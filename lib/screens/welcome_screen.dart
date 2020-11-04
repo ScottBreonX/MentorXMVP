@@ -51,7 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TypewriterAnimatedTextKit(
-                  text: ['Mentor'],
+                  text: ['MentorX'],
                   speed: Duration(milliseconds: 200),
                   textStyle: TextStyle(
                     fontSize: 60.0,
