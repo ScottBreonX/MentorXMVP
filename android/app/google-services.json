@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "342264838521",
+    "firebase_url": "https://mentorxmvp-9d7a4.firebaseio.com",
+    "project_id": "mentorxmvp-9d7a4",
+    "storage_bucket": "mentorxmvp-9d7a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342264838521:android:01e7701292fd5a80dd97a8",
+        "android_client_info": {
+          "package_name": "scottbreon.mentorx_mvp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "342264838521-egrmc0pu3hihs4lh1e3ovractfnorq6t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8in2keuL45qI2KeIMfYrItdAIyNcTNNo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "342264838521-egrmc0pu3hihs4lh1e3ovractfnorq6t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

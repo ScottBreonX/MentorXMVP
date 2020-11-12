@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:mentorx_mvp/screens/registration_screen.dart';
@@ -22,9 +23,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     super.initState();
 
     controller =
-        AnimationController(duration: Duration(seconds: 1), vsync: this);
-    animation = ColorTween(begin: Colors.blueGrey, end: Colors.white70)
-        .animate(controller);
+        AnimationController(duration: Duration(milliseconds: 400), vsync: this);
+    animation =
+        ColorTween(begin: Colors.grey, end: Colors.white).animate(controller);
     controller.forward();
     controller.addListener(() {
       setState(() {});
@@ -45,25 +46,16 @@ class _WelcomeScreenState extends State<WelcomeScreen>
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+//          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TypewriterAnimatedTextKit(
-                  text: ['MentorX'],
-                  speed: Duration(milliseconds: 200),
-                  textStyle: TextStyle(
-                    fontSize: 60.0,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                ),
                 Hero(
                   tag: 'logo',
                   child: Container(
                     child: Image.asset('images/XLogo.png'),
-                    height: 100.0,
+                    height: 150.0,
                     margin: EdgeInsets.only(left: 0.0),
                   ),
                 ),
@@ -73,15 +65,15 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               height: 48.0,
             ),
             RoundedButton(
-              title: 'Log In',
-              color: Colors.blueAccent,
+              title: 'LOG IN',
+              color: Color.fromRGBO(39, 163, 183, 0.7),
               onPressed: () {
                 Navigator.pushNamed(context, LoginScreen.id);
               },
             ),
             RoundedButton(
-              title: 'Register',
-              color: Colors.blueAccent,
+              title: 'REGISTER',
+              color: Color.fromRGBO(39, 163, 183, 0.7),
               onPressed: () {
                 Navigator.pushNamed(context, RegistrationScreen.id);
               },
