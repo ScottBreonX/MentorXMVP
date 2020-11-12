@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>342264838521-392hd764e0gf44dr41tupkqrau4i0a29.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.342264838521-392hd764e0gf44dr41tupkqrau4i0a29</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD4SjdtfUqHUev2jwUWF99GYKHP-sQFNbQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>342264838521</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>scottbreon.mentorxmvp</string>
+	<key>PROJECT_ID</key>
+	<string>mentorxmvp-9d7a4</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mentorxmvp-9d7a4.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:342264838521:ios:f854a0dde0679fc2dd97a8</string>
+	<key>DATABASE_URL</key>
+	<string>https://mentorxmvp-9d7a4.firebaseio.com</string>
+</dict>
+</plist>
