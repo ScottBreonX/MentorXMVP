@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'home_screen.dart';
+import 'package:mentorx_mvp/components/alert_popup.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = 'registration_screen';
@@ -12,6 +15,7 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   bool showSpinner = false;
+  final _auth = FirebaseAuth.instance;
 
   String email;
   String password;
@@ -73,9 +77,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               SizedBox(height: 20.0),
               RoundedButton(
-                onPressed: () {
-                  print(email);
-                  print(password);
+                onPressed: () async {
+                  setState(() {
+                    showSpinner = true;
+                  });
+
+                  try {
+                    final newUser = await _auth.createUserWithEmailAndPassword(
+                        email: email, password: password);
+                    if (newUser != null) {
+                      Navigator.pushNamed(context, HomeScreen.id);
+                    }
+
+                    setState(() {
+                      showSpinner = false;
+                    });
+                  } catch (e) {
+                    showAlertDialog(context);
+                  }
                 },
                 title: 'REGISTER',
                 color: Color.fromRGBO(39, 163, 183, 0.7),
