@@ -16,6 +16,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   animated_text_kit: ^2.5.1
   firebase_core: ^0.5.2
+  firebase_auth: ^0.18.3
   modal_progress_hud: ^0.1.3
 
 

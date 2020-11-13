@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/constants.dart';
+import 'package:mentorx_mvp/components/rounded_button.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -13,8 +14,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool showSpinner = false;
 //  final _auth = FirebaseAuth.instance;
-//  String email;
-//  String password;
+  String email;
+  String password;
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +46,40 @@ class _LoginScreenState extends State<LoginScreen> {
               TextField(
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
-                onChanged: (value) {},
+                style: TextStyle(
+                  color: Colors.grey.shade800,
+                  fontWeight: FontWeight.w400,
+                ),
+                onChanged: (value) {
+                  email = value;
+                },
                 decoration:
                     kTextFieldDecoration.copyWith(hintText: 'Enter your email'),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                obscureText: true,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.grey.shade800,
+                  fontWeight: FontWeight.w400,
+                ),
+                onChanged: (value) {
+                  password = value;
+                },
+                decoration: kTextFieldDecoration.copyWith(
+                    hintText: 'Enter your password'),
+              ),
+              SizedBox(height: 20.0),
+              RoundedButton(
+                onPressed: () {
+                  print(email);
+                  print(password);
+                },
+                title: 'LOG IN',
+                color: Color.fromRGBO(39, 163, 183, 0.7),
               ),
             ],
           ),
