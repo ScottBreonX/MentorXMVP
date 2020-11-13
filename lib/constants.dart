@@ -6,9 +6,11 @@ const kTextFieldDecoration = InputDecoration(
   border:
       OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),
   enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
+      borderSide:
+          BorderSide(color: Color.fromRGBO(39, 163, 183, 0.7), width: 1.0),
       borderRadius: BorderRadius.all(Radius.circular(32.0))),
   focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+      borderSide:
+          BorderSide(color: Color.fromRGBO(39, 163, 183, 0.7), width: 4.0),
       borderRadius: BorderRadius.all(Radius.circular(32.0))),
 );
