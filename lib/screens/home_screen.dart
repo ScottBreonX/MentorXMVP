@@ -1,8 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:mentorx_mvp/screens/chat_screen.dart';
 import 'package:mentorx_mvp/screens/welcome_screen.dart';
+import 'chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = 'home_screen';
@@ -58,6 +59,13 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text('Welcome Back, $firstName'),
+            RoundedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, ChatScreen.id);
+              },
+              title: 'Chat Screen',
+              color: Color.fromRGBO(39, 163, 183, 0.7),
+            )
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/screens/chat_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/registration_screen.dart';
@@ -22,6 +23,7 @@ class MentorX extends StatelessWidget {
         LoginScreen.id: (context) => LoginScreen(),
         RegistrationScreen.id: (context) => RegistrationScreen(),
         HomeScreen.id: (context) => HomeScreen(),
+        ChatScreen.id: (context) => ChatScreen(),
       },
     );
   }
