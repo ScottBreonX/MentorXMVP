@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mentorx_mvp/components/alert_popup.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/constants.dart';
@@ -87,16 +88,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (user != null) {
                       Navigator.pushNamed(context, HomeScreen.id);
                     }
-
                     setState(() {
                       showSpinner = false;
                     });
                   } catch (e) {
+                    showLoginError(context);
                     print(e);
                   }
                 },
                 title: 'LOG IN',
-                color: Color.fromRGBO(39, 163, 183, 0.7),
+                color: kMentorXTeal,
               ),
             ],
           ),

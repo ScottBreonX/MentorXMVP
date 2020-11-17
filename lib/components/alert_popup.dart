@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/login_screen.dart';
+import 'package:mentorx_mvp/screens/registration_screen.dart';
 
-showAlertDialog(BuildContext context) {
+showLoginError(BuildContext context) {
   // set up the buttons
   Widget cancelButton = FlatButton(
-    child: Text("Cancel"),
+    child: Text("Try Again"),
     onPressed: () {
-      Navigator.of(context).pop(); // dismiss dialog
+      Navigator.popAndPushNamed(context, LoginScreen.id); // dismiss dialog
     },
   );
   Widget continueButton = FlatButton(
-    child: Text("Log In"),
+    child: Text("Register"),
     onPressed: () {
-      Navigator.popAndPushNamed(context, LoginScreen.id);
+      Navigator.popAndPushNamed(context, RegistrationScreen.id);
     },
   );
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    title: Text("Please log in"),
-    content: Text("An account with this email already exists. Please log in."),
+    title: Text("Incorrect Email or Password"),
+    content: Text(
+        "Incorrect email or password entered. Try again or register as new user."),
     actions: [
       cancelButton,
       continueButton,
