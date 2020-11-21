@@ -30,4 +30,4 @@ const kMessageContainerDecoration = BoxDecoration(
 const kSendButtonTextStyle =
     TextStyle(color: kMentorXTeal, fontWeight: FontWeight.bold, fontSize: 18.0);
 
-const kMentorXTeal = Color.fromRGBO(39, 163, 183, 0.7);
+const kMentorXTeal = Color.fromRGBO(56, 142, 137, 1.0);
