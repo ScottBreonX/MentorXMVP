@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/registration_screen.dart';
 import 'login_screen.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
@@ -66,14 +67,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             ),
             RoundedButton(
               title: 'LOG IN',
-              color: Color.fromRGBO(39, 163, 183, 0.7),
+              color: kMentorXTeal,
               onPressed: () {
                 Navigator.pushNamed(context, LoginScreen.id);
               },
             ),
             RoundedButton(
               title: 'REGISTER',
-              color: Color.fromRGBO(39, 163, 183, 0.7),
+              color: kMentorXTeal,
               onPressed: () {
                 Navigator.pushNamed(context, RegistrationScreen.id);
               },

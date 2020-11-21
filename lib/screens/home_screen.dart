@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/chat_screen.dart';
 import 'package:mentorx_mvp/screens/welcome_screen.dart';
 import 'chat_screen.dart';
@@ -51,20 +52,25 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
         title: Text('MentorX'),
-        backgroundColor: Color.fromRGBO(39, 163, 183, 0.7),
+        backgroundColor: kMentorXTeal,
       ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text('Welcome Back, $firstName'),
+//            Flexible(
+//              child: Text('Welcome Back, $firstName'),
+//            ),
+            SizedBox(
+              height: 20.0,
+            ),
             RoundedButton(
               onPressed: () {
                 Navigator.pushNamed(context, ChatScreen.id);
               },
               title: 'Chat Screen',
-              color: Color.fromRGBO(39, 163, 183, 0.7),
+              color: kMentorXTeal,
             )
           ],
         ),

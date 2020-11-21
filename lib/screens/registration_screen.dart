@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'home_screen.dart';
-import 'login_screen.dart';
+import 'package:mentorx_mvp/components/alert_dialog.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = 'registration_screen';
@@ -20,10 +20,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   String email;
   String password;
+  String passwordConfirm;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kMentorXTeal,
+        title: Text('Create Account'),
+        centerTitle: true,
+      ),
       backgroundColor: Colors.white,
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
@@ -76,62 +82,104 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 decoration: kTextFieldDecoration.copyWith(
                     hintText: 'Enter your password'),
               ),
+              SizedBox(
+                height: 20.0,
+              ),
+              TextField(
+                obscureText: true,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.grey.shade800,
+                  fontWeight: FontWeight.w400,
+                ),
+                onChanged: (value) {
+                  passwordConfirm = value;
+                },
+                decoration:
+                    kTextFieldDecoration.copyWith(hintText: 'Confirm Password'),
+              ),
               SizedBox(height: 20.0),
               RoundedButton(
                 onPressed: () async {
                   setState(() {
                     showSpinner = true;
                   });
-
-                  try {
-                    final newUser = await _auth.createUserWithEmailAndPassword(
-                      email: email,
-                      password: password,
-                    );
-                    if (newUser != null) {
-                      Navigator.pushNamed(context, HomeScreen.id);
-                    }
-
+                  if (password != passwordConfirm) {
                     setState(() {
                       showSpinner = false;
                     });
-                  } on FirebaseAuthException catch (e) {
-                    //TODO: weak password, blank password, @symbol, email domains
-                    if (e.code == 'email-already-in-use') {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AuthenticationAlert(
+                          title: Text('Password'),
+                          content:
+                              Text('Passwords do not match. Please try again.'),
+                        );
+                      },
+                    );
+                  } else {
+                    try {
+                      final newUser =
+                          await _auth.createUserWithEmailAndPassword(
+                        email: email,
+                        password: password,
+                      );
+                      if (newUser != null) {
+                        Navigator.pushNamed(context, HomeScreen.id);
+                      }
+                      setState(() {
+                        showSpinner = false;
+                      });
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'invalid-email') {
+                        setState(() {
+                          showSpinner = false;
+                        });
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AuthenticationAlert(
+                              title: Text('Invalid Email'),
+                              content:
+                                  Text('Please enter a valid email address'),
+                            );
+                          },
+                        );
+                      } else if (e.code == 'email-already-in-use') {
+                        setState(() {
+                          showSpinner = false;
+                        });
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AuthenticationAlert(
+                              title: Text('Email already in use'),
+                              content: Text(
+                                  'Email is already in use. Try new email or log in'),
+                            );
+                          },
+                        );
+                      }
+                    } catch (e) {
                       setState(() {
                         showSpinner = false;
                       });
                       showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Email already in use'),
-                              content: Text(
-                                  'Email is already in use. Try new email or log in.'),
-                              actions: [
-                                FlatButton(
-                                  child: Text("Log In"),
-                                  onPressed: () {
-                                    Navigator.popAndPushNamed(
-                                        context, LoginScreen.id);
-                                  },
-                                ),
-                                FlatButton(
-                                  child: Text("Cancel"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                          });
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AuthenticationAlert(
+                            title: Text('Invalid Registration'),
+                            content:
+                                Text('Please enter a valid email and password'),
+                          );
+                        },
+                      );
                     }
-                  } catch (e) {
-                    print(e);
                   }
                 },
                 title: 'REGISTER',
-                color: Color.fromRGBO(39, 163, 183, 0.7),
+                color: kMentorXTeal,
               ),
             ],
           ),
