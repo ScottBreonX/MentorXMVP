@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/rendering.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/chat_screen.dart';
 import 'package:mentorx_mvp/screens/welcome_screen.dart';
-import 'chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = 'home_screen';
@@ -57,11 +58,22 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-//            Flexible(
-//              child: Text('Welcome Back, $firstName'),
-//            ),
+            CircleAvatar(
+              backgroundColor: kMentorXTeal,
+              radius: 100,
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Center(
+              child: Text(
+                'Welcome Back, $firstName',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
             SizedBox(
               height: 20.0,
             ),
@@ -71,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               title: 'Chat Screen',
               color: kMentorXTeal,
-            )
+            ),
           ],
         ),
       ),
