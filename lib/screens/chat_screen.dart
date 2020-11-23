@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mentorx_mvp/screens/welcome_screen.dart';
+
+User loggedInUser;
+final _firestore = FirebaseFirestore.instance;
 
 class ChatScreen extends StatefulWidget {
   static const String id = 'chat_screen';
@@ -10,8 +14,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  User loggedInUser;
-  final _firestore = FirebaseFirestore.instance;
+  final messageTextController = TextEditingController();
   final _auth = FirebaseAuth.instance;
   String messageText;
 
@@ -57,56 +60,19 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
               icon: Icon(Icons.close),
               onPressed: () {
-                messagesStream();
-//                _auth.signOut();
-//                Navigator.pop(context);
+                _auth.signOut();
+                Navigator.popAndPushNamed(context, WelcomeScreen.id);
               }),
         ],
         title: Text('MentorX'),
-        backgroundColor: Color.fromRGBO(39, 163, 183, 0.7),
+        backgroundColor: kMentorXTeal,
       ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            StreamBuilder<QuerySnapshot>(
-              stream: _firestore.collection('messages').snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: kMentorXTeal,
-                    ),
-                  );
-                }
-
-                final messages = snapshot.data.docs;
-                List<MessageBubble> messageBubbles = [];
-
-                for (var message in messages) {
-                  final messageData = message.data();
-
-                  final messageText = messageData['text'];
-                  final messageSender = messageData['sender'];
-
-                  final messageBubble = MessageBubble(
-                    sender: messageSender,
-                    text: messageText,
-                  );
-                  messageBubbles.add(messageBubble);
-                }
-                return Expanded(
-                  child: ListView(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 10.0,
-                      vertical: 20.0,
-                    ),
-                    children: messageBubbles,
-                  ),
-                );
-              },
-            ),
+            MessagesStream(),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -114,6 +80,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: [
                   Expanded(
                     child: TextField(
+                      controller: messageTextController,
                       onChanged: (value) {
                         messageText = value;
                       },
@@ -122,10 +89,11 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   FlatButton(
                     onPressed: () {
-                      //messageText + loggedInUser.email
+                      messageTextController.clear();
                       _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': loggedInUser.email,
+                        'timestamp': DateTime.now(),
                       });
                     },
                     child: Text(
@@ -143,17 +111,68 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 }
 
+class MessagesStream extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream:
+          _firestore.collection('messages').orderBy('timestamp').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(
+              backgroundColor: kMentorXTeal,
+            ),
+          );
+        }
+
+        final messages = snapshot.data.docs.reversed;
+        List<MessageBubble> messageBubbles = [];
+
+        for (var message in messages) {
+          final messageData = message.data();
+
+          final messageText = messageData['text'];
+          final messageSender = messageData['sender'];
+          final messageTime = messageData['timestamp'];
+
+          final currentUser = loggedInUser.email;
+
+          final messageBubble = MessageBubble(
+            sender: messageSender,
+            text: messageText,
+            isMe: currentUser == messageSender,
+          );
+          messageBubbles.add(messageBubble);
+        }
+        return Expanded(
+          child: ListView(
+            reverse: true,
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.0,
+              vertical: 20.0,
+            ),
+            children: messageBubbles,
+          ),
+        );
+      },
+    );
+  }
+}
+
 class MessageBubble extends StatelessWidget {
-  MessageBubble({this.text, this.sender});
+  MessageBubble({this.text, this.sender, this.isMe});
   final String text;
   final String sender;
+  final bool isMe;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment:
+            isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Text(
             sender,
@@ -165,7 +184,7 @@ class MessageBubble extends StatelessWidget {
           Material(
             borderRadius: BorderRadius.circular(30.0),
             elevation: 5.0,
-            color: Colors.grey,
+            color: isMe ? kMentorXTeal : Colors.grey,
             child: Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 10.0,
