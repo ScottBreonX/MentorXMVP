@@ -6,6 +6,7 @@ import 'package:mentorx_mvp/screens/registration_screen.dart';
 import 'login_screen.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'registration_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
@@ -25,8 +26,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
     controller =
         AnimationController(duration: Duration(milliseconds: 400), vsync: this);
-    animation =
-        ColorTween(begin: Colors.grey, end: Colors.white).animate(controller);
+    animation = ColorTween(begin: Colors.blueGrey, end: Colors.white)
+        .animate(controller);
     controller.forward();
     controller.addListener(() {
       setState(() {});
@@ -51,12 +52,39 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(
+                  width: 240,
+                  child: ColorizeAnimatedTextKit(
+                    speed: Duration(milliseconds: 1000),
+                    text: ['Mentor'],
+                    textStyle: TextStyle(
+                      fontSize: 70.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey,
+                    ),
+                    colors: [
+                      Colors.grey,
+                      Colors.white,
+                      kMentorXTeal,
+                      Colors.grey,
+                      Colors.white,
+                      kMentorXTeal,
+                      Colors.grey,
+                      Colors.white,
+                      kMentorXTeal,
+                      Colors.grey,
+                      Colors.white,
+                      kMentorXTeal,
+                    ],
+                    textAlign: TextAlign.start,
+                    alignment: AlignmentDirectional.topStart,
+                  ),
+                ),
                 Hero(
                   tag: 'logo',
                   child: Container(
                     child: Image.asset('images/XLogo.png'),
-                    height: 150.0,
-                    margin: EdgeInsets.only(left: 0.0),
+                    height: 100.0,
                   ),
                 ),
               ],
