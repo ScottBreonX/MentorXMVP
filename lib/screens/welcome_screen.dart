@@ -73,7 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       kMentorXTeal,
                       Colors.grey,
                       Colors.white,
-                      kMentorXTeal,
+                      Colors.black54,
                     ],
                     textAlign: TextAlign.start,
                     alignment: AlignmentDirectional.topStart,
