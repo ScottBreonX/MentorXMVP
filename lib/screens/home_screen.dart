@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Text(
                 'Welcome Back, $firstName',
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 20,
                 ),
               ),
             ),
