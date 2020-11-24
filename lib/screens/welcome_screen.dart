@@ -6,7 +6,6 @@ import 'package:mentorx_mvp/screens/registration_screen.dart';
 import 'login_screen.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'registration_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
@@ -74,7 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       kMentorXTeal,
                       Colors.grey,
                       Colors.white,
-                      kMentorXTeal,
+                      Colors.black54,
                     ],
                     textAlign: TextAlign.start,
                     alignment: AlignmentDirectional.topStart,
