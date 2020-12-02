@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
-import 'package:mentorx_mvp/screens/home_screen.dart';
+import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
@@ -21,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    timeDilation = 2.0;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kMentorXTeal,
@@ -39,10 +41,13 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                SizedBox(
+                  height: 50,
+                ),
                 Hero(
                   tag: 'logo',
                   child: Container(
-                    height: 200.0,
+                    height: 150.0,
                     child: Image.asset('images/XLogo.png'),
                   ),
                 ),
@@ -91,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {
                           showSpinner = false;
                         });
-                        Navigator.pushNamed(context, HomeScreen.id);
+                        Navigator.popAndPushNamed(context, LaunchScreen.id);
                       }
                     } catch (e) {
                       setState(() {
@@ -112,6 +117,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   title: 'LOG IN',
                   color: kMentorXTeal,
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 Center(
                   child: InkWell(
