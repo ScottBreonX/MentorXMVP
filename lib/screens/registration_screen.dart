@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'home_screen.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -24,6 +25,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    timeDilation = 2.0;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kMentorXTeal,
@@ -42,10 +44,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                SizedBox(
+                  height: 50,
+                ),
                 Hero(
                   tag: 'logo',
                   child: Container(
-                    height: 200.0,
+                    height: 150.0,
                     child: Image.asset('images/XLogo.png'),
                   ),
                 ),
@@ -66,7 +71,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       hintText: 'Enter your email'),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
                 TextField(
                   obscureText: true,
@@ -125,7 +130,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           password: password,
                         );
                         if (newUser != null) {
-                          Navigator.pushNamed(context, HomeScreen.id);
+                          Navigator.pushNamed(context, LaunchScreen.id);
                         }
                         setState(() {
                           showSpinner = false;

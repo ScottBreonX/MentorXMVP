@@ -64,7 +64,10 @@ class _ChatScreenState extends State<ChatScreen> {
                 Navigator.popAndPushNamed(context, WelcomeScreen.id);
               }),
         ],
-        title: Text('MentorX'),
+        title: Text(
+          'Chat with FName LName',
+          style: TextStyle(fontSize: 15),
+        ),
         backgroundColor: kMentorXTeal,
       ),
       body: SafeArea(
