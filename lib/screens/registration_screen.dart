@@ -33,135 +33,77 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       backgroundColor: Colors.white,
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 24.0,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Flexible(
-                child: Hero(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 24.0,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Hero(
                   tag: 'logo',
                   child: Container(
                     height: 200.0,
                     child: Image.asset('images/XLogo.png'),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 48.0,
-              ),
-              TextField(
-                keyboardType: TextInputType.emailAddress,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.grey.shade800,
-                  fontWeight: FontWeight.w400,
+                SizedBox(
+                  height: 48.0,
                 ),
-                onChanged: (value) {
-                  email = value;
-                },
-                decoration:
-                    kTextFieldDecoration.copyWith(hintText: 'Enter your email'),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextField(
-                obscureText: true,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.grey.shade800,
-                  fontWeight: FontWeight.w400,
+                TextField(
+                  keyboardType: TextInputType.emailAddress,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.grey.shade800,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  onChanged: (value) {
+                    email = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: 'Enter your email'),
                 ),
-                onChanged: (value) {
-                  password = value;
-                },
-                decoration: kTextFieldDecoration.copyWith(
-                    hintText: 'Enter your password'),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextField(
-                obscureText: true,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.grey.shade800,
-                  fontWeight: FontWeight.w400,
+                SizedBox(
+                  height: 20,
                 ),
-                onChanged: (value) {
-                  passwordConfirm = value;
-                },
-                decoration:
-                    kTextFieldDecoration.copyWith(hintText: 'Confirm Password'),
-              ),
-              SizedBox(height: 20.0),
-              RoundedButton(
-                onPressed: () async {
-                  setState(() {
-                    showSpinner = true;
-                  });
-                  if (password != passwordConfirm) {
+                TextField(
+                  obscureText: true,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.grey.shade800,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  onChanged: (value) {
+                    password = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: 'Enter your password'),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                TextField(
+                  obscureText: true,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.grey.shade800,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  onChanged: (value) {
+                    passwordConfirm = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: 'Confirm Password'),
+                ),
+                SizedBox(height: 20.0),
+                RoundedButton(
+                  onPressed: () async {
                     setState(() {
-                      showSpinner = false;
+                      showSpinner = true;
                     });
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AuthenticationAlert(
-                          title: Text('Password'),
-                          content:
-                              Text('Passwords do not match. Please try again.'),
-                        );
-                      },
-                    );
-                  } else {
-                    try {
-                      final newUser =
-                          await _auth.createUserWithEmailAndPassword(
-                        email: email,
-                        password: password,
-                      );
-                      if (newUser != null) {
-                        Navigator.pushNamed(context, HomeScreen.id);
-                      }
-                      setState(() {
-                        showSpinner = false;
-                      });
-                    } on FirebaseAuthException catch (e) {
-                      if (e.code == 'invalid-email') {
-                        setState(() {
-                          showSpinner = false;
-                        });
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AuthenticationAlert(
-                              title: Text('Invalid Email'),
-                              content:
-                                  Text('Please enter a valid email address'),
-                            );
-                          },
-                        );
-                      } else if (e.code == 'email-already-in-use') {
-                        setState(() {
-                          showSpinner = false;
-                        });
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AuthenticationAlert(
-                              title: Text('Email already in use'),
-                              content: Text(
-                                  'Email is already in use. Try new email or log in'),
-                            );
-                          },
-                        );
-                      }
-                    } catch (e) {
+                    if (password != passwordConfirm) {
                       setState(() {
                         showSpinner = false;
                       });
@@ -169,19 +111,77 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         context: context,
                         builder: (BuildContext context) {
                           return AuthenticationAlert(
-                            title: Text('Invalid Registration'),
-                            content:
-                                Text('Please enter a valid email and password'),
+                            title: Text('Password'),
+                            content: Text(
+                                'Passwords do not match. Please try again.'),
                           );
                         },
                       );
+                    } else {
+                      try {
+                        final newUser =
+                            await _auth.createUserWithEmailAndPassword(
+                          email: email,
+                          password: password,
+                        );
+                        if (newUser != null) {
+                          Navigator.pushNamed(context, HomeScreen.id);
+                        }
+                        setState(() {
+                          showSpinner = false;
+                        });
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'invalid-email') {
+                          setState(() {
+                            showSpinner = false;
+                          });
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AuthenticationAlert(
+                                title: Text('Invalid Email'),
+                                content:
+                                    Text('Please enter a valid email address'),
+                              );
+                            },
+                          );
+                        } else if (e.code == 'email-already-in-use') {
+                          setState(() {
+                            showSpinner = false;
+                          });
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AuthenticationAlert(
+                                title: Text('Email already in use'),
+                                content: Text(
+                                    'Email is already in use. Try new email or log in'),
+                              );
+                            },
+                          );
+                        }
+                      } catch (e) {
+                        setState(() {
+                          showSpinner = false;
+                        });
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AuthenticationAlert(
+                              title: Text('Invalid Registration'),
+                              content: Text(
+                                  'Please enter a valid email and password'),
+                            );
+                          },
+                        );
+                      }
                     }
-                  }
-                },
-                title: 'REGISTER',
-                color: kMentorXTeal,
-              ),
-            ],
+                  },
+                  title: 'REGISTER',
+                  color: kMentorXTeal,
+                ),
+              ],
+            ),
           ),
         ),
       ),

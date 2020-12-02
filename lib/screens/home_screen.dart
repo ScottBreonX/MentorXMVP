@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/chat_screen.dart';
+import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/welcome_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -82,6 +83,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pushNamed(context, ChatScreen.id);
               },
               title: 'Chat Screen',
+              color: kMentorXTeal,
+            ),
+            RoundedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, LaunchScreen.id);
+              },
+              title: 'Launch Screen',
               color: kMentorXTeal,
             ),
           ],

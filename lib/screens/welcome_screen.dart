@@ -65,15 +65,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       Colors.grey,
                       Colors.white,
                       kMentorXTeal,
-                      Colors.grey,
                       Colors.white,
-                      kMentorXTeal,
                       Colors.grey,
-                      Colors.white,
-                      kMentorXTeal,
-                      Colors.grey,
-                      Colors.white,
-                      Colors.black54,
                     ],
                     textAlign: TextAlign.start,
                     alignment: AlignmentDirectional.topStart,
@@ -104,7 +97,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               onPressed: () {
                 Navigator.pushNamed(context, RegistrationScreen.id);
               },
-            )
+            ),
           ],
         ),
       ),
