@@ -26,7 +26,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
       ),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.only(bottom: 100.0),
+        padding: const EdgeInsets.only(bottom: 50.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -64,7 +64,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
               ],
             ),
             SizedBox(
-              height: 50,
+              height: 30,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -76,11 +76,11 @@ class _LaunchScreenState extends State<LaunchScreen> {
                   child: Column(
                     children: [
                       CircleAvatar(
-                        radius: 60,
+                        radius: 50,
                         backgroundColor: kMentorXTeal,
                         child: Icon(
                           Icons.person,
-                          size: 80,
+                          size: 70,
                           color: Colors.white,
                         ),
                       ),
@@ -98,7 +98,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                   ),
                 ),
                 SizedBox(
-                  width: 50,
+                  width: 20,
                 ),
                 FlatButton(
                   onPressed: () {
@@ -107,11 +107,11 @@ class _LaunchScreenState extends State<LaunchScreen> {
                   child: Column(
                     children: [
                       CircleAvatar(
-                        radius: 60,
+                        radius: 50,
                         backgroundColor: kMentorXTeal,
                         child: Icon(
                           Icons.calendar_today_rounded,
-                          size: 80,
+                          size: 70,
                           color: Colors.white,
                         ),
                       ),
@@ -143,11 +143,11 @@ class _LaunchScreenState extends State<LaunchScreen> {
                   child: Column(
                     children: [
                       CircleAvatar(
-                        radius: 60,
+                        radius: 50,
                         backgroundColor: kMentorXTeal,
                         child: Icon(
                           Icons.people,
-                          size: 80,
+                          size: 70,
                           color: Colors.white,
                         ),
                       ),
@@ -165,7 +165,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                   ),
                 ),
                 SizedBox(
-                  width: 50,
+                  width: 20,
                 ),
                 FlatButton(
                   onPressed: () {
@@ -174,11 +174,11 @@ class _LaunchScreenState extends State<LaunchScreen> {
                   child: Column(
                     children: [
                       CircleAvatar(
-                        radius: 60,
+                        radius: 50,
                         backgroundColor: kMentorXTeal,
                         child: Icon(
                           Icons.chat_bubble,
-                          size: 80,
+                          size: 70,
                           color: Colors.white,
                         ),
                       ),
