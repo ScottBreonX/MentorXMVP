@@ -42,63 +42,76 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: animation.value,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 240,
-                  child: ColorizeAnimatedTextKit(
-                    speed: Duration(milliseconds: 1000),
-                    text: ['Mentor'],
-                    textStyle: TextStyle(
-                      fontSize: 70.0,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.grey,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.white,
+              Colors.white,
+              Colors.white30,
+              kMentorXTeal,
+            ],
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 240,
+                    child: ColorizeAnimatedTextKit(
+                      speed: Duration(milliseconds: 1000),
+                      text: ['Mentor'],
+                      textStyle: TextStyle(
+                        fontSize: 70.0,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.grey,
+                      ),
+                      colors: [
+                        Colors.grey,
+                        Colors.white,
+                        kMentorXTeal,
+                        Colors.white,
+                        Colors.grey,
+                      ],
+                      textAlign: TextAlign.start,
+                      alignment: AlignmentDirectional.topStart,
                     ),
-                    colors: [
-                      Colors.grey,
-                      Colors.white,
-                      kMentorXTeal,
-                      Colors.white,
-                      Colors.grey,
-                    ],
-                    textAlign: TextAlign.start,
-                    alignment: AlignmentDirectional.topStart,
                   ),
-                ),
-                Hero(
-                  tag: 'logo',
-                  child: Container(
-                    child: Image.asset('images/XLogo.png'),
-                    height: 100.0,
+                  Hero(
+                    tag: 'logo',
+                    child: Container(
+                      child: Image.asset('images/XLogo.png'),
+                      height: 100.0,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 48.0,
-            ),
-            RoundedButton(
-              title: 'LOG IN',
-              color: kMentorXTeal,
-              onPressed: () {
-                Navigator.pushNamed(context, LoginScreen.id);
-              },
-            ),
-            RoundedButton(
-              title: 'REGISTER',
-              color: kMentorXTeal,
-              onPressed: () {
-                Navigator.pushNamed(context, RegistrationScreen.id);
-              },
-            ),
-          ],
+                ],
+              ),
+              SizedBox(
+                height: 40.0,
+              ),
+              RoundedButton(
+                title: 'LOG IN',
+                color: kMentorXTeal,
+                onPressed: () {
+                  Navigator.pushNamed(context, LoginScreen.id);
+                },
+              ),
+              RoundedButton(
+                title: 'REGISTER',
+                color: kMentorXTeal,
+                onPressed: () {
+                  Navigator.pushNamed(context, RegistrationScreen.id);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

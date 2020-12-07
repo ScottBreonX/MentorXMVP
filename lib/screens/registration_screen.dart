@@ -71,7 +71,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       hintText: 'Enter your email'),
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 20,
                 ),
                 TextField(
                   obscureText: true,
