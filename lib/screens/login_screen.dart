@@ -102,17 +102,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       setState(() {
                         showSpinner = false;
                       });
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AuthenticationAlert(
-                            title: Text('Invalid Credentials'),
-                            content: Text(
-                                'Invalid log in credentials. Please try again'),
-                          );
-                        },
+                      showAlertDialog(
+                        context,
+                        title: "Invalid Credentials",
+                        content: "Invalid log in credentials. Please try again",
+                        defaultActionText: "Ok",
                       );
-                      print(e);
                     }
                   },
                   title: 'LOG IN',

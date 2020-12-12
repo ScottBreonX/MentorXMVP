@@ -112,15 +112,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       setState(() {
                         showSpinner = false;
                       });
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AuthenticationAlert(
-                            title: Text('Password'),
-                            content: Text(
-                                'Passwords do not match. Please try again.'),
-                          );
-                        },
+                      showAlertDialog(
+                        context,
+                        title: "Password Verification",
+                        content: "Passwords do not match. Please try again.",
+                        defaultActionText: "Ok",
                       );
                     } else {
                       try {
@@ -140,44 +136,33 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           setState(() {
                             showSpinner = false;
                           });
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AuthenticationAlert(
-                                title: Text('Invalid Email'),
-                                content:
-                                    Text('Please enter a valid email address'),
-                              );
-                            },
+                          showAlertDialog(
+                            context,
+                            title: "Invalid Email",
+                            content: "Please enter a valid email address",
+                            defaultActionText: "Ok",
                           );
                         } else if (e.code == 'email-already-in-use') {
                           setState(() {
                             showSpinner = false;
                           });
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AuthenticationAlert(
-                                title: Text('Email already in use'),
-                                content: Text(
-                                    'Email is already in use. Try new email or log in'),
-                              );
-                            },
+                          showAlertDialog(
+                            context,
+                            title: "Email already in use",
+                            content:
+                                "Email is already in use. Try new email or proceed to log in.",
+                            defaultActionText: "Ok",
                           );
                         }
                       } catch (e) {
                         setState(() {
                           showSpinner = false;
                         });
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AuthenticationAlert(
-                              title: Text('Invalid Registration'),
-                              content: Text(
-                                  'Please enter a valid email and password'),
-                            );
-                          },
+                        showAlertDialog(
+                          context,
+                          title: "Invalid Registration",
+                          content: "Please enter a valid email and password",
+                          defaultActionText: "Ok",
                         );
                       }
                     }
