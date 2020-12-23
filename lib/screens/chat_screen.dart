@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mentorx_mvp/screens/welcome_screen.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:mentorx_mvp/components/alert_dialog.dart';
+import 'package:mentorx_mvp/components/sign_out.dart';
 
 User loggedInUser;
 final _firestore = FirebaseFirestore.instance;
@@ -20,20 +19,6 @@ class _ChatScreenState extends State<ChatScreen> {
   bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
   String messageText;
-
-  Future<void> _confirmSignOut(BuildContext context) async {
-    final didRequestSignOut = await showAlertDialog(
-      context,
-      title: "Log Out",
-      content: "Are you sure you want to log out?",
-      defaultActionText: "Yes",
-      cancelActionText: "No",
-    );
-    if (didRequestSignOut == true) {
-      _auth.signOut();
-      Navigator.popAndPushNamed(context, WelcomeScreen.id);
-    }
-  }
 
   @override
   void initState() {
@@ -53,13 +38,6 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
-//  void getMessages() async {
-//    final messages = await _firestore.collection('messages').get();
-//    for (var message in messages.docs) {
-//      print(message.data());
-//    }
-//  }
-
   void messagesStream() async {
     await for (var snapshot in _firestore.collection('messages').snapshots()) {
       for (var message in snapshot.docs) {}
@@ -78,7 +56,7 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: Icon(Icons.close),
             onPressed: () {
-              _confirmSignOut(context);
+              confirmSignOut(context);
             },
           ),
         ],

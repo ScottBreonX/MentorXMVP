@@ -43,9 +43,7 @@ class _MyProfileState extends State<MyProfile> {
       body: SafeArea(
         child: Column(
           children: [
-            Text(
-              '$loggedInUser',
-            ),
+            Text('${loggedInUser.email}'),
           ],
         ),
       ),

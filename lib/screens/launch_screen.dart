@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/constants.dart';
@@ -7,9 +8,17 @@ import 'package:mentorx_mvp/screens/profile_screen.dart';
 import 'profile_screen.dart';
 import 'events_screen.dart';
 import 'mentoring_screen.dart';
+import 'package:mentorx_mvp/components/sign_out.dart';
+import 'package:mentorx_mvp/services/auth.dart';
 
 class LaunchScreen extends StatefulWidget {
+  const LaunchScreen({Key key, this.onSignOut, this.user, @required this.auth})
+      : super(key: key);
+
   static const String id = 'launch_screen';
+  final VoidCallback onSignOut;
+  final User user;
+  final AuthBase auth;
 
   @override
   _LaunchScreenState createState() => _LaunchScreenState();
@@ -21,8 +30,17 @@ class _LaunchScreenState extends State<LaunchScreen> {
     timeDilation = 1.0;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () {
+              confirmSignOut(context);
+            },
+          ),
+        ],
         backgroundColor: kMentorXTeal,
-        title: Text('Launch Screen'),
+        title: Text('Home Screen'),
       ),
       backgroundColor: Colors.white,
       body: Padding(
@@ -88,7 +106,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                         height: 5.0,
                       ),
                       Text(
-                        'My Profile',
+                        '${widget.user.email} Profile',
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black54,
