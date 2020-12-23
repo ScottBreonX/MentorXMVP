@@ -5,11 +5,15 @@ import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
+import 'package:mentorx_mvp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 
 class RegistrationScreen extends StatefulWidget {
+  const RegistrationScreen({Key key, this.auth}) : super(key: key);
+
   static const String id = 'registration_screen';
+  final AuthBase auth;
 
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
@@ -120,11 +124,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       );
                     } else {
                       try {
-                        final newUser =
-                            await _auth.createUserWithEmailAndPassword(
-                          email: email,
-                          password: password,
-                        );
+                        final newUser = await widget.auth
+                            .createUserWithEmailAndPassword(email, password);
                         if (newUser != null) {
                           Navigator.pushNamed(context, LaunchScreen.id);
                         }
