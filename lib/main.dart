@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/chat_screen.dart';
 import 'package:mentorx_mvp/screens/landing_page.dart';
@@ -20,30 +19,27 @@ void main() async {
 }
 
 class MentorX extends StatelessWidget {
-  const MentorX({Key key, this.auth, this.user}) : super(key: key);
-  final AuthBase auth;
-
-  final User user;
-
-  void _updateUser(User user) {
-    print('User ID: ${user.email}');
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: LandingPage.id,
       routes: {
-        WelcomeScreen.id: (context) => WelcomeScreen(auth: auth),
-        LoginScreen.id: (context) => LoginScreen(auth: auth),
+        WelcomeScreen.id: (context) => WelcomeScreen(
+              auth: Auth(),
+            ),
+        LoginScreen.id: (context) => LoginScreen(
+              auth: Auth(),
+            ),
         RegistrationScreen.id: (context) => RegistrationScreen(),
         ChatScreen.id: (context) => ChatScreen(),
-        LaunchScreen.id: (context) => LaunchScreen(),
+        LaunchScreen.id: (context) => LaunchScreen(
+              auth: Auth(),
+            ),
         MyProfile.id: (context) => MyProfile(),
         EventsScreen.id: (context) => EventsScreen(),
         MentoringScreen.id: (context) => MentoringScreen(),
-        LandingPage.id: (context) => LandingPage(auth: auth),
+        LandingPage.id: (context) => LandingPage(auth: Auth()),
       },
     );
   }

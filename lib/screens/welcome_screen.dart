@@ -10,19 +10,25 @@ import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'registration_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key key, @required this.auth, @required this.onSignIn})
-      : super(key: key);
+  const WelcomeScreen({Key key, @required this.auth}) : super(key: key);
 
   static const String id = 'welcome_screen';
   final AuthBase auth;
-  final void Function(User) onSignIn;
 
   void _signInWithEmail(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        builder: (context) => LoginScreen(
-          auth: auth,
-        ),
+        fullscreenDialog: true,
+        builder: (context) => LoginScreen(auth: auth),
+      ),
+    );
+  }
+
+  void _createNewUser(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (context) => RegistrationScreen(auth: auth),
       ),
     );
   }
@@ -121,9 +127,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               RoundedButton(
                 title: 'REGISTER',
                 color: kMentorXTeal,
-                onPressed: () {
-                  Navigator.pushNamed(context, RegistrationScreen.id);
-                },
+                onPressed: () => widget._createNewUser(context),
               ),
             ],
           ),
