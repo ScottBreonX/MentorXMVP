@@ -5,7 +5,6 @@ import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -22,16 +21,18 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   bool showSpinner = false;
-  User user;
   String get _email => _emailController.text;
   String get _password => _passwordController.text;
 
   void _submit() async {
+    setState(() {
+      showSpinner = true;
+    });
     print(
         'Email: ${_emailController.text} Password: ${_passwordController.text}');
     try {
       await widget.auth.signInWithEmailAndPassword(_email, _password);
-      Navigator.of(context).pop();
+      Navigator.of(context).popAndPushNamed(LaunchScreen.id);
     } catch (e) {
       setState(() {
         showSpinner = false;
@@ -44,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
         defaultActionText: "Ok",
       );
     }
+    print('Auth is ${widget.auth.currentUser}');
   }
 
   @override
@@ -89,7 +91,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     fontWeight: FontWeight.w400,
                   ),
                   decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Enter your email'),
+                    labelText: 'Enter your email',
+                  ),
                 ),
                 SizedBox(
                   height: 20,
@@ -103,7 +106,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     fontWeight: FontWeight.w400,
                   ),
                   decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Enter your password'),
+                    labelText: 'Enter your password',
+                  ),
                 ),
                 SizedBox(height: 20.0),
                 RoundedButton(

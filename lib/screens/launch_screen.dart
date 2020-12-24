@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -11,13 +12,14 @@ import 'mentoring_screen.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 
+User loggedInUser;
+
 class LaunchScreen extends StatefulWidget {
-  const LaunchScreen({Key key, this.onSignOut, this.user, @required this.auth})
+  const LaunchScreen({Key key, this.onSignOut, @required this.auth})
       : super(key: key);
 
   static const String id = 'launch_screen';
   final VoidCallback onSignOut;
-  final User user;
   final AuthBase auth;
 
   @override
@@ -25,6 +27,23 @@ class LaunchScreen extends StatefulWidget {
 }
 
 class _LaunchScreenState extends State<LaunchScreen> {
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  void getCurrentUser() {
+    try {
+      final user = widget.auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     timeDilation = 1.0;
@@ -40,7 +59,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
           ),
         ],
         backgroundColor: kMentorXTeal,
-        title: Text('Home Screen'),
+        title: Text('${loggedInUser.email} Home Screen'),
       ),
       backgroundColor: Colors.white,
       body: Padding(
@@ -106,7 +125,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                         height: 5.0,
                       ),
                       Text(
-                        '${widget.user.email} Profile',
+                        'Profile',
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black54,
