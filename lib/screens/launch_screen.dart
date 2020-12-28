@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -6,36 +5,29 @@ import 'package:mentorx_mvp/constants.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:mentorx_mvp/screens/chat_screen.dart';
 import 'package:mentorx_mvp/screens/profile_screen.dart';
+import 'package:mentorx_mvp/services/auth_provider.dart';
 import 'profile_screen.dart';
 import 'events_screen.dart';
 import 'mentoring_screen.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
-import 'package:mentorx_mvp/services/auth.dart';
 
 User loggedInUser;
 
 class LaunchScreen extends StatefulWidget {
-  const LaunchScreen({Key key, this.onSignOut, @required this.auth})
-      : super(key: key);
+  const LaunchScreen({this.onSignOut});
 
   static const String id = 'launch_screen';
   final VoidCallback onSignOut;
-  final AuthBase auth;
 
   @override
   _LaunchScreenState createState() => _LaunchScreenState();
 }
 
 class _LaunchScreenState extends State<LaunchScreen> {
-  @override
-  void initState() {
-    super.initState();
-    getCurrentUser();
-  }
-
   void getCurrentUser() {
+    final auth = AuthProvider.of(context);
     try {
-      final user = widget.auth.currentUser;
+      final user = auth.currentUser;
       if (user != null) {
         loggedInUser = user;
       }
@@ -47,6 +39,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
   @override
   Widget build(BuildContext context) {
     timeDilation = 1.0;
+    getCurrentUser();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

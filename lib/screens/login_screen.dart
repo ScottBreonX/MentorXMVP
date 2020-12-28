@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
+import 'package:mentorx_mvp/components/validators.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
+import 'package:mentorx_mvp/screens/registration_screen.dart';
+import 'package:mentorx_mvp/services/auth_provider.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
-import 'package:mentorx_mvp/services/auth.dart';
 
-class LoginScreen extends StatefulWidget {
-  LoginScreen({@required this.auth});
+class LoginScreen extends StatefulWidget with EmailAndPasswordValidators {
   static const String id = 'login_screen';
-  final AuthBase auth;
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -23,15 +23,18 @@ class _LoginScreenState extends State<LoginScreen> {
   bool showSpinner = false;
   String get _email => _emailController.text;
   String get _password => _passwordController.text;
+  bool _submitted = false;
 
   void _submit() async {
+    final auth = AuthProvider.of(context);
     setState(() {
+      _submitted = true;
       showSpinner = true;
     });
     print(
         'Email: ${_emailController.text} Password: ${_passwordController.text}');
     try {
-      await widget.auth.signInWithEmailAndPassword(_email, _password);
+      await auth.signInWithEmailAndPassword(_email, _password);
       Navigator.of(context).popAndPushNamed(LaunchScreen.id);
     } catch (e) {
       setState(() {
@@ -45,12 +48,15 @@ class _LoginScreenState extends State<LoginScreen> {
         defaultActionText: "Ok",
       );
     }
-    print('Auth is ${widget.auth.currentUser}');
+//    print('Auth is ${widget.auth.currentUser}');
   }
 
   @override
   Widget build(BuildContext context) {
     timeDilation = 2.0;
+    bool submitEnabled = widget.emailValidator.isValid(_email) &&
+        widget.passwordValidator.isValid(_password);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kMentorXTeal,
@@ -82,38 +88,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 48.0,
                 ),
-                TextField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.grey.shade800,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  decoration: kTextFieldDecoration.copyWith(
-                    labelText: 'Enter your email',
-                  ),
-                ),
+                _buildEmailTextField(),
                 SizedBox(
                   height: 20,
                 ),
-                TextField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.grey.shade800,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  decoration: kTextFieldDecoration.copyWith(
-                    labelText: 'Enter your password',
-                  ),
-                ),
+                _buildPasswordTextField(),
                 SizedBox(height: 20.0),
                 RoundedButton(
-                  onPressed: _submit,
+                  onPressed: submitEnabled ? _submit : null,
                   title: 'LOG IN',
-                  color: kMentorXTeal,
+                  color: submitEnabled ? kMentorXTeal : Colors.grey,
                 ),
                 SizedBox(
                   height: 20,
@@ -121,10 +105,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 Center(
                   child: InkWell(
                     child: Text(
-                      'Forgot Password',
+                      'Need an account? Register',
                       style: TextStyle(fontSize: 20, color: kMentorXTeal),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.popAndPushNamed(context, RegistrationScreen.id);
+                    },
                   ),
                 ),
               ],
@@ -133,5 +119,50 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  TextField _buildPasswordTextField() {
+    bool showErrorText =
+        _submitted && !widget.passwordValidator.isValid(_password);
+    return TextField(
+      controller: _passwordController,
+      obscureText: true,
+      textAlign: TextAlign.center,
+      textInputAction: TextInputAction.done,
+      onChanged: (password) => _submitState(),
+      style: TextStyle(
+        color: Colors.grey.shade800,
+        fontWeight: FontWeight.w400,
+      ),
+      decoration: kTextFieldDecoration.copyWith(
+        labelText: 'Enter your password',
+        errorText: showErrorText ? widget.invalidPasswordErrorText : null,
+      ),
+    );
+  }
+
+  TextField _buildEmailTextField() {
+    bool showErrorText = _submitted && !widget.emailValidator.isValid(_email);
+    return TextField(
+      controller: _emailController,
+      keyboardType: TextInputType.emailAddress,
+      textInputAction: TextInputAction.next,
+      textAlign: TextAlign.center,
+      onChanged: (email) => _submitState(),
+      style: TextStyle(
+        color: Colors.grey.shade800,
+        fontWeight: FontWeight.w400,
+      ),
+      autocorrect: false,
+      decoration: kTextFieldDecoration.copyWith(
+        labelText: 'Enter your email',
+        hintText: 'email@domain.com',
+        errorText: showErrorText ? widget.invalidEmailErrorText : null,
+      ),
+    );
+  }
+
+  void _submitState() {
+    setState(() {});
   }
 }

@@ -1,34 +1,32 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/registration_screen.dart';
-import 'package:mentorx_mvp/services/auth.dart';
+import 'package:mentorx_mvp/services/auth_provider.dart';
 import 'login_screen.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'registration_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key key, @required this.auth}) : super(key: key);
-
   static const String id = 'welcome_screen';
-  final AuthBase auth;
 
   void _signInWithEmail(BuildContext context) {
+    final auth = AuthProvider.of(context);
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => LoginScreen(auth: auth),
+        builder: (context) => LoginScreen(),
       ),
     );
   }
 
   void _createNewUser(BuildContext context) {
+    final auth = AuthProvider.of(context);
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => RegistrationScreen(auth: auth),
+        builder: (context) => RegistrationScreen(),
       ),
     );
   }
