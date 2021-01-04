@@ -5,10 +5,11 @@ import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
-import 'package:mentorx_mvp/screens/login_screen.dart';
-import 'package:mentorx_mvp/services/auth_provider.dart';
+import 'package:mentorx_mvp/screens/login_screen_blocbased.dart';
+import 'package:mentorx_mvp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
+import 'package:provider/provider.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = 'registration_screen';
@@ -33,7 +34,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       showSpinner = true;
     });
     try {
-      final auth = AuthProvider.of(context);
+      final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.createUserWithEmailAndPassword(_email, _password);
       Navigator.of(context).popAndPushNamed(LaunchScreen.id);
     } on FirebaseAuthException catch (e) {
@@ -173,7 +174,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       style: TextStyle(fontSize: 20, color: kMentorXTeal),
                     ),
                     onTap: () {
-                      Navigator.popAndPushNamed(context, LoginScreen.id);
+                      Navigator.popAndPushNamed(
+                          context, LoginScreenBlocBased.id);
                     },
                   ),
                 ),

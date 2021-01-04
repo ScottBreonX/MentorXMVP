@@ -3,20 +3,22 @@ import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/components/validators.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
-import 'package:mentorx_mvp/screens/registration_screen.dart';
-import 'package:mentorx_mvp/services/auth_provider.dart';
+import 'package:mentorx_mvp/screens/registration_screen_blocbased.dart';
+import 'package:mentorx_mvp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget with EmailAndPasswordValidators {
-  static const String id = 'login_screen';
+class LoginScreenStateful extends StatefulWidget
+    with EmailAndPasswordValidators {
+  static const String id = 'login_screen_stateful';
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _LoginScreenStatefulState createState() => _LoginScreenStatefulState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenStatefulState extends State<LoginScreenStateful> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -25,8 +27,8 @@ class _LoginScreenState extends State<LoginScreen> {
   String get _password => _passwordController.text;
   bool _submitted = false;
 
-  void _submit() async {
-    final auth = AuthProvider.of(context);
+  Future<void> _submit() async {
+    final auth = Provider.of<AuthBase>(context, listen: false);
     setState(() {
       _submitted = true;
       showSpinner = true;
@@ -109,7 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(fontSize: 20, color: kMentorXTeal),
                     ),
                     onTap: () {
-                      Navigator.popAndPushNamed(context, RegistrationScreen.id);
+                      Navigator.popAndPushNamed(
+                          context, RegistrationScreenBlocBased.id);
                     },
                   ),
                 ),
