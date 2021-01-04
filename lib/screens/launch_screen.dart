@@ -5,7 +5,8 @@ import 'package:mentorx_mvp/constants.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:mentorx_mvp/screens/chat_screen.dart';
 import 'package:mentorx_mvp/screens/profile_screen.dart';
-import 'package:mentorx_mvp/services/auth_provider.dart';
+import 'package:mentorx_mvp/services/auth.dart';
+import 'package:provider/provider.dart';
 import 'profile_screen.dart';
 import 'events_screen.dart';
 import 'mentoring_screen.dart';
@@ -25,7 +26,7 @@ class LaunchScreen extends StatefulWidget {
 
 class _LaunchScreenState extends State<LaunchScreen> {
   void getCurrentUser() {
-    final auth = AuthProvider.of(context);
+    final auth = Provider.of<AuthBase>(context, listen: false);
     try {
       final user = auth.currentUser;
       if (user != null) {
