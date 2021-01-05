@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/welcome_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
+import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
 
 class LandingPage extends StatelessWidget {
@@ -19,7 +20,10 @@ class LandingPage extends StatelessWidget {
           if (user == null) {
             return WelcomeScreen.create(context);
           }
-          return LaunchScreen();
+          return Provider<Database>(
+            create: (_) => FirestoreDatabase(uid: user.uid),
+            child: LaunchScreen(),
+          );
         }
         return Scaffold(
           body: Center(
