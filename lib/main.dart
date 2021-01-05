@@ -5,6 +5,7 @@ import 'package:mentorx_mvp/screens/landing_page.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/login_screen_blocbased.dart';
 import 'package:mentorx_mvp/services/auth.dart';
+import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/login_screen_blocbased.dart';
@@ -22,8 +23,9 @@ void main() async {
 }
 
 class MentorX extends StatelessWidget {
-  const MentorX({this.bloc});
+  const MentorX({this.bloc, this.database});
   final LoginBloc bloc;
+  final Database database;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,9 @@ class MentorX extends StatelessWidget {
               ),
           ChatScreen.id: (context) => ChatScreen(),
           LaunchScreen.id: (context) => LaunchScreen(),
-          MyProfile.id: (context) => MyProfile(),
+          MyProfile.id: (context) => MyProfile(
+                database: database,
+              ),
           EventsScreen.id: (context) => EventsScreen(),
           MentoringScreen.id: (context) => MentoringScreen(),
           LandingPage.id: (context) => LandingPage(),
