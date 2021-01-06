@@ -7,10 +7,7 @@ import 'package:provider/provider.dart';
 User loggedInUser;
 
 class MyProfile extends StatefulWidget {
-  const MyProfile({Key key, @required this.database}) : super(key: key);
-
   static const String id = 'profile_screen';
-  final Database database;
 
   @override
   _MyProfileState createState() => _MyProfileState();
