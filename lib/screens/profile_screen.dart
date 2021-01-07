@@ -1,12 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/models/profile.dart';
-import 'package:mentorx_mvp/services/api_path.dart';
 import 'package:mentorx_mvp/services/database.dart';
-import 'package:provider/provider.dart';
 
 User loggedInUser;
 

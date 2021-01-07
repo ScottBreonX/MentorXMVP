@@ -27,6 +27,16 @@ class LoginScreenBlocBased extends StatefulWidget {
     );
   }
 
+  void _createNewUser(BuildContext context) {
+    final auth = Provider.of<AuthBase>(context, listen: false);
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (context) => RegistrationScreenBlocBased.create(context),
+      ),
+    );
+  }
+
   @override
   _LoginScreenBlocBasedState createState() => _LoginScreenBlocBasedState();
 }
@@ -156,10 +166,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                             'Need an account? Register',
                             style: TextStyle(fontSize: 20, color: kMentorXTeal),
                           ),
-                          onTap: () {
-                            Navigator.popAndPushNamed(
-                                context, RegistrationScreenBlocBased.id);
-                          },
+                          onTap: () => widget._createNewUser(context),
                         ),
                       ),
                     ],
