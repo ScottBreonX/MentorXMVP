@@ -135,11 +135,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 title: 'LOG IN',
                 color: kMentorXTeal,
                 onPressed: () => widget._signInWithEmail(context),
+                minWidth: 200.0,
               ),
               RoundedButton(
                 title: 'REGISTER',
                 color: kMentorXTeal,
                 onPressed: () => widget._createNewUser(context),
+                minWidth: 200.0,
               ),
             ],
           ),
