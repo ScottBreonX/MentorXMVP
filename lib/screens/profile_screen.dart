@@ -1,13 +1,21 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mentorx_mvp/models/profile.dart';
+import 'package:mentorx_mvp/services/api_path.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
 
 User loggedInUser;
 
 class MyProfile extends StatefulWidget {
+  const MyProfile({Key key, this.database, this.uid}) : super(key: key);
+
   static const String id = 'profile_screen';
+  final Database database;
+  final String uid;
 
   @override
   _MyProfileState createState() => _MyProfileState();
@@ -34,11 +42,8 @@ class _MyProfileState extends State<MyProfile> {
   }
 
   Future<void> _createProfile(BuildContext context) async {
-    final database = Provider.of<Database>(context, listen: false);
-    await database.createProfile({
-      'fName': 'Scott',
-      'lName': 'Breon',
-    });
+    final database = FirestoreDatabase(uid: loggedInUser.uid);
+    await database.createProfile(Profile(fName: 'Jefferson', lName: 'Breon'));
   }
 
   @override
@@ -126,7 +131,7 @@ class _MyProfileState extends State<MyProfile> {
                   width: 10.0,
                 ),
                 Text(
-                  '${loggedInUser.displayName}',
+                  'lName',
                   style: TextStyle(
                     fontSize: 30.0,
                     color: Colors.black,

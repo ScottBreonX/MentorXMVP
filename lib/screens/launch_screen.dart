@@ -6,6 +6,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:mentorx_mvp/screens/chat_screen.dart';
 import 'package:mentorx_mvp/screens/profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
+import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
 import 'profile_screen.dart';
 import 'events_screen.dart';
