@@ -1,21 +1,21 @@
-import 'dart:math';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/models/profile.dart';
-import 'package:mentorx_mvp/services/api_path.dart';
 import 'package:mentorx_mvp/services/database.dart';
-import 'package:provider/provider.dart';
 
 User loggedInUser;
 
 class MyProfile extends StatefulWidget {
-  const MyProfile({Key key, this.database, this.uid}) : super(key: key);
+  const MyProfile({Key key, this.database, this.uid, this.fName})
+      : super(key: key);
 
   static const String id = 'profile_screen';
   final Database database;
   final String uid;
+  final String fName;
 
   @override
   _MyProfileState createState() => _MyProfileState();
@@ -27,6 +27,8 @@ class _MyProfileState extends State<MyProfile> {
   @override
   void initState() {
     getCurrentUser();
+    _createProfile(context);
+    getProfileData();
     super.initState();
   }
 
@@ -41,13 +43,40 @@ class _MyProfileState extends State<MyProfile> {
     }
   }
 
+  dynamic profileData;
+
+  Future<dynamic> getProfileData() async {
+    await FirebaseFirestore.instance
+        .collection('users/${loggedInUser.uid}/profile')
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((result) {
+        setState(() {
+          profileData = result.data();
+        });
+      });
+    });
+  }
+
   Future<void> _createProfile(BuildContext context) async {
-    final database = FirestoreDatabase(uid: loggedInUser.uid);
-    await database.createProfile(Profile(fName: 'Jefferson', lName: 'Breon'));
+    try {
+      final database = FirestoreDatabase(uid: loggedInUser.uid);
+      await database.profileCoreInfo(Profile(email: loggedInUser.email));
+    } on FirebaseException catch (e) {
+      showAlertDialog(context,
+          title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (profileData == null) {
+      return Center(
+        child: CircularProgressIndicator(
+          backgroundColor: kMentorXTeal,
+        ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kMentorXTeal,
@@ -121,7 +150,7 @@ class _MyProfileState extends State<MyProfile> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${loggedInUser.displayName}',
+                  '${profileData['First Name']}',
                   style: TextStyle(
                     fontSize: 30.0,
                     color: Colors.black,
@@ -131,7 +160,7 @@ class _MyProfileState extends State<MyProfile> {
                   width: 10.0,
                 ),
                 Text(
-                  'lName',
+                  'First Name',
                   style: TextStyle(
                     fontSize: 30.0,
                     color: Colors.black,
@@ -203,15 +232,6 @@ class _MyProfileState extends State<MyProfile> {
                       )
                     ],
                   ),
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                FloatingActionButton(
-                  child: Icon(
-                    Icons.add,
-                  ),
-                  onPressed: () => _createProfile(context),
                 ),
               ],
             ),

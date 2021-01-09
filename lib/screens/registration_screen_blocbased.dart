@@ -30,6 +30,25 @@ class RegistrationScreenBlocBased extends StatefulWidget {
     );
   }
 
+  void _signInWithEmail(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (context) => LoginScreenBlocBased.create(context),
+      ),
+    );
+  }
+
+  void _createNewUser(BuildContext context) {
+    final auth = Provider.of<AuthBase>(context, listen: false);
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (context) => RegistrationScreenBlocBased.create(context),
+      ),
+    );
+  }
+
   @override
   _RegistrationScreenBlocBasedState createState() =>
       _RegistrationScreenBlocBasedState();
@@ -193,11 +212,12 @@ class _RegistrationScreenBlocBasedState
                               defaultActionText: "Ok",
                             );
                           } else {
-                            _submit();
+                            widget._createNewUser(context);
                           }
                         },
                         title: 'REGISTER',
                         color: kMentorXTeal,
+                        minWidth: 500.0,
                       ),
                       Center(
                         child: InkWell(
@@ -205,10 +225,7 @@ class _RegistrationScreenBlocBasedState
                             'Already have an account? Log In',
                             style: TextStyle(fontSize: 20, color: kMentorXTeal),
                           ),
-                          onTap: () {
-                            Navigator.popAndPushNamed(
-                                context, LoginScreenBlocBased.id);
-                          },
+                          onTap: () => widget._signInWithEmail(context),
                         ),
                       ),
                     ],
