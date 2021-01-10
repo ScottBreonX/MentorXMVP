@@ -212,7 +212,7 @@ class _RegistrationScreenBlocBasedState
                               defaultActionText: "Ok",
                             );
                           } else {
-                            widget._createNewUser(context);
+                            _submit();
                           }
                         },
                         title: 'REGISTER',
