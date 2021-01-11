@@ -4,7 +4,7 @@ import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/models/login_model.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
-import 'package:mentorx_mvp/screens/registration_screen_blocbased.dart';
+import 'package:mentorx_mvp/screens/registration_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/constants.dart';
@@ -32,7 +32,7 @@ class LoginScreenBlocBased extends StatefulWidget {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => RegistrationScreenBlocBased.create(context),
+        builder: (context) => RegistrationScreen.create(context),
       ),
     );
   }
@@ -74,7 +74,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
       textAlign: TextAlign.center,
       onChanged: widget.bloc.updateEmail,
       style: TextStyle(
-        color: Colors.grey.shade800,
+        color: Colors.white,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
@@ -94,7 +94,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updatePassword,
       style: TextStyle(
-        color: Colors.grey.shade800,
+        color: Colors.white,
         fontWeight: FontWeight.w400,
       ),
       decoration: kTextFieldDecoration.copyWith(
@@ -122,54 +122,68 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
               centerTitle: true,
             ),
             backgroundColor: Colors.white,
-            body: ModalProgressHUD(
-              inAsyncCall: model.showSpinner,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 24.0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      SizedBox(
-                        height: 50,
-                      ),
-                      Hero(
-                        tag: 'logo',
-                        child: Container(
-                          height: 150.0,
-                          child: Image.asset('images/XLogo.png'),
+            body: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('images/XMountains.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: ModalProgressHUD(
+                inAsyncCall: model.showSpinner,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 24.0,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SizedBox(
+                          height: 50,
                         ),
-                      ),
-                      SizedBox(
-                        height: 48.0,
-                      ),
-                      _buildEmailTextField(model),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      _buildPasswordTextField(model),
-                      SizedBox(height: 20.0),
-                      RoundedButton(
-                        onPressed: model.canSubmit ? _submit : null,
-                        title: 'LOG IN',
-                        color: model.canSubmit ? kMentorXTeal : Colors.grey,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Center(
-                        child: InkWell(
-                          child: Text(
-                            'Need an account? Register',
-                            style: TextStyle(fontSize: 20, color: kMentorXTeal),
+                        Hero(
+                          tag: 'logo',
+                          child: Container(
+                            height: 150.0,
+                            child: Image.asset('images/XLogo.png'),
                           ),
-                          onTap: () => widget._createNewUser(context),
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 48.0,
+                        ),
+                        _buildEmailTextField(model),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        _buildPasswordTextField(model),
+                        SizedBox(height: 20.0),
+                        RoundedButton(
+                          onPressed: model.canSubmit ? _submit : null,
+                          title: 'LOG IN',
+                          buttonColor:
+                              model.canSubmit ? kMentorXTeal : Colors.grey,
+                          minWidth: 500,
+                          fontColor: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Center(
+                          child: InkWell(
+                            child: Text(
+                              'Need an account? Register',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                            onTap: () => widget._createNewUser(context),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

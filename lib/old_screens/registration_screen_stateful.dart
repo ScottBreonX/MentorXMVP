@@ -5,7 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
-import 'package:mentorx_mvp/screens/login_screen_blocbased.dart';
+import 'package:mentorx_mvp/screens/login_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
@@ -165,7 +165,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     }
                   },
                   title: 'REGISTER',
-                  color: kMentorXTeal,
+                  buttonColor: kMentorXTeal,
                 ),
                 Center(
                   child: InkWell(
