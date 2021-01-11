@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
-import 'package:mentorx_mvp/screens/registration_screen_blocbased.dart';
+import 'package:mentorx_mvp/screens/registration_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
-import 'login_screen_blocbased.dart';
+import 'login_screen.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
-import 'registration_screen_blocbased.dart';
+import 'registration_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key key, @required this.bloc}) : super(key: key);
@@ -40,7 +40,7 @@ class WelcomeScreen extends StatefulWidget {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => RegistrationScreenBlocBased.create(context),
+        builder: (context) => RegistrationScreen.create(context),
       ),
     );
   }
@@ -69,6 +69,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   }
 
   @override
+  void didChangeDependencies() {
+    precacheImage(AssetImage('images/XMountains.jpg'), context);
+    super.didChangeDependencies();
+  }
+
+  @override
   void dispose() {
     controller.dispose();
     super.dispose();
@@ -79,16 +85,20 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.white,
-              Colors.white,
-              Colors.white30,
-              kMentorXTeal,
-            ],
+          image: DecorationImage(
+            image: AssetImage("images/XMountains.jpg"),
+            fit: BoxFit.cover,
           ),
+//          gradient: LinearGradient(
+//            begin: Alignment.topCenter,
+//            end: Alignment.bottomCenter,
+//            colors: [
+//              Colors.white,
+//              Colors.white,
+//              Colors.white30,
+//              kMentorXTeal,
+//            ],
+//          ),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -106,14 +116,21 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       textStyle: TextStyle(
                         fontSize: 70.0,
                         fontWeight: FontWeight.w400,
-                        color: Colors.grey,
+                        color: Colors.white,
                       ),
                       colors: [
-                        Colors.grey,
                         Colors.white,
+                        Colors.white60,
+                        Colors.grey,
                         kMentorXTeal,
-                        Colors.white,
                         Colors.grey,
+                        Colors.white60,
+                        Colors.white,
+//                        Colors.grey,
+//                        Colors.white,
+//                        kMentorXTeal,
+//                        Colors.white,
+//                        Colors.grey,
                       ],
                       textAlign: TextAlign.start,
                       alignment: AlignmentDirectional.topStart,
@@ -129,19 +146,21 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 ],
               ),
               SizedBox(
-                height: 40.0,
+                height: 200.0,
               ),
               RoundedButton(
-                title: 'LOG IN',
-                color: kMentorXTeal,
-                onPressed: () => widget._signInWithEmail(context),
-                minWidth: 200.0,
-              ),
-              RoundedButton(
-                title: 'REGISTER',
-                color: kMentorXTeal,
+                title: 'Sign up',
+                buttonColor: kMentorXTeal,
+                fontColor: Colors.white,
                 onPressed: () => widget._createNewUser(context),
-                minWidth: 200.0,
+                minWidth: 250.0,
+              ),
+              RoundedButton(
+                title: 'Sign in',
+                buttonColor: Colors.white,
+                fontColor: kMentorXTeal,
+                onPressed: () => widget._signInWithEmail(context),
+                minWidth: 250.0,
               ),
             ],
           ),

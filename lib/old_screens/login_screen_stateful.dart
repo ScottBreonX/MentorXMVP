@@ -3,7 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/components/validators.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
-import 'package:mentorx_mvp/screens/registration_screen_blocbased.dart';
+import 'package:mentorx_mvp/screens/registration_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/constants.dart';
@@ -99,7 +99,7 @@ class _LoginScreenStatefulState extends State<LoginScreenStateful> {
                 RoundedButton(
                   onPressed: submitEnabled ? _submit : null,
                   title: 'LOG IN',
-                  color: submitEnabled ? kMentorXTeal : Colors.grey,
+                  buttonColor: submitEnabled ? kMentorXTeal : Colors.grey,
                 ),
                 SizedBox(
                   height: 20,
@@ -111,8 +111,7 @@ class _LoginScreenStatefulState extends State<LoginScreenStateful> {
                       style: TextStyle(fontSize: 20, color: kMentorXTeal),
                     ),
                     onTap: () {
-                      Navigator.popAndPushNamed(
-                          context, RegistrationScreenBlocBased.id);
+                      Navigator.popAndPushNamed(context, RegistrationScreen.id);
                     },
                   ),
                 ),

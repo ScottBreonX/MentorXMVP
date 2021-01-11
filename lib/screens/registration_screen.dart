@@ -7,16 +7,17 @@ import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/models/login_model.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
-import 'package:mentorx_mvp/screens/login_screen_blocbased.dart';
+import 'package:mentorx_mvp/screens/login_screen.dart';
+import 'package:mentorx_mvp/screens/registration_profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:provider/provider.dart';
 
-class RegistrationScreenBlocBased extends StatefulWidget {
-  RegistrationScreenBlocBased({@required this.bloc});
+class RegistrationScreen extends StatefulWidget {
+  RegistrationScreen({@required this.bloc});
 
-  static const String id = 'registration_screen_blocbased';
+  static const String id = 'registration_screen';
   final LoginBloc bloc;
 
   static Widget create(BuildContext context) {
@@ -24,7 +25,7 @@ class RegistrationScreenBlocBased extends StatefulWidget {
     return Provider<LoginBloc>(
       create: (_) => LoginBloc(auth: auth),
       child: Consumer<LoginBloc>(
-        builder: (_, bloc, __) => RegistrationScreenBlocBased(bloc: bloc),
+        builder: (_, bloc, __) => RegistrationScreen(bloc: bloc),
       ),
       dispose: (_, bloc) => bloc.dispose(),
     );
@@ -39,23 +40,11 @@ class RegistrationScreenBlocBased extends StatefulWidget {
     );
   }
 
-  void _createNewUser(BuildContext context) {
-    final auth = Provider.of<AuthBase>(context, listen: false);
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        fullscreenDialog: true,
-        builder: (context) => RegistrationScreenBlocBased.create(context),
-      ),
-    );
-  }
-
   @override
-  _RegistrationScreenBlocBasedState createState() =>
-      _RegistrationScreenBlocBasedState();
+  _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
-class _RegistrationScreenBlocBasedState
-    extends State<RegistrationScreenBlocBased> {
+class _RegistrationScreenState extends State<RegistrationScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordConfirmController =
@@ -64,7 +53,7 @@ class _RegistrationScreenBlocBasedState
   Future<void> _submit() async {
     try {
       await widget.bloc.createUser();
-      Navigator.of(context).popAndPushNamed(LaunchScreen.id);
+      Navigator.of(context).popAndPushNamed(RegistrationProfileScreen.id);
     } on FirebaseAuthException catch (e) {
       print(e.toString());
       if (e.code == 'invalid-email') {
@@ -102,7 +91,7 @@ class _RegistrationScreenBlocBasedState
       textAlign: TextAlign.center,
       onChanged: widget.bloc.updateEmail,
       style: TextStyle(
-        color: Colors.grey.shade800,
+        color: Colors.white,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
@@ -122,7 +111,7 @@ class _RegistrationScreenBlocBasedState
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updatePassword,
       style: TextStyle(
-        color: Colors.grey.shade800,
+        color: Colors.white,
         fontWeight: FontWeight.w400,
       ),
       decoration: kTextFieldDecoration.copyWith(
@@ -140,7 +129,7 @@ class _RegistrationScreenBlocBasedState
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updateConfirmPassword,
       style: TextStyle(
-        color: Colors.grey.shade800,
+        color: Colors.white,
         fontWeight: FontWeight.w400,
       ),
       decoration: kTextFieldDecoration.copyWith(
@@ -166,69 +155,97 @@ class _RegistrationScreenBlocBasedState
               title: Text('Create Account'),
               centerTitle: true,
             ),
-            backgroundColor: Colors.white,
-            body: ModalProgressHUD(
-              inAsyncCall: model.showSpinner,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 24.0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      SizedBox(
-                        height: 50,
-                      ),
-                      Hero(
-                        tag: 'logo',
-                        child: Container(
-                          height: 150.0,
-                          child: Image.asset('images/XLogo.png'),
+//            backgroundColor: Colors.white,
+            body: Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('images/XMountains.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: ModalProgressHUD(
+                inAsyncCall: model.showSpinner,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 24.0,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SizedBox(
+                          height: 50,
                         ),
-                      ),
-                      SizedBox(
-                        height: 48.0,
-                      ),
-                      _buildEmailTextField(model),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      _buildPasswordTextField(model),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      _buildConfirmPasswordTextField(model),
-                      SizedBox(height: 20.0),
-                      RoundedButton(
-                        onPressed: () {
-                          if (model.password != model.confirmPassword) {
-                            showAlertDialog(
-                              context,
-                              title: "Confirm Password",
-                              content:
-                                  "Passwords do not match. Please re-enter password.",
-                              defaultActionText: "Ok",
-                            );
-                          } else {
-                            _submit();
-                          }
-                        },
-                        title: 'REGISTER',
-                        color: kMentorXTeal,
-                        minWidth: 500.0,
-                      ),
-                      Center(
-                        child: InkWell(
-                          child: Text(
-                            'Already have an account? Log In',
-                            style: TextStyle(fontSize: 20, color: kMentorXTeal),
+                        Hero(
+                          tag: 'logo',
+                          child: Container(
+                            height: 150.0,
+                            child: Image.asset('images/XLogo.png'),
                           ),
-                          onTap: () => widget._signInWithEmail(context),
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 48.0,
+                        ),
+                        _buildEmailTextField(model),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        _buildPasswordTextField(model),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        _buildConfirmPasswordTextField(model),
+                        SizedBox(height: 20.0),
+                        RoundedButton(
+                          onPressed: () {
+                            if (model.password != model.confirmPassword) {
+                              showAlertDialog(
+                                context,
+                                title: "Confirm Password",
+                                content:
+                                    "Passwords do not match. Please re-enter password.",
+                                defaultActionText: "Ok",
+                              );
+                            } else {
+                              _submit();
+                            }
+                          },
+                          title: 'NEXT',
+                          buttonColor: kMentorXTeal,
+                          fontColor: Colors.white,
+                          minWidth: 500.0,
+                        ),
+                        Center(
+                          child: InkWell(
+                            child: Text(
+                              'Already have an account? Log In',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                            onTap: () => widget._signInWithEmail(context),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 100,
+                        ),
+                        Center(
+                          child: InkWell(
+                            child: Text(
+                              'Test Profile Page',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, RegistrationProfileScreen.id);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

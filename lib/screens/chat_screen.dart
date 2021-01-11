@@ -24,7 +24,12 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
     getCurrentUser();
-//    showSpinner = true;
+  }
+
+  @override
+  void dispose() {
+    messageTextController.dispose();
+    super.dispose();
   }
 
   void getCurrentUser() {
@@ -47,6 +52,8 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
+  final FocusScopeNode _focusScopeNode = FocusScopeNode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +68,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ],
         title: Text(
-          'Chat with FName LName',
+          'Chat Room',
           style: TextStyle(fontSize: 15),
         ),
         backgroundColor: kMentorXTeal,
@@ -80,12 +87,15 @@ class _ChatScreenState extends State<ChatScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
-                      child: TextField(
-                        controller: messageTextController,
-                        onChanged: (value) {
-                          messageText = value;
-                        },
-                        decoration: kMessageTextFieldDecoration,
+                      child: FocusScope(
+                        node: _focusScopeNode,
+                        child: TextField(
+                          controller: messageTextController,
+                          onChanged: (text) {
+                            messageText = text;
+                          },
+                          decoration: kMessageTextFieldDecoration,
+                        ),
                       ),
                     ),
                     FlatButton(
@@ -136,7 +146,6 @@ class MessagesStream extends StatelessWidget {
 
           final messageText = messageData['text'];
           final messageSender = messageData['sender'];
-          final messageTime = messageData['timestamp'];
 
           final currentUser = loggedInUser.email;
 
@@ -164,6 +173,7 @@ class MessagesStream extends StatelessWidget {
 
 class MessageBubble extends StatelessWidget {
   MessageBubble({this.text, this.sender, this.isMe});
+
   final String text;
   final String sender;
   final bool isMe;

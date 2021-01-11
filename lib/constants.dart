@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 const kTextFieldDecoration = InputDecoration(
   labelText: 'Enter a value',
-  hintStyle: TextStyle(color: Colors.grey),
+  labelStyle: TextStyle(color: Colors.white),
+  hintStyle: TextStyle(color: kMentorXTeal),
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   border:
       OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),
   enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: kMentorXTeal, width: 1.0),
+      borderSide: BorderSide(color: kMentorXTeal, width: 4.0),
       borderRadius: BorderRadius.all(Radius.circular(32.0))),
   focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: kMentorXTeal, width: 4.0),
+      borderSide: BorderSide(color: Colors.white, width: 4.0),
       borderRadius: BorderRadius.all(Radius.circular(32.0))),
 );
 
