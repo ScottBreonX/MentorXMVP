@@ -3,9 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/services/database.dart';
+import 'package:provider/provider.dart';
 
 User loggedInUser;
 
@@ -44,6 +47,20 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       }
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<void> _createProfile(BuildContext context) async {
+    try {
+      final database = FirestoreDatabase(uid: loggedInUser.uid);
+      await database.createProfile(Profile(
+          email: loggedInUser.email,
+          fName: 'Scott',
+          lName: 'Breon',
+          major: 'Economics'));
+    } on FirebaseException catch (e) {
+      showAlertDialog(context,
+          title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
     }
   }
 
@@ -173,6 +190,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                 SizedBox(height: 20.0),
                 RoundedButton(
                   onPressed: () {
+                    _createProfile(context);
                     print(loggedInUser.email);
                   },
                   title: 'Submit',
