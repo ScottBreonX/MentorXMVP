@@ -56,8 +56,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
         title: Text('Home Screen'),
       ),
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: 50.0),
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

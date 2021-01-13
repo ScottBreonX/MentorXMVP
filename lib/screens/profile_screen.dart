@@ -1,9 +1,11 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mentorx_mvp/models/profile.dart';
+import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
 User loggedInUser;
@@ -23,11 +25,13 @@ class MyProfile extends StatefulWidget {
 
 class _MyProfileState extends State<MyProfile> {
   final _auth = FirebaseAuth.instance;
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _firstNameController = TextEditingController();
+  String fName;
 
   @override
   void initState() {
     getCurrentUser();
-    _createProfile(context);
     getProfileData();
     super.initState();
   }
@@ -41,6 +45,33 @@ class _MyProfileState extends State<MyProfile> {
     } catch (e) {
       print(e);
     }
+  }
+
+  TextField _buildFirstNameTextField(BuildContext context) {
+    return TextField(
+      key: _formKey,
+      controller: _firstNameController,
+      textInputAction: TextInputAction.next,
+      textAlign: TextAlign.center,
+      onChanged: (value) => fName = value,
+      style: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.w400,
+      ),
+      autocorrect: false,
+      decoration: kTextFieldDecoration.copyWith(
+        labelText: 'Enter your First name',
+        labelStyle: TextStyle(color: Colors.black54),
+        hintText: '${profileData['First Name']}',
+        hintStyle: TextStyle(color: Colors.black54),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: kMentorXTeal, width: 4.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(32.0),
+          ),
+        ),
+      ),
+    );
   }
 
   dynamic profileData;
@@ -61,7 +92,9 @@ class _MyProfileState extends State<MyProfile> {
   Future<void> _createProfile(BuildContext context) async {
     try {
       final database = FirestoreDatabase(uid: loggedInUser.uid);
-      await database.profileCoreInfo(Profile(email: loggedInUser.email));
+      await database.createProfile(
+        Profile(email: loggedInUser.email, fName: fName),
+      );
     } on FirebaseException catch (e) {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
@@ -160,7 +193,7 @@ class _MyProfileState extends State<MyProfile> {
                   width: 10.0,
                 ),
                 Text(
-                  'First Name',
+                  '${profileData['Last Name']}',
                   style: TextStyle(
                     fontSize: 30.0,
                     color: Colors.black,
@@ -175,7 +208,7 @@ class _MyProfileState extends State<MyProfile> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Finance',
+                  '${profileData['Major']}',
                   style: TextStyle(
                     fontSize: 25.0,
                     color: Colors.black54,
@@ -210,6 +243,10 @@ class _MyProfileState extends State<MyProfile> {
             SizedBox(
               height: 10,
             ),
+            _buildFirstNameTextField(context),
+            SizedBox(
+              height: 10,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -235,6 +272,14 @@ class _MyProfileState extends State<MyProfile> {
                 ),
               ],
             ),
+            FloatingActionButton(
+              onPressed: () {
+                _createProfile(context);
+                setState(() {
+                  getProfileData();
+                });
+              },
+            )
           ],
         ),
       ),
