@@ -10,6 +10,8 @@ import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
 
+import 'launch_screen.dart';
+
 User loggedInUser;
 
 class RegistrationProfileScreen extends StatefulWidget {
@@ -27,6 +29,13 @@ class RegistrationProfileScreen extends StatefulWidget {
 
 class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
   final _auth = FirebaseAuth.instance;
+  final _formKey = GlobalKey<FormState>();
+  final _formKey2 = GlobalKey<FormState>();
+  final _formKey3 = GlobalKey<FormState>();
+
+  String fName;
+  String lName;
+  String major;
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -53,11 +62,14 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
   Future<void> _createProfile(BuildContext context) async {
     try {
       final database = FirestoreDatabase(uid: loggedInUser.uid);
-      await database.createProfile(Profile(
+      await database.createProfile(
+        Profile(
           email: loggedInUser.email,
-          fName: 'Scott',
-          lName: 'Breon',
-          major: 'Economics'));
+          fName: fName,
+          lName: lName,
+          major: major,
+        ),
+      );
     } on FirebaseException catch (e) {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
@@ -82,10 +94,11 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
 
   TextField _buildFirstNameTextField(BuildContext context) {
     return TextField(
+      key: _formKey,
       controller: _firstNameController,
       textInputAction: TextInputAction.next,
       textAlign: TextAlign.center,
-//      onChanged: widget.bloc.updateEmail,
+      onChanged: (value) => fName = value,
       style: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w400,
@@ -93,7 +106,6 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       autocorrect: false,
       decoration: kTextFieldDecoration.copyWith(
         labelText: 'Enter your first name',
-        hintText: 'Alex',
 //        errorText: model.emailErrorText,
       ),
     );
@@ -101,10 +113,11 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
 
   TextField _buildLastNameTextField(BuildContext context) {
     return TextField(
+      key: _formKey2,
       controller: _lastNameController,
       textInputAction: TextInputAction.next,
       textAlign: TextAlign.center,
-//      onChanged: widget.bloc.updateEmail,
+      onChanged: (value) => lName = value,
       style: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w400,
@@ -112,7 +125,6 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       autocorrect: false,
       decoration: kTextFieldDecoration.copyWith(
         labelText: 'Enter your last name',
-        hintText: 'Davidson',
 //        errorText: model.emailErrorText,
       ),
     );
@@ -120,10 +132,11 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
 
   TextField _buildFieldOfStudyTextField(BuildContext context) {
     return TextField(
+      key: _formKey3,
       controller: _fieldOfStudyController,
       textInputAction: TextInputAction.next,
       textAlign: TextAlign.center,
-//      onChanged: widget.bloc.updateEmail,
+      onChanged: (value) => major = value,
       style: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w400,
@@ -131,7 +144,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       autocorrect: false,
       decoration: kTextFieldDecoration.copyWith(
         labelText: 'Enter your field of study',
-        hintText: 'Economics',
+        hintText: 'i.e. Economics',
 //        errorText: model.emailErrorText,
       ),
     );
@@ -189,9 +202,9 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                 _buildFieldOfStudyTextField(context),
                 SizedBox(height: 20.0),
                 RoundedButton(
-                  onPressed: () {
-                    _createProfile(context);
-                    print(loggedInUser.email);
+                  onPressed: () async {
+                    await _createProfile(context);
+                    Navigator.pushNamed(context, LaunchScreen.id);
                   },
                   title: 'Submit',
                   buttonColor: kMentorXTeal,
