@@ -1,13 +1,23 @@
 import 'package:flutter/foundation.dart';
+import 'package:mentorx_mvp/models/user.dart';
 
-class Profile {
-  Profile({this.fName, this.lName, this.email, this.major});
+class ProfileModel {
+  ProfileModel({
+    this.fName = '',
+    this.lName = '',
+    this.email = '',
+    this.major = '',
+    this.submitted = false,
+    this.showSpinner = false,
+  });
   final String fName;
   final String lName;
   final String major;
   final String email;
+  final bool submitted;
+  final bool showSpinner;
 
-  factory Profile.fromMap(Map<String, dynamic> data) {
+  factory ProfileModel.fromMap(Map<String, dynamic> data) {
     if (data == null) {
       return null;
     }
@@ -15,7 +25,7 @@ class Profile {
     final String lName = data['Last Name'];
     final String major = data['Major'];
     final String email = data['Email Address'];
-    return Profile(fName: fName, lName: lName, email: email, major: major);
+    return ProfileModel(fName: fName, lName: lName, email: email, major: major);
   }
 
   Map<String, dynamic> toMap() {
@@ -25,5 +35,23 @@ class Profile {
       'Major': major,
       'Email Address': email,
     };
+  }
+
+  ProfileModel copyWith({
+    String email,
+    String fName,
+    String lName,
+    String major,
+    bool submitted,
+    bool showSpinner,
+  }) {
+    return ProfileModel(
+      email: email ?? this.email,
+      fName: fName ?? this.fName,
+      lName: lName ?? this.lName,
+      major: major ?? this.major,
+      submitted: submitted ?? this.submitted,
+      showSpinner: showSpinner ?? this.showSpinner,
+    );
   }
 }

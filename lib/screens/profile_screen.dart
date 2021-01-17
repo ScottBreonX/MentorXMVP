@@ -93,7 +93,7 @@ class _MyProfileState extends State<MyProfile> {
     try {
       final database = FirestoreDatabase(uid: loggedInUser.uid);
       await database.createProfile(
-        Profile(
+        ProfileModel(
           email: loggedInUser.email,
           fName: fName,
           lName: profileData['Last Name'],
