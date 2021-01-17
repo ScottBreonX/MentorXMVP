@@ -24,6 +24,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
     getCurrentUser();
+    getProfileData();
   }
 
   @override
@@ -41,6 +42,21 @@ class _ChatScreenState extends State<ChatScreen> {
     } catch (e) {
       print(e);
     }
+  }
+
+  dynamic profileData;
+
+  Future<dynamic> getProfileData() async {
+    await FirebaseFirestore.instance
+        .collection('users/${loggedInUser.uid}/profile')
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((result) {
+        setState(() {
+          profileData = result.data();
+        });
+      });
+    });
   }
 
   void messagesStream() async {
@@ -103,7 +119,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         messageTextController.clear();
                         _firestore.collection('messages').add({
                           'text': messageText,
-                          'sender': loggedInUser.email,
+                          'sender': '${profileData['First Name']}',
                           'timestamp': DateTime.now(),
                         });
                       },
@@ -146,7 +162,6 @@ class MessagesStream extends StatelessWidget {
 
           final messageText = messageData['text'];
           final messageSender = messageData['sender'];
-
           final currentUser = loggedInUser.email;
 
           final messageBubble = MessageBubble(
