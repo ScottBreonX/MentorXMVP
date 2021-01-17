@@ -6,9 +6,9 @@ import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:mentorx_mvp/models/profile_bloc.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/services/database.dart';
-import 'package:provider/provider.dart';
 
 import 'launch_screen.dart';
 
@@ -16,8 +16,14 @@ User loggedInUser;
 
 class RegistrationProfileScreen extends StatefulWidget {
   static const String id = 'registration_profile_screen';
-  const RegistrationProfileScreen({this.database, this.uid, this.fName});
+  const RegistrationProfileScreen({
+    this.database,
+    this.uid,
+    this.fName,
+    this.bloc,
+  });
 
+  final ProfileBloc bloc;
   final Database database;
   final String uid;
   final String fName;
@@ -63,7 +69,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
     try {
       final database = FirestoreDatabase(uid: loggedInUser.uid);
       await database.createProfile(
-        Profile(
+        ProfileModel(
           email: loggedInUser.email,
           fName: fName,
           lName: lName,
