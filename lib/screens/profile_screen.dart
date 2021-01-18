@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
@@ -11,13 +8,15 @@ import 'package:mentorx_mvp/services/database.dart';
 User loggedInUser;
 
 class MyProfile extends StatefulWidget {
-  const MyProfile({Key key, this.database, this.uid, this.fName})
-      : super(key: key);
+  const MyProfile({
+    Key key,
+    this.database,
+    this.uid,
+  }) : super(key: key);
 
   static const String id = 'profile_screen';
   final Database database;
   final String uid;
-  final String fName;
 
   @override
   _MyProfileState createState() => _MyProfileState();
@@ -25,9 +24,6 @@ class MyProfile extends StatefulWidget {
 
 class _MyProfileState extends State<MyProfile> {
   final _auth = FirebaseAuth.instance;
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _firstNameController = TextEditingController();
-  String fName;
 
   @override
   void initState() {
@@ -47,33 +43,6 @@ class _MyProfileState extends State<MyProfile> {
     }
   }
 
-  TextField _buildFirstNameTextField(BuildContext context) {
-    return TextField(
-      key: _formKey,
-      controller: _firstNameController,
-      textInputAction: TextInputAction.next,
-      textAlign: TextAlign.center,
-      onChanged: (value) => fName = value,
-      style: TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.w400,
-      ),
-      autocorrect: false,
-      decoration: kTextFieldDecoration.copyWith(
-        labelText: 'Enter your First name',
-        labelStyle: TextStyle(color: Colors.black54),
-        hintText: '${profileData['First Name']}',
-        hintStyle: TextStyle(color: Colors.black54),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: kMentorXTeal, width: 4.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(32.0),
-          ),
-        ),
-      ),
-    );
-  }
-
   dynamic profileData;
 
   Future<dynamic> getProfileData() async {
@@ -89,22 +58,22 @@ class _MyProfileState extends State<MyProfile> {
     });
   }
 
-  Future<void> _createProfile(BuildContext context) async {
-    try {
-      final database = FirestoreDatabase(uid: loggedInUser.uid);
-      await database.createProfile(
-        ProfileModel(
-          email: loggedInUser.email,
-          fName: fName,
-          lName: profileData['Last Name'],
-          major: profileData['Major'],
-        ),
-      );
-    } on FirebaseException catch (e) {
-      showAlertDialog(context,
-          title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
-    }
-  }
+//  Future<void> _createProfile(BuildContext context) async {
+//    try {
+//      final database = FirestoreDatabase(uid: loggedInUser.uid);
+//      await database.createProfile(
+//        ProfileModel(
+//          email: loggedInUser.email,
+//          fName: fName,
+//          lName: profileData['Last Name'],
+//          major: profileData['Major'],
+//        ),
+//      );
+//    } on FirebaseException catch (e) {
+//      showAlertDialog(context,
+//          title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
+//    }
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -213,7 +182,7 @@ class _MyProfileState extends State<MyProfile> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${profileData['Year in School']},',
+                  '${profileData['Year in school']},',
                   style: TextStyle(
                     fontSize: 25.0,
                     color: Colors.black54,
@@ -227,6 +196,129 @@ class _MyProfileState extends State<MyProfile> {
                   style: TextStyle(
                     fontSize: 25.0,
                     color: Colors.black54,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Field of Study: ',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Flexible(
+                  child: Text(
+                    '${profileData['Major']}',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: kMentorXTeal,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Year in school: ',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  '${profileData['Year in school']}',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: kMentorXTeal,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Hobbies: ',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Flexible(
+                  child: Text(
+                    '${profileData['Hobbies']}',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: kMentorXTeal,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Motivations: ',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Flexible(
+                  child: Text(
+                    '${profileData['Motivations']}',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: kMentorXTeal,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Expertise: ',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Flexible(
+                  child: Text(
+                    '${profileData['Expertise']}',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: kMentorXTeal,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ],
