@@ -6,28 +6,14 @@ import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
-import 'package:mentorx_mvp/models/profile_bloc.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/services/database.dart';
-
 import 'launch_screen.dart';
 
 User loggedInUser;
 
 class RegistrationProfileScreen extends StatefulWidget {
   static const String id = 'registration_profile_screen';
-  const RegistrationProfileScreen({
-    this.database,
-    this.uid,
-    this.fName,
-    this.bloc,
-  });
-
-  final ProfileBloc bloc;
-  final Database database;
-  final String uid;
-  final String fName;
-
   @override
   _RegistrationProfileScreenState createState() =>
       _RegistrationProfileScreenState();
@@ -38,14 +24,17 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
   final _formKey3 = GlobalKey<FormState>();
+  final _formKey4 = GlobalKey<FormState>();
 
   String fName;
   String lName;
   String major;
+  String yearInSchool;
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _fieldOfStudyController = TextEditingController();
+  final TextEditingController _yearInSchoolController = TextEditingController();
 
   @override
   void initState() {
@@ -74,6 +63,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
           fName: fName,
           lName: lName,
           major: major,
+          yearInSchool: yearInSchool,
         ),
       );
     } on FirebaseException catch (e) {
@@ -156,6 +146,25 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
     );
   }
 
+  TextField _buildYearInSchoolTextField(BuildContext context) {
+    return TextField(
+      key: _formKey4,
+      controller: _yearInSchoolController,
+      textInputAction: TextInputAction.next,
+      textAlign: TextAlign.center,
+      onChanged: (value) => yearInSchool = value,
+      style: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.w400,
+      ),
+      autocorrect: false,
+      decoration: kTextFieldDecoration.copyWith(
+        labelText: 'Year in School',
+        hintText: 'i.e. Junior',
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     timeDilation = 2.0;
@@ -207,6 +216,10 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                 ),
                 _buildFieldOfStudyTextField(context),
                 SizedBox(height: 20.0),
+                _buildYearInSchoolTextField(context),
+                SizedBox(
+                  height: 20,
+                ),
                 RoundedButton(
                   onPressed: () async {
                     await _createProfile(context);

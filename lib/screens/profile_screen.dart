@@ -213,7 +213,7 @@ class _MyProfileState extends State<MyProfile> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${profileData['Major']}',
+                  '${profileData['Year in School']},',
                   style: TextStyle(
                     fontSize: 25.0,
                     color: Colors.black54,
@@ -223,7 +223,7 @@ class _MyProfileState extends State<MyProfile> {
                   width: 10.0,
                 ),
                 Text(
-                  '2024',
+                  '${profileData['Major']}',
                   style: TextStyle(
                     fontSize: 25.0,
                     color: Colors.black54,
@@ -231,60 +231,6 @@ class _MyProfileState extends State<MyProfile> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 30,
-            ),
-            Row(
-              children: [
-                Text(
-                  'About Me',
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            _buildFirstNameTextField(context),
-            SizedBox(
-              height: 10,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  height: 150,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black54,
-                      width: 2.0,
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    shape: BoxShape.rectangle,
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 3,
-                        offset: Offset(2, 3),
-                        color: Colors.grey,
-                        spreadRadius: 0.5,
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            FloatingActionButton(
-              onPressed: () {
-                _createProfile(context);
-                setState(() {
-                  getProfileData();
-                });
-              },
-            )
           ],
         ),
       ),

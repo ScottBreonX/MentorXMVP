@@ -5,7 +5,7 @@ import 'package:mentorx_mvp/services/api_path.dart';
 
 abstract class Database {
   Future<void> createProfile(ProfileModel profile);
-  Stream<List<ProfileModel>> profileStream();
+  Stream<List<ProfileModel>> _profileStream();
 }
 
 class FirestoreDatabase implements Database {
@@ -23,7 +23,7 @@ class FirestoreDatabase implements Database {
     await reference.set(data);
   }
 
-  Stream<List<ProfileModel>> profileStream() {
+  Stream<List<ProfileModel>> _profileStream() {
     final path = 'users/$uid/profile';
     final reference = FirebaseFirestore.instance.collection(path);
     final snapshots = reference.snapshots();
