@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Allow access to MentorX for audio capture</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow access to MentorX for image capture</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow access to MentorX for image upload</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
