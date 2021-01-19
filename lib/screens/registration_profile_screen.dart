@@ -100,7 +100,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecoration.copyWith(
+      decoration: kTextFieldDecorationDark.copyWith(
         labelText: 'Enter your first name',
 //        errorText: model.emailErrorText,
       ),
@@ -119,7 +119,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecoration.copyWith(
+      decoration: kTextFieldDecorationDark.copyWith(
         labelText: 'Enter your last name',
 //        errorText: model.emailErrorText,
       ),
@@ -138,7 +138,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecoration.copyWith(
+      decoration: kTextFieldDecorationDark.copyWith(
         labelText: 'Enter your field of study',
         hintText: 'i.e. Economics',
 //        errorText: model.emailErrorText,
@@ -158,7 +158,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecoration.copyWith(
+      decoration: kTextFieldDecorationDark.copyWith(
         labelText: 'Year in School',
         hintText: 'i.e. Junior',
       ),

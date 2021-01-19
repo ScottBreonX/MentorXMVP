@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/screens/chat_screen.dart';
+import 'package:mentorx_mvp/screens/edit_profile_screen.dart';
 import 'package:mentorx_mvp/screens/landing_page.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/login_screen.dart';
@@ -51,6 +52,7 @@ class MentorX extends StatelessWidget {
           EventsScreen.id: (context) => EventsScreen(),
           MentoringScreen.id: (context) => MentoringScreen(),
           LandingPage.id: (context) => LandingPage(),
+          EditMyProfile.id: (context) => EditMyProfile(),
         },
       ),
     );

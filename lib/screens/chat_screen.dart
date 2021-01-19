@@ -119,7 +119,9 @@ class _ChatScreenState extends State<ChatScreen> {
                         messageTextController.clear();
                         _firestore.collection('messages').add({
                           'text': messageText,
-                          'sender': '${profileData['First Name']}',
+                          'sender': loggedInUser.email,
+                          'senderFName': profileData['First Name'],
+                          'senderLName': profileData['Last Name'],
                           'timestamp': DateTime.now(),
                         });
                       },
@@ -161,10 +163,14 @@ class MessagesStream extends StatelessWidget {
           final messageData = message.data();
 
           final messageText = messageData['text'];
+          final senderFName = messageData['senderFName'];
+          final senderLName = messageData['senderLName'];
           final messageSender = messageData['sender'];
           final currentUser = loggedInUser.email;
 
           final messageBubble = MessageBubble(
+            senderFName: senderFName,
+            senderLName: senderLName,
             sender: messageSender,
             text: messageText,
             isMe: currentUser == messageSender,
@@ -187,9 +193,12 @@ class MessagesStream extends StatelessWidget {
 }
 
 class MessageBubble extends StatelessWidget {
-  MessageBubble({this.text, this.sender, this.isMe});
+  MessageBubble(
+      {this.text, this.sender, this.isMe, this.senderFName, this.senderLName});
 
   final String text;
+  final String senderFName;
+  final String senderLName;
   final String sender;
   final bool isMe;
 
@@ -202,7 +211,7 @@ class MessageBubble extends StatelessWidget {
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Text(
-            sender,
+            '$senderFName $senderLName',
             style: TextStyle(
               fontSize: 12.0,
               color: Colors.black54,

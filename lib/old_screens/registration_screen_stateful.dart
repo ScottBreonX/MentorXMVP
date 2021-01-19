@@ -118,7 +118,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     color: Colors.grey.shade800,
                     fontWeight: FontWeight.w400,
                   ),
-                  decoration: kTextFieldDecoration.copyWith(
+                  decoration: kTextFieldDecorationDark.copyWith(
                       labelText: 'Enter your email'),
                 ),
                 SizedBox(
@@ -132,7 +132,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     color: Colors.grey.shade800,
                     fontWeight: FontWeight.w400,
                   ),
-                  decoration: kTextFieldDecoration.copyWith(
+                  decoration: kTextFieldDecorationDark.copyWith(
                       labelText: 'Enter your password'),
                 ),
                 SizedBox(
@@ -146,7 +146,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     color: Colors.grey.shade800,
                     fontWeight: FontWeight.w400,
                   ),
-                  decoration: kTextFieldDecoration.copyWith(
+                  decoration: kTextFieldDecorationDark.copyWith(
                       labelText: 'Confirm Password'),
                 ),
                 SizedBox(height: 20.0),

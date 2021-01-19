@@ -95,7 +95,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecoration.copyWith(
+      decoration: kTextFieldDecorationDark.copyWith(
         labelText: 'Enter your email',
         hintText: 'email@domain.com',
         errorText: model.emailErrorText,
@@ -114,7 +114,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         color: Colors.white,
         fontWeight: FontWeight.w400,
       ),
-      decoration: kTextFieldDecoration.copyWith(
+      decoration: kTextFieldDecorationDark.copyWith(
         labelText: 'Enter your password',
         errorText: model.passwordErrorText,
       ),
@@ -132,7 +132,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         color: Colors.white,
         fontWeight: FontWeight.w400,
       ),
-      decoration: kTextFieldDecoration.copyWith(
+      decoration: kTextFieldDecorationDark.copyWith(
         labelText: 'Re-enter your password',
         errorText: model.passwordErrorText,
       ),
