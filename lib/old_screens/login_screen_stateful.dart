@@ -136,7 +136,7 @@ class _LoginScreenStatefulState extends State<LoginScreenStateful> {
         color: Colors.grey.shade800,
         fontWeight: FontWeight.w400,
       ),
-      decoration: kTextFieldDecoration.copyWith(
+      decoration: kTextFieldDecorationDark.copyWith(
         labelText: 'Enter your password',
         errorText: showErrorText ? widget.invalidPasswordErrorText : null,
       ),
@@ -156,7 +156,7 @@ class _LoginScreenStatefulState extends State<LoginScreenStateful> {
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecoration.copyWith(
+      decoration: kTextFieldDecorationDark.copyWith(
         labelText: 'Enter your email',
         hintText: 'email@domain.com',
         errorText: showErrorText ? widget.invalidEmailErrorText : null,

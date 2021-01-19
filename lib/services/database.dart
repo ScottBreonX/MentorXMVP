@@ -23,6 +23,17 @@ class FirestoreDatabase implements Database {
     await reference.set(data);
   }
 
+  Future<void> updateProfile(ProfileModel profile) => _updateData(
+        path: APIPath.profile(uid, 'coreInfo'),
+        data: profile.toMap(),
+      );
+
+  Future<void> _updateData({String path, Map<String, dynamic> data}) async {
+    final reference = FirebaseFirestore.instance.doc(path);
+    print('$path: $data');
+    await reference.update(data);
+  }
+
   Stream<List<ProfileModel>> _profileStream() {
     final path = 'users/$uid/profile';
     final reference = FirebaseFirestore.instance.collection(path);

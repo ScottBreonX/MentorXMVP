@@ -78,7 +78,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecoration.copyWith(
+      decoration: kTextFieldDecorationDark.copyWith(
         labelText: 'Enter your email',
         hintText: 'email@domain.com',
         errorText: model.emailErrorText,
@@ -97,7 +97,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
         color: Colors.white,
         fontWeight: FontWeight.w400,
       ),
-      decoration: kTextFieldDecoration.copyWith(
+      decoration: kTextFieldDecorationDark.copyWith(
         labelText: 'Enter your password',
         errorText: model.passwordErrorText,
       ),
