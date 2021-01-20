@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/screens/edit_profile_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
