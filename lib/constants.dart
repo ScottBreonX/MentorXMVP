@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 const kTextFieldDecorationDark = InputDecoration(
   labelText: 'Enter a value',
   labelStyle: TextStyle(color: Colors.white),
-  hintStyle: TextStyle(color: kMentorXTeal),
+  hintStyle: TextStyle(color: Colors.white60),
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   border:
       OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),

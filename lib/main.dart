@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
+import 'package:mentorx_mvp/screens/available_mentors_screen.dart';
 import 'package:mentorx_mvp/screens/chat_screen.dart';
 import 'package:mentorx_mvp/screens/edit_profile_screen.dart';
 import 'package:mentorx_mvp/screens/landing_page.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/login_screen.dart';
+import 'package:mentorx_mvp/screens/mentee_screen.dart';
+import 'package:mentorx_mvp/screens/mentor_screen.dart';
 import 'package:mentorx_mvp/screens/profile_screen.dart';
 import 'package:mentorx_mvp/screens/registration_profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
@@ -51,6 +54,9 @@ class MentorX extends StatelessWidget {
           LaunchScreen.id: (context) => LaunchScreen(),
           EventsScreen.id: (context) => EventsScreen(),
           MentoringScreen.id: (context) => MentoringScreen(),
+          MenteeScreen.id: (context) => MenteeScreen(),
+          MentorScreen.id: (context) => MentorScreen(),
+          AvailableMentors.id: (context) => AvailableMentors(),
           LandingPage.id: (context) => LandingPage(),
           EditMyProfile.id: (context) => EditMyProfile(),
         },

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:mentorx_mvp/models/mentee_model.dart';
+import 'package:mentorx_mvp/models/mentoring_model.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/screens/chat_screen.dart';
 import 'package:mentorx_mvp/services/api_path.dart';
@@ -19,8 +19,8 @@ class FirestoreDatabase implements Database {
         data: profile.toMap(),
       );
 
-  Future<void> createMentee(MenteeModel mentee) => _setData(
-        path: APIPath.mentees('UniversityOfFlorida', 'available', uid),
+  Future<void> createMentee(MentorModel mentee) => _setData(
+        path: APIPath.mentees('UniversityOfFlorida', 'mentoringGroup', uid),
         data: mentee.toMap(),
       );
 
