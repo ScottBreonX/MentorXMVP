@@ -231,19 +231,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         SizedBox(
                           height: 100,
                         ),
-                        Center(
-                          child: InkWell(
-                            child: Text(
-                              'Test Profile Page',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
-                            ),
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, RegistrationProfileScreen.id);
-                            },
-                          ),
-                        ),
                       ],
                     ),
                   ),

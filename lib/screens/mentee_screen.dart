@@ -1,24 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
-import 'package:mentorx_mvp/models/mentoring_model.dart';
-import 'package:mentorx_mvp/screens/mentee_screen.dart';
-import 'package:mentorx_mvp/screens/mentor_screen.dart';
-import 'package:mentorx_mvp/services/database.dart';
+import 'package:mentorx_mvp/screens/available_mentors_screen.dart';
 
 User loggedInUser;
 
-class MentoringScreen extends StatefulWidget {
-  static String id = 'mentoring_screen';
+class MenteeScreen extends StatefulWidget {
+  static String id = 'mentee_screen';
 
   @override
-  _MentoringScreenState createState() => _MentoringScreenState();
+  _MenteeScreenState createState() => _MenteeScreenState();
 }
 
-class _MentoringScreenState extends State<MentoringScreen> {
+class _MenteeScreenState extends State<MenteeScreen> {
   final _auth = FirebaseAuth.instance;
 
   @override
@@ -36,22 +32,6 @@ class _MentoringScreenState extends State<MentoringScreen> {
       }
     } catch (e) {
       print(e);
-    }
-  }
-
-  Future<void> _updateEnrollment(String title) async {
-    try {
-      final database = FirestoreDatabase(uid: loggedInUser.uid);
-      await database.createMentee(
-        MentorModel(
-          status: true,
-          openSlots: 1,
-          title: title,
-        ),
-      );
-    } on FirebaseException catch (e) {
-      showAlertDialog(context,
-          title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
     }
   }
 
@@ -88,22 +68,18 @@ class _MentoringScreenState extends State<MentoringScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 RoundedButton(
-                  onPressed: () async {
-                    await _updateEnrollment('Mentee');
-                    Navigator.pushNamed(context, MenteeScreen.id);
+                  onPressed: () {
+                    Navigator.pushNamed(context, AvailableMentors.id);
                   },
                   minWidth: 500.0,
-                  title: 'Enroll as Mentee',
+                  title: 'View Available Mentors',
                   buttonColor: kMentorXTeal,
                   fontColor: Colors.white,
                 ),
                 RoundedButton(
-                  onPressed: () async {
-                    await _updateEnrollment('Mentor');
-                    Navigator.pushNamed(context, MentorScreen.id);
-                  },
+                  onPressed: () {},
                   minWidth: 500.0,
-                  title: 'Enroll as Mentor',
+                  title: 'Questionnaire',
                   buttonColor: kMentorXTeal,
                   fontColor: Colors.white,
                 ),
