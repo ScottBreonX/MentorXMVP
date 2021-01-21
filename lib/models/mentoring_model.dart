@@ -1,33 +1,28 @@
 class MentorModel {
   MentorModel({
-    this.status,
-    this.openSlots,
-    this.title,
+    this.uid,
+    this.availableSlots,
   });
-  final bool status;
-  final int openSlots;
-  final String title;
+  final int availableSlots;
+  final String uid;
 
   factory MentorModel.fromMap(Map<String, dynamic> data) {
     if (data == null) {
       return null;
     }
-    final bool status = data['status'];
-    final int openSlots = data['Open Slots'];
-    final String title = data['Title'];
+    final int availableSlots = data['Available Slots'];
+    final String uid = data['UID'];
 
     return MentorModel(
-      status: status,
-      openSlots: openSlots,
-      title: title,
+      availableSlots: availableSlots,
+      uid: uid,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'status': status,
-      'Open Slots': openSlots,
-      'Title': title,
+      'Available Slots': availableSlots,
+      'UID': uid,
     };
   }
 }
