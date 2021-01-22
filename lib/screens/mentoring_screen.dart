@@ -39,14 +39,13 @@ class _MentoringScreenState extends State<MentoringScreen> {
     }
   }
 
-  Future<void> _updateEnrollment(String title) async {
+  Future<void> _createMentor(BuildContext context) async {
     try {
       final database = FirestoreDatabase(uid: loggedInUser.uid);
-      await database.createMentee(
+      await database.createMentor(
         MentorModel(
-          status: true,
-          openSlots: 1,
-          title: title,
+          availableSlots: 1,
+          uid: loggedInUser.uid,
         ),
       );
     } on FirebaseException catch (e) {
@@ -88,8 +87,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 RoundedButton(
-                  onPressed: () async {
-                    await _updateEnrollment('Mentee');
+                  onPressed: () {
                     Navigator.pushNamed(context, MenteeScreen.id);
                   },
                   minWidth: 500.0,
@@ -99,8 +97,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                 ),
                 RoundedButton(
                   onPressed: () async {
-                    await _updateEnrollment('Mentor');
-                    Navigator.pushNamed(context, MentorScreen.id);
+                    await _createMentor(context);
                   },
                   minWidth: 500.0,
                   title: 'Enroll as Mentor',
