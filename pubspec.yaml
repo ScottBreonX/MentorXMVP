@@ -15,6 +15,7 @@ dependencies:
 
   cupertino_icons: ^1.0.0
 
+  convex_bottom_bar: ^2.6.0
   animated_text_kit: ^2.5.1
   firebase_core: ^0.5.2
   firebase_auth: ^0.18.3

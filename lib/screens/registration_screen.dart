@@ -177,7 +177,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         SizedBox(
-                          height: 50,
+                          height: 0,
                         ),
                         Hero(
                           tag: 'logo',
@@ -187,7 +187,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 48.0,
+                          height: 20.0,
                         ),
                         _buildEmailTextField(model),
                         SizedBox(
@@ -198,7 +198,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           height: 20.0,
                         ),
                         _buildConfirmPasswordTextField(model),
-                        SizedBox(height: 20.0),
+                        SizedBox(height: 10.0),
                         RoundedButton(
                           onPressed: () {
                             if (model.password != model.confirmPassword) {
