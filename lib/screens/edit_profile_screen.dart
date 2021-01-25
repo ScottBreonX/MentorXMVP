@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
+import 'package:mentorx_mvp/components/bottom_navigation_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
-import 'package:mentorx_mvp/screens/profile_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
 User loggedInUser;
@@ -95,6 +95,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
     }
+    Navigator.popAndPushNamed(context, XBottomNavigationBar.id);
   }
 
   TextFormField _buildFieldOfStudyTextField(BuildContext context) {
@@ -205,6 +206,20 @@ class _EditMyProfileState extends State<EditMyProfile> {
       appBar: AppBar(
         backgroundColor: kMentorXTeal,
         title: Text('Edit Profile'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.popAndPushNamed(context, XBottomNavigationBar.id);
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.save),
+            onPressed: () {
+              _updateProfile(context);
+            },
+          )
+        ],
       ),
       body: Container(
         padding: EdgeInsets.only(left: 16.0, top: 20.0, right: 16.0),
@@ -337,7 +352,6 @@ class _EditMyProfileState extends State<EditMyProfile> {
                     setState(() {
                       _updateProfile(context);
                     });
-                    Navigator.popAndPushNamed(context, MyProfile.id);
                   },
                   child: Container(
                     height: 40.0,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
+import 'package:mentorx_mvp/components/bottom_navigation_bar.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/models/login_model.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
@@ -55,7 +56,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
   Future<void> _submit() async {
     try {
       await widget.bloc.submit();
-      Navigator.of(context).popAndPushNamed(LaunchScreen.id);
+      Navigator.of(context).popAndPushNamed(XBottomNavigationBar.id);
     } catch (e) {
       showAlertDialog(
         context,
@@ -143,7 +144,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         SizedBox(
-                          height: 50,
+                          height: 0,
                         ),
                         Hero(
                           tag: 'logo',
@@ -170,7 +171,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                           fontColor: Colors.white,
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 0,
                         ),
                         Center(
                           child: InkWell(
