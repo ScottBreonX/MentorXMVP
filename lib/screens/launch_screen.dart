@@ -2,11 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:mentorx_mvp/components/bottom_navigation_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:mentorx_mvp/screens/chat_screen.dart';
-import 'package:mentorx_mvp/screens/profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
@@ -51,16 +47,17 @@ class _LaunchScreenState extends State<LaunchScreen> {
         .get()
         .then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
-        setState(() {
-          profileData = result.data();
-        });
+        if (mounted) {
+          setState(() {
+            profileData = result.data();
+          });
+        }
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 1.0;
     if (profileData == null) {
       return Center(
         child: CircularProgressIndicator(
