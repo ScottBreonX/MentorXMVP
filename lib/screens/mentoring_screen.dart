@@ -6,7 +6,6 @@ import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/mentoring_model.dart';
 import 'package:mentorx_mvp/screens/mentee_screen.dart';
-import 'package:mentorx_mvp/screens/mentor_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
 User loggedInUser;
@@ -46,6 +45,26 @@ class _MentoringScreenState extends State<MentoringScreen> {
         MentorModel(
           availableSlots: 1,
           uid: loggedInUser.uid,
+          fName: profileData['First Name'],
+          lName: profileData['Last Name'],
+          email: profileData['Email Address'],
+        ),
+      );
+    } on FirebaseException catch (e) {
+      showAlertDialog(context,
+          title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
+    }
+  }
+
+  Future<void> _createMentee(BuildContext context) async {
+    try {
+      final database = FirestoreDatabase(uid: loggedInUser.uid);
+      await database.createMentee(
+        MenteeModel(
+          uid: loggedInUser.uid,
+          fName: profileData['First Name'],
+          lName: profileData['Last Name'],
+          email: profileData['Email Address'],
         ),
       );
     } on FirebaseException catch (e) {
@@ -87,8 +106,9 @@ class _MentoringScreenState extends State<MentoringScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 RoundedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, MenteeScreen.id);
+                  onPressed: () async {
+                    await _createMentee(context).then((value) =>
+                        Navigator.pushNamed(context, MenteeScreen.id));
                   },
                   minWidth: 500.0,
                   title: 'Enroll as Mentee',

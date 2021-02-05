@@ -101,7 +101,7 @@ class AvailableMentorsStream extends StatelessWidget {
       stream: _firestore
           .collection('mentoring')
           .doc('UniversityOfFlorida')
-          .collection('availableMentors')
+          .collection('mentors')
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
@@ -112,22 +112,26 @@ class AvailableMentorsStream extends StatelessWidget {
           );
         }
 
-        final availableMentors = snapshot.data.docs;
-        List<AvailableMentorBubble> availableMentorBubbles = [];
+        final mentors = snapshot.data.docs;
+        List<MentorBubble> mentorBubbles = [];
 
-        for (var availableMentor in availableMentors) {
-          final availableMentorData = availableMentor.data();
+        for (var mentor in mentors) {
+          final mentorData = mentor.data();
 
-          final mentorUID = availableMentorData['UID'];
-          final mentorSlots = availableMentorData['Available Slots'];
-          final mentorFname = 'Scott';
+          final mentorUID = mentorData['UID'];
+          final mentorSlots = mentorData['Available Slots'];
+          final mentorFname = mentorData['First Name'];
+          final mentorLname = mentorData['Last Name'];
+          final mentorEmail = mentorData['Email Address'];
 
-          final availableMentorBubble = AvailableMentorBubble(
+          final mentorBubble = MentorBubble(
             mentorUID: mentorUID,
             mentorSlots: mentorSlots,
             mentorFname: mentorFname,
+            mentorLname: mentorLname,
+            mentorEmail: mentorEmail,
           );
-          availableMentorBubbles.add(availableMentorBubble);
+          mentorBubbles.add(mentorBubble);
         }
         return Expanded(
           child: ListView(
@@ -136,7 +140,7 @@ class AvailableMentorsStream extends StatelessWidget {
               horizontal: 10.0,
               vertical: 20.0,
             ),
-            children: availableMentorBubbles,
+            children: mentorBubbles,
           ),
         );
       },
@@ -144,12 +148,19 @@ class AvailableMentorsStream extends StatelessWidget {
   }
 }
 
-class AvailableMentorBubble extends StatelessWidget {
-  AvailableMentorBubble({this.mentorUID, this.mentorSlots, this.mentorFname});
+class MentorBubble extends StatelessWidget {
+  MentorBubble(
+      {this.mentorUID,
+      this.mentorSlots,
+      this.mentorFname,
+      this.mentorLname,
+      this.mentorEmail});
 
   final String mentorUID;
   final int mentorSlots;
   final String mentorFname;
+  final String mentorLname;
+  final String mentorEmail;
 
   @override
   Widget build(BuildContext context) {
@@ -159,7 +170,7 @@ class AvailableMentorBubble extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '$mentorUID $mentorFname',
+            '$mentorFname $mentorLname',
             style: TextStyle(
               fontSize: 12.0,
               color: Colors.black54,
