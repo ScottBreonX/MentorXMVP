@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/bottom_navigation_bar.dart';
+import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
+import 'package:mentorx_mvp/screens/view_profile_screen.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../constants.dart';
 
@@ -113,7 +116,7 @@ class AvailableMentorsStream extends StatelessWidget {
         }
 
         final mentors = snapshot.data.docs;
-        List<MentorBubble> mentorBubbles = [];
+        List<MentorCard> mentorBubbles = [];
 
         for (var mentor in mentors) {
           final mentorData = mentor.data();
@@ -124,7 +127,7 @@ class AvailableMentorsStream extends StatelessWidget {
           final mentorLname = mentorData['Last Name'];
           final mentorEmail = mentorData['Email Address'];
 
-          final mentorBubble = MentorBubble(
+          final mentorBubble = MentorCard(
             mentorUID: mentorUID,
             mentorSlots: mentorSlots,
             mentorFname: mentorFname,
@@ -135,10 +138,9 @@ class AvailableMentorsStream extends StatelessWidget {
         }
         return Expanded(
           child: ListView(
-            reverse: true,
             padding: EdgeInsets.symmetric(
               horizontal: 10.0,
-              vertical: 20.0,
+              vertical: 10.0,
             ),
             children: mentorBubbles,
           ),
@@ -148,8 +150,8 @@ class AvailableMentorsStream extends StatelessWidget {
   }
 }
 
-class MentorBubble extends StatelessWidget {
-  MentorBubble(
+class MentorCard extends StatelessWidget {
+  MentorCard(
       {this.mentorUID,
       this.mentorSlots,
       this.mentorFname,
@@ -167,29 +169,79 @@ class MentorBubble extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '$mentorFname $mentorLname',
-            style: TextStyle(
-              fontSize: 12.0,
-              color: Colors.black54,
-            ),
-          ),
-          Material(
-            borderRadius: BorderRadius.circular(30.0),
-            elevation: 5.0,
-            color: kMentorXTeal,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 10.0,
-                horizontal: 20.0,
-              ),
-              child: Text(
-                '$mentorSlots',
-                style: TextStyle(
-                  fontSize: 15.0,
-                  color: Colors.white,
+          Container(
+            width: double.infinity,
+            height: 250,
+            child: Material(
+              borderRadius: BorderRadius.circular(10.0),
+              elevation: 5.0,
+              color: Colors.grey,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 10.0,
+                  horizontal: 20.0,
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '$mentorFname $mentorLname',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '$mentorEmail',
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            color: Colors.white,
+                          ),
+                        )
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RoundedButton(
+                          title: 'View Profile',
+                          buttonColor: kMentorXTeal,
+                          borderRadius: 10.0,
+                          fontColor: Colors.white,
+                          minWidth: 200,
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ViewProfile(viewProfileUID: mentorUID),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RoundedButton(
+                          title: 'Select Mentor',
+                          buttonColor: kMentorXTeal,
+                          borderRadius: 10.0,
+                          fontColor: Colors.white,
+                          minWidth: 200,
+                          onPressed: () => Navigator.pushNamed(
+                              context, XBottomNavigationBar.id),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),

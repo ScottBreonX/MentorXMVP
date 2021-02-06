@@ -10,6 +10,7 @@ import 'package:mentorx_mvp/screens/mentee_screen.dart';
 import 'package:mentorx_mvp/screens/mentor_screen.dart';
 import 'package:mentorx_mvp/screens/profile_screen.dart';
 import 'package:mentorx_mvp/screens/registration_profile_screen.dart';
+import 'package:mentorx_mvp/screens/view_profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'components/bottom_navigation_bar.dart';
@@ -61,6 +62,7 @@ class MentorX extends StatelessWidget {
           LandingPage.id: (context) => LandingPage(),
           EditMyProfile.id: (context) => EditMyProfile(),
           XBottomNavigationBar.id: (context) => XBottomNavigationBar(),
+          ViewProfile.id: (context) => ViewProfile(),
         },
       ),
     );
