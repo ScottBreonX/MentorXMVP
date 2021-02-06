@@ -20,8 +20,12 @@ class FirestoreDatabase implements Database {
       );
 
   Future<void> createMentor(MentorModel mentor) => _setData(
-        path: APIPath.mentoring('UniversityOfFlorida', 'availableMentors', uid),
+        path: APIPath.mentoring('UniversityOfFlorida', 'mentors', uid),
         data: mentor.toMap(),
+      );
+  Future<void> createMentee(MenteeModel mentee) => _setData(
+        path: APIPath.mentoring('UniversityOfFlorida', 'mentee', uid),
+        data: mentee.toMap(),
       );
 
   Future<void> _setData({String path, Map<String, dynamic> data}) async {
