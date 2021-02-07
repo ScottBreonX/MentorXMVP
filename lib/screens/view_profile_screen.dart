@@ -9,28 +9,31 @@ import 'package:mentorx_mvp/services/database.dart';
 
 User loggedInUser;
 
-class MyProfile extends StatefulWidget {
-  const MyProfile({
+class ViewProfile extends StatefulWidget {
+  const ViewProfile({
     Key key,
     this.database,
     this.uid,
+    this.viewProfileUID,
   }) : super(key: key);
 
-  static const String id = 'profile_screen';
+  static const String id = 'view_profile_screen';
   final Database database;
   final String uid;
+  final String viewProfileUID;
 
   @override
-  _MyProfileState createState() => _MyProfileState();
+  _ViewProfileState createState() => _ViewProfileState();
 }
 
-class _MyProfileState extends State<MyProfile> {
+class _ViewProfileState extends State<ViewProfile> {
   final _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
     getCurrentUser();
     getProfileData();
+    print('${widget.viewProfileUID}');
     super.initState();
   }
 
@@ -49,7 +52,7 @@ class _MyProfileState extends State<MyProfile> {
 
   Future<dynamic> getProfileData() async {
     await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
+        .collection('users/${widget.viewProfileUID}/profile')
         .get()
         .then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
@@ -71,9 +74,8 @@ class _MyProfileState extends State<MyProfile> {
     }
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         backgroundColor: kMentorXTeal,
-        title: Text('My Profile'),
+        title: Text('Profile'),
       ),
       body: Container(
         padding: EdgeInsets.only(left: 16.0, top: 20.0, right: 16.0),
@@ -106,30 +108,6 @@ class _MyProfileState extends State<MyProfile> {
                           color: kMentorXTeal,
                           size: 100,
                         ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                      height: 40.0,
-                      width: 40.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: kMentorXTeal,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 3,
-                            offset: Offset(2, 3),
-                            color: Colors.grey,
-                            spreadRadius: 0.5,
-                          )
-                        ],
-                      ),
-                      child: Icon(
-                        Icons.edit,
-                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -198,34 +176,8 @@ class _MyProfileState extends State<MyProfile> {
               indent: 0,
               endIndent: 0,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                GestureDetector(
-                  onTap: () =>
-                      Navigator.popAndPushNamed(context, EditMyProfile.id),
-                  child: Container(
-                    height: 40.0,
-                    width: 40.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: kMentorXTeal,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 3,
-                          offset: Offset(2, 3),
-                          color: Colors.grey,
-                          spreadRadius: 0.5,
-                        )
-                      ],
-                    ),
-                    child: Icon(
-                      Icons.edit,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
+            SizedBox(
+              height: 20.0,
             ),
             Row(
               children: [

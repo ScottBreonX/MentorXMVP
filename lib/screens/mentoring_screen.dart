@@ -92,6 +92,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: kMentorXTeal,
         title: Text('Mentoring'),
       ),

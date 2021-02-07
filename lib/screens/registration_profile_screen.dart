@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
+import 'package:mentorx_mvp/components/bottom_navigation_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
@@ -223,7 +224,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                 RoundedButton(
                   onPressed: () async {
                     await _createProfile(context);
-                    Navigator.pushNamed(context, LaunchScreen.id);
+                    Navigator.pushNamed(context, XBottomNavigationBar.id);
                   },
                   title: 'Submit',
                   buttonColor: kMentorXTeal,
