@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
+import 'package:mentorx_mvp/models/mentoring_model.dart';
 import 'package:mentorx_mvp/screens/chat_screen.dart';
 import 'package:mentorx_mvp/screens/events_screen.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
+import 'package:mentorx_mvp/screens/mentee_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring_screen.dart';
 import 'package:mentorx_mvp/screens/profile_screen.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
