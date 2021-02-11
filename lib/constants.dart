@@ -6,13 +6,13 @@ const kTextFieldDecorationDark = InputDecoration(
   hintStyle: TextStyle(color: Colors.white60),
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   border:
-      OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),
+      OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
   enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(color: kMentorXTeal, width: 4.0),
-      borderRadius: BorderRadius.all(Radius.circular(32.0))),
+      borderRadius: BorderRadius.all(Radius.circular(20.0))),
   focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(color: Colors.white, width: 4.0),
-      borderRadius: BorderRadius.all(Radius.circular(32.0))),
+      borderRadius: BorderRadius.all(Radius.circular(20.0))),
 );
 
 const kTextFieldDecorationLight = InputDecoration(
@@ -21,13 +21,13 @@ const kTextFieldDecorationLight = InputDecoration(
   hintStyle: TextStyle(color: kMentorXTeal),
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   border:
-      OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),
+      OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
   enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(color: kMentorXTeal, width: 2.0),
-      borderRadius: BorderRadius.all(Radius.circular(32.0))),
+      borderRadius: BorderRadius.all(Radius.circular(20.0))),
   focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(color: kMentorXTeal, width: 4.0),
-      borderRadius: BorderRadius.all(Radius.circular(32.0))),
+      borderRadius: BorderRadius.all(Radius.circular(20.0))),
 );
 
 const kMessageTextFieldDecoration = InputDecoration(
@@ -44,6 +44,9 @@ const kMessageContainerDecoration = BoxDecoration(
 
 const kSendButtonTextStyle =
     TextStyle(color: kMentorXTeal, fontWeight: FontWeight.bold, fontSize: 18.0);
+
+const kInactiveSendButtonTextStyle =
+    TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 18.0);
 
 const kMentorXTeal = Color.fromRGBO(56, 142, 137, 1.0);
 

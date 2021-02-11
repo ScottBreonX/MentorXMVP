@@ -17,3 +17,7 @@ class EmailAndPasswordValidators {
   final String invalidEmailErrorText = 'Email can\'t be empty';
   final String invalidPasswordErrorText = 'Email can\'t be empty';
 }
+
+class ChatMessageValidator {
+  final StringValidator messageValidator = NonEmptyStringValidator();
+}

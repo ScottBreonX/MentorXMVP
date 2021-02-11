@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/components/bottom_navigation_bar.dart';
+import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
@@ -95,7 +96,14 @@ class _EditMyProfileState extends State<EditMyProfile> {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
     }
-    Navigator.popAndPushNamed(context, XBottomNavigationBar.id);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => XBottomNavigationBar(
+          pageIndex: 3,
+        ),
+      ),
+    );
   }
 
   TextFormField _buildFieldOfStudyTextField(BuildContext context) {
@@ -245,37 +253,13 @@ class _EditMyProfileState extends State<EditMyProfile> {
                       backgroundColor: kMentorXTeal,
                       radius: 80,
                       child: CircleAvatar(
-                        backgroundColor: Colors.white,
+                        backgroundColor: kMentorXTeal,
                         radius: 75,
                         child: Icon(
                           Icons.person,
-                          color: kMentorXTeal,
+                          color: Colors.white,
                           size: 100,
                         ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                      height: 40.0,
-                      width: 40.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: kMentorXTeal,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 3,
-                            offset: Offset(2, 3),
-                            color: Colors.grey,
-                            spreadRadius: 0.5,
-                          )
-                        ],
-                      ),
-                      child: Icon(
-                        Icons.edit,
-                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -292,7 +276,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
                   '${profileData['First Name']}',
                   style: TextStyle(
                     fontSize: 30.0,
-                    color: Colors.black,
+                    color: kMentorXTeal,
                   ),
                 ),
                 SizedBox(
@@ -302,7 +286,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
                   '${profileData['Last Name']}',
                   style: TextStyle(
                     fontSize: 30.0,
-                    color: Colors.black,
+                    color: kMentorXTeal,
                   ),
                 ),
               ],
@@ -347,30 +331,34 @@ class _EditMyProfileState extends State<EditMyProfile> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _updateProfile(context);
-                    });
-                  },
-                  child: Container(
-                    height: 40.0,
-                    width: 40.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: kMentorXTeal,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 3,
-                          offset: Offset(2, 3),
-                          color: Colors.grey,
-                          spreadRadius: 0.5,
-                        )
-                      ],
-                    ),
-                    child: Icon(
-                      Icons.save,
-                      color: Colors.white,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _updateProfile(context);
+                      });
+                    },
+                    child: Container(
+                      height: 50.0,
+                      width: 50.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: kMentorXTeal,
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 3,
+                            offset: Offset(2, 3),
+                            color: Colors.grey,
+                            spreadRadius: 0.5,
+                          )
+                        ],
+                      ),
+                      child: Icon(
+                        Icons.save,
+                        color: Colors.white,
+                        size: 30,
+                      ),
                     ),
                   ),
                 ),
@@ -465,8 +453,24 @@ class _EditMyProfileState extends State<EditMyProfile> {
             ),
             _buildExpertiseTextField(context),
             SizedBox(
-              height: 40,
+              height: 20,
             ),
+            const Divider(
+              color: kMentorXTeal,
+              height: 20,
+              thickness: 4,
+              indent: 0,
+              endIndent: 0,
+            ),
+            RoundedButton(
+                title: 'Save',
+                buttonColor: kMentorXTeal,
+                fontColor: Colors.white,
+                onPressed: () {
+                  setState(() {
+                    _updateProfile(context);
+                  });
+                }),
           ],
         ),
       ),

@@ -84,7 +84,6 @@ class _MyProfileState extends State<MyProfile> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
@@ -99,11 +98,11 @@ class _MyProfileState extends State<MyProfile> {
                         backgroundColor: kMentorXTeal,
                         radius: 80,
                         child: CircleAvatar(
-                          backgroundColor: Colors.white,
+                          backgroundColor: kMentorXTeal,
                           radius: 75,
                           child: Icon(
                             Icons.person,
-                            color: kMentorXTeal,
+                            color: Colors.white,
                             size: 100,
                           ),
                         ),
@@ -117,7 +116,7 @@ class _MyProfileState extends State<MyProfile> {
                         width: 40.0,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: kMentorXTeal,
+                          color: Colors.white,
                           boxShadow: [
                             BoxShadow(
                               blurRadius: 3,
@@ -129,7 +128,7 @@ class _MyProfileState extends State<MyProfile> {
                         ),
                         child: Icon(
                           Icons.edit,
-                          color: Colors.white,
+                          color: kMentorXTeal,
                         ),
                       ),
                     ),
@@ -146,7 +145,7 @@ class _MyProfileState extends State<MyProfile> {
                     '${profileData['First Name']}',
                     style: TextStyle(
                       fontSize: 30.0,
-                      color: Colors.black,
+                      color: kMentorXTeal,
                     ),
                   ),
                   SizedBox(
@@ -156,7 +155,7 @@ class _MyProfileState extends State<MyProfile> {
                     '${profileData['Last Name']}',
                     style: TextStyle(
                       fontSize: 30.0,
-                      color: Colors.black,
+                      color: kMentorXTeal,
                     ),
                   ),
                 ],
@@ -209,7 +208,7 @@ class _MyProfileState extends State<MyProfile> {
                       width: 40.0,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: kMentorXTeal,
+                        color: Colors.white,
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 3,
@@ -221,7 +220,7 @@ class _MyProfileState extends State<MyProfile> {
                       ),
                       child: Icon(
                         Icons.edit,
-                        color: Colors.white,
+                        color: kMentorXTeal,
                       ),
                     ),
                   ),
