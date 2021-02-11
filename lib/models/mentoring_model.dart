@@ -70,3 +70,51 @@ class MenteeModel {
     };
   }
 }
+
+class MentorMatchModel {
+  MentorMatchModel({this.mentorUID, this.menteeUID});
+  final String mentorUID;
+  final String menteeUID;
+
+  factory MentorMatchModel.fromMap(Map<String, dynamic> data) {
+    if (data == null) {
+      return null;
+    }
+    final String mentorUID = data['mentorUID'];
+    final String menteeUID = data['menteeUID'];
+
+    return MentorMatchModel(
+      mentorUID: mentorUID,
+      menteeUID: menteeUID,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'mentorUID': mentorUID,
+      'menteeUID': menteeUID,
+    };
+  }
+}
+
+class MatchIDModel {
+  MatchIDModel({this.mentorUID});
+  final String mentorUID;
+
+  factory MatchIDModel.fromMap(Map<String, dynamic> data) {
+    if (data == null) {
+      return null;
+    }
+    final String mentorUID = data['mentorUID'];
+
+    return MatchIDModel(
+      mentorUID: mentorUID,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'mentorUID': mentorUID,
+    };
+  }
+}

@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mentorx_mvp/models/mentoring_model.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
-import 'package:mentorx_mvp/screens/chat_screen.dart';
 import 'package:mentorx_mvp/services/api_path.dart';
 
 abstract class Database {
@@ -28,6 +27,15 @@ class FirestoreDatabase implements Database {
         data: mentee.toMap(),
       );
 
+  Future<void> createMentorMatch(
+    MentorMatchModel mentorMatch,
+    String mentorUID,
+  ) =>
+      _setData(
+        path: APIPath.mentorMatch('UniversityOfFlorida', mentorUID, uid),
+        data: mentorMatch.toMap(),
+      );
+
   Future<void> _setData({String path, Map<String, dynamic> data}) async {
     final reference = FirebaseFirestore.instance.doc(path);
     print('$path: $data');
@@ -37,6 +45,10 @@ class FirestoreDatabase implements Database {
   Future<void> updateProfile(ProfileModel profile) => _updateData(
         path: APIPath.profile(uid, 'coreInfo'),
         data: profile.toMap(),
+      );
+  Future<void> createMatchID(MatchIDModel matchID) => _updateData(
+        path: APIPath.profile(uid, 'coreInfo'),
+        data: matchID.toMap(),
       );
 
   Future<void> _updateData({String path, Map<String, dynamic> data}) async {

@@ -1,10 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/components/bottom_navigation_bar.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
+import 'package:mentorx_mvp/models/mentoring_model.dart';
+import 'package:mentorx_mvp/models/profile_model.dart';
+import 'package:mentorx_mvp/screens/match_success_screen.dart';
 import 'package:mentorx_mvp/screens/view_profile_screen.dart';
+import 'package:mentorx_mvp/services/database.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../constants.dart';
 
@@ -151,6 +156,26 @@ class AvailableMentorsStream extends StatelessWidget {
 }
 
 class MentorCard extends StatelessWidget {
+  Future<void> _createMentorMatch(String mentorUID) async {
+    try {
+      final database = FirestoreDatabase(uid: loggedInUser.uid);
+      await database.createMentorMatch(
+        MentorMatchModel(
+          menteeUID: loggedInUser.uid,
+          mentorUID: mentorUID,
+        ),
+        mentorUID,
+      );
+      await database.createMatchID(
+        MatchIDModel(
+          mentorUID: mentorUID,
+        ),
+      );
+    } on FirebaseException catch (e) {
+      print(e);
+    }
+  }
+
   MentorCard(
       {this.mentorUID,
       this.mentorSlots,
@@ -236,8 +261,16 @@ class MentorCard extends StatelessWidget {
                           borderRadius: 10.0,
                           fontColor: Colors.white,
                           minWidth: 200,
-                          onPressed: () => Navigator.pushNamed(
-                              context, XBottomNavigationBar.id),
+                          onPressed: () async {
+                            await _createMentorMatch(mentorUID);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    MatchSuccessScreen(mentorUID: mentorUID),
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
