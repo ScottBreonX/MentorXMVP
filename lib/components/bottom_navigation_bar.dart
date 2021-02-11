@@ -8,7 +8,7 @@ import 'package:mentorx_mvp/screens/profile_screen.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
 class XBottomNavigationBar extends StatefulWidget {
-  const XBottomNavigationBar({this.pageIndex});
+  const XBottomNavigationBar({@required this.pageIndex});
   final int pageIndex;
   static const String id = 'bottom_navigation_bar';
 
