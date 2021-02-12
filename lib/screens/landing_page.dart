@@ -22,7 +22,9 @@ class LandingPage extends StatelessWidget {
           }
           return Provider<Database>(
             create: (_) => FirestoreDatabase(uid: user.uid),
-            child: XBottomNavigationBar(),
+            child: XBottomNavigationBar(
+              pageIndex: 0,
+            ),
           );
         }
         return Scaffold(

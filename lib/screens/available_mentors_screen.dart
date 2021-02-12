@@ -6,8 +6,6 @@ import 'package:mentorx_mvp/components/bottom_navigation_bar.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/models/mentoring_model.dart';
-import 'package:mentorx_mvp/models/profile_model.dart';
-import 'package:mentorx_mvp/screens/match_success_screen.dart';
 import 'package:mentorx_mvp/screens/view_profile_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -156,10 +154,24 @@ class AvailableMentorsStream extends StatelessWidget {
 }
 
 class MentorCard extends StatelessWidget {
+  Future<void> _confirmMentorSelection(String mentorUID, BuildContext context,
+      String mentorFName, String mentorLName) async {
+    final didRequestMentor = await showAlertDialog(
+      context,
+      title: "Selection Confirmation",
+      content: "Confirm selection of $mentorFname $mentorLname as Mentor?",
+      defaultActionText: "Yes",
+      cancelActionText: "No",
+    );
+    if (didRequestMentor == true) {
+      _createMentorMatch(mentorUID);
+    }
+  }
+
   Future<void> _createMentorMatch(String mentorUID) async {
     try {
       final database = FirestoreDatabase(uid: loggedInUser.uid);
-      await database.createMentorMatch(
+      database.createMentorMatch(
         MentorMatchModel(
           menteeUID: loggedInUser.uid,
           mentorUID: mentorUID,
@@ -262,12 +274,14 @@ class MentorCard extends StatelessWidget {
                           fontColor: Colors.white,
                           minWidth: 200,
                           onPressed: () async {
-                            await _createMentorMatch(mentorUID);
+                            await _confirmMentorSelection(
+                                mentorUID, context, mentorFname, mentorLname);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    MatchSuccessScreen(mentorUID: mentorUID),
+                                builder: (context) => XBottomNavigationBar(
+                                  pageIndex: 2,
+                                ),
                               ),
                             );
                           },

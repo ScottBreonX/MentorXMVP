@@ -70,139 +70,47 @@ class _MyProfileState extends State<MyProfile> {
       );
     }
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: kMentorXTeal,
-          title: Text('My Profile'),
-        ),
-        body: Container(
-          padding: EdgeInsets.only(left: 16.0, top: 20.0, right: 16.0),
-          child: ListView(
-            children: [
-              Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 5,
-                            offset: Offset(2, 3),
-                            color: Colors.grey,
-                            spreadRadius: 1,
-                          )
-                        ],
-                      ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: kMentorXTeal,
+        title: Text('My Profile'),
+      ),
+      body: Container(
+        padding: EdgeInsets.only(left: 16.0, top: 20.0, right: 16.0),
+        child: ListView(
+          children: [
+            Center(
+              child: Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 5,
+                          offset: Offset(2, 3),
+                          color: Colors.grey,
+                          spreadRadius: 1,
+                        )
+                      ],
+                    ),
+                    child: CircleAvatar(
+                      backgroundColor: kMentorXTeal,
+                      radius: 80,
                       child: CircleAvatar(
                         backgroundColor: kMentorXTeal,
-                        radius: 80,
-                        child: CircleAvatar(
-                          backgroundColor: kMentorXTeal,
-                          radius: 75,
-                          child: Icon(
-                            Icons.person,
-                            color: Colors.white,
-                            size: 100,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        height: 40.0,
-                        width: 40.0,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 3,
-                              offset: Offset(2, 3),
-                              color: Colors.grey,
-                              spreadRadius: 0.5,
-                            )
-                          ],
-                        ),
+                        radius: 75,
                         child: Icon(
-                          Icons.edit,
-                          color: kMentorXTeal,
+                          Icons.person,
+                          color: Colors.white,
+                          size: 100,
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 30.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '${profileData['First Name']}',
-                    style: TextStyle(
-                      fontSize: 30.0,
-                      color: kMentorXTeal,
-                    ),
                   ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Text(
-                    '${profileData['Last Name']}',
-                    style: TextStyle(
-                      fontSize: 30.0,
-                      color: kMentorXTeal,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                    child: Text(
-                      '${profileData['Year in School']},',
-                      style: TextStyle(
-                        fontSize: 25.0,
-                        color: Colors.black54,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Text(
-                    '${profileData['Major']}',
-                    style: TextStyle(
-                      fontSize: 25.0,
-                      color: Colors.black54,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              const Divider(
-                color: kMentorXTeal,
-                height: 20,
-                thickness: 4,
-                indent: 0,
-                endIndent: 0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  GestureDetector(
-                    onTap: () =>
-                        Navigator.popAndPushNamed(context, EditMyProfile.id),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
                     child: Container(
                       height: 40.0,
                       width: 40.0,
@@ -219,135 +127,231 @@ class _MyProfileState extends State<MyProfile> {
                         ],
                       ),
                       child: Icon(
-                        Icons.edit,
+                        Icons.photo_camera,
                         color: kMentorXTeal,
                       ),
                     ),
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  Text(
-                    'Field of Study: ',
+            ),
+            SizedBox(
+              height: 30.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '${profileData['First Name']}',
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: kMentorXTeal,
+                  ),
+                ),
+                SizedBox(
+                  width: 10.0,
+                ),
+                Text(
+                  '${profileData['Last Name']}',
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: kMentorXTeal,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Text(
+                    '${profileData['Year in School']},',
                     style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: 25.0,
                       color: Colors.black54,
-                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Flexible(
-                    child: Text(
-                      '${profileData['Major']}',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: kMentorXTeal,
-                        fontWeight: FontWeight.w500,
-                      ),
+                ),
+                SizedBox(
+                  width: 10.0,
+                ),
+                Text(
+                  '${profileData['Major']}',
+                  style: TextStyle(
+                    fontSize: 25.0,
+                    color: Colors.black54,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            const Divider(
+              color: kMentorXTeal,
+              height: 20,
+              thickness: 4,
+              indent: 0,
+              endIndent: 0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                GestureDetector(
+                  onTap: () =>
+                      Navigator.popAndPushNamed(context, EditMyProfile.id),
+                  child: Container(
+                    height: 40.0,
+                    width: 40.0,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 3,
+                          offset: Offset(2, 3),
+                          color: Colors.grey,
+                          spreadRadius: 0.5,
+                        )
+                      ],
+                    ),
+                    child: Icon(
+                      Icons.edit,
+                      color: kMentorXTeal,
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Year in School: ',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.black54,
-                      fontWeight: FontWeight.w500,
-                    ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  'Field of Study: ',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
                   ),
-                  Text(
-                    '${profileData['Year in School']}',
+                ),
+                Flexible(
+                  child: Text(
+                    '${profileData['Major']}',
                     style: TextStyle(
                       fontSize: 20.0,
                       color: kMentorXTeal,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Hobbies: ',
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Year in School: ',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  '${profileData['Year in School']}',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: kMentorXTeal,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Hobbies: ',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Flexible(
+                  child: Text(
+                    '${profileData['Hobbies']}',
                     style: TextStyle(
                       fontSize: 20.0,
-                      color: Colors.black54,
+                      color: kMentorXTeal,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Flexible(
-                    child: Text(
-                      '${profileData['Hobbies']}',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: kMentorXTeal,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Motivations: ',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Motivations: ',
+                ),
+                Flexible(
+                  child: Text(
+                    '${profileData['Motivations']}',
                     style: TextStyle(
                       fontSize: 20.0,
-                      color: Colors.black54,
+                      color: kMentorXTeal,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Flexible(
-                    child: Text(
-                      '${profileData['Motivations']}',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: kMentorXTeal,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Expertise: ',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Expertise: ',
+                ),
+                Flexible(
+                  child: Text(
+                    '${profileData['Expertise']}',
                     style: TextStyle(
                       fontSize: 20.0,
-                      color: Colors.black54,
+                      color: kMentorXTeal,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Flexible(
-                    child: Text(
-                      '${profileData['Expertise']}',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: kMentorXTeal,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ));
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40.0,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
