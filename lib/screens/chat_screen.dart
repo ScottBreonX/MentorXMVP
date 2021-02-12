@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,6 +20,7 @@ class _ChatScreenState extends State<ChatScreen> {
   bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
   String messageText;
+  bool canSubmit = false;
 
   @override
   void initState() {
@@ -41,6 +43,26 @@ class _ChatScreenState extends State<ChatScreen> {
       }
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<void> _submit() async {
+    try {
+      messageTextController.clear();
+      await _firestore.collection('messages').add({
+        'text': messageText,
+        'sender': loggedInUser.email,
+        'senderFName': profileData['First Name'],
+        'senderLName': profileData['Last Name'],
+        'timestamp': DateTime.now(),
+      });
+    } catch (e) {
+      showAlertDialog(
+        context,
+        title: "Message Error",
+        content: "Message send error, please try again",
+        defaultActionText: "Ok",
+      );
     }
   }
 
@@ -108,26 +130,26 @@ class _ChatScreenState extends State<ChatScreen> {
                         child: TextField(
                           controller: messageTextController,
                           onChanged: (text) {
-                            messageText = text;
+                            setState(() {
+                              messageText = text;
+                            });
+                            if (messageText == null || messageText == '') {
+                              canSubmit = false;
+                            } else {
+                              canSubmit = true;
+                            }
                           },
                           decoration: kMessageTextFieldDecoration,
                         ),
                       ),
                     ),
                     FlatButton(
-                      onPressed: () {
-                        messageTextController.clear();
-                        _firestore.collection('messages').add({
-                          'text': messageText,
-                          'sender': loggedInUser.email,
-                          'senderFName': profileData['First Name'],
-                          'senderLName': profileData['Last Name'],
-                          'timestamp': DateTime.now(),
-                        });
-                      },
+                      onPressed: canSubmit ? _submit : null,
                       child: Text(
                         'Send',
-                        style: kSendButtonTextStyle,
+                        style: canSubmit
+                            ? kSendButtonTextStyle
+                            : kInactiveSendButtonTextStyle,
                       ),
                     )
                   ],

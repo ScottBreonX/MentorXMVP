@@ -89,19 +89,19 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             image: AssetImage("images/XMountains.jpg"),
             fit: BoxFit.cover,
           ),
-//          gradient: LinearGradient(
-//            begin: Alignment.topCenter,
-//            end: Alignment.bottomCenter,
-//            colors: [
-//              Colors.white,
-//              Colors.white,
-//              Colors.white30,
-//              kMentorXTeal,
-//            ],
-//          ),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.grey,
+              Colors.black38,
+              Colors.black54,
+              Colors.black,
+            ],
+          ),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -109,9 +109,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 240,
+                    width: 250,
                     child: ColorizeAnimatedTextKit(
-                      speed: Duration(milliseconds: 1000),
+                      speed: Duration(milliseconds: 400),
                       text: ['Mentor'],
                       textStyle: TextStyle(
                         fontSize: 70.0,
@@ -120,17 +120,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       ),
                       colors: [
                         Colors.white,
-                        Colors.white60,
-                        Colors.grey,
+                        Colors.white70,
+                        Colors.tealAccent,
                         kMentorXTeal,
-                        Colors.grey,
-                        Colors.white60,
+                        Colors.tealAccent,
+                        Colors.white70,
                         Colors.white,
-//                        Colors.grey,
-//                        Colors.white,
-//                        kMentorXTeal,
-//                        Colors.white,
-//                        Colors.grey,
                       ],
                       textAlign: TextAlign.start,
                       alignment: AlignmentDirectional.topStart,
