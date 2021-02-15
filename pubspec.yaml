@@ -22,6 +22,8 @@ dependencies:
   modal_progress_hud: ^0.1.3
   cloud_firestore: ^0.14.3
   provider: 4.3.2+3
+  font_awesome_flutter: ^8.11.0
+
 
 
 
@@ -42,6 +44,7 @@ flutter:
     - images/XLogoWhite.png
     - images/XMountains.jpg
     - images/XMountainsWhite.jpg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
