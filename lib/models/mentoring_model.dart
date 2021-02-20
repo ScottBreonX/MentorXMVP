@@ -1,11 +1,17 @@
 class MentorModel {
   MentorModel(
-      {this.uid, this.availableSlots, this.fName, this.lName, this.email});
+      {this.uid,
+      this.availableSlots,
+      this.fName,
+      this.lName,
+      this.email,
+      this.whyMentor});
   final int availableSlots;
   final String uid;
   final String fName;
   final String lName;
   final String email;
+  final String whyMentor;
 
   factory MentorModel.fromMap(Map<String, dynamic> data) {
     if (data == null) {
@@ -15,6 +21,7 @@ class MentorModel {
     final String uid = data['UID'];
     final String fName = data['First Name'];
     final String lName = data['Last Name'];
+    final String whyMentor = data['Why Mentor'];
     final String email = data['Email Address'];
 
     return MentorModel(
@@ -22,6 +29,7 @@ class MentorModel {
       uid: uid,
       fName: fName,
       lName: lName,
+      whyMentor: whyMentor,
       email: email,
     );
   }
@@ -32,6 +40,7 @@ class MentorModel {
       'UID': uid,
       'First Name': fName,
       'Last Name': lName,
+      'Why Mentor': whyMentor,
       'Email Address': email,
     };
   }

@@ -7,9 +7,9 @@ import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/mentoring_model.dart';
 import 'package:mentorx_mvp/screens/mentee_screen.dart';
+import 'package:mentorx_mvp/screens/mentor_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'mentor_chat_screen.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 User loggedInUser;
 
@@ -121,6 +121,34 @@ class _MentoringScreenState extends State<MentoringScreen> {
   Color _nextButtonColor = Colors.grey;
   String _enrollmentSelection = 'Nothing';
   Color _errorTextColor = Colors.white;
+
+  Future<void> _confirmMentorEnrollment(BuildContext context) async {
+    final didEnroll = await showAlertDialog(
+      context,
+      title: "Mentor Enrollment",
+      content: "Confirm enrollment as a mentor?",
+      defaultActionText: "Yes",
+      cancelActionText: "Go back",
+    );
+    if (didEnroll == true) {
+      _createMentor(context)
+          .then((value) => Navigator.pushNamed(context, MentorScreen.id));
+    }
+  }
+
+  Future<void> _confirmMenteeEnrollment(BuildContext context) async {
+    final didEnroll = await showAlertDialog(
+      context,
+      title: "Mentee Enrollment",
+      content: "Confirm enrollment as a mentee?",
+      defaultActionText: "Yes",
+      cancelActionText: "Go back",
+    );
+    if (didEnroll == true) {
+      _createMentee(context)
+          .then((value) => Navigator.pushNamed(context, MenteeScreen.id));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -303,10 +331,9 @@ class _MentoringScreenState extends State<MentoringScreen> {
                   minWidth: 250,
                   onPressed: () async {
                     if (_enrollmentSelection == 'Mentor') {
-                      await _createMentor(context);
+                      await _confirmMentorEnrollment(context);
                     } else if (_enrollmentSelection == 'Mentee') {
-                      await _createMentee(context).then((value) =>
-                          Navigator.pushNamed(context, MenteeScreen.id));
+                      await _confirmMenteeEnrollment(context);
                     } else {
                       setState(() {
                         _errorTextColor = Colors.red;
