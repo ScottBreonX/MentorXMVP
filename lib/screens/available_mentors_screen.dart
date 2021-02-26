@@ -108,6 +108,7 @@ class AvailableMentorsStream extends StatelessWidget {
           .collection('mentoring')
           .doc('UniversityOfFlorida')
           .collection('mentors')
+          .where('UID', isNotEqualTo: loggedInUser.uid)
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
@@ -118,7 +119,9 @@ class AvailableMentorsStream extends StatelessWidget {
           );
         }
 
-        final mentors = snapshot.data.docs;
+        final mentors = snapshot.data.docs
+            .where((mentorData) => mentorData['Available Slots'] >= 1);
+
         List<MentorCard> mentorBubbles = [];
 
         for (var mentor in mentors) {
@@ -141,12 +144,11 @@ class AvailableMentorsStream extends StatelessWidget {
         }
         return Expanded(
           child: ListView(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10.0,
-              vertical: 10.0,
-            ),
-            children: mentorBubbles,
-          ),
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.0,
+                vertical: 10.0,
+              ),
+              children: mentorBubbles),
         );
       },
     );
@@ -170,8 +172,9 @@ class MentorCard extends StatelessWidget {
 
   Future<void> _createMentorMatch(String mentorUID) async {
     try {
-      final database = FirestoreDatabase(uid: loggedInUser.uid);
-      database.createMentorMatch(
+      final database =
+          FirestoreDatabase(uid: loggedInUser.uid, mentorUID: mentorUID);
+      await database.createMentorMatch(
         MentorMatchModel(
           menteeUID: loggedInUser.uid,
           mentorUID: mentorUID,
@@ -183,6 +186,12 @@ class MentorCard extends StatelessWidget {
           mentorUID: mentorUID,
         ),
       );
+      await FirebaseFirestore.instance
+          .collection('mentoring')
+          .doc('UniversityOfFlorida')
+          .collection('mentors')
+          .doc(mentorUID)
+          .update({'Available Slots': mentorSlots - 1});
     } on FirebaseException catch (e) {
       print(e);
     }
@@ -237,7 +246,7 @@ class MentorCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '$mentorEmail',
+                          'Available Slots: $mentorSlots',
                           style: TextStyle(
                             fontSize: 15.0,
                             color: Colors.white,

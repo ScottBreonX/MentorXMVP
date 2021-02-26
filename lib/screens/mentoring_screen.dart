@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
+import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
@@ -160,9 +161,22 @@ class _MentoringScreenState extends State<MentoringScreen> {
       );
     }
     if (profileData['mentorUID'] == null) {
+      var drawerHeader = MentorXMenuHeader(
+        fName: '${profileData['First Name']}',
+        lName: '${profileData['Last Name']}',
+        email: '${profileData['Email Address']}',
+      );
+
+      final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
+
       return Scaffold(
+        drawer: Drawer(
+          child: Container(
+            child: drawerItems,
+            color: kDrawerItems,
+          ),
+        ),
         appBar: AppBar(
-          automaticallyImplyLeading: false,
           backgroundColor: kMentorXTeal,
           title: Text('Mentoring'),
         ),
@@ -365,9 +379,23 @@ class _MentoringScreenState extends State<MentoringScreen> {
           ),
         );
       }
+
+      var drawerHeader = MentorXMenuHeader(
+        fName: '${profileData['First Name']}',
+        lName: '${profileData['Last Name']}',
+        email: '${profileData['Email Address']}',
+      );
+
+      final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
+
       return Scaffold(
+        drawer: Drawer(
+          child: Container(
+            child: drawerItems,
+            color: kDrawerItems,
+          ),
+        ),
         appBar: AppBar(
-          automaticallyImplyLeading: false,
           backgroundColor: kMentorXTeal,
           title: Text('Mentoring'),
         ),

@@ -10,8 +10,9 @@ abstract class Database {
 }
 
 class FirestoreDatabase implements Database {
-  FirestoreDatabase({@required this.uid}) : assert(uid != null);
+  FirestoreDatabase({@required this.uid, this.mentorUID}) : assert(uid != null);
   final String uid;
+  final String mentorUID;
 
   Future<void> createProfile(ProfileModel profile) => _setData(
         path: APIPath.profile(uid, 'coreInfo'),
@@ -22,6 +23,7 @@ class FirestoreDatabase implements Database {
         path: APIPath.mentoring('UniversityOfFlorida', 'mentors', uid),
         data: mentor.toMap(),
       );
+
   Future<void> createMentee(MenteeModel mentee) => _setData(
         path: APIPath.mentoring('UniversityOfFlorida', 'mentee', uid),
         data: mentee.toMap(),
