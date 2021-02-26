@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/screens/edit_profile_screen.dart';
@@ -69,9 +70,23 @@ class _MyProfileState extends State<MyProfile> {
         ),
       );
     }
+
+    var drawerHeader = MentorXMenuHeader(
+      fName: '${profileData['First Name']}',
+      lName: '${profileData['Last Name']}',
+      email: '${profileData['Email Address']}',
+    );
+
+    final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
+
     return Scaffold(
+      drawer: Drawer(
+        child: Container(
+          child: drawerItems,
+          color: Colors.white,
+        ),
+      ),
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         backgroundColor: kMentorXTeal,
         title: Text('My Profile'),
       ),
