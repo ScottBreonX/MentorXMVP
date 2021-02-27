@@ -6,6 +6,7 @@ import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/screens/edit_profile_screen.dart';
+import 'package:mentorx_mvp/screens/profile_test_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
 User loggedInUser;
@@ -91,7 +92,7 @@ class _MyProfileState extends State<MyProfile> {
         title: Text('My Profile'),
       ),
       body: Container(
-        padding: EdgeInsets.only(left: 16.0, top: 20.0, right: 16.0),
+        padding: EdgeInsets.all(20),
         child: ListView(
           children: [
             Center(
@@ -111,14 +112,14 @@ class _MyProfileState extends State<MyProfile> {
                     ),
                     child: CircleAvatar(
                       backgroundColor: kMentorXTeal,
-                      radius: 80,
+                      radius: 50,
                       child: CircleAvatar(
                         backgroundColor: kMentorXTeal,
-                        radius: 75,
+                        radius: 40,
                         child: Icon(
                           Icons.person,
                           color: Colors.white,
-                          size: 100,
+                          size: 80,
                         ),
                       ),
                     ),
@@ -127,8 +128,8 @@ class _MyProfileState extends State<MyProfile> {
                     bottom: 0,
                     right: 0,
                     child: Container(
-                      height: 40.0,
-                      width: 40.0,
+                      height: 30.0,
+                      width: 30.0,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white,
@@ -141,9 +142,15 @@ class _MyProfileState extends State<MyProfile> {
                           )
                         ],
                       ),
-                      child: Icon(
-                        Icons.photo_camera,
-                        color: kMentorXTeal,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, MyProfileTest.id);
+                        },
+                        child: Icon(
+                          Icons.photo_camera,
+                          color: kMentorXTeal,
+                          size: 20.0,
+                        ),
                       ),
                     ),
                   ),
