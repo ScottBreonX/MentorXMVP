@@ -11,6 +11,7 @@ import 'package:mentorx_mvp/screens/mentee_screen.dart';
 import 'package:mentorx_mvp/screens/mentor_chat_screen.dart';
 import 'package:mentorx_mvp/screens/mentor_screen.dart';
 import 'package:mentorx_mvp/screens/profile_screen.dart';
+import 'package:mentorx_mvp/screens/profile_test_screen.dart';
 import 'package:mentorx_mvp/screens/registration_profile_screen.dart';
 import 'package:mentorx_mvp/screens/view_profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
@@ -67,6 +68,7 @@ class MentorX extends StatelessWidget {
           ViewProfile.id: (context) => ViewProfile(),
           MatchSuccessScreen.id: (context) => MatchSuccessScreen(),
           MentorChatScreen.id: (context) => MentorChatScreen(),
+          MyProfileTest.id: (context) => MyProfileTest(),
         },
       ),
     );
