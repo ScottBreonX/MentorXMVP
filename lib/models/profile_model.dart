@@ -5,7 +5,7 @@ class ProfileModel {
     this.email,
     this.major,
     this.yearInSchool,
-    this.hobbies,
+    this.aboutMe,
     this.motivations,
     this.expertise,
   });
@@ -14,7 +14,7 @@ class ProfileModel {
   final String major;
   final String yearInSchool;
   final String email;
-  final String hobbies;
+  final String aboutMe;
   final String motivations;
   final String expertise;
 
@@ -27,7 +27,7 @@ class ProfileModel {
     final String major = data['Major'];
     final String yearInSchool = data['Year in School'];
     final String email = data['Email Address'];
-    final String hobbies = data['Hobbies'];
+    final String aboutMe = data['About Me'];
     final String motivations = data['Motivations'];
     final String expertise = data['Expertise'];
 
@@ -37,7 +37,7 @@ class ProfileModel {
       email: email,
       major: major,
       yearInSchool: yearInSchool,
-      hobbies: hobbies,
+      aboutMe: aboutMe,
       motivations: motivations,
       expertise: expertise,
     );
@@ -50,7 +50,7 @@ class ProfileModel {
       'Major': major,
       'Email Address': email,
       'Year in School': yearInSchool,
-      'Hobbies': hobbies,
+      'About Me': aboutMe,
       'Motivations': motivations,
       'Expertise': expertise,
     };

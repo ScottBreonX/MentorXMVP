@@ -48,7 +48,7 @@ const kSendButtonTextStyle =
 const kInactiveSendButtonTextStyle =
     TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 18.0);
 
-const kMentorXTeal = Color.fromRGBO(56, 142, 137, 1.0);
+const kMentorXTeal = Colors.blueGrey;
 const kDrawerItems = Colors.white;
 
 //Color.fromRGBO(56, 142, 137, 1.0);
