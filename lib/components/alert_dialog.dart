@@ -25,7 +25,9 @@ Future<bool> showAlertDialog(
           if (cancelActionText != null)
             FlatButton(
               child: Text(cancelActionText),
-              onPressed: () => Navigator.pop(context, false),
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+              },
             ),
         ],
       ),
@@ -46,7 +48,9 @@ Future<bool> showAlertDialog(
         if (cancelActionText != null)
           CupertinoDialogAction(
             child: Text(cancelActionText),
-            onPressed: () => Navigator.pop(context, false),
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true).pop();
+            },
           ),
       ],
     ),

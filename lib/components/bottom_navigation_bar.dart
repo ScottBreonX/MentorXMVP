@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/events_screen.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring_screen.dart';
@@ -41,7 +40,6 @@ class _XBottomNavigationBarState extends State<XBottomNavigationBar> {
   void initState() {
     super.initState();
     getPageIndex();
-    print('${widget.pageIndex}');
     _pageController = PageController(initialPage: pageIndex);
   }
 
@@ -53,6 +51,12 @@ class _XBottomNavigationBarState extends State<XBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    if (pageIndex < 4) {
+      pageIndex = pageIndex;
+    } else {
+      pageIndex = pageIndex - 1;
+    }
+
     return Scaffold(
       bottomNavigationBar: ConvexAppBar(
         style: TabStyle.reactCircle,
@@ -60,7 +64,7 @@ class _XBottomNavigationBarState extends State<XBottomNavigationBar> {
         initialActiveIndex: pageIndex,
         color: Colors.white,
         onTap: onTabTapped,
-        backgroundColor: kMentorXTeal,
+        backgroundColor: Colors.blueGrey.shade800,
         items: [
           TabItem(
             icon: Icons.home,

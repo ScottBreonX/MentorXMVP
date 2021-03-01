@@ -77,227 +77,475 @@ class _ViewProfileState extends State<ViewProfile> {
         title: Text('Profile'),
       ),
       body: Container(
-        padding: EdgeInsets.only(left: 16.0, top: 20.0, right: 16.0),
-        child: ListView(
+        child: Column(
           children: [
-            Center(
-              child: Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 5,
-                          offset: Offset(2, 3),
-                          color: Colors.grey,
-                          spreadRadius: 1,
-                        )
+            Container(
+              height: 300,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [
+                    Colors.blueGrey.shade800,
+                    Colors.blueGrey.shade900,
+                  ],
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Stack(
+                          children: [
+                            Container(
+                              child: CircleAvatar(
+                                backgroundColor: Colors.white,
+                                radius: 50,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 40,
+                                  child: Icon(
+                                    Icons.person,
+                                    color: Colors.blueGrey,
+                                    size: 80,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                    child: CircleAvatar(
-                      backgroundColor: kMentorXTeal,
-                      radius: 80,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 75,
-                        child: Icon(
-                          Icons.person,
-                          color: kMentorXTeal,
-                          size: 100,
-                        ),
-                      ),
+                    SizedBox(
+                      height: 20,
                     ),
-                  ),
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${profileData['First Name']}',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Text(
+                          '${profileData['Last Name']}',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                          width: 120,
+                          child: Center(
+                            child: Text(
+                              '${profileData['Year in School']}',
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          color: Colors.white,
+                          height: 50,
+                          width: 2,
+                        ),
+                        SizedBox(
+                          width: 120,
+                          child: Center(
+                            child: Text(
+                              '${profileData['Major']}',
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          color: Colors.white,
+                          height: 50,
+                          width: 2,
+                        ),
+                        SizedBox(
+                          width: 120,
+                          child: Center(
+                            child: Text(
+                              '${profileData['Major']}',
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
-            SizedBox(
-              height: 30.0,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '${profileData['First Name']}',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    color: Colors.black,
-                  ),
-                ),
-                SizedBox(
-                  width: 10.0,
-                ),
-                Text(
-                  '${profileData['Last Name']}',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Flexible(
-                  child: Text(
-                    '${profileData['Year in School']},',
-                    style: TextStyle(
-                      fontSize: 25.0,
-                      color: Colors.black54,
+            Expanded(
+              child: Padding(
+                padding:
+                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+                child: Container(
+                  child: SizedBox(
+                    height: double.infinity,
+                    child: ListView(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                'About Me',
+                                style: TextStyle(
+                                    fontSize: 20.0, color: Colors.black54),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Row(
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  '${profileData['Hobbies']}',
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Top Skills',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      offset: Offset(2, 3),
+                                      color: Colors.grey,
+                                      spreadRadius: 1,
+                                    )
+                                  ],
+                                ),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.blueGrey.shade600,
+                                  radius: 50,
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 45,
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.blueGrey.shade600,
+                                      size: 50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      offset: Offset(2, 3),
+                                      color: Colors.grey,
+                                      spreadRadius: 1,
+                                    )
+                                  ],
+                                ),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.blueGrey.shade600,
+                                  radius: 50,
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 45,
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.blueGrey.shade600,
+                                      size: 50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      offset: Offset(2, 3),
+                                      color: Colors.grey,
+                                      spreadRadius: 1,
+                                    )
+                                  ],
+                                ),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.blueGrey.shade600,
+                                  radius: 50,
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 45,
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.blueGrey.shade600,
+                                      size: 50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Hobbies / Activities',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      offset: Offset(2, 3),
+                                      color: Colors.grey,
+                                      spreadRadius: 1,
+                                    )
+                                  ],
+                                ),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.blueGrey.shade600,
+                                  radius: 50,
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 45,
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.blueGrey.shade600,
+                                      size: 50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      offset: Offset(2, 3),
+                                      color: Colors.grey,
+                                      spreadRadius: 1,
+                                    )
+                                  ],
+                                ),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.blueGrey.shade600,
+                                  radius: 50,
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 45,
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.blueGrey.shade600,
+                                      size: 50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      offset: Offset(2, 3),
+                                      color: Colors.grey,
+                                      spreadRadius: 1,
+                                    )
+                                  ],
+                                ),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.blueGrey.shade600,
+                                  radius: 50,
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 45,
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.blueGrey.shade600,
+                                      size: 50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Motivations',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Colors.black54,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      offset: Offset(2, 3),
+                                      color: Colors.grey,
+                                      spreadRadius: 1,
+                                    )
+                                  ],
+                                ),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.blueGrey.shade600,
+                                  radius: 50,
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 45,
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.blueGrey.shade600,
+                                      size: 50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      offset: Offset(2, 3),
+                                      color: Colors.grey,
+                                      spreadRadius: 1,
+                                    )
+                                  ],
+                                ),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.blueGrey.shade600,
+                                  radius: 50,
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 45,
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.blueGrey.shade600,
+                                      size: 50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      offset: Offset(2, 3),
+                                      color: Colors.grey,
+                                      spreadRadius: 1,
+                                    )
+                                  ],
+                                ),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.blueGrey.shade600,
+                                  radius: 50,
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 45,
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.blueGrey.shade600,
+                                      size: 50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 10.0,
-                ),
-                Text(
-                  '${profileData['Major']}',
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    color: Colors.black54,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            const Divider(
-              color: kMentorXTeal,
-              height: 20,
-              thickness: 4,
-              indent: 0,
-              endIndent: 0,
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Field of Study: ',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.black54,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Flexible(
-                  child: Text(
-                    '${profileData['Major']}',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: kMentorXTeal,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Year in School: ',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.black54,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Text(
-                  '${profileData['Year in School']}',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: kMentorXTeal,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Hobbies: ',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.black54,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Flexible(
-                  child: Text(
-                    '${profileData['Hobbies']}',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: kMentorXTeal,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Motivations: ',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.black54,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Flexible(
-                  child: Text(
-                    '${profileData['Motivations']}',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: kMentorXTeal,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Expertise: ',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.black54,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Flexible(
-                  child: Text(
-                    '${profileData['Expertise']}',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: kMentorXTeal,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            )
           ],
         ),
       ),

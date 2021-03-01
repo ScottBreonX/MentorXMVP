@@ -87,7 +87,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
           email: loggedInUser.email,
           yearInSchool: yearInSchool,
           major: major,
-          hobbies: hobbies,
+          aboutMe: hobbies,
           motivations: motivations,
           expertise: expertise,
         ),
