@@ -23,7 +23,6 @@ class _XBottomNavigationBarState extends State<XBottomNavigationBar> {
     EventsScreen(),
     MentoringScreen(),
     MyProfile(),
-    MentoringScreen(),
   ];
 
   int pageIndex;
