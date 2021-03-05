@@ -1,13 +1,18 @@
-import 'dart:ui';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
+import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
+import 'package:path/path.dart' as p;
+import 'package:provider/provider.dart';
 
 User loggedInUser;
 
@@ -15,20 +20,18 @@ class MyProfile extends StatefulWidget {
   const MyProfile({
     Key key,
     this.database,
-    this.uid,
   }) : super(key: key);
 
   static const String id = 'profile_screen';
   final Database database;
-  final String uid;
 
   @override
   _MyProfileState createState() => _MyProfileState();
 }
 
 class _MyProfileState extends State<MyProfile> {
-  final _auth = FirebaseAuth.instance;
   bool aboutMeEditStatus = false;
+  bool profilePhotoStatus = false;
   final _formKey1 = GlobalKey<FormState>();
   String aboutMe;
 
@@ -41,8 +44,9 @@ class _MyProfileState extends State<MyProfile> {
   }
 
   void getCurrentUser() {
+    final auth = Provider.of<AuthBase>(context, listen: false);
     try {
-      final user = _auth.currentUser;
+      final user = auth.currentUser;
       if (user != null) {
         loggedInUser = user;
       }
@@ -59,11 +63,73 @@ class _MyProfileState extends State<MyProfile> {
         .get()
         .then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
-        setState(() {
-          profileData = result.data();
-        });
+        if (mounted) {
+          setState(() {
+            profileData = result.data();
+          });
+        }
       });
     });
+  }
+
+  // Image Picker
+  File _image; // Used only if you need a single picture
+
+  Future getImage(bool gallery) async {
+    ImagePicker picker = ImagePicker();
+    PickedFile pickedFile;
+    // Let user select photo from gallery
+    if (gallery) {
+      pickedFile = await picker.getImage(
+        source: ImageSource.gallery,
+      );
+    }
+    // Otherwise open camera to get new photo
+    else {
+      pickedFile = await picker.getImage(
+        source: ImageSource.camera,
+      );
+    }
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+        profilePhotoStatus = true;
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future<void> saveImage(File _image) async {
+    String profileReferenceString() =>
+        'users/${loggedInUser.uid}/profile/coreInfo';
+
+    DocumentReference profileReference = FirebaseFirestore.instance
+        .collection('users')
+        .doc('${loggedInUser.uid}')
+        .collection('profile')
+        .doc('coreInfo');
+
+    String imageURL = await uploadFile(_image);
+    profileReference.update({
+      '$profileReferenceString/images': FieldValue.arrayUnion([imageURL])
+    });
+  }
+
+  Future<String> uploadFile(File _image) async {
+    Reference storageReference = FirebaseStorage.instance
+        .ref()
+        .child('profilePictures/${p.basename(_image.path)}');
+
+    UploadTask uploadTask = storageReference.putFile(_image);
+    await uploadTask;
+    print('File Uploaded');
+    String returnURL;
+    await storageReference.getDownloadURL().then((fileURL) {
+      returnURL = fileURL;
+    });
+    return returnURL;
   }
 
   Future<void> _updateProfile(BuildContext context) async {
@@ -174,15 +240,18 @@ class _MyProfileState extends State<MyProfile> {
                               child: CircleAvatar(
                                 backgroundColor: Colors.white,
                                 radius: 50,
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  radius: 40,
-                                  child: Icon(
-                                    Icons.person,
-                                    color: Colors.blueGrey,
-                                    size: 80,
-                                  ),
-                                ),
+                                backgroundImage:
+                                    AssetImage('images/XMountainsWhite.jpg'),
+                                child: profilePhotoStatus
+                                    ? Image.file(
+                                        _image,
+                                        fit: BoxFit.fitWidth,
+                                      )
+                                    : Icon(
+                                        Icons.person,
+                                        color: Colors.blueGrey,
+                                        size: 80,
+                                      ),
                               ),
                             ),
                             Positioned(
@@ -196,8 +265,9 @@ class _MyProfileState extends State<MyProfile> {
                                   color: Colors.blueGrey,
                                 ),
                                 child: GestureDetector(
-                                  onTap: () {
-                                    print(aboutMeEditStatus);
+                                  onTap: () async {
+                                    getImage(true)
+                                        .whenComplete(() => saveImage(_image));
                                   },
                                   child: Icon(
                                     Icons.photo_camera,

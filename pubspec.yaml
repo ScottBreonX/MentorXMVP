@@ -13,16 +13,20 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.0
+  cupertino_icons:
 
-  convex_bottom_bar: ^2.6.0
-  animated_text_kit: ^2.5.1
-  firebase_core: ^0.5.2
-  firebase_auth: ^0.18.3
-  modal_progress_hud: ^0.1.3
-  cloud_firestore: ^0.14.3
-  provider: 4.3.2+3
-  font_awesome_flutter: ^8.11.0
+  convex_bottom_bar:
+  animated_text_kit:
+  firebase_core:
+  firebase_auth:
+  firebase_storage:
+  image_picker:
+  camera:
+  path:
+  modal_progress_hud:
+  cloud_firestore:
+  provider:
+  font_awesome_flutter:
 
 
 

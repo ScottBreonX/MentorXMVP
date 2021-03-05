@@ -6,9 +6,9 @@ import 'package:mentorx_mvp/components/bottom_navigation_bar.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
+import 'package:mentorx_mvp/screens/profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
-import 'package:mentorx_mvp/components/sign_out.dart';
 
 User loggedInUser;
 
@@ -210,14 +210,15 @@ class _LaunchScreenState extends State<LaunchScreen> {
                         minWidth: 150,
                         fontColor: Colors.white,
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => XBottomNavigationBar(
-                                pageIndex: 3,
-                              ),
-                            ),
-                          );
+                          Navigator.pushNamed(context, MyProfile.id);
+//                          Navigator.push(
+//                            context,
+//                            MaterialPageRoute(
+//                              builder: (context) => XBottomNavigationBar(
+//                                pageIndex: 3,
+//                              ),
+//                            ),
+//                          );
                         },
                       ),
                     ],

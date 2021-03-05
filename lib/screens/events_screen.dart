@@ -13,7 +13,7 @@ User loggedInUser;
 class EventsScreen extends StatefulWidget {
   const EventsScreen({this.onSignOut});
 
-  static const String id = 'launch_screen';
+  static const String id = 'events_screen';
   final VoidCallback onSignOut;
 
   @override

@@ -8,6 +8,14 @@
 	<string>Allow access to MentorX for image capture</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow access to MentorX for image upload</string>
+	<key>NSHumanReadableCopyright</key>
+	<string></string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
+	<key>CFBundleDisplayName</key>
+	<string></string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
