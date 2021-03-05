@@ -114,6 +114,8 @@ class _MyProfileState extends State<MyProfile> {
     });
   }
 
+//  image formatting
+
   Future<String> uploadFile(File _image) async {
     Reference storageReference = FirebaseStorage.instance
         .ref()
