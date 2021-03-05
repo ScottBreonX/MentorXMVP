@@ -102,9 +102,6 @@ class _MyProfileState extends State<MyProfile> {
   }
 
   Future<void> saveImage(File _image) async {
-    String profileReferenceString() =>
-        'users/${loggedInUser.uid}/profile/coreInfo';
-
     DocumentReference profileReference = FirebaseFirestore.instance
         .collection('users')
         .doc('${loggedInUser.uid}')
@@ -113,7 +110,7 @@ class _MyProfileState extends State<MyProfile> {
 
     String imageURL = await uploadFile(_image);
     profileReference.update({
-      '$profileReferenceString/images': FieldValue.arrayUnion([imageURL])
+      'images': FieldValue.arrayUnion([imageURL])
     });
   }
 
