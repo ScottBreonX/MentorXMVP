@@ -9,7 +9,6 @@ import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/services/database.dart';
-import 'launch_screen.dart';
 
 User loggedInUser;
 

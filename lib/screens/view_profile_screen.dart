@@ -64,6 +64,8 @@ class _ViewProfileState extends State<ViewProfile> {
 
   @override
   Widget build(BuildContext context) {
+    bool profilePhotoStatus;
+
     if (profileData == null) {
       return Center(
         child: CircularProgressIndicator(
@@ -71,10 +73,21 @@ class _ViewProfileState extends State<ViewProfile> {
         ),
       );
     }
+
+    if (profileData['images'] == null) {
+      setState(() {
+        profilePhotoStatus = false;
+      });
+    } else {
+      setState(() {
+        profilePhotoStatus = true;
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kMentorXTeal,
-        title: Text('Profile'),
+        title: Text('Mentoring'),
       ),
       body: Container(
         child: Column(
@@ -99,24 +112,21 @@ class _ViewProfileState extends State<ViewProfile> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Stack(
-                          children: [
-                            Container(
-                              child: CircleAvatar(
-                                backgroundColor: Colors.white,
-                                radius: 50,
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  radius: 40,
-                                  child: Icon(
+                        Container(
+                          child: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 50,
+                            backgroundImage: profilePhotoStatus
+                                ? NetworkImage(profileData['images'])
+                                : null,
+                            child: profilePhotoStatus
+                                ? null
+                                : Icon(
                                     Icons.person,
-                                    color: Colors.blueGrey,
-                                    size: 80,
+                                    color: kMentorXTeal,
+                                    size: 50,
                                   ),
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ],
                     ),
@@ -215,6 +225,8 @@ class _ViewProfileState extends State<ViewProfile> {
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 'About Me',
@@ -225,12 +237,12 @@ class _ViewProfileState extends State<ViewProfile> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
+                          padding: const EdgeInsets.only(top: 8.0, right: 10.0),
                           child: Row(
                             children: [
                               Flexible(
                                 child: Text(
-                                  '${profileData['Hobbies']}',
+                                  '${profileData['About Me']}',
                                   style: TextStyle(
                                     fontSize: 15.0,
                                     color: Colors.black54,
@@ -241,7 +253,7 @@ class _ViewProfileState extends State<ViewProfile> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
+                          padding: const EdgeInsets.only(top: 30.0),
                           child: Row(
                             children: [
                               Text(

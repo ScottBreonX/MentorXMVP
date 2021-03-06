@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
-import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/mentoring_model.dart';
@@ -165,6 +164,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
         fName: '${profileData['First Name']}',
         lName: '${profileData['Last Name']}',
         email: '${profileData['Email Address']}',
+        profilePicture: '${profileData['images']}',
       );
 
       final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
@@ -372,6 +372,9 @@ class _MentoringScreenState extends State<MentoringScreen> {
         ),
       );
     } else {
+      bool profilePhotoStatus;
+      bool mentorPhotoStatus;
+
       if (profileData == null || mentorProfileData == null) {
         return Center(
           child: CircularProgressIndicator(
@@ -380,10 +383,23 @@ class _MentoringScreenState extends State<MentoringScreen> {
         );
       }
 
+      if (profileData['images'] == null) {
+        profilePhotoStatus = false;
+      } else {
+        profilePhotoStatus = true;
+      }
+
+      if (mentorProfileData['images'] == null) {
+        mentorPhotoStatus = false;
+      } else {
+        mentorPhotoStatus = true;
+      }
+
       var drawerHeader = MentorXMenuHeader(
         fName: '${profileData['First Name']}',
         lName: '${profileData['Last Name']}',
         email: '${profileData['Email Address']}',
+        profilePicture: '${profileData['images']}',
       );
 
       final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
@@ -421,7 +437,22 @@ class _MentoringScreenState extends State<MentoringScreen> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: ProfileImageCircle(circleSize: 50),
+                              child: Container(
+                                child: CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage: profilePhotoStatus
+                                      ? NetworkImage(profileData['images'])
+                                      : null,
+                                  backgroundColor: kMentorXTeal,
+                                  child: profilePhotoStatus
+                                      ? null
+                                      : Icon(
+                                          Icons.person,
+                                          color: Colors.white,
+                                          size: 50,
+                                        ),
+                                ),
+                              ),
                             ),
                             Row(
                               children: [
@@ -446,7 +477,23 @@ class _MentoringScreenState extends State<MentoringScreen> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: ProfileImageCircle(circleSize: 50),
+                              child: Container(
+                                child: CircleAvatar(
+                                  radius: 50,
+                                  backgroundColor: kMentorXTeal,
+                                  backgroundImage: mentorPhotoStatus
+                                      ? NetworkImage(
+                                          mentorProfileData['images'])
+                                      : null,
+                                  child: mentorPhotoStatus
+                                      ? null
+                                      : Icon(
+                                          Icons.person,
+                                          color: Colors.white,
+                                          size: 50,
+                                        ),
+                                ),
+                              ),
                             ),
                             Row(
                               children: [
@@ -489,7 +536,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      FlatButton(
+                      TextButton(
                         onPressed: () {},
                         child: Column(
                           children: [
@@ -518,7 +565,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                       SizedBox(
                         width: 40,
                       ),
-                      FlatButton(
+                      TextButton(
                         onPressed: () {},
                         child: Column(
                           children: [
@@ -552,7 +599,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      FlatButton(
+                      TextButton(
                         onPressed: () {},
                         child: Column(
                           children: [
@@ -581,7 +628,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                       SizedBox(
                         width: 40,
                       ),
-                      FlatButton(
+                      TextButton(
                         onPressed: () {
                           Navigator.pushNamed(context, MentorChatScreen.id);
                         },

@@ -71,6 +71,7 @@ class _EventsScreenState extends State<EventsScreen> {
       fName: '${profileData['First Name']}',
       lName: '${profileData['Last Name']}',
       email: '${profileData['Email Address']}',
+      profilePicture: '${profileData['images']}',
     );
 
     final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
@@ -89,7 +90,7 @@ class _EventsScreenState extends State<EventsScreen> {
         ),
         elevation: 0,
         actions: [
-          FlatButton(
+          TextButton(
             onPressed: () {
               confirmSignOut(context);
             },

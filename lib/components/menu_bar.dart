@@ -5,18 +5,30 @@ import 'bottom_navigation_bar.dart';
 
 class MentorXMenuHeader extends StatefulWidget {
   const MentorXMenuHeader(
-      {@required this.fName, @required this.lName, @required this.email});
+      {@required this.fName,
+      @required this.lName,
+      @required this.email,
+      @required this.profilePicture});
   final String fName;
   final String lName;
   final String email;
+  final String profilePicture;
 
   @override
   _MentorXMenuHeaderState createState() => _MentorXMenuHeaderState();
 }
 
 class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
+  bool profilePictureStatus;
+
   @override
   Widget build(BuildContext context) {
+    if (widget.profilePicture == 'null') {
+      profilePictureStatus = false;
+    } else {
+      profilePictureStatus = true;
+    }
+
     return UserAccountsDrawerHeader(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -31,12 +43,16 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
       accountName: Text('${widget.fName} ${widget.lName}'),
       accountEmail: Text('${widget.email}'),
       currentAccountPicture: CircleAvatar(
+        backgroundImage:
+            profilePictureStatus ? NetworkImage(widget.profilePicture) : null,
         backgroundColor: Colors.white,
-        child: Icon(
-          Icons.person,
-          color: kMentorXTeal,
-          size: 42.0,
-        ),
+        child: profilePictureStatus
+            ? null
+            : Icon(
+                Icons.person,
+                color: kMentorXTeal,
+                size: 42.0,
+              ),
       ),
       otherAccountsPictures: [
         CircleAvatar(
