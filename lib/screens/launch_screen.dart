@@ -61,6 +61,8 @@ class _LaunchScreenState extends State<LaunchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool profilePictureStatus;
+
     if (profileData == null) {
       return Center(
         child: CircularProgressIndicator(
@@ -69,10 +71,17 @@ class _LaunchScreenState extends State<LaunchScreen> {
       );
     }
 
+    if (profileData['images'] != null) {
+      profilePictureStatus = true;
+    } else {
+      profilePictureStatus = false;
+    }
+
     var drawerHeader = MentorXMenuHeader(
       fName: '${profileData['First Name']}',
       lName: '${profileData['Last Name']}',
       email: '${profileData['Email Address']}',
+      profilePicture: '${profileData['images']}',
     );
 
     final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
@@ -129,17 +138,18 @@ class _LaunchScreenState extends State<LaunchScreen> {
                             ],
                           ),
                           child: CircleAvatar(
+                            backgroundImage: profilePictureStatus
+                                ? NetworkImage(profileData['images'])
+                                : null,
                             backgroundColor: kMentorXTeal,
                             radius: 50,
-                            child: CircleAvatar(
-                              backgroundColor: kMentorXTeal,
-                              radius: 45,
-                              child: Icon(
-                                Icons.person,
-                                color: Colors.white,
-                                size: 50,
-                              ),
-                            ),
+                            child: profilePictureStatus
+                                ? null
+                                : Icon(
+                                    Icons.person,
+                                    color: Colors.white,
+                                    size: 50,
+                                  ),
                           ),
                         ),
                         SizedBox(

@@ -32,6 +32,7 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   bool aboutMeEditStatus = false;
   bool profilePhotoStatus = false;
+  bool profilePhotoSelected = false;
   final _formKey1 = GlobalKey<FormState>();
   String aboutMe;
 
@@ -94,17 +95,14 @@ class _MyProfileState extends State<MyProfile> {
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
-        profilePhotoStatus = true;
+        profilePhotoSelected = true;
       } else {
-        print('No image selected.');
+        profilePhotoSelected = false;
       }
     });
   }
 
   Future<void> saveImage(File _image) async {
-    String profileReferenceString() =>
-        'users/${loggedInUser.uid}/profile/coreInfo';
-
     DocumentReference profileReference = FirebaseFirestore.instance
         .collection('users')
         .doc('${loggedInUser.uid}')
@@ -112,10 +110,13 @@ class _MyProfileState extends State<MyProfile> {
         .doc('coreInfo');
 
     String imageURL = await uploadFile(_image);
-    profileReference.update({
-      '$profileReferenceString/images': FieldValue.arrayUnion([imageURL])
+    profileReference.update({'images': imageURL});
+    setState(() {
+      getProfileData();
     });
   }
+
+//  image formatting
 
   Future<String> uploadFile(File _image) async {
     Reference storageReference = FirebaseStorage.instance
@@ -191,10 +192,21 @@ class _MyProfileState extends State<MyProfile> {
       );
     }
 
+    if (profileData['images'] == null) {
+      setState(() {
+        profilePhotoStatus = false;
+      });
+    } else {
+      setState(() {
+        profilePhotoStatus = true;
+      });
+    }
+
     var drawerHeader = MentorXMenuHeader(
       fName: '${profileData['First Name']}',
       lName: '${profileData['Last Name']}',
       email: '${profileData['Email Address']}',
+      profilePicture: '${profileData['images']}',
     );
 
     final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
@@ -240,17 +252,15 @@ class _MyProfileState extends State<MyProfile> {
                               child: CircleAvatar(
                                 backgroundColor: Colors.white,
                                 radius: 50,
-                                backgroundImage:
-                                    AssetImage('images/XMountainsWhite.jpg'),
+                                backgroundImage: profilePhotoStatus
+                                    ? NetworkImage(profileData['images'])
+                                    : null,
                                 child: profilePhotoStatus
-                                    ? Image.file(
-                                        _image,
-                                        fit: BoxFit.fitWidth,
-                                      )
+                                    ? null
                                     : Icon(
                                         Icons.person,
-                                        color: Colors.blueGrey,
-                                        size: 80,
+                                        color: kMentorXTeal,
+                                        size: 50,
                                       ),
                               ),
                             ),
@@ -266,8 +276,10 @@ class _MyProfileState extends State<MyProfile> {
                                 ),
                                 child: GestureDetector(
                                   onTap: () async {
-                                    getImage(true)
-                                        .whenComplete(() => saveImage(_image));
+                                    getImage(true).whenComplete(() =>
+                                        profilePhotoSelected
+                                            ? saveImage(_image)
+                                            : null);
                                   },
                                   child: Icon(
                                     Icons.photo_camera,
