@@ -1,29 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/bottom_navigation_bar.dart';
+import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
+import 'package:mentorx_mvp/screens/enrollment/available_mentors_screen.dart';
 
 User loggedInUser;
 
-class MatchSuccessScreen extends StatefulWidget {
-  const MatchSuccessScreen({Key key, this.mentorUID}) : super(key: key);
-
-  static String id = 'match_success_screen';
-  final String mentorUID;
+class MenteeScreen extends StatefulWidget {
+  static String id = 'mentee_screen';
 
   @override
-  _MatchSuccessScreenState createState() => _MatchSuccessScreenState();
+  _MenteeScreenState createState() => _MenteeScreenState();
 }
 
-class _MatchSuccessScreenState extends State<MatchSuccessScreen> {
+class _MenteeScreenState extends State<MenteeScreen> {
   final _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
     getCurrentUser();
     getProfileData();
-    getMentorProfileData();
     super.initState();
   }
 
@@ -53,42 +50,10 @@ class _MatchSuccessScreenState extends State<MatchSuccessScreen> {
     });
   }
 
-  dynamic mentorProfileData;
-
-  Future<dynamic> getMentorProfileData() async {
-    await FirebaseFirestore.instance
-        .collection('users/${widget.mentorUID}/profile')
-        .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        setState(() {
-          mentorProfileData = result.data();
-        });
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (profileData == null || mentorProfileData == null) {
-      return Center(
-        child: CircularProgressIndicator(
-          backgroundColor: kMentorXTeal,
-        ),
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.home),
-            onPressed: () {
-              Navigator.popAndPushNamed(context, XBottomNavigationBar.id);
-            },
-          ),
-        ],
         backgroundColor: kMentorXTeal,
         title: Text('Mentoring'),
       ),
@@ -102,10 +67,22 @@ class _MatchSuccessScreenState extends State<MatchSuccessScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                    'Mentor: ${mentorProfileData['First Name']} ${mentorProfileData['Last Name']}'),
-                Text(
-                    'Mentee: ${profileData['First Name']} ${profileData['Last Name']}'),
+                RoundedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, AvailableMentors.id);
+                  },
+                  minWidth: 500.0,
+                  title: 'View Available Mentors',
+                  buttonColor: kMentorXTeal,
+                  fontColor: Colors.white,
+                ),
+                RoundedButton(
+                  onPressed: () {},
+                  minWidth: 500.0,
+                  title: 'Questionnaire',
+                  buttonColor: kMentorXTeal,
+                  fontColor: Colors.white,
+                ),
               ],
             ),
           ),

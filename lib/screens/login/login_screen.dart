@@ -4,8 +4,7 @@ import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/components/bottom_navigation_bar.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/models/login_model.dart';
-import 'package:mentorx_mvp/screens/launch_screen.dart';
-import 'package:mentorx_mvp/screens/registration_screen.dart';
+import 'package:mentorx_mvp/screens/registration/registration_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/constants.dart';
@@ -29,7 +28,7 @@ class LoginScreenBlocBased extends StatefulWidget {
   }
 
   void _createNewUser(BuildContext context) {
-    final auth = Provider.of<AuthBase>(context, listen: false);
+    Provider.of<AuthBase>(context, listen: false);
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,

@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
-import 'package:mentorx_mvp/screens/available_mentors_screen.dart';
-import 'package:mentorx_mvp/screens/chat_screen.dart';
+import 'package:mentorx_mvp/screens/enrollment/available_mentors_screen.dart';
+import 'package:mentorx_mvp/screens/enrollment/enrollment.dart';
 import 'package:mentorx_mvp/screens/landing_page.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
-import 'package:mentorx_mvp/screens/login_screen.dart';
-import 'package:mentorx_mvp/screens/match_success_screen.dart';
-import 'package:mentorx_mvp/screens/mentee_screen.dart';
-import 'package:mentorx_mvp/screens/mentor_chat_screen.dart';
-import 'package:mentorx_mvp/screens/mentor_screen.dart';
-import 'package:mentorx_mvp/screens/profile_screen.dart';
-import 'package:mentorx_mvp/screens/registration_profile_screen.dart';
-import 'package:mentorx_mvp/screens/view_profile_screen.dart';
+import 'package:mentorx_mvp/screens/login/login_screen.dart';
+import 'package:mentorx_mvp/screens/enrollment/mentee_screen.dart';
+import 'package:mentorx_mvp/screens/chat/mentor_chat_screen.dart';
+import 'package:mentorx_mvp/screens/enrollment/mentor_screen.dart';
+import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
+import 'package:mentorx_mvp/screens/registration/registration_profile_screen.dart';
+import 'package:mentorx_mvp/screens/enrollment/view_profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'components/bottom_navigation_bar.dart';
-import 'screens/welcome_screen.dart';
-import 'screens/login_screen.dart';
-import 'screens/registration_screen.dart';
+import 'screens/login/welcome_screen.dart';
+import 'screens/login/login_screen.dart';
+import 'screens/registration/registration_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'screens/mentoring_screen.dart';
-import 'screens/events_screen.dart';
+import 'screens/enrollment/mentoring_screen.dart';
+import 'screens/events/events_screen.dart';
 import 'services/auth.dart';
 
 void main() async {
@@ -52,7 +51,6 @@ class MentorX extends StatelessWidget {
               ),
           RegistrationProfileScreen.id: (context) =>
               RegistrationProfileScreen(),
-          ChatScreen.id: (context) => ChatScreen(),
           MyProfile.id: (context) => MyProfile(),
           LaunchScreen.id: (context) => LaunchScreen(),
           EventsScreen.id: (context) => EventsScreen(),
@@ -65,8 +63,8 @@ class MentorX extends StatelessWidget {
                 pageIndex: 0,
               ),
           ViewProfile.id: (context) => ViewProfile(),
-          MatchSuccessScreen.id: (context) => MatchSuccessScreen(),
           MentorChatScreen.id: (context) => MentorChatScreen(),
+          EnrollmentScreen.id: (context) => EnrollmentScreen(),
         },
       ),
     );

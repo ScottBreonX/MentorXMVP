@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
-import 'package:mentorx_mvp/screens/registration_screen.dart';
+import 'package:mentorx_mvp/screens/registration/registration_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'login_screen.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
-import 'registration_screen.dart';
+import '../registration/registration_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key key, @required this.bloc}) : super(key: key);
@@ -36,7 +36,7 @@ class WelcomeScreen extends StatefulWidget {
   }
 
   void _createNewUser(BuildContext context) {
-    final auth = Provider.of<AuthBase>(context, listen: false);
+    Provider.of<AuthBase>(context, listen: false);
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
