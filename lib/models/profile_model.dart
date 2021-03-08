@@ -5,18 +5,12 @@ class ProfileModel {
     this.email,
     this.major,
     this.yearInSchool,
-    this.aboutMe,
-    this.motivations,
-    this.expertise,
   });
   final String fName;
   final String lName;
   final String major;
   final String yearInSchool;
   final String email;
-  final String aboutMe;
-  final String motivations;
-  final String expertise;
 
   factory ProfileModel.fromMap(Map<String, dynamic> data) {
     if (data == null) {
@@ -27,9 +21,6 @@ class ProfileModel {
     final String major = data['Major'];
     final String yearInSchool = data['Year in School'];
     final String email = data['Email Address'];
-    final String aboutMe = data['About Me'];
-    final String motivations = data['Motivations'];
-    final String expertise = data['Expertise'];
 
     return ProfileModel(
       fName: fName,
@@ -37,9 +28,6 @@ class ProfileModel {
       email: email,
       major: major,
       yearInSchool: yearInSchool,
-      aboutMe: aboutMe,
-      motivations: motivations,
-      expertise: expertise,
     );
   }
 
@@ -50,9 +38,30 @@ class ProfileModel {
       'Major': major,
       'Email Address': email,
       'Year in School': yearInSchool,
+    };
+  }
+}
+
+class AboutMeModel {
+  AboutMeModel({
+    this.aboutMe,
+  });
+  final String aboutMe;
+
+  factory AboutMeModel.fromMap(Map<String, dynamic> data) {
+    if (data == null) {
+      return null;
+    }
+    final String aboutMe = data['About Me'];
+
+    return AboutMeModel(
+      aboutMe: aboutMe,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
       'About Me': aboutMe,
-      'Motivations': motivations,
-      'Expertise': expertise,
     };
   }
 }

@@ -133,16 +133,11 @@ class _MyProfileState extends State<MyProfile> {
     return returnURL;
   }
 
-  Future<void> _updateProfile(BuildContext context) async {
+  Future<void> _updateAboutMe(BuildContext context) async {
     try {
       final database = FirestoreDatabase(uid: loggedInUser.uid);
-      await database.updateProfile(
-        ProfileModel(
-          fName: profileData['First Name'],
-          lName: profileData['Last Name'],
-          email: loggedInUser.email,
-          major: profileData['Major'],
-          yearInSchool: profileData['Year in School'],
+      await database.updateAboutMe(
+        AboutMeModel(
           aboutMe: aboutMe,
         ),
       );
@@ -404,7 +399,7 @@ class _MyProfileState extends State<MyProfile> {
                                               right: 8.0, bottom: 10.0),
                                           child: GestureDetector(
                                             onTap: () {
-                                              _updateProfile(context);
+                                              _updateAboutMe(context);
                                             },
                                             child: Container(
                                               height: 40.0,

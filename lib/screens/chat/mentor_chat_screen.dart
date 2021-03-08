@@ -9,13 +9,13 @@ import 'package:mentorx_mvp/components/sign_out.dart';
 User loggedInUser;
 final _firestore = FirebaseFirestore.instance;
 
-class ChatScreen extends StatefulWidget {
-  static const String id = 'chat_screen';
+class MentorChatScreen extends StatefulWidget {
+  static const String id = 'mentor_chat_screen';
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  _MentorChatScreenState createState() => _MentorChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _MentorChatScreenState extends State<MentorChatScreen> {
   final messageTextController = TextEditingController();
   bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
@@ -81,14 +81,14 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-  void messagesStream() async {
-    await for (var snapshot in _firestore.collection('messages').snapshots()) {
-      for (var message in snapshot.docs) {}
-    }
-    setState(() {
-      showSpinner = false;
-    });
-  }
+//  void messagesStream() async {
+//    await for (var snapshot in _firestore.collection('messages').snapshots()) {
+//      for (var message in snapshot.docs) {}
+//    }
+//    setState(() {
+//      showSpinner = false;
+//    });
+//  }
 
   final FocusScopeNode _focusScopeNode = FocusScopeNode();
 
@@ -142,7 +142,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                       ),
                     ),
-                    FlatButton(
+                    TextButton(
                       onPressed: canSubmit ? _submit : null,
                       child: Text(
                         'Send',

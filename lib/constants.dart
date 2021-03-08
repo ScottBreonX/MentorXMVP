@@ -50,5 +50,10 @@ const kInactiveSendButtonTextStyle =
 
 const kMentorXTeal = Colors.blueGrey;
 const kDrawerItems = Colors.white;
-
 //Color.fromRGBO(56, 142, 137, 1.0);
+
+class Constants {
+  Constants._();
+  static const double padding = 20;
+  static const double avatarRadius = 45;
+}

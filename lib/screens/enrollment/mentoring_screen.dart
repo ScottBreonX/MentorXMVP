@@ -2,14 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
+import 'package:mentorx_mvp/components/custom_dialog.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/mentoring_model.dart';
-import 'package:mentorx_mvp/screens/mentee_screen.dart';
-import 'package:mentorx_mvp/screens/mentor_screen.dart';
+import 'package:mentorx_mvp/screens/enrollment/mentee_screen.dart';
+import 'package:mentorx_mvp/screens/enrollment/mentor_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
-import 'mentor_chat_screen.dart';
+import '../chat/mentor_chat_screen.dart';
 
 User loggedInUser;
 
@@ -123,31 +124,41 @@ class _MentoringScreenState extends State<MentoringScreen> {
   Color _errorTextColor = Colors.white;
 
   Future<void> _confirmMentorEnrollment(BuildContext context) async {
-    final didEnroll = await showAlertDialog(
-      context,
-      title: "Mentor Enrollment",
-      content: "Confirm enrollment as a mentor?",
-      defaultActionText: "Yes",
-      cancelActionText: "Go back",
-    );
-    if (didEnroll == true) {
-      _createMentor(context)
-          .then((value) => Navigator.pushNamed(context, MentorScreen.id));
-    }
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CustomDialog(
+              title: 'Mentor Enrollment',
+              descriptions: 'Confirm enrollment as mentor?',
+              textLeft: '<-- Go Back',
+              textRight: 'Yes',
+              leftOnPressed: () {
+                Navigator.pop(context);
+              },
+              rightOnPressed: () {
+                _createMentor(context).then(
+                    (value) => Navigator.pushNamed(context, MentorScreen.id));
+              });
+        });
   }
 
   Future<void> _confirmMenteeEnrollment(BuildContext context) async {
-    final didEnroll = await showAlertDialog(
-      context,
-      title: "Mentee Enrollment",
-      content: "Confirm enrollment as a mentee?",
-      defaultActionText: "Yes",
-      cancelActionText: "Go back",
-    );
-    if (didEnroll == true) {
-      _createMentee(context)
-          .then((value) => Navigator.pushNamed(context, MenteeScreen.id));
-    }
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CustomDialog(
+              title: 'Mentee Enrollment',
+              descriptions: 'Confirm enrollment as mentee?',
+              textLeft: '<-- Go Back',
+              textRight: 'Yes',
+              leftOnPressed: () {
+                Navigator.pop(context);
+              },
+              rightOnPressed: () {
+                _createMentee(context).then(
+                    (value) => Navigator.pushNamed(context, MenteeScreen.id));
+              });
+        });
   }
 
   @override

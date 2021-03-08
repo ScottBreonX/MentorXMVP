@@ -56,10 +56,10 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
       ),
       otherAccountsPictures: [
         CircleAvatar(
-          backgroundColor: Colors.white,
+          backgroundColor: kMentorXTeal,
           child: Image.asset(
-            'images/XLogo.png',
-            height: 30,
+            'images/XLogoWhite.png',
+            height: 80,
           ),
         )
       ],

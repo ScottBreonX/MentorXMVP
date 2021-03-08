@@ -6,7 +6,7 @@ import 'package:mentorx_mvp/components/bottom_navigation_bar.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
-import 'package:mentorx_mvp/screens/profile_screen.dart';
+import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -131,10 +131,10 @@ class _LaunchScreenState extends State<LaunchScreen> {
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                blurRadius: 2,
-                                offset: Offset(2, 3),
-                                spreadRadius: 1,
-                              ),
+                                  blurRadius: 2,
+                                  offset: Offset(1, 2),
+                                  spreadRadius: 1,
+                                  color: Colors.grey),
                             ],
                           ),
                           child: CircleAvatar(
@@ -142,7 +142,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                                 ? NetworkImage(profileData['images'])
                                 : null,
                             backgroundColor: kMentorXTeal,
-                            radius: 50,
+                            radius: 60,
                             child: profilePictureStatus
                                 ? null
                                 : Icon(
