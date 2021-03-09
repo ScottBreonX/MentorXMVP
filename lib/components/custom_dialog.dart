@@ -11,10 +11,14 @@ class CustomDialog extends StatefulWidget {
     @required this.textRight,
     @required this.leftOnPressed,
     @required this.rightOnPressed,
+    this.titleFontSize,
+    this.descriptionFontSize,
   });
 
   final String title;
+  final double titleFontSize;
   final String descriptions;
+  final double descriptionFontSize;
   final String textLeft;
   final String textRight;
   final Function leftOnPressed;
@@ -52,7 +56,7 @@ class _CustomDialogState extends State<CustomDialog> {
               Text(
                 widget.title,
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: widget.titleFontSize,
                   fontWeight: FontWeight.w600,
                   color: kMentorXTeal,
                 ),
@@ -63,7 +67,7 @@ class _CustomDialogState extends State<CustomDialog> {
               Text(
                 widget.descriptions,
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: widget.descriptionFontSize,
                   color: Colors.black54,
                 ),
                 textAlign: TextAlign.center,
@@ -80,7 +84,7 @@ class _CustomDialogState extends State<CustomDialog> {
                         child: Text(
                           widget.textLeft,
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 20,
                             color: kMentorXTeal,
                             fontWeight: FontWeight.w300,
                           ),

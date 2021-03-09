@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
-import 'package:mentorx_mvp/components/bottom_navigation_bar.dart';
+import 'package:mentorx_mvp/bottom_navigation_bar.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/models/mentoring_model.dart';

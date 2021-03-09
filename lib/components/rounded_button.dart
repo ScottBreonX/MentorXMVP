@@ -8,11 +8,13 @@ class RoundedButton extends StatelessWidget {
     @required this.onPressed,
     this.minWidth,
     this.borderRadius = 30.0,
+    this.fontSize,
   });
 
   final Color buttonColor;
   final String title;
   final Color fontColor;
+  final double fontSize;
   final Function onPressed;
   final double minWidth;
   final double borderRadius;
@@ -33,6 +35,7 @@ class RoundedButton extends StatelessWidget {
             title,
             style: TextStyle(
               color: fontColor,
+              fontSize: fontSize,
             ),
           ),
         ),
