@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import '../constants.dart';
-import 'bottom_navigation_bar.dart';
+import '../bottom_navigation_bar.dart';
 
 class MentorXMenuHeader extends StatefulWidget {
   const MentorXMenuHeader(

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/screens/enrollment/enrollment_start_screen.dart';
 import 'package:mentorx_mvp/screens/events/events_screen.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
-import 'package:mentorx_mvp/screens/enrollment/mentoring_screen.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
@@ -21,7 +21,7 @@ class _XBottomNavigationBarState extends State<XBottomNavigationBar> {
   List<Widget> tabPages = [
     LaunchScreen(),
     EventsScreen(),
-    MentoringScreen(),
+    EnrollmentStartScreen(),
     MyProfile(),
   ];
 
