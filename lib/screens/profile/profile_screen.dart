@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
+import 'package:mentorx_mvp/components/work_experience_section.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
@@ -246,7 +247,7 @@ class _MyProfileState extends State<MyProfile> {
                             Container(
                               child: CircleAvatar(
                                 backgroundColor: Colors.white,
-                                radius: 50,
+                                radius: 70,
                                 backgroundImage: profilePhotoStatus
                                     ? NetworkImage(profileData['images'])
                                     : null,
@@ -255,7 +256,7 @@ class _MyProfileState extends State<MyProfile> {
                                     : Icon(
                                         Icons.person,
                                         color: kMentorXTeal,
-                                        size: 50,
+                                        size: 70,
                                       ),
                               ),
                             ),
@@ -263,8 +264,8 @@ class _MyProfileState extends State<MyProfile> {
                               bottom: 0,
                               right: 0,
                               child: Container(
-                                height: 30.0,
-                                width: 30.0,
+                                height: 35.0,
+                                width: 35.0,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Colors.blueGrey,
@@ -279,7 +280,7 @@ class _MyProfileState extends State<MyProfile> {
                                   child: Icon(
                                     Icons.photo_camera,
                                     color: Colors.white,
-                                    size: 20.0,
+                                    size: 25.0,
                                   ),
                                 ),
                               ),
@@ -357,7 +358,7 @@ class _MyProfileState extends State<MyProfile> {
                           width: 120,
                           child: Center(
                             child: Text(
-                              '${profileData['Major']}',
+                              '${profileData['Minor']}',
                               style: TextStyle(
                                 fontSize: 20.0,
                                 color: Colors.white,
@@ -384,12 +385,14 @@ class _MyProfileState extends State<MyProfile> {
                           padding: const EdgeInsets.only(top: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
                                 'About Me',
                                 style: TextStyle(
-                                    fontSize: 20.0, color: Colors.black54),
+                                    fontSize: 25.0,
+                                    color: kMentorXTeal.shade700,
+                                    fontWeight: FontWeight.w600),
                               ),
                               aboutMeEditStatus
                                   ? Row(
@@ -501,8 +504,8 @@ class _MyProfileState extends State<MyProfile> {
                                       child: Text(
                                         '${profileData['About Me']}',
                                         style: TextStyle(
-                                          fontSize: 15.0,
-                                          color: Colors.black54,
+                                          fontSize: 18.0,
+                                          color: kMentorXTeal,
                                         ),
                                       ),
                                     ),
@@ -510,21 +513,67 @@ class _MyProfileState extends State<MyProfile> {
                                 ),
                               ),
                         Padding(
+                          padding: const EdgeInsets.only(top: 40.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                'Work Experience',
+                                style: TextStyle(
+                                  fontSize: 25.0,
+                                  color: kMentorXTeal.shade700,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        WorkExperienceSection(
+                          title: 'Summer Finance Intern',
+                          company: 'The Walt Disney Company',
+                          dateRange: 'April 2019 - April 2020',
+                          location: 'Burbank, CA',
+                          description: profileData['About Me'],
+                          dividerColor: Colors.transparent,
+                          dividerHeight: 0,
+                        ),
+                        WorkExperienceSection(
+                          title: 'Summer Finance Intern',
+                          company: 'The Walt Disney Company',
+                          dateRange: 'April 2019 - April 2020',
+                          location: 'Burbank, CA',
+                          description: profileData['About Me'],
+                          dividerColor: Colors.grey.shade400,
+                          dividerThickness: 1,
+                        ),
+                        WorkExperienceSection(
+                          title: 'Summer Finance Intern',
+                          company: 'The Walt Disney Company',
+                          dateRange: 'April 2019 - April 2020',
+                          location: 'Burbank, CA',
+                          description: profileData['About Me'],
+                          dividerColor: Colors.grey.shade400,
+                          dividerThickness: 1,
+                        ),
+                        Padding(
                           padding: const EdgeInsets.only(top: 30.0),
                           child: Row(
                             children: [
                               Text(
                                 'Top Skills',
                                 style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.black54,
+                                  fontSize: 25.0,
+                                  color: kMentorXTeal.shade700,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
+                          padding: const EdgeInsets.only(
+                              top: 20.0, left: 10.0, right: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -541,15 +590,15 @@ class _MyProfileState extends State<MyProfile> {
                                   ],
                                 ),
                                 child: CircleAvatar(
-                                  backgroundColor: Colors.blueGrey.shade600,
-                                  radius: 50,
+                                  backgroundColor: kMentorXTeal.shade700,
+                                  radius: 45,
                                   child: CircleAvatar(
                                     backgroundColor: Colors.white,
-                                    radius: 45,
+                                    radius: 43,
                                     child: Icon(
                                       Icons.add,
-                                      color: Colors.blueGrey.shade600,
-                                      size: 50,
+                                      color: kMentorXTeal.shade700,
+                                      size: 45,
                                     ),
                                   ),
                                 ),
@@ -567,15 +616,15 @@ class _MyProfileState extends State<MyProfile> {
                                   ],
                                 ),
                                 child: CircleAvatar(
-                                  backgroundColor: Colors.blueGrey.shade600,
-                                  radius: 50,
+                                  backgroundColor: kMentorXTeal.shade700,
+                                  radius: 45,
                                   child: CircleAvatar(
                                     backgroundColor: Colors.white,
-                                    radius: 45,
+                                    radius: 43,
                                     child: Icon(
                                       Icons.add,
-                                      color: Colors.blueGrey.shade600,
-                                      size: 50,
+                                      color: kMentorXTeal.shade700,
+                                      size: 45,
                                     ),
                                   ),
                                 ),
@@ -593,15 +642,15 @@ class _MyProfileState extends State<MyProfile> {
                                   ],
                                 ),
                                 child: CircleAvatar(
-                                  backgroundColor: Colors.blueGrey.shade600,
-                                  radius: 50,
+                                  backgroundColor: kMentorXTeal.shade700,
+                                  radius: 45,
                                   child: CircleAvatar(
                                     backgroundColor: Colors.white,
-                                    radius: 45,
+                                    radius: 43,
                                     child: Icon(
                                       Icons.add,
-                                      color: Colors.blueGrey.shade600,
-                                      size: 50,
+                                      color: kMentorXTeal.shade700,
+                                      size: 45,
                                     ),
                                   ),
                                 ),
@@ -610,21 +659,23 @@ class _MyProfileState extends State<MyProfile> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
+                          padding: const EdgeInsets.only(top: 30.0),
                           child: Row(
                             children: [
                               Text(
-                                'Hobbies / Activities',
+                                'Hobbies / Interests',
                                 style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.black54,
+                                  fontSize: 25.0,
+                                  color: kMentorXTeal.shade700,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
+                          padding: const EdgeInsets.only(
+                              top: 20.0, left: 10.0, right: 10.0, bottom: 40),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -641,15 +692,15 @@ class _MyProfileState extends State<MyProfile> {
                                   ],
                                 ),
                                 child: CircleAvatar(
-                                  backgroundColor: Colors.blueGrey.shade600,
-                                  radius: 50,
+                                  backgroundColor: kMentorXTeal.shade700,
+                                  radius: 45,
                                   child: CircleAvatar(
                                     backgroundColor: Colors.white,
-                                    radius: 45,
+                                    radius: 43,
                                     child: Icon(
                                       Icons.add,
-                                      color: Colors.blueGrey.shade600,
-                                      size: 50,
+                                      color: kMentorXTeal.shade700,
+                                      size: 45,
                                     ),
                                   ),
                                 ),
@@ -667,15 +718,15 @@ class _MyProfileState extends State<MyProfile> {
                                   ],
                                 ),
                                 child: CircleAvatar(
-                                  backgroundColor: Colors.blueGrey.shade600,
-                                  radius: 50,
+                                  backgroundColor: kMentorXTeal.shade700,
+                                  radius: 45,
                                   child: CircleAvatar(
                                     backgroundColor: Colors.white,
-                                    radius: 45,
+                                    radius: 43,
                                     child: Icon(
                                       Icons.add,
-                                      color: Colors.blueGrey.shade600,
-                                      size: 50,
+                                      color: kMentorXTeal.shade700,
+                                      size: 45,
                                     ),
                                   ),
                                 ),
@@ -693,115 +744,15 @@ class _MyProfileState extends State<MyProfile> {
                                   ],
                                 ),
                                 child: CircleAvatar(
-                                  backgroundColor: Colors.blueGrey.shade600,
-                                  radius: 50,
+                                  backgroundColor: kMentorXTeal.shade700,
+                                  radius: 45,
                                   child: CircleAvatar(
                                     backgroundColor: Colors.white,
-                                    radius: 45,
+                                    radius: 43,
                                     child: Icon(
                                       Icons.add,
-                                      color: Colors.blueGrey.shade600,
-                                      size: 50,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                'Motivations',
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.black54,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 5,
-                                      offset: Offset(2, 3),
-                                      color: Colors.grey,
-                                      spreadRadius: 1,
-                                    )
-                                  ],
-                                ),
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.blueGrey.shade600,
-                                  radius: 50,
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: 45,
-                                    child: Icon(
-                                      Icons.add,
-                                      color: Colors.blueGrey.shade600,
-                                      size: 50,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 5,
-                                      offset: Offset(2, 3),
-                                      color: Colors.grey,
-                                      spreadRadius: 1,
-                                    )
-                                  ],
-                                ),
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.blueGrey.shade600,
-                                  radius: 50,
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: 45,
-                                    child: Icon(
-                                      Icons.add,
-                                      color: Colors.blueGrey.shade600,
-                                      size: 50,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 5,
-                                      offset: Offset(2, 3),
-                                      color: Colors.grey,
-                                      spreadRadius: 1,
-                                    )
-                                  ],
-                                ),
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.blueGrey.shade600,
-                                  radius: 50,
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: 45,
-                                    child: Icon(
-                                      Icons.add,
-                                      color: Colors.blueGrey.shade600,
-                                      size: 50,
+                                      color: kMentorXTeal.shade700,
+                                      size: 45,
                                     ),
                                   ),
                                 ),
