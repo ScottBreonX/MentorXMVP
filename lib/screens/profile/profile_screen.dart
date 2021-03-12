@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
+import 'package:mentorx_mvp/components/work_experience_form.dart';
 import 'package:mentorx_mvp/components/work_experience_section.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,6 +42,7 @@ class _MyProfileState extends State<MyProfile> {
   void initState() {
     getCurrentUser();
     getProfileData();
+    getWorkData();
     aboutMeEditStatus = false;
     super.initState();
   }
@@ -68,6 +70,23 @@ class _MyProfileState extends State<MyProfile> {
         if (mounted) {
           setState(() {
             profileData = result.data();
+          });
+        }
+      });
+    });
+  }
+
+  dynamic workExperienceData;
+
+  Future<dynamic> getWorkData() async {
+    await FirebaseFirestore.instance
+        .collection('users/${loggedInUser.uid}/workExperience')
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((result) {
+        if (mounted) {
+          setState(() {
+            workExperienceData = result.data();
           });
         }
       });
@@ -149,6 +168,26 @@ class _MyProfileState extends State<MyProfile> {
     setState(() {
       getProfileData().then((value) => aboutMeEditStatus = false);
     });
+  }
+
+  Future<void> _editWorkExperience(BuildContext context) async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return WorkExperienceForm(
+              title: 'Mentee Enrollment',
+              titleFontSize: 20.0,
+              descriptions: 'Confirm enrollment as mentee?',
+              descriptionFontSize: 20.0,
+              textLeft: 'Cancel',
+              textRight: 'Yes',
+              leftOnPressed: () {
+                Navigator.pop(context);
+              },
+              rightOnPressed: () {
+                Navigator.pop(context);
+              });
+        });
   }
 
   TextFormField _buildAboutMeTextField(BuildContext context) {
@@ -530,13 +569,22 @@ class _MyProfileState extends State<MyProfile> {
                           ),
                         ),
                         WorkExperienceSection(
-                          title: 'Summer Finance Intern',
-                          company: 'The Walt Disney Company',
-                          dateRange: 'April 2019 - April 2020',
-                          location: 'Burbank, CA',
-                          description: profileData['About Me'],
                           dividerColor: Colors.transparent,
                           dividerHeight: 0,
+                          workExpEditStatus: () {
+                            setState(() {
+                              _editWorkExperience(context);
+                            });
+                          },
+                          location:
+                              workExperienceData['location1'] ?? '<Blank>',
+                          description:
+                              workExperienceData['description1'] ?? '<Blank>',
+                          title: workExperienceData['title1'] ?? '<Blank>',
+                          dateRange:
+                              '${workExperienceData['startDate1']} - ${workExperienceData['endDate1']}' ??
+                                  '<Blank>',
+                          company: workExperienceData['company1'] ?? '<Blank>',
                         ),
                         WorkExperienceSection(
                           title: 'Summer Finance Intern',
@@ -544,17 +592,9 @@ class _MyProfileState extends State<MyProfile> {
                           dateRange: 'April 2019 - April 2020',
                           location: 'Burbank, CA',
                           description: profileData['About Me'],
-                          dividerColor: Colors.grey.shade400,
-                          dividerThickness: 1,
-                        ),
-                        WorkExperienceSection(
-                          title: 'Summer Finance Intern',
-                          company: 'The Walt Disney Company',
-                          dateRange: 'April 2019 - April 2020',
-                          location: 'Burbank, CA',
-                          description: profileData['About Me'],
-                          dividerColor: Colors.grey.shade400,
-                          dividerThickness: 1,
+                          dividerColor: Colors.black54,
+                          dividerHeight: 2,
+                          workExpEditStatus: () {},
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 30.0),
