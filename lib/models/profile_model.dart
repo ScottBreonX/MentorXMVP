@@ -65,3 +65,52 @@ class AboutMeModel {
     };
   }
 }
+
+class WorkExperienceModel {
+  WorkExperienceModel(
+      {this.company,
+      this.title,
+      this.description,
+      this.startDate,
+      this.endDate,
+      this.location});
+
+  final String company;
+  final String title;
+  final String description;
+  final String startDate;
+  final String endDate;
+  final String location;
+
+  factory WorkExperienceModel.fromMap(Map<String, dynamic> data) {
+    if (data == null) {
+      return null;
+    }
+    final String company = data['Company'];
+    final String title = data['Title'];
+    final String description = data['Description'];
+    final String startDate = data['Start Date'];
+    final String endDate = data['End Date'];
+    final String location = data['Location'];
+
+    return WorkExperienceModel(
+      company: company,
+      title: title,
+      description: description,
+      startDate: startDate,
+      endDate: endDate,
+      location: location,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'Company': company,
+      'Title': title,
+      'Description': description,
+      'Start Date': startDate,
+      'End Date': endDate,
+      'Location': location,
+    };
+  }
+}
