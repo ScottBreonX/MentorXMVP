@@ -70,7 +70,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
   @override
   void didChangeDependencies() {
-    precacheImage(AssetImage('images/XMountains.jpg'), context);
+    precacheImage(AssetImage('images/XBackground.png'), context);
     super.didChangeDependencies();
   }
 
@@ -86,7 +86,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("images/XMountains.jpg"),
+            image: AssetImage("images/XBackground.png"),
             fit: BoxFit.cover,
           ),
           gradient: LinearGradient(
@@ -109,7 +109,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 250,
+                    width: 240,
                     child: ColorizeAnimatedTextKit(
                       speed: Duration(milliseconds: 400),
                       text: ['Mentor'],
@@ -121,9 +121,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       colors: [
                         Colors.white,
                         Colors.white70,
-                        Colors.tealAccent,
                         kMentorXTeal,
-                        Colors.tealAccent,
                         Colors.white70,
                         Colors.white,
                       ],

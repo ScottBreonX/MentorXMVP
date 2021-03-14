@@ -74,14 +74,16 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
       textAlign: TextAlign.center,
       onChanged: widget.bloc.updateEmail,
       style: TextStyle(
-        color: Colors.white,
+        color: kMentorXTeal,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecorationDark.copyWith(
+      decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Enter your email',
         hintText: 'email@domain.com',
         errorText: model.emailErrorText,
+        fillColor: Colors.white70,
+        filled: true,
       ),
     );
   }
@@ -94,12 +96,14 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updatePassword,
       style: TextStyle(
-        color: Colors.white,
+        color: kMentorXTeal,
         fontWeight: FontWeight.w400,
       ),
-      decoration: kTextFieldDecorationDark.copyWith(
+      decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Enter your password',
         errorText: model.passwordErrorText,
+        filled: true,
+        fillColor: Colors.white70,
       ),
     );
   }
@@ -127,7 +131,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
               height: double.infinity,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('images/XMountains.jpg'),
+                  image: AssetImage('images/XBackground.png'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -164,8 +168,9 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                         RoundedButton(
                           onPressed: model.canSubmit ? _submit : null,
                           title: 'LOG IN',
-                          buttonColor:
-                              model.canSubmit ? kMentorXTeal : Colors.grey,
+                          buttonColor: model.canSubmit
+                              ? kMentorXTeal
+                              : Colors.grey.shade600,
                           minWidth: 500,
                           fontColor: Colors.white,
                         ),
@@ -177,7 +182,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                             child: Text(
                               'Need an account? Register',
                               style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                                  TextStyle(fontSize: 20, color: kMentorXTeal),
                             ),
                             onTap: () => widget._createNewUser(context),
                           ),

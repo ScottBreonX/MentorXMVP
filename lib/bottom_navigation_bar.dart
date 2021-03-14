@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/enrollment/enrollment_start_screen.dart';
 import 'package:mentorx_mvp/screens/events/events_screen.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
@@ -63,7 +64,7 @@ class _XBottomNavigationBarState extends State<XBottomNavigationBar> {
         initialActiveIndex: pageIndex,
         color: Colors.white,
         onTap: onTabTapped,
-        backgroundColor: Colors.blueGrey.shade800,
+        backgroundColor: kMentorXTeal,
         items: [
           TabItem(
             icon: Icons.home,

@@ -96,12 +96,14 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       textAlign: TextAlign.center,
       onChanged: (value) => fName = value,
       style: TextStyle(
-        color: Colors.white,
+        color: kMentorXTeal,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecorationDark.copyWith(
+      decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Enter your first name',
+        fillColor: Colors.white70,
+        filled: true,
 //        errorText: model.emailErrorText,
       ),
     );
@@ -115,12 +117,14 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       textAlign: TextAlign.center,
       onChanged: (value) => lName = value,
       style: TextStyle(
-        color: Colors.white,
+        color: kMentorXTeal,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecorationDark.copyWith(
+      decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Enter your last name',
+        fillColor: Colors.white70,
+        filled: true,
 //        errorText: model.emailErrorText,
       ),
     );
@@ -134,13 +138,15 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       textAlign: TextAlign.center,
       onChanged: (value) => major = value,
       style: TextStyle(
-        color: Colors.white,
+        color: kMentorXTeal,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecorationDark.copyWith(
+      decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Enter your field of study',
         hintText: 'i.e. Economics',
+        fillColor: Colors.white70,
+        filled: true,
 //        errorText: model.emailErrorText,
       ),
     );
@@ -154,13 +160,15 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       textAlign: TextAlign.center,
       onChanged: (value) => yearInSchool = value,
       style: TextStyle(
-        color: Colors.white,
+        color: kMentorXTeal,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecorationDark.copyWith(
+      decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Year in School',
         hintText: 'i.e. Junior',
+        filled: true,
+        fillColor: Colors.white70,
       ),
     );
   }
@@ -180,7 +188,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/XMountains.jpg'),
+            image: AssetImage('images/XBackground.png'),
             fit: BoxFit.cover,
           ),
         ),

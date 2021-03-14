@@ -90,14 +90,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       textAlign: TextAlign.center,
       onChanged: widget.bloc.updateEmail,
       style: TextStyle(
-        color: Colors.white,
+        color: kMentorXTeal,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecorationDark.copyWith(
+      decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Enter your email',
         hintText: 'email@domain.com',
         errorText: model.emailErrorText,
+        fillColor: Colors.white70,
+        filled: true,
       ),
     );
   }
@@ -110,12 +112,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updatePassword,
       style: TextStyle(
-        color: Colors.white,
+        color: kMentorXTeal,
         fontWeight: FontWeight.w400,
       ),
-      decoration: kTextFieldDecorationDark.copyWith(
+      decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Enter your password',
         errorText: model.passwordErrorText,
+        fillColor: Colors.white70,
+        filled: true,
       ),
     );
   }
@@ -128,12 +132,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updateConfirmPassword,
       style: TextStyle(
-        color: Colors.white,
+        color: kMentorXTeal,
         fontWeight: FontWeight.w400,
       ),
-      decoration: kTextFieldDecorationDark.copyWith(
+      decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Re-enter your password',
         errorText: model.passwordErrorText,
+        fillColor: Colors.white70,
+        filled: true,
       ),
     );
   }
@@ -160,7 +166,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               width: double.infinity,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('images/XMountains.jpg'),
+                  image: AssetImage('images/XBackground.png'),
                   fit: BoxFit.cover,
                 ),
               ),
