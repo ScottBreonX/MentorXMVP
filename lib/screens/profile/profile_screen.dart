@@ -254,7 +254,7 @@ class _MyProfileState extends State<MyProfile> {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey.shade900,
+        backgroundColor: kMentorXTeal,
         elevation: 0,
         title: Text('My Profile'),
       ),
@@ -268,8 +268,8 @@ class _MyProfileState extends State<MyProfile> {
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                   colors: [
-                    Colors.blueGrey.shade800,
-                    Colors.blueGrey.shade900,
+                    kMentorXTeal.withOpacity(0.7),
+                    kMentorXTeal,
                   ],
                 ),
               ),
@@ -307,7 +307,7 @@ class _MyProfileState extends State<MyProfile> {
                                 width: 35.0,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Colors.blueGrey,
+                                  color: Colors.white,
                                 ),
                                 child: GestureDetector(
                                   onTap: () async {
@@ -318,7 +318,7 @@ class _MyProfileState extends State<MyProfile> {
                                   },
                                   child: Icon(
                                     Icons.photo_camera,
-                                    color: Colors.white,
+                                    color: kMentorXTeal,
                                     size: 25.0,
                                   ),
                                 ),
@@ -412,395 +412,408 @@ class _MyProfileState extends State<MyProfile> {
               ),
             ),
             Expanded(
-              child: Padding(
-                padding:
-                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
-                child: Container(
-                  child: SizedBox(
-                    height: double.infinity,
-                    child: ListView(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                'About Me',
-                                style: TextStyle(
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.grey.shade400,
+                      Colors.white,
+                    ],
+                  ),
+                ),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+                  child: Container(
+                    child: SizedBox(
+                      height: double.infinity,
+                      child: ListView(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'About Me',
+                                  style: TextStyle(
+                                      fontSize: 25.0,
+                                      color: kMentorXTeal,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                aboutMeEditStatus
+                                    ? Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 8.0, bottom: 10.0),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                _updateAboutMe(context);
+                                              },
+                                              child: Container(
+                                                height: 40.0,
+                                                width: 40.0,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Colors.white,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      blurRadius: 2,
+                                                      offset: Offset(2, 2),
+                                                      color: Colors.grey,
+                                                      spreadRadius: 0.5,
+                                                    )
+                                                  ],
+                                                ),
+                                                child: Icon(
+                                                  Icons.check,
+                                                  color: Colors.green,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 8.0, bottom: 10.0),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  aboutMeEditStatus = false;
+                                                });
+                                              },
+                                              child: Container(
+                                                height: 40.0,
+                                                width: 40.0,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Colors.white,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      blurRadius: 2,
+                                                      offset: Offset(2, 2),
+                                                      color: Colors.grey,
+                                                      spreadRadius: 0.5,
+                                                    )
+                                                  ],
+                                                ),
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color: Colors.red,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 8.0),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              aboutMeEditStatus = true;
+                                            });
+                                          },
+                                          child: Container(
+                                            height: 40.0,
+                                            width: 40.0,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 2,
+                                                  offset: Offset(2, 2),
+                                                  color: Colors.grey,
+                                                  spreadRadius: 0.5,
+                                                )
+                                              ],
+                                            ),
+                                            child: Icon(
+                                              Icons.edit,
+                                              color: kMentorXTeal,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          ),
+                          aboutMeEditStatus
+                              ? _buildAboutMeTextField(context)
+                              : Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8.0, right: 10.0),
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                        child: Text(
+                                          '${profileData['About Me']}',
+                                          style: TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 40.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'Work Experience',
+                                  style: TextStyle(
                                     fontSize: 25.0,
-                                    color: kMentorXTeal.shade700,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              aboutMeEditStatus
-                                  ? Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: 8.0, bottom: 10.0),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              _updateAboutMe(context);
-                                            },
-                                            child: Container(
-                                              height: 40.0,
-                                              width: 40.0,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Colors.white,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    blurRadius: 2,
-                                                    offset: Offset(2, 2),
-                                                    color: Colors.grey,
-                                                    spreadRadius: 0.5,
-                                                  )
-                                                ],
-                                              ),
-                                              child: Icon(
-                                                Icons.check,
-                                                color: Colors.green,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: 8.0, bottom: 10.0),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              setState(() {
-                                                aboutMeEditStatus = false;
-                                              });
-                                            },
-                                            child: Container(
-                                              height: 40.0,
-                                              width: 40.0,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Colors.white,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    blurRadius: 2,
-                                                    offset: Offset(2, 2),
-                                                    color: Colors.grey,
-                                                    spreadRadius: 0.5,
-                                                  )
-                                                ],
-                                              ),
-                                              child: Icon(
-                                                Icons.close,
-                                                color: Colors.red,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  : Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 8.0),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            aboutMeEditStatus = true;
-                                          });
-                                        },
-                                        child: Container(
-                                          height: 40.0,
-                                          width: 40.0,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.white,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 2,
-                                                offset: Offset(2, 2),
-                                                color: Colors.grey,
-                                                spreadRadius: 0.5,
-                                              )
-                                            ],
-                                          ),
-                                          child: Icon(
-                                            Icons.edit,
-                                            color: Colors.blueGrey,
-                                          ),
-                                        ),
+                                    color: kMentorXTeal,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          WorkExperienceSection(
+                            dividerColor: Colors.transparent,
+                            dividerHeight: 0,
+                            workExpEditStatus: () {
+                              setState(() {
+                                _editWorkExperience(context);
+                              });
+                            },
+                            location:
+                                workExperienceData['location1'] ?? '<Blank>',
+                            description:
+                                workExperienceData['description1'] ?? '<Blank>',
+                            title: workExperienceData['title1'] ?? '<Blank>',
+                            dateRange:
+                                '${workExperienceData['startDate1']} - ${workExperienceData['endDate1']}' ??
+                                    '<Blank>',
+                            company:
+                                workExperienceData['company1'] ?? '<Blank>',
+                          ),
+                          WorkExperienceSection(
+                            title: 'Summer Finance Intern',
+                            company: 'The Walt Disney Company',
+                            dateRange: 'April 2019 - April 2020',
+                            location: 'Burbank, CA',
+                            description: profileData['About Me'],
+                            dividerColor: Colors.black54,
+                            dividerHeight: 2,
+                            workExpEditStatus: () {},
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 30.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Top Skills',
+                                  style: TextStyle(
+                                    fontSize: 25.0,
+                                    color: kMentorXTeal,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 20.0, left: 10.0, right: 10.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 5,
+                                        offset: Offset(2, 3),
+                                        color: Colors.grey,
+                                        spreadRadius: 1,
+                                      )
+                                    ],
+                                  ),
+                                  child: CircleAvatar(
+                                    backgroundColor: kMentorXTeal,
+                                    radius: 45,
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      radius: 43,
+                                      child: Icon(
+                                        Icons.add,
+                                        color: kMentorXTeal,
+                                        size: 45,
                                       ),
                                     ),
-                            ],
-                          ),
-                        ),
-                        aboutMeEditStatus
-                            ? _buildAboutMeTextField(context)
-                            : Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 8.0, right: 10.0),
-                                child: Row(
-                                  children: [
-                                    Flexible(
-                                      child: Text(
-                                        '${profileData['About Me']}',
-                                        style: TextStyle(
-                                          fontSize: 18.0,
-                                          color: kMentorXTeal,
-                                        ),
+                                  ),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 5,
+                                        offset: Offset(2, 3),
+                                        color: Colors.grey,
+                                        spreadRadius: 1,
+                                      )
+                                    ],
+                                  ),
+                                  child: CircleAvatar(
+                                    backgroundColor: kMentorXTeal,
+                                    radius: 45,
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      radius: 43,
+                                      child: Icon(
+                                        Icons.add,
+                                        color: kMentorXTeal,
+                                        size: 45,
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 40.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                'Work Experience',
-                                style: TextStyle(
-                                  fontSize: 25.0,
-                                  color: kMentorXTeal.shade700,
-                                  fontWeight: FontWeight.w600,
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 5,
+                                        offset: Offset(2, 3),
+                                        color: Colors.grey,
+                                        spreadRadius: 1,
+                                      )
+                                    ],
+                                  ),
+                                  child: CircleAvatar(
+                                    backgroundColor: kMentorXTeal,
+                                    radius: 45,
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      radius: 43,
+                                      child: Icon(
+                                        Icons.add,
+                                        color: kMentorXTeal,
+                                        size: 45,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        WorkExperienceSection(
-                          dividerColor: Colors.transparent,
-                          dividerHeight: 0,
-                          workExpEditStatus: () {
-                            setState(() {
-                              _editWorkExperience(context);
-                            });
-                          },
-                          location:
-                              workExperienceData['location1'] ?? '<Blank>',
-                          description:
-                              workExperienceData['description1'] ?? '<Blank>',
-                          title: workExperienceData['title1'] ?? '<Blank>',
-                          dateRange:
-                              '${workExperienceData['startDate1']} - ${workExperienceData['endDate1']}' ??
-                                  '<Blank>',
-                          company: workExperienceData['company1'] ?? '<Blank>',
-                        ),
-                        WorkExperienceSection(
-                          title: 'Summer Finance Intern',
-                          company: 'The Walt Disney Company',
-                          dateRange: 'April 2019 - April 2020',
-                          location: 'Burbank, CA',
-                          description: profileData['About Me'],
-                          dividerColor: Colors.black54,
-                          dividerHeight: 2,
-                          workExpEditStatus: () {},
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 30.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                'Top Skills',
-                                style: TextStyle(
-                                  fontSize: 25.0,
-                                  color: kMentorXTeal.shade700,
-                                  fontWeight: FontWeight.w600,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 30.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Hobbies / Interests',
+                                  style: TextStyle(
+                                    fontSize: 25.0,
+                                    color: kMentorXTeal,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 20.0, left: 10.0, right: 10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 5,
-                                      offset: Offset(2, 3),
-                                      color: Colors.grey,
-                                      spreadRadius: 1,
-                                    )
-                                  ],
-                                ),
-                                child: CircleAvatar(
-                                  backgroundColor: kMentorXTeal.shade700,
-                                  radius: 45,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 20.0, left: 10.0, right: 10.0, bottom: 40),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 5,
+                                        offset: Offset(2, 3),
+                                        color: Colors.grey,
+                                        spreadRadius: 1,
+                                      )
+                                    ],
+                                  ),
                                   child: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: 43,
-                                    child: Icon(
-                                      Icons.add,
-                                      color: kMentorXTeal.shade700,
-                                      size: 45,
+                                    backgroundColor: kMentorXTeal,
+                                    radius: 45,
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      radius: 43,
+                                      child: Icon(
+                                        Icons.add,
+                                        color: kMentorXTeal,
+                                        size: 45,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 5,
-                                      offset: Offset(2, 3),
-                                      color: Colors.grey,
-                                      spreadRadius: 1,
-                                    )
-                                  ],
-                                ),
-                                child: CircleAvatar(
-                                  backgroundColor: kMentorXTeal.shade700,
-                                  radius: 45,
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 5,
+                                        offset: Offset(2, 3),
+                                        color: Colors.grey,
+                                        spreadRadius: 1,
+                                      )
+                                    ],
+                                  ),
                                   child: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: 43,
-                                    child: Icon(
-                                      Icons.add,
-                                      color: kMentorXTeal.shade700,
-                                      size: 45,
+                                    backgroundColor: kMentorXTeal,
+                                    radius: 45,
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      radius: 43,
+                                      child: Icon(
+                                        Icons.add,
+                                        color: kMentorXTeal,
+                                        size: 45,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 5,
-                                      offset: Offset(2, 3),
-                                      color: Colors.grey,
-                                      spreadRadius: 1,
-                                    )
-                                  ],
-                                ),
-                                child: CircleAvatar(
-                                  backgroundColor: kMentorXTeal.shade700,
-                                  radius: 45,
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 5,
+                                        offset: Offset(2, 3),
+                                        color: Colors.grey,
+                                        spreadRadius: 1,
+                                      )
+                                    ],
+                                  ),
                                   child: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: 43,
-                                    child: Icon(
-                                      Icons.add,
-                                      color: kMentorXTeal.shade700,
-                                      size: 45,
+                                    backgroundColor: kMentorXTeal,
+                                    radius: 45,
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      radius: 43,
+                                      child: Icon(
+                                        Icons.add,
+                                        color: kMentorXTeal,
+                                        size: 45,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 30.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                'Hobbies / Interests',
-                                style: TextStyle(
-                                  fontSize: 25.0,
-                                  color: kMentorXTeal.shade700,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 20.0, left: 10.0, right: 10.0, bottom: 40),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 5,
-                                      offset: Offset(2, 3),
-                                      color: Colors.grey,
-                                      spreadRadius: 1,
-                                    )
-                                  ],
-                                ),
-                                child: CircleAvatar(
-                                  backgroundColor: kMentorXTeal.shade700,
-                                  radius: 45,
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: 43,
-                                    child: Icon(
-                                      Icons.add,
-                                      color: kMentorXTeal.shade700,
-                                      size: 45,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 5,
-                                      offset: Offset(2, 3),
-                                      color: Colors.grey,
-                                      spreadRadius: 1,
-                                    )
-                                  ],
-                                ),
-                                child: CircleAvatar(
-                                  backgroundColor: kMentorXTeal.shade700,
-                                  radius: 45,
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: 43,
-                                    child: Icon(
-                                      Icons.add,
-                                      color: kMentorXTeal.shade700,
-                                      size: 45,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 5,
-                                      offset: Offset(2, 3),
-                                      color: Colors.grey,
-                                      spreadRadius: 1,
-                                    )
-                                  ],
-                                ),
-                                child: CircleAvatar(
-                                  backgroundColor: kMentorXTeal.shade700,
-                                  radius: 45,
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: 43,
-                                    child: Icon(
-                                      Icons.add,
-                                      color: kMentorXTeal.shade700,
-                                      size: 45,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

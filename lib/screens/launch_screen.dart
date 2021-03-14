@@ -105,11 +105,15 @@ class _LaunchScreenState extends State<LaunchScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+//          image: DecorationImage(
+//            image: AssetImage('images/XBackground.png'),
+//            fit: BoxFit.cover,
+//          ),
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
             colors: [
-              Colors.white,
+              Colors.grey.shade400,
               Colors.white,
             ],
           ),
@@ -182,7 +186,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                                   '${profileData['Major']}, ${profileData['Year in School']}',
                                   style: TextStyle(
                                     fontSize: 20.0,
-                                    color: Colors.grey,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),

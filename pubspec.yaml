@@ -45,6 +45,7 @@ flutter:
 
   assets:
     - images/XLogo.png
+    - images/XBackground.png
     - images/XLogoWhite.png
     - images/XMountains.jpg
     - images/XMountainsWhite.jpg
