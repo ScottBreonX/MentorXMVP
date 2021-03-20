@@ -200,7 +200,7 @@ class _MyProfileState extends State<MyProfile> {
       textAlign: TextAlign.start,
       onChanged: (value) => aboutMe = value,
       style: TextStyle(
-        color: kMentorXTeal,
+        color: Colors.black87,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
@@ -222,7 +222,7 @@ class _MyProfileState extends State<MyProfile> {
     if (profileData == null) {
       return Center(
         child: CircularProgressIndicator(
-          backgroundColor: kMentorXTeal,
+          backgroundColor: kMentorXPrimary,
         ),
       );
     }
@@ -254,7 +254,7 @@ class _MyProfileState extends State<MyProfile> {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: kMentorXTeal,
+        backgroundColor: kMentorXDark.withOpacity(1.0),
         elevation: 0,
         title: Text('My Profile'),
       ),
@@ -262,14 +262,13 @@ class _MyProfileState extends State<MyProfile> {
         child: Column(
           children: [
             Container(
-              height: 300,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                   colors: [
-                    kMentorXTeal.withOpacity(0.7),
-                    kMentorXTeal,
+                    kMentorXDark.withOpacity(0.8),
+                    kMentorXDark.withOpacity(1.0),
                   ],
                 ),
               ),
@@ -286,7 +285,7 @@ class _MyProfileState extends State<MyProfile> {
                             Container(
                               child: CircleAvatar(
                                 backgroundColor: Colors.white,
-                                radius: 70,
+                                radius: 60,
                                 backgroundImage: profilePhotoStatus
                                     ? NetworkImage(profileData['images'])
                                     : null,
@@ -294,7 +293,7 @@ class _MyProfileState extends State<MyProfile> {
                                     ? null
                                     : Icon(
                                         Icons.person,
-                                        color: kMentorXTeal,
+                                        color: kMentorXPrimary,
                                         size: 70,
                                       ),
                               ),
@@ -307,7 +306,7 @@ class _MyProfileState extends State<MyProfile> {
                                 width: 35.0,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Colors.white,
+                                  color: kMentorXPrimary,
                                 ),
                                 child: GestureDetector(
                                   onTap: () async {
@@ -318,7 +317,7 @@ class _MyProfileState extends State<MyProfile> {
                                   },
                                   child: Icon(
                                     Icons.photo_camera,
-                                    color: kMentorXTeal,
+                                    color: Colors.white,
                                     size: 25.0,
                                   ),
                                 ),
@@ -354,58 +353,61 @@ class _MyProfileState extends State<MyProfile> {
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizedBox(
-                          width: 120,
-                          child: Center(
-                            child: Text(
-                              '${profileData['Year in School']}',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                color: Colors.white,
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            width: 120,
+                            child: Center(
+                              child: Text(
+                                '${profileData['Year in School']}',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          color: Colors.white,
-                          height: 50,
-                          width: 2,
-                        ),
-                        SizedBox(
-                          width: 120,
-                          child: Center(
-                            child: Text(
-                              '${profileData['Major']}',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                color: Colors.white,
+                          Container(
+                            color: Colors.white,
+                            height: 30,
+                            width: 2,
+                          ),
+                          SizedBox(
+                            width: 120,
+                            child: Center(
+                              child: Text(
+                                '${profileData['Major']}',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          color: Colors.white,
-                          height: 50,
-                          width: 2,
-                        ),
-                        SizedBox(
-                          width: 120,
-                          child: Center(
-                            child: Text(
-                              '${profileData['Minor']}',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                color: Colors.white,
+                          Container(
+                            color: Colors.white,
+                            height: 30,
+                            width: 2,
+                          ),
+                          SizedBox(
+                            width: 120,
+                            child: Center(
+                              child: Text(
+                                '${profileData['Minor']}',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -418,7 +420,7 @@ class _MyProfileState extends State<MyProfile> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Colors.grey.shade400,
+                      Colors.white,
                       Colors.white,
                     ],
                   ),
@@ -435,21 +437,26 @@ class _MyProfileState extends State<MyProfile> {
                             padding: const EdgeInsets.only(top: 10.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                              crossAxisAlignment: aboutMeEditStatus
+                                  ? CrossAxisAlignment.center
+                                  : CrossAxisAlignment.end,
                               children: [
                                 Text(
                                   'About Me',
                                   style: TextStyle(
-                                      fontSize: 25.0,
-                                      color: kMentorXTeal,
-                                      fontWeight: FontWeight.w600),
+                                    fontSize: 20.0,
+                                    color: kMentorXPrimary,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                                 aboutMeEditStatus
                                     ? Row(
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                right: 8.0, bottom: 10.0),
+                                              right: 8.0,
+                                              bottom: 10.0,
+                                            ),
                                             child: GestureDetector(
                                               onTap: () {
                                                 _updateAboutMe(context);
@@ -535,7 +542,7 @@ class _MyProfileState extends State<MyProfile> {
                                             ),
                                             child: Icon(
                                               Icons.edit,
-                                              color: kMentorXTeal,
+                                              color: kMentorXPrimary,
                                             ),
                                           ),
                                         ),
@@ -554,8 +561,8 @@ class _MyProfileState extends State<MyProfile> {
                                         child: Text(
                                           '${profileData['About Me']}',
                                           style: TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black,
+                                            fontSize: 15.0,
+                                            color: Colors.black87,
                                           ),
                                         ),
                                       ),
@@ -571,8 +578,8 @@ class _MyProfileState extends State<MyProfile> {
                                 Text(
                                   'Work Experience',
                                   style: TextStyle(
-                                    fontSize: 25.0,
-                                    color: kMentorXTeal,
+                                    fontSize: 20.0,
+                                    color: kMentorXPrimary,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -580,6 +587,11 @@ class _MyProfileState extends State<MyProfile> {
                             ),
                           ),
                           WorkExperienceSection(
+                            title: 'Summer Finance Intern',
+                            company: 'The Walt Disney Company',
+                            dateRange: 'April 2019 - April 2020',
+                            location: 'Burbank, CA',
+                            description: profileData['About Me'],
                             dividerColor: Colors.transparent,
                             dividerHeight: 0,
                             workExpEditStatus: () {
@@ -587,26 +599,6 @@ class _MyProfileState extends State<MyProfile> {
                                 _editWorkExperience(context);
                               });
                             },
-                            location:
-                                workExperienceData['location1'] ?? '<Blank>',
-                            description:
-                                workExperienceData['description1'] ?? '<Blank>',
-                            title: workExperienceData['title1'] ?? '<Blank>',
-                            dateRange:
-                                '${workExperienceData['startDate1']} - ${workExperienceData['endDate1']}' ??
-                                    '<Blank>',
-                            company:
-                                workExperienceData['company1'] ?? '<Blank>',
-                          ),
-                          WorkExperienceSection(
-                            title: 'Summer Finance Intern',
-                            company: 'The Walt Disney Company',
-                            dateRange: 'April 2019 - April 2020',
-                            location: 'Burbank, CA',
-                            description: profileData['About Me'],
-                            dividerColor: Colors.black54,
-                            dividerHeight: 2,
-                            workExpEditStatus: () {},
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 30.0),
@@ -615,8 +607,8 @@ class _MyProfileState extends State<MyProfile> {
                                 Text(
                                   'Top Skills',
                                   style: TextStyle(
-                                    fontSize: 25.0,
-                                    color: kMentorXTeal,
+                                    fontSize: 20.0,
+                                    color: kMentorXPrimary,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -642,14 +634,14 @@ class _MyProfileState extends State<MyProfile> {
                                     ],
                                   ),
                                   child: CircleAvatar(
-                                    backgroundColor: kMentorXTeal,
+                                    backgroundColor: kMentorXPrimary,
                                     radius: 45,
                                     child: CircleAvatar(
                                       backgroundColor: Colors.white,
                                       radius: 43,
                                       child: Icon(
                                         Icons.add,
-                                        color: kMentorXTeal,
+                                        color: kMentorXPrimary,
                                         size: 45,
                                       ),
                                     ),
@@ -668,14 +660,14 @@ class _MyProfileState extends State<MyProfile> {
                                     ],
                                   ),
                                   child: CircleAvatar(
-                                    backgroundColor: kMentorXTeal,
+                                    backgroundColor: kMentorXPrimary,
                                     radius: 45,
                                     child: CircleAvatar(
                                       backgroundColor: Colors.white,
                                       radius: 43,
                                       child: Icon(
                                         Icons.add,
-                                        color: kMentorXTeal,
+                                        color: kMentorXPrimary,
                                         size: 45,
                                       ),
                                     ),
@@ -694,14 +686,14 @@ class _MyProfileState extends State<MyProfile> {
                                     ],
                                   ),
                                   child: CircleAvatar(
-                                    backgroundColor: kMentorXTeal,
+                                    backgroundColor: kMentorXPrimary,
                                     radius: 45,
                                     child: CircleAvatar(
                                       backgroundColor: Colors.white,
                                       radius: 43,
                                       child: Icon(
                                         Icons.add,
-                                        color: kMentorXTeal,
+                                        color: kMentorXPrimary,
                                         size: 45,
                                       ),
                                     ),
@@ -717,8 +709,8 @@ class _MyProfileState extends State<MyProfile> {
                                 Text(
                                   'Hobbies / Interests',
                                   style: TextStyle(
-                                    fontSize: 25.0,
-                                    color: kMentorXTeal,
+                                    fontSize: 20.0,
+                                    color: kMentorXPrimary,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -744,14 +736,14 @@ class _MyProfileState extends State<MyProfile> {
                                     ],
                                   ),
                                   child: CircleAvatar(
-                                    backgroundColor: kMentorXTeal,
+                                    backgroundColor: kMentorXPrimary,
                                     radius: 45,
                                     child: CircleAvatar(
                                       backgroundColor: Colors.white,
                                       radius: 43,
                                       child: Icon(
                                         Icons.add,
-                                        color: kMentorXTeal,
+                                        color: kMentorXPrimary,
                                         size: 45,
                                       ),
                                     ),
@@ -770,14 +762,14 @@ class _MyProfileState extends State<MyProfile> {
                                     ],
                                   ),
                                   child: CircleAvatar(
-                                    backgroundColor: kMentorXTeal,
+                                    backgroundColor: kMentorXPrimary,
                                     radius: 45,
                                     child: CircleAvatar(
                                       backgroundColor: Colors.white,
                                       radius: 43,
                                       child: Icon(
                                         Icons.add,
-                                        color: kMentorXTeal,
+                                        color: kMentorXPrimary,
                                         size: 45,
                                       ),
                                     ),
@@ -796,14 +788,14 @@ class _MyProfileState extends State<MyProfile> {
                                     ],
                                   ),
                                   child: CircleAvatar(
-                                    backgroundColor: kMentorXTeal,
+                                    backgroundColor: kMentorXPrimary,
                                     radius: 45,
                                     child: CircleAvatar(
                                       backgroundColor: Colors.white,
                                       radius: 43,
                                       child: Icon(
                                         Icons.add,
-                                        color: kMentorXTeal,
+                                        color: kMentorXPrimary,
                                         size: 45,
                                       ),
                                     ),

@@ -166,7 +166,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
     if (profileData == null) {
       return Center(
         child: CircularProgressIndicator(
-          backgroundColor: kMentorXTeal,
+          backgroundColor: kMentorXPrimary,
         ),
       );
     }
@@ -188,7 +188,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
           ),
         ),
         appBar: AppBar(
-          backgroundColor: kMentorXTeal,
+          backgroundColor: kMentorXPrimary,
           title: Text('Mentoring'),
         ),
         body: Column(
@@ -225,10 +225,10 @@ class _MentoringScreenState extends State<MentoringScreen> {
                         onTap: () {
                           _enrollmentSelection = 'Mentee';
                           setState(() {
-                            _nextButtonColor = kMentorXTeal;
+                            _nextButtonColor = kMentorXPrimary;
                             _errorTextColor = Colors.white;
 
-                            _menteeBackgroundColor = kMentorXTeal;
+                            _menteeBackgroundColor = kMentorXPrimary;
                             _menteeBorderWidth = 4.0;
                             _menteeBorderColor = Colors.greenAccent;
                             _menteeShadowBlur = 2.0;
@@ -274,7 +274,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20.0,
-                        color: kMentorXTeal,
+                        color: kMentorXPrimary,
                       ),
                     ),
                   ],
@@ -287,10 +287,10 @@ class _MentoringScreenState extends State<MentoringScreen> {
                         onTap: () {
                           _enrollmentSelection = 'Mentor';
                           setState(() {
-                            _nextButtonColor = kMentorXTeal;
+                            _nextButtonColor = kMentorXPrimary;
                             _errorTextColor = Colors.white;
 
-                            _mentorBackgroundColor = kMentorXTeal;
+                            _mentorBackgroundColor = kMentorXPrimary;
                             _mentorBorderWidth = 4.0;
                             _mentorBorderColor = Colors.greenAccent;
                             _mentorShadowBlur = 2.0;
@@ -336,7 +336,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20.0,
-                        color: kMentorXTeal,
+                        color: kMentorXPrimary,
                       ),
                     ),
                   ],
@@ -389,7 +389,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
       if (profileData == null || mentorProfileData == null) {
         return Center(
           child: CircularProgressIndicator(
-            backgroundColor: kMentorXTeal,
+            backgroundColor: kMentorXPrimary,
           ),
         );
       }
@@ -423,7 +423,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
           ),
         ),
         appBar: AppBar(
-          backgroundColor: kMentorXTeal,
+          backgroundColor: kMentorXPrimary,
           title: Text('Mentoring'),
         ),
         body: Container(
@@ -454,7 +454,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                                   backgroundImage: profilePhotoStatus
                                       ? NetworkImage(profileData['images'])
                                       : null,
-                                  backgroundColor: kMentorXTeal,
+                                  backgroundColor: kMentorXPrimary,
                                   child: profilePhotoStatus
                                       ? null
                                       : Icon(
@@ -470,7 +470,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                                 Text(
                                   profileData['First Name'],
                                   style: TextStyle(
-                                      color: kMentorXTeal, fontSize: 20.0),
+                                      color: kMentorXPrimary, fontSize: 20.0),
                                 ),
                                 SizedBox(
                                   width: 5.0,
@@ -478,7 +478,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                                 Text(
                                   profileData['Last Name'],
                                   style: TextStyle(
-                                      color: kMentorXTeal, fontSize: 20.0),
+                                      color: kMentorXPrimary, fontSize: 20.0),
                                 ),
                               ],
                             ),
@@ -491,7 +491,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                               child: Container(
                                 child: CircleAvatar(
                                   radius: 50,
-                                  backgroundColor: kMentorXTeal,
+                                  backgroundColor: kMentorXPrimary,
                                   backgroundImage: mentorPhotoStatus
                                       ? NetworkImage(
                                           mentorProfileData['images'])
@@ -511,7 +511,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                                 Text(
                                   mentorProfileData['First Name'],
                                   style: TextStyle(
-                                      color: kMentorXTeal, fontSize: 20.0),
+                                      color: kMentorXPrimary, fontSize: 20.0),
                                 ),
                                 SizedBox(
                                   width: 5.0,
@@ -519,7 +519,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                                 Text(
                                   mentorProfileData['Last Name'],
                                   style: TextStyle(
-                                      color: kMentorXTeal, fontSize: 20.0),
+                                      color: kMentorXPrimary, fontSize: 20.0),
                                 ),
                               ],
                             ),
@@ -534,7 +534,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: const Divider(
-                      color: kMentorXTeal,
+                      color: kMentorXPrimary,
                       height: 20,
                       thickness: 4,
                       indent: 0,
@@ -553,7 +553,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                           children: [
                             CircleAvatar(
                               radius: 50,
-                              backgroundColor: kMentorXTeal,
+                              backgroundColor: kMentorXPrimary,
                               child: Icon(
                                 Icons.pending_actions,
                                 size: 70,
@@ -582,7 +582,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                           children: [
                             CircleAvatar(
                               radius: 50,
-                              backgroundColor: kMentorXTeal,
+                              backgroundColor: kMentorXPrimary,
                               child: Icon(
                                 Icons.calendar_today_rounded,
                                 size: 70,
@@ -616,7 +616,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                           children: [
                             CircleAvatar(
                               radius: 50,
-                              backgroundColor: kMentorXTeal,
+                              backgroundColor: kMentorXPrimary,
                               child: Icon(
                                 Icons.menu_book,
                                 size: 70,
@@ -647,7 +647,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                           children: [
                             CircleAvatar(
                               radius: 50,
-                              backgroundColor: kMentorXTeal,
+                              backgroundColor: kMentorXPrimary,
                               child: Icon(
                                 Icons.chat_bubble,
                                 size: 70,

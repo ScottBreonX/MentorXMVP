@@ -171,7 +171,7 @@ class _EnrollmentSelectionScreenState extends State<EnrollmentSelectionScreen> {
     if (profileData == null) {
       return Center(
         child: CircularProgressIndicator(
-          backgroundColor: kMentorXTeal,
+          backgroundColor: kMentorXPrimary,
         ),
       );
     }
@@ -192,7 +192,7 @@ class _EnrollmentSelectionScreenState extends State<EnrollmentSelectionScreen> {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: kMentorXTeal,
+        backgroundColor: kMentorXPrimary,
         title: Text('Mentoring'),
       ),
       body: Column(
@@ -229,10 +229,10 @@ class _EnrollmentSelectionScreenState extends State<EnrollmentSelectionScreen> {
                       onTap: () {
                         _enrollmentSelection = 'Mentor';
                         setState(() {
-                          _nextButtonColor = kMentorXTeal;
+                          _nextButtonColor = kMentorXPrimary;
                           _errorTextColor = Colors.white;
 
-                          _mentorBackgroundColor = kMentorXTeal;
+                          _mentorBackgroundColor = kMentorXPrimary;
                           _mentorBorderWidth = 4.0;
                           _mentorBorderColor = Colors.greenAccent;
                           _mentorShadowBlur = 2.0;
@@ -284,7 +284,7 @@ class _EnrollmentSelectionScreenState extends State<EnrollmentSelectionScreen> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20.0,
-                      color: kMentorXTeal,
+                      color: kMentorXPrimary,
                     ),
                   ),
                 ],
@@ -297,10 +297,10 @@ class _EnrollmentSelectionScreenState extends State<EnrollmentSelectionScreen> {
                       onTap: () {
                         _enrollmentSelection = 'Mentee';
                         setState(() {
-                          _nextButtonColor = kMentorXTeal;
+                          _nextButtonColor = kMentorXPrimary;
                           _errorTextColor = Colors.white;
 
-                          _menteeBackgroundColor = kMentorXTeal;
+                          _menteeBackgroundColor = kMentorXPrimary;
                           _menteeBorderWidth = 4.0;
                           _menteeBorderColor = Colors.greenAccent;
                           _menteeShadowBlur = 2.0;
@@ -351,7 +351,7 @@ class _EnrollmentSelectionScreenState extends State<EnrollmentSelectionScreen> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20.0,
-                      color: kMentorXTeal,
+                      color: kMentorXPrimary,
                     ),
                   ),
                 ],

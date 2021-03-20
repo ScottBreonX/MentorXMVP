@@ -54,13 +54,13 @@ class _MentorScreenState extends State<MentorScreen> {
     if (profileData == null) {
       return Center(
         child: CircularProgressIndicator(
-          backgroundColor: kMentorXTeal,
+          backgroundColor: kMentorXPrimary,
         ),
       );
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kMentorXTeal,
+        backgroundColor: kMentorXPrimary,
         title: Text('Mentor Enrollment'),
         actions: [
           IconButton(

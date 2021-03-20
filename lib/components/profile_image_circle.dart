@@ -5,7 +5,7 @@ import '../constants.dart';
 class ProfileImageCircle extends StatelessWidget {
   const ProfileImageCircle(
       {@required this.circleSize,
-      this.circleColor = kMentorXTeal,
+      this.circleColor = kMentorXPrimary,
       this.iconColor = Colors.white});
 
   final double circleSize;

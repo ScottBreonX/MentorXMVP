@@ -90,7 +90,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       textAlign: TextAlign.center,
       onChanged: widget.bloc.updateEmail,
       style: TextStyle(
-        color: kMentorXTeal,
+        color: kMentorXPrimary,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
@@ -112,7 +112,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updatePassword,
       style: TextStyle(
-        color: kMentorXTeal,
+        color: kMentorXPrimary,
         fontWeight: FontWeight.w400,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
@@ -132,7 +132,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updateConfirmPassword,
       style: TextStyle(
-        color: kMentorXTeal,
+        color: kMentorXPrimary,
         fontWeight: FontWeight.w400,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
@@ -156,7 +156,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: kMentorXTeal,
+              backgroundColor: kMentorXPrimary,
               title: Text('Create Account'),
               centerTitle: true,
             ),
@@ -219,7 +219,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             }
                           },
                           title: 'NEXT',
-                          buttonColor: kMentorXTeal,
+                          buttonColor: kMentorXPrimary,
                           fontColor: Colors.white,
                           minWidth: 500.0,
                         ),

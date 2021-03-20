@@ -21,7 +21,6 @@ dependencies:
   firebase_auth:
   firebase_storage:
   image_picker:
-  camera:
   path:
   modal_progress_hud:
   cloud_firestore:

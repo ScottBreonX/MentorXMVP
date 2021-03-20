@@ -35,8 +35,8 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
           colors: [
-            kMentorXTeal,
-            kMentorXTeal,
+            kMentorXPrimary,
+            kMentorXPrimary,
           ],
         ),
       ),
@@ -50,13 +50,13 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
             ? null
             : Icon(
                 Icons.person,
-                color: kMentorXTeal,
+                color: kMentorXPrimary,
                 size: 42.0,
               ),
       ),
       otherAccountsPictures: [
         CircleAvatar(
-          backgroundColor: kMentorXTeal,
+          backgroundColor: kMentorXPrimary,
           child: Image.asset(
             'images/XLogoWhite.png',
             height: 80,
@@ -80,10 +80,13 @@ class MentorXMenuList extends StatelessWidget {
       children: [
         drawerHeader,
         ListTile(
-          leading: Icon(Icons.home),
+          leading: Icon(
+            Icons.home,
+            color: Colors.black54,
+          ),
           title: Text(
             'Home',
-            style: TextStyle(color: Colors.grey, fontSize: 20),
+            style: TextStyle(color: Colors.black54, fontSize: 20),
           ),
           onTap: () => Navigator.push(
             context,
@@ -95,10 +98,13 @@ class MentorXMenuList extends StatelessWidget {
           ),
         ),
         ListTile(
-          leading: Icon(Icons.person),
+          leading: Icon(
+            Icons.person,
+            color: Colors.black54,
+          ),
           title: Text(
             'My Profile',
-            style: TextStyle(color: Colors.grey, fontSize: 20),
+            style: TextStyle(color: Colors.black54, fontSize: 20),
           ),
           onTap: () => Navigator.push(
             context,
@@ -110,10 +116,13 @@ class MentorXMenuList extends StatelessWidget {
           ),
         ),
         ListTile(
-          leading: Icon(Icons.people),
+          leading: Icon(
+            Icons.people,
+            color: Colors.black54,
+          ),
           title: Text(
             'Mentoring',
-            style: TextStyle(color: Colors.grey, fontSize: 20),
+            style: TextStyle(color: Colors.black54, fontSize: 20),
           ),
           onTap: () => Navigator.push(
             context,
@@ -125,10 +134,13 @@ class MentorXMenuList extends StatelessWidget {
           ),
         ),
         ListTile(
-          leading: Icon(Icons.calendar_today),
+          leading: Icon(
+            Icons.calendar_today,
+            color: Colors.black54,
+          ),
           title: Text(
             'Events',
-            style: TextStyle(color: Colors.grey, fontSize: 20),
+            style: TextStyle(color: Colors.black54, fontSize: 20),
           ),
           onTap: () {
             Navigator.push(
@@ -142,25 +154,31 @@ class MentorXMenuList extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: Icon(Icons.settings),
+          leading: Icon(
+            Icons.settings,
+            color: Colors.black54,
+          ),
           title: Text(
             'Settings',
-            style: TextStyle(color: Colors.grey, fontSize: 20),
+            style: TextStyle(color: Colors.black54, fontSize: 20),
           ),
           onTap: () {},
         ),
         ListTile(
           title: const Text(
             '',
-            style: TextStyle(color: Colors.grey),
+            style: TextStyle(color: Colors.black54),
           ),
           onTap: () {},
         ),
         ListTile(
-          leading: Icon(Icons.exit_to_app_rounded),
+          leading: Icon(
+            Icons.exit_to_app_rounded,
+            color: Colors.black54,
+          ),
           title: Text(
             'Log Out',
-            style: TextStyle(color: Colors.grey, fontSize: 20),
+            style: TextStyle(color: Colors.black54, fontSize: 20),
           ),
           onTap: () {
             confirmSignOut(context);

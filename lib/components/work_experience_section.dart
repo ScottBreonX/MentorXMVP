@@ -33,7 +33,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(0.0),
       child: Column(
         children: [
           Divider(
@@ -51,8 +51,9 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                   child: Text(
                     widget.title,
                     style: TextStyle(
-                      fontSize: 18.0,
-                      color: kMentorXTeal,
+                      fontSize: 15.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
@@ -77,7 +78,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                       ),
                       child: Icon(
                         Icons.edit,
-                        color: Colors.blueGrey,
+                        color: kMentorXPrimary,
                       ),
                     ),
                   ),
@@ -86,7 +87,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8.0, right: 10.0),
+            padding: const EdgeInsets.only(top: 0.0, right: 10.0),
             child: Row(
               children: [
                 Flexible(
@@ -94,7 +95,8 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                     widget.company,
                     style: TextStyle(
                       fontSize: 15.0,
-                      color: kMentorXTeal,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                 ),
@@ -142,7 +144,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                     widget.description,
                     style: TextStyle(
                       fontSize: 15.0,
-                      color: kMentorXTeal,
+                      color: Colors.black87,
                     ),
                   ),
                 ),

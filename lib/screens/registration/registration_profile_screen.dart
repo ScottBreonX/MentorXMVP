@@ -96,7 +96,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       textAlign: TextAlign.center,
       onChanged: (value) => fName = value,
       style: TextStyle(
-        color: kMentorXTeal,
+        color: kMentorXPrimary,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
@@ -117,7 +117,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       textAlign: TextAlign.center,
       onChanged: (value) => lName = value,
       style: TextStyle(
-        color: kMentorXTeal,
+        color: kMentorXPrimary,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
@@ -138,7 +138,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       textAlign: TextAlign.center,
       onChanged: (value) => major = value,
       style: TextStyle(
-        color: kMentorXTeal,
+        color: kMentorXPrimary,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
@@ -160,7 +160,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       textAlign: TextAlign.center,
       onChanged: (value) => yearInSchool = value,
       style: TextStyle(
-        color: kMentorXTeal,
+        color: kMentorXPrimary,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
@@ -178,7 +178,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
     timeDilation = 2.0;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kMentorXTeal,
+        backgroundColor: kMentorXPrimary,
         title: Text('Create Profile'),
         centerTitle: true,
       ),
@@ -234,7 +234,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                     Navigator.pushNamed(context, XBottomNavigationBar.id);
                   },
                   title: 'Submit',
-                  buttonColor: kMentorXTeal,
+                  buttonColor: kMentorXPrimary,
                   fontColor: Colors.white,
                   minWidth: 500.0,
                 ),
