@@ -54,7 +54,7 @@ class _MenteeScreenState extends State<MenteeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kMentorXTeal,
+        backgroundColor: kMentorXPrimary,
         title: Text('Mentoring'),
       ),
       body: Container(
@@ -73,14 +73,14 @@ class _MenteeScreenState extends State<MenteeScreen> {
                   },
                   minWidth: 500.0,
                   title: 'View Available Mentors',
-                  buttonColor: kMentorXTeal,
+                  buttonColor: kMentorXPrimary,
                   fontColor: Colors.white,
                 ),
                 RoundedButton(
                   onPressed: () {},
                   minWidth: 500.0,
                   title: 'Questionnaire',
-                  buttonColor: kMentorXTeal,
+                  buttonColor: kMentorXPrimary,
                   fontColor: Colors.white,
                 ),
               ],

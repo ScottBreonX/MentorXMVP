@@ -74,7 +74,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
       textAlign: TextAlign.center,
       onChanged: widget.bloc.updateEmail,
       style: TextStyle(
-        color: kMentorXTeal,
+        color: kMentorXPrimary,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
@@ -96,7 +96,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updatePassword,
       style: TextStyle(
-        color: kMentorXTeal,
+        color: kMentorXPrimary,
         fontWeight: FontWeight.w400,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
@@ -121,7 +121,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
 
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: kMentorXTeal,
+              backgroundColor: kMentorXPrimary,
               title: Text('Log In'),
               centerTitle: true,
             ),
@@ -169,7 +169,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                           onPressed: model.canSubmit ? _submit : null,
                           title: 'LOG IN',
                           buttonColor: model.canSubmit
-                              ? kMentorXTeal
+                              ? kMentorXPrimary
                               : Colors.grey.shade600,
                           minWidth: 500,
                           fontColor: Colors.white,
@@ -181,8 +181,8 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                           child: InkWell(
                             child: Text(
                               'Need an account? Register',
-                              style:
-                                  TextStyle(fontSize: 20, color: kMentorXTeal),
+                              style: TextStyle(
+                                  fontSize: 20, color: kMentorXPrimary),
                             ),
                             onTap: () => widget._createNewUser(context),
                           ),

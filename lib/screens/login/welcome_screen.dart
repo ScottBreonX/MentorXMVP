@@ -121,7 +121,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       colors: [
                         Colors.white,
                         Colors.white70,
-                        kMentorXTeal,
+                        kMentorXPrimary,
                         Colors.white70,
                         Colors.white,
                       ],
@@ -143,7 +143,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               ),
               RoundedButton(
                 title: 'Sign up',
-                buttonColor: kMentorXTeal,
+                buttonColor: kMentorXPrimary,
                 fontColor: Colors.white,
                 onPressed: () => widget._createNewUser(context),
                 minWidth: 250.0,
@@ -151,7 +151,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               RoundedButton(
                 title: 'Sign in',
                 buttonColor: Colors.white,
-                fontColor: kMentorXTeal,
+                fontColor: kMentorXPrimary,
                 onPressed: () => widget._signInWithEmail(context),
                 minWidth: 250.0,
               ),

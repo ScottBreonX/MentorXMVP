@@ -69,7 +69,7 @@ class _ViewProfileState extends State<ViewProfile> {
     if (profileData == null) {
       return Center(
         child: CircularProgressIndicator(
-          backgroundColor: kMentorXTeal,
+          backgroundColor: kMentorXPrimary,
         ),
       );
     }
@@ -86,7 +86,7 @@ class _ViewProfileState extends State<ViewProfile> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kMentorXTeal,
+        backgroundColor: kMentorXPrimary,
         title: Text('Mentoring'),
       ),
       body: Container(
@@ -123,7 +123,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                 ? null
                                 : Icon(
                                     Icons.person,
-                                    color: kMentorXTeal,
+                                    color: kMentorXPrimary,
                                     size: 50,
                                   ),
                           ),

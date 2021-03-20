@@ -108,7 +108,7 @@ class _MentorChatScreenState extends State<MentorChatScreen> {
           'Chat Room',
           style: TextStyle(fontSize: 15),
         ),
-        backgroundColor: kMentorXTeal,
+        backgroundColor: kMentorXPrimary,
       ),
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
@@ -172,7 +172,7 @@ class MessagesStream extends StatelessWidget {
         if (!snapshot.hasData) {
           return Center(
             child: CircularProgressIndicator(
-              backgroundColor: kMentorXTeal,
+              backgroundColor: kMentorXPrimary,
             ),
           );
         }
@@ -241,7 +241,7 @@ class MessageBubble extends StatelessWidget {
           Material(
             borderRadius: BorderRadius.circular(30.0),
             elevation: 5.0,
-            color: isMe ? kMentorXTeal : Colors.grey,
+            color: isMe ? kMentorXPrimary : Colors.grey,
             child: Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 10.0,

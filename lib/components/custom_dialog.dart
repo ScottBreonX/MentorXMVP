@@ -58,7 +58,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 style: TextStyle(
                   fontSize: widget.titleFontSize,
                   fontWeight: FontWeight.w600,
-                  color: kMentorXTeal,
+                  color: kMentorXPrimary,
                 ),
               ),
               SizedBox(
@@ -85,7 +85,7 @@ class _CustomDialogState extends State<CustomDialog> {
                           widget.textLeft,
                           style: TextStyle(
                             fontSize: 20,
-                            color: kMentorXTeal,
+                            color: kMentorXPrimary,
                             fontWeight: FontWeight.w300,
                           ),
                         )),
@@ -98,7 +98,7 @@ class _CustomDialogState extends State<CustomDialog> {
                           widget.textRight,
                           style: TextStyle(
                             fontSize: 20,
-                            color: kMentorXTeal,
+                            color: kMentorXPrimary,
                             fontWeight: FontWeight.w700,
                           ),
                         )),
@@ -112,7 +112,7 @@ class _CustomDialogState extends State<CustomDialog> {
           left: Constants.padding,
           right: Constants.padding,
           child: CircleAvatar(
-            backgroundColor: kMentorXTeal,
+            backgroundColor: kMentorXPrimary,
             radius: Constants.avatarRadius,
             child: ClipRRect(
               borderRadius: BorderRadius.all(

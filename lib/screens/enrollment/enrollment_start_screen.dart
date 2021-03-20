@@ -71,7 +71,7 @@ class _EnrollmentStartScreenState extends State<EnrollmentStartScreen> {
     if (profileData == null) {
       return Center(
         child: CircularProgressIndicator(
-          backgroundColor: kMentorXTeal,
+          backgroundColor: kMentorXPrimary,
         ),
       );
     }
@@ -85,8 +85,8 @@ class _EnrollmentStartScreenState extends State<EnrollmentStartScreen> {
     final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
 
     Color infoBackground = Colors.white;
-    Color infoText = kMentorXTeal;
-    Color infoOutline = kMentorXTeal;
+    Color infoText = kMentorXPrimary;
+    Color infoOutline = kMentorXPrimary;
 
     return Scaffold(
       drawer: Drawer(
@@ -96,7 +96,7 @@ class _EnrollmentStartScreenState extends State<EnrollmentStartScreen> {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: kMentorXTeal,
+        backgroundColor: kMentorXPrimary,
         title: Text('Enrollment'),
       ),
       body: SingleChildScrollView(
@@ -116,7 +116,7 @@ class _EnrollmentStartScreenState extends State<EnrollmentStartScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 40,
-                        color: kMentorXTeal,
+                        color: kMentorXPrimary,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
@@ -276,7 +276,7 @@ class _EnrollmentStartScreenState extends State<EnrollmentStartScreen> {
               padding: const EdgeInsets.all(8.0),
               child: RoundedButton(
                 title: 'Proceed to Enrollment -->',
-                buttonColor: kMentorXTeal,
+                buttonColor: kMentorXPrimary,
                 fontColor: Colors.white,
                 fontSize: 20.0,
                 onPressed: () => Navigator.pushNamed(

@@ -66,7 +66,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
     if (profileData == null) {
       return Center(
         child: CircularProgressIndicator(
-          backgroundColor: kMentorXTeal,
+          backgroundColor: kMentorXPrimary,
         ),
       );
     }
@@ -96,28 +96,23 @@ class _LaunchScreenState extends State<LaunchScreen> {
         ),
       ),
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         title: Image.asset(
           'images/XLogoWhite.png',
           height: 50,
         ),
-        elevation: 0,
-        backgroundColor: kMentorXTeal,
+        elevation: 10,
+        backgroundColor: kMentorXDark,
       ),
       body: Container(
         decoration: BoxDecoration(
-//          image: DecorationImage(
-//            image: AssetImage('images/XBackground.png'),
-//            fit: BoxFit.cover,
-//          ),
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.grey.shade400,
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
               Colors.white,
-            ],
-          ),
-        ),
+              Colors.white,
+            ])),
         child: ListView(
           children: [
             Column(
@@ -145,7 +140,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                             backgroundImage: profilePictureStatus
                                 ? NetworkImage(profileData['images'])
                                 : null,
-                            backgroundColor: kMentorXTeal,
+                            backgroundColor: kMentorXPrimary,
                             radius: 60,
                             child: profilePictureStatus
                                 ? null
@@ -171,7 +166,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                                   '${profileData['First Name']} ${profileData['Last Name']}',
                                   style: TextStyle(
                                     fontSize: 40.0,
-                                    color: kMentorXTeal,
+                                    color: kMentorXPrimary,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -201,7 +196,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: const Divider(
-                    color: kMentorXTeal,
+                    color: kMentorXPrimary,
                     height: 20,
                     thickness: 4,
                   ),
@@ -215,12 +210,12 @@ class _LaunchScreenState extends State<LaunchScreen> {
                         '1.) Complete Profile',
                         style: TextStyle(
                             fontSize: 20,
-                            color: kMentorXTeal,
+                            color: kMentorXPrimary,
                             fontWeight: FontWeight.w500),
                       ),
                       RoundedButton(
                         title: 'My Profile',
-                        buttonColor: kMentorXTeal,
+                        buttonColor: kMentorXPrimary,
                         minWidth: 150,
                         fontColor: Colors.white,
                         onPressed: () {
@@ -247,12 +242,12 @@ class _LaunchScreenState extends State<LaunchScreen> {
                         '2.) View Events',
                         style: TextStyle(
                             fontSize: 20,
-                            color: kMentorXTeal,
+                            color: kMentorXPrimary,
                             fontWeight: FontWeight.w500),
                       ),
                       RoundedButton(
                         title: 'Events',
-                        buttonColor: kMentorXTeal,
+                        buttonColor: kMentorXPrimary,
                         minWidth: 150,
                         fontColor: Colors.white,
                         onPressed: () {
@@ -278,12 +273,12 @@ class _LaunchScreenState extends State<LaunchScreen> {
                         '3.) Enroll in Program',
                         style: TextStyle(
                             fontSize: 20,
-                            color: kMentorXTeal,
+                            color: kMentorXPrimary,
                             fontWeight: FontWeight.w500),
                       ),
                       RoundedButton(
                         title: 'Mentoring',
-                        buttonColor: kMentorXTeal,
+                        buttonColor: kMentorXPrimary,
                         minWidth: 150,
                         fontColor: Colors.white,
                         onPressed: () {

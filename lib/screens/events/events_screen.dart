@@ -62,7 +62,7 @@ class _EventsScreenState extends State<EventsScreen> {
     if (profileData == null) {
       return Center(
         child: CircularProgressIndicator(
-          backgroundColor: kMentorXTeal,
+          backgroundColor: kMentorXPrimary,
         ),
       );
     }
@@ -100,7 +100,7 @@ class _EventsScreenState extends State<EventsScreen> {
             ),
           ),
         ],
-        backgroundColor: kMentorXTeal,
+        backgroundColor: kMentorXPrimary,
       ),
       backgroundColor: Colors.white,
       body: Column(

@@ -82,7 +82,7 @@ class _AvailableMentorsScreenState extends State<AvailableMentors> {
           'Available Mentors',
           style: TextStyle(fontSize: 15),
         ),
-        backgroundColor: kMentorXTeal,
+        backgroundColor: kMentorXPrimary,
       ),
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
@@ -114,7 +114,7 @@ class AvailableMentorsStream extends StatelessWidget {
         if (!snapshot.hasData) {
           return Center(
             child: CircularProgressIndicator(
-              backgroundColor: kMentorXTeal,
+              backgroundColor: kMentorXPrimary,
             ),
           );
         }
@@ -259,7 +259,7 @@ class MentorCard extends StatelessWidget {
                       children: [
                         RoundedButton(
                           title: 'View Profile',
-                          buttonColor: kMentorXTeal,
+                          buttonColor: kMentorXPrimary,
                           borderRadius: 10.0,
                           fontColor: Colors.white,
                           minWidth: 200,
@@ -278,7 +278,7 @@ class MentorCard extends StatelessWidget {
                       children: [
                         RoundedButton(
                           title: 'Select Mentor',
-                          buttonColor: kMentorXTeal,
+                          buttonColor: kMentorXPrimary,
                           borderRadius: 10.0,
                           fontColor: Colors.white,
                           minWidth: 200,
