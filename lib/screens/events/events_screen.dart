@@ -102,7 +102,7 @@ class _EventsScreenState extends State<EventsScreen> {
         ],
         backgroundColor: kMentorXPrimary,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade800,
       body: Column(
         children: [],
       ),
