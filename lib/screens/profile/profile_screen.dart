@@ -526,23 +526,16 @@ class _MyProfileState extends State<MyProfile> {
                                             });
                                           },
                                           child: Container(
-                                            height: 40.0,
-                                            width: 40.0,
+                                            height: 30.0,
+                                            width: 30.0,
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 2,
-                                                  offset: Offset(2, 2),
-                                                  color: Colors.grey,
-                                                  spreadRadius: 0.5,
-                                                )
-                                              ],
                                             ),
                                             child: Icon(
                                               Icons.edit,
                                               color: kMentorXPrimary,
+                                              size: 20,
                                             ),
                                           ),
                                         ),
@@ -581,6 +574,37 @@ class _MyProfileState extends State<MyProfile> {
                                     fontSize: 20.0,
                                     color: kMentorXPrimary,
                                     fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        _editWorkExperience(context);
+                                      });
+                                    },
+                                    child: Container(
+                                      height: 30.0,
+                                      width: 30.0,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: kMentorXPrimary,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 2,
+                                            offset: Offset(2, 2),
+                                            color: Colors.grey,
+                                            spreadRadius: 0.5,
+                                          )
+                                        ],
+                                      ),
+                                      child: Icon(
+                                        Icons.add,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
