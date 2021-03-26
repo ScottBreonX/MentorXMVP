@@ -62,23 +62,24 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                   child: GestureDetector(
                     onTap: widget.workExpEditStatus,
                     child: Container(
-                      height: 40.0,
-                      width: 40.0,
+                      height: 30.0,
+                      width: 30.0,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 2,
-                            offset: Offset(2, 2),
-                            color: Colors.grey,
-                            spreadRadius: 0.5,
-                          )
-                        ],
+//                        boxShadow: [
+//                          BoxShadow(
+//                            blurRadius: 2,
+//                            offset: Offset(2, 2),
+//                            color: Colors.grey,
+//                            spreadRadius: 0.5,
+//                          )
+//                        ],
                       ),
                       child: Icon(
                         Icons.edit,
                         color: kMentorXPrimary,
+                        size: 20,
                       ),
                     ),
                   ),
