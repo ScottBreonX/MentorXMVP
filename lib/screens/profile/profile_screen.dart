@@ -587,7 +587,7 @@ class _MyProfileState extends State<MyProfile> {
                             ),
                           ),
                           WorkExperienceSection(
-                            title: 'Summer Finance Intern',
+                            title: 'Summer Marketing Intern',
                             company: 'The Walt Disney Company',
                             dateRange: 'April 2019 - April 2020',
                             location: 'Burbank, CA',
