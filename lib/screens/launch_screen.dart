@@ -110,8 +110,8 @@ class _LaunchScreenState extends State<LaunchScreen> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-              Colors.white,
-              Colors.white,
+              Colors.grey.shade800,
+              Colors.grey.shade800,
             ])),
         child: ListView(
           children: [
