@@ -186,12 +186,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('images/XBackground.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
+        color: kMentorXDark,
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(

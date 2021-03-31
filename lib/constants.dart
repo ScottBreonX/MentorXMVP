@@ -49,9 +49,9 @@ const kSendButtonTextStyle = TextStyle(
 const kInactiveSendButtonTextStyle =
     TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 18.0);
 
-const kMentorXPrimary = Color.fromRGBO(0, 179, 255, 1.0);
-const kMentorXSecondary = Color.fromRGBO(84, 84, 84, 1.0);
-const kMentorXDark = Color.fromRGBO(0, 179, 255, 1.0);
+const kMentorXPrimary = Color.fromRGBO(51, 173, 251, 1.0);
+const kMentorXSecondary = Color.fromRGBO(171, 237, 0, 1.0);
+const kMentorXDark = Color.fromRGBO(84, 84, 84, 1.0);
 const kDrawerItems = Colors.white;
 //Color.fromRGBO(4, 52, 106, 1.0)
 //Color.fromRGBO(56, 142, 137, 1.0);

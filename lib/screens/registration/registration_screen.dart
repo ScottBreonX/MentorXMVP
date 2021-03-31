@@ -90,15 +90,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       textAlign: TextAlign.center,
       onChanged: widget.bloc.updateEmail,
       style: TextStyle(
-        color: kMentorXPrimary,
-        fontWeight: FontWeight.w400,
+        color: Colors.white,
+        fontWeight: FontWeight.w600,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Enter your email',
+        labelStyle: TextStyle(color: Colors.white),
         hintText: 'email@domain.com',
         errorText: model.emailErrorText,
-        fillColor: Colors.white70,
+        fillColor: kMentorXDark,
         filled: true,
       ),
     );
@@ -112,13 +113,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updatePassword,
       style: TextStyle(
-        color: kMentorXPrimary,
-        fontWeight: FontWeight.w400,
+        color: Colors.white,
+        fontWeight: FontWeight.w600,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Enter your password',
+        labelStyle: TextStyle(color: Colors.white),
         errorText: model.passwordErrorText,
-        fillColor: Colors.white70,
+        fillColor: kMentorXDark,
         filled: true,
       ),
     );
@@ -132,13 +134,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updateConfirmPassword,
       style: TextStyle(
-        color: kMentorXPrimary,
-        fontWeight: FontWeight.w400,
+        color: Colors.white,
+        fontWeight: FontWeight.w600,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Re-enter your password',
+        labelStyle: TextStyle(color: Colors.white),
         errorText: model.passwordErrorText,
-        fillColor: Colors.white70,
+        fillColor: kMentorXDark,
         filled: true,
       ),
     );
@@ -164,12 +167,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             body: Container(
               height: double.infinity,
               width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('images/XBackground.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
+              color: kMentorXDark,
               child: ModalProgressHUD(
                 inAsyncCall: model.showSpinner,
                 child: SingleChildScrollView(
@@ -223,15 +221,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           fontColor: Colors.white,
                           minWidth: 500.0,
                         ),
-                        Center(
-                          child: InkWell(
-                            child: Text(
-                              'Already have an account? Log In',
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Already have an account?  ',
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             ),
-                            onTap: () => widget._signInWithEmail(context),
-                          ),
+                            InkWell(
+                              child: Text(
+                                'Log In',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: kMentorXPrimary,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              onTap: () => widget._signInWithEmail(context),
+                            ),
+                          ],
                         ),
                         SizedBox(
                           height: 100,

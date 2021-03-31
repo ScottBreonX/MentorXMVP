@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/screens/registration/registration_screen.dart';
@@ -69,12 +68,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   }
 
   @override
-  void didChangeDependencies() {
-    precacheImage(AssetImage('images/XBackground.png'), context);
-    super.didChangeDependencies();
-  }
-
-  @override
   void dispose() {
     controller.dispose();
     super.dispose();
@@ -85,18 +78,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("images/XBackground.png"),
-            fit: BoxFit.cover,
-          ),
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.grey,
-              Colors.black38,
-              Colors.black54,
-              Colors.black,
+              kMentorXDark,
+              kMentorXDark,
             ],
           ),
         ),
@@ -109,31 +96,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 240,
-                    child: ColorizeAnimatedTextKit(
-                      speed: Duration(milliseconds: 400),
-                      text: ['Mentor'],
-                      textStyle: TextStyle(
-                        fontSize: 70.0,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white,
-                      ),
-                      colors: [
-                        Colors.white,
-                        Colors.white70,
-                        kMentorXPrimary,
-                        Colors.white70,
-                        Colors.white,
-                      ],
-                      textAlign: TextAlign.start,
-                      alignment: AlignmentDirectional.topStart,
-                    ),
+                    height: 0,
                   ),
                   Hero(
                     tag: 'logo',
                     child: Container(
+                      height: 150.0,
                       child: Image.asset('images/XLogo.png'),
-                      height: 100.0,
                     ),
                   ),
                 ],
