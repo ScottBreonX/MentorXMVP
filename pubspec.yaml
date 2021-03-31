@@ -30,7 +30,6 @@ dependencies:
 
 
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -44,10 +43,7 @@ flutter:
 
   assets:
     - images/XLogo.png
-    - images/XBackground.png
     - images/XLogoWhite.png
-    - images/XMountains.jpg
-    - images/XMountainsWhite.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

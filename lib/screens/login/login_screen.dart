@@ -74,15 +74,16 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
       textAlign: TextAlign.center,
       onChanged: widget.bloc.updateEmail,
       style: TextStyle(
-        color: kMentorXPrimary,
-        fontWeight: FontWeight.w400,
+        color: Colors.white,
+        fontWeight: FontWeight.w600,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Enter your email',
+        labelStyle: TextStyle(color: Colors.white),
         hintText: 'email@domain.com',
         errorText: model.emailErrorText,
-        fillColor: Colors.white70,
+        fillColor: kMentorXDark,
         filled: true,
       ),
     );
@@ -96,14 +97,15 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updatePassword,
       style: TextStyle(
-        color: kMentorXPrimary,
-        fontWeight: FontWeight.w400,
+        color: Colors.white,
+        fontWeight: FontWeight.w600,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Enter your password',
+        labelStyle: TextStyle(color: Colors.white),
         errorText: model.passwordErrorText,
         filled: true,
-        fillColor: Colors.white70,
+        fillColor: kMentorXDark,
       ),
     );
   }
@@ -129,12 +131,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
             body: Container(
               width: double.infinity,
               height: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('images/XBackground.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
+              color: kMentorXDark,
               child: ModalProgressHUD(
                 inAsyncCall: model.showSpinner,
                 child: SingleChildScrollView(
@@ -177,15 +174,25 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                         SizedBox(
                           height: 0,
                         ),
-                        Center(
-                          child: InkWell(
-                            child: Text(
-                              'Need an account? Register',
-                              style: TextStyle(
-                                  fontSize: 20, color: kMentorXPrimary),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Need an account? ',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
                             ),
-                            onTap: () => widget._createNewUser(context),
-                          ),
+                            InkWell(
+                              child: Text(
+                                'Register',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: kMentorXPrimary,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              onTap: () => widget._createNewUser(context),
+                            ),
+                          ],
                         ),
                       ],
                     ),
