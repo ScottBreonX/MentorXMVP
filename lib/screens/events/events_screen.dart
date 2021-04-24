@@ -100,12 +100,10 @@ class _EventsScreenState extends State<EventsScreen> {
             ),
           ),
         ],
-        backgroundColor: kMentorXPrimary,
+        backgroundColor: kMentorXBlack,
       ),
-      backgroundColor: Colors.grey.shade800,
-      body: Column(
-        children: [],
-      ),
+      backgroundColor: kMentorXDark,
+      body: Container(),
     );
   }
 }

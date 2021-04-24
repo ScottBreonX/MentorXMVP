@@ -85,13 +85,16 @@ class _LaunchScreenState extends State<LaunchScreen> {
     );
 
     final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
 
     return Scaffold(
+      key: _scaffoldKey,
       drawer: Drawer(
         child: Container(
           child: drawerItems,
           decoration: BoxDecoration(
-            color: kDrawerItems,
+            color: kMentorXDark,
           ),
         ),
       ),
@@ -102,16 +105,16 @@ class _LaunchScreenState extends State<LaunchScreen> {
           height: 50,
         ),
         elevation: 10,
-        backgroundColor: kMentorXDark,
+        backgroundColor: kMentorXBlack,
       ),
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
                 colors: [
-              Colors.grey.shade800,
-              Colors.grey.shade800,
+              kMentorXDark,
+              kMentorXDark,
             ])),
         child: ListView(
           children: [

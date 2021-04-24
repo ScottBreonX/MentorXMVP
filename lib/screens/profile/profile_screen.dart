@@ -200,18 +200,20 @@ class _MyProfileState extends State<MyProfile> {
       textAlign: TextAlign.start,
       onChanged: (value) => aboutMe = value,
       style: TextStyle(
-        color: Colors.black87,
+        color: kMentorXDark,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
+        fillColor: Colors.white,
+        filled: true,
         labelText: '',
         hintText: '',
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1.0),
+            borderSide: BorderSide(color: Colors.white, width: 1.0),
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 2.0),
+            borderSide: BorderSide(color: kMentorXPrimary, width: 2.0),
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
       ),
     );
@@ -250,11 +252,11 @@ class _MyProfileState extends State<MyProfile> {
       drawer: Drawer(
         child: Container(
           child: drawerItems,
-          color: Colors.white,
+          color: kMentorXDark,
         ),
       ),
       appBar: AppBar(
-        backgroundColor: kMentorXDark.withOpacity(1.0),
+        backgroundColor: kMentorXBlack,
         elevation: 0,
         title: Text('My Profile'),
       ),
@@ -263,14 +265,7 @@ class _MyProfileState extends State<MyProfile> {
           children: [
             Container(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                  colors: [
-                    kMentorXDark.withOpacity(0.8),
-                    kMentorXDark.withOpacity(1.0),
-                  ],
-                ),
+                color: kMentorXDark,
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -416,14 +411,7 @@ class _MyProfileState extends State<MyProfile> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.white,
-                      Colors.white,
-                    ],
-                  ),
+                  color: kMentorXDark,
                 ),
                 child: Padding(
                   padding:
@@ -555,7 +543,7 @@ class _MyProfileState extends State<MyProfile> {
                                           '${profileData['About Me']}',
                                           style: TextStyle(
                                             fontSize: 15.0,
-                                            color: Colors.black87,
+                                            color: Colors.white,
                                           ),
                                         ),
                                       ),
