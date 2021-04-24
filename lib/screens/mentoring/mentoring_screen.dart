@@ -188,7 +188,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
           ),
         ),
         appBar: AppBar(
-          backgroundColor: kMentorXPrimary,
+          backgroundColor: kMentorXBlack,
           title: Text('Mentoring'),
         ),
         body: Column(

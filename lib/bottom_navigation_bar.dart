@@ -62,9 +62,9 @@ class _XBottomNavigationBarState extends State<XBottomNavigationBar> {
         style: TabStyle.reactCircle,
         activeColor: Colors.white,
         initialActiveIndex: pageIndex,
-        color: Colors.white,
+        color: kMentorXPrimary,
         onTap: onTabTapped,
-        backgroundColor: kMentorXDark,
+        backgroundColor: kMentorXBlack,
         items: [
           TabItem(
             icon: Icons.home,
