@@ -104,17 +104,19 @@ class _LaunchScreenState extends State<LaunchScreen> {
           'images/XLogoWhite.png',
           height: 50,
         ),
-        elevation: 10,
-        backgroundColor: kMentorXBlack,
+        elevation: 5,
+        backgroundColor: kMentorXDark,
       ),
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
                 colors: [
-              kMentorXDark,
-              kMentorXDark,
+              kMentorXBlack.withOpacity(0.95),
+              kMentorXBlack.withOpacity(0.9),
+              kMentorXBlack.withOpacity(0.85),
+              kMentorXBlack.withOpacity(0.8),
             ])),
         child: ListView(
           children: [
@@ -213,7 +215,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                         '1.) Complete Profile',
                         style: TextStyle(
                             fontSize: 20,
-                            color: kMentorXPrimary,
+                            color: Colors.white,
                             fontWeight: FontWeight.w500),
                       ),
                       RoundedButton(
@@ -245,7 +247,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                         '2.) View Events',
                         style: TextStyle(
                             fontSize: 20,
-                            color: kMentorXPrimary,
+                            color: Colors.white,
                             fontWeight: FontWeight.w500),
                       ),
                       RoundedButton(
@@ -276,7 +278,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                         '3.) Enroll in Program',
                         style: TextStyle(
                             fontSize: 20,
-                            color: kMentorXPrimary,
+                            color: Colors.white,
                             fontWeight: FontWeight.w500),
                       ),
                       RoundedButton(

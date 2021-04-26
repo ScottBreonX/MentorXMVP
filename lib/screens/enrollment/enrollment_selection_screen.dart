@@ -122,7 +122,7 @@ class _EnrollmentSelectionScreenState extends State<EnrollmentSelectionScreen> {
 
   Color _nextButtonColor = Colors.grey;
   String _enrollmentSelection = 'Nothing';
-  Color _errorTextColor = Colors.white;
+  Color _errorTextColor = kMentorXBlack.withOpacity(0);
 
   Future<void> _confirmMentorEnrollment(BuildContext context) async {
     await showDialog(
@@ -188,228 +188,240 @@ class _EnrollmentSelectionScreenState extends State<EnrollmentSelectionScreen> {
       drawer: Drawer(
         child: Container(
           child: drawerItems,
-          color: kDrawerItems,
+          color: kMentorXDark,
         ),
       ),
       appBar: AppBar(
-        backgroundColor: kMentorXPrimary,
+        backgroundColor: kMentorXDark,
         title: Text('Mentoring'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Flexible(
-                  child: Text(
-                    'Select your enrollment',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 50.0,
-                      color: Colors.black54,
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+              kMentorXBlack.withOpacity(0.95),
+              kMentorXBlack.withOpacity(0.9),
+              kMentorXBlack.withOpacity(0.85),
+              kMentorXBlack.withOpacity(0.8),
+            ])),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      'Select your enrollment',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 50.0,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          _enrollmentSelection = 'Mentor';
+                          setState(() {
+                            _nextButtonColor = kMentorXPrimary;
+                            _errorTextColor = kMentorXDark.withOpacity(0);
+
+                            _mentorBackgroundColor = kMentorXPrimary;
+                            _mentorBorderWidth = 4.0;
+                            _mentorBorderColor = Colors.greenAccent;
+                            _mentorShadowBlur = 2.0;
+                            _mentorShadowColor = Colors.grey;
+
+                            _menteeBackgroundColor = Colors.grey;
+                            _menteeBorderWidth = 0.0;
+                            _menteeBorderColor = Colors.grey;
+                            _menteeShadowBlur = 0.0;
+                            _menteeShadowColor = Colors.white;
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                            color: _mentorBackgroundColor,
+                            border: Border.all(
+                              color: _mentorBorderColor,
+                              width: _mentorBorderWidth,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 2,
+                                offset: Offset(4, 3),
+                                color: _mentorShadowColor,
+                                spreadRadius: _mentorShadowBlur,
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: FaIcon(
+                              FontAwesomeIcons.chalkboardTeacher,
+                              color: Colors.white,
+                              size: 75,
+                            ),
+                          ),
+                          height: 150.0,
+                          width: 150.0,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Text(
+                      'Mentor',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          _enrollmentSelection = 'Mentee';
+                          setState(() {
+                            _nextButtonColor = kMentorXPrimary;
+                            _errorTextColor = kMentorXDark.withOpacity(0);
+
+                            _menteeBackgroundColor = kMentorXPrimary;
+                            _menteeBorderWidth = 4.0;
+                            _menteeBorderColor = Colors.greenAccent;
+                            _menteeShadowBlur = 2.0;
+                            _menteeShadowColor = Colors.grey;
+
+                            _mentorBackgroundColor = Colors.grey;
+                            _mentorBorderWidth = 0.0;
+                            _mentorBorderColor = Colors.grey;
+                            _mentorShadowBlur = 0.0;
+                            _mentorShadowColor = Colors.white;
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                            color: _menteeBackgroundColor,
+                            border: Border.all(
+                              color: _menteeBorderColor,
+                              width: _menteeBorderWidth,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 2,
+                                offset: Offset(4, 3),
+                                color: _menteeShadowColor,
+                                spreadRadius: _menteeShadowBlur,
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                              child: FaIcon(
+                            FontAwesomeIcons.userAstronaut,
+                            color: Colors.white,
+                            size: 75,
+                          )),
+                          height: 150.0,
+                          width: 150.0,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Text(
+                      'Mentee',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        _enrollmentSelection = 'Mentor';
-                        setState(() {
-                          _nextButtonColor = kMentorXPrimary;
-                          _errorTextColor = Colors.white;
-
-                          _mentorBackgroundColor = kMentorXPrimary;
-                          _mentorBorderWidth = 4.0;
-                          _mentorBorderColor = Colors.greenAccent;
-                          _mentorShadowBlur = 2.0;
-                          _mentorShadowColor = Colors.grey;
-
-                          _menteeBackgroundColor = Colors.grey;
-                          _menteeBorderWidth = 0.0;
-                          _menteeBorderColor = Colors.grey;
-                          _menteeShadowBlur = 0.0;
-                          _menteeShadowColor = Colors.white;
-                        });
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
-                          color: _mentorBackgroundColor,
-                          border: Border.all(
-                            color: _mentorBorderColor,
-                            width: _mentorBorderWidth,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 2,
-                              offset: Offset(4, 3),
-                              color: _mentorShadowColor,
-                              spreadRadius: _mentorShadowBlur,
-                            ),
-                          ],
-                        ),
-                        child: Center(
-                          child: FaIcon(
-                            FontAwesomeIcons.chalkboardTeacher,
-                            color: Colors.white,
-                            size: 75,
-                          ),
-                        ),
-                        height: 150.0,
-                        width: 150.0,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Text(
-                    'Mentor',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: kMentorXPrimary,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        _enrollmentSelection = 'Mentee';
-                        setState(() {
-                          _nextButtonColor = kMentorXPrimary;
-                          _errorTextColor = Colors.white;
-
-                          _menteeBackgroundColor = kMentorXPrimary;
-                          _menteeBorderWidth = 4.0;
-                          _menteeBorderColor = Colors.greenAccent;
-                          _menteeShadowBlur = 2.0;
-                          _menteeShadowColor = Colors.grey;
-
-                          _mentorBackgroundColor = Colors.grey;
-                          _mentorBorderWidth = 0.0;
-                          _mentorBorderColor = Colors.grey;
-                          _mentorShadowBlur = 0.0;
-                          _mentorShadowColor = Colors.white;
-                        });
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
-                          color: _menteeBackgroundColor,
-                          border: Border.all(
-                            color: _menteeBorderColor,
-                            width: _menteeBorderWidth,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 2,
-                              offset: Offset(4, 3),
-                              color: _menteeShadowColor,
-                              spreadRadius: _menteeShadowBlur,
-                            ),
-                          ],
-                        ),
-                        child: Center(
-                            child: FaIcon(
-                          FontAwesomeIcons.userAstronaut,
-                          color: Colors.white,
-                          size: 75,
-                        )),
-                        height: 150.0,
-                        width: 150.0,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Text(
-                    'Mentee',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: kMentorXPrimary,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 50.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              RoundedButton(
-                title: 'Next -->',
-                fontSize: 20.0,
-                buttonColor: _nextButtonColor,
-                fontColor: Colors.white,
-                minWidth: 250,
-                onPressed: () async {
-                  if (_enrollmentSelection == 'Mentor') {
-                    await _confirmMentorEnrollment(context);
-                  } else if (_enrollmentSelection == 'Mentee') {
-                    await _confirmMenteeEnrollment(context);
-                  } else {
-                    setState(() {
-                      _errorTextColor = Colors.red;
-                    });
-                  }
-                },
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              RoundedButton(
-                title: 'Back',
-                buttonColor: Colors.grey,
-                fontColor: Colors.white,
-                minWidth: 250,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Please select Mentor or Mentee',
-                style: TextStyle(
-                  color: _errorTextColor,
+            SizedBox(
+              height: 50.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                RoundedButton(
+                  title: 'Next -->',
+                  fontSize: 20.0,
+                  buttonColor: _nextButtonColor,
+                  fontColor: Colors.white,
+                  minWidth: 250,
+                  onPressed: () async {
+                    if (_enrollmentSelection == 'Mentor') {
+                      await _confirmMentorEnrollment(context);
+                    } else if (_enrollmentSelection == 'Mentee') {
+                      await _confirmMenteeEnrollment(context);
+                    } else {
+                      setState(() {
+                        _errorTextColor = Colors.white;
+                      });
+                    }
+                  },
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RoundedButton(
+                  title: 'Back',
+                  buttonColor: Colors.grey,
+                  fontColor: Colors.white,
+                  minWidth: 250,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Please select Mentor or Mentee',
+                  style: TextStyle(
+                    color: _errorTextColor,
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
