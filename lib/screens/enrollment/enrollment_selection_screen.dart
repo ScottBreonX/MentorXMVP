@@ -133,7 +133,7 @@ class _EnrollmentSelectionScreenState extends State<EnrollmentSelectionScreen> {
               titleFontSize: 20.0,
               descriptions: 'Confirm enrollment as mentor?',
               descriptionFontSize: 20.0,
-              textLeft: 'Cancel',
+              textLeft: 'No',
               textRight: 'Yes',
               leftOnPressed: () {
                 Navigator.pop(context);
