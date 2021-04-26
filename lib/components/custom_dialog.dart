@@ -41,7 +41,7 @@ class _CustomDialogState extends State<CustomDialog> {
           margin: EdgeInsets.only(top: Constants.avatarRadius),
           decoration: BoxDecoration(
               shape: BoxShape.rectangle,
-              color: Colors.white,
+              color: kMentorXPrimary.withOpacity(0.9),
               borderRadius: BorderRadius.circular(Constants.padding),
               boxShadow: [
                 BoxShadow(
@@ -58,7 +58,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 style: TextStyle(
                   fontSize: widget.titleFontSize,
                   fontWeight: FontWeight.w600,
-                  color: kMentorXPrimary,
+                  color: Colors.white,
                 ),
               ),
               SizedBox(
@@ -68,7 +68,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 widget.descriptions,
                 style: TextStyle(
                   fontSize: widget.descriptionFontSize,
-                  color: Colors.black54,
+                  color: Colors.white,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -85,7 +85,7 @@ class _CustomDialogState extends State<CustomDialog> {
                           widget.textLeft,
                           style: TextStyle(
                             fontSize: 20,
-                            color: kMentorXPrimary,
+                            color: Colors.white,
                             fontWeight: FontWeight.w300,
                           ),
                         )),
@@ -98,7 +98,7 @@ class _CustomDialogState extends State<CustomDialog> {
                           widget.textRight,
                           style: TextStyle(
                             fontSize: 20,
-                            color: kMentorXPrimary,
+                            color: Colors.white,
                             fontWeight: FontWeight.w700,
                           ),
                         )),
@@ -112,7 +112,7 @@ class _CustomDialogState extends State<CustomDialog> {
           left: Constants.padding,
           right: Constants.padding,
           child: CircleAvatar(
-            backgroundColor: kMentorXPrimary,
+            backgroundColor: kMentorXDark,
             radius: Constants.avatarRadius,
             child: ClipRRect(
               borderRadius: BorderRadius.all(

@@ -84,207 +84,251 @@ class _EnrollmentStartScreenState extends State<EnrollmentStartScreen> {
 
     final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
 
-    Color infoBackground = Colors.white;
-    Color infoText = kMentorXPrimary;
+    Color infoBackground = kMentorXPrimary;
+    Color infoText = Colors.white;
     Color infoOutline = kMentorXPrimary;
 
     return Scaffold(
       drawer: Drawer(
         child: Container(
           child: drawerItems,
-          color: kDrawerItems,
+          decoration: BoxDecoration(
+            color: kMentorXDark,
+          ),
         ),
       ),
       appBar: AppBar(
-        backgroundColor: kMentorXPrimary,
+        backgroundColor: kMentorXDark,
         title: Text('Enrollment'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+              kMentorXBlack.withOpacity(0.95),
+              kMentorXBlack.withOpacity(0.9),
+              kMentorXBlack.withOpacity(0.85),
+              kMentorXBlack.withOpacity(0.8),
+            ])),
+        child: ListView(
           children: [
-            SizedBox(
-              height: 100,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                    child: Text(
-                      'Welcome to the enrollment page',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 40,
-                        color: kMentorXPrimary,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                    child: Text(
-                      'Before you begin, please read the below guides on what to expect',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black54,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20.0),
-                      ),
-                      color: infoBackground,
-                      border: Border.all(
-                        color: infoOutline,
-                        width: 4.0,
-                      ),
-                    ),
-                    height: 100.0,
-                    width: 150.0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: Text(
-                          'What to expect',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: infoText,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20.0),
-                      ),
-                      color: infoBackground,
-                      border: Border.all(
-                        color: infoOutline,
-                        width: 4.0,
-                      ),
-                    ),
-                    height: 100.0,
-                    width: 150.0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: Text(
-                          'Mentorship Timeline',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: infoText,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20.0),
-                      ),
-                      color: infoBackground,
-                      border: Border.all(
-                        color: infoOutline,
-                        width: 4.0,
-                      ),
-                    ),
-                    height: 100.0,
-                    width: 150.0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: Text(
-                          'Info for Mentees',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: infoText,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20.0),
-                      ),
-                      color: infoBackground,
-                      border: Border.all(
-                        color: infoOutline,
-                        width: 4.0,
-                      ),
-                    ),
-                    height: 100.0,
-                    width: 150.0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: Text(
-                          'Info for Mentors',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: infoText,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: RoundedButton(
-                title: 'Proceed to Enrollment -->',
-                buttonColor: kMentorXPrimary,
-                fontColor: Colors.white,
-                fontSize: 20.0,
-                onPressed: () => Navigator.pushNamed(
-                  context,
-                  EnrollmentSelectionScreen.id,
+            Column(
+              children: [
+                SizedBox(
+                  height: 100,
                 ),
-                minWidth: 350,
-              ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          'Welcome to the enrollment page',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 40,
+                            color: kMentorXPrimary,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          'Before you begin, please read the below guides on what to expect',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20.0),
+                          ),
+                          color: infoBackground,
+                          border: Border.all(
+                            color: infoOutline,
+                            width: 4.0,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 2.0,
+                              offset: Offset(2, 2),
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                        height: 100.0,
+                        width: 150.0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text(
+                              'What to expect',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: infoText,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20.0),
+                          ),
+                          color: infoBackground,
+                          border: Border.all(
+                            color: infoOutline,
+                            width: 4.0,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 2.0,
+                              offset: Offset(2, 2),
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                        height: 100.0,
+                        width: 150.0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text(
+                              'Mentorship Timeline',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: infoText,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20.0),
+                          ),
+                          color: infoBackground,
+                          border: Border.all(
+                            color: infoOutline,
+                            width: 4.0,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 2.0,
+                              offset: Offset(2, 2),
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                        height: 100.0,
+                        width: 150.0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text(
+                              'Info for Mentees',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: infoText,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20.0),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 2.0,
+                              offset: Offset(2, 2),
+                              color: Colors.white,
+                            ),
+                          ],
+                          color: infoBackground,
+                          border: Border.all(
+                            color: infoOutline,
+                            width: 4.0,
+                          ),
+                        ),
+                        height: 100.0,
+                        width: 150.0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text(
+                              'Info for Mentors',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: infoText,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RoundedButton(
+                    title: 'Proceed to Enrollment -->',
+                    buttonColor: kMentorXPrimary,
+                    fontColor: Colors.white,
+                    fontSize: 20.0,
+                    onPressed: () => Navigator.pushNamed(
+                      context,
+                      EnrollmentSelectionScreen.id,
+                    ),
+                    minWidth: 350,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

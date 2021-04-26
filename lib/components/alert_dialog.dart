@@ -17,7 +17,7 @@ Future<bool> showAlertDialog(
         content: Text(content),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.canPop(context),
             child: Text(
               defaultActionText,
             ),
