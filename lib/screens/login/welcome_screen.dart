@@ -83,7 +83,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             end: Alignment.bottomCenter,
             colors: [
               kMentorXDark,
-              kMentorXDark,
+              kMentorXBlack,
             ],
           ),
         ),
@@ -98,17 +98,18 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   SizedBox(
                     height: 0,
                   ),
-                  Hero(
-                    tag: 'logo',
-                    child: Container(
-                      height: 150.0,
-                      child: Image.asset('images/XLogo.png'),
+                  Flexible(
+                    child: Hero(
+                      tag: 'logo',
+                      child: Container(
+                        child: Image.asset('images/Mentor.png'),
+                      ),
                     ),
                   ),
                 ],
               ),
               SizedBox(
-                height: 200.0,
+                height: 0.0,
               ),
               RoundedButton(
                 title: 'Sign up',
