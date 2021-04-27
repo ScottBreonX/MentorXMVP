@@ -83,7 +83,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
         labelStyle: TextStyle(color: Colors.white),
         hintText: 'email@domain.com',
         errorText: model.emailErrorText,
-        fillColor: kMentorXDark,
+        fillColor: Colors.white.withOpacity(0.3),
         filled: true,
       ),
     );
@@ -105,7 +105,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
         labelStyle: TextStyle(color: Colors.white),
         errorText: model.passwordErrorText,
         filled: true,
-        fillColor: kMentorXDark,
+        fillColor: Colors.white.withOpacity(0.3),
       ),
     );
   }
@@ -131,7 +131,14 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
             body: Container(
               width: double.infinity,
               height: double.infinity,
-              color: kMentorXDark,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                    kMentorXBlack,
+                    kMentorXDark,
+                  ])),
               child: ModalProgressHUD(
                 inAsyncCall: model.showSpinner,
                 child: SingleChildScrollView(
