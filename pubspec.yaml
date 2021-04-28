@@ -20,7 +20,6 @@ dependencies:
   firebase_core:
   firebase_auth:
   firebase_storage:
-  image_picker:
   path:
   modal_progress_hud:
   cloud_firestore:
