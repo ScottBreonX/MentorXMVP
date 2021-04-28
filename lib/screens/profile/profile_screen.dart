@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/components/work_experience_form.dart';
@@ -13,7 +11,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
-import 'package:path/path.dart' as p;
 import 'package:provider/provider.dart';
 
 User loggedInUser;
@@ -91,66 +88,6 @@ class _MyProfileState extends State<MyProfile> {
         }
       });
     });
-  }
-
-  // Image Picker
-  File _image; // Used only if you need a single picture
-
-  Future getImage(bool gallery) async {
-    ImagePicker picker = ImagePicker();
-    PickedFile pickedFile;
-    // Let user select photo from gallery
-    if (gallery) {
-      pickedFile = await picker.getImage(
-        source: ImageSource.gallery,
-      );
-    }
-    // Otherwise open camera to get new photo
-    else {
-      pickedFile = await picker.getImage(
-        source: ImageSource.camera,
-      );
-    }
-
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-        profilePhotoSelected = true;
-      } else {
-        profilePhotoSelected = false;
-      }
-    });
-  }
-
-  Future<void> saveImage(File _image) async {
-    DocumentReference profileReference = FirebaseFirestore.instance
-        .collection('users')
-        .doc('${loggedInUser.uid}')
-        .collection('profile')
-        .doc('coreInfo');
-
-    String imageURL = await uploadFile(_image);
-    profileReference.update({'images': imageURL});
-    setState(() {
-      getProfileData();
-    });
-  }
-
-//  image formatting
-
-  Future<String> uploadFile(File _image) async {
-    Reference storageReference = FirebaseStorage.instance
-        .ref()
-        .child('profilePictures/${p.basename(_image.path)}');
-
-    UploadTask uploadTask = storageReference.putFile(_image);
-    await uploadTask;
-    print('File Uploaded');
-    String returnURL;
-    await storageReference.getDownloadURL().then((fileURL) {
-      returnURL = fileURL;
-    });
-    return returnURL;
   }
 
   Future<void> _updateAboutMe(BuildContext context) async {
@@ -304,12 +241,7 @@ class _MyProfileState extends State<MyProfile> {
                                   color: kMentorXPrimary,
                                 ),
                                 child: GestureDetector(
-                                  onTap: () async {
-                                    getImage(true).whenComplete(() =>
-                                        profilePhotoSelected
-                                            ? saveImage(_image)
-                                            : null);
-                                  },
+                                  onTap: () {},
                                   child: Icon(
                                     Icons.photo_camera,
                                     color: Colors.white,
