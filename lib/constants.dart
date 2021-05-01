@@ -24,7 +24,7 @@ const kTextFieldDecorationLight = InputDecoration(
   border:
       OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
   enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: kMentorXPrimary, width: 2.0),
+      borderSide: BorderSide(color: Colors.white, width: 2.0),
       borderRadius: BorderRadius.all(Radius.circular(20.0))),
   focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(color: kMentorXPrimary, width: 4.0),
@@ -52,8 +52,8 @@ const kInactiveSendButtonTextStyle =
 const kMentorXPrimary = Color.fromRGBO(51, 173, 251, 1.0);
 const kMentorXMenu = Color.fromRGBO(251, 251, 251, 1.0);
 const kMentorXSecondary = Color.fromRGBO(171, 237, 0, 1.0);
-const kMentorXDark = Color.fromRGBO(84, 84, 84, 1.0);
-const kMentorXBlack = Color.fromRGBO(40, 40, 40, 1.0);
+const kMentorXDark = Color.fromRGBO(40, 40, 40, 1.0);
+const kMentorXBlack = Color.fromRGBO(20, 20, 20, 1.0);
 const kDrawerItems = Colors.white;
 //Color.fromRGBO(4, 52, 106, 1.0)
 //Color.fromRGBO(56, 142, 137, 1.0);

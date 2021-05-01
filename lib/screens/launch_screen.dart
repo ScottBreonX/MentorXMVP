@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/bottom_navigation_bar.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
-import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
-import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -109,199 +107,191 @@ class _LaunchScreenState extends State<LaunchScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              kMentorXBlack.withOpacity(0.95),
-              kMentorXBlack.withOpacity(0.9),
-              kMentorXBlack.withOpacity(0.85),
-              kMentorXBlack.withOpacity(0.8),
-            ])),
-        child: ListView(
+          color: kMentorXDark,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 100,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 2,
-                                  offset: Offset(1, 2),
-                                  spreadRadius: 1,
-                                  color: Colors.grey),
-                            ],
-                          ),
-                          child: CircleAvatar(
-                            backgroundImage: profilePictureStatus
-                                ? NetworkImage(profileData['images'])
-                                : null,
-                            backgroundColor: kMentorXPrimary,
-                            radius: 60,
-                            child: profilePictureStatus
-                                ? null
-                                : Icon(
-                                    Icons.person,
-                                    color: Colors.white,
-                                    size: 50,
-                                  ),
-                          ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => XBottomNavigationBar(
+                          pageIndex: 3,
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  '${profileData['First Name']} ${profileData['Last Name']}',
-                                  style: TextStyle(
-                                    fontSize: 40.0,
-                                    color: kMentorXPrimary,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  '${profileData['Major']}, ${profileData['Year in School']}',
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                      ),
                     ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: const Divider(
-                    color: kMentorXPrimary,
-                    height: 20,
-                    thickness: 4,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '1.) Complete Profile',
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white.withOpacity(0.05),
                       ),
-                      RoundedButton(
-                        title: 'My Profile',
-                        buttonColor: kMentorXPrimary,
-                        minWidth: 150,
-                        fontColor: Colors.white,
-                        onPressed: () {
-                          Navigator.pushNamed(context, MyProfile.id);
-//                          Navigator.push(
-//                            context,
-//                            MaterialPageRoute(
-//                              builder: (context) => XBottomNavigationBar(
-//                                pageIndex: 3,
-//                              ),
-//                            ),
-//                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '2.) View Events',
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      RoundedButton(
-                        title: 'Events',
-                        buttonColor: kMentorXPrimary,
-                        minWidth: 150,
-                        fontColor: Colors.white,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => XBottomNavigationBar(
-                                pageIndex: 1,
-                              ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.person,
+                            color: kMentorXPrimary,
+                            size: 80,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'My Profile',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
                             ),
-                          );
-                        },
+                          )
+                        ],
                       ),
-                    ],
+                      height: 150,
+                      width: 150,
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '3.) Enroll in Program',
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500),
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => XBottomNavigationBar(
+                          pageIndex: 2,
+                        ),
                       ),
-                      RoundedButton(
-                        title: 'Mentoring',
-                        buttonColor: kMentorXPrimary,
-                        minWidth: 150,
-                        fontColor: Colors.white,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => XBottomNavigationBar(
-                                pageIndex: 2,
-                              ),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white.withOpacity(0.05),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.people,
+                            color: kMentorXPrimary,
+                            size: 80,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'Mentoring',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
                             ),
-                          );
-                        },
+                          )
+                        ],
                       ),
-                    ],
+                      height: 150,
+                      width: 150,
+                    ),
                   ),
-                ),
+                )
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => XBottomNavigationBar(
+                          pageIndex: 1,
+                        ),
+                      ),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white.withOpacity(0.05),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.calendar_today_rounded,
+                              color: kMentorXPrimary,
+                              size: 80,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'Upcoming',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          )
+                        ],
+                      ),
+                      height: 150,
+                      width: 150,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => XBottomNavigationBar(
+                          pageIndex: 1,
+                        ),
+                      ),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white.withOpacity(0.05),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.school,
+                              color: kMentorXPrimary,
+                              size: 80,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'My University',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          )
+                        ],
+                      ),
+                      height: 150,
+                      width: 150,
+                    ),
+                  ),
+                )
+              ],
+            )
           ],
         ),
       ),

@@ -60,9 +60,9 @@ class _XBottomNavigationBarState extends State<XBottomNavigationBar> {
     return Scaffold(
       bottomNavigationBar: ConvexAppBar(
         style: TabStyle.reactCircle,
-        activeColor: Colors.white,
+        activeColor: kMentorXPrimary,
         initialActiveIndex: pageIndex,
-        color: Colors.white,
+        color: kMentorXPrimary,
         onTap: onTabTapped,
         backgroundColor: kMentorXDark,
         elevation: 5,
