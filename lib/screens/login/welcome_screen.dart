@@ -83,7 +83,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             end: Alignment.bottomCenter,
             colors: [
               kMentorXDark,
-              kMentorXBlack,
+              kMentorXDark,
             ],
           ),
         ),
