@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-
 class WorkExperienceSection extends StatefulWidget {
   const WorkExperienceSection({
     @required this.title,
@@ -51,36 +49,9 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                   child: Text(
                     widget.title,
                     style: TextStyle(
-                      fontSize: 15.0,
-                      color: Colors.black87,
+                      fontSize: 18.0,
+                      color: Colors.white,
                       fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: GestureDetector(
-                    onTap: widget.workExpEditStatus,
-                    child: Container(
-                      height: 30.0,
-                      width: 30.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-//                        boxShadow: [
-//                          BoxShadow(
-//                            blurRadius: 2,
-//                            offset: Offset(2, 2),
-//                            color: Colors.grey,
-//                            spreadRadius: 0.5,
-//                          )
-//                        ],
-                      ),
-                      child: Icon(
-                        Icons.edit,
-                        color: kMentorXPrimary,
-                        size: 20,
-                      ),
                     ),
                   ),
                 ),
@@ -96,7 +67,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                     widget.company,
                     style: TextStyle(
                       fontSize: 15.0,
-                      color: Colors.black87,
+                      color: Colors.white,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -113,7 +84,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                     widget.dateRange,
                     style: TextStyle(
                       fontSize: 15.0,
-                      color: Colors.black54,
+                      color: Colors.white70,
                     ),
                   ),
                 ),
@@ -129,7 +100,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                     widget.location,
                     style: TextStyle(
                       fontSize: 15.0,
-                      color: Colors.black54,
+                      color: Colors.white70,
                     ),
                   ),
                 ),
@@ -145,7 +116,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                     widget.description,
                     style: TextStyle(
                       fontSize: 15.0,
-                      color: Colors.black87,
+                      color: Colors.white,
                     ),
                   ),
                 ),

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/bottom_navigation_bar.dart';
+import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/services/auth.dart';
@@ -86,6 +87,11 @@ class _LaunchScreenState extends State<LaunchScreen> {
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 
+    Color cardColor = Colors.white.withOpacity(0.10);
+    Color cardIconColor = kMentorXPrimary;
+    Color cardTextColor = Colors.white;
+    Color cardShadowColor = kMentorXBlack;
+
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
@@ -103,7 +109,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
           height: 50,
         ),
         elevation: 5,
-        backgroundColor: kMentorXDark,
+        backgroundColor: kMentorXDark.withOpacity(0.95),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -115,181 +121,75 @@ class _LaunchScreenState extends State<LaunchScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => XBottomNavigationBar(
-                          pageIndex: 3,
-                        ),
+                IconCard(
+                  cardColor: cardColor,
+                  cardIconColor: cardIconColor,
+                  cardTextColor: cardTextColor,
+                  cardText: 'My Profile',
+                  cardIcon: Icons.person,
+                  cardShadowColor: cardShadowColor,
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => XBottomNavigationBar(
+                        pageIndex: 3,
                       ),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white.withOpacity(0.05),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.person,
-                            color: kMentorXPrimary,
-                            size: 80,
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            'My Profile',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                          )
-                        ],
-                      ),
-                      height: 150,
-                      width: 150,
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => XBottomNavigationBar(
-                          pageIndex: 2,
-                        ),
+                IconCard(
+                  cardColor: cardColor,
+                  cardIconColor: cardIconColor,
+                  cardTextColor: cardTextColor,
+                  cardText: 'Mentoring',
+                  cardIcon: Icons.people,
+                  cardShadowColor: cardShadowColor,
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => XBottomNavigationBar(
+                        pageIndex: 2,
                       ),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white.withOpacity(0.05),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.people,
-                            color: kMentorXPrimary,
-                            size: 80,
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            'Mentoring',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                          )
-                        ],
-                      ),
-                      height: 150,
-                      width: 150,
                     ),
                   ),
-                )
+                ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => XBottomNavigationBar(
-                          pageIndex: 1,
-                        ),
+                IconCard(
+                  cardColor: cardColor,
+                  cardIconColor: cardIconColor,
+                  cardTextColor: cardTextColor,
+                  cardText: 'Events',
+                  cardIcon: Icons.calendar_today_rounded,
+                  cardShadowColor: cardShadowColor,
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => XBottomNavigationBar(
+                        pageIndex: 1,
                       ),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white.withOpacity(0.05),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.calendar_today_rounded,
-                              color: kMentorXPrimary,
-                              size: 80,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            'Upcoming',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                          )
-                        ],
-                      ),
-                      height: 150,
-                      width: 150,
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => XBottomNavigationBar(
-                          pageIndex: 1,
-                        ),
+                IconCard(
+                  cardColor: cardColor,
+                  cardIconColor: cardIconColor,
+                  cardTextColor: cardTextColor,
+                  cardText: 'My University',
+                  cardIcon: Icons.school,
+                  cardShadowColor: cardShadowColor,
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => XBottomNavigationBar(
+                        pageIndex: 0,
                       ),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white.withOpacity(0.05),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.school,
-                              color: kMentorXPrimary,
-                              size: 80,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            'My University',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                          )
-                        ],
-                      ),
-                      height: 150,
-                      width: 150,
                     ),
                   ),
-                )
+                ),
               ],
             )
           ],

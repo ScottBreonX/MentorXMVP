@@ -3,7 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
-import 'package:mentorx_mvp/components/menu_bar.dart';
+import 'package:mentorx_mvp/components/icon_circle.dart';
 import 'package:mentorx_mvp/components/work_experience_form.dart';
 import 'package:mentorx_mvp/components/work_experience_section.dart';
 import 'package:mentorx_mvp/constants.dart';
@@ -147,7 +147,7 @@ class _MyProfileState extends State<MyProfile> {
         labelText: '',
         hintText: '',
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 1.0),
+            borderSide: BorderSide(color: kMentorXBlack, width: 1.0),
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: kMentorXPrimary, width: 2.0),
@@ -176,174 +176,203 @@ class _MyProfileState extends State<MyProfile> {
       });
     }
 
-    var drawerHeader = MentorXMenuHeader(
-      fName: '${profileData['First Name']}',
-      lName: '${profileData['Last Name']}',
-      email: '${profileData['Email Address']}',
-      profilePicture: '${profileData['images']}',
-    );
-
-    final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
-
     return Scaffold(
-      drawer: Drawer(
-        child: Container(
-          child: drawerItems,
-          color: kMentorXDark,
-        ),
-      ),
       appBar: AppBar(
-        backgroundColor: kMentorXBlack,
-        elevation: 0,
+        backgroundColor: kMentorXDark.withOpacity(0.95),
+        elevation: 5,
         title: Text('My Profile'),
       ),
       body: Container(
+        color: kMentorXDark,
         child: Column(
           children: [
-            Container(
-              decoration: BoxDecoration(
-                color: kMentorXDark,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Stack(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.10),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 2,
+                      offset: Offset(2, 3),
+                      color: kMentorXBlack,
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              child: CircleAvatar(
-                                backgroundColor: Colors.white,
-                                radius: 60,
-                                backgroundImage: profilePhotoStatus
-                                    ? NetworkImage(profileData['images'])
-                                    : null,
-                                child: profilePhotoStatus
-                                    ? null
-                                    : Icon(
-                                        Icons.person,
-                                        color: kMentorXPrimary,
-                                        size: 70,
+                            Stack(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 2,
+                                        offset: Offset(2, 3),
+                                        color: kMentorXBlack,
                                       ),
+                                    ],
+                                    borderRadius: BorderRadius.circular(60),
+                                  ),
+                                  child: CircleAvatar(
+                                    backgroundColor:
+                                        Colors.white.withOpacity(0.10),
+                                    radius: 50,
+                                    backgroundImage: profilePhotoStatus
+                                        ? NetworkImage(profileData['images'])
+                                        : null,
+                                    child: profilePhotoStatus
+                                        ? null
+                                        : Icon(
+                                            Icons.person,
+                                            color: kMentorXPrimary,
+                                            size: 70,
+                                          ),
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: Container(
+                                    height: 35.0,
+                                    width: 35.0,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: kMentorXPrimary,
+                                    ),
+                                    child: GestureDetector(
+                                      onTap: () {},
+                                      child: Icon(
+                                        Icons.photo_camera,
+                                        color: Colors.white,
+                                        size: 25.0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '${profileData['First Name']}',
+                            style: TextStyle(
+                              fontSize: 30.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Text(
+                            '${profileData['Last Name']}',
+                            style: TextStyle(
+                              fontSize: 30.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  width: 120,
+                                  child: Center(
+                                    child: Text(
+                                      '${profileData['Year in School']}',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                            Positioned(
-                              bottom: 0,
-                              right: 0,
-                              child: Container(
-                                height: 35.0,
-                                width: 35.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: kMentorXPrimary,
+                            Container(
+                              color: kMentorXPrimary,
+                              height: 25,
+                              width: 2,
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  width: 120,
+                                  child: Center(
+                                    child: Text(
+                                      '${profileData['Major']}',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                child: GestureDetector(
-                                  onTap: () {},
-                                  child: Icon(
-                                    Icons.photo_camera,
-                                    color: Colors.white,
-                                    size: 25.0,
+                              ),
+                            ),
+                            Container(
+                              color: kMentorXPrimary,
+                              height: 25,
+                              width: 2,
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  width: 120,
+                                  child: Center(
+                                    child: Text(
+                                      '${profileData['Minor']}',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '${profileData['First Name']}',
-                          style: TextStyle(
-                            fontSize: 30.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        Text(
-                          '${profileData['Last Name']}',
-                          style: TextStyle(
-                            fontSize: 30.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SizedBox(
-                            width: 120,
-                            child: Center(
-                              child: Text(
-                                '${profileData['Year in School']}',
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            color: Colors.white,
-                            height: 30,
-                            width: 2,
-                          ),
-                          SizedBox(
-                            width: 120,
-                            child: Center(
-                              child: Text(
-                                '${profileData['Major']}',
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            color: Colors.white,
-                            height: 30,
-                            width: 2,
-                          ),
-                          SizedBox(
-                            width: 120,
-                            child: Center(
-                              child: Text(
-                                '${profileData['Minor']}',
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: kMentorXDark,
+                  color: kMentorXDark.withOpacity(0.95),
                 ),
                 child: Padding(
                   padding:
@@ -364,7 +393,7 @@ class _MyProfileState extends State<MyProfile> {
                                 Text(
                                   'About Me',
                                   style: TextStyle(
-                                    fontSize: 20.0,
+                                    fontSize: 25.0,
                                     color: kMentorXPrimary,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -445,18 +474,13 @@ class _MyProfileState extends State<MyProfile> {
                                               aboutMeEditStatus = true;
                                             });
                                           },
-                                          child: Container(
-                                            height: 30.0,
+                                          child: IconCircle(
                                             width: 30.0,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Colors.white,
-                                            ),
-                                            child: Icon(
-                                              Icons.edit,
-                                              color: kMentorXPrimary,
-                                              size: 20,
-                                            ),
+                                            height: 30.0,
+                                            circleColor: kMentorXPrimary,
+                                            iconColor: Colors.white,
+                                            iconSize: 20.0,
+                                            iconType: Icons.edit,
                                           ),
                                         ),
                                       ),
@@ -491,7 +515,7 @@ class _MyProfileState extends State<MyProfile> {
                                 Text(
                                   'Work Experience',
                                   style: TextStyle(
-                                    fontSize: 20.0,
+                                    fontSize: 25.0,
                                     color: kMentorXPrimary,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -504,26 +528,13 @@ class _MyProfileState extends State<MyProfile> {
                                         _editWorkExperience(context);
                                       });
                                     },
-                                    child: Container(
+                                    child: IconCircle(
                                       height: 30.0,
                                       width: 30.0,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: kMentorXPrimary,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 2,
-                                            offset: Offset(2, 2),
-                                            color: Colors.grey,
-                                            spreadRadius: 0.5,
-                                          )
-                                        ],
-                                      ),
-                                      child: Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                        size: 20,
-                                      ),
+                                      iconSize: 20.0,
+                                      iconType: Icons.edit,
+                                      circleColor: kMentorXPrimary,
+                                      iconColor: Colors.white,
                                     ),
                                   ),
                                 ),
@@ -545,208 +556,24 @@ class _MyProfileState extends State<MyProfile> {
                             },
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 30.0),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Top Skills',
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                    color: kMentorXPrimary,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: const Divider(
+                              color: Colors.white,
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 20.0, left: 10.0, right: 10.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 5,
-                                        offset: Offset(2, 3),
-                                        color: Colors.grey,
-                                        spreadRadius: 1,
-                                      )
-                                    ],
-                                  ),
-                                  child: CircleAvatar(
-                                    backgroundColor: kMentorXPrimary,
-                                    radius: 45,
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      radius: 43,
-                                      child: Icon(
-                                        Icons.add,
-                                        color: kMentorXPrimary,
-                                        size: 45,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 5,
-                                        offset: Offset(2, 3),
-                                        color: Colors.grey,
-                                        spreadRadius: 1,
-                                      )
-                                    ],
-                                  ),
-                                  child: CircleAvatar(
-                                    backgroundColor: kMentorXPrimary,
-                                    radius: 45,
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      radius: 43,
-                                      child: Icon(
-                                        Icons.add,
-                                        color: kMentorXPrimary,
-                                        size: 45,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 5,
-                                        offset: Offset(2, 3),
-                                        color: Colors.grey,
-                                        spreadRadius: 1,
-                                      )
-                                    ],
-                                  ),
-                                  child: CircleAvatar(
-                                    backgroundColor: kMentorXPrimary,
-                                    radius: 45,
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      radius: 43,
-                                      child: Icon(
-                                        Icons.add,
-                                        color: kMentorXPrimary,
-                                        size: 45,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 30.0),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Hobbies / Interests',
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                    color: kMentorXPrimary,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 20.0, left: 10.0, right: 10.0, bottom: 40),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 5,
-                                        offset: Offset(2, 3),
-                                        color: Colors.grey,
-                                        spreadRadius: 1,
-                                      )
-                                    ],
-                                  ),
-                                  child: CircleAvatar(
-                                    backgroundColor: kMentorXPrimary,
-                                    radius: 45,
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      radius: 43,
-                                      child: Icon(
-                                        Icons.add,
-                                        color: kMentorXPrimary,
-                                        size: 45,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 5,
-                                        offset: Offset(2, 3),
-                                        color: Colors.grey,
-                                        spreadRadius: 1,
-                                      )
-                                    ],
-                                  ),
-                                  child: CircleAvatar(
-                                    backgroundColor: kMentorXPrimary,
-                                    radius: 45,
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      radius: 43,
-                                      child: Icon(
-                                        Icons.add,
-                                        color: kMentorXPrimary,
-                                        size: 45,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 5,
-                                        offset: Offset(2, 3),
-                                        color: Colors.grey,
-                                        spreadRadius: 1,
-                                      )
-                                    ],
-                                  ),
-                                  child: CircleAvatar(
-                                    backgroundColor: kMentorXPrimary,
-                                    radius: 45,
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      radius: 43,
-                                      child: Icon(
-                                        Icons.add,
-                                        color: kMentorXPrimary,
-                                        size: 45,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                          WorkExperienceSection(
+                            title: 'Summer Bro Intern',
+                            company: 'The Walt Disney Company',
+                            dateRange: 'April 2019 - April 2020',
+                            location: 'Burbank, CA',
+                            description: profileData['About Me'],
+                            dividerColor: Colors.transparent,
+                            dividerHeight: 0,
+                            workExpEditStatus: () {
+                              setState(() {
+                                _editWorkExperience(context);
+                              });
+                            },
                           ),
                         ],
                       ),

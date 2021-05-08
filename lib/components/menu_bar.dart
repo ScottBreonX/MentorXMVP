@@ -30,44 +30,70 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
       profilePictureStatus = true;
     }
 
-    return UserAccountsDrawerHeader(
-      key: _scaffoldKey,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: [
-            kMentorXBlack,
-            kMentorXBlack,
-          ],
-        ),
-      ),
-      accountName: Text('${widget.fName} ${widget.lName}'),
-      accountEmail: Text('${widget.email}'),
-      currentAccountPicture: CircleAvatar(
-        backgroundImage:
-            profilePictureStatus ? NetworkImage(widget.profilePicture) : null,
-        backgroundColor: Colors.white,
-        child: profilePictureStatus
-            ? null
-            : Icon(
-                Icons.person,
-                color: kMentorXPrimary,
-                size: 42.0,
-              ),
-      ),
-      otherAccountsPictures: [
-        CircleAvatar(
-          backgroundColor: kMentorXBlack,
-          child: GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
-            child: Icon(
-              Icons.close,
-              color: kMentorXPrimary,
-            ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: UserAccountsDrawerHeader(
+        key: _scaffoldKey,
+        decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.10),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: kMentorXBlack,
+                offset: Offset(1, 2),
+                blurRadius: 2,
+              )
+            ]),
+        accountName: Text(
+          '${widget.fName} ${widget.lName}',
+          style: TextStyle(
+            color: Colors.white,
           ),
-        )
-      ],
+        ),
+        accountEmail: Text(
+          '${widget.email}',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        currentAccountPicture: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(60),
+              color: Colors.white.withOpacity(0.05),
+              boxShadow: [
+                BoxShadow(
+                  color: kMentorXBlack,
+                  offset: Offset(2, 3),
+                  blurRadius: 2,
+                ),
+              ]),
+          child: CircleAvatar(
+            backgroundImage: profilePictureStatus
+                ? NetworkImage(widget.profilePicture)
+                : null,
+            backgroundColor: Colors.white.withOpacity(0.05),
+            child: profilePictureStatus
+                ? null
+                : Icon(
+                    Icons.person,
+                    color: kMentorXPrimary,
+                    size: 42.0,
+                  ),
+          ),
+        ),
+        otherAccountsPictures: [
+          CircleAvatar(
+            backgroundColor: Colors.white.withOpacity(0),
+            child: GestureDetector(
+              onTap: () => Navigator.of(context).pop(),
+              child: Icon(
+                Icons.close,
+                color: kMentorXPrimary,
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -87,11 +113,11 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.home,
-            color: kMentorXMenu,
+            color: Colors.white,
           ),
           title: Text(
             'Home',
-            style: TextStyle(color: kMentorXMenu, fontSize: 20),
+            style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onTap: () => Navigator.push(
             context,
@@ -105,11 +131,11 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.person,
-            color: kMentorXMenu,
+            color: Colors.white,
           ),
           title: Text(
             'My Profile',
-            style: TextStyle(color: kMentorXMenu, fontSize: 20),
+            style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onTap: () => Navigator.push(
             context,
@@ -123,11 +149,11 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.people,
-            color: kMentorXMenu,
+            color: Colors.white,
           ),
           title: Text(
             'Mentoring',
-            style: TextStyle(color: kMentorXMenu, fontSize: 20),
+            style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onTap: () => Navigator.push(
             context,
@@ -141,11 +167,11 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.calendar_today,
-            color: kMentorXMenu,
+            color: Colors.white,
           ),
           title: Text(
             'Events',
-            style: TextStyle(color: kMentorXMenu, fontSize: 20),
+            style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onTap: () {
             Navigator.push(
@@ -161,29 +187,29 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.settings,
-            color: kMentorXMenu,
+            color: Colors.white,
           ),
           title: Text(
             'Settings',
-            style: TextStyle(color: kMentorXMenu, fontSize: 20),
+            style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onTap: () {},
         ),
         ListTile(
           title: const Text(
             '',
-            style: TextStyle(color: kMentorXMenu),
+            style: TextStyle(color: Colors.white),
           ),
           onTap: () {},
         ),
         ListTile(
           leading: Icon(
             Icons.exit_to_app_rounded,
-            color: kMentorXMenu,
+            color: Colors.white,
           ),
           title: Text(
             'Log Out',
-            style: TextStyle(color: kMentorXMenu, fontSize: 20),
+            style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onTap: () {
             confirmSignOut(context);

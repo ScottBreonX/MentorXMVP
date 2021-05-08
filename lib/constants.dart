@@ -50,7 +50,6 @@ const kInactiveSendButtonTextStyle =
     TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 18.0);
 
 const kMentorXPrimary = Color.fromRGBO(51, 173, 251, 1.0);
-const kMentorXMenu = Color.fromRGBO(251, 251, 251, 1.0);
 const kMentorXSecondary = Color.fromRGBO(171, 237, 0, 1.0);
 const kMentorXDark = Color.fromRGBO(40, 40, 40, 1.0);
 const kMentorXBlack = Color.fromRGBO(20, 20, 20, 1.0);

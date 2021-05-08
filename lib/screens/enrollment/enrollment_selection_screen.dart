@@ -192,20 +192,11 @@ class _EnrollmentSelectionScreenState extends State<EnrollmentSelectionScreen> {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: kMentorXDark,
+        backgroundColor: kMentorXDark.withOpacity(0.95),
         title: Text('Mentoring'),
       ),
       body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              kMentorXBlack.withOpacity(0.95),
-              kMentorXBlack.withOpacity(0.9),
-              kMentorXBlack.withOpacity(0.85),
-              kMentorXBlack.withOpacity(0.8),
-            ])),
+        decoration: BoxDecoration(color: kMentorXDark),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -214,12 +205,14 @@ class _EnrollmentSelectionScreenState extends State<EnrollmentSelectionScreen> {
               child: Row(
                 children: [
                   Flexible(
-                    child: Text(
-                      'Select your enrollment',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 50.0,
-                        color: Colors.white,
+                    child: Center(
+                      child: Text(
+                        'Select your enrollment',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 30.0,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -376,7 +369,7 @@ class _EnrollmentSelectionScreenState extends State<EnrollmentSelectionScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 RoundedButton(
-                  title: 'Next -->',
+                  title: 'Next',
                   fontSize: 20.0,
                   buttonColor: _nextButtonColor,
                   fontColor: Colors.white,
@@ -400,6 +393,7 @@ class _EnrollmentSelectionScreenState extends State<EnrollmentSelectionScreen> {
               children: [
                 RoundedButton(
                   title: 'Back',
+                  fontSize: 20.0,
                   buttonColor: Colors.grey,
                   fontColor: Colors.white,
                   minWidth: 250,

@@ -6,7 +6,6 @@ import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
-import 'package:mentorx_mvp/components/sign_out.dart';
 
 User loggedInUser;
 
@@ -80,29 +79,21 @@ class _EventsScreenState extends State<EventsScreen> {
       drawer: Drawer(
         child: Container(
           child: drawerItems,
-          color: kDrawerItems,
+          decoration: BoxDecoration(
+            color: kMentorXDark,
+          ),
         ),
       ),
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         title: Image.asset(
           'images/XLogoWhite.png',
           height: 50,
         ),
-        elevation: 0,
-        actions: [
-          TextButton(
-            onPressed: () {
-              confirmSignOut(context);
-            },
-            child: Text(
-              'Logout',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ],
-        backgroundColor: kMentorXBlack,
+        elevation: 5,
+        backgroundColor: kMentorXDark,
       ),
-      backgroundColor: kMentorXDark,
+      backgroundColor: kMentorXDark.withOpacity(0.95),
       body: Container(),
     );
   }
