@@ -64,7 +64,9 @@ class _XBottomNavigationBarState extends State<XBottomNavigationBar> {
         initialActiveIndex: pageIndex,
         color: kMentorXPrimary,
         onTap: onTabTapped,
-        backgroundColor: kMentorXDark,
+        backgroundColor: Color.fromRGBO(47, 47, 47, 1),
+        top: -30,
+        curveSize: 100,
         elevation: 5,
         items: [
           TabItem(
