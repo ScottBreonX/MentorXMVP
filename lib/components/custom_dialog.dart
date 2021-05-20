@@ -41,13 +41,15 @@ class _CustomDialogState extends State<CustomDialog> {
           margin: EdgeInsets.only(top: Constants.avatarRadius),
           decoration: BoxDecoration(
               shape: BoxShape.rectangle,
-              color: kMentorXPrimary.withOpacity(0.9),
-              borderRadius: BorderRadius.circular(Constants.padding),
+              color: Colors.white.withOpacity(0.1),
+              border: Border.all(
+                color: kMentorXBlack,
+                width: 0.0,
+              ),
+              borderRadius: BorderRadius.circular(20.0),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black,
-                  offset: Offset(0, 10),
-                  blurRadius: 10,
+                  offset: Offset(0, 2),
                 ),
               ]),
           child: Column(
@@ -86,7 +88,7 @@ class _CustomDialogState extends State<CustomDialog> {
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,
-                            fontWeight: FontWeight.w300,
+                            fontWeight: FontWeight.w700,
                           ),
                         )),
                   ),
@@ -111,14 +113,28 @@ class _CustomDialogState extends State<CustomDialog> {
         Positioned(
           left: Constants.padding,
           right: Constants.padding,
-          child: CircleAvatar(
-            backgroundColor: kMentorXDark,
-            radius: Constants.avatarRadius,
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(
-                Radius.circular(Constants.avatarRadius),
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 2),
+                )
+              ],
+            ),
+            child: CircleAvatar(
+              backgroundColor: Colors.white.withOpacity(0.10),
+              radius: Constants.avatarRadius,
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(Constants.avatarRadius),
+                ),
+                child: Image.asset(
+                  "images/XLogoWhite.png",
+                  width: 80,
+                  height: 80,
+                ),
               ),
-              child: Image.asset("images/XLogoWhite.png"),
             ),
           ),
         ), // top part

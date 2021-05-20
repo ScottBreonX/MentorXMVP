@@ -83,7 +83,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
         labelStyle: TextStyle(color: Colors.white),
         hintText: 'email@domain.com',
         errorText: model.emailErrorText,
-        fillColor: Colors.white.withOpacity(0.0),
+        fillColor: Colors.white.withOpacity(0.10),
         filled: true,
       ),
     );
@@ -105,7 +105,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
         labelStyle: TextStyle(color: Colors.white),
         errorText: model.passwordErrorText,
         filled: true,
-        fillColor: Colors.white.withOpacity(0.0),
+        fillColor: Colors.white.withOpacity(0.10),
       ),
     );
   }
@@ -123,7 +123,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
 
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: kMentorXPrimary,
+              backgroundColor: kMentorXBlack.withOpacity(0.90),
               title: Text('Log In'),
               centerTitle: true,
             ),
@@ -133,11 +133,11 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
               height: double.infinity,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
                       colors: [
-                    kMentorXDark,
-                    kMentorXDark,
+                    kMentorXBlack,
+                    kMentorXBlack,
                   ])),
               child: ModalProgressHUD(
                 inAsyncCall: model.showSpinner,
@@ -163,11 +163,31 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                         SizedBox(
                           height: 48.0,
                         ),
-                        _buildEmailTextField(model),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 2),
+                              )
+                            ],
+                          ),
+                          child: _buildEmailTextField(model),
+                        ),
                         SizedBox(
                           height: 20,
                         ),
-                        _buildPasswordTextField(model),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 2),
+                              )
+                            ],
+                          ),
+                          child: _buildPasswordTextField(model),
+                        ),
                         SizedBox(height: 20.0),
                         RoundedButton(
                           onPressed: model.canSubmit ? _submit : null,
