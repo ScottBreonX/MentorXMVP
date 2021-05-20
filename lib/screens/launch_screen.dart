@@ -90,7 +90,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
     Color cardColor = Colors.white.withOpacity(0.10);
     Color cardIconColor = kMentorXPrimary;
     Color cardTextColor = Colors.white;
-    Color cardShadowColor = kMentorXBlack;
+    Color cardShadowColor = Colors.black;
 
     return Scaffold(
       key: _scaffoldKey,
@@ -109,11 +109,11 @@ class _LaunchScreenState extends State<LaunchScreen> {
           height: 50,
         ),
         elevation: 5,
-        backgroundColor: kMentorXDark.withOpacity(0.95),
+        backgroundColor: kMentorXBlack.withOpacity(0.9),
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: kMentorXDark,
+          color: kMentorXBlack,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

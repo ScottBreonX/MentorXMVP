@@ -71,6 +71,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               "Email is already in use. Try new email or proceed to log in.",
           defaultActionText: "Ok",
         );
+      } else {
+        showAlertDialog(
+          context,
+          title: "Password",
+          content: "Password should be at least 6 characters in length",
+          defaultActionText: "Ok",
+        );
       }
     } catch (e) {
       showAlertDialog(
@@ -99,7 +106,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         labelStyle: TextStyle(color: Colors.white),
         hintText: 'email@domain.com',
         errorText: model.emailErrorText,
-        fillColor: kMentorXDark,
+        fillColor: Colors.white.withOpacity(0.1),
         filled: true,
       ),
     );
@@ -120,7 +127,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         labelText: 'Enter your password',
         labelStyle: TextStyle(color: Colors.white),
         errorText: model.passwordErrorText,
-        fillColor: kMentorXDark,
+        fillColor: Colors.white.withOpacity(0.10),
         filled: true,
       ),
     );
@@ -141,7 +148,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         labelText: 'Re-enter your password',
         labelStyle: TextStyle(color: Colors.white),
         errorText: model.passwordErrorText,
-        fillColor: kMentorXDark,
+        fillColor: Colors.white.withOpacity(0.10),
         filled: true,
       ),
     );
@@ -159,15 +166,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: kMentorXPrimary,
+              backgroundColor: kMentorXDark,
               title: Text('Create Account'),
               centerTitle: true,
             ),
-//            backgroundColor: Colors.white,
             body: Container(
               height: double.infinity,
               width: double.infinity,
-              color: kMentorXDark,
+              color: kMentorXBlack,
               child: ModalProgressHUD(
                 inAsyncCall: model.showSpinner,
                 child: SingleChildScrollView(
@@ -192,15 +198,45 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         SizedBox(
                           height: 20.0,
                         ),
-                        _buildEmailTextField(model),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 2),
+                              )
+                            ],
+                          ),
+                          child: _buildEmailTextField(model),
+                        ),
                         SizedBox(
                           height: 20,
                         ),
-                        _buildPasswordTextField(model),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 2),
+                              )
+                            ],
+                          ),
+                          child: _buildPasswordTextField(model),
+                        ),
                         SizedBox(
                           height: 20.0,
                         ),
-                        _buildConfirmPasswordTextField(model),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 2),
+                              )
+                            ],
+                          ),
+                          child: _buildConfirmPasswordTextField(model),
+                        ),
                         SizedBox(height: 10.0),
                         RoundedButton(
                           onPressed: () {
