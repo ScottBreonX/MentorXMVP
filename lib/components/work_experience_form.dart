@@ -51,7 +51,13 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
             margin: EdgeInsets.only(top: Constants.avatarRadius),
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
-              color: kMentorXPrimary.withOpacity(0.5),
+              color: Colors.white.withOpacity(0.1),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black,
+                  offset: Offset(2, 3),
+                ),
+              ],
               borderRadius: BorderRadius.circular(Constants.padding),
             ),
             child: ListView(
@@ -121,7 +127,7 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
                     ),
                     RoundedButton(
                       title: 'Save',
-                      buttonColor: kMentorXSecondary.withOpacity(0.6),
+                      buttonColor: kMentorXPrimary.withOpacity(1.0),
                       fontColor: Colors.white,
                       fontSize: 20,
                       onPressed: () {
@@ -137,18 +143,29 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
           Positioned(
             left: Constants.padding,
             right: Constants.padding,
-            child: CircleAvatar(
-              backgroundColor: kMentorXPrimary,
-              radius: Constants.avatarRadius,
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(Constants.avatarRadius),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Image.asset(
-                    "images/XLogoWhite.png",
-                    fit: BoxFit.fill,
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black,
+                    offset: Offset(2, 3),
+                  )
+                ],
+              ),
+              child: CircleAvatar(
+                backgroundColor: Colors.white.withOpacity(0.1),
+                radius: Constants.avatarRadius,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(Constants.avatarRadius),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Image.asset(
+                      "images/XLogoWhite.png",
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               ),
@@ -163,7 +180,7 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
                 onTap: () => Navigator.pop(context),
                 child: Icon(
                   Icons.save,
-                  color: kMentorXSecondary,
+                  color: kMentorXPrimary,
                   size: 30,
                 ),
               ),
