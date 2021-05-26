@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
@@ -16,6 +17,7 @@ class MenteeScreen extends StatefulWidget {
 
 class _MenteeScreenState extends State<MenteeScreen> {
   final _auth = FirebaseAuth.instance;
+  PageController _pageController;
 
   @override
   void initState() {
@@ -54,12 +56,14 @@ class _MenteeScreenState extends State<MenteeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kMentorXPrimary,
+        backgroundColor: kMentorXBlack.withOpacity(0.9),
+        elevation: 5,
         title: Text('Mentoring'),
       ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
+        decoration: BoxDecoration(color: kMentorXDark),
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),

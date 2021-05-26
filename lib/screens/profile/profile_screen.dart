@@ -39,7 +39,7 @@ class _MyProfileState extends State<MyProfile> {
   void initState() {
     getCurrentUser();
     getProfileData();
-    getWorkData();
+    getWorkExpData();
     aboutMeEditStatus = false;
     super.initState();
   }
@@ -75,7 +75,7 @@ class _MyProfileState extends State<MyProfile> {
 
   dynamic workExperienceData;
 
-  Future<dynamic> getWorkData() async {
+  Future<dynamic> getWorkExpData() async {
     await FirebaseFirestore.instance
         .collection('users/${loggedInUser.uid}/workExperience')
         .get()
@@ -542,11 +542,15 @@ class _MyProfileState extends State<MyProfile> {
                             ),
                           ),
                           WorkExperienceSection(
-                            title: 'Summer Bro Intern',
-                            company: 'The Walt Disney Company',
-                            dateRange: 'April 2019 - April 2020',
-                            location: 'Burbank, CA',
-                            description: profileData['About Me'],
+                            title: workExperienceData['title1'] ?? "<Blank>",
+                            company:
+                                workExperienceData['company1'] ?? "<Blank>",
+                            dateRange:
+                                workExperienceData['dateRange1'] ?? "<Blank>",
+                            location:
+                                workExperienceData['location1'] ?? "<Blank>",
+                            description:
+                                workExperienceData['description1'] ?? "<Blank>",
                             dividerColor: Colors.transparent,
                             dividerHeight: 0,
                             workExpEditStatus: () {
