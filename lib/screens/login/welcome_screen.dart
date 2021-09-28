@@ -82,8 +82,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              kMentorXDark,
-              kMentorXBlack,
+              Colors.pink,
+              Colors.blue,
             ],
           ),
         ),
@@ -102,7 +102,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     child: Hero(
                       tag: 'logo',
                       child: Container(
-                        child: Image.asset('images/Mentor.png'),
+                        child: Image.asset('images/MentorWhite.png'),
                       ),
                     ),
                   ),
@@ -112,17 +112,19 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 height: 0.0,
               ),
               RoundedButton(
-                title: 'Sign up',
+                title: 'Sign in',
                 buttonColor: kMentorXPrimary,
                 fontColor: Colors.white,
-                onPressed: () => widget._createNewUser(context),
+                fontSize: 20.0,
+                onPressed: () => widget._signInWithEmail(context),
                 minWidth: 250.0,
               ),
               RoundedButton(
-                title: 'Sign in',
+                title: 'Sign up',
                 buttonColor: Colors.white,
                 fontColor: kMentorXPrimary,
-                onPressed: () => widget._signInWithEmail(context),
+                fontSize: 20.0,
+                onPressed: () => widget._createNewUser(context),
                 minWidth: 250.0,
               ),
             ],

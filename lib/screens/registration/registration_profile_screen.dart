@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
-import 'package:mentorx_mvp/bottom_navigation_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
+import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
 User loggedInUser;
@@ -96,13 +96,13 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       textAlign: TextAlign.center,
       onChanged: (value) => fName = value,
       style: TextStyle(
-        color: kMentorXPrimary,
+        color: Colors.white,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Enter your first name',
-        fillColor: Colors.white70,
+        fillColor: Colors.white.withOpacity(0.05),
         filled: true,
 //        errorText: model.emailErrorText,
       ),
@@ -117,13 +117,13 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       textAlign: TextAlign.center,
       onChanged: (value) => lName = value,
       style: TextStyle(
-        color: kMentorXPrimary,
+        color: Colors.white,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Enter your last name',
-        fillColor: Colors.white70,
+        fillColor: Colors.white.withOpacity(0.05),
         filled: true,
 //        errorText: model.emailErrorText,
       ),
@@ -138,14 +138,14 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       textAlign: TextAlign.center,
       onChanged: (value) => major = value,
       style: TextStyle(
-        color: kMentorXPrimary,
+        color: Colors.white,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
         labelText: 'Enter your field of study',
         hintText: 'i.e. Economics',
-        fillColor: Colors.white70,
+        fillColor: Colors.white.withOpacity(0.05),
         filled: true,
 //        errorText: model.emailErrorText,
       ),
@@ -160,7 +160,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       textAlign: TextAlign.center,
       onChanged: (value) => yearInSchool = value,
       style: TextStyle(
-        color: kMentorXPrimary,
+        color: Colors.white,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
@@ -168,7 +168,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
         labelText: 'Year in School',
         hintText: 'i.e. Junior',
         filled: true,
-        fillColor: Colors.white70,
+        fillColor: Colors.white.withOpacity(0.05),
       ),
     );
   }
@@ -177,16 +177,27 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
   Widget build(BuildContext context) {
     timeDilation = 2.0;
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: kMentorXPrimary,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
         title: Text('Create Profile'),
         centerTitle: true,
       ),
-//            backgroundColor: Colors.white,
       body: Container(
+        padding: EdgeInsets.only(top: 100),
         height: double.infinity,
         width: double.infinity,
-        color: kMentorXDark,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.blue,
+              Colors.pink,
+            ],
+          ),
+        ),
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(
@@ -203,7 +214,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                   tag: 'logo',
                   child: Container(
                     height: 150.0,
-                    child: Image.asset('images/XLogo.png'),
+                    child: Image.asset('images/MLogoWhite.png'),
                   ),
                 ),
                 SizedBox(
@@ -226,7 +237,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                 RoundedButton(
                   onPressed: () async {
                     await _createProfile(context);
-                    Navigator.pushNamed(context, XBottomNavigationBar.id);
+                    Navigator.pushNamed(context, LaunchScreen.id);
                   },
                   title: 'Submit',
                   buttonColor: kMentorXPrimary,

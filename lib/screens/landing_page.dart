@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/bottom_navigation_bar.dart';
+import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/login/welcome_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
@@ -22,9 +22,7 @@ class LandingPage extends StatelessWidget {
           }
           return Provider<Database>(
             create: (_) => FirestoreDatabase(uid: user.uid),
-            child: XBottomNavigationBar(
-              pageIndex: 0,
-            ),
+            child: LaunchScreen(),
           );
         }
         return Scaffold(

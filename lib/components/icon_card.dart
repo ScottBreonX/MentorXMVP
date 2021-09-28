@@ -44,7 +44,10 @@ class IconCard extends StatelessWidget {
                 color: cardShadowColor,
               ),
             ],
-            color: cardColor,
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.blue, Colors.pink]),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
