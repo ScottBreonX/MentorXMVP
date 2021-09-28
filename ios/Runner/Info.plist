@@ -9,11 +9,11 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow access to MentorX for image upload</string>
 	<key>NSHumanReadableCopyright</key>
-	<string></string>
+	<string>Mentor+</string>
 	<key>CFBundleGetInfoString</key>
-	<string></string>
+	<string>Mentor+</string>
 	<key>CFBundleDisplayName</key>
-	<string></string>
+	<string>Mentor+</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>CFBundleDevelopmentRegion</key>

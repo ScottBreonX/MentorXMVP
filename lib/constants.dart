@@ -18,14 +18,27 @@ const kTextFieldDecorationDark = InputDecoration(
 
 const kTextFieldDecorationLight = InputDecoration(
   labelText: 'Enter a value',
-  labelStyle: TextStyle(color: kMentorXPrimary),
-  hintStyle: TextStyle(color: Colors.grey),
+  labelStyle: TextStyle(color: Colors.white),
+  hintStyle: TextStyle(color: Colors.white70),
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-  border:
-      OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.grey, width: 4.0),
+    borderRadius: BorderRadius.all(
+      Radius.circular(20.0),
+    ),
+  ),
+  disabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.grey, width: 4.0),
+    borderRadius: BorderRadius.all(
+      Radius.circular(20.0),
+    ),
+  ),
   focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: kMentorXPrimary, width: 4.0),
-      borderRadius: BorderRadius.all(Radius.circular(20.0))),
+    borderSide: BorderSide(color: Colors.white, width: 4.0),
+    borderRadius: BorderRadius.all(
+      Radius.circular(20.0),
+    ),
+  ),
 );
 
 const kMessageTextFieldDecoration = InputDecoration(

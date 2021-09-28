@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
+import 'package:mentorx_mvp/screens/events/events_screen.dart';
+import 'package:mentorx_mvp/screens/home_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
+import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import '../constants.dart';
-import '../bottom_navigation_bar.dart';
 
 class MentorXMenuHeader extends StatefulWidget {
   const MentorXMenuHeader(
@@ -119,14 +122,7 @@ class MentorXMenuList extends StatelessWidget {
             'Home',
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => XBottomNavigationBar(
-                pageIndex: 0,
-              ),
-            ),
-          ),
+          onTap: () => Navigator.pushNamed(context, LaunchScreen.id),
         ),
         ListTile(
           leading: Icon(
@@ -137,14 +133,7 @@ class MentorXMenuList extends StatelessWidget {
             'My Profile',
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => XBottomNavigationBar(
-                pageIndex: 3,
-              ),
-            ),
-          ),
+          onTap: () => Navigator.pushNamed(context, MyProfile.id),
         ),
         ListTile(
           leading: Icon(
@@ -155,14 +144,7 @@ class MentorXMenuList extends StatelessWidget {
             'Mentoring',
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => XBottomNavigationBar(
-                pageIndex: 2,
-              ),
-            ),
-          ),
+          onTap: () => Navigator.pushNamed(context, MentoringScreen.id),
         ),
         ListTile(
           leading: Icon(
@@ -174,14 +156,7 @@ class MentorXMenuList extends StatelessWidget {
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => XBottomNavigationBar(
-                  pageIndex: 1,
-                ),
-              ),
-            );
+            Navigator.pushNamed(context, EventsScreen.id);
           },
         ),
         ListTile(

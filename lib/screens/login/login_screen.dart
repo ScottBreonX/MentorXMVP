@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
-import 'package:mentorx_mvp/bottom_navigation_bar.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/models/login_model.dart';
+import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/registration/registration_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -55,7 +55,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
   Future<void> _submit() async {
     try {
       await widget.bloc.submit();
-      Navigator.of(context).popAndPushNamed(XBottomNavigationBar.id);
+      Navigator.of(context).popAndPushNamed(LaunchScreen.id);
     } catch (e) {
       showAlertDialog(
         context,
@@ -83,8 +83,8 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
         labelStyle: TextStyle(color: Colors.white),
         hintText: 'email@domain.com',
         errorText: model.emailErrorText,
-        fillColor: Colors.white.withOpacity(0.10),
         filled: true,
+        fillColor: Colors.white.withOpacity(0.05),
       ),
     );
   }
@@ -105,7 +105,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
         labelStyle: TextStyle(color: Colors.white),
         errorText: model.passwordErrorText,
         filled: true,
-        fillColor: Colors.white.withOpacity(0.10),
+        fillColor: Colors.white.withOpacity(0.05),
       ),
     );
   }
@@ -122,13 +122,15 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
           model.canSubmit;
 
           return Scaffold(
+            extendBodyBehindAppBar: true,
             appBar: AppBar(
-              backgroundColor: kMentorXBlack.withOpacity(0.90),
-              title: Text('Log In'),
+              elevation: 0,
+              backgroundColor: Colors.transparent,
               centerTitle: true,
             ),
             backgroundColor: Colors.white,
             body: Container(
+              padding: EdgeInsets.only(top: 100),
               width: double.infinity,
               height: double.infinity,
               decoration: BoxDecoration(
@@ -136,8 +138,8 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                    kMentorXBlack,
-                    kMentorXBlack,
+                    Colors.blue,
+                    Colors.pink,
                   ])),
               child: ModalProgressHUD(
                 inAsyncCall: model.showSpinner,
@@ -157,35 +159,19 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                           tag: 'logo',
                           child: Container(
                             height: 150.0,
-                            child: Image.asset('images/XLogo.png'),
+                            child: Image.asset('images/MLogoWhite.png'),
                           ),
                         ),
                         SizedBox(
                           height: 48.0,
                         ),
                         Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 2),
-                              )
-                            ],
-                          ),
                           child: _buildEmailTextField(model),
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 2),
-                              )
-                            ],
-                          ),
                           child: _buildPasswordTextField(model),
                         ),
                         SizedBox(height: 20.0),
@@ -194,7 +180,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                           title: 'LOG IN',
                           buttonColor: model.canSubmit
                               ? kMentorXPrimary
-                              : Colors.grey.shade600,
+                              : Colors.white.withOpacity(0.5),
                           minWidth: 500,
                           fontColor: Colors.white,
                         ),
@@ -214,7 +200,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                                 'Register',
                                 style: TextStyle(
                                     fontSize: 20,
-                                    color: kMentorXPrimary,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.w600),
                               ),
                               onTap: () => widget._createNewUser(context),

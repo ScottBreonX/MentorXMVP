@@ -4,7 +4,7 @@ import 'package:mentorx_mvp/screens/enrollment/available_mentors_screen.dart';
 import 'package:mentorx_mvp/screens/enrollment/enrollment_start_screen.dart';
 import 'package:mentorx_mvp/screens/enrollment/enrollment_selection_screen.dart';
 import 'package:mentorx_mvp/screens/landing_page.dart';
-import 'package:mentorx_mvp/screens/launch_screen.dart';
+import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/login/login_screen.dart';
 import 'package:mentorx_mvp/screens/enrollment/mentee_screen.dart';
 import 'package:mentorx_mvp/screens/chat/mentor_chat_screen.dart';
@@ -14,7 +14,6 @@ import 'package:mentorx_mvp/screens/registration/registration_profile_screen.dar
 import 'package:mentorx_mvp/screens/enrollment/view_profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
-import 'bottom_navigation_bar.dart';
 import 'screens/login/welcome_screen.dart';
 import 'screens/login/login_screen.dart';
 import 'screens/registration/registration_screen.dart';
@@ -60,9 +59,6 @@ class MentorX extends StatelessWidget {
           MentorScreen.id: (context) => MentorScreen(),
           AvailableMentors.id: (context) => AvailableMentors(),
           LandingPage.id: (context) => LandingPage(),
-          XBottomNavigationBar.id: (context) => XBottomNavigationBar(
-                pageIndex: 0,
-              ),
           ViewProfile.id: (context) => ViewProfile(),
           MentorChatScreen.id: (context) => MentorChatScreen(),
           EnrollmentStartScreen.id: (context) => EnrollmentStartScreen(),

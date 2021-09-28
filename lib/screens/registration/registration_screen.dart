@@ -165,15 +165,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           model.canSubmit;
 
           return Scaffold(
+            extendBodyBehindAppBar: true,
             appBar: AppBar(
-              backgroundColor: kMentorXDark,
-              title: Text('Create Account'),
+              elevation: 0,
+              backgroundColor: Colors.transparent,
               centerTitle: true,
             ),
             body: Container(
+              padding: EdgeInsets.only(top: 100),
               height: double.infinity,
               width: double.infinity,
-              color: kMentorXBlack,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.blue,
+                    Colors.pink,
+                  ],
+                ),
+              ),
               child: ModalProgressHUD(
                 inAsyncCall: model.showSpinner,
                 child: SingleChildScrollView(
@@ -192,49 +203,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           tag: 'logo',
                           child: Container(
                             height: 150.0,
-                            child: Image.asset('images/XLogo.png'),
+                            child: Image.asset('images/MLogoWhite.png'),
                           ),
                         ),
                         SizedBox(
                           height: 20.0,
                         ),
                         Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 2),
-                              )
-                            ],
-                          ),
                           child: _buildEmailTextField(model),
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 2),
-                              )
-                            ],
-                          ),
                           child: _buildPasswordTextField(model),
                         ),
                         SizedBox(
                           height: 20.0,
                         ),
                         Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 2),
-                              )
-                            ],
-                          ),
                           child: _buildConfirmPasswordTextField(model),
                         ),
                         SizedBox(height: 10.0),
