@@ -33,16 +33,25 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
       profilePictureStatus = true;
     }
 
+    Color accountCardTextColor = kMentorXPrimary;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: UserAccountsDrawerHeader(
         key: _scaffoldKey,
         decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.10),
+            gradient: LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [
+                  Colors.white,
+                  Colors.pink.shade100,
+                  Colors.blue.shade100,
+                ]),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: kMentorXBlack,
+                color: Colors.black54,
                 offset: Offset(1, 2),
                 blurRadius: 2,
               )
@@ -50,31 +59,29 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
         accountName: Text(
           '${widget.fName} ${widget.lName}',
           style: TextStyle(
-            color: Colors.white,
+            color: accountCardTextColor,
           ),
         ),
         accountEmail: Text(
           '${widget.email}',
           style: TextStyle(
-            color: Colors.white,
+            color: accountCardTextColor,
           ),
         ),
         currentAccountPicture: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(60),
-              color: Colors.white.withOpacity(0.05),
-              boxShadow: [
-                BoxShadow(
-                  color: kMentorXBlack,
-                  offset: Offset(2, 3),
-                  blurRadius: 2,
-                ),
-              ]),
+            borderRadius: BorderRadius.circular(60),
+            border: Border.all(
+              width: 5.0,
+              color: Colors.grey,
+            ),
+            color: Colors.white.withOpacity(0.05),
+          ),
           child: CircleAvatar(
             backgroundImage: profilePictureStatus
                 ? NetworkImage(widget.profilePicture)
                 : null,
-            backgroundColor: Colors.white.withOpacity(0.05),
+            backgroundColor: Colors.white,
             child: profilePictureStatus
                 ? null
                 : Icon(
@@ -91,7 +98,7 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
               onTap: () => Navigator.of(context).pop(),
               child: Icon(
                 Icons.close,
-                color: kMentorXPrimary,
+                color: accountCardTextColor,
               ),
             ),
           )
@@ -100,6 +107,9 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
     );
   }
 }
+
+Color iconColor = Colors.white;
+Color iconText = Colors.white;
 
 class MentorXMenuList extends StatelessWidget {
   const MentorXMenuList({
@@ -116,44 +126,44 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.home,
-            color: Colors.white,
+            color: iconColor,
           ),
           title: Text(
             'Home',
-            style: TextStyle(color: Colors.white, fontSize: 20),
+            style: TextStyle(color: iconText, fontSize: 20),
           ),
           onTap: () => Navigator.pushNamed(context, LaunchScreen.id),
         ),
         ListTile(
           leading: Icon(
             Icons.person,
-            color: Colors.white,
+            color: iconColor,
           ),
           title: Text(
             'My Profile',
-            style: TextStyle(color: Colors.white, fontSize: 20),
+            style: TextStyle(color: iconText, fontSize: 20),
           ),
           onTap: () => Navigator.pushNamed(context, MyProfile.id),
         ),
         ListTile(
           leading: Icon(
             Icons.people,
-            color: Colors.white,
+            color: iconColor,
           ),
           title: Text(
             'Mentoring',
-            style: TextStyle(color: Colors.white, fontSize: 20),
+            style: TextStyle(color: iconText, fontSize: 20),
           ),
           onTap: () => Navigator.pushNamed(context, MentoringScreen.id),
         ),
         ListTile(
           leading: Icon(
             Icons.calendar_today,
-            color: Colors.white,
+            color: iconColor,
           ),
           title: Text(
             'Events',
-            style: TextStyle(color: Colors.white, fontSize: 20),
+            style: TextStyle(color: iconText, fontSize: 20),
           ),
           onTap: () {
             Navigator.pushNamed(context, EventsScreen.id);
@@ -162,29 +172,29 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.settings,
-            color: Colors.white,
+            color: iconColor,
           ),
           title: Text(
             'Settings',
-            style: TextStyle(color: Colors.white, fontSize: 20),
+            style: TextStyle(color: iconText, fontSize: 20),
           ),
           onTap: () {},
         ),
         ListTile(
           title: const Text(
             '',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(),
           ),
           onTap: () {},
         ),
         ListTile(
           leading: Icon(
             Icons.exit_to_app_rounded,
-            color: Colors.white,
+            color: iconColor,
           ),
           title: Text(
             'Log Out',
-            style: TextStyle(color: Colors.white, fontSize: 20),
+            style: TextStyle(color: iconText, fontSize: 20),
           ),
           onTap: () {
             confirmSignOut(context);

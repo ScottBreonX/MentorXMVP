@@ -88,7 +88,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 
-    Color cardColor = Colors.white.withOpacity(0.10);
+    Color cardColor = kMentorXPrimary;
     Color cardIconColor = Colors.white;
     Color cardTextColor = Colors.white;
     Color cardShadowColor = Colors.black;
@@ -100,20 +100,20 @@ class _LaunchScreenState extends State<LaunchScreen> {
         child: Container(
           child: drawerItems,
           decoration: BoxDecoration(
-            color: kMentorXDark,
+            color: kMentorXPrimary,
           ),
         ),
       ),
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: Colors.black,
+          color: Colors.white,
         ),
         title: Image.asset(
-          'images/MLogoBlue.png',
+          'images/MLogoPink.png',
           height: 80,
         ),
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: kMentorXPrimary,
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -143,8 +143,8 @@ class _LaunchScreenState extends State<LaunchScreen> {
                 ),
                 IconCard(
                   cardColor: cardColor,
-                  cardIconColor: cardIconColor,
-                  cardTextColor: cardTextColor,
+                  cardIconColor: Colors.white,
+                  cardTextColor: Colors.white,
                   cardText: 'My Profile',
                   cardIcon: Icons.person,
                   cardShadowColor: cardShadowColor,

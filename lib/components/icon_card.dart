@@ -41,13 +41,11 @@ class IconCard extends StatelessWidget {
               BoxShadow(
                 blurRadius: 2,
                 offset: Offset(2, 3),
-                color: cardShadowColor,
+                color: Colors.grey[700],
               ),
             ],
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.blue, Colors.pink]),
+            color: cardColor,
+//            color: Colors.blue,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
