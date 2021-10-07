@@ -385,7 +385,7 @@ class _MyProfileState extends State<MyProfile> {
                           icon: Icon(
                             Icons.person,
                             color: kMentorXPrimary,
-                            size: 40,
+                            size: 30,
                           ),
                           text: 'About Me',
                         ),

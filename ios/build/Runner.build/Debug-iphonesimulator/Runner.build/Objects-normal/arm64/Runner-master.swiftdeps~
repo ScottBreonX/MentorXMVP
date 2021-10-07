@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)"
+options: "5b4ccce98fc9ce3d8783c3712cbda9cf41e2947c710266a730cc68a96380507d"
+build_start_time: [1633496831, 975811958]
+build_end_time: [1633496832, 15683174]
+inputs:
+  "/Users/scottbreon/AndroidStudioProjects/MentorXMVP/ios/Runner/AppDelegate.swift": !private [1621742635, 637166500]
