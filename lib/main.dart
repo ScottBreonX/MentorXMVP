@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
-import 'package:mentorx_mvp/screens/landing_page.dart';
+import 'package:mentorx_mvp/screens/login/landing_page.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/login/login_screen.dart';
 import 'package:mentorx_mvp/screens/enrollment/mentor_screen.dart';

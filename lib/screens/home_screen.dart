@@ -110,7 +110,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
         ),
         title: Image.asset(
           'images/MLogoPink.png',
-          height: 80,
+          height: 60,
         ),
         elevation: 0,
         backgroundColor: kMentorXPrimary,
@@ -129,6 +129,17 @@ class _LaunchScreenState extends State<LaunchScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'images/MentorPink.png',
+                  fit: BoxFit.fitWidth,
+                  height: 150,
+                  width: 300,
+                ),
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

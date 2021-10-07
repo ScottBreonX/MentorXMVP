@@ -8,6 +8,7 @@ class WorkExperienceSection extends StatefulWidget {
     @required this.location,
     @required this.description,
     @required this.dividerColor,
+    this.textColor,
     this.dividerHeight,
     this.dividerThickness,
     @required this.workExpEditStatus,
@@ -22,6 +23,7 @@ class WorkExperienceSection extends StatefulWidget {
   final double dividerHeight;
   final double dividerThickness;
   final Function workExpEditStatus;
+  final Color textColor;
 
   @override
   _WorkExperienceSectionState createState() => _WorkExperienceSectionState();
@@ -50,7 +52,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                     widget.title,
                     style: TextStyle(
                       fontSize: 18.0,
-                      color: Colors.white,
+                      color: widget.textColor ?? Colors.black,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -67,7 +69,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                     widget.company,
                     style: TextStyle(
                       fontSize: 15.0,
-                      color: Colors.white,
+                      color: widget.textColor ?? Colors.black,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -84,7 +86,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                     widget.dateRange,
                     style: TextStyle(
                       fontSize: 15.0,
-                      color: Colors.white70,
+                      color: widget.textColor ?? Colors.grey,
                     ),
                   ),
                 ),
@@ -100,7 +102,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                     widget.location,
                     style: TextStyle(
                       fontSize: 15.0,
-                      color: Colors.white70,
+                      color: widget.textColor ?? Colors.grey,
                     ),
                   ),
                 ),
@@ -116,7 +118,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                     widget.description,
                     style: TextStyle(
                       fontSize: 15.0,
-                      color: Colors.white,
+                      color: widget.textColor ?? Colors.black54,
                     ),
                   ),
                 ),

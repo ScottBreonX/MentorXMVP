@@ -49,6 +49,7 @@ flutter:
     - images/MLogoWhite.png
     - images/MLogoBlue.png
     - images/MLogoPink.png
+    - images/MentorPink.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
