@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
-import 'package:mentorx_mvp/screens/enrollment/available_mentors_screen.dart';
-import 'package:mentorx_mvp/screens/enrollment/enrollment_start_screen.dart';
-import 'package:mentorx_mvp/screens/enrollment/enrollment_selection_screen.dart';
 import 'package:mentorx_mvp/screens/landing_page.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/login/login_screen.dart';
-import 'package:mentorx_mvp/screens/enrollment/mentee_screen.dart';
-import 'package:mentorx_mvp/screens/chat/mentor_chat_screen.dart';
 import 'package:mentorx_mvp/screens/enrollment/mentor_screen.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/screens/registration/registration_profile_screen.dart';
@@ -18,7 +13,6 @@ import 'screens/login/welcome_screen.dart';
 import 'screens/login/login_screen.dart';
 import 'screens/registration/registration_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'screens/mentoring/mentoring_screen.dart';
 import 'screens/events/events_screen.dart';
 import 'services/auth.dart';
 
@@ -54,16 +48,9 @@ class MentorX extends StatelessWidget {
           MyProfile.id: (context) => MyProfile(),
           LaunchScreen.id: (context) => LaunchScreen(),
           EventsScreen.id: (context) => EventsScreen(),
-          MentoringScreen.id: (context) => MentoringScreen(),
-          MenteeScreen.id: (context) => MenteeScreen(),
           MentorScreen.id: (context) => MentorScreen(),
-          AvailableMentors.id: (context) => AvailableMentors(),
           LandingPage.id: (context) => LandingPage(),
           ViewProfile.id: (context) => ViewProfile(),
-          MentorChatScreen.id: (context) => MentorChatScreen(),
-          EnrollmentStartScreen.id: (context) => EnrollmentStartScreen(),
-          EnrollmentSelectionScreen.id: (context) =>
-              EnrollmentSelectionScreen(),
         },
       ),
     );

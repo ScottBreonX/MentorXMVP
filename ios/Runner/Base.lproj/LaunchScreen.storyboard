@@ -19,22 +19,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Mentor.png" translatesAutoresizingMaskIntoConstraints="NO" id="CDv-gA-G8q">
-                                <rect key="frame" x="26" y="248" width="363" height="384"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                            </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="SplashGradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="P8F-HS-dHX">
+                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="SplashGradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="P8F-HS-dHX">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Mentor.png" translatesAutoresizingMaskIntoConstraints="NO" id="CDv-gA-G8q">
+                                <rect key="frame" x="107" y="284" width="200" height="328"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="CDv-gA-G8q" secondAttribute="height" multiplier="25:41" id="Zjj-Wx-fwA"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.23919135329999999" green="0.2392312586" blue="0.23918259140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="CDv-gA-G8q" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4eU-5r-lq4"/>
+                            <constraint firstItem="CDv-gA-G8q" firstAttribute="centerX" secondItem="P8F-HS-dHX" secondAttribute="centerX" id="7Sw-Hk-sTY"/>
+                            <constraint firstItem="CDv-gA-G8q" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="87" id="Ex4-0W-CBI"/>
+                            <constraint firstItem="CDv-gA-G8q" firstAttribute="top" secondItem="Ydg-fD-yQy" secondAttribute="bottom" constant="240" id="JDw-Yf-PZZ"/>
+                            <constraint firstItem="CDv-gA-G8q" firstAttribute="centerY" secondItem="P8F-HS-dHX" secondAttribute="centerY" id="QFz-lX-FOX"/>
+                            <constraint firstItem="CDv-gA-G8q" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="aFQ-eg-ALU"/>
+                            <constraint firstItem="CDv-gA-G8q" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="dLR-Dx-Q1J"/>
+                            <constraint firstItem="CDv-gA-G8q" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="nzw-Ds-KC9"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -496,7 +496,7 @@ class _MyProfileState extends State<MyProfile> {
                                     children: [
                                       Flexible(
                                         child: Text(
-                                          '${profileData['About Me']}',
+                                          '${profileData['About Me'] ?? "<Blank>"}',
                                           style: TextStyle(
                                             fontSize: 15.0,
                                             color: Colors.white,
@@ -541,24 +541,6 @@ class _MyProfileState extends State<MyProfile> {
                               ],
                             ),
                           ),
-                          WorkExperienceSection(
-                            title: workExperienceData['title1'] ?? "<Blank>",
-                            company:
-                                workExperienceData['company1'] ?? "<Blank>",
-                            dateRange:
-                                workExperienceData['dateRange1'] ?? "<Blank>",
-                            location:
-                                workExperienceData['location1'] ?? "<Blank>",
-                            description:
-                                workExperienceData['description1'] ?? "<Blank>",
-                            dividerColor: Colors.transparent,
-                            dividerHeight: 0,
-                            workExpEditStatus: () {
-                              setState(() {
-                                _editWorkExperience(context);
-                              });
-                            },
-                          ),
                           Padding(
                             padding: const EdgeInsets.only(top: 8.0),
                             child: const Divider(
@@ -570,7 +552,7 @@ class _MyProfileState extends State<MyProfile> {
                             company: 'The Walt Disney Company',
                             dateRange: 'April 2019 - April 2020',
                             location: 'Burbank, CA',
-                            description: profileData['About Me'],
+                            description: profileData['About Me'] ?? "<Blank>",
                             dividerColor: Colors.transparent,
                             dividerHeight: 0,
                             workExpEditStatus: () {
