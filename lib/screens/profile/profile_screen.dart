@@ -137,20 +137,20 @@ class _MyProfileState extends State<MyProfile> {
       textAlign: TextAlign.start,
       onChanged: (value) => aboutMe = value,
       style: TextStyle(
-        color: kMentorXDark,
+        color: kMentorXPrimary,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
-        fillColor: Colors.white,
+        fillColor: Colors.grey.shade200,
         filled: true,
         labelText: '',
         hintText: '',
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: kMentorXBlack, width: 1.0),
+            borderSide: BorderSide(color: kMentorXPrimary, width: 1.0),
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: kMentorXPrimary, width: 2.0),
+            borderSide: BorderSide(color: kMentorXPrimary, width: 3.0),
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
       ),
     );
@@ -178,19 +178,19 @@ class _MyProfileState extends State<MyProfile> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kMentorXDark.withOpacity(0.95),
+        backgroundColor: kMentorXPrimary,
         elevation: 5,
         title: Text('My Profile'),
       ),
       body: Container(
-        color: kMentorXDark,
+        color: Colors.white,
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.10),
+                  color: kMentorXPrimary,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
@@ -224,8 +224,7 @@ class _MyProfileState extends State<MyProfile> {
                                     borderRadius: BorderRadius.circular(60),
                                   ),
                                   child: CircleAvatar(
-                                    backgroundColor:
-                                        Colors.white.withOpacity(0.10),
+                                    backgroundColor: Colors.white,
                                     radius: 50,
                                     backgroundImage: profilePhotoStatus
                                         ? NetworkImage(profileData['images'])
@@ -234,7 +233,7 @@ class _MyProfileState extends State<MyProfile> {
                                         ? null
                                         : Icon(
                                             Icons.person,
-                                            color: kMentorXPrimary,
+                                            color: Colors.black54,
                                             size: 70,
                                           ),
                                   ),
@@ -247,7 +246,7 @@ class _MyProfileState extends State<MyProfile> {
                                     width: 35.0,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: kMentorXPrimary,
+                                      color: Colors.pink,
                                     ),
                                     child: GestureDetector(
                                       onTap: () {},
@@ -316,7 +315,7 @@ class _MyProfileState extends State<MyProfile> {
                               ),
                             ),
                             Container(
-                              color: kMentorXPrimary,
+                              color: Colors.white,
                               height: 25,
                               width: 2,
                             ),
@@ -339,7 +338,7 @@ class _MyProfileState extends State<MyProfile> {
                               ),
                             ),
                             Container(
-                              color: kMentorXPrimary,
+                              color: Colors.white,
                               height: 25,
                               width: 2,
                             ),
@@ -350,7 +349,7 @@ class _MyProfileState extends State<MyProfile> {
                                   width: 120,
                                   child: Center(
                                     child: Text(
-                                      '${profileData['Minor']}',
+                                      '${profileData['Minor'] ?? '<blank>'}',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize: 15.0,
@@ -363,8 +362,51 @@ class _MyProfileState extends State<MyProfile> {
                             ),
                           ],
                         ),
-                      )
+                      ),
                     ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: DefaultTabController(
+                length: 3,
+                child: Scaffold(
+                  appBar: AppBar(
+                    toolbarHeight: 10,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    automaticallyImplyLeading: false,
+                    bottom: TabBar(
+                      labelColor: kMentorXPrimary,
+                      indicatorColor: kMentorXPrimary,
+                      tabs: [
+                        Tab(
+                          icon: Icon(
+                            Icons.person,
+                            color: kMentorXPrimary,
+                            size: 30,
+                          ),
+                          text: 'About Me',
+                        ),
+                        Tab(
+                          icon: Icon(
+                            Icons.work,
+                            color: kMentorXPrimary,
+                            size: 40,
+                          ),
+                          text: 'About Me',
+                        ),
+                        Tab(
+                          icon: Icon(
+                            Icons.school,
+                            color: kMentorXPrimary,
+                            size: 40,
+                          ),
+                          text: 'Education',
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -372,7 +414,7 @@ class _MyProfileState extends State<MyProfile> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: kMentorXDark.withOpacity(0.95),
+                  color: Colors.white,
                 ),
                 child: Padding(
                   padding:
@@ -420,7 +462,7 @@ class _MyProfileState extends State<MyProfile> {
                                                     BoxShadow(
                                                       blurRadius: 2,
                                                       offset: Offset(2, 2),
-                                                      color: Colors.grey,
+                                                      color: Colors.black54,
                                                       spreadRadius: 0.5,
                                                     )
                                                   ],
@@ -451,7 +493,7 @@ class _MyProfileState extends State<MyProfile> {
                                                     BoxShadow(
                                                       blurRadius: 2,
                                                       offset: Offset(2, 2),
-                                                      color: Colors.grey,
+                                                      color: Colors.black54,
                                                       spreadRadius: 0.5,
                                                     )
                                                   ],
@@ -496,10 +538,10 @@ class _MyProfileState extends State<MyProfile> {
                                     children: [
                                       Flexible(
                                         child: Text(
-                                          '${profileData['About Me']}',
+                                          '${profileData['About Me'] ?? "<Blank>"}',
                                           style: TextStyle(
                                             fontSize: 15.0,
-                                            color: Colors.white,
+                                            color: Colors.black54,
                                           ),
                                         ),
                                       ),
@@ -541,24 +583,6 @@ class _MyProfileState extends State<MyProfile> {
                               ],
                             ),
                           ),
-                          WorkExperienceSection(
-                            title: workExperienceData['title1'] ?? "<Blank>",
-                            company:
-                                workExperienceData['company1'] ?? "<Blank>",
-                            dateRange:
-                                workExperienceData['dateRange1'] ?? "<Blank>",
-                            location:
-                                workExperienceData['location1'] ?? "<Blank>",
-                            description:
-                                workExperienceData['description1'] ?? "<Blank>",
-                            dividerColor: Colors.transparent,
-                            dividerHeight: 0,
-                            workExpEditStatus: () {
-                              setState(() {
-                                _editWorkExperience(context);
-                              });
-                            },
-                          ),
                           Padding(
                             padding: const EdgeInsets.only(top: 8.0),
                             child: const Divider(
@@ -570,7 +594,7 @@ class _MyProfileState extends State<MyProfile> {
                             company: 'The Walt Disney Company',
                             dateRange: 'April 2019 - April 2020',
                             location: 'Burbank, CA',
-                            description: profileData['About Me'],
+                            description: profileData['About Me'] ?? "<Blank>",
                             dividerColor: Colors.transparent,
                             dividerHeight: 0,
                             workExpEditStatus: () {
