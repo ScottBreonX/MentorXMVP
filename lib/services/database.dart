@@ -39,7 +39,6 @@ class FirestoreDatabase implements Database {
 
   Future<void> _setData({String path, Map<String, dynamic> data}) async {
     final reference = FirebaseFirestore.instance.doc(path);
-    print('$path: $data');
     await reference.set(data);
   }
 
@@ -61,7 +60,6 @@ class FirestoreDatabase implements Database {
 
   Future<void> _updateData({String path, Map<String, dynamic> data}) async {
     final reference = FirebaseFirestore.instance.doc(path);
-    print('$path: $data');
     await reference.update(data);
   }
 }

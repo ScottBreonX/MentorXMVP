@@ -1,17 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/alert_dialog.dart';
-import 'package:mentorx_mvp/components/icon_circle.dart';
-import 'package:mentorx_mvp/components/work_experience_form.dart';
-import 'package:mentorx_mvp/components/work_experience_section.dart';
+import 'package:mentorx_mvp/components/profile_card.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
+import 'package:mentorx_mvp/components/about_me.dart';
 
 User loggedInUser;
 
@@ -32,14 +28,12 @@ class _MyProfileState extends State<MyProfile> {
   bool aboutMeEditStatus = false;
   bool profilePhotoStatus = false;
   bool profilePhotoSelected = false;
-  final _formKey1 = GlobalKey<FormState>();
-  String aboutMe;
+  String aboutMeText;
 
   @override
   void initState() {
     getCurrentUser();
     getProfileData();
-    getWorkExpData();
     aboutMeEditStatus = false;
     super.initState();
   }
@@ -73,89 +67,6 @@ class _MyProfileState extends State<MyProfile> {
     });
   }
 
-  dynamic workExperienceData;
-
-  Future<dynamic> getWorkExpData() async {
-    await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/workExperience')
-        .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        if (mounted) {
-          setState(() {
-            workExperienceData = result.data();
-          });
-        }
-      });
-    });
-  }
-
-  Future<void> _updateAboutMe(BuildContext context) async {
-    try {
-      final database = FirestoreDatabase(uid: loggedInUser.uid);
-      await database.updateAboutMe(
-        AboutMeModel(
-          aboutMe: aboutMe,
-        ),
-      );
-    } on FirebaseException catch (e) {
-      showAlertDialog(context,
-          title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
-    }
-    setState(() {
-      getProfileData().then((value) => aboutMeEditStatus = false);
-    });
-  }
-
-  Future<void> _editWorkExperience(BuildContext context) async {
-    await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return WorkExperienceForm(
-              title: 'Mentee Enrollment',
-              titleFontSize: 20.0,
-              descriptions: 'Confirm enrollment as mentee?',
-              descriptionFontSize: 20.0,
-              textLeft: 'Cancel',
-              textRight: 'Yes',
-              leftOnPressed: () {
-                Navigator.pop(context);
-              },
-              rightOnPressed: () {
-                Navigator.pop(context);
-              });
-        });
-  }
-
-  TextFormField _buildAboutMeTextField(BuildContext context) {
-    return TextFormField(
-      key: _formKey1,
-      initialValue: aboutMe = profileData['About Me'],
-      textInputAction: TextInputAction.next,
-      keyboardType: TextInputType.multiline,
-      maxLines: null,
-      textAlign: TextAlign.start,
-      onChanged: (value) => aboutMe = value,
-      style: TextStyle(
-        color: kMentorXPrimary,
-        fontWeight: FontWeight.w400,
-      ),
-      autocorrect: false,
-      decoration: kTextFieldDecorationLight.copyWith(
-        fillColor: Colors.grey.shade200,
-        filled: true,
-        labelText: '',
-        hintText: '',
-        enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: kMentorXPrimary, width: 1.0),
-            borderRadius: BorderRadius.all(Radius.circular(10.0))),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: kMentorXPrimary, width: 3.0),
-            borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     if (profileData == null) {
@@ -186,188 +97,9 @@ class _MyProfileState extends State<MyProfile> {
         color: Colors.white,
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: kMentorXPrimary,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 2,
-                      offset: Offset(2, 3),
-                      color: kMentorXBlack,
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Stack(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 2,
-                                        offset: Offset(2, 3),
-                                        color: kMentorXBlack,
-                                      ),
-                                    ],
-                                    borderRadius: BorderRadius.circular(60),
-                                  ),
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: 50,
-                                    backgroundImage: profilePhotoStatus
-                                        ? NetworkImage(profileData['images'])
-                                        : null,
-                                    child: profilePhotoStatus
-                                        ? null
-                                        : Icon(
-                                            Icons.person,
-                                            color: Colors.black54,
-                                            size: 70,
-                                          ),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  right: 0,
-                                  child: Container(
-                                    height: 35.0,
-                                    width: 35.0,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.pink,
-                                    ),
-                                    child: GestureDetector(
-                                      onTap: () {},
-                                      child: Icon(
-                                        Icons.photo_camera,
-                                        color: Colors.white,
-                                        size: 25.0,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '${profileData['First Name']}',
-                            style: TextStyle(
-                              fontSize: 30.0,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Text(
-                            '${profileData['Last Name']}',
-                            style: TextStyle(
-                              fontSize: 30.0,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SizedBox(
-                                  width: 120,
-                                  child: Center(
-                                    child: Text(
-                                      '${profileData['Year in School']}',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 15.0,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              color: Colors.white,
-                              height: 25,
-                              width: 2,
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SizedBox(
-                                  width: 120,
-                                  child: Center(
-                                    child: Text(
-                                      '${profileData['Major']}',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 15.0,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              color: Colors.white,
-                              height: 25,
-                              width: 2,
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SizedBox(
-                                  width: 120,
-                                  child: Center(
-                                    child: Text(
-                                      '${profileData['Minor'] ?? '<blank>'}',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 15.0,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            ProfileCard(
+                profilePhotoStatus: profilePhotoStatus,
+                profileData: profileData),
             Expanded(
               child: DefaultTabController(
                 length: 3,
@@ -408,19 +140,9 @@ class _MyProfileState extends State<MyProfile> {
                       ],
                     ),
                   ),
-                  body: const TabBarView(
+                  body: TabBarView(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'About Me',
-                          style: TextStyle(
-                            fontSize: 25.0,
-                            color: kMentorXPrimary,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
+                      AboutMe(),
                       Center(
                         child: Text('Placeholder for Education Section'),
                       ),
