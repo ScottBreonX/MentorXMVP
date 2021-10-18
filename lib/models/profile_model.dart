@@ -66,6 +66,54 @@ class AboutMeModel {
   }
 }
 
+class MentoringAttributesModel {
+  MentoringAttributesModel({
+    this.mentoringAttributes,
+  });
+  final String mentoringAttributes;
+
+  factory MentoringAttributesModel.fromMap(Map<String, dynamic> data) {
+    if (data == null) {
+      return null;
+    }
+    final String mentoringAttributes = data['Mentoring Attributes'];
+
+    return MentoringAttributesModel(
+      mentoringAttributes: mentoringAttributes,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'Mentoring Attributes': mentoringAttributes,
+    };
+  }
+}
+
+class MenteeAttributesModel {
+  MenteeAttributesModel({
+    this.menteeAttributes,
+  });
+  final String menteeAttributes;
+
+  factory MenteeAttributesModel.fromMap(Map<String, dynamic> data) {
+    if (data == null) {
+      return null;
+    }
+    final String menteeAttributes = data['Mentee Attributes'];
+
+    return MenteeAttributesModel(
+      menteeAttributes: menteeAttributes,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'Mentee Attributes': menteeAttributes,
+    };
+  }
+}
+
 class WorkExperienceModel {
   WorkExperienceModel(
       {this.company,

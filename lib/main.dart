@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/screens/login/landing_page.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
@@ -28,6 +29,11 @@ class MentorX extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return Provider<AuthBase>(
       create: (context) => Auth(),
       child: MaterialApp(
