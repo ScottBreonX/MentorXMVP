@@ -47,6 +47,18 @@ class FirestoreDatabase implements Database {
         data: profile.toMap(),
       );
 
+  Future<void> updateMentoringAttributes(MentoringAttributesModel profile) =>
+      _updateData(
+        path: APIPath.profile(uid, 'coreInfo'),
+        data: profile.toMap(),
+      );
+
+  Future<void> updateMenteeAttributes(MenteeAttributesModel profile) =>
+      _updateData(
+        path: APIPath.profile(uid, 'coreInfo'),
+        data: profile.toMap(),
+      );
+
   Future<void> updateWorkExperience(WorkExperienceModel workExperience) =>
       _updateData(
         path: APIPath.workExperience(uid, 'coreInfo', 'Field1'),

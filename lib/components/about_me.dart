@@ -27,12 +27,20 @@ class _AboutMeState extends State<AboutMe> {
     getCurrentUser();
     getProfileData();
     aboutMeEditStatus = false;
+    mentoringEditStatus = false;
+    menteeEditStatus = false;
     super.initState();
   }
 
   bool aboutMeEditStatus = false;
+  bool menteeEditStatus = false;
+  bool mentoringEditStatus = false;
   String aboutMeText;
+  String mentoringAttributesText;
+  String menteeAttributesText;
   final _formKey1 = GlobalKey<FormState>();
+  final _formKey2 = GlobalKey<FormState>();
+  final _formKey3 = GlobalKey<FormState>();
 
   TextFormField _buildAboutMeTextField(BuildContext context) {
     return TextFormField(
@@ -43,6 +51,65 @@ class _AboutMeState extends State<AboutMe> {
       maxLines: null,
       textAlign: TextAlign.start,
       onChanged: (value) => aboutMeText = value,
+      style: TextStyle(
+        color: kMentorXPrimary,
+        fontWeight: FontWeight.w400,
+      ),
+      autocorrect: false,
+      decoration: kTextFieldDecorationLight.copyWith(
+        fillColor: Colors.grey.shade200,
+        filled: true,
+        labelText: '',
+        hintText: '',
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: kMentorXPrimary, width: 1.0),
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: kMentorXPrimary, width: 3.0),
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+      ),
+    );
+  }
+
+  TextFormField _buildMentoringAttributesTextField(BuildContext context) {
+    return TextFormField(
+      key: _formKey2,
+      initialValue: mentoringAttributesText =
+          profileData['Mentoring Attributes'],
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.multiline,
+      maxLines: null,
+      textAlign: TextAlign.start,
+      onChanged: (value) => mentoringAttributesText = value,
+      style: TextStyle(
+        color: kMentorXPrimary,
+        fontWeight: FontWeight.w400,
+      ),
+      autocorrect: false,
+      decoration: kTextFieldDecorationLight.copyWith(
+        fillColor: Colors.grey.shade200,
+        filled: true,
+        labelText: '',
+        hintText: '',
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: kMentorXPrimary, width: 1.0),
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: kMentorXPrimary, width: 3.0),
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+      ),
+    );
+  }
+
+  TextFormField _buildMenteeAttributesTextField(BuildContext context) {
+    return TextFormField(
+      key: _formKey3,
+      initialValue: menteeAttributesText = profileData['Mentee Attributes'],
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.multiline,
+      maxLines: null,
+      textAlign: TextAlign.start,
+      onChanged: (value) => menteeAttributesText = value,
       style: TextStyle(
         color: kMentorXPrimary,
         fontWeight: FontWeight.w400,
@@ -109,6 +176,40 @@ class _AboutMeState extends State<AboutMe> {
     });
   }
 
+  Future<void> _updateMentoringAttributes(BuildContext context) async {
+    try {
+      final database = FirestoreDatabase(uid: loggedInUser.uid);
+      await database.updateMentoringAttributes(
+        MentoringAttributesModel(
+          mentoringAttributes: mentoringAttributesText,
+        ),
+      );
+    } on FirebaseException catch (e) {
+      showAlertDialog(context,
+          title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
+    }
+    setState(() {
+      getProfileData().then((value) => mentoringEditStatus = false);
+    });
+  }
+
+  Future<void> _updateMenteeAttributes(BuildContext context) async {
+    try {
+      final database = FirestoreDatabase(uid: loggedInUser.uid);
+      await database.updateMenteeAttributes(
+        MenteeAttributesModel(
+          menteeAttributes: menteeAttributesText,
+        ),
+      );
+    } on FirebaseException catch (e) {
+      showAlertDialog(context,
+          title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
+    }
+    setState(() {
+      getProfileData().then((value) => menteeEditStatus = false);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     if (profileData == null) {
@@ -141,7 +242,7 @@ class _AboutMeState extends State<AboutMe> {
                       Text(
                         'About Me',
                         style: TextStyle(
-                          fontSize: 25.0,
+                          fontSize: 20.0,
                           color: kMentorXPrimary,
                           fontWeight: FontWeight.w600,
                         ),
@@ -243,6 +344,260 @@ class _AboutMeState extends State<AboutMe> {
                             Flexible(
                               child: Text(
                                 '${profileData['About Me']}',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+//                start of new about me section
+                Padding(
+                  padding: const EdgeInsets.only(top: 50.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: mentoringEditStatus
+                        ? CrossAxisAlignment.center
+                        : CrossAxisAlignment.end,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          'What makes me a great mentor',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: kMentorXPrimary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      mentoringEditStatus
+                          ? Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 20,
+                                    right: 8.0,
+                                    bottom: 10.0,
+                                  ),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      _updateMentoringAttributes(context);
+                                    },
+                                    child: Container(
+                                      height: 40.0,
+                                      width: 40.0,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 2,
+                                            offset: Offset(2, 2),
+                                            color: Colors.black54,
+                                            spreadRadius: 0.5,
+                                          )
+                                        ],
+                                      ),
+                                      child: Icon(
+                                        Icons.check,
+                                        color: Colors.green,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: 8.0, bottom: 10.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        mentoringEditStatus = false;
+                                      });
+                                    },
+                                    child: Container(
+                                      height: 40.0,
+                                      width: 40.0,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 2,
+                                            offset: Offset(2, 2),
+                                            color: Colors.black54,
+                                            spreadRadius: 0.5,
+                                          )
+                                        ],
+                                      ),
+                                      child: Icon(
+                                        Icons.close,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 8.0, left: 10.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    mentoringEditStatus = true;
+                                  });
+                                },
+                                child: IconCircle(
+                                  width: 30.0,
+                                  height: 30.0,
+                                  circleColor: kMentorXPrimary,
+                                  iconColor: Colors.white,
+                                  iconSize: 20.0,
+                                  iconType: Icons.edit,
+                                ),
+                              ),
+                            ),
+                    ],
+                  ),
+                ),
+                mentoringEditStatus
+                    ? _buildMentoringAttributesTextField(context)
+                    : Padding(
+                        padding: const EdgeInsets.only(top: 8.0, right: 10.0),
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                '${profileData['Mentoring Attributes']}',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+//                start of mentee section
+                Padding(
+                  padding: const EdgeInsets.only(top: 50.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: menteeEditStatus
+                        ? CrossAxisAlignment.center
+                        : CrossAxisAlignment.end,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          "What I am looking for in a mentor",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: kMentorXPrimary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      menteeEditStatus
+                          ? Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 20,
+                                    right: 8.0,
+                                    bottom: 10.0,
+                                  ),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      _updateMenteeAttributes(context);
+                                    },
+                                    child: Container(
+                                      height: 40.0,
+                                      width: 40.0,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 2,
+                                            offset: Offset(2, 2),
+                                            color: Colors.black54,
+                                            spreadRadius: 0.5,
+                                          )
+                                        ],
+                                      ),
+                                      child: Icon(
+                                        Icons.check,
+                                        color: Colors.green,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: 8.0, bottom: 10.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        menteeEditStatus = false;
+                                      });
+                                    },
+                                    child: Container(
+                                      height: 40.0,
+                                      width: 40.0,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 2,
+                                            offset: Offset(2, 2),
+                                            color: Colors.black54,
+                                            spreadRadius: 0.5,
+                                          )
+                                        ],
+                                      ),
+                                      child: Icon(
+                                        Icons.close,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 8.0, left: 10.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    menteeEditStatus = true;
+                                  });
+                                },
+                                child: IconCircle(
+                                  width: 30.0,
+                                  height: 30.0,
+                                  circleColor: kMentorXPrimary,
+                                  iconColor: Colors.white,
+                                  iconSize: 20.0,
+                                  iconType: Icons.edit,
+                                ),
+                              ),
+                            ),
+                    ],
+                  ),
+                ),
+                menteeEditStatus
+                    ? _buildMenteeAttributesTextField(context)
+                    : Padding(
+                        padding: const EdgeInsets.only(top: 8.0, right: 10.0),
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                '${profileData['Mentee Attributes']}',
                                 style: TextStyle(
                                   fontSize: 15.0,
                                   color: Colors.black54,

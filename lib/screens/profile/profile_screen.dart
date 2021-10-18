@@ -115,11 +115,11 @@ class _MyProfileState extends State<MyProfile> {
                       tabs: [
                         Tab(
                           icon: Icon(
-                            Icons.person,
+                            Icons.people,
                             color: kMentorXPrimary,
-                            size: 30,
+                            size: 40,
                           ),
-                          text: 'About Me',
+                          text: 'Mentoring',
                         ),
                         Tab(
                           icon: Icon(
