@@ -3,12 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
+import 'package:mentorx_mvp/screens/enrollment/mentor_screen.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
+import 'events/events_screen.dart';
 
 User loggedInUser;
 
@@ -23,8 +24,12 @@ class LaunchScreen extends StatefulWidget {
 }
 
 class _LaunchScreenState extends State<LaunchScreen> {
+  PageController pageController;
+  int pageIndex = 0;
+
   @override
   void initState() {
+    pageController = PageController();
     getCurrentUser();
     getProfileData();
     super.initState();
@@ -60,21 +65,31 @@ class _LaunchScreenState extends State<LaunchScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    bool profilePictureStatus;
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
 
+  onPageChanged(int pageIndex) {
+    setState(() {
+      this.pageIndex = pageIndex;
+    });
+  }
+
+  onTap(int pageIndex) {
+    pageController.jumpToPage(
+      pageIndex,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     if (profileData == null) {
       return Center(
         child: CircularProgressIndicator(
-          backgroundColor: kMentorXPrimary,
+          backgroundColor: Colors.blue,
         ),
       );
-    }
-
-    if (profileData['images'] != null) {
-      profilePictureStatus = true;
-    } else {
-      profilePictureStatus = false;
     }
 
     var drawerHeader = MentorXMenuHeader(
@@ -88,83 +103,28 @@ class _LaunchScreenState extends State<LaunchScreen> {
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 
-    Color cardColor = kMentorXPrimary;
-    Color cardIconColor = Colors.white;
-    Color cardTextColor = Colors.white;
-    Color cardShadowColor = Colors.black;
-
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      key: _scaffoldKey,
-      drawer: Drawer(
-        child: Container(
-          child: drawerItems,
-          decoration: BoxDecoration(
-            color: kMentorXPrimary,
-          ),
-        ),
+      body: PageView(
+        children: [
+          EventsScreen(),
+          MyProfile(),
+          MentorScreen(),
+          MentorScreen(),
+        ],
+        controller: pageController,
+        onPageChanged: onPageChanged,
+        physics: NeverScrollableScrollPhysics(),
       ),
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
-        title: Image.asset(
-          'images/MLogoPink.png',
-          height: 60,
-        ),
-        elevation: 0,
-        backgroundColor: kMentorXPrimary,
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: AlignmentDirectional.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.white,
-              Colors.white,
-            ],
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'images/MentorPink.png',
-                  fit: BoxFit.fitWidth,
-                  height: 150,
-                  width: 300,
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconCard(
-                  cardColor: cardColor,
-                  cardIconColor: cardIconColor,
-                  cardTextColor: cardTextColor,
-                  cardText: 'Programs',
-                  cardIcon: Icons.people,
-                  cardShadowColor: cardShadowColor,
-                  onTap: () => Navigator.pushNamed(context, LaunchScreen.id),
-                ),
-                IconCard(
-                  cardColor: cardColor,
-                  cardIconColor: Colors.white,
-                  cardTextColor: Colors.white,
-                  cardText: 'My Profile',
-                  cardIcon: Icons.person,
-                  cardShadowColor: cardShadowColor,
-                  onTap: () => Navigator.pushNamed(context, MyProfile.id),
-                ),
-              ],
-            )
-          ],
-        ),
+      bottomNavigationBar: CupertinoTabBar(
+        currentIndex: pageIndex,
+        onTap: onTap,
+        activeColor: Colors.pink,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.whatshot)),
+          BottomNavigationBarItem(icon: Icon(Icons.person, size: 35)),
+          BottomNavigationBarItem(icon: Icon(Icons.people, size: 35)),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications_active)),
+        ],
       ),
     );
   }
