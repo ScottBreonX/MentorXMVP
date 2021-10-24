@@ -79,11 +79,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
             colors: [
-              Colors.pink,
               Colors.blue,
+              Colors.pink,
             ],
           ),
         ),

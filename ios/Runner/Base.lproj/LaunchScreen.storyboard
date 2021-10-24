@@ -26,7 +26,7 @@
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                             </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Mentor.png" translatesAutoresizingMaskIntoConstraints="NO" id="CDv-gA-G8q">
+                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="MLogoSplash.png" translatesAutoresizingMaskIntoConstraints="NO" id="CDv-gA-G8q">
                                 <rect key="frame" x="107" y="284" width="200" height="328"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -55,7 +55,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Mentor.png" width="375" height="375"/>
+        <image name="MLogoSplash.png" width="375" height="375"/>
         <image name="SplashGradient.png" width="375" height="375"/>
     </resources>
 </document>
