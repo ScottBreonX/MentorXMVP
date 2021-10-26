@@ -242,7 +242,7 @@ class _AboutMeState extends State<AboutMe> {
                       Text(
                         'About Me',
                         style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: 15.0,
                           color: kMentorXPrimary,
                           fontWeight: FontWeight.w600,
                         ),
@@ -366,7 +366,7 @@ class _AboutMeState extends State<AboutMe> {
                         child: Text(
                           'What makes me a great mentor',
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 15.0,
                             color: kMentorXPrimary,
                             fontWeight: FontWeight.w600,
                           ),
@@ -491,9 +491,9 @@ class _AboutMeState extends State<AboutMe> {
                     children: [
                       Flexible(
                         child: Text(
-                          "What I am looking for in a mentor",
+                          "What I'm looking for in a mentor",
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 15.0,
                             color: kMentorXPrimary,
                             fontWeight: FontWeight.w600,
                           ),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/components/profile_card.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -87,7 +88,27 @@ class _MyProfileState extends State<MyProfile> {
       });
     }
 
+    var drawerHeader = MentorXMenuHeader(
+      fName: '${profileData['First Name']}',
+      lName: '${profileData['Last Name']}',
+      email: '${profileData['Email Address']}',
+      profilePicture: '${profileData['images']}',
+    );
+
+    final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
+
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: Drawer(
+        child: Container(
+          child: drawerItems,
+          decoration: BoxDecoration(
+            color: kMentorXPrimary,
+          ),
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: kMentorXPrimary,
         elevation: 5,
@@ -98,8 +119,9 @@ class _MyProfileState extends State<MyProfile> {
         child: Column(
           children: [
             ProfileCard(
-                profilePhotoStatus: profilePhotoStatus,
-                profileData: profileData),
+              profilePhotoStatus: profilePhotoStatus,
+              profileData: profileData,
+            ),
             Expanded(
               child: DefaultTabController(
                 length: 3,
@@ -144,10 +166,26 @@ class _MyProfileState extends State<MyProfile> {
                     children: [
                       AboutMe(),
                       Center(
-                        child: Text('Placeholder for Education Section'),
+                        child: Text(
+                          'Placeholder for Work Experience Section',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Signatra',
+                            color: Colors.black54,
+                            fontSize: 30,
+                          ),
+                        ),
                       ),
                       Center(
-                        child: Text('Placeholder for Education Section'),
+                        child: Text(
+                          'Placeholder for Education Section',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Signatra',
+                            color: Colors.black54,
+                            fontSize: 30,
+                          ),
+                        ),
                       ),
                     ],
                   ),

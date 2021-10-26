@@ -6,18 +6,21 @@ import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/enrollment/mentor_screen.dart';
+import 'package:mentorx_mvp/screens/news_feed/news_feed.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'events/events_screen.dart';
+import 'notifications/notifications_screen.dart';
 
 User loggedInUser;
 
 class LaunchScreen extends StatefulWidget {
-  const LaunchScreen({this.onSignOut});
+  const LaunchScreen({this.onSignOut, this.pageIndex});
 
   static const String id = 'launch_screen';
   final VoidCallback onSignOut;
+  final int pageIndex;
 
   @override
   _LaunchScreenState createState() => _LaunchScreenState();
@@ -25,11 +28,11 @@ class LaunchScreen extends StatefulWidget {
 
 class _LaunchScreenState extends State<LaunchScreen> {
   PageController pageController;
-  int pageIndex = 0;
+  int pageIndex;
 
   @override
   void initState() {
-    pageController = PageController();
+    pageController = PageController(initialPage: widget.pageIndex ?? 0);
     getCurrentUser();
     getProfileData();
     super.initState();
@@ -72,7 +75,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
 
   onPageChanged(int pageIndex) {
     setState(() {
-      this.pageIndex = pageIndex;
+      this.pageIndex = pageIndex ?? widget.pageIndex;
     });
   }
 
@@ -92,31 +95,20 @@ class _LaunchScreenState extends State<LaunchScreen> {
       );
     }
 
-    var drawerHeader = MentorXMenuHeader(
-      fName: '${profileData['First Name']}',
-      lName: '${profileData['Last Name']}',
-      email: '${profileData['Email Address']}',
-      profilePicture: '${profileData['images']}',
-    );
-
-    final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
-
     return Scaffold(
       body: PageView(
         children: [
-          EventsScreen(),
+          NewsFeed(),
           MyProfile(),
           MentorScreen(),
-          MentorScreen(),
+          NotificationScreen(),
         ],
         controller: pageController,
         onPageChanged: onPageChanged,
         physics: NeverScrollableScrollPhysics(),
       ),
       bottomNavigationBar: CupertinoTabBar(
-        currentIndex: pageIndex,
+        currentIndex: pageIndex ?? widget.pageIndex ?? 0,
         onTap: onTap,
         activeColor: Colors.pink,
         items: [

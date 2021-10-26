@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
-import 'package:mentorx_mvp/screens/registration/registration_screen.dart';
+import 'package:mentorx_mvp/screens/authentication/registration_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'login_screen.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
-import '../registration/registration_screen.dart';
+import 'registration_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key key, @required this.bloc}) : super(key: key);
