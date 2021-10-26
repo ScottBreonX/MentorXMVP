@@ -1,21 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/services/auth.dart';
+import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
 
 User loggedInUser;
 
-class MentorScreen extends StatefulWidget {
-  static String id = 'mentor_screen';
+class NewsFeed extends StatefulWidget {
+  const NewsFeed({
+    Key key,
+    this.database,
+  }) : super(key: key);
+
+  static const String id = 'news_feed';
+  final Database database;
 
   @override
-  _MentorScreenState createState() => _MentorScreenState();
+  _NewsFeedState createState() => _NewsFeedState();
 }
 
-class _MentorScreenState extends State<MentorScreen> {
+class _NewsFeedState extends State<NewsFeed> {
   bool aboutMeEditStatus = false;
   bool profilePhotoStatus = false;
   bool profilePhotoSelected = false;
@@ -108,7 +116,7 @@ class _MentorScreenState extends State<MentorScreen> {
         color: Colors.white,
         child: Center(
           child: Text(
-            'Mentoring Placeholder',
+            'News Feed Placeholder',
             style: TextStyle(
               color: Colors.black54,
               fontFamily: "Signatra",

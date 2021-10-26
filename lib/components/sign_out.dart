@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/screens/authentication/welcome_screen.dart';
 import 'alert_dialog.dart';
-import 'package:mentorx_mvp/screens/login/welcome_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 final _auth = FirebaseAuth.instance;

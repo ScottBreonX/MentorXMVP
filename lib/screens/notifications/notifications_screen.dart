@@ -1,21 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/services/auth.dart';
+import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
 
 User loggedInUser;
 
-class MentorScreen extends StatefulWidget {
-  static String id = 'mentor_screen';
+class NotificationScreen extends StatefulWidget {
+  const NotificationScreen({
+    Key key,
+    this.database,
+  }) : super(key: key);
+
+  static const String id = 'notifications_screen';
+  final Database database;
 
   @override
-  _MentorScreenState createState() => _MentorScreenState();
+  _NotificationScreenState createState() => _NotificationScreenState();
 }
 
-class _MentorScreenState extends State<MentorScreen> {
+class _NotificationScreenState extends State<NotificationScreen> {
   bool aboutMeEditStatus = false;
   bool profilePhotoStatus = false;
   bool profilePhotoSelected = false;
@@ -102,13 +110,13 @@ class _MentorScreenState extends State<MentorScreen> {
       appBar: AppBar(
         backgroundColor: kMentorXPrimary,
         elevation: 5,
-        title: Text('News Feed'),
+        title: Text('Notifications'),
       ),
       body: Container(
         color: Colors.white,
         child: Center(
           child: Text(
-            'Mentoring Placeholder',
+            'Notifications Placeholder',
             style: TextStyle(
               color: Colors.black54,
               fontFamily: "Signatra",

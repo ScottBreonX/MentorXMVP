@@ -119,6 +119,8 @@ class MentorXMenuList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int pageIndex;
+
     return ListView(
       children: [
         drawerHeader,
@@ -142,7 +144,12 @@ class MentorXMenuList extends StatelessWidget {
             'My Profile',
             style: TextStyle(color: iconText, fontSize: 20),
           ),
-          onTap: () => Navigator.pushNamed(context, MyProfile.id),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LaunchScreen(pageIndex: 1),
+            ),
+          ),
         ),
         ListTile(
           leading: Icon(
@@ -153,19 +160,6 @@ class MentorXMenuList extends StatelessWidget {
             'Mentoring',
             style: TextStyle(color: iconText, fontSize: 20),
           ),
-        ),
-        ListTile(
-          leading: Icon(
-            Icons.calendar_today,
-            color: iconColor,
-          ),
-          title: Text(
-            'Events',
-            style: TextStyle(color: iconText, fontSize: 20),
-          ),
-          onTap: () {
-            Navigator.pushNamed(context, EventsScreen.id);
-          },
         ),
         ListTile(
           leading: Icon(

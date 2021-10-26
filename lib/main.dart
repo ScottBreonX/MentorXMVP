@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
-import 'package:mentorx_mvp/screens/login/landing_page.dart';
+import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
+import 'package:mentorx_mvp/screens/authentication/login_screen.dart';
+import 'package:mentorx_mvp/screens/authentication/welcome_screen.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
-import 'package:mentorx_mvp/screens/login/login_screen.dart';
 import 'package:mentorx_mvp/screens/enrollment/mentor_screen.dart';
+import 'package:mentorx_mvp/screens/news_feed/news_feed.dart';
+import 'package:mentorx_mvp/screens/notifications/notifications_screen.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
-import 'package:mentorx_mvp/screens/registration/registration_profile_screen.dart';
+import 'package:mentorx_mvp/screens/authentication/registration_profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
-import 'screens/login/welcome_screen.dart';
-import 'screens/login/login_screen.dart';
-import 'screens/registration/registration_screen.dart';
+import 'screens/authentication/registration_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'screens/events/events_screen.dart';
 import 'services/auth.dart';
@@ -55,6 +56,8 @@ class MentorX extends StatelessWidget {
           EventsScreen.id: (context) => EventsScreen(),
           MentorScreen.id: (context) => MentorScreen(),
           LandingPage.id: (context) => LandingPage(),
+          NewsFeed.id: (context) => NewsFeed(),
+          NotificationScreen.id: (context) => NotificationScreen(),
         },
       ),
     );
