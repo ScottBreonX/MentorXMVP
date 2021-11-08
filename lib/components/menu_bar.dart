@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
-import 'package:mentorx_mvp/screens/events/events_screen.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
-import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import '../constants.dart';
 
 class MentorXMenuHeader extends StatefulWidget {

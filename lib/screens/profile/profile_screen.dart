@@ -78,16 +78,6 @@ class _MyProfileState extends State<MyProfile> {
       );
     }
 
-    if (profileData['images'] == null) {
-      setState(() {
-        profilePhotoStatus = false;
-      });
-    } else {
-      setState(() {
-        profilePhotoStatus = true;
-      });
-    }
-
     var drawerHeader = MentorXMenuHeader(
       fName: '${profileData['First Name']}',
       lName: '${profileData['Last Name']}',
@@ -119,7 +109,7 @@ class _MyProfileState extends State<MyProfile> {
         child: Column(
           children: [
             ProfileCard(
-              profilePhotoStatus: profilePhotoStatus,
+              profilePhotoStatus: false,
               profileData: profileData,
             ),
             Expanded(

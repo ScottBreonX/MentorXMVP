@@ -203,58 +203,62 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           tag: 'logo',
                           child: Container(
                             height: 150.0,
-                            child: Image.asset('images/MLogoWhite.png'),
+                            child: Image.asset('assets/images/MLogoWhite.png'),
                           ),
                         ),
-                        SizedBox(
-                          height: 20.0,
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            child: _buildEmailTextField(model),
+                          ),
                         ),
-                        Container(
-                          child: _buildEmailTextField(model),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            child: _buildPasswordTextField(model),
+                          ),
                         ),
-                        SizedBox(
-                          height: 20,
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            child: _buildConfirmPasswordTextField(model),
+                          ),
                         ),
-                        Container(
-                          child: _buildPasswordTextField(model),
-                        ),
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                        Container(
-                          child: _buildConfirmPasswordTextField(model),
-                        ),
-                        SizedBox(height: 10.0),
-                        RoundedButton(
-                          onPressed: () {
-                            if (model.password != model.confirmPassword) {
-                              showAlertDialog(
-                                context,
-                                title: "Confirm Password",
-                                content:
-                                    "Passwords do not match. Please re-enter password.",
-                                defaultActionText: "Ok",
-                              );
-                            } else {
-                              _submit();
-                            }
-                          },
-                          title: 'NEXT',
-                          buttonColor: kMentorXPrimary,
-                          fontColor: Colors.white,
-                          minWidth: 500.0,
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: RoundedButton(
+                            onPressed: () {
+                              if (model.password != model.confirmPassword) {
+                                showAlertDialog(
+                                  context,
+                                  title: "Confirm Password",
+                                  content:
+                                      "Passwords do not match. Please re-enter password.",
+                                  defaultActionText: "Ok",
+                                );
+                              } else {
+                                _submit();
+                              }
+                            },
+                            title: 'NEXT',
+                            buttonColor: kMentorXPrimary,
+                            fontColor: Colors.white,
+                            minWidth: 500.0,
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               'Already have an account?  ',
+                              softWrap: true,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             ),
                             InkWell(
                               child: Text(
                                 'Log In',
+                                softWrap: true,
                                 style: TextStyle(
                                     fontSize: 20,
                                     color: kMentorXPrimary,

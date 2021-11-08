@@ -159,30 +159,42 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                           tag: 'logo',
                           child: Container(
                             height: 150.0,
-                            child: Image.asset('images/MLogoWhite.png'),
+                            child: Image.asset('assets/images/MLogoWhite.png'),
                           ),
                         ),
                         SizedBox(
-                          height: 48.0,
+                          height: 20.0,
                         ),
-                        Container(
-                          child: _buildEmailTextField(model),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 10.0, right: 10.0),
+                          child: Container(
+                            child: _buildEmailTextField(model),
+                          ),
                         ),
                         SizedBox(
                           height: 20,
                         ),
-                        Container(
-                          child: _buildPasswordTextField(model),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 10.0, right: 10.0),
+                          child: Container(
+                            child: _buildPasswordTextField(model),
+                          ),
                         ),
                         SizedBox(height: 20.0),
-                        RoundedButton(
-                          onPressed: model.canSubmit ? _submit : null,
-                          title: 'LOG IN',
-                          buttonColor: model.canSubmit
-                              ? kMentorXPrimary
-                              : Colors.white.withOpacity(0.5),
-                          minWidth: 500,
-                          fontColor: Colors.white,
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 10.0, right: 10.0),
+                          child: RoundedButton(
+                            onPressed: model.canSubmit ? _submit : null,
+                            title: 'LOG IN',
+                            buttonColor: model.canSubmit
+                                ? kMentorXPrimary
+                                : Colors.white.withOpacity(0.5),
+                            minWidth: 500,
+                            fontColor: Colors.white,
+                          ),
                         ),
                         SizedBox(
                           height: 0,

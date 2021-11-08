@@ -5,7 +5,7 @@ import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/authentication/login_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/welcome_screen.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
-import 'package:mentorx_mvp/screens/enrollment/mentor_screen.dart';
+import 'package:mentorx_mvp/screens/profile/profile_screenV2.dart';
 import 'package:mentorx_mvp/screens/news_feed/news_feed.dart';
 import 'package:mentorx_mvp/screens/notifications/notifications_screen.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
