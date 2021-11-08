@@ -214,7 +214,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                   tag: 'logo',
                   child: Container(
                     height: 150.0,
-                    child: Image.asset('images/MLogoWhite.png'),
+                    child: Image.asset('assets/images/MLogoWhite.png'),
                   ),
                 ),
                 SizedBox(

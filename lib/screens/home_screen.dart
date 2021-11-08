@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
-import 'package:mentorx_mvp/screens/enrollment/mentor_screen.dart';
+import 'package:mentorx_mvp/screens/profile/profile_screenV2.dart';
 import 'package:mentorx_mvp/screens/news_feed/news_feed.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';

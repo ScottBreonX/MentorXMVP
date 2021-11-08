@@ -4,10 +4,12 @@ import '../constants.dart';
 
 class ProfileImageCircle extends StatelessWidget {
   const ProfileImageCircle(
-      {@required this.circleSize,
+      {@required this.iconSize,
       this.circleColor = kMentorXPrimary,
-      this.iconColor = Colors.white});
+      this.iconColor = Colors.white,
+      @required this.circleSize});
 
+  final double iconSize;
   final double circleSize;
   final Color circleColor;
   final Color iconColor;
@@ -17,24 +19,17 @@ class ProfileImageCircle extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 2,
-            offset: Offset(2, 3),
-            spreadRadius: 1,
-          ),
-        ],
       ),
       child: CircleAvatar(
         backgroundColor: circleColor,
-        radius: 50,
+        radius: circleSize ?? 50,
         child: CircleAvatar(
           backgroundColor: circleColor,
           radius: 45,
           child: Icon(
             Icons.person,
             color: iconColor,
-            size: circleSize,
+            size: iconSize,
           ),
         ),
       ),
