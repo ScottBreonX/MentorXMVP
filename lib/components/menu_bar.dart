@@ -131,7 +131,12 @@ class MentorXMenuList extends StatelessWidget {
             'Home',
             style: TextStyle(color: iconText, fontSize: 20),
           ),
-          onTap: () => Navigator.pushNamed(context, LaunchScreen.id),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LaunchScreen(pageIndex: 0),
+            ),
+          ),
         ),
         ListTile(
           leading: Icon(
@@ -153,6 +158,12 @@ class MentorXMenuList extends StatelessWidget {
           leading: Icon(
             Icons.people,
             color: iconColor,
+          ),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LaunchScreen(pageIndex: 2),
+            ),
           ),
           title: Text(
             'Mentoring',

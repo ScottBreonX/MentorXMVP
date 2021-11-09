@@ -5,10 +5,10 @@ import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/authentication/login_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/welcome_screen.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
-import 'package:mentorx_mvp/screens/profile/profile_screenV2.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentor_lauch_screen.dart';
+import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/screens/news_feed/news_feed.dart';
 import 'package:mentorx_mvp/screens/notifications/notifications_screen.dart';
-import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/registration_profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
@@ -51,10 +51,10 @@ class MentorX extends StatelessWidget {
               ),
           RegistrationProfileScreen.id: (context) =>
               RegistrationProfileScreen(),
-          MyProfile.id: (context) => MyProfile(),
           LaunchScreen.id: (context) => LaunchScreen(),
           EventsScreen.id: (context) => EventsScreen(),
-          MentorScreen.id: (context) => MentorScreen(),
+          MyProfile.id: (context) => MyProfile(),
+          MentorLaunch.id: (context) => MentorLaunch(),
           LandingPage.id: (context) => LandingPage(),
           NewsFeed.id: (context) => NewsFeed(),
           NotificationScreen.id: (context) => NotificationScreen(),

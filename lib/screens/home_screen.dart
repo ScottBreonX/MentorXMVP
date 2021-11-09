@@ -3,14 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:mentorx_mvp/components/menu_bar.dart';
-import 'package:mentorx_mvp/constants.dart';
-import 'package:mentorx_mvp/screens/profile/profile_screenV2.dart';
-import 'package:mentorx_mvp/screens/news_feed/news_feed.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
+import 'package:mentorx_mvp/screens/news_feed/news_feed.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
-import 'events/events_screen.dart';
+import 'mentoring/mentor_lauch_screen.dart';
 import 'notifications/notifications_screen.dart';
 
 User loggedInUser;
@@ -100,7 +97,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
         children: [
           NewsFeed(),
           MyProfile(),
-          MentorScreen(),
+          MentorLaunch(),
           NotificationScreen(),
         ],
         controller: pageController,

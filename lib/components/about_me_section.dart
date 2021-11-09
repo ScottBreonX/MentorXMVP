@@ -140,43 +140,112 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        aboutMeEditStatus = true;
-                      });
-                    },
-                    child: IconCircle(
-                      width: 30.0,
-                      height: 30.0,
-                      circleColor: kMentorXPrimary,
-                      iconColor: Colors.white,
-                      iconSize: 20.0,
-                      iconType: Icons.edit,
-                    ),
-                  ),
-                ),
+                aboutMeEditStatus
+                    ? Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              right: 8.0,
+                              bottom: 10.0,
+                            ),
+                            child: GestureDetector(
+                              onTap: () {
+                                _updateAboutMe(context);
+                              },
+                              child: Container(
+                                height: 40.0,
+                                width: 40.0,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 2,
+                                      offset: Offset(2, 2),
+                                      color: Colors.black54,
+                                      spreadRadius: 0.5,
+                                    )
+                                  ],
+                                ),
+                                child: Icon(
+                                  Icons.check,
+                                  color: Colors.green,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(right: 8.0, bottom: 10.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  aboutMeEditStatus = false;
+                                });
+                              },
+                              child: Container(
+                                height: 40.0,
+                                width: 40.0,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 2,
+                                      offset: Offset(2, 2),
+                                      color: Colors.black54,
+                                      spreadRadius: 0.5,
+                                    )
+                                  ],
+                                ),
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              aboutMeEditStatus = true;
+                            });
+                          },
+                          child: IconCircle(
+                            width: 30.0,
+                            height: 30.0,
+                            circleColor: kMentorXPrimary,
+                            iconColor: Colors.white,
+                            iconSize: 20.0,
+                            iconType: Icons.edit,
+                          ),
+                        ),
+                      ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0, right: 10.0),
-            child: Row(
-              children: [
-                Flexible(
-                  child: Text(
-                    '${profileData['About Me']}',
-                    style: TextStyle(
-                      fontSize: 15.0,
-                      color: Colors.black54,
-                    ),
+          aboutMeEditStatus
+              ? _buildAboutMeTextField(context)
+              : Padding(
+                  padding: const EdgeInsets.only(top: 8.0, right: 10.0),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          '${profileData['About Me']}',
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
         ],
       ),
     );
