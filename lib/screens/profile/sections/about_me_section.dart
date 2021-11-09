@@ -6,9 +6,9 @@ import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
 
-import '../constants.dart';
-import 'alert_dialog.dart';
-import 'icon_circle.dart';
+import '../../../constants.dart';
+import '../../../components/alert_dialog.dart';
+import '../../../components/icon_circle.dart';
 
 User loggedInUser;
 

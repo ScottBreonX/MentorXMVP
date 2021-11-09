@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/about_me_section.dart';
-import 'package:mentorx_mvp/components/menu_bar.dart';
+import 'package:mentorx_mvp/components/divider_3D.dart';
+import 'package:mentorx_mvp/components/icon_circle.dart';
+import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
+import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/constants.dart';
+import 'package:mentorx_mvp/screens/profile/sections/profile_mentee_section.dart';
+import 'package:mentorx_mvp/screens/profile/sections/profile_mentor_section.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -65,7 +69,7 @@ class _MyProfileState extends State<MyProfile> {
     if (profileData == null) {
       return Center(
         child: CircularProgressIndicator(
-          backgroundColor: kMentorXPrimary,
+          backgroundColor: Colors.pink,
         ),
       );
     }
@@ -165,10 +169,14 @@ class _MyProfileState extends State<MyProfile> {
                       ),
                       child: GestureDetector(
                         onTap: () {},
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.grey,
-                          size: 25.0,
+                        child: IconCircle(
+                          height: 40.0,
+                          width: 40.0,
+                          iconSize: 30.0,
+                          iconType: Icons.edit,
+                          circleColor: Colors.transparent,
+                          iconColor: Colors.grey,
+                          shadowColor: Colors.transparent,
                         ),
                       ),
                     ),
@@ -176,21 +184,13 @@ class _MyProfileState extends State<MyProfile> {
                   Positioned(
                     top: 20,
                     right: 10,
-                    child: Container(
+                    child: IconCircle(
                       height: 30.0,
                       width: 30.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.pink,
-                          size: 20.0,
-                        ),
-                      ),
+                      iconSize: 20.0,
+                      iconType: Icons.edit,
+                      circleColor: Colors.white,
+                      iconColor: Colors.pink,
                     ),
                   ),
                 ],
@@ -214,7 +214,8 @@ class _MyProfileState extends State<MyProfile> {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 15.0, top: 5.0),
+                    padding: const EdgeInsets.only(
+                        left: 15.0, top: 5.0, bottom: 15.0),
                     child: Text(
                       '${profileData['Year in School']}, ${profileData['Major']}',
                       style: TextStyle(
@@ -226,92 +227,30 @@ class _MyProfileState extends State<MyProfile> {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Container(
-                  height: 8,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Colors.grey, Colors.grey.shade200],
-                    ),
-                  ),
-                ),
-              ),
+              Divider3D(),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
                 child: AboutMeSection(),
               ),
-              Container(
-                height: 8,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.grey,
-                      Colors.grey.shade200,
-                    ],
+              Divider3D(),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                    child: Text(
+                      'Mentoring Atttributes',
+                      style: TextStyle(
+                        fontFamily: 'Work Sans',
+                        fontWeight: FontWeight.bold,
+                        color: kMentorXPrimary,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-              AboutMeSection(),
-              Container(
-                height: 8,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.grey,
-                      Colors.grey.shade200,
-                    ],
-                  ),
-                ),
-              ),
-              AboutMeSection(),
-              Container(
-                height: 8,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.grey,
-                      Colors.grey.shade200,
-                    ],
-                  ),
-                ),
-              ),
-              AboutMeSection(),
-              Container(
-                height: 8,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.grey,
-                      Colors.grey.shade200,
-                    ],
-                  ),
-                ),
-              ),
-              AboutMeSection(),
-              Container(
-                height: 8,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.grey,
-                      Colors.grey.shade200,
-                    ],
-                  ),
-                ),
-              ),
+              ProfileMentorSection(),
+              ProfileMenteeSection(),
             ],
           ),
         ),

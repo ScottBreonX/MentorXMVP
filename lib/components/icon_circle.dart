@@ -11,6 +11,7 @@ class IconCircle extends StatelessWidget {
     @required this.iconType,
     @required this.circleColor,
     @required this.iconColor,
+    this.shadowColor,
   }) : super(key: key);
 
   final double height;
@@ -19,6 +20,7 @@ class IconCircle extends StatelessWidget {
   final IconData iconType;
   final Color circleColor;
   final Color iconColor;
+  final Color shadowColor;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class IconCircle extends StatelessWidget {
       decoration:
           BoxDecoration(shape: BoxShape.circle, color: circleColor, boxShadow: [
         BoxShadow(
-          color: kMentorXBlack,
+          color: shadowColor ?? kMentorXBlack,
           offset: Offset(2, 3),
           blurRadius: 2,
         )

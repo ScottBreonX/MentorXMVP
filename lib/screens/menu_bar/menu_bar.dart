@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
-import '../constants.dart';
+import '../../constants.dart';
 
 class MentorXMenuHeader extends StatefulWidget {
   const MentorXMenuHeader(
@@ -30,29 +30,16 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
       profilePictureStatus = true;
     }
 
-    Color accountCardTextColor = kMentorXPrimary;
+    Color accountCardTextColor = Colors.black54;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: UserAccountsDrawerHeader(
         key: _scaffoldKey,
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.bottomLeft,
-                end: Alignment.topRight,
-                colors: [
-                  Colors.white,
-                  Colors.pink.shade100,
-                  Colors.blue.shade100,
-                ]),
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black54,
-                offset: Offset(1, 2),
-                blurRadius: 2,
-              )
-            ]),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+        ),
         accountName: Text(
           '${widget.fName} ${widget.lName}',
           style: TextStyle(
@@ -65,28 +52,17 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
             color: accountCardTextColor,
           ),
         ),
-        currentAccountPicture: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(60),
-            border: Border.all(
-              width: 5.0,
-              color: Colors.grey,
-            ),
-            color: Colors.white.withOpacity(0.05),
-          ),
-          child: CircleAvatar(
-            backgroundImage: profilePictureStatus
-                ? NetworkImage(widget.profilePicture)
-                : null,
-            backgroundColor: Colors.white,
-            child: profilePictureStatus
-                ? null
-                : Icon(
-                    Icons.person,
-                    color: kMentorXPrimary,
-                    size: 42.0,
-                  ),
-          ),
+        currentAccountPicture: CircleAvatar(
+          backgroundImage:
+              profilePictureStatus ? NetworkImage(widget.profilePicture) : null,
+          backgroundColor: kMentorXPrimary,
+          child: profilePictureStatus
+              ? null
+              : Icon(
+                  Icons.person,
+                  color: Colors.white,
+                  size: 40.0,
+                ),
         ),
         otherAccountsPictures: [
           CircleAvatar(
@@ -117,8 +93,6 @@ class MentorXMenuList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int pageIndex;
-
     return ListView(
       children: [
         drawerHeader,
