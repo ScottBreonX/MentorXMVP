@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/menu_bar.dart';
-import 'package:mentorx_mvp/components/profile_card.dart';
+import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/services/auth.dart';
@@ -108,10 +107,6 @@ class _OldProfileState extends State<OldProfile> {
         color: Colors.white,
         child: Column(
           children: [
-            ProfileCard(
-              profilePhotoStatus: false,
-              profileData: profileData,
-            ),
             Expanded(
               child: DefaultTabController(
                 length: 3,

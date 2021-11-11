@@ -6,43 +6,43 @@ import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
 
-import '../constants.dart';
-import 'alert_dialog.dart';
-import 'icon_circle.dart';
+import '../../../constants.dart';
+import '../../../components/alert_dialog.dart';
+import '../../../components/icon_circle.dart';
 
 User loggedInUser;
 
-class AboutMeSection extends StatefulWidget {
-  const AboutMeSection({
+class ProfileMenteeSection extends StatefulWidget {
+  const ProfileMenteeSection({
     Key key,
   });
 
   @override
-  _AboutMeSectionState createState() => _AboutMeSectionState();
+  _ProfileMenteeSectionState createState() => _ProfileMenteeSectionState();
 }
 
-class _AboutMeSectionState extends State<AboutMeSection> {
+class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
   @override
   void initState() {
-    aboutMeEditStatus = false;
+    menteeEditStatus = false;
     getCurrentUser();
     getProfileData();
     super.initState();
   }
 
-  bool aboutMeEditStatus = false;
-  String aboutMeText;
+  bool menteeEditStatus = false;
+  String menteeText;
   final _formKey1 = GlobalKey<FormState>();
 
-  TextFormField _buildAboutMeTextField(BuildContext context) {
+  TextFormField _buildMenteeTextField(BuildContext context) {
     return TextFormField(
       key: _formKey1,
-      initialValue: aboutMeText = profileData['About Me'],
+      initialValue: menteeText = profileData['Mentee Attributes'],
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.multiline,
       maxLines: null,
       textAlign: TextAlign.start,
-      onChanged: (value) => aboutMeText = value,
+      onChanged: (value) => menteeText = value,
       style: TextStyle(
         color: kMentorXPrimary,
         fontWeight: FontWeight.w400,
@@ -92,12 +92,12 @@ class _AboutMeSectionState extends State<AboutMeSection> {
     }
   }
 
-  Future<void> _updateAboutMe(BuildContext context) async {
+  Future<void> _updateMenteeAttributes(BuildContext context) async {
     try {
       final database = FirestoreDatabase(uid: loggedInUser.uid);
-      await database.updateAboutMe(
-        AboutMeModel(
-          aboutMe: aboutMeText,
+      await database.updateMenteeAttributes(
+        MenteeAttributesModel(
+          menteeAttributes: menteeText,
         ),
       );
     } on FirebaseException catch (e) {
@@ -105,7 +105,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
     }
     setState(() {
-      getProfileData().then((value) => aboutMeEditStatus = false);
+      getProfileData().then((value) => menteeEditStatus = false);
     });
   }
 
@@ -120,27 +120,29 @@ class _AboutMeSectionState extends State<AboutMeSection> {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
       child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: aboutMeEditStatus
+              crossAxisAlignment: menteeEditStatus
                   ? CrossAxisAlignment.center
                   : CrossAxisAlignment.end,
               children: [
-                Text(
-                  'About Me',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: kMentorXPrimary,
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    'What I seek in a mentor',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.black54,
+                      fontFamily: 'WorkSans',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-                aboutMeEditStatus
+                menteeEditStatus
                     ? Row(
                         children: [
                           Padding(
@@ -150,7 +152,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                             ),
                             child: GestureDetector(
                               onTap: () {
-                                _updateAboutMe(context);
+                                _updateMenteeAttributes(context);
                               },
                               child: Container(
                                 height: 40.0,
@@ -180,7 +182,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                             child: GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  aboutMeEditStatus = false;
+                                  menteeEditStatus = false;
                                 });
                               },
                               child: Container(
@@ -212,7 +214,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                         child: GestureDetector(
                           onTap: () {
                             setState(() {
-                              aboutMeEditStatus = true;
+                              menteeEditStatus = true;
                             });
                           },
                           child: IconCircle(
@@ -228,15 +230,15 @@ class _AboutMeSectionState extends State<AboutMeSection> {
               ],
             ),
           ),
-          aboutMeEditStatus
-              ? _buildAboutMeTextField(context)
+          menteeEditStatus
+              ? _buildMenteeTextField(context)
               : Padding(
                   padding: const EdgeInsets.only(top: 8.0, right: 10.0),
                   child: Row(
                     children: [
                       Flexible(
                         child: Text(
-                          '${profileData['About Me']}',
+                          '${profileData['Mentee Attributes']}',
                           style: TextStyle(
                             fontSize: 15.0,
                             color: Colors.black54,
