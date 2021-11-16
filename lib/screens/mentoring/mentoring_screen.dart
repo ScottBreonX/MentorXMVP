@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/divider_3D.dart';
-import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/icon_circle.dart';
-import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -116,6 +114,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
         elevation: 5,
         title: Text('MentoringScreen'),
       ),
+      // replace body with ListView of mentees
       body: Container(
         alignment: Alignment.center,
         child: Column(
@@ -123,25 +122,65 @@ class _MentoringScreenState extends State<MentoringScreen> {
             Container(
               child: Expanded(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    // replace icon circle with profile pics
                     IconCircle(
-                      height: 75.0,
-                      width: 75.0,
-                      iconSize: 70,
+                      height: 250.0,
+                      width: 250.0,
+                      iconSize: 220,
                       iconType: Icons.person,
                       circleColor: Colors.black,
                       iconColor: Colors.white,
                     ),
-                    Text('Test'),
+                    SizedBox(height: 10.0),
+                    Text(
+                      'Alan Croft',
+                      style: TextStyle(
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Mentee',
+                      style: TextStyle(
+                        fontSize: 25.0,
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
+            Divider3D(),
             Container(
               child: Expanded(
                   child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('TEST'),
+                  // replace icon circle with profile pics
+                  IconCircle(
+                    height: 250.0,
+                    width: 250.0,
+                    iconSize: 220,
+                    iconType: Icons.person_outlined,
+                    circleColor: Colors.black,
+                    iconColor: Colors.white,
+                  ),
+                  SizedBox(height: 10.0),
+                  // replace text with imported names
+                  Text(
+                    'Scott Breon',
+                    style: TextStyle(
+                      fontSize: 40.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'Mentee',
+                    style: TextStyle(
+                      fontSize: 26.0,
+                    ),
+                  ),
                 ],
               )),
             ),
