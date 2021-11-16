@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/divider_3D.dart';
+import 'package:mentorx_mvp/components/icon_card.dart';
+import 'package:mentorx_mvp/screens/home_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -113,28 +117,118 @@ class _MentorLaunchState extends State<MentorLaunch> {
         title: Text('Mentoring'),
       ),
       body: Container(
-        color: Colors.white,
-        child: Center(
-          child: Row(
-            children: [
-              Expanded(
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Mentoring Launch Page Placeholder',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontFamily: "Signatra",
-                        fontSize: 40,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 4,
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: Container(
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: Image.asset('assets/images/MLogoBlue.png'),
                       ),
                     ),
                   ),
-                ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      child: Text(
+                        'UNIVERSITY OF MICHIGAN',
+                        style: TextStyle(
+                          fontSize: 24,
+                          letterSpacing: 3,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Divider3D(),
+            SizedBox(height: 15.0),
+            Expanded(
+              flex: 3,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            child: IconCard(
+                              cardColor: Colors.grey[800],
+                              cardIconColor: Colors.white,
+                              cardTextColor: Colors.white,
+                              cardText: 'Mentoring',
+                              cardIcon: Icons.group,
+                              boxHeight: 200,
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MentoringScreen(),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: IconCard(
+                            cardColor: Colors.grey[800],
+                            cardIconColor: Colors.white,
+                            cardTextColor: Colors.white,
+                            cardText: 'News Feed',
+                            cardIcon: Icons.article_outlined,
+                            boxHeight: 200,
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    LaunchScreen(pageIndex: 0),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: IconCard(
+                            cardColor: Colors.grey[800],
+                            cardIconColor: Colors.white,
+                            cardTextColor: Colors.white,
+                            cardText: 'Calendar',
+                            cardIcon: Icons.date_range,
+                            boxHeight: 200,
+                            onTap: () {},
+                          ),
+                        ),
+                        Expanded(
+                          child: IconCard(
+                            cardColor: Colors.grey[800],
+                            cardIconColor: Colors.white,
+                            cardTextColor: Colors.white,
+                            cardText: 'Program Info',
+                            cardIcon: Icons.info_outline,
+                            boxHeight: 200,
+                            onTap: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
