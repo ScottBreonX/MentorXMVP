@@ -24,16 +24,10 @@ class MentorLaunch extends StatefulWidget {
 }
 
 class _MentorLaunchState extends State<MentorLaunch> {
-  bool aboutMeEditStatus = false;
-  bool profilePhotoStatus = false;
-  bool profilePhotoSelected = false;
-  String aboutMeText;
-
   @override
   void initState() {
     getCurrentUser();
     getProfileData();
-    aboutMeEditStatus = false;
     super.initState();
   }
 
@@ -74,16 +68,6 @@ class _MentorLaunchState extends State<MentorLaunch> {
           backgroundColor: kMentorXPrimary,
         ),
       );
-    }
-
-    if (profileData['images'] == null) {
-      setState(() {
-        profilePhotoStatus = false;
-      });
-    } else {
-      setState(() {
-        profilePhotoStatus = true;
-      });
     }
 
     var drawerHeader = MentorXMenuHeader(
