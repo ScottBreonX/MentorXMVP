@@ -6,6 +6,7 @@ import 'package:mentorx_mvp/screens/authentication/login_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/welcome_screen.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_lauch_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/screens/news_feed/news_feed.dart';
 import 'package:mentorx_mvp/screens/notifications/notifications_screen.dart';
@@ -58,6 +59,7 @@ class MentorX extends StatelessWidget {
           LandingPage.id: (context) => LandingPage(),
           NewsFeed.id: (context) => NewsFeed(),
           NotificationScreen.id: (context) => NotificationScreen(),
+          MentoringScreen.id: (context) => MentoringScreen(),
         },
       ),
     );
