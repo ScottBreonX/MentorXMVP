@@ -127,10 +127,7 @@ class _MentorLaunchState extends State<MentorLaunch> {
                   Expanded(
                     flex: 4,
                     child: Container(
-                      child: FittedBox(
-                        fit: BoxFit.contain,
-                        child: Image.asset('assets/images/MLogoBlue.png'),
-                      ),
+                      child: Image.asset('assets/images/MLogoBlue.png'),
                     ),
                   ),
                   Expanded(
