@@ -6,7 +6,7 @@ class IconCard extends StatelessWidget {
     @required this.cardColor,
     @required this.cardIconColor,
     @required this.cardTextColor,
-    @required this.cardShadowColor,
+    this.cardShadowColor,
     @required this.cardIcon,
     @required this.cardText,
     @required this.onTap,

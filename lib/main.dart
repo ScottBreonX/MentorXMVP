@@ -4,6 +4,7 @@ import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/authentication/login_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/welcome_screen.dart';
+import 'package:mentorx_mvp/screens/chat/chat_screen.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_lauch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
@@ -13,6 +14,10 @@ import 'package:mentorx_mvp/screens/notifications/notifications_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/registration_profile_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
+import 'Notes/available_mentors_old.dart';
+import 'Notes/mentee_screen_old.dart';
+import 'Notes/mentor_screen_old.dart';
+import 'Notes/mentoring_screen_old.dart';
 import 'screens/authentication/registration_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'screens/events/events_screen.dart';
@@ -60,6 +65,12 @@ class MentorX extends StatelessWidget {
           NewsFeed.id: (context) => NewsFeed(),
           NotificationScreen.id: (context) => NotificationScreen(),
           MentoringScreen.id: (context) => MentoringScreen(),
+          MentoringScreenOld.id: (context) => MentoringScreenOld(),
+          MentorScreenOld.id: (context) => MentorScreenOld(),
+          MenteeScreenOld.id: (context) => MenteeScreenOld(),
+          AvailableMentorsScreenOld.id: (context) =>
+              AvailableMentorsScreenOld(),
+          ChatScreen.id: (context) => ChatScreen(),
         },
       ),
     );

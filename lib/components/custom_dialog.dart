@@ -130,7 +130,7 @@ class _CustomDialogState extends State<CustomDialog> {
                   Radius.circular(Constants.avatarRadius),
                 ),
                 child: Image.asset(
-                  "images/XLogoWhite.png",
+                  "assets/images/MentorPink.png",
                   width: 80,
                   height: 80,
                 ),

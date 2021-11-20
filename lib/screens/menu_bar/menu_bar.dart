@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/Notes/mentoring_screen_old.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import '../../constants.dart';
@@ -141,6 +142,18 @@ class MentorXMenuList extends StatelessWidget {
           ),
           title: Text(
             'Mentoring',
+            style: TextStyle(color: iconText, fontSize: 20),
+          ),
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.people,
+            color: iconColor,
+          ),
+          onTap: () =>
+              Navigator.popAndPushNamed(context, MentoringScreenOld.id),
+          title: Text(
+            'Mentoring [OLD]',
             style: TextStyle(color: iconText, fontSize: 20),
           ),
         ),

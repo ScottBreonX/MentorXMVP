@@ -111,21 +111,23 @@ class _MentorLaunchState extends State<MentorLaunch> {
                   Expanded(
                     flex: 4,
                     child: Container(
-                      child: FittedBox(
-                        fit: BoxFit.contain,
-                        child: Image.asset('assets/images/MLogoBlue.png'),
-                      ),
+                      child: Image.asset('assets/images/MLogoBlue.png'),
                     ),
                   ),
                   Expanded(
                     flex: 1,
-                    child: Container(
-                      child: Text(
-                        'UNIVERSITY OF MICHIGAN',
-                        style: TextStyle(
-                          fontSize: 24,
-                          letterSpacing: 3,
-                          fontWeight: FontWeight.bold,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        child: Center(
+                          child: Text(
+                            'UNIVERSITY OF MICHIGAN',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
                     ),
