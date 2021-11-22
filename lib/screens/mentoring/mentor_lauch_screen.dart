@@ -28,16 +28,10 @@ class MentorLaunch extends StatefulWidget {
 }
 
 class _MentorLaunchState extends State<MentorLaunch> {
-  bool aboutMeEditStatus = false;
-  bool profilePhotoStatus = false;
-  bool profilePhotoSelected = false;
-  String aboutMeText;
-
   @override
   void initState() {
     getCurrentUser();
     getProfileData();
-    aboutMeEditStatus = false;
     super.initState();
   }
 
@@ -78,16 +72,6 @@ class _MentorLaunchState extends State<MentorLaunch> {
           backgroundColor: kMentorXPrimary,
         ),
       );
-    }
-
-    if (profileData['images'] == null) {
-      setState(() {
-        profilePhotoStatus = false;
-      });
-    } else {
-      setState(() {
-        profilePhotoStatus = true;
-      });
     }
 
     var drawerHeader = MentorXMenuHeader(
@@ -132,13 +116,18 @@ class _MentorLaunchState extends State<MentorLaunch> {
                   ),
                   Expanded(
                     flex: 1,
-                    child: Container(
-                      child: Text(
-                        'UNIVERSITY OF MICHIGAN',
-                        style: TextStyle(
-                          fontSize: 24,
-                          letterSpacing: 3,
-                          fontWeight: FontWeight.bold,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        child: Center(
+                          child: Text(
+                            'UNIVERSITY OF MICHIGAN',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
                     ),
