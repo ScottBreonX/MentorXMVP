@@ -6,11 +6,14 @@ import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/screens/news_feed/news_feed.dart';
 import 'package:mentorx_mvp/services/auth.dart';
+import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
 import 'mentoring/mentor_lauch_screen.dart';
 import 'notifications/notifications_screen.dart';
 
 User loggedInUser;
+final usersRef = FirebaseFirestore.instance.collection('users');
+final mentorsRef = FirebaseFirestore.instance.collection('mentors');
 
 class LaunchScreen extends StatefulWidget {
   const LaunchScreen({this.onSignOut, this.pageIndex});

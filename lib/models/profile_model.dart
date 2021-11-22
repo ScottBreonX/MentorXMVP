@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class ProfileModel {
   ProfileModel({
     this.fName,
@@ -29,6 +31,18 @@ class ProfileModel {
       major: major,
       yearInSchool: yearInSchool,
     );
+  }
+
+  factory ProfileModel.fromDocument(DocumentSnapshot doc) {
+    if (doc == null) {
+      return null;
+    }
+    return ProfileModel(
+        fName: doc['First Name'],
+        lName: doc['Last Name'],
+        major: doc['Major'],
+        yearInSchool: doc['Year in School'],
+        email: doc['Email Address']);
   }
 
   Map<String, dynamic> toMap() {
