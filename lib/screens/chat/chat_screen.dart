@@ -181,7 +181,7 @@ class MessagesStream extends StatelessWidget {
         List<MessageBubble> messageBubbles = [];
 
         for (var message in messages) {
-          final messageData = message.data();
+          final messageData = message;
 
           final messageText = messageData['text'];
           final senderFName = messageData['senderFName'];
