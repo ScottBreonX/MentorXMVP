@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/icon_card.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentor_lauch_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,20 +12,20 @@ import 'package:provider/provider.dart';
 
 User loggedInUser;
 
-class NewsFeed extends StatefulWidget {
-  const NewsFeed({
+class ProgramSelectionScreen extends StatefulWidget {
+  const ProgramSelectionScreen({
     Key key,
     this.database,
   }) : super(key: key);
 
-  static const String id = 'news_feed';
+  static const String id = 'program_selection_screen';
   final Database database;
 
   @override
-  _NewsFeedState createState() => _NewsFeedState();
+  _ProgramSelectionScreenState createState() => _ProgramSelectionScreenState();
 }
 
-class _NewsFeedState extends State<NewsFeed> {
+class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
   bool aboutMeEditStatus = false;
   bool profilePhotoStatus = false;
   bool profilePhotoSelected = false;
@@ -110,19 +112,39 @@ class _NewsFeedState extends State<NewsFeed> {
       appBar: AppBar(
         backgroundColor: kMentorXPrimary,
         elevation: 5,
-        title: Text('News Feed'),
+        title: Text('Program Selection'),
       ),
       body: Container(
-        color: Colors.white,
-        child: Center(
-          child: Text(
-            'News Feed Placeholder',
-            style: TextStyle(
-              color: Colors.black54,
-              fontFamily: "Signatra",
-              fontSize: 40,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Wrap(
+                  children: [
+                    IconCard(
+                      cardColor: kMentorXPrimary,
+                      cardIconColor: Colors.white,
+                      cardTextColor: Colors.white,
+                      cardIcon: Icons.add,
+                      cardText: 'Join a Program',
+                      onTap: () {},
+                    ),
+                    IconCard(
+                      cardColor: Colors.white,
+                      cardIconColor: kMentorXPrimary,
+                      cardTextColor: Colors.black54,
+                      cardText: 'University of Michigan',
+                      onTap: () {
+                        Navigator.popAndPushNamed(context, MentorLaunch.id);
+                      },
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ),
+          ],
         ),
       ),
     );

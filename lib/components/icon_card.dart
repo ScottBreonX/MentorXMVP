@@ -4,10 +4,10 @@ class IconCard extends StatelessWidget {
   const IconCard({
     Key key,
     @required this.cardColor,
-    @required this.cardIconColor,
+    this.cardIconColor,
     @required this.cardTextColor,
     this.cardShadowColor,
-    @required this.cardIcon,
+    this.cardIcon,
     @required this.cardText,
     @required this.onTap,
     this.iconSize,
