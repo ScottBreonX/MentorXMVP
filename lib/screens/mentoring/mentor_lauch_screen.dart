@@ -69,7 +69,7 @@ class _MentorLaunchState extends State<MentorLaunch> {
     if (profileData == null) {
       return Center(
         child: CircularProgressIndicator(
-          backgroundColor: kMentorXPrimary,
+          backgroundColor: kUMichBlue,
         ),
       );
     }
@@ -91,12 +91,12 @@ class _MentorLaunchState extends State<MentorLaunch> {
         child: Container(
           child: drawerItems,
           decoration: BoxDecoration(
-            color: kMentorXPrimary,
+            color: kUMichBlue,
           ),
         ),
       ),
       appBar: AppBar(
-        backgroundColor: kMentorXPrimary,
+        backgroundColor: kUMichBlue,
         elevation: 5,
         title: Text('Mentoring'),
       ),
@@ -105,114 +105,101 @@ class _MentorLaunchState extends State<MentorLaunch> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Expanded(
-              flex: 4,
+              flex: 2,
               child: Column(
                 children: [
-                  Expanded(
-                    flex: 4,
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
                     child: Container(
-                      child: Image.asset('assets/images/MLogoBlue.png'),
+                      child: Image.asset(
+                        'assets/images/UMichLogo.png',
+                        height: 200,
+                      ),
                     ),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        child: Center(
-                          child: Text(
-                            'UNIVERSITY OF MICHIGAN',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                  Container(
+                    child: Center(
+                      child: Text(
+                        'University of Michigan',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: kUMichBlue,
                         ),
                       ),
                     ),
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Mentorship Program',
+                        style: TextStyle(
+                          color: kUMichBlue,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
             Divider3D(),
             SizedBox(height: 15.0),
-            Expanded(
-              flex: 3,
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            child: IconCard(
-                              cardColor: Colors.grey[800],
-                              cardIconColor: Colors.white,
-                              cardTextColor: Colors.white,
-                              cardText: 'Mentoring',
-                              cardIcon: Icons.group,
-                              boxHeight: 200,
-                              onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MentoringScreen(),
-                                ),
-                              ),
-                            ),
+            Column(
+              children: [
+                Wrap(
+                  children: [
+                    Container(
+                      child: IconCard(
+                        cardColor: kUMichBlue,
+                        cardIconColor: Colors.white,
+                        cardTextColor: Colors.white,
+                        cardText: 'Mentoring',
+                        cardIcon: Icons.group,
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MentoringScreen(),
                           ),
                         ),
-                        Expanded(
-                          child: IconCard(
-                            cardColor: Colors.grey[800],
-                            cardIconColor: Colors.white,
-                            cardTextColor: Colors.white,
-                            cardText: 'News Feed',
-                            cardIcon: Icons.article_outlined,
-                            boxHeight: 200,
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    LaunchScreen(pageIndex: 0),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: IconCard(
-                            cardColor: Colors.grey[800],
-                            cardIconColor: Colors.white,
-                            cardTextColor: Colors.white,
-                            cardText: 'Calendar',
-                            cardIcon: Icons.date_range,
-                            boxHeight: 200,
-                            onTap: () {},
-                          ),
+                    IconCard(
+                      cardColor: kUMichBlue,
+                      cardIconColor: Colors.white,
+                      cardTextColor: Colors.white,
+                      cardText: 'News Feed',
+                      cardIcon: Icons.article_outlined,
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LaunchScreen(pageIndex: 0),
                         ),
-                        Expanded(
-                          child: IconCard(
-                            cardColor: Colors.grey[800],
-                            cardIconColor: Colors.white,
-                            cardTextColor: Colors.white,
-                            cardText: 'Program Info',
-                            cardIcon: Icons.info_outline,
-                            boxHeight: 200,
-                            onTap: () {},
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 10.0),
-                ],
-              ),
+                    IconCard(
+                      cardColor: kUMichBlue,
+                      cardIconColor: Colors.white,
+                      cardTextColor: Colors.white,
+                      cardText: 'Calendar',
+                      cardIcon: Icons.date_range,
+                      onTap: () {},
+                    ),
+                    IconCard(
+                      cardColor: kUMichBlue,
+                      cardIconColor: Colors.white,
+                      cardTextColor: Colors.white,
+                      cardText: 'Program Info',
+                      cardIcon: Icons.info_outline,
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+                SizedBox(height: 80.0),
+              ],
             ),
           ],
         ),

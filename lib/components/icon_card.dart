@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/constants.dart';
 
 class IconCard extends StatelessWidget {
   const IconCard({
@@ -14,6 +15,10 @@ class IconCard extends StatelessWidget {
     this.textSize,
     this.boxHeight,
     this.boxWidth,
+    this.imageAsset,
+    this.borderColor,
+    this.borderWidth,
+    this.textSpacingHeight,
   }) : super(key: key);
 
   final Color cardColor;
@@ -26,7 +31,11 @@ class IconCard extends StatelessWidget {
   final double iconSize;
   final double textSize;
   final double boxHeight;
+  final Image imageAsset;
   final double boxWidth;
+  final Color borderColor;
+  final double borderWidth;
+  final double textSpacingHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +46,8 @@ class IconCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+                color: borderColor ?? kMentorXPrimary, width: borderWidth ?? 0),
             boxShadow: [
               BoxShadow(
                 blurRadius: 2,
@@ -45,28 +56,31 @@ class IconCard extends StatelessWidget {
               ),
             ],
             color: cardColor,
-//            color: Colors.blue,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                cardIcon,
-                color: cardIconColor,
-                size: iconSize ?? 80,
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                cardText,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: cardTextColor,
-                  fontSize: textSize ?? 20,
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                imageAsset ??
+                    Icon(
+                      cardIcon,
+                      color: cardIconColor,
+                      size: iconSize ?? 80,
+                    ),
+                SizedBox(
+                  height: textSpacingHeight ?? 5,
                 ),
-              )
-            ],
+                Text(
+                  cardText,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: cardTextColor,
+                    fontSize: textSize ?? 20,
+                  ),
+                )
+              ],
+            ),
           ),
           height: boxHeight ?? 150,
           width: boxWidth ?? 150,
