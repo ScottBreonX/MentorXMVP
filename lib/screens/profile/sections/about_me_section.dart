@@ -46,22 +46,10 @@ class _AboutMeSectionState extends State<AboutMeSection> {
       textAlign: TextAlign.start,
       onChanged: (value) => aboutMeText = value,
       style: TextStyle(
-        color: kMentorXPrimary,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecorationLight.copyWith(
-        fillColor: Colors.grey.shade200,
-        filled: true,
-        labelText: '',
-        hintText: '',
-        enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: kMentorXPrimary, width: 1.0),
-            borderRadius: BorderRadius.all(Radius.circular(10.0))),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: kMentorXPrimary, width: 3.0),
-            borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      ),
+      decoration: kTextFieldDecorationDark,
     );
   }
 
@@ -114,11 +102,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
   @override
   Widget build(BuildContext context) {
     if (profileData == null) {
-      return Center(
-        child: CircularProgressIndicator(
-          backgroundColor: kMentorXPrimary,
-        ),
-      );
+      return Center();
     }
 
     return Padding(
@@ -137,7 +121,6 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                   'About Me',
                   style: TextStyle(
                     fontSize: 20.0,
-                    color: kMentorXPrimary,
                     fontFamily: 'WorkSans',
                     fontWeight: FontWeight.bold,
                   ),
@@ -157,18 +140,6 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                               child: Container(
                                 height: 40.0,
                                 width: 40.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 2,
-                                      offset: Offset(2, 2),
-                                      color: Colors.black54,
-                                      spreadRadius: 0.5,
-                                    )
-                                  ],
-                                ),
                                 child: Icon(
                                   Icons.check,
                                   color: Colors.green,
@@ -188,18 +159,6 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                               child: Container(
                                 height: 40.0,
                                 width: 40.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 2,
-                                      offset: Offset(2, 2),
-                                      color: Colors.black54,
-                                      spreadRadius: 0.5,
-                                    )
-                                  ],
-                                ),
                                 child: Icon(
                                   Icons.close,
                                   color: Colors.red,
@@ -220,9 +179,6 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                           child: IconCircle(
                             width: 30.0,
                             height: 30.0,
-                            circleColor: kMentorXPrimary,
-                            iconColor: Colors.white,
-                            iconSize: 20.0,
                             iconType: Icons.edit,
                           ),
                         ),
@@ -241,7 +197,6 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                           '${profileData['About Me']}',
                           style: TextStyle(
                             fontSize: 15.0,
-                            color: Colors.black54,
                           ),
                         ),
                       ),

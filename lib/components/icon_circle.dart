@@ -5,12 +5,12 @@ import '../constants.dart';
 class IconCircle extends StatelessWidget {
   const IconCircle({
     Key key,
-    @required this.height,
-    @required this.width,
-    @required this.iconSize,
-    @required this.iconType,
-    @required this.circleColor,
-    @required this.iconColor,
+    this.height,
+    this.width,
+    this.iconSize,
+    this.iconType,
+    this.circleColor,
+    this.iconColor,
     this.shadowColor,
   }) : super(key: key);
 
