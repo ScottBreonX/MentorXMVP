@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/divider_3D.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/available_mentors.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
@@ -194,7 +195,12 @@ class _MentorLaunchState extends State<MentorLaunch> {
                       cardTextColor: Colors.white,
                       cardText: 'Program Info',
                       cardIcon: Icons.info_outline,
-                      onTap: () {},
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AvailableMentorsScreen(),
+                        ),
+                      ),
                     ),
                   ],
                 ),

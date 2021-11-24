@@ -182,7 +182,6 @@ class MessagesStream extends StatelessWidget {
 
         for (var message in messages) {
           final messageData = message;
-          final DocumentSnapshot messageData = message.data();
 
           final messageText = messageData['text'];
           final senderFName = messageData['senderFName'];
