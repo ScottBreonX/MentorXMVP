@@ -4,13 +4,13 @@ import 'package:mentorx_mvp/constants.dart';
 class IconCard extends StatelessWidget {
   const IconCard({
     Key key,
-    @required this.cardColor,
+    this.cardColor,
     this.cardIconColor,
-    @required this.cardTextColor,
+    this.cardTextColor,
     this.cardShadowColor,
     this.cardIcon,
-    @required this.cardText,
-    @required this.onTap,
+    this.cardText,
+    this.onTap,
     this.iconSize,
     this.textSize,
     this.boxHeight,

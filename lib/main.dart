@@ -46,6 +46,14 @@ class MentorX extends StatelessWidget {
       create: (context) => Auth(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark().copyWith(
+          primaryColor: Colors.blue,
+//          colorScheme: ColorScheme.fromSwatch().copyWith(
+//            secondary: Colors.pink,
+//          ),
+        ),
+
+// Navigator routes
         initialRoute: LandingPage.id,
         routes: {
           WelcomeScreen.id: (context) => WelcomeScreen(

@@ -88,11 +88,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
   @override
   Widget build(BuildContext context) {
     if (profileData == null) {
-      return Center(
-        child: CircularProgressIndicator(
-          backgroundColor: Colors.blue,
-        ),
-      );
+      return Center();
     }
 
     return Scaffold(
@@ -110,11 +106,10 @@ class _LaunchScreenState extends State<LaunchScreen> {
       bottomNavigationBar: CupertinoTabBar(
         currentIndex: pageIndex ?? widget.pageIndex ?? 0,
         onTap: onTap,
-        activeColor: Colors.pink,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home)),
-          BottomNavigationBarItem(icon: Icon(Icons.person, size: 35)),
-          BottomNavigationBarItem(icon: Icon(Icons.people, size: 35)),
+          BottomNavigationBarItem(icon: Icon(Icons.person)),
+          BottomNavigationBarItem(icon: Icon(Icons.people)),
           BottomNavigationBarItem(icon: Icon(Icons.notifications_active)),
         ],
       ),

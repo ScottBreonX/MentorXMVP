@@ -3,11 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/divider_3D.dart';
 import 'package:mentorx_mvp/components/icon_circle.dart';
-import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
-import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/profile/sections/profile_mentee_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/profile_mentor_section.dart';
 import 'package:mentorx_mvp/services/auth.dart';
@@ -68,11 +66,7 @@ class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
     if (profileData == null) {
-      return Center(
-        child: CircularProgressIndicator(
-          backgroundColor: Colors.pink,
-        ),
-      );
+      return Center();
     }
 
     double circleSize = 55.0;
@@ -93,13 +87,9 @@ class _MyProfileState extends State<MyProfile> {
       drawer: Drawer(
         child: Container(
           child: drawerItems,
-          decoration: BoxDecoration(
-            color: kMentorXPrimary,
-          ),
         ),
       ),
       appBar: AppBar(
-        backgroundColor: kMentorXPrimary,
         elevation: 5,
         title: Text('My Profile'),
       ),
@@ -115,7 +105,7 @@ class _MyProfileState extends State<MyProfile> {
                     width: double.infinity,
                     color: Colors.grey.shade300,
                     child: Image.asset(
-                      'assets/images/MentorPink.png',
+                      'assets/images/MentorWhite.png',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -125,7 +115,6 @@ class _MyProfileState extends State<MyProfile> {
                       children: [
                         CircleAvatar(
                           radius: circleSize + 3,
-                          backgroundColor: Colors.white,
                           child: ProfileImageCircle(
                             iconSize: circleSize,
                             circleSize: circleSize,
@@ -137,20 +126,10 @@ class _MyProfileState extends State<MyProfile> {
                           child: Container(
                             height: 30.0,
                             width: 30.0,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey, offset: Offset(1, 1))
-                              ],
-                            ),
                             child: GestureDetector(
                               onTap: () {},
                               child: Icon(
                                 Icons.photo_camera,
-                                color: Colors.grey,
-                                size: 15.0,
                               ),
                             ),
                           ),
@@ -160,25 +139,13 @@ class _MyProfileState extends State<MyProfile> {
                   ),
                   Positioned(
                     bottom: 20,
-                    right: 10,
-                    child: Container(
-                      height: 30.0,
-                      width: 30.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.transparent,
-                      ),
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: IconCircle(
-                          height: 40.0,
-                          width: 40.0,
-                          iconSize: 30.0,
-                          iconType: Icons.edit,
-                          circleColor: Colors.transparent,
-                          iconColor: Colors.grey,
-                          shadowColor: Colors.transparent,
-                        ),
+                    right: 15,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: IconCircle(
+                        height: 30.0,
+                        width: 30.0,
+                        iconType: Icons.edit,
                       ),
                     ),
                   ),
@@ -206,7 +173,6 @@ class _MyProfileState extends State<MyProfile> {
                         fontSize: 20.0,
                         fontFamily: 'WorkSans',
                         fontWeight: FontWeight.bold,
-                        color: Colors.black54,
                       ),
                     ),
                   ),
@@ -222,7 +188,6 @@ class _MyProfileState extends State<MyProfile> {
                       style: TextStyle(
                         fontSize: 15.0,
                         fontFamily: 'WorkSans',
-                        color: Colors.black54,
                       ),
                     ),
                   ),
@@ -243,7 +208,6 @@ class _MyProfileState extends State<MyProfile> {
                       style: TextStyle(
                         fontFamily: 'Work Sans',
                         fontWeight: FontWeight.bold,
-                        color: kMentorXPrimary,
                         fontSize: 20,
                       ),
                     ),

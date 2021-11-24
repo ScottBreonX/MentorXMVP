@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_lauch_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
-import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
@@ -71,11 +70,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     if (profileData == null) {
-      return Center(
-        child: CircularProgressIndicator(
-          backgroundColor: kMentorXPrimary,
-        ),
-      );
+      return Center();
     }
 
     if (profileData['images'] == null) {
@@ -104,13 +99,9 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
       drawer: Drawer(
         child: Container(
           child: drawerItems,
-          decoration: BoxDecoration(
-            color: kMentorXPrimary,
-          ),
         ),
       ),
       appBar: AppBar(
-        backgroundColor: kMentorXPrimary,
         elevation: 5,
         title: Text('Program Selection'),
       ),
@@ -122,21 +113,13 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
               child: Wrap(
                 children: [
                   IconCard(
-                    cardColor: Colors.white,
-                    cardIconColor: Colors.blue,
-                    cardTextColor: Colors.blue,
                     cardIcon: Icons.add,
                     cardText: 'Join a Program',
                     borderWidth: 3,
                     onTap: () {},
                   ),
                   IconCard(
-                    cardColor: Colors.grey,
-                    cardIconColor: kMentorXPrimary,
-                    cardTextColor: Colors.white,
                     cardText: 'University of Michigan',
-                    textSize: 15,
-                    textSpacingHeight: 20,
                     imageAsset: Image.asset(
                       'assets/images/UMichLogo.png',
                       height: 60,
@@ -146,11 +129,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                     },
                   ),
                   IconCard(
-                    cardColor: Colors.grey,
-                    cardIconColor: kMentorXPrimary,
-                    cardTextColor: Colors.white,
                     cardText: 'Finance Careers Mentorship',
-                    textSize: 15,
                     imageAsset: Image.asset(
                       'assets/images/MLogoWhite.png',
                       height: 60,
@@ -160,11 +139,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                     },
                   ),
                   IconCard(
-                    cardColor: Colors.grey,
-                    cardIconColor: kMentorXPrimary,
-                    cardTextColor: Colors.white,
                     cardText: 'Consulting Careers Mentorship',
-                    textSize: 15,
                     imageAsset: Image.asset(
                       'assets/images/MLogoPink.png',
                       height: 60,

@@ -44,22 +44,10 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
       textAlign: TextAlign.start,
       onChanged: (value) => mentorText = value,
       style: TextStyle(
-        color: kMentorXPrimary,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
-      decoration: kTextFieldDecorationLight.copyWith(
-        fillColor: Colors.grey.shade200,
-        filled: true,
-        labelText: '',
-        hintText: '',
-        enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: kMentorXPrimary, width: 1.0),
-            borderRadius: BorderRadius.all(Radius.circular(10.0))),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: kMentorXPrimary, width: 3.0),
-            borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      ),
+      decoration: kTextFieldDecorationDark,
     );
   }
 
@@ -112,11 +100,7 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
   @override
   Widget build(BuildContext context) {
     if (profileData == null) {
-      return Center(
-        child: CircularProgressIndicator(
-          backgroundColor: kMentorXPrimary,
-        ),
-      );
+      return Center();
     }
 
     return Padding(
@@ -136,7 +120,6 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
                     'What makes me a good mentor',
                     style: TextStyle(
                       fontSize: 18.0,
-                      color: Colors.black54,
                       fontFamily: 'WorkSans',
                       fontWeight: FontWeight.bold,
                     ),
@@ -157,18 +140,6 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
                               child: Container(
                                 height: 40.0,
                                 width: 40.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 2,
-                                      offset: Offset(2, 2),
-                                      color: Colors.black54,
-                                      spreadRadius: 0.5,
-                                    )
-                                  ],
-                                ),
                                 child: Icon(
                                   Icons.check,
                                   color: Colors.green,
@@ -188,18 +159,6 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
                               child: Container(
                                 height: 40.0,
                                 width: 40.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 2,
-                                      offset: Offset(2, 2),
-                                      color: Colors.black54,
-                                      spreadRadius: 0.5,
-                                    )
-                                  ],
-                                ),
                                 child: Icon(
                                   Icons.close,
                                   color: Colors.red,
@@ -220,9 +179,6 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
                           child: IconCircle(
                             width: 30.0,
                             height: 30.0,
-                            circleColor: kMentorXPrimary,
-                            iconColor: Colors.white,
-                            iconSize: 20.0,
                             iconType: Icons.edit,
                           ),
                         ),
@@ -241,7 +197,6 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
                           '${profileData['Mentoring Attributes']}',
                           style: TextStyle(
                             fontSize: 15.0,
-                            color: Colors.black54,
                           ),
                         ),
                       ),

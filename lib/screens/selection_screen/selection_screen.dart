@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
-import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
@@ -72,11 +71,7 @@ class _SelectionScreenState extends State<SelectionScreen> {
   @override
   Widget build(BuildContext context) {
     if (profileData == null) {
-      return Center(
-        child: CircularProgressIndicator(
-          backgroundColor: kMentorXPrimary,
-        ),
-      );
+      return Center();
     }
 
     if (profileData['images'] == null) {
@@ -105,13 +100,9 @@ class _SelectionScreenState extends State<SelectionScreen> {
       drawer: Drawer(
         child: Container(
           child: drawerItems,
-          decoration: BoxDecoration(
-            color: kMentorXPrimary,
-          ),
         ),
       ),
       appBar: AppBar(
-        backgroundColor: kMentorXPrimary,
         elevation: 5,
         title: Text('Mentor+'),
       ),
@@ -125,9 +116,6 @@ class _SelectionScreenState extends State<SelectionScreen> {
                 Wrap(
                   children: [
                     IconCard(
-                      cardColor: kMentorXPrimary,
-                      cardIconColor: Colors.white,
-                      cardTextColor: Colors.white,
                       cardIcon: Icons.people,
                       cardText: 'Programs',
                       onTap: () => Navigator.push(
@@ -138,9 +126,6 @@ class _SelectionScreenState extends State<SelectionScreen> {
                       ),
                     ),
                     IconCard(
-                      cardColor: kMentorXPrimary,
-                      cardIconColor: Colors.white,
-                      cardTextColor: Colors.white,
                       cardIcon: Icons.person,
                       cardText: 'My Profile',
                       onTap: () => Navigator.push(
