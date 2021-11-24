@@ -63,6 +63,7 @@ const kMentorXPrimary = Colors.blue;
 const kMentorXSecondary = Color.fromRGBO(171, 237, 0, 1.0);
 const kMentorXDark = Color.fromRGBO(40, 40, 40, 1.0);
 const kMentorXBlack = Color.fromRGBO(20, 20, 20, 1.0);
+const kUMichBlue = Color.fromRGBO(20, 24, 70, 1.0);
 const kDrawerItems = Colors.white;
 //Color.fromRGBO(4, 52, 106, 1.0)
 //Color.fromRGBO(56, 142, 137, 1.0);

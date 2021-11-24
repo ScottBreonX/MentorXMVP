@@ -118,31 +118,63 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Wrap(
-                  children: [
-                    IconCard(
-                      cardColor: kMentorXPrimary,
-                      cardIconColor: Colors.white,
-                      cardTextColor: Colors.white,
-                      cardIcon: Icons.add,
-                      cardText: 'Join a Program',
-                      onTap: () {},
+            Center(
+              child: Wrap(
+                children: [
+                  IconCard(
+                    cardColor: Colors.white,
+                    cardIconColor: Colors.blue,
+                    cardTextColor: Colors.blue,
+                    cardIcon: Icons.add,
+                    cardText: 'Join a Program',
+                    borderWidth: 3,
+                    onTap: () {},
+                  ),
+                  IconCard(
+                    cardColor: Colors.grey,
+                    cardIconColor: kMentorXPrimary,
+                    cardTextColor: Colors.white,
+                    cardText: 'University of Michigan',
+                    textSize: 15,
+                    textSpacingHeight: 20,
+                    imageAsset: Image.asset(
+                      'assets/images/UMichLogo.png',
+                      height: 60,
                     ),
-                    IconCard(
-                      cardColor: Colors.white,
-                      cardIconColor: kMentorXPrimary,
-                      cardTextColor: Colors.black54,
-                      cardText: 'University of Michigan',
-                      onTap: () {
-                        Navigator.popAndPushNamed(context, MentorLaunch.id);
-                      },
+                    onTap: () {
+                      Navigator.popAndPushNamed(context, MentorLaunch.id);
+                    },
+                  ),
+                  IconCard(
+                    cardColor: Colors.grey,
+                    cardIconColor: kMentorXPrimary,
+                    cardTextColor: Colors.white,
+                    cardText: 'Finance Careers Mentorship',
+                    textSize: 15,
+                    imageAsset: Image.asset(
+                      'assets/images/MLogoWhite.png',
+                      height: 60,
                     ),
-                  ],
-                ),
-              ],
+                    onTap: () {
+                      Navigator.popAndPushNamed(context, MentorLaunch.id);
+                    },
+                  ),
+                  IconCard(
+                    cardColor: Colors.grey,
+                    cardIconColor: kMentorXPrimary,
+                    cardTextColor: Colors.white,
+                    cardText: 'Consulting Careers Mentorship',
+                    textSize: 15,
+                    imageAsset: Image.asset(
+                      'assets/images/MLogoPink.png',
+                      height: 60,
+                    ),
+                    onTap: () {
+                      Navigator.popAndPushNamed(context, MentorLaunch.id);
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),
