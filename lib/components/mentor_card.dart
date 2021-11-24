@@ -89,16 +89,6 @@ class MentorCard extends StatelessWidget {
             width: double.infinity,
             height: 250,
             child: Column(
-              // Material(
-              // borderRadius: BorderRadius.circular(10.0),
-              // elevation: 5.0,
-              // color: Colors.grey,
-              // child: Padding(
-              //   padding: EdgeInsets.symmetric(
-              //     vertical: 10.0,
-              //     horizontal: 20.0,
-              //   ),
-              //   child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
