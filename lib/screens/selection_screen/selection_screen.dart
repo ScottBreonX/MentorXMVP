@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,22 +9,24 @@ import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
 
+import '../home_screen.dart';
+
 User loggedInUser;
 
-class NewsFeed extends StatefulWidget {
-  const NewsFeed({
+class SelectionScreen extends StatefulWidget {
+  const SelectionScreen({
     Key key,
     this.database,
   }) : super(key: key);
 
-  static const String id = 'news_feed';
+  static const String id = 'selection_screen';
   final Database database;
 
   @override
-  _NewsFeedState createState() => _NewsFeedState();
+  _SelectionScreenState createState() => _SelectionScreenState();
 }
 
-class _NewsFeedState extends State<NewsFeed> {
+class _SelectionScreenState extends State<SelectionScreen> {
   bool aboutMeEditStatus = false;
   bool profilePhotoStatus = false;
   bool profilePhotoSelected = false;
@@ -110,19 +113,48 @@ class _NewsFeedState extends State<NewsFeed> {
       appBar: AppBar(
         backgroundColor: kMentorXPrimary,
         elevation: 5,
-        title: Text('News Feed'),
+        title: Text('Mentor+'),
       ),
       body: Container(
-        color: Colors.white,
-        child: Center(
-          child: Text(
-            'News Feed Placeholder',
-            style: TextStyle(
-              color: Colors.black54,
-              fontFamily: "Signatra",
-              fontSize: 40,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Wrap(
+                  children: [
+                    IconCard(
+                      cardColor: kMentorXPrimary,
+                      cardIconColor: Colors.white,
+                      cardTextColor: Colors.white,
+                      cardIcon: Icons.people,
+                      cardText: 'Programs',
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LaunchScreen(pageIndex: 2),
+                        ),
+                      ),
+                    ),
+                    IconCard(
+                      cardColor: kMentorXPrimary,
+                      cardIconColor: Colors.white,
+                      cardTextColor: Colors.white,
+                      cardIcon: Icons.person,
+                      cardText: 'My Profile',
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LaunchScreen(pageIndex: 1),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ),
+          ],
         ),
       ),
     );

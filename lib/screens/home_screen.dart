@@ -4,11 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
-import 'package:mentorx_mvp/screens/news_feed/news_feed.dart';
+import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
+import 'package:mentorx_mvp/screens/selection_screen/selection_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
-import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
-import 'mentoring/mentor_lauch_screen.dart';
 import 'notifications/notifications_screen.dart';
 
 User loggedInUser;
@@ -99,9 +98,9 @@ class _LaunchScreenState extends State<LaunchScreen> {
     return Scaffold(
       body: PageView(
         children: [
-          NewsFeed(),
+          SelectionScreen(),
           MyProfile(),
-          MentorLaunch(),
+          ProgramSelectionScreen(),
           NotificationScreen(),
         ],
         controller: pageController,
@@ -113,7 +112,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
         onTap: onTap,
         activeColor: Colors.pink,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.whatshot)),
+          BottomNavigationBarItem(icon: Icon(Icons.home)),
           BottomNavigationBarItem(icon: Icon(Icons.person, size: 35)),
           BottomNavigationBarItem(icon: Icon(Icons.people, size: 35)),
           BottomNavigationBarItem(icon: Icon(Icons.notifications_active)),

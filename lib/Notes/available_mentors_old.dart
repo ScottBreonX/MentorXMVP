@@ -124,7 +124,7 @@ class AvailableMentorsStream extends StatelessWidget {
         List<MentorCardOld> mentorBubbles = [];
 
         for (var mentor in mentors) {
-          final DocumentSnapshot mentorData = mentor.data();
+          final DocumentSnapshot mentorData = mentor;
 
           final mentorUID = mentorData['UID'];
           final mentorSlots = mentorData['Available Slots'];
