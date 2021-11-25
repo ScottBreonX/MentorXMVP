@@ -6,6 +6,7 @@ import '../constants.dart';
 class MenteeCard extends StatelessWidget {
   ProfileModel user;
   final Color cardColor;
+  final Color borderColor;
   final Color cardTextColor;
   final Function onTap;
   final double primaryTextSize;
@@ -17,6 +18,7 @@ class MenteeCard extends StatelessWidget {
     Key key,
     @required this.user,
     this.cardTextColor,
+    this.borderColor,
     this.onTap,
     this.cardColor,
     this.primaryTextSize,
@@ -27,42 +29,13 @@ class MenteeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () {},
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           Padding(
-//             padding: EdgeInsets.fromLTRB(0, 35, 0, 0),
-//           ),
-//           // Image.network(user.photoUrl),
-//           ProfileImageCircle(
-//               iconSize: 75, circleSize: 100), // image placeholder
-//           SizedBox(height: 15.0),
-//           Text(
-//             user.fName,
-//             style: TextStyle(
-//               fontSize: 24,
-//               color: Colors.black,
-//             ),
-//           ),
-//           Text(user.major,
-//               style: TextStyle(
-//                 fontSize: 18,
-//                 color: Colors.black,
-//               )),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: onTap,
         child: Container(
           decoration: BoxDecoration(
+            border: Border.all(color: borderColor ?? kMentorXPrimary, width: 8),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
@@ -71,26 +44,27 @@ class MenteeCard extends StatelessWidget {
                 color: Colors.grey[700],
               ),
             ],
-            color: cardColor ?? kMentorXPrimary,
-//            color: Colors.blue,
+            color: cardColor ?? Colors.white,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // image placeholder
               ProfileImageCircle(
                 iconSize: 150,
+                iconColor: Colors.blue,
                 circleSize: 100,
-                circleColor: Colors.grey[700],
-              ), // image placeholder
+                circleColor: Colors.grey[300],
+              ),
               SizedBox(height: 5.0),
               SizedBox(
                 height: 5,
               ),
               Text(
-                user.fName,
+                '${user.fName} ${user.lName}',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: cardTextColor ?? Colors.white,
+                  color: cardTextColor ?? Colors.black,
                   fontSize: primaryTextSize ?? 20,
                   fontWeight: FontWeight.bold,
                 ),
@@ -99,10 +73,10 @@ class MenteeCard extends StatelessWidget {
                 height: 5,
               ),
               Text(
-                user.major,
+                '${user.major} - ${user.yearInSchool}',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: cardTextColor ?? Colors.white,
+                  color: cardTextColor ?? Colors.black,
                   fontSize: secondaryTextSize ?? 20,
                 ),
               ),

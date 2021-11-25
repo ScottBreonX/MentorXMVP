@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/mentee_card.dart';
-import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
@@ -18,7 +16,7 @@ class Mentee extends StatefulWidget {
 
   @override
   _MenteeState createState() => _MenteeState(
-        menteeUID: this.menteeUID.trim(),
+        menteeUID: this.menteeUID,
       );
 }
 
@@ -29,13 +27,15 @@ class _MenteeState extends State<Mentee> {
 
   buildMenteeCard() {
     return FutureBuilder<DocumentSnapshot>(
-      future: usersRef.doc(menteeUID).get(),
+      future: usersRef.doc(menteeUID.trim()).get(),
       builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (!snapshot.hasData) {
           return circularProgress();
         }
         ProfileModel user = ProfileModel.fromDocument(snapshot.data);
         return MenteeCard(
+          onTap: () =>
+              Navigator.pop(context), // replace with navigation to user profile
           user: user,
           primaryTextSize: 30,
           secondaryTextSize: 20,
@@ -44,34 +44,6 @@ class _MenteeState extends State<Mentee> {
       },
     );
   }
-
-  // GestureDetector(
-  // onTap: () {},
-  // child: Column(
-  // mainAxisAlignment: MainAxisAlignment.center,
-  // children: [
-  // Padding(
-  // padding: EdgeInsets.fromLTRB(0, 35, 0, 0),
-  // ),
-  // // Image.network(user.photoUrl),
-  // ProfileImageCircle(
-  // iconSize: 75, circleSize: 100), // image placeholder
-  // SizedBox(height: 15.0),
-  // Text(
-  // user.fName,
-  // style: TextStyle(
-  // fontSize: 24,
-  // color: Colors.black,
-  // ),
-  // ),
-  // Text(user.major,
-  // style: TextStyle(
-  // fontSize: 18,
-  // color: Colors.black,
-  // )),
-  // ],
-  // ),
-  // );
 
   @override
   Widget build(BuildContext context) {

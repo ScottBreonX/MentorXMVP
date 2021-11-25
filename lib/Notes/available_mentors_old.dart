@@ -121,10 +121,10 @@ class AvailableMentorsStream extends StatelessWidget {
         final mentors = snapshot.data.docs
             .where((mentorData) => mentorData['Available Slots'] >= 1);
 
-        List<MentorCard> mentorBubbles = [];
+        List<MentorCardOld> mentorBubbles = [];
 
         for (var mentor in mentors) {
-          final mentorData = mentor;
+          final DocumentSnapshot mentorData = mentor;
 
           final mentorUID = mentorData['UID'];
           final mentorSlots = mentorData['Available Slots'];
@@ -132,7 +132,7 @@ class AvailableMentorsStream extends StatelessWidget {
           final mentorLname = mentorData['Last Name'];
           final mentorEmail = mentorData['Email Address'];
 
-          final mentorBubble = MentorCard(
+          final mentorBubble = MentorCardOld(
             mentorUID: mentorUID,
             mentorSlots: mentorSlots,
             mentorFname: mentorFname,
@@ -154,7 +154,7 @@ class AvailableMentorsStream extends StatelessWidget {
   }
 }
 
-class MentorCard extends StatelessWidget {
+class MentorCardOld extends StatelessWidget {
   Future<void> _confirmMentorSelection(String mentorUID, BuildContext context,
       String mentorFName, String mentorLName) async {
     final didRequestMentor = await showAlertDialog(
@@ -196,7 +196,7 @@ class MentorCard extends StatelessWidget {
     }
   }
 
-  MentorCard(
+  MentorCardOld(
       {this.mentorUID,
       this.mentorSlots,
       this.mentorFname,

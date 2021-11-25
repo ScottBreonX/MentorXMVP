@@ -13,6 +13,7 @@ import 'notifications/notifications_screen.dart';
 User loggedInUser;
 final usersRef = FirebaseFirestore.instance.collection('users');
 final mentorsRef = FirebaseFirestore.instance.collection('mentors');
+final mentoringRef = FirebaseFirestore.instance.collection('mentoring');
 
 class LaunchScreen extends StatefulWidget {
   const LaunchScreen({this.onSignOut, this.pageIndex});
