@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
-import 'package:mentorx_mvp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
@@ -69,11 +68,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     if (profileData == null) {
-      return Center(
-        child: CircularProgressIndicator(
-          backgroundColor: kMentorXPrimary,
-        ),
-      );
+      return Center();
     }
 
     if (profileData['images'] == null) {
@@ -102,23 +97,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
       drawer: Drawer(
         child: Container(
           child: drawerItems,
-          decoration: BoxDecoration(
-            color: kMentorXPrimary,
-          ),
+          decoration: BoxDecoration(),
         ),
       ),
       appBar: AppBar(
-        backgroundColor: kMentorXPrimary,
         elevation: 5,
         title: Text('Notifications'),
       ),
       body: Container(
-        color: Colors.white,
         child: Center(
           child: Text(
             'Notifications Placeholder',
             style: TextStyle(
-              color: Colors.black54,
               fontFamily: "Signatra",
               fontSize: 40,
             ),

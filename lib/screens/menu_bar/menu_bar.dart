@@ -31,48 +31,37 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
       profilePictureStatus = true;
     }
 
-    Color accountCardTextColor = Colors.black54;
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: UserAccountsDrawerHeader(
         key: _scaffoldKey,
         decoration: BoxDecoration(
-          color: Colors.white,
           borderRadius: BorderRadius.circular(20),
         ),
         accountName: Text(
           '${widget.fName} ${widget.lName}',
-          style: TextStyle(
-            color: accountCardTextColor,
-          ),
+          style: TextStyle(),
         ),
         accountEmail: Text(
           '${widget.email}',
-          style: TextStyle(
-            color: accountCardTextColor,
-          ),
+          style: TextStyle(),
         ),
         currentAccountPicture: CircleAvatar(
           backgroundImage:
               profilePictureStatus ? NetworkImage(widget.profilePicture) : null,
-          backgroundColor: kMentorXPrimary,
           child: profilePictureStatus
               ? null
               : Icon(
                   Icons.person,
-                  color: Colors.white,
                   size: 40.0,
                 ),
         ),
         otherAccountsPictures: [
           CircleAvatar(
-            backgroundColor: Colors.white.withOpacity(0),
             child: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
               child: Icon(
                 Icons.close,
-                color: accountCardTextColor,
               ),
             ),
           )
@@ -81,9 +70,6 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
     );
   }
 }
-
-Color iconColor = Colors.white;
-Color iconText = Colors.white;
 
 class MentorXMenuList extends StatelessWidget {
   const MentorXMenuList({
@@ -100,11 +86,10 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.home,
-            color: iconColor,
           ),
           title: Text(
             'Home',
-            style: TextStyle(color: iconText, fontSize: 20),
+            style: TextStyle(fontSize: 20),
           ),
           onTap: () => Navigator.push(
             context,
@@ -116,11 +101,10 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.person,
-            color: iconColor,
           ),
           title: Text(
             'My Profile',
-            style: TextStyle(color: iconText, fontSize: 20),
+            style: TextStyle(fontSize: 20),
           ),
           onTap: () => Navigator.push(
             context,
@@ -132,7 +116,6 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.people,
-            color: iconColor,
           ),
           onTap: () => Navigator.push(
             context,
@@ -142,29 +125,27 @@ class MentorXMenuList extends StatelessWidget {
           ),
           title: Text(
             'Mentoring',
-            style: TextStyle(color: iconText, fontSize: 20),
+            style: TextStyle(fontSize: 20),
           ),
         ),
         ListTile(
           leading: Icon(
             Icons.people,
-            color: iconColor,
           ),
           onTap: () =>
               Navigator.popAndPushNamed(context, MentoringScreenOld.id),
           title: Text(
             'Mentoring [OLD]',
-            style: TextStyle(color: iconText, fontSize: 20),
+            style: TextStyle(fontSize: 20),
           ),
         ),
         ListTile(
           leading: Icon(
             Icons.settings,
-            color: iconColor,
           ),
           title: Text(
             'Settings',
-            style: TextStyle(color: iconText, fontSize: 20),
+            style: TextStyle(fontSize: 20),
           ),
           onTap: () {},
         ),
@@ -178,11 +159,10 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.exit_to_app_rounded,
-            color: iconColor,
           ),
           title: Text(
             'Log Out',
-            style: TextStyle(color: iconText, fontSize: 20),
+            style: TextStyle(fontSize: 20),
           ),
           onTap: () {
             confirmSignOut(context);

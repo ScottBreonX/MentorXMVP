@@ -193,7 +193,6 @@ class _MentoringScreenOldState extends State<MentoringScreenOld> {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: kMentorXBlack,
         title: Text('Mentoring'),
       ),
       body: Column(

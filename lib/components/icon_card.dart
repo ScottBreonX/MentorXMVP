@@ -46,12 +46,8 @@ class IconCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-                color: borderColor ?? kMentorXPrimary, width: borderWidth ?? 0),
             boxShadow: [
               BoxShadow(
-                blurRadius: 2,
-                offset: Offset(2, 3),
                 color: Colors.grey[700],
               ),
             ],
