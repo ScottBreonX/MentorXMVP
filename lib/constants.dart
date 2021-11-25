@@ -13,7 +13,7 @@ const kTextFieldDecorationDark = InputDecoration(
       borderSide: BorderSide(color: Colors.white60, width: 2.0),
       borderRadius: BorderRadius.all(Radius.circular(10.0))),
   focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: kMentorXSecondary, width: 3.0),
+      borderSide: BorderSide(width: 3.0),
       borderRadius: BorderRadius.all(Radius.circular(10.0))),
 );
 
@@ -63,9 +63,6 @@ const kInactiveSendButtonTextStyle =
 
 //Color pallette themes
 const kMentorXPrimary = Colors.blue;
-const kMentorXSecondary = Color.fromRGBO(171, 237, 0, 1.0);
-const kMentorXDark = Color.fromRGBO(40, 40, 40, 1.0);
-const kMentorXBlack = Color.fromRGBO(20, 20, 20, 1.0);
 const kUMichBlue = Color.fromRGBO(20, 24, 70, 1.0);
 const kDrawerItems = Colors.white;
 

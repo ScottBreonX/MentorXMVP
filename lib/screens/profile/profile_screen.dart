@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/divider_3D.dart';
 import 'package:mentorx_mvp/components/icon_circle.dart';
 import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
@@ -193,12 +192,12 @@ class _MyProfileState extends State<MyProfile> {
                   ),
                 ],
               ),
-              Divider3D(),
+              const Divider(),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
                 child: AboutMeSection(),
               ),
-              Divider3D(),
+              const Divider(),
               Row(
                 children: [
                   Padding(

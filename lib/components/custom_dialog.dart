@@ -42,10 +42,6 @@ class _CustomDialogState extends State<CustomDialog> {
           decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               color: Colors.white.withOpacity(0.1),
-              border: Border.all(
-                color: kMentorXBlack,
-                width: 0.0,
-              ),
               borderRadius: BorderRadius.circular(20.0),
               boxShadow: [
                 BoxShadow(

@@ -79,9 +79,6 @@ class _EventsScreenState extends State<EventsScreen> {
       drawer: Drawer(
         child: Container(
           child: drawerItems,
-          decoration: BoxDecoration(
-            color: kMentorXDark,
-          ),
         ),
       ),
       appBar: AppBar(
@@ -91,9 +88,7 @@ class _EventsScreenState extends State<EventsScreen> {
           height: 50,
         ),
         elevation: 5,
-        backgroundColor: kMentorXDark,
       ),
-      backgroundColor: kMentorXDark.withOpacity(0.95),
       body: Container(),
     );
   }

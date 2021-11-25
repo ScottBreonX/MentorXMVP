@@ -90,7 +90,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
 
   buildUserMentees() {
     if (isLoading) {
-      return circularProgress();
+      return CircularProgressIndicator();
     }
     return Column(children: matches);
   }

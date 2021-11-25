@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/divider_3D.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
@@ -146,7 +145,7 @@ class _MentorLaunchState extends State<MentorLaunch> {
                 ],
               ),
             ),
-            Divider3D(),
+            Divider(),
             SizedBox(height: 15.0),
             Column(
               children: [

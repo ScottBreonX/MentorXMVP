@@ -55,14 +55,12 @@ class _MenteeScreenOldState extends State<MenteeScreenOld> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kMentorXBlack.withOpacity(0.9),
         elevation: 5,
         title: Text('Mentoring'),
       ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(color: kMentorXDark),
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),

@@ -159,6 +159,9 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
                               child: Container(
                                 height: 40.0,
                                 width: 40.0,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
                                 child: Icon(
                                   Icons.close,
                                   color: Colors.red,
@@ -179,6 +182,7 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
                           child: IconCircle(
                             width: 30.0,
                             height: 30.0,
+                            iconSize: 20.0,
                             iconType: Icons.edit,
                           ),
                         ),

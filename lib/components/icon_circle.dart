@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-
 class IconCircle extends StatelessWidget {
   const IconCircle({
     Key key,
@@ -27,14 +25,7 @@ class IconCircle extends StatelessWidget {
     return Container(
       height: height,
       width: width,
-      decoration:
-          BoxDecoration(shape: BoxShape.circle, color: circleColor, boxShadow: [
-        BoxShadow(
-          color: shadowColor ?? kMentorXBlack,
-          offset: Offset(2, 3),
-          blurRadius: 2,
-        )
-      ]),
+      decoration: BoxDecoration(shape: BoxShape.circle, color: circleColor),
       child: Icon(
         iconType,
         color: iconColor,
