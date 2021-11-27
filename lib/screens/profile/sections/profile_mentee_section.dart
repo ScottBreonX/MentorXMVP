@@ -43,9 +43,7 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
       maxLines: null,
       textAlign: TextAlign.start,
       onChanged: (value) => menteeText = value,
-      style: TextStyle(
-        fontWeight: FontWeight.w400,
-      ),
+      style: Theme.of(context).textTheme.subtitle2,
       autocorrect: false,
       decoration: kTextFieldDecorationDark,
     );
@@ -118,11 +116,7 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
                 Expanded(
                   child: Text(
                     'What I seek in a mentor',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontFamily: 'WorkSans',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.headline4,
                   ),
                 ),
                 menteeEditStatus
@@ -138,11 +132,15 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
                                 _updateMenteeAttributes(context);
                               },
                               child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.green,
+                                ),
                                 height: 40.0,
                                 width: 40.0,
                                 child: Icon(
                                   Icons.check,
-                                  color: Colors.green,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -157,6 +155,10 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
                                 });
                               },
                               child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.red,
+                                ),
                                 height: 40.0,
                                 width: 40.0,
                                 decoration: BoxDecoration(
@@ -164,7 +166,7 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
                                 ),
                                 child: Icon(
                                   Icons.close,
-                                  color: Colors.red,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -180,6 +182,7 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
                             });
                           },
                           child: IconCircle(
+                            circleColor: Theme.of(context).backgroundColor,
                             width: 30.0,
                             height: 30.0,
                             iconSize: 20.0,
@@ -199,9 +202,7 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
                       Flexible(
                         child: Text(
                           '${profileData['Mentee Attributes']}',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                          ),
+                          style: Theme.of(context).textTheme.subtitle2,
                         ),
                       ),
                     ],

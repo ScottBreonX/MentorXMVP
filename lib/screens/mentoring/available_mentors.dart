@@ -1,13 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mentorx_mvp/components/mentor_card_test.dart';
-import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
-import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/mentor_card.dart';
-import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -82,25 +78,30 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
 
   AppBar buildSearchField() {
     return AppBar(
-      backgroundColor: kMentorXPrimary,
       title: Container(
         width: double.infinity,
         height: 40,
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(5)),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
         child: TextFormField(
-            controller: searchController,
-            decoration: InputDecoration(
-              hintText: 'Search for a mentor...',
-              filled: true,
-              prefixIcon: Icon(Icons.account_box, size: 28),
-              suffixIcon: IconButton(
-                icon: Icon(Icons.clear),
-                onPressed: clearSearch,
-              ),
+          style: Theme.of(context).textTheme.subtitle2,
+          controller: searchController,
+          decoration: InputDecoration(
+            hintText: 'Search for a mentor...',
+            hintStyle: Theme.of(context).textTheme.subtitle2,
+            filled: true,
+            fillColor: Colors.white,
+            prefixIcon: Icon(
+              Icons.account_box,
+              size: 30,
             ),
-            // onFieldSubmitted: handleSearch),
-            onFieldSubmitted: handleSearch),
+            suffixIcon: IconButton(
+              icon: Icon(Icons.clear),
+              onPressed: clearSearch,
+            ),
+          ),
+//           onFieldSubmitted: handleSearch),
+          onFieldSubmitted: handleSearch,
+        ),
       ),
     );
   }
@@ -138,10 +139,8 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
             children: [
               Text(
                 'Available Mentors',
-                style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: kMentorXPrimary),
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headline1,
               ),
               AvailableMentorsStream(searchString: searchString),
             ],
@@ -153,11 +152,7 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
 
   Widget build(BuildContext context) {
     if (profileData == null) {
-      return Center(
-        child: CircularProgressIndicator(
-          backgroundColor: kMentorXPrimary,
-        ),
-      );
+      return Center();
     }
 
     if (profileData['images'] == null) {
@@ -186,9 +181,6 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
         drawer: Drawer(
           child: Container(
             child: drawerItems,
-            decoration: BoxDecoration(
-              color: kMentorXPrimary,
-            ),
           ),
         ),
         appBar: buildSearchField(),
@@ -223,11 +215,7 @@ class AvailableMentorsStream extends StatelessWidget {
       stream: searchString == null ? mentorStream : searchStream,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return Center(
-            child: CircularProgressIndicator(
-              backgroundColor: kMentorXPrimary,
-            ),
-          );
+          return Center();
         }
         final mentors = snapshot.data.docs;
         print(mentors);

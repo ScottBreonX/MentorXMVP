@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-
 class ProfileImageCircle extends StatelessWidget {
   const ProfileImageCircle({
     @required this.iconSize,
     @required this.circleSize,
-    this.circleColor = kMentorXPrimary,
+    this.circleColor,
     this.iconColor = Colors.white,
     this.onTap,
   });
@@ -47,10 +45,9 @@ class ProfileImageCircle extends StatelessWidget {
       width: circleSize * 2,
       child: RawMaterialButton(
         onPressed: onTap,
-        elevation: 2.0,
-        fillColor: circleColor,
+        fillColor: circleColor ?? Theme.of(context).canvasColor,
         child: Icon(
-          Icons.person_outlined,
+          Icons.person,
           color: iconColor,
           size: iconSize,
         ),

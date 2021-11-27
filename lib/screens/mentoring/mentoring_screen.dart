@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/models/mentee_model.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
@@ -131,9 +130,6 @@ class _MentoringScreenState extends State<MentoringScreen> {
       drawer: Drawer(
         child: Container(
           child: drawerItems,
-          decoration: BoxDecoration(
-            color: kMentorXPrimary,
-          ),
         ),
       ),
       appBar: AppBar(
