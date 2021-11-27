@@ -117,6 +117,7 @@ class _SelectionScreenState extends State<SelectionScreen> {
                   children: [
                     IconCard(
                       cardIcon: Icons.people,
+                      cardColor: Theme.of(context).cardColor,
                       cardText: 'Programs',
                       onTap: () => Navigator.push(
                         context,
@@ -127,6 +128,7 @@ class _SelectionScreenState extends State<SelectionScreen> {
                     ),
                     IconCard(
                       cardIcon: Icons.person,
+                      cardColor: Theme.of(context).cardColor,
                       cardText: 'My Profile',
                       onTap: () => Navigator.push(
                         context,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mentorx_mvp/components/apptheme.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/authentication/login_screen.dart';
@@ -46,12 +47,8 @@ class MentorX extends StatelessWidget {
       create: (context) => Auth(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark().copyWith(
-          primaryColor: Colors.blue,
-//          colorScheme: ColorScheme.fromSwatch().copyWith(
-//            secondary: Colors.pink,
-//          ),
-        ),
+        theme: AppTheme.lightTheme,
+//https://itnext.io/app-theming-in-flutter-dark-mode-light-mode-27d9adf3cee
 
 // Navigator routes
         initialRoute: LandingPage.id,

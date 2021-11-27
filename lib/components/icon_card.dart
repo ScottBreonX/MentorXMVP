@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/constants.dart';
 
 class IconCard extends StatelessWidget {
   const IconCard({
@@ -49,6 +48,8 @@ class IconCard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.grey[700],
+                blurRadius: 5,
+                offset: Offset(5, 5),
               ),
             ],
             color: cardColor,

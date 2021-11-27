@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/Notes/mentoring_screen_old.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
-import '../../constants.dart';
 
 class MentorXMenuHeader extends StatefulWidget {
   const MentorXMenuHeader(
@@ -89,7 +88,7 @@ class MentorXMenuList extends StatelessWidget {
           ),
           title: Text(
             'Home',
-            style: TextStyle(fontSize: 20),
+            style: Theme.of(context).textTheme.headline2,
           ),
           onTap: () => Navigator.push(
             context,
@@ -104,7 +103,7 @@ class MentorXMenuList extends StatelessWidget {
           ),
           title: Text(
             'My Profile',
-            style: TextStyle(fontSize: 20),
+            style: Theme.of(context).textTheme.headline2,
           ),
           onTap: () => Navigator.push(
             context,
@@ -125,7 +124,7 @@ class MentorXMenuList extends StatelessWidget {
           ),
           title: Text(
             'Mentoring',
-            style: TextStyle(fontSize: 20),
+            style: Theme.of(context).textTheme.headline2,
           ),
         ),
         ListTile(
@@ -136,7 +135,7 @@ class MentorXMenuList extends StatelessWidget {
               Navigator.popAndPushNamed(context, MentoringScreenOld.id),
           title: Text(
             'Mentoring [OLD]',
-            style: TextStyle(fontSize: 20),
+            style: Theme.of(context).textTheme.headline2,
           ),
         ),
         ListTile(
@@ -145,7 +144,7 @@ class MentorXMenuList extends StatelessWidget {
           ),
           title: Text(
             'Settings',
-            style: TextStyle(fontSize: 20),
+            style: Theme.of(context).textTheme.headline2,
           ),
           onTap: () {},
         ),
@@ -162,7 +161,7 @@ class MentorXMenuList extends StatelessWidget {
           ),
           title: Text(
             'Log Out',
-            style: TextStyle(fontSize: 20),
+            style: Theme.of(context).textTheme.headline2,
           ),
           onTap: () {
             confirmSignOut(context);

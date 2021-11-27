@@ -43,9 +43,7 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
       maxLines: null,
       textAlign: TextAlign.start,
       onChanged: (value) => mentorText = value,
-      style: TextStyle(
-        fontWeight: FontWeight.w400,
-      ),
+      style: Theme.of(context).textTheme.subtitle2,
       autocorrect: false,
       decoration: kTextFieldDecorationDark,
     );
@@ -118,11 +116,7 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
                 Expanded(
                   child: Text(
                     'What makes me a good mentor',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontFamily: 'WorkSans',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.headline4,
                   ),
                 ),
                 mentorEditStatus
@@ -138,11 +132,15 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
                                 _updateMentoringAttributes(context);
                               },
                               child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.green,
+                                ),
                                 height: 40.0,
                                 width: 40.0,
                                 child: Icon(
                                   Icons.check,
-                                  color: Colors.green,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -157,11 +155,15 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
                                 });
                               },
                               child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.red,
+                                ),
                                 height: 40.0,
                                 width: 40.0,
                                 child: Icon(
                                   Icons.close,
-                                  color: Colors.red,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -177,6 +179,7 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
                             });
                           },
                           child: IconCircle(
+                            circleColor: Theme.of(context).backgroundColor,
                             width: 30.0,
                             height: 30.0,
                             iconType: Icons.edit,
@@ -195,9 +198,7 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
                       Flexible(
                         child: Text(
                           '${profileData['Mentoring Attributes']}',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                          ),
+                          style: Theme.of(context).textTheme.subtitle2,
                         ),
                       ),
                     ],

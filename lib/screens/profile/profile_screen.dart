@@ -102,10 +102,17 @@ class _MyProfileState extends State<MyProfile> {
                   Container(
                     height: 120.0,
                     width: double.infinity,
-                    color: Colors.grey.shade300,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          width: 3,
+                        ),
+                      ),
+                    ),
                     child: Image.asset(
-                      'assets/images/MentorWhite.png',
-                      fit: BoxFit.cover,
+                      'assets/images/MLogoBlue.png',
+                      fit: BoxFit.fitHeight,
                     ),
                   ),
                   Padding(
@@ -113,6 +120,8 @@ class _MyProfileState extends State<MyProfile> {
                     child: Stack(
                       children: [
                         CircleAvatar(
+                          backgroundColor:
+                              Theme.of(context).scaffoldBackgroundColor,
                           radius: circleSize + 3,
                           child: ProfileImageCircle(
                             iconSize: circleSize,
@@ -123,12 +132,17 @@ class _MyProfileState extends State<MyProfile> {
                           bottom: 0,
                           right: 5,
                           child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Theme.of(context).backgroundColor,
+                            ),
                             height: 30.0,
                             width: 30.0,
                             child: GestureDetector(
                               onTap: () {},
                               child: Icon(
                                 Icons.photo_camera,
+                                color: Theme.of(context).iconTheme.color,
                               ),
                             ),
                           ),
@@ -145,6 +159,8 @@ class _MyProfileState extends State<MyProfile> {
                         height: 30.0,
                         width: 30.0,
                         iconType: Icons.edit,
+                        circleColor: Theme.of(context).backgroundColor,
+                        iconColor: Theme.of(context).iconTheme.color,
                       ),
                     ),
                   ),
@@ -156,8 +172,8 @@ class _MyProfileState extends State<MyProfile> {
                       width: 30.0,
                       iconSize: 20.0,
                       iconType: Icons.edit,
-                      circleColor: Colors.white,
-                      iconColor: Colors.pink,
+                      circleColor: Theme.of(context).backgroundColor,
+                      iconColor: Theme.of(context).iconTheme.color,
                     ),
                   ),
                 ],
@@ -168,11 +184,7 @@ class _MyProfileState extends State<MyProfile> {
                     padding: const EdgeInsets.only(left: 15.0, top: 5.0),
                     child: Text(
                       '${profileData['First Name']} ${profileData['Last Name']}',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontFamily: 'WorkSans',
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.headline4,
                     ),
                   ),
                 ],
@@ -184,31 +196,30 @@ class _MyProfileState extends State<MyProfile> {
                         left: 15.0, top: 5.0, bottom: 15.0),
                     child: Text(
                       '${profileData['Year in School']}, ${profileData['Major']}',
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        fontFamily: 'WorkSans',
-                      ),
+                      style: Theme.of(context).textTheme.subtitle2,
                     ),
                   ),
                 ],
               ),
-              const Divider(),
+              const Divider(
+                thickness: 2,
+                color: Colors.white,
+              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
                 child: AboutMeSection(),
               ),
-              const Divider(),
+              const Divider(
+                thickness: 2,
+                color: Colors.white,
+              ),
               Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, top: 8.0),
                     child: Text(
                       'Mentoring Atttributes',
-                      style: TextStyle(
-                        fontFamily: 'Work Sans',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                      style: Theme.of(context).textTheme.headline3,
                     ),
                   ),
                 ],

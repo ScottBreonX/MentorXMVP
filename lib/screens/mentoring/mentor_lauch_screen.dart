@@ -90,13 +90,9 @@ class _MentorLaunchState extends State<MentorLaunch> {
       drawer: Drawer(
         child: Container(
           child: drawerItems,
-          decoration: BoxDecoration(
-            color: kUMichBlue,
-          ),
         ),
       ),
       appBar: AppBar(
-        backgroundColor: kUMichBlue,
         elevation: 5,
         title: Text('Mentoring'),
       ),
@@ -125,7 +121,6 @@ class _MentorLaunchState extends State<MentorLaunch> {
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: kUMichBlue,
                         ),
                       ),
                     ),
@@ -136,7 +131,6 @@ class _MentorLaunchState extends State<MentorLaunch> {
                       Text(
                         'Mentorship Program',
                         style: TextStyle(
-                          color: kUMichBlue,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -154,9 +148,6 @@ class _MentorLaunchState extends State<MentorLaunch> {
                   children: [
                     Container(
                       child: IconCard(
-                        cardColor: kUMichBlue,
-                        cardIconColor: Colors.white,
-                        cardTextColor: Colors.white,
                         cardText: 'Mentoring',
                         cardIcon: Icons.group,
                         onTap: () => Navigator.push(
@@ -168,9 +159,6 @@ class _MentorLaunchState extends State<MentorLaunch> {
                       ),
                     ),
                     IconCard(
-                      cardColor: kUMichBlue,
-                      cardIconColor: Colors.white,
-                      cardTextColor: Colors.white,
                       cardText: 'News Feed',
                       cardIcon: Icons.article_outlined,
                       onTap: () => Navigator.push(
@@ -181,17 +169,11 @@ class _MentorLaunchState extends State<MentorLaunch> {
                       ),
                     ),
                     IconCard(
-                      cardColor: kUMichBlue,
-                      cardIconColor: Colors.white,
-                      cardTextColor: Colors.white,
                       cardText: 'Calendar',
                       cardIcon: Icons.date_range,
                       onTap: () {},
                     ),
                     IconCard(
-                      cardColor: kUMichBlue,
-                      cardIconColor: Colors.white,
-                      cardTextColor: Colors.white,
                       cardText: 'Program Info',
                       cardIcon: Icons.info_outline,
                       onTap: () => Navigator.push(

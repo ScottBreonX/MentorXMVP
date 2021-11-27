@@ -114,12 +114,14 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                 children: [
                   IconCard(
                     cardIcon: Icons.add,
+                    cardColor: Theme.of(context).cardColor,
                     cardText: 'Join a Program',
                     borderWidth: 3,
                     onTap: () {},
                   ),
                   IconCard(
                     cardText: 'University of Michigan',
+                    cardColor: Theme.of(context).cardColor,
                     imageAsset: Image.asset(
                       'assets/images/UMichLogo.png',
                       height: 60,
@@ -130,8 +132,9 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                   ),
                   IconCard(
                     cardText: 'Finance Careers Mentorship',
+                    cardColor: Theme.of(context).cardColor,
                     imageAsset: Image.asset(
-                      'assets/images/MLogoWhite.png',
+                      'assets/images/MLogoBlue.png',
                       height: 60,
                     ),
                     onTap: () {
@@ -140,8 +143,9 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                   ),
                   IconCard(
                     cardText: 'Consulting Careers Mentorship',
+                    cardColor: Theme.of(context).cardColor,
                     imageAsset: Image.asset(
-                      'assets/images/MLogoPink.png',
+                      'assets/images/MLogoBlue.png',
                       height: 60,
                     ),
                     onTap: () {
