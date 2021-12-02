@@ -1,66 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_circle.dart';
-import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
-import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
-import 'package:mentorx_mvp/screens/profile/sections/profile_mentee_section.dart';
-import 'package:mentorx_mvp/screens/profile/sections/profile_mentor_section.dart';
-import 'package:mentorx_mvp/services/auth.dart';
-import 'package:provider/provider.dart';
+import 'package:mentorx_mvp/models/profile_model.dart';
+import 'package:mentorx_mvp/screens/home_screen.dart';
+import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 
-User loggedInUser;
+class Profile extends StatefulWidget {
+  final String profileId;
 
-class MyProfile extends StatefulWidget {
-  static String id = 'mentor_screen';
+  Profile({this.profileId});
 
   @override
-  _MyProfileState createState() => _MyProfileState();
+  _ProfileState createState() => _ProfileState();
 }
 
-class _MyProfileState extends State<MyProfile> {
-  bool aboutMeEditStatus = false;
-  bool profilePhotoStatus = false;
-  bool profilePhotoSelected = false;
-  String aboutMeText;
+class _ProfileState extends State<Profile> {
+  final String currentUserId = loggedInUser?.uid;
+  // final temp = loggedInUser.
 
-  @override
-  void initState() {
-    getCurrentUser();
-    getProfileData();
-    aboutMeEditStatus = false;
-    super.initState();
-  }
-
-  void getCurrentUser() {
-    final auth = Provider.of<AuthBase>(context, listen: false);
-    try {
-      final user = auth.currentUser;
-      if (user != null) {
-        loggedInUser = user;
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  dynamic profileData;
-
-  Future<dynamic> getProfileData() async {
-    await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
-        .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        if (mounted) {
-          setState(() {
-            profileData = result.data();
-          });
-        }
-      });
-    });
-  }
+  // dynamic profileData;
+  //
+  // Future<dynamic> getProfileData() async {
+  //   await FirebaseFirestore.instance
+  //       .collection('users/${loggedInUser.uid}/profile')
+  //       .get()
+  //       .then((querySnapshot) {
+  //     querySnapshot.docs.forEach((result) {
+  //       if (mounted) {
+  //         setState(() {
+  //           profileData = result.data();
+  //         });
+  //       }
+  //     });
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +61,9 @@ class _MyProfileState extends State<MyProfile> {
       ),
       appBar: AppBar(
         elevation: 5,
-        title: Text('My Profile'),
+        title: widget.profileId == loggedInUser.uid
+            ? Text('My Profile')
+            : Text('SOMEONES PROFILE'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -228,5 +204,6 @@ class _MyProfileState extends State<MyProfile> {
         ),
       ),
     );
+    ;
   }
 }

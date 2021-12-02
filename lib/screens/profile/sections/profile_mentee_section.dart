@@ -161,9 +161,9 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
                                 ),
                                 height: 40.0,
                                 width: 40.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
+                                // decoration: BoxDecoration(
+                                //   shape: BoxShape.circle,
+                                // ),
                                 child: Icon(
                                   Icons.close,
                                   color: Colors.white,

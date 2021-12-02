@@ -115,10 +115,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
     }
 
     var drawerHeader = MentorXMenuHeader(
-      fName: '${profileData['First Name']}',
-      lName: '${profileData['Last Name']}',
-      email: '${profileData['Email Address']}',
-      profilePicture: '${profileData['images']}',
+      profileData: profileData,
     );
 
     final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);

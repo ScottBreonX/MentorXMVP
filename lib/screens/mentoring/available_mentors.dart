@@ -166,10 +166,7 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
     }
 
     var drawerHeader = MentorXMenuHeader(
-      fName: '${profileData['First Name']}',
-      lName: '${profileData['Last Name']}',
-      email: '${profileData['Email Address']}',
-      profilePicture: '${profileData['images']}',
+      profileData: profileData,
     );
 
     final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
@@ -205,9 +202,18 @@ class AvailableMentorsStream extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var strStart = searchString == null
+        ? null
+        : searchString.substring(0, searchString.length - 1);
+    var strEnd = searchString == null
+        ? null
+        : String.fromCharCode(searchString.characters.last.codeUnitAt(0) + 1);
+    var limit = searchString != null ? (strStart + strEnd) : null;
+
     Stream searchStream = _firestore
         .collection('users')
         .where('First Name', isGreaterThanOrEqualTo: searchString)
+        .where('First Name', isLessThan: limit)
         .where('Mentor', isEqualTo: true)
         .snapshots();
 

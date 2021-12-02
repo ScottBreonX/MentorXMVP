@@ -4,15 +4,9 @@ import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 
 class MentorXMenuHeader extends StatefulWidget {
-  const MentorXMenuHeader(
-      {@required this.fName,
-      @required this.lName,
-      @required this.email,
-      @required this.profilePicture});
-  final String fName;
-  final String lName;
-  final String email;
-  final String profilePicture;
+  const MentorXMenuHeader({@required this.profileData});
+
+  final profileData;
 
   @override
   _MentorXMenuHeaderState createState() => _MentorXMenuHeaderState();
@@ -24,7 +18,12 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.profilePicture == 'null') {
+    final String fName = '${widget.profileData['First Name']}';
+    final String lName = '${widget.profileData['Last Name']}';
+    final String email = '${widget.profileData['Email Address']}';
+    final String profilePicture = '${widget.profileData['images']}';
+
+    if (profilePicture == 'null') {
       profilePictureStatus = false;
     } else {
       profilePictureStatus = true;
@@ -38,16 +37,16 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
           borderRadius: BorderRadius.circular(20),
         ),
         accountName: Text(
-          '${widget.fName} ${widget.lName}',
+          '$fName $lName',
           style: TextStyle(),
         ),
         accountEmail: Text(
-          '${widget.email}',
+          '$email',
           style: TextStyle(),
         ),
         currentAccountPicture: CircleAvatar(
           backgroundImage:
-              profilePictureStatus ? NetworkImage(widget.profilePicture) : null,
+              profilePictureStatus ? NetworkImage(profilePicture) : null,
           child: profilePictureStatus
               ? null
               : Icon(
