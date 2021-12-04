@@ -1,18 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_circle.dart';
+import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/screens/profile/sections/profile_mentee_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/profile_mentor_section.dart';
-import 'package:mentorx_mvp/services/auth.dart';
-import 'package:provider/provider.dart';
-
-User loggedInUser;
 
 class MyProfile extends StatefulWidget {
+  const MyProfile({@required this.profileData});
+  final profileData;
   static String id = 'mentor_screen';
 
   @override
@@ -21,57 +18,17 @@ class MyProfile extends StatefulWidget {
 
 class _MyProfileState extends State<MyProfile> {
   bool aboutMeEditStatus = false;
-  bool profilePhotoStatus = false;
-  bool profilePhotoSelected = false;
-  String aboutMeText;
-
-  @override
-  void initState() {
-    getCurrentUser();
-    getProfileData();
-    aboutMeEditStatus = false;
-    super.initState();
-  }
-
-  void getCurrentUser() {
-    final auth = Provider.of<AuthBase>(context, listen: false);
-    try {
-      final user = auth.currentUser;
-      if (user != null) {
-        loggedInUser = user;
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  dynamic profileData;
-
-  Future<dynamic> getProfileData() async {
-    await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
-        .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        if (mounted) {
-          setState(() {
-            profileData = result.data();
-          });
-        }
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    if (profileData == null) {
-      return Center();
+    if (widget.profileData == null) {
+      return circularProgress();
     }
 
     double circleSize = 55.0;
 
     var drawerHeader = MentorXMenuHeader(
-      profileData: profileData,
+      profileData: widget.profileData,
     );
 
     final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
@@ -180,7 +137,7 @@ class _MyProfileState extends State<MyProfile> {
                   Padding(
                     padding: const EdgeInsets.only(left: 15.0, top: 5.0),
                     child: Text(
-                      '${profileData['First Name']} ${profileData['Last Name']}',
+                      '${widget.profileData['First Name']} ${widget.profileData['Last Name']}',
                       style: Theme.of(context).textTheme.headline4,
                     ),
                   ),
@@ -192,7 +149,7 @@ class _MyProfileState extends State<MyProfile> {
                     padding: const EdgeInsets.only(
                         left: 15.0, top: 5.0, bottom: 15.0),
                     child: Text(
-                      '${profileData['Year in School']}, ${profileData['Major']}',
+                      '${widget.profileData['Year in School']}, ${widget.profileData['Major']}',
                       style: Theme.of(context).textTheme.subtitle2,
                     ),
                   ),

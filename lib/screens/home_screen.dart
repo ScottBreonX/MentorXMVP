@@ -95,7 +95,9 @@ class _LaunchScreenState extends State<LaunchScreen> {
       body: PageView(
         children: [
           SelectionScreen(),
-          MyProfile(),
+          MyProfile(
+            profileData: profileData,
+          ),
           ProgramSelectionScreen(),
           NotificationScreen(),
         ],
