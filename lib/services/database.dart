@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:mentorx_mvp/models/mentoring_model.dart';
+import 'package:mentorx_mvp/Notes/mentoring_model.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/services/api_path.dart';
 

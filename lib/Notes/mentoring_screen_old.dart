@@ -5,7 +5,7 @@ import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/components/custom_dialog.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
-import 'package:mentorx_mvp/models/mentoring_model.dart';
+import 'package:mentorx_mvp/Notes/mentoring_model.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
