@@ -5,6 +5,9 @@ import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
+import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
+import 'package:mentorx_mvp/screens/profile/sections/profile_mentee_section.dart';
+import 'package:mentorx_mvp/screens/profile/sections/profile_mentor_section.dart';
 
 class Profile extends StatefulWidget {
   final String profileId;
