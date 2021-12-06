@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
@@ -23,23 +21,16 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
   final _auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
-  final _formKey3 = GlobalKey<FormState>();
-  final _formKey4 = GlobalKey<FormState>();
 
   String fName;
   String lName;
-  String major;
-  String yearInSchool;
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _fieldOfStudyController = TextEditingController();
-  final TextEditingController _yearInSchoolController = TextEditingController();
 
   @override
   void initState() {
     getCurrentUser();
-    getProfileData();
     super.initState();
   }
 
@@ -62,30 +53,12 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
           email: loggedInUser.email,
           fName: fName,
           lName: lName,
-          major: major,
-          yearInSchool: yearInSchool,
         ),
       );
     } on FirebaseException catch (e) {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
     }
-  }
-
-  dynamic profileData;
-
-  Future<dynamic> getProfileData() async {
-    await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
-        .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        setState(() {
-          profileData = result.data();
-          print(profileData);
-        });
-      });
-    });
   }
 
   TextField _buildFirstNameTextField(BuildContext context) {
@@ -126,49 +99,6 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
         fillColor: Colors.white.withOpacity(0.05),
         filled: true,
 //        errorText: model.emailErrorText,
-      ),
-    );
-  }
-
-  TextField _buildFieldOfStudyTextField(BuildContext context) {
-    return TextField(
-      key: _formKey3,
-      controller: _fieldOfStudyController,
-      textInputAction: TextInputAction.next,
-      textAlign: TextAlign.center,
-      onChanged: (value) => major = value,
-      style: TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.w400,
-      ),
-      autocorrect: false,
-      decoration: kTextFieldDecorationLight.copyWith(
-        labelText: 'Enter your field of study',
-        hintText: 'i.e. Economics',
-        fillColor: Colors.white.withOpacity(0.05),
-        filled: true,
-//        errorText: model.emailErrorText,
-      ),
-    );
-  }
-
-  TextField _buildYearInSchoolTextField(BuildContext context) {
-    return TextField(
-      key: _formKey4,
-      controller: _yearInSchoolController,
-      textInputAction: TextInputAction.next,
-      textAlign: TextAlign.center,
-      onChanged: (value) => yearInSchool = value,
-      style: TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.w400,
-      ),
-      autocorrect: false,
-      decoration: kTextFieldDecorationLight.copyWith(
-        labelText: 'Year in School',
-        hintText: 'i.e. Junior',
-        filled: true,
-        fillColor: Colors.white.withOpacity(0.05),
       ),
     );
   }
@@ -228,16 +158,10 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                 SizedBox(
                   height: 20.0,
                 ),
-                _buildFieldOfStudyTextField(context),
-                SizedBox(height: 20.0),
-                _buildYearInSchoolTextField(context),
-                SizedBox(
-                  height: 20,
-                ),
                 RoundedButton(
                   onPressed: () async {
                     await _createProfile(context);
-                    Navigator.pushNamed(context, LaunchScreen.id);
+                    Navigator.pushNamed(context, HomeScreen.id);
                   },
                   title: 'Submit',
                   buttonColor: kMentorXPrimary,

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_lauch_screen.dart';
@@ -25,16 +24,10 @@ class ProgramSelectionScreen extends StatefulWidget {
 }
 
 class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
-  bool aboutMeEditStatus = false;
-  bool profilePhotoStatus = false;
-  bool profilePhotoSelected = false;
-  String aboutMeText;
-
   @override
   void initState() {
     getCurrentUser();
     getProfileData();
-    aboutMeEditStatus = false;
     super.initState();
   }
 
@@ -73,21 +66,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
       return Center();
     }
 
-    if (profileData['images'] == null) {
-      setState(() {
-        profilePhotoStatus = false;
-      });
-    } else {
-      setState(() {
-        profilePhotoStatus = true;
-      });
-    }
-
-    var drawerHeader = MentorXMenuHeader(
-      profileData: profileData,
-    );
-
-    final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
+    final drawerItems = MentorXMenuList();
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 

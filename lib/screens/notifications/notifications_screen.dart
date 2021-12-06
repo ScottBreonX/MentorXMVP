@@ -23,16 +23,9 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
-  bool aboutMeEditStatus = false;
-  bool profilePhotoStatus = false;
-  bool profilePhotoSelected = false;
-  String aboutMeText;
-
   @override
   void initState() {
     getCurrentUser();
-    getProfileData();
-    aboutMeEditStatus = false;
     super.initState();
   }
 
@@ -48,44 +41,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
     }
   }
 
-  dynamic profileData;
-
-  Future<dynamic> getProfileData() async {
-    await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
-        .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        if (mounted) {
-          setState(() {
-            profileData = result.data();
-          });
-        }
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (profileData == null) {
-      return Center();
-    }
-
-    if (profileData['images'] == null) {
-      setState(() {
-        profilePhotoStatus = false;
-      });
-    } else {
-      setState(() {
-        profilePhotoStatus = true;
-      });
-    }
-
-    var drawerHeader = MentorXMenuHeader(
-      profileData: profileData,
-    );
-
-    final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
+    final drawerItems = MentorXMenuList();
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 

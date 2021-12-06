@@ -27,11 +27,7 @@ class _MyProfileState extends State<MyProfile> {
 
     double circleSize = 55.0;
 
-    var drawerHeader = MentorXMenuHeader(
-      profileData: widget.profileData,
-    );
-
-    final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
+    final drawerItems = MentorXMenuList();
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 

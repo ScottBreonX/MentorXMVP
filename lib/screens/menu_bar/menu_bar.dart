@@ -1,85 +1,71 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 
+final usersRef = FirebaseFirestore.instance.collection('users');
+
 class MentorXMenuHeader extends StatefulWidget {
-  const MentorXMenuHeader({@required this.profileData});
-
-  final profileData;
-
   @override
   _MentorXMenuHeaderState createState() => _MentorXMenuHeaderState();
 }
 
 class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
-  bool profilePictureStatus;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final String fName = '${widget.profileData['First Name']}';
-    final String lName = '${widget.profileData['Last Name']}';
-    final String email = '${widget.profileData['Email Address']}';
-    final String profilePicture = '${widget.profileData['images']}';
-
-    if (profilePicture == 'null') {
-      profilePictureStatus = false;
-    } else {
-      profilePictureStatus = true;
-    }
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: UserAccountsDrawerHeader(
-        key: _scaffoldKey,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        accountName: Text(
-          '$fName $lName',
-          style: TextStyle(),
-        ),
-        accountEmail: Text(
-          '$email',
-          style: TextStyle(),
-        ),
-        currentAccountPicture: CircleAvatar(
-          backgroundImage:
-              profilePictureStatus ? NetworkImage(profilePicture) : null,
-          child: profilePictureStatus
-              ? null
-              : Icon(
+    return StreamBuilder<QuerySnapshot>(
+        stream: usersRef.snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return circularProgress();
+          }
+          final profileData =
+              snapshot.data.docs.map((doc) => Text(doc['First Name']));
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: UserAccountsDrawerHeader(
+              key: _scaffoldKey,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              accountName: Text('$profileData'),
+              accountEmail: Text(''),
+              currentAccountPicture: CircleAvatar(
+                child: Icon(
                   Icons.person,
                   size: 40.0,
                 ),
-        ),
-        otherAccountsPictures: [
-          CircleAvatar(
-            child: GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
-              child: Icon(
-                Icons.close,
               ),
+              otherAccountsPictures: [
+                CircleAvatar(
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: Icon(
+                      Icons.close,
+                    ),
+                  ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
-    );
+          );
+        });
   }
 }
 
 class MentorXMenuList extends StatelessWidget {
-  const MentorXMenuList({
-    @required this.drawerHeader,
-  });
-
-  final MentorXMenuHeader drawerHeader;
-
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        drawerHeader,
+        MentorXMenuHeader(),
         ListTile(
           leading: Icon(
             Icons.home,
@@ -91,7 +77,7 @@ class MentorXMenuList extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => LaunchScreen(pageIndex: 0),
+              builder: (context) => HomeScreen(pageIndex: 0),
             ),
           ),
         ),
@@ -106,7 +92,7 @@ class MentorXMenuList extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => LaunchScreen(pageIndex: 1),
+              builder: (context) => HomeScreen(pageIndex: 1),
             ),
           ),
         ),
@@ -117,7 +103,7 @@ class MentorXMenuList extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => LaunchScreen(pageIndex: 2),
+              builder: (context) => HomeScreen(pageIndex: 2),
             ),
           ),
           title: Text(
