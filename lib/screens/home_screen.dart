@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
 import 'package:mentorx_mvp/screens/selection_screen/selection_screen.dart';
@@ -15,18 +15,18 @@ final usersRef = FirebaseFirestore.instance.collection('users');
 final mentorsRef = FirebaseFirestore.instance.collection('mentors');
 final mentoringRef = FirebaseFirestore.instance.collection('mentoring');
 
-class LaunchScreen extends StatefulWidget {
-  const LaunchScreen({this.onSignOut, this.pageIndex});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({this.onSignOut, this.pageIndex});
 
-  static const String id = 'launch_screen';
+  static const String id = 'home_screen';
   final VoidCallback onSignOut;
   final int pageIndex;
 
   @override
-  _LaunchScreenState createState() => _LaunchScreenState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _LaunchScreenState extends State<LaunchScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   PageController pageController;
   int pageIndex;
 
@@ -34,6 +34,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
   void initState() {
     pageController = PageController(initialPage: widget.pageIndex ?? 0);
     getCurrentUser();
+    getUserbyID();
     getProfileData();
     super.initState();
   }
@@ -50,13 +51,17 @@ class _LaunchScreenState extends State<LaunchScreen> {
     }
   }
 
+  dynamic doc;
+
+  getUserbyID() async {
+    final DocumentSnapshot doc = await usersRef.doc(loggedInUser.uid).get();
+    print(doc.data());
+  }
+
   dynamic profileData;
 
   Future<dynamic> getProfileData() async {
-    await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
-        .get()
-        .then((querySnapshot) {
+    await usersRef.get().then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
         if (mounted) {
           setState(() {
@@ -88,14 +93,16 @@ class _LaunchScreenState extends State<LaunchScreen> {
   @override
   Widget build(BuildContext context) {
     if (profileData == null) {
-      return Center();
+      return circularProgress();
     }
 
     return Scaffold(
       body: PageView(
         children: [
           SelectionScreen(),
-          MyProfile(),
+          MyProfile(
+            profileData: profileData,
+          ),
           ProgramSelectionScreen(),
           NotificationScreen(),
         ],

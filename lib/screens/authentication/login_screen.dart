@@ -55,7 +55,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
   Future<void> _submit() async {
     try {
       await widget.bloc.submit();
-      Navigator.of(context).popAndPushNamed(LaunchScreen.id);
+      Navigator.of(context).popAndPushNamed(HomeScreen.id);
     } catch (e) {
       showAlertDialog(
         context,

@@ -74,11 +74,7 @@ class _MentorLaunchState extends State<MentorLaunch> {
       );
     }
 
-    var drawerHeader = MentorXMenuHeader(
-      profileData: profileData,
-    );
-
-    final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
+    final drawerItems = MentorXMenuList();
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 
@@ -161,7 +157,7 @@ class _MentorLaunchState extends State<MentorLaunch> {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LaunchScreen(pageIndex: 0),
+                          builder: (context) => HomeScreen(pageIndex: 0),
                         ),
                       ),
                     ),

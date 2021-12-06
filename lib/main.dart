@@ -4,7 +4,6 @@ import 'package:mentorx_mvp/components/apptheme.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/authentication/login_screen.dart';
-import 'package:mentorx_mvp/screens/authentication/login_screen_test.dart';
 import 'package:mentorx_mvp/screens/authentication/welcome_screen.dart';
 import 'package:mentorx_mvp/screens/chat/chat_screen.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
@@ -20,7 +19,6 @@ import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'screens/authentication/registration_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'screens/events/events_screen.dart';
 import 'services/auth.dart';
 
 void main() async {
@@ -61,8 +59,7 @@ class MentorX extends StatelessWidget {
               ),
           RegistrationProfileScreen.id: (context) =>
               RegistrationProfileScreen(),
-          LaunchScreen.id: (context) => LaunchScreen(),
-          EventsScreen.id: (context) => EventsScreen(),
+          HomeScreen.id: (context) => HomeScreen(),
           MyProfile.id: (context) => MyProfile(),
           MentorLaunch.id: (context) => MentorLaunch(),
           LandingPage.id: (context) => LandingPage(),
@@ -72,7 +69,6 @@ class MentorX extends StatelessWidget {
           AvailableMentorsScreen.id: (context) => AvailableMentorsScreen(),
           ChatScreen.id: (context) => ChatScreen(),
           ProgramSelectionScreen.id: (context) => ProgramSelectionScreen(),
-          LoginScreenTest.id: (context) => LoginScreenTest(),
         },
       ),
     );

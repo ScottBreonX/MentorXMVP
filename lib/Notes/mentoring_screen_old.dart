@@ -171,11 +171,7 @@ class _MentoringScreenOldState extends State<MentoringScreenOld> {
       );
     }
 
-    var drawerHeader = MentorXMenuHeader(
-      profileData: profileData,
-    );
-
-    final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
+    final drawerItems = MentorXMenuList();
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 

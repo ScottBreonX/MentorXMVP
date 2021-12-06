@@ -1,9 +1,5 @@
 class APIPath {
-  static String profile(String uid, String profileInfo) =>
-      'users/$uid/profile/$profileInfo';
-
-  static String workExperience(String uid, String profileInfo, String field) =>
-      'users/$uid/profile/$profileInfo/workexperience/$field';
+  static String profile(String uid) => 'users/$uid';
 
   static String mentorInfo(String uid, String profileInfo) =>
       'users/$uid/mentorInfo/$profileInfo';

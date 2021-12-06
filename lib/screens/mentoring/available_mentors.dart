@@ -26,8 +26,6 @@ class AvailableMentorsScreen extends StatefulWidget {
 
 class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
   bool showSpinner = false;
-  bool profilePhotoStatus = false;
-  bool profilePhotoSelected = false;
   final _auth = FirebaseAuth.instance;
   String messageText;
   TextEditingController searchController = TextEditingController();
@@ -155,21 +153,7 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
       return Center();
     }
 
-    if (profileData['images'] == null) {
-      setState(() {
-        profilePhotoStatus = false;
-      });
-    } else {
-      setState(() {
-        profilePhotoStatus = true;
-      });
-    }
-
-    var drawerHeader = MentorXMenuHeader(
-      profileData: profileData,
-    );
-
-    final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
+    final drawerItems = MentorXMenuList();
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 
@@ -243,8 +227,6 @@ class AvailableMentorsStream extends StatelessWidget {
             mentorFname: user.fName,
             mentorLname: user.lName,
             mentorEmail: user.email,
-            mentorMajor: user.major,
-            mentorYearInSchool: user.yearInSchool,
           );
           mentorBubbles.add(mentorBubble);
         }

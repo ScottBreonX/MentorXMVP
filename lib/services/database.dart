@@ -14,7 +14,7 @@ class FirestoreDatabase implements Database {
   final String mentorUID;
 
   Future<void> createProfile(ProfileModel profile) => _setData(
-        path: APIPath.profile(uid, 'coreInfo'),
+        path: APIPath.profile(uid),
         data: profile.toMap(),
       );
 
@@ -43,30 +43,24 @@ class FirestoreDatabase implements Database {
   }
 
   Future<void> updateAboutMe(AboutMeModel profile) => _updateData(
-        path: APIPath.profile(uid, 'coreInfo'),
+        path: APIPath.profile(uid),
         data: profile.toMap(),
       );
 
   Future<void> updateMentoringAttributes(MentoringAttributesModel profile) =>
       _updateData(
-        path: APIPath.profile(uid, 'coreInfo'),
+        path: APIPath.profile(uid),
         data: profile.toMap(),
       );
 
   Future<void> updateMenteeAttributes(MenteeAttributesModel profile) =>
       _updateData(
-        path: APIPath.profile(uid, 'coreInfo'),
+        path: APIPath.profile(uid),
         data: profile.toMap(),
       );
 
-  Future<void> updateWorkExperience(WorkExperienceModel workExperience) =>
-      _updateData(
-        path: APIPath.workExperience(uid, 'coreInfo', 'Field1'),
-        data: workExperience.toMap(),
-      );
-
   Future<void> createMatchID(MatchIDModel matchID) => _updateData(
-        path: APIPath.profile(uid, 'coreInfo'),
+        path: APIPath.profile(uid),
         data: matchID.toMap(),
       );
 

@@ -66,7 +66,7 @@ class _MentorScreenOldState extends State<MentorScreenOld> {
           IconButton(
             icon: Icon(Icons.home),
             onPressed: () {
-              Navigator.pushNamed(context, LaunchScreen.id);
+              Navigator.pushNamed(context, HomeScreen.id);
             },
           ),
         ],

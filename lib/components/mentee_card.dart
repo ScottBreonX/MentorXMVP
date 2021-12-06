@@ -72,14 +72,14 @@ class MenteeCard extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              Text(
-                '${user.major} - ${user.yearInSchool}',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: cardTextColor ?? Colors.black,
-                  fontSize: secondaryTextSize ?? 20,
-                ),
-              ),
+//              Text(
+//                '${user.major} - ${user.yearInSchool}',
+//                textAlign: TextAlign.center,
+//                style: TextStyle(
+//                  color: cardTextColor ?? Colors.black,
+//                  fontSize: secondaryTextSize ?? 20,
+//                ),
+//              ),
             ],
           ),
           height: boxHeight ?? 150,

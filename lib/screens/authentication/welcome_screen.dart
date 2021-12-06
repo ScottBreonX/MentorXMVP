@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
-import 'package:mentorx_mvp/screens/authentication/login_screen_test.dart';
 import 'package:mentorx_mvp/screens/authentication/registration_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
@@ -126,15 +125,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 fontColor: kMentorXPrimary,
                 fontSize: 20.0,
                 onPressed: () => widget._createNewUser(context),
-                minWidth: 250.0,
-              ),
-              RoundedButton(
-                title: '[Test] Log In',
-                buttonColor: Colors.white,
-                fontColor: kMentorXPrimary,
-                fontSize: 20.0,
-                onPressed: () =>
-                    Navigator.pushNamed(context, LoginScreenTest.id),
                 minWidth: 250.0,
               ),
             ],

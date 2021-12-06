@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
+import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/services/auth.dart';
@@ -26,16 +27,9 @@ class SelectionScreen extends StatefulWidget {
 }
 
 class _SelectionScreenState extends State<SelectionScreen> {
-  bool aboutMeEditStatus = false;
-  bool profilePhotoStatus = false;
-  bool profilePhotoSelected = false;
-  String aboutMeText;
-
   @override
   void initState() {
     getCurrentUser();
-    getProfileData();
-    aboutMeEditStatus = false;
     super.initState();
   }
 
@@ -51,44 +45,9 @@ class _SelectionScreenState extends State<SelectionScreen> {
     }
   }
 
-  dynamic profileData;
-
-  Future<dynamic> getProfileData() async {
-    await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
-        .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        if (mounted) {
-          setState(() {
-            profileData = result.data();
-          });
-        }
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (profileData == null) {
-      return Center();
-    }
-
-    if (profileData['images'] == null) {
-      setState(() {
-        profilePhotoStatus = false;
-      });
-    } else {
-      setState(() {
-        profilePhotoStatus = true;
-      });
-    }
-
-    var drawerHeader = MentorXMenuHeader(
-      profileData: profileData,
-    );
-
-    final drawerItems = MentorXMenuList(drawerHeader: drawerHeader);
+    final drawerItems = MentorXMenuList();
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 
@@ -107,6 +66,12 @@ class _SelectionScreenState extends State<SelectionScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            RoundedButton(
+              title: '${loggedInUser.uid}',
+              buttonColor: Colors.blue,
+              fontColor: Colors.white,
+              onPressed: () => confirmSignOut(context),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -119,7 +84,7 @@ class _SelectionScreenState extends State<SelectionScreen> {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LaunchScreen(pageIndex: 2),
+                          builder: (context) => HomeScreen(pageIndex: 2),
                         ),
                       ),
                     ),
@@ -130,7 +95,7 @@ class _SelectionScreenState extends State<SelectionScreen> {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LaunchScreen(pageIndex: 1),
+                          builder: (context) => HomeScreen(pageIndex: 1),
                         ),
                       ),
                     ),
