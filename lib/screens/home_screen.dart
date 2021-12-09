@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: PageView(
         children: [
-          SelectionScreen(),
+          SelectionScreen(loggedInUser: loggedInUser),
           MyProfile(
             profileId: loggedInUser.id,
           ),

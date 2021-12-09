@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
+import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/services/auth.dart';
@@ -11,12 +12,13 @@ import 'package:provider/provider.dart';
 
 import '../home_screen.dart';
 
-User loggedInUser;
-
 class SelectionScreen extends StatefulWidget {
+  final myUser loggedInUser;
+
   const SelectionScreen({
     Key key,
     this.database,
+    this.loggedInUser,
   }) : super(key: key);
 
   static const String id = 'selection_screen';
@@ -29,25 +31,13 @@ class SelectionScreen extends StatefulWidget {
 class _SelectionScreenState extends State<SelectionScreen> {
   @override
   void initState() {
-    getCurrentUser();
+    // getCurrentUser();
     super.initState();
-  }
-
-  void getCurrentUser() {
-    final auth = Provider.of<AuthBase>(context, listen: false);
-    try {
-      final user = auth.currentUser;
-      if (user != null) {
-        loggedInUser = user;
-      }
-    } catch (e) {
-      print(e);
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final drawerItems = MentorXMenuList();
+    final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 
@@ -67,7 +57,8 @@ class _SelectionScreenState extends State<SelectionScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             RoundedButton(
-              title: '${loggedInUser.uid}',
+              title: 'Welcome, ${loggedInUser.firstName}!',
+              fontSize: 24,
               buttonColor: Colors.blue,
               fontColor: Colors.white,
               onPressed: () => confirmSignOut(context),

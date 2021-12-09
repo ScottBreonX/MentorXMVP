@@ -2,11 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
+import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 
-final usersRef = FirebaseFirestore.instance.collection('users');
-
 class MentorXMenuHeader extends StatefulWidget {
+  final myUser loggedInUser;
+
+  MentorXMenuHeader({this.loggedInUser});
+
   @override
   _MentorXMenuHeaderState createState() => _MentorXMenuHeaderState();
 }
@@ -36,8 +39,9 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
               ),
-              accountName: Text('$profileData'),
-              accountEmail: Text(''),
+              accountName:
+                  Text('${loggedInUser.firstName} ${loggedInUser.lastName}'),
+              accountEmail: Text('${loggedInUser.email}'),
               currentAccountPicture: CircleAvatar(
                 child: Icon(
                   Icons.person,
@@ -61,11 +65,15 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
 }
 
 class MentorXMenuList extends StatelessWidget {
+  final myUser loggedInUser;
+
+  MentorXMenuList({this.loggedInUser});
+
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        MentorXMenuHeader(),
+        MentorXMenuHeader(loggedInUser: loggedInUser),
         ListTile(
           leading: Icon(
             Icons.home,
