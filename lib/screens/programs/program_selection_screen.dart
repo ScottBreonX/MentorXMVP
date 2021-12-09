@@ -62,9 +62,9 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (profileData == null) {
-      return Center();
-    }
+    // if (profileData == null) {
+    //   return Center();
+    // }
 
     final drawerItems = MentorXMenuList();
     final GlobalKey<ScaffoldState> _scaffoldKey =

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
+import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
 import 'package:mentorx_mvp/screens/selection_screen/selection_screen.dart';
@@ -10,7 +11,7 @@ import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'notifications/notifications_screen.dart';
 
-User loggedInUser;
+myUser loggedInUser;
 final usersRef = FirebaseFirestore.instance.collection('users');
 final mentorsRef = FirebaseFirestore.instance.collection('mentors');
 final mentoringRef = FirebaseFirestore.instance.collection('mentoring');
@@ -34,43 +35,36 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     pageController = PageController(initialPage: widget.pageIndex ?? 0);
     getCurrentUser();
-    getUserbyID();
-    getProfileData();
+    // getProfileData();
     super.initState();
   }
 
-  void getCurrentUser() {
+  void getCurrentUser() async {
     final auth = Provider.of<AuthBase>(context, listen: false);
     try {
       final user = auth.currentUser;
       if (user != null) {
-        loggedInUser = user;
+        DocumentSnapshot doc = await usersRef.doc(user.uid).get();
+        loggedInUser = myUser.fromDocument(doc);
       }
     } catch (e) {
       print(e);
     }
   }
 
-  dynamic doc;
-
-  getUserbyID() async {
-    final DocumentSnapshot doc = await usersRef.doc(loggedInUser.uid).get();
-    print(doc.data());
-  }
-
-  dynamic profileData;
-
-  Future<dynamic> getProfileData() async {
-    await usersRef.get().then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        if (mounted) {
-          setState(() {
-            profileData = result.data();
-          });
-        }
-      });
-    });
-  }
+  // dynamic profileData;
+  //
+  // Future<dynamic> getProfileData() async {
+  //   await usersRef.get().then((querySnapshot) {
+  //     querySnapshot.docs.forEach((result) {
+  //       if (mounted) {
+  //         setState(() {
+  //           profileData = result.data();
+  //         });
+  //       }
+  //     });
+  //   });
+  // }
 
   @override
   void dispose() {
@@ -92,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (profileData == null) {
+    if (loggedInUser.id == null) {
       return circularProgress();
     }
 
@@ -101,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           SelectionScreen(),
           MyProfile(
-            profileData: profileData,
+            profileId: loggedInUser.id,
           ),
           ProgramSelectionScreen(),
           NotificationScreen(),

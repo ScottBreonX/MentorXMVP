@@ -66,13 +66,13 @@ class _MentorLaunchState extends State<MentorLaunch> {
 
   @override
   Widget build(BuildContext context) {
-    if (profileData == null) {
-      return Center(
-        child: CircularProgressIndicator(
-          backgroundColor: kUMichBlue,
-        ),
-      );
-    }
+    // if (profileData == null) {
+    //   return Center(
+    //     child: CircularProgressIndicator(
+    //       backgroundColor: kUMichBlue,
+    //     ),
+    //   );
+    // }
 
     final drawerItems = MentorXMenuList();
     final GlobalKey<ScaffoldState> _scaffoldKey =
