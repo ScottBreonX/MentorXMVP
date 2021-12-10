@@ -60,7 +60,7 @@ class MentorX extends StatelessWidget {
           RegistrationProfileScreen.id: (context) =>
               RegistrationProfileScreen(),
           HomeScreen.id: (context) => HomeScreen(),
-          MyProfile.id: (context) => MyProfile(),
+          Profile.id: (context) => Profile(),
           MentorLaunch.id: (context) => MentorLaunch(),
           LandingPage.id: (context) => LandingPage(),
           SelectionScreen.id: (context) => SelectionScreen(),

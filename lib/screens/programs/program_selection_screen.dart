@@ -1,23 +1,22 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
+import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_lauch_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
-import 'package:provider/provider.dart';
-
-User loggedInUser;
 
 class ProgramSelectionScreen extends StatefulWidget {
-  const ProgramSelectionScreen({
-    Key key,
-    this.database,
-  }) : super(key: key);
-
+  final myUser loggedInUser;
   static const String id = 'program_selection_screen';
   final Database database;
+
+  const ProgramSelectionScreen({
+    this.loggedInUser,
+    this.database,
+  });
 
   @override
   _ProgramSelectionScreenState createState() => _ProgramSelectionScreenState();
@@ -26,47 +25,12 @@ class ProgramSelectionScreen extends StatefulWidget {
 class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
   @override
   void initState() {
-    getCurrentUser();
-    getProfileData();
     super.initState();
-  }
-
-  void getCurrentUser() {
-    final auth = Provider.of<AuthBase>(context, listen: false);
-    try {
-      final user = auth.currentUser;
-      if (user != null) {
-        loggedInUser = user;
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  dynamic profileData;
-
-  Future<dynamic> getProfileData() async {
-    await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
-        .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        if (mounted) {
-          setState(() {
-            profileData = result.data();
-          });
-        }
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // if (profileData == null) {
-    //   return Center();
-    // }
-
-    final drawerItems = MentorXMenuList();
+    final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 
@@ -125,7 +89,8 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                       height: 60,
                     ),
                     onTap: () {
-                      Navigator.popAndPushNamed(context, MentorLaunch.id);
+                      Navigator.popAndPushNamed(context, MentorLaunch.id,
+                          arguments: loggedInUser);
                     },
                   ),
                 ],

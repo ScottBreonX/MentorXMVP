@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-User loggedInUser;
+import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 
 class MentorCardTest extends StatelessWidget {
   final String mentorUID;
@@ -41,7 +40,12 @@ class MentorCardTest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Profile(profileId: mentorUID),
+        ),
+      ),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.94,
         child: Card(

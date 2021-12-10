@@ -52,20 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // dynamic profileData;
-  //
-  // Future<dynamic> getProfileData() async {
-  //   await usersRef.get().then((querySnapshot) {
-  //     querySnapshot.docs.forEach((result) {
-  //       if (mounted) {
-  //         setState(() {
-  //           profileData = result.data();
-  //         });
-  //       }
-  //     });
-  //   });
-  // }
-
   @override
   void dispose() {
     pageController.dispose();
@@ -94,10 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: PageView(
         children: [
           SelectionScreen(loggedInUser: loggedInUser),
-          MyProfile(
-            profileId: loggedInUser.id,
-          ),
-          ProgramSelectionScreen(),
+          Profile(profileId: loggedInUser.id),
+          ProgramSelectionScreen(loggedInUser: loggedInUser),
           NotificationScreen(),
         ],
         controller: pageController,

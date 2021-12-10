@@ -5,22 +5,20 @@ import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
-import 'package:mentorx_mvp/screens/profile/sections/profile_mentee_section.dart';
-import 'package:mentorx_mvp/screens/profile/sections/profile_mentor_section.dart';
 import 'package:mentorx_mvp/models/user.dart';
 
-class MyProfile extends StatefulWidget {
+class Profile extends StatefulWidget {
   final String profileId;
   static String id = 'mentor_screen';
 
-  MyProfile({@required this.profileId});
+  Profile({@required this.profileId});
 
   @override
-  _MyProfileState createState() => _MyProfileState();
+  _ProfileState createState() => _ProfileState();
 }
 
-class _MyProfileState extends State<MyProfile> {
-  // final String currentUserId = loggedInUser.uid;
+class _ProfileState extends State<Profile> {
+  final String currentUserId = loggedInUser.id;
   bool aboutMeEditStatus = false;
 
   @override
@@ -51,7 +49,9 @@ class _MyProfileState extends State<MyProfile> {
             ),
             appBar: AppBar(
               elevation: 5,
-              title: Text('My Profile'),
+              title: Text(user.id != loggedInUser.id
+                  ? '${user.firstName}\'s Profile'
+                  : 'My Profile'),
             ),
             body: SingleChildScrollView(
               child: Container(
@@ -169,7 +169,8 @@ class _MyProfileState extends State<MyProfile> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10.0),
-                      child: AboutMeSection(),
+                      child: Text('ABOUT ME SECTION PLACEHOLDER'),
+                      // AboutMeSection(),
                     ),
                     const Divider(
                       thickness: 2,
@@ -180,7 +181,7 @@ class _MyProfileState extends State<MyProfile> {
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0, top: 8.0),
                           child: Text(
-                            'Mentoring Atttributes',
+                            'Mentoring Attributes',
                             style: Theme.of(context).textTheme.headline3,
                           ),
                         ),

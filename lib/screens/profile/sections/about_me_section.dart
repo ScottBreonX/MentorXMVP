@@ -2,19 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
-import 'package:mentorx_mvp/services/auth.dart';
+import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
-import 'package:provider/provider.dart';
-
 import '../../../constants.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/icon_circle.dart';
 
-User loggedInUser;
-
 class AboutMeSection extends StatefulWidget {
+  final myUser loggedInUser;
+
   const AboutMeSection({
-    Key key,
+    this.loggedInUser,
   });
 
   @override
@@ -25,8 +24,6 @@ class _AboutMeSectionState extends State<AboutMeSection> {
   @override
   void initState() {
     aboutMeEditStatus = false;
-    getCurrentUser();
-    getProfileData();
     super.initState();
   }
 
@@ -39,7 +36,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
   TextFormField _buildAboutMeTextField(BuildContext context) {
     return TextFormField(
       key: _formKey1,
-      initialValue: aboutMeText = profileData['About Me'],
+      initialValue: aboutMeText = '',
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.multiline,
       maxLines: null,
@@ -51,38 +48,9 @@ class _AboutMeSectionState extends State<AboutMeSection> {
     );
   }
 
-  dynamic profileData;
-
-  Future<dynamic> getProfileData() async {
-    await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
-        .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        if (mounted) {
-          setState(() {
-            profileData = result.data();
-          });
-        }
-      });
-    });
-  }
-
-  void getCurrentUser() {
-    final auth = Provider.of<AuthBase>(context, listen: false);
-    try {
-      final user = auth.currentUser;
-      if (user != null) {
-        loggedInUser = user;
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
   Future<void> _updateAboutMe(BuildContext context) async {
     try {
-      final database = FirestoreDatabase(uid: loggedInUser.uid);
+      final database = FirestoreDatabase(uid: loggedInUser.id);
       await database.updateAboutMe(
         AboutMeModel(
           aboutMe: aboutMeText,
@@ -92,17 +60,13 @@ class _AboutMeSectionState extends State<AboutMeSection> {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
     }
-    setState(() {
-      getProfileData().then((value) => aboutMeEditStatus = false);
-    });
+    // setState(() {
+    //   getProfileData().then((value) => aboutMeEditStatus = false);
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (profileData == null) {
-      return Center();
-    }
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -197,7 +161,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                     children: [
                       Flexible(
                         child: Text(
-                          '${profileData['About Me']}',
+                          '',
                           style: Theme.of(context).textTheme.subtitle2,
                         ),
                       ),

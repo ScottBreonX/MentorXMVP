@@ -2,23 +2,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mentorx_mvp/components/mentor_card_test.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mentorx_mvp/services/auth.dart';
+import 'package:mentorx_mvp/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:provider/provider.dart';
 
-User loggedInUser;
 final _firestore = FirebaseFirestore.instance;
 
 class AvailableMentorsScreen extends StatefulWidget {
-  const AvailableMentorsScreen({
-    Key key,
-    this.database,
-  }) : super(key: key);
+  final myUser loggedInUser;
   static const String id = 'available_mentors_screen';
   final Database database;
+
+  AvailableMentorsScreen({
+    this.loggedInUser,
+    this.database,
+  });
 
   @override
   _AvailableMentorsScreenState createState() => _AvailableMentorsScreenState();
@@ -27,44 +28,12 @@ class AvailableMentorsScreen extends StatefulWidget {
 class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
   bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
-  String messageText;
   TextEditingController searchController = TextEditingController();
   String searchString;
 
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
-    getProfileData();
-  }
-
-  void getCurrentUser() {
-    final auth = Provider.of<AuthBase>(context, listen: false);
-    try {
-      final user = auth.currentUser;
-      if (user != null) {
-        loggedInUser = user;
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  dynamic profileData;
-
-  Future<dynamic> getProfileData() async {
-    await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
-        .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        if (mounted) {
-          setState(() {
-            profileData = result.data();
-          });
-        }
-      });
-    });
   }
 
   clearSearch() {
@@ -125,7 +94,7 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
     );
   }
 
-  buildMentorListContent() {
+  buildMentorListContent(myUser loggedInUser) {
     return ModalProgressHUD(
       inAsyncCall: showSpinner,
       child: SafeArea(
@@ -140,7 +109,10 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline1,
               ),
-              AvailableMentorsStream(searchString: searchString),
+              AvailableMentorsStream(
+                searchString: searchString,
+                loggedInUser: loggedInUser,
+              ),
             ],
           ),
         ),
@@ -149,10 +121,6 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
   }
 
   Widget build(BuildContext context) {
-    if (profileData == null) {
-      return Center();
-    }
-
     final drawerItems = MentorXMenuList();
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
@@ -165,15 +133,12 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
           ),
         ),
         appBar: buildSearchField(),
-        // body: searchResultsFuture == null
-        //     ? buildMentorListContent(query)
-        //     // ? buildNoContent()
-        //     : buildSearchResults(),
-        body: buildMentorListContent());
+        body: buildMentorListContent(loggedInUser));
   }
 }
 
 class AvailableMentorsStream extends StatelessWidget {
+  final myUser loggedInUser;
   final String searchString;
   final Stream mentorStream = _firestore
       .collection('users')
@@ -182,6 +147,7 @@ class AvailableMentorsStream extends StatelessWidget {
 
   AvailableMentorsStream({
     this.searchString,
+    this.loggedInUser,
   });
 
   @override
@@ -214,12 +180,11 @@ class AvailableMentorsStream extends StatelessWidget {
         List<MentorCardTest> mentorBubbles = [];
 
         for (var mentor in mentors) {
-          if (mentor.id == loggedInUser.uid) {
+          if (mentor.id == loggedInUser.id) {
             continue;
           }
           ProfileModel user = ProfileModel.fromDocument(mentor);
 
-          // final mentorBubble = MentorCard(
           final mentorBubble = MentorCardTest(
             mentorUID: mentor.id.toString(),
             // mentorSlots: mentor.data()['Available Slots'],
