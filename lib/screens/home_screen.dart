@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
@@ -30,12 +29,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   PageController pageController;
   int pageIndex;
+  bool loggedIn = false;
 
   @override
   void initState() {
     pageController = PageController(initialPage: widget.pageIndex ?? 0);
     getCurrentUser();
-    // getProfileData();
     super.initState();
   }
 
@@ -46,6 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
       if (user != null) {
         DocumentSnapshot doc = await usersRef.doc(user.uid).get();
         loggedInUser = myUser.fromDocument(doc);
+        setState(() {
+          loggedIn = true;
+        });
       }
     } catch (e) {
       print(e);
@@ -72,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (loggedInUser.id == null) {
+    if (loggedIn == false) {
       return circularProgress();
     }
 
@@ -82,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SelectionScreen(loggedInUser: loggedInUser),
           Profile(profileId: loggedInUser.id),
           ProgramSelectionScreen(loggedInUser: loggedInUser),
-          NotificationScreen(),
+          NotificationScreen(loggedInUser: loggedInUser),
         ],
         controller: pageController,
         onPageChanged: onPageChanged,

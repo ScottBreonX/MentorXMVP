@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 
-User loggedInUser;
+User tempUser;
 final _firestore = FirebaseFirestore.instance;
 
 class ChatScreen extends StatefulWidget {
@@ -39,7 +39,7 @@ class _ChatScreenState extends State<ChatScreen> {
     try {
       final user = _auth.currentUser;
       if (user != null) {
-        loggedInUser = user;
+        tempUser = user;
       }
     } catch (e) {
       print(e);
@@ -51,7 +51,7 @@ class _ChatScreenState extends State<ChatScreen> {
       messageTextController.clear();
       await _firestore.collection('messages').add({
         'text': messageText,
-        'sender': loggedInUser.email,
+        'sender': tempUser.email,
         'senderFName': profileData['First Name'],
         'senderLName': profileData['Last Name'],
         'timestamp': DateTime.now(),
@@ -70,7 +70,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Future<dynamic> getProfileData() async {
     await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
+        .collection('users/${tempUser.uid}/profile')
         .get()
         .then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
@@ -187,7 +187,7 @@ class MessagesStream extends StatelessWidget {
           final senderFName = messageData['senderFName'];
           final senderLName = messageData['senderLName'];
           final messageSender = messageData['sender'];
-          final currentUser = loggedInUser.email;
+          final currentUser = tempUser.email;
 
           final messageBubble = MessageBubble(
             senderFName: senderFName,

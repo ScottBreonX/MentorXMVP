@@ -12,7 +12,7 @@ import 'package:mentorx_mvp/services/database.dart';
 import 'mentee_screen_old.dart';
 import 'mentor_screen_old.dart';
 
-User loggedInUser;
+User tempUser;
 
 class MentoringScreenOld extends StatefulWidget {
   static String id = 'mentoring_screen_old';
@@ -35,7 +35,7 @@ class _MentoringScreenOldState extends State<MentoringScreenOld> {
     try {
       final user = _auth.currentUser;
       if (user != null) {
-        loggedInUser = user;
+        tempUser = user;
       }
     } catch (e) {
       print(e);
@@ -44,11 +44,11 @@ class _MentoringScreenOldState extends State<MentoringScreenOld> {
 
   Future<void> _createMentor(BuildContext context) async {
     try {
-      final database = FirestoreDatabase(uid: loggedInUser.uid);
+      final database = FirestoreDatabase(uid: tempUser.uid);
       await database.createMentor(
         MentorModel(
           availableSlots: 1,
-          uid: loggedInUser.uid,
+          uid: tempUser.uid,
           fName: profileData['First Name'],
           lName: profileData['Last Name'],
           email: profileData['Email Address'],
@@ -62,10 +62,10 @@ class _MentoringScreenOldState extends State<MentoringScreenOld> {
 
   Future<void> _createMentee(BuildContext context) async {
     try {
-      final database = FirestoreDatabase(uid: loggedInUser.uid);
+      final database = FirestoreDatabase(uid: tempUser.uid);
       await database.createMentee(
         MenteeModel(
-          uid: loggedInUser.uid,
+          uid: tempUser.uid,
           fName: profileData['First Name'],
           lName: profileData['Last Name'],
           email: profileData['Email Address'],
@@ -81,7 +81,7 @@ class _MentoringScreenOldState extends State<MentoringScreenOld> {
 
   Future<dynamic> getProfileData() async {
     await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
+        .collection('users/${tempUser.uid}/profile')
         .get()
         .then((querySnapshot) {
       querySnapshot.docs.forEach((result) {

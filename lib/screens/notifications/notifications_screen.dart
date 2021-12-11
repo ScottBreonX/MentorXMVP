@@ -1,22 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
-import 'package:provider/provider.dart';
-
-User loggedInUser;
 
 class NotificationScreen extends StatefulWidget {
-  const NotificationScreen({
-    Key key,
-    this.database,
-  }) : super(key: key);
-
+  final myUser loggedInUser;
   static const String id = 'notifications_screen';
   final Database database;
+
+  const NotificationScreen({
+    this.database,
+    this.loggedInUser,
+  });
 
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
@@ -25,20 +22,7 @@ class NotificationScreen extends StatefulWidget {
 class _NotificationScreenState extends State<NotificationScreen> {
   @override
   void initState() {
-    getCurrentUser();
     super.initState();
-  }
-
-  void getCurrentUser() {
-    final auth = Provider.of<AuthBase>(context, listen: false);
-    try {
-      final user = auth.currentUser;
-      if (user != null) {
-        loggedInUser = user;
-      }
-    } catch (e) {
-      print(e);
-    }
   }
 
   @override

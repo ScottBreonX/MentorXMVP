@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/mentee_card.dart';
 import 'package:mentorx_mvp/components/progress.dart';
-import 'package:mentorx_mvp/models/profile_model.dart';
+import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
+import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 
 class Mentee extends StatefulWidget {
   final String menteeUID;
@@ -32,12 +33,16 @@ class _MenteeState extends State<Mentee> {
         if (!snapshot.hasData) {
           return circularProgress();
         }
-        ProfileModel user = ProfileModel.fromDocument(snapshot.data);
+        myUser user = myUser.fromDocument(snapshot.data);
         return MenteeCard(
-          onTap: () =>
-              Navigator.pop(context), // replace with navigation to user profile
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Profile(profileId: menteeUID),
+            ),
+          ), // replace with navigation to user profile
           user: user,
-          primaryTextSize: 30,
+          primaryTextSize: 25,
           secondaryTextSize: 20,
           boxHeight: 300,
         );

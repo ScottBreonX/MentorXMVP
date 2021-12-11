@@ -6,7 +6,7 @@ import 'package:mentorx_mvp/constants.dart';
 
 import 'available_mentors_old.dart';
 
-User loggedInUser;
+User tempUser;
 
 class MenteeScreenOld extends StatefulWidget {
   static String id = 'mentee_screen_old';
@@ -29,7 +29,7 @@ class _MenteeScreenOldState extends State<MenteeScreenOld> {
     try {
       final user = _auth.currentUser;
       if (user != null) {
-        loggedInUser = user;
+        tempUser = user;
       }
     } catch (e) {
       print(e);
@@ -40,7 +40,7 @@ class _MenteeScreenOldState extends State<MenteeScreenOld> {
 
   Future<dynamic> getProfileData() async {
     await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
+        .collection('users/${tempUser.uid}/profile')
         .get()
         .then((querySnapshot) {
       querySnapshot.docs.forEach((result) {

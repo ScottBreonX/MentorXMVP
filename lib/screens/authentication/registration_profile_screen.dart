@@ -8,7 +8,7 @@ import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
-User loggedInUser;
+User tempUser;
 
 class RegistrationProfileScreen extends StatefulWidget {
   static const String id = 'registration_profile_screen';
@@ -38,7 +38,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
     try {
       final user = _auth.currentUser;
       if (user != null) {
-        loggedInUser = user;
+        tempUser = user;
       }
     } catch (e) {
       print(e);
@@ -47,10 +47,10 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
 
   Future<void> _createProfile(BuildContext context) async {
     try {
-      final database = FirestoreDatabase(uid: loggedInUser.uid);
+      final database = FirestoreDatabase(uid: tempUser.uid);
       await database.createProfile(
         ProfileModel(
-          email: loggedInUser.email,
+          email: tempUser.email,
           fName: fName,
           lName: lName,
         ),

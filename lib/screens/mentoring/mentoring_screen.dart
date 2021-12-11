@@ -2,24 +2,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/mentee_model.dart';
+import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
-import 'package:provider/provider.dart';
-
-User loggedInUser;
 
 class MentoringScreen extends StatefulWidget {
-  const MentoringScreen({
-    Key key,
-    this.database,
-  }) : super(key: key);
-
+  final myUser loggedInUser;
   static const String id = 'mentoring_screen';
   final Database database;
+
+  const MentoringScreen({
+    Key key,
+    this.loggedInUser,
+    this.database,
+  }) : super(key: key);
 
   @override
   _MentoringScreenState createState() => _MentoringScreenState();
@@ -27,7 +25,7 @@ class MentoringScreen extends StatefulWidget {
 
 class _MentoringScreenState extends State<MentoringScreen> {
   bool aboutMeEditStatus = false;
-  bool profilePhotoStatus = false;
+  // bool profilePhotoStatus = false;
   bool profilePhotoSelected = false;
   String aboutMeText;
   bool isLoading = false;
@@ -35,40 +33,9 @@ class _MentoringScreenState extends State<MentoringScreen> {
 
   @override
   void initState() {
-    getCurrentUser();
-    getProfileData();
     getMatchData();
     aboutMeEditStatus = false;
     super.initState();
-  }
-
-  void getCurrentUser() {
-    final auth = Provider.of<AuthBase>(context, listen: false);
-    try {
-      final user = auth.currentUser;
-      if (user != null) {
-        loggedInUser = user;
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  dynamic profileData;
-
-  Future<dynamic> getProfileData() async {
-    await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
-        .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        if (mounted) {
-          setState(() {
-            profileData = result.data();
-          });
-        }
-      });
-    });
   }
 
   dynamic matchData;
@@ -77,10 +44,8 @@ class _MentoringScreenState extends State<MentoringScreen> {
     setState(() {
       isLoading = true;
     });
-    QuerySnapshot snapshot = await mentorsRef
-        .doc(loggedInUser.uid)
-        .collection('userMentoring')
-        .get();
+    QuerySnapshot snapshot =
+        await mentorsRef.doc(loggedInUser.id).collection('userMentoring').get();
     setState(() {
       isLoading = false;
       matches = snapshot.docs.map((doc) => Mentee.fromDocument(doc)).toList();
@@ -96,23 +61,23 @@ class _MentoringScreenState extends State<MentoringScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (profileData == null) {
-      return Center(
-        child: CircularProgressIndicator(
-          backgroundColor: kMentorXPrimary,
-        ),
-      );
-    }
+    // if (profileData == null) {
+    //   return Center(
+    //     child: CircularProgressIndicator(
+    //       backgroundColor: kMentorXPrimary,
+    //     ),
+    //   );
+    // }
 
-    if (profileData['images'] == null) {
-      setState(() {
-        profilePhotoStatus = false;
-      });
-    } else {
-      setState(() {
-        profilePhotoStatus = true;
-      });
-    }
+    // if (profileData['images'] == null) {
+    //   setState(() {
+    //     profilePhotoStatus = false;
+    //   });
+    // } else {
+    //   setState(() {
+    //     profilePhotoStatus = true;
+    //   });
+    // }
 
     final drawerItems = MentorXMenuList();
     final GlobalKey<ScaffoldState> _scaffoldKey =

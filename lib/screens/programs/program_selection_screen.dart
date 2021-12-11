@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/available_programs.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_lauch_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/services/database.dart';
@@ -47,8 +48,30 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
       ),
       body: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(25, 35, 25, 25),
+              child: Text(
+                'Enrolled Mentorship Programs',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                ),
+              ),
+            ),
+            Divider(
+              height: 2,
+              color: Colors.black,
+              thickness: 2,
+              indent: 10,
+              endIndent: 10,
+            ),
+            SizedBox(
+              height: 75,
+            ),
             Center(
               child: Wrap(
                 children: [
@@ -57,7 +80,16 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                     cardColor: Theme.of(context).cardColor,
                     cardText: 'Join a Program',
                     borderWidth: 3,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AvailableProgramsScreen(
+                            loggedInUser: loggedInUser,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   IconCard(
                     cardText: 'University of Michigan',
@@ -67,7 +99,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                       height: 60,
                     ),
                     onTap: () {
-                      Navigator.popAndPushNamed(context, MentorLaunch.id);
+                      Navigator.pushNamed(context, MentorLaunch.id);
                     },
                   ),
                   IconCard(
@@ -89,8 +121,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                       height: 60,
                     ),
                     onTap: () {
-                      Navigator.popAndPushNamed(context, MentorLaunch.id,
-                          arguments: loggedInUser);
+                      Navigator.popAndPushNamed(context, MentorLaunch.id);
                     },
                   ),
                 ],

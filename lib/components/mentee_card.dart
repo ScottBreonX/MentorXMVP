@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
+import 'package:mentorx_mvp/models/user.dart';
 import '../constants.dart';
 
 class MenteeCard extends StatelessWidget {
-  ProfileModel user;
+  myUser user;
   final Color cardColor;
   final Color borderColor;
   final Color cardTextColor;
@@ -51,9 +52,9 @@ class MenteeCard extends StatelessWidget {
             children: [
               // image placeholder
               ProfileImageCircle(
-                iconSize: 150,
+                iconSize: 125,
                 iconColor: Colors.blue,
-                circleSize: 100,
+                circleSize: 75,
                 circleColor: Colors.grey[300],
               ),
               SizedBox(height: 5.0),
@@ -61,25 +62,25 @@ class MenteeCard extends StatelessWidget {
                 height: 5,
               ),
               Text(
-                '${user.fName} ${user.lName}',
+                '${user.firstName} ${user.lastName}',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: cardTextColor ?? Colors.black,
-                  fontSize: primaryTextSize ?? 20,
+                  fontSize: primaryTextSize ?? 15,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(
                 height: 5,
               ),
-//              Text(
-//                '${user.major} - ${user.yearInSchool}',
-//                textAlign: TextAlign.center,
-//                style: TextStyle(
-//                  color: cardTextColor ?? Colors.black,
-//                  fontSize: secondaryTextSize ?? 20,
-//                ),
-//              ),
+              Text(
+                '${user.major} - ${user.yearInSchool}',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: cardTextColor ?? Colors.black,
+                  fontSize: secondaryTextSize ?? 15,
+                ),
+              ),
             ],
           ),
           height: boxHeight ?? 150,

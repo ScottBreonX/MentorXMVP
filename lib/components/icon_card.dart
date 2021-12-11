@@ -9,6 +9,7 @@ class IconCard extends StatelessWidget {
     this.cardShadowColor,
     this.cardIcon,
     this.cardText,
+    this.cardGradient,
     this.onTap,
     this.iconSize,
     this.textSize,
@@ -26,6 +27,7 @@ class IconCard extends StatelessWidget {
   final Color cardShadowColor;
   final IconData cardIcon;
   final String cardText;
+  final Gradient cardGradient;
   final Function onTap;
   final double iconSize;
   final double textSize;
@@ -44,6 +46,13 @@ class IconCard extends StatelessWidget {
         onTap: onTap,
         child: Container(
           decoration: BoxDecoration(
+            gradient: cardGradient,
+            border: Border.all(
+              color: borderColor != null
+                  ? borderColor
+                  : Colors.white.withOpacity(1.0),
+              width: borderWidth != null ? borderWidth : 0,
+            ),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(

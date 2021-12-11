@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mentorx_mvp/components/mentor_card_test.dart';
-import 'package:mentorx_mvp/models/profile_model.dart';
+import 'package:mentorx_mvp/components/mentor_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:flutter/material.dart';
@@ -176,22 +175,22 @@ class AvailableMentorsStream extends StatelessWidget {
         final mentors = snapshot.data.docs;
         print(mentors);
 
-        // List<MentorCard> mentorBubbles = [];
-        List<MentorCardTest> mentorBubbles = [];
+        List<MentorCard> mentorBubbles = [];
 
         for (var mentor in mentors) {
           if (mentor.id == loggedInUser.id) {
             continue;
           }
-          ProfileModel user = ProfileModel.fromDocument(mentor);
+          myUser user = myUser.fromDocument(mentor);
 
-          final mentorBubble = MentorCardTest(
+          final mentorBubble = MentorCard(
             mentorUID: mentor.id.toString(),
-            // mentorSlots: mentor.data()['Available Slots'],
-            mentorSlots: 1,
-            mentorFname: user.fName,
-            mentorLname: user.lName,
+            mentorFname: user.firstName,
+            mentorLname: user.lastName,
+            mentorSlots: user.mentorSlots,
             mentorEmail: user.email,
+            mentorMajor: user.major,
+            mentorYearInSchool: user.yearInSchool,
           );
           mentorBubbles.add(mentorBubble);
         }

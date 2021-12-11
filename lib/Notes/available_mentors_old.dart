@@ -10,7 +10,7 @@ import 'package:mentorx_mvp/services/database.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../../constants.dart';
 
-User loggedInUser;
+User tempUser;
 final _firestore = FirebaseFirestore.instance;
 
 class AvailableMentorsScreenOld extends StatefulWidget {
@@ -42,7 +42,7 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreenOld> {
     try {
       final user = _auth.currentUser;
       if (user != null) {
-        loggedInUser = user;
+        tempUser = user;
       }
     } catch (e) {
       print(e);
@@ -53,7 +53,7 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreenOld> {
 
   Future<dynamic> getProfileData() async {
     await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
+        .collection('users/${tempUser.uid}/profile')
         .get()
         .then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
@@ -107,7 +107,7 @@ class AvailableMentorsStream extends StatelessWidget {
           .collection('mentoring')
           .doc('UniversityOfFlorida')
           .collection('mentors')
-          .where('UID', isNotEqualTo: loggedInUser.uid)
+          .where('UID', isNotEqualTo: tempUser.uid)
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
@@ -172,10 +172,10 @@ class MentorCardOld extends StatelessWidget {
   Future<void> _createMentorMatch(String mentorUID) async {
     try {
       final database =
-          FirestoreDatabase(uid: loggedInUser.uid, mentorUID: mentorUID);
+          FirestoreDatabase(uid: tempUser.uid, mentorUID: mentorUID);
       await database.createMentorMatch(
         MentorMatchModel(
-          menteeUID: loggedInUser.uid,
+          menteeUID: tempUser.uid,
           mentorUID: mentorUID,
         ),
         mentorUID,

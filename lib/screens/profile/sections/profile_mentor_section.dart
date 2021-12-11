@@ -10,8 +10,6 @@ import '../../../constants.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/icon_circle.dart';
 
-User loggedInUser;
-
 class ProfileMentorSection extends StatefulWidget {
   const ProfileMentorSection({
     Key key,
