@@ -5,7 +5,7 @@ import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/available_programs.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentor_lauch_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentor_launch_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/services/database.dart';
 

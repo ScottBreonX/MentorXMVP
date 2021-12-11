@@ -4,7 +4,6 @@ import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
-import 'package:mentorx_mvp/services/database.dart';
 import '../home_screen.dart';
 
 class SelectionScreen extends StatefulWidget {
@@ -12,12 +11,10 @@ class SelectionScreen extends StatefulWidget {
 
   const SelectionScreen({
     Key key,
-    this.database,
     this.loggedInUser,
   }) : super(key: key);
 
   static const String id = 'selection_screen';
-  final Database database;
 
   @override
   _SelectionScreenState createState() => _SelectionScreenState();

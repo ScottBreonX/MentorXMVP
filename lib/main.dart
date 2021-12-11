@@ -9,7 +9,7 @@ import 'package:mentorx_mvp/screens/chat/chat_screen.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/available_mentors.dart';
 import 'package:mentorx_mvp/screens/mentoring/available_programs.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentor_lauch_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentor_launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/screens/notifications/notifications_screen.dart';
