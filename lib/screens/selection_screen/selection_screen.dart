@@ -4,6 +4,7 @@ import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
+import '../../components/progress.dart';
 import '../home_screen.dart';
 
 class SelectionScreen extends StatefulWidget {
@@ -28,6 +29,10 @@ class _SelectionScreenState extends State<SelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (loggedInUser == null) {
+      return circularProgress();
+    }
+
     final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();

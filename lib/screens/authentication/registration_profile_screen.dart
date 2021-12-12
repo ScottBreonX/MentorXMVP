@@ -24,6 +24,10 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
 
   String fName;
   String lName;
+  String major;
+  String yearInSchool;
+  int mentorSlots;
+  String aboutMe;
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -53,6 +57,10 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
           email: tempUser.email,
           fName: fName,
           lName: lName,
+          major: '',
+          yearInSchool: '',
+          mentorSlots: 0,
+          aboutMe: '',
         ),
       );
     } on FirebaseException catch (e) {

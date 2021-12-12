@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../constants.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/icon_circle.dart';
+import '../../home_screen.dart';
 
 class ProfileMenteeSection extends StatefulWidget {
   const ProfileMenteeSection({
@@ -51,7 +52,7 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
 
   Future<dynamic> getProfileData() async {
     await FirebaseFirestore.instance
-        .collection('users/${loggedInUser.uid}/profile')
+        .collection('users/${loggedInUser.id}/profile')
         .get()
         .then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
@@ -69,7 +70,7 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
     try {
       final user = auth.currentUser;
       if (user != null) {
-        loggedInUser = user;
+//        loggedInUser = user;
       }
     } catch (e) {
       print(e);
@@ -78,7 +79,7 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
 
   Future<void> _updateMenteeAttributes(BuildContext context) async {
     try {
-      final database = FirestoreDatabase(uid: loggedInUser.uid);
+      final database = FirestoreDatabase(uid: loggedInUser.id);
       await database.updateMenteeAttributes(
         MenteeAttributesModel(
           menteeAttributes: menteeText,

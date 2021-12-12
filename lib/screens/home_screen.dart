@@ -29,7 +29,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   PageController pageController;
   int pageIndex;
-  bool loggedIn = false;
+  bool loggedIn = true;
 
   @override
   void initState() {
@@ -45,9 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
       if (user != null) {
         DocumentSnapshot doc = await usersRef.doc(user.uid).get();
         loggedInUser = myUser.fromDocument(doc);
-        setState(() {
-          loggedIn = true;
-        });
       }
     } catch (e) {
       print(e);
@@ -74,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (loggedIn == false) {
+    if (loggedInUser == null) {
       return circularProgress();
     }
 
@@ -82,7 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: PageView(
         children: [
           SelectionScreen(loggedInUser: loggedInUser),
-          Profile(profileId: loggedInUser.id),
+          Profile(
+            profileId: loggedInUser.id,
+          ),
           ProgramSelectionScreen(loggedInUser: loggedInUser),
           NotificationScreen(loggedInUser: loggedInUser),
         ],

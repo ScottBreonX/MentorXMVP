@@ -8,15 +8,18 @@ class myUser {
   final String major;
   final String yearInSchool;
   final int mentorSlots;
+  final String aboutMe;
 
-  myUser(
-      {this.id,
-      this.email,
-      this.firstName,
-      this.lastName,
-      this.major,
-      this.yearInSchool,
-      this.mentorSlots});
+  myUser({
+    this.id,
+    this.email,
+    this.firstName,
+    this.lastName,
+    this.major,
+    this.yearInSchool,
+    this.mentorSlots,
+    this.aboutMe,
+  });
 
   factory myUser.fromDocument(DocumentSnapshot doc) {
     return myUser(
@@ -27,6 +30,7 @@ class myUser {
       major: doc['Major'],
       yearInSchool: doc['Year in School'],
       mentorSlots: doc['Mentor Slots'],
+      aboutMe: doc['About Me'],
     );
   }
 }

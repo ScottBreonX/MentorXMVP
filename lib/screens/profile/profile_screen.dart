@@ -1,13 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_circle.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
-import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/models/user.dart';
-// import 'package:mentorx_mvp/screens/profile/sections/profile_mentee_section.dart';
-// import 'package:mentorx_mvp/screens/profile/sections/profile_mentor_section.dart';
+import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
+
+final usersRef = FirebaseFirestore.instance.collection('users');
 
 class Profile extends StatefulWidget {
   final String profileId;
@@ -171,8 +172,9 @@ class _ProfileState extends State<Profile> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Text('ABOUT ME SECTION PLACEHOLDER'),
-                      // AboutMeSection(),
+                      child: AboutMeSection(
+                        profileId: user.id,
+                      ),
                     ),
                     const Divider(
                       thickness: 2,

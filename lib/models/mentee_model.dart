@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/mentee_card.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
+
+final usersRef = FirebaseFirestore.instance.collection('users');
 
 class Mentee extends StatefulWidget {
   final String menteeUID;

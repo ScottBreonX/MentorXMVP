@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:mentorx_mvp/Notes/mentoring_model.dart';
 import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/services/api_path.dart';
 
@@ -14,27 +13,8 @@ class FirestoreDatabase implements Database {
   final String mentorUID;
 
   Future<void> createProfile(ProfileModel profile) => _setData(
-        path: APIPath.profile(uid),
+        path: APIPath.user(uid),
         data: profile.toMap(),
-      );
-
-  Future<void> createMentor(MentorModel mentor) => _setData(
-        path: APIPath.mentoring('UniversityOfFlorida', 'mentors', uid),
-        data: mentor.toMap(),
-      );
-
-  Future<void> createMentee(MenteeModel mentee) => _setData(
-        path: APIPath.mentoring('UniversityOfFlorida', 'mentee', uid),
-        data: mentee.toMap(),
-      );
-
-  Future<void> createMentorMatch(
-    MentorMatchModel mentorMatch,
-    String mentorUID,
-  ) =>
-      _setData(
-        path: APIPath.mentorMatch('UniversityOfFlorida', mentorUID, uid),
-        data: mentorMatch.toMap(),
       );
 
   Future<void> _setData({String path, Map<String, dynamic> data}) async {
@@ -42,26 +22,21 @@ class FirestoreDatabase implements Database {
     await reference.set(data);
   }
 
-  Future<void> updateAboutMe(AboutMeModel profile) => _updateData(
-        path: APIPath.profile(uid),
+  Future<void> updateAboutMe(ProfileModel profile) => _updateData(
+        path: APIPath.user(uid),
         data: profile.toMap(),
       );
 
   Future<void> updateMentoringAttributes(MentoringAttributesModel profile) =>
       _updateData(
-        path: APIPath.profile(uid),
+        path: APIPath.user(uid),
         data: profile.toMap(),
       );
 
   Future<void> updateMenteeAttributes(MenteeAttributesModel profile) =>
       _updateData(
-        path: APIPath.profile(uid),
+        path: APIPath.user(uid),
         data: profile.toMap(),
-      );
-
-  Future<void> createMatchID(MatchIDModel matchID) => _updateData(
-        path: APIPath.profile(uid),
-        data: matchID.toMap(),
       );
 
   Future<void> _updateData({String path, Map<String, dynamic> data}) async {

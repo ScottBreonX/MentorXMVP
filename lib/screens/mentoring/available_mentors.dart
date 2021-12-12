@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mentorx_mvp/components/mentor_card.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
@@ -26,7 +25,6 @@ class AvailableMentorsScreen extends StatefulWidget {
 
 class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
   bool showSpinner = false;
-  final _auth = FirebaseAuth.instance;
   TextEditingController searchController = TextEditingController();
   String searchString;
 
@@ -96,23 +94,25 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
   buildMentorListContent(myUser loggedInUser) {
     return ModalProgressHUD(
       inAsyncCall: showSpinner,
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Available Mentors',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline1,
-              ),
-              AvailableMentorsStream(
-                searchString: searchString,
-                loggedInUser: loggedInUser,
-              ),
-            ],
+      child: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Available Mentors',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline1,
+                ),
+                AvailableMentorsStream(
+                  searchString: searchString,
+                  loggedInUser: loggedInUser,
+                ),
+              ],
+            ),
           ),
         ),
       ),
