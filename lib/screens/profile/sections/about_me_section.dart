@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/screens/home_screen.dart';
 import '../../../components/progress.dart';
 import '../../../constants.dart';
 import '../../../components/alert_dialog.dart';
@@ -24,14 +23,12 @@ class _AboutMeSectionState extends State<AboutMeSection> {
   @override
   void initState() {
     aboutMeEditStatus = false;
-    _aboutMeTextController = TextEditingController(text: aboutMeText);
     super.initState();
   }
 
   bool aboutMeEditStatus;
   String aboutMeText;
   final _formKey1 = GlobalKey<FormState>();
-  TextEditingController _aboutMeTextController;
 
   TextFormField _buildAboutMeTextField(String userAboutMeText) {
     return TextFormField(

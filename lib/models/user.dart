@@ -9,6 +9,8 @@ class myUser {
   final String yearInSchool;
   final int mentorSlots;
   final String aboutMe;
+  final String mentorAbout;
+  final String menteeAbout;
 
   myUser({
     this.id,
@@ -19,6 +21,8 @@ class myUser {
     this.yearInSchool,
     this.mentorSlots,
     this.aboutMe,
+    this.mentorAbout,
+    this.menteeAbout,
   });
 
   factory myUser.fromDocument(DocumentSnapshot doc) {
@@ -31,6 +35,22 @@ class myUser {
       yearInSchool: doc['Year in School'],
       mentorSlots: doc['Mentor Slots'],
       aboutMe: doc['About Me'],
+      mentorAbout: doc['Mentoring About'],
+      menteeAbout: doc['Mentee About'],
     );
+  }
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'Email Address': email,
+      'First Name': firstName,
+      'Last Name': lastName,
+      'Major': major,
+      'Year in School': yearInSchool,
+      'Mentor Slots': mentorSlots,
+      'About Me': aboutMe,
+      'Mentoring About': mentorAbout,
+      'Mentee About': menteeAbout,
+    };
   }
 }

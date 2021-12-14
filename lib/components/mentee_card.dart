@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
-import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import '../constants.dart';
 

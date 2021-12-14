@@ -94,25 +94,23 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
   buildMentorListContent(myUser loggedInUser) {
     return ModalProgressHUD(
       inAsyncCall: showSpinner,
-      child: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Available Mentors',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-                AvailableMentorsStream(
-                  searchString: searchString,
-                  loggedInUser: loggedInUser,
-                ),
-              ],
-            ),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Available Mentors',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headline1,
+              ),
+              AvailableMentorsStream(
+                searchString: searchString,
+                loggedInUser: loggedInUser,
+              ),
+            ],
           ),
         ),
       ),

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
@@ -24,14 +23,12 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-        stream: usersRef.snapshots(),
+    return FutureBuilder<Object>(
+        future: usersRef.doc(loggedInUser.id).get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return circularProgress();
           }
-          final profileData =
-              snapshot.data.docs.map((doc) => Text(doc['First Name']));
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: UserAccountsDrawerHeader(

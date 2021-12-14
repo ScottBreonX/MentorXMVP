@@ -6,9 +6,14 @@ import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatefulWidget {
   static const String id = 'landing_page';
 
+  @override
+  State<LandingPage> createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthBase>(context, listen: false);
@@ -21,7 +26,7 @@ class LandingPage extends StatelessWidget {
             return WelcomeScreen.create(context);
           }
           return Provider<Database>(
-            create: (_) => FirestoreDatabase(uid: user.uid),
+            create: (_) => FirestoreDatabase(),
             child: HomeScreen(),
           );
         }

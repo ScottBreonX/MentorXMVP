@@ -4,11 +4,9 @@ import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
-import 'package:mentorx_mvp/models/profile_model.dart';
+import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
-
-User tempUser;
 
 class RegistrationProfileScreen extends StatefulWidget {
   static const String id = 'registration_profile_screen';
@@ -21,13 +19,16 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
   final _auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
+  User user;
 
-  String fName;
-  String lName;
+  String firstName;
+  String lastName;
   String major;
   String yearInSchool;
   int mentorSlots;
   String aboutMe;
+  String mentorAbout;
+  String menteeAbout;
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -42,7 +43,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
     try {
       final user = _auth.currentUser;
       if (user != null) {
-        tempUser = user;
+        this.user = user;
       }
     } catch (e) {
       print(e);
@@ -51,16 +52,19 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
 
   Future<void> _createProfile(BuildContext context) async {
     try {
-      final database = FirestoreDatabase(uid: tempUser.uid);
+      final database = FirestoreDatabase();
       await database.createProfile(
-        ProfileModel(
-          email: tempUser.email,
-          fName: fName,
-          lName: lName,
-          major: '',
-          yearInSchool: '',
-          mentorSlots: 0,
-          aboutMe: '',
+        myUser(
+          id: user.uid,
+          email: user.email,
+          firstName: firstName,
+          lastName: lastName,
+          major: major ?? '',
+          yearInSchool: yearInSchool ?? '',
+          mentorSlots: mentorSlots ?? 0,
+          aboutMe: aboutMe ?? '',
+          mentorAbout: mentorAbout ?? '',
+          menteeAbout: menteeAbout ?? '',
         ),
       );
     } on FirebaseException catch (e) {
@@ -75,7 +79,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       controller: _firstNameController,
       textInputAction: TextInputAction.next,
       textAlign: TextAlign.center,
-      onChanged: (value) => fName = value,
+      onChanged: (value) => firstName = value,
       style: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w400,
@@ -96,7 +100,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       controller: _lastNameController,
       textInputAction: TextInputAction.next,
       textAlign: TextAlign.center,
-      onChanged: (value) => lName = value,
+      onChanged: (value) => lastName = value,
       style: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w400,
@@ -169,7 +173,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                 RoundedButton(
                   onPressed: () async {
                     await _createProfile(context);
-                    Navigator.pushNamed(context, HomeScreen.id);
+                    Navigator.popAndPushNamed(context, HomeScreen.id);
                   },
                   title: 'Submit',
                   buttonColor: kMentorXPrimary,

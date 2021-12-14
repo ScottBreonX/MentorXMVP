@@ -29,70 +29,73 @@ class _SelectionScreenState extends State<SelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (loggedInUser == null) {
-      return circularProgress();
-    }
-
     final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: Drawer(
-        child: Container(
-          child: drawerItems,
-        ),
-      ),
-      appBar: AppBar(
-        elevation: 5,
-        title: Text('Mentor+'),
-      ),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            RoundedButton(
-              title: 'Welcome, ${loggedInUser.firstName}!',
-              fontSize: 24,
-              buttonColor: Colors.blue,
-              fontColor: Colors.white,
-              onPressed: () => confirmSignOut(context),
+    return FutureBuilder<Object>(
+        future: usersRef.doc(loggedInUser.id).get(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return circularProgress();
+          }
+          return Scaffold(
+            key: _scaffoldKey,
+            drawer: Drawer(
+              child: Container(
+                child: drawerItems,
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Wrap(
-                  children: [
-                    IconCard(
-                      cardIcon: Icons.people,
-                      cardColor: Theme.of(context).cardColor,
-                      cardText: 'Programs',
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomeScreen(pageIndex: 2),
-                        ),
-                      ),
-                    ),
-                    IconCard(
-                      cardIcon: Icons.person,
-                      cardColor: Theme.of(context).cardColor,
-                      cardText: 'My Profile',
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomeScreen(pageIndex: 1),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            appBar: AppBar(
+              elevation: 5,
+              title: Text('Mentor+'),
             ),
-          ],
-        ),
-      ),
-    );
+            body: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RoundedButton(
+                    title: 'Welcome, ${loggedInUser.firstName}!',
+                    fontSize: 24,
+                    buttonColor: Colors.blue,
+                    fontColor: Colors.white,
+                    onPressed: () => confirmSignOut(context),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Wrap(
+                        children: [
+                          IconCard(
+                            cardIcon: Icons.people,
+                            cardColor: Theme.of(context).cardColor,
+                            cardText: 'Programs',
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomeScreen(pageIndex: 2),
+                              ),
+                            ),
+                          ),
+                          IconCard(
+                            cardIcon: Icons.person,
+                            cardColor: Theme.of(context).cardColor,
+                            cardText: 'My Profile',
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomeScreen(pageIndex: 1),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

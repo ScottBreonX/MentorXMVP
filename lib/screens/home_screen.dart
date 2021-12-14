@@ -41,9 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void getCurrentUser() async {
     final auth = Provider.of<AuthBase>(context, listen: false);
     try {
-      final user = auth.currentUser;
-      if (user != null) {
-        DocumentSnapshot doc = await usersRef.doc(user.uid).get();
+      if (auth.currentUser != null) {
+        DocumentSnapshot doc = await usersRef.doc(auth.currentUser.uid).get();
         loggedInUser = myUser.fromDocument(doc);
       }
     } catch (e) {
@@ -74,12 +73,16 @@ class _HomeScreenState extends State<HomeScreen> {
     if (loggedInUser == null) {
       return circularProgress();
     }
+    setState(() {
+      getCurrentUser();
+    });
 
     return Scaffold(
       body: PageView(
         children: [
           SelectionScreen(loggedInUser: loggedInUser),
           Profile(
+            loggedInUser: loggedInUser.id,
             profileId: loggedInUser.id,
           ),
           ProgramSelectionScreen(loggedInUser: loggedInUser),

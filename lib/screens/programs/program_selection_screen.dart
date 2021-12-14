@@ -1,9 +1,7 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/available_programs.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_launch_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
@@ -31,7 +29,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
+    final drawerItems = MentorXMenuList(loggedInUser: widget.loggedInUser);
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 
@@ -85,7 +83,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => AvailableProgramsScreen(
-                            loggedInUser: loggedInUser,
+                            loggedInUser: widget.loggedInUser,
                           ),
                         ),
                       );

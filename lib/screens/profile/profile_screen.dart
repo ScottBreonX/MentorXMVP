@@ -2,26 +2,27 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_circle.dart';
 import 'package:mentorx_mvp/components/progress.dart';
-import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
+import 'package:mentorx_mvp/screens/profile/sections/profile_mentee_section.dart';
+import 'package:mentorx_mvp/screens/profile/sections/profile_mentor_section.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 
 class Profile extends StatefulWidget {
+  final String loggedInUser;
   final String profileId;
   static String id = 'mentor_screen';
 
-  Profile({@required this.profileId});
+  Profile({this.profileId, this.loggedInUser});
 
   @override
   _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-  final String currentUserId = loggedInUser.id;
   bool aboutMeEditStatus = false;
 
   @override
@@ -52,7 +53,7 @@ class _ProfileState extends State<Profile> {
             ),
             appBar: AppBar(
               elevation: 5,
-              title: Text(user.id != loggedInUser.id
+              title: Text(user.id != widget.loggedInUser
                   ? '${user.firstName}\'s Profile'
                   : 'My Profile'),
             ),
@@ -191,8 +192,12 @@ class _ProfileState extends State<Profile> {
                         ),
                       ],
                     ),
-                    // ProfileMentorSection(),
-                    // ProfileMenteeSection(),
+                    ProfileMentorSection(
+                      profileId: user.id,
+                    ),
+                    ProfileMenteeSection(
+                      profileId: user.id,
+                    ),
                   ],
                 ),
               ),
