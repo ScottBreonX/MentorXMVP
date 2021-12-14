@@ -192,7 +192,8 @@ class AvailableMentorsStream extends StatelessWidget {
           );
           mentorBubbles.add(mentorBubble);
         }
-        return Expanded(
+        return Flexible(
+          fit: FlexFit.loose,
           child: ListView(
               padding: EdgeInsets.symmetric(
                 horizontal: 10.0,

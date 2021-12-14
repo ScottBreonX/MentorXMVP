@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_profile.dart';
 
 class ProgramTile extends StatelessWidget {
   final String programId;
@@ -19,10 +20,15 @@ class ProgramTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => {},
+      onTap: () {},
       child: Container(
         child: IconCard(
-          onTap: () {},
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProgramProfile(programId: programId),
+            ),
+          ),
           cardText: '$programName',
           cardColor: type == 'school' ? Theme.of(context).cardColor : null,
           cardGradient: type != 'school'

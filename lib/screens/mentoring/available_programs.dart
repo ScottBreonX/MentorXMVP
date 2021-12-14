@@ -197,7 +197,6 @@ class AvailableProgramsStream extends StatelessWidget {
           return Center();
         }
         final programs = snapshot.data.docs;
-        print(programs);
 
         List<ProgramTile> programBubbles = [];
 
