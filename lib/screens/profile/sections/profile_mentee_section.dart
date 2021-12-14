@@ -44,7 +44,7 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
       onChanged: (value) => menteeText = value,
       style: Theme.of(context).textTheme.subtitle2,
       autocorrect: false,
-      decoration: kTextFieldDecorationDark,
+      decoration: kTextFieldDecoration,
     );
   }
 

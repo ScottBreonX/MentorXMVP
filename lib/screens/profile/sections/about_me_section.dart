@@ -24,19 +24,19 @@ class _AboutMeSectionState extends State<AboutMeSection> {
   @override
   void initState() {
     aboutMeEditStatus = false;
+    _aboutMeTextController = TextEditingController(text: aboutMeText);
     super.initState();
   }
 
-//  comment here
-
-  bool aboutMeEditStatus = false;
+  bool aboutMeEditStatus;
   String aboutMeText;
   final _formKey1 = GlobalKey<FormState>();
+  TextEditingController _aboutMeTextController;
 
-  TextFormField _buildAboutMeTextField(BuildContext context) {
+  TextFormField _buildAboutMeTextField(String userAboutMeText) {
     return TextFormField(
       key: _formKey1,
-      initialValue: '${loggedInUser.aboutMe}',
+      initialValue: userAboutMeText,
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.multiline,
       maxLines: null,
@@ -44,7 +44,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
       onChanged: (value) => aboutMeText = value,
       style: Theme.of(context).textTheme.subtitle2,
       autocorrect: false,
-      decoration: kTextFieldDecorationDark,
+      decoration: kTextFieldDecoration,
     );
   }
 
@@ -156,7 +156,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                 ),
               ),
               aboutMeEditStatus
-                  ? _buildAboutMeTextField(context)
+                  ? _buildAboutMeTextField(user.aboutMe)
                   : Padding(
                       padding: const EdgeInsets.only(top: 8.0, right: 10.0),
                       child: Row(

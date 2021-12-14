@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 //Text field decorations
-const kTextFieldDecorationDark = InputDecoration(
+const kTextFieldDecoration = InputDecoration(
 //  hintText: 'Enter a value',
   hintStyle: TextStyle(color: Colors.white60),
   fillColor: Colors.white24,
