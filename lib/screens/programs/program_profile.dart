@@ -53,25 +53,30 @@ class _ProgramProfileState extends State<ProgramProfile> {
                       Icons.attach_money_outlined,
                       size: 150,
                     ),
-                    Text(
-                      '${program.programName}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 35,
-                        color: Theme.of(context).textTheme.headline1.color,
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
+                      child: Text(
+                        '${program.institutionName}\'s \n ${program.programName} Mentorship Program',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 28,
+                          color: Theme.of(context).textTheme.headline1.color,
+                        ),
                       ),
                     ),
                     Divider(
-                      thickness: 5,
+                      thickness: 8,
                       color: Theme.of(context).dividerColor,
                     ),
+                    SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 15),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text(
-                            'Type of Program',
+                            'Type of program',
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -93,7 +98,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                 vertical: 5,
                               ),
                               child: Text(
-                                '${program.enrollmentType}',
+                                '${program.enrollmentType.toUpperCase()}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 30,
@@ -114,7 +119,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text(
-                            'Type of Program',
+                            'About this program',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
@@ -147,6 +152,21 @@ class _ProgramProfileState extends State<ProgramProfile> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Want to join?',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Theme.of(context).textTheme.button.color),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Theme.of(context)
+                            .buttonTheme
+                            .colorScheme
+                            .background,
                       ),
                     ),
                   ],
