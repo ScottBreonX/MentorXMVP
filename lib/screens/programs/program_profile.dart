@@ -43,6 +43,116 @@ class _ProgramProfileState extends State<ProgramProfile> {
               elevation: 5,
               title: Text('${program.programName}'),
             ),
+            body: Container(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.attach_money_outlined,
+                      size: 150,
+                    ),
+                    Text(
+                      '${program.programName}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 35,
+                        color: Theme.of(context).textTheme.headline1.color,
+                      ),
+                    ),
+                    Divider(
+                      thickness: 5,
+                      color: Theme.of(context).dividerColor,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            'Type of Program',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                              color:
+                                  Theme.of(context).textTheme.headline1.color,
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.grey,
+                            ),
+                            height: 45,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              child: Text(
+                                '${program.enrollmentType}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .headline4
+                                      .color,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            'Type of Program',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                              color:
+                                  Theme.of(context).textTheme.headline1.color,
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              child: Text(
+                                '${program.aboutProgram}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .headline4
+                                      .color,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           );
         });
   }
