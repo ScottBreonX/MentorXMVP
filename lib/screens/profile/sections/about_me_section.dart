@@ -47,9 +47,11 @@ class _AboutMeSectionState extends State<AboutMeSection> {
     );
   }
 
-  Future<void> _updateAboutMe(BuildContext context) async {
+  Future<void> _updateAboutMe(String userID) async {
     try {
-      await usersRef.doc(widget.profileId).update({"About Me": aboutMeText});
+      if (aboutMeText != null) {
+        await usersRef.doc(userID).update({"About Me": aboutMeText});
+      }
     } on FirebaseException catch (e) {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
@@ -94,7 +96,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                                 ),
                                 child: GestureDetector(
                                   onTap: () {
-                                    _updateAboutMe(context);
+                                    _updateAboutMe(user.id);
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
