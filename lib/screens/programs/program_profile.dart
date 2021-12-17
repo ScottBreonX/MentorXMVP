@@ -3,6 +3,7 @@ import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
+import 'package:mentorx_mvp/screens/programs/program_join_request.dart';
 
 class ProgramProfile extends StatefulWidget {
   final loggedInUser;
@@ -85,6 +86,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                   Theme.of(context).textTheme.headline1.color,
                             ),
                           ),
+                          SizedBox(height: 5),
                           Container(
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
@@ -127,6 +129,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                   Theme.of(context).textTheme.headline1.color,
                             ),
                           ),
+                          SizedBox(height: 5),
                           Container(
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
@@ -155,7 +158,15 @@ class _ProgramProfileState extends State<ProgramProfile> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProgramJoinRequest(
+                            loggedInUser: loggedInUser,
+                            program: program,
+                          ),
+                        ),
+                      ),
                       child: Text(
                         'Want to join?',
                         style: TextStyle(
