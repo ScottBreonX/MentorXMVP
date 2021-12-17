@@ -52,16 +52,11 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
               child: Text(
                 'Enrolled Mentorship Programs',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2,
-                ),
+                style: Theme.of(context).textTheme.headline1,
               ),
             ),
             Divider(
               height: 2,
-              color: Colors.black,
               thickness: 2,
               indent: 10,
               endIndent: 10,

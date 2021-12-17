@@ -11,10 +11,12 @@ import '../../home_screen.dart';
 class ProfileMenteeSection extends StatefulWidget {
   const ProfileMenteeSection({
     this.profileId,
+    @required this.myProfileView,
     Key key,
   });
 
   final String profileId;
+  final bool myProfileView;
 
   @override
   _ProfileMenteeSectionState createState() => _ProfileMenteeSectionState();
@@ -136,23 +138,25 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
                                 ),
                               ],
                             )
-                          : Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    menteeEditStatus = true;
-                                  });
-                                },
-                                child: IconCircle(
-                                  circleColor:
-                                      Theme.of(context).backgroundColor,
-                                  width: 30.0,
-                                  height: 30.0,
-                                  iconType: Icons.edit,
+                          : !widget.myProfileView
+                              ? SizedBox()
+                              : Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        menteeEditStatus = true;
+                                      });
+                                    },
+                                    child: IconCircle(
+                                      circleColor:
+                                          Theme.of(context).backgroundColor,
+                                      width: 30.0,
+                                      height: 30.0,
+                                      iconType: Icons.edit,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
                     ],
                   ),
                 ),

@@ -6,7 +6,7 @@ class AppTheme {
 
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white70,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.white70,
     appBarTheme: AppBarTheme(
       color: Colors.blue,
       iconTheme: IconThemeData(
@@ -28,7 +28,7 @@ class AppTheme {
     ),
     textTheme: TextTheme(
       headline1: TextStyle(
-        color: Colors.white,
+        color: Colors.black54,
         fontSize: 30.0,
         fontWeight: FontWeight.bold,
         fontFamily: 'WorkSans-Regular',
@@ -72,7 +72,6 @@ class AppTheme {
     colorScheme: ColorScheme.light(
       primary: Colors.black,
       onPrimary: Colors.black,
-      primaryVariant: Colors.black,
       secondary: Colors.red,
     ),
     cardTheme: CardTheme(

@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/available_mentors.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
-import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
 class MentorLaunch extends StatefulWidget {
@@ -31,22 +29,13 @@ class _MentorLaunchState extends State<MentorLaunch> {
 
   @override
   Widget build(BuildContext context) {
-    final drawerItems = MentorXMenuList();
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
-
     return Scaffold(
-      key: _scaffoldKey,
-      drawer: Drawer(
-        child: Container(
-          child: drawerItems,
-        ),
-      ),
       appBar: AppBar(
         elevation: 5,
         title: Text('Mentoring'),
       ),
       body: Container(
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -63,26 +52,24 @@ class _MentorLaunchState extends State<MentorLaunch> {
                       ),
                     ),
                   ),
-                  Container(
+                  Flexible(
                     child: Center(
                       child: Text(
                         'University of Michigan',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.headline1,
                       ),
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'Mentorship Program',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      Flexible(
+                        child: Center(
+                          child: Text(
+                            'Mentorship Program',
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
                         ),
                       ),
                     ],
@@ -91,7 +78,6 @@ class _MentorLaunchState extends State<MentorLaunch> {
               ),
             ),
             Divider(),
-            SizedBox(height: 15.0),
             Column(
               children: [
                 Wrap(
@@ -99,6 +85,7 @@ class _MentorLaunchState extends State<MentorLaunch> {
                     Container(
                       child: IconCard(
                         cardText: 'Mentoring',
+                        cardColor: Theme.of(context).cardColor,
                         cardIcon: Icons.group,
                         onTap: () => Navigator.push(
                           context,
@@ -110,6 +97,7 @@ class _MentorLaunchState extends State<MentorLaunch> {
                     ),
                     IconCard(
                       cardText: 'News Feed',
+                      cardColor: Theme.of(context).cardColor,
                       cardIcon: Icons.article_outlined,
                       onTap: () => Navigator.push(
                         context,
@@ -120,11 +108,13 @@ class _MentorLaunchState extends State<MentorLaunch> {
                     ),
                     IconCard(
                       cardText: 'Calendar',
+                      cardColor: Theme.of(context).cardColor,
                       cardIcon: Icons.date_range,
                       onTap: () {},
                     ),
                     IconCard(
                       cardText: 'Program Info',
+                      cardColor: Theme.of(context).cardColor,
                       cardIcon: Icons.info_outline,
                       onTap: () => Navigator.push(
                         context,

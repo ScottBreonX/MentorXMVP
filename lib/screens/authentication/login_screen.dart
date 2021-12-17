@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/models/login_model.dart';
+import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/registration_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
@@ -55,7 +56,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
   Future<void> _submit() async {
     try {
       await widget.bloc.submit();
-      Navigator.of(context).popAndPushNamed(HomeScreen.id);
+      Navigator.of(context).popAndPushNamed(LandingPage.id);
     } catch (e) {
       showAlertDialog(
         context,

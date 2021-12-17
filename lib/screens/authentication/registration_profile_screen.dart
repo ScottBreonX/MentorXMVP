@@ -5,6 +5,7 @@ import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
@@ -29,6 +30,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
   String aboutMe;
   String mentorAbout;
   String menteeAbout;
+  bool mentor;
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -173,7 +175,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                 RoundedButton(
                   onPressed: () async {
                     await _createProfile(context);
-                    Navigator.popAndPushNamed(context, HomeScreen.id);
+                    Navigator.popAndPushNamed(context, LandingPage.id);
                   },
                   title: 'Submit',
                   buttonColor: kMentorXPrimary,

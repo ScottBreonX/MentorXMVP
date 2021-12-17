@@ -64,8 +64,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   onTap(int pageIndex) {
-    pageController.jumpToPage(
+    pageController.animateToPage(
       pageIndex,
+      duration: Duration(milliseconds: 100),
+      curve: Curves.linear,
     );
   }
 

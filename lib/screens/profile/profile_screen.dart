@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_circle.dart';
 import 'package:mentorx_mvp/components/progress.dart';
+import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/models/user.dart';
@@ -24,11 +25,18 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   bool aboutMeEditStatus = false;
+  bool myProfileView = false;
 
   @override
   Widget build(BuildContext context) {
     if (widget.profileId == null) {
       return circularProgress();
+    }
+
+    if (widget.profileId == loggedInUser.id) {
+      setState(() {
+        myProfileView = true;
+      });
     }
 
     double circleSize = 55.0;
@@ -45,6 +53,7 @@ class _ProfileState extends State<Profile> {
           }
           myUser user = myUser.fromDocument(snapshot.data);
           return Scaffold(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             key: _scaffoldKey,
             drawer: Drawer(
               child: Container(
@@ -53,7 +62,7 @@ class _ProfileState extends State<Profile> {
             ),
             appBar: AppBar(
               elevation: 5,
-              title: Text(user.id != widget.loggedInUser
+              title: Text(!myProfileView
                   ? '${user.firstName}\'s Profile'
                   : 'My Profile'),
             ),
@@ -116,32 +125,39 @@ class _ProfileState extends State<Profile> {
                             ],
                           ),
                         ),
-                        Positioned(
-                          bottom: 20,
-                          right: 15,
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: IconCircle(
-                              height: 30.0,
-                              width: 30.0,
-                              iconType: Icons.edit,
-                              circleColor: Theme.of(context).backgroundColor,
-                              iconColor: Theme.of(context).iconTheme.color,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 20,
-                          right: 10,
-                          child: IconCircle(
-                            height: 30.0,
-                            width: 30.0,
-                            iconSize: 20.0,
-                            iconType: Icons.edit,
-                            circleColor: Theme.of(context).backgroundColor,
-                            iconColor: Theme.of(context).iconTheme.color,
-                          ),
-                        ),
+                        !myProfileView
+                            ? Container()
+                            : Positioned(
+                                bottom: 20,
+                                right: 15,
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: IconCircle(
+                                    height: 30.0,
+                                    width: 30.0,
+                                    iconType: Icons.edit,
+                                    circleColor:
+                                        Theme.of(context).backgroundColor,
+                                    iconColor:
+                                        Theme.of(context).iconTheme.color,
+                                  ),
+                                ),
+                              ),
+                        !myProfileView
+                            ? Container()
+                            : Positioned(
+                                top: 20,
+                                right: 10,
+                                child: IconCircle(
+                                  height: 30.0,
+                                  width: 30.0,
+                                  iconSize: 20.0,
+                                  iconType: Icons.edit,
+                                  circleColor:
+                                      Theme.of(context).backgroundColor,
+                                  iconColor: Theme.of(context).iconTheme.color,
+                                ),
+                              ),
                       ],
                     ),
                     Row(
@@ -175,6 +191,7 @@ class _ProfileState extends State<Profile> {
                       padding: const EdgeInsets.only(bottom: 10.0),
                       child: AboutMeSection(
                         profileId: user.id,
+                        myProfileView: myProfileView,
                       ),
                     ),
                     const Divider(
@@ -194,9 +211,11 @@ class _ProfileState extends State<Profile> {
                     ),
                     ProfileMentorSection(
                       profileId: user.id,
+                      myProfileView: myProfileView,
                     ),
                     ProfileMenteeSection(
                       profileId: user.id,
+                      myProfileView: myProfileView,
                     ),
                   ],
                 ),

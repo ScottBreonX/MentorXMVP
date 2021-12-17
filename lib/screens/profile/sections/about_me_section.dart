@@ -10,9 +10,11 @@ final usersRef = FirebaseFirestore.instance.collection('users');
 
 class AboutMeSection extends StatefulWidget {
   final String profileId;
+  final bool myProfileView;
 
   const AboutMeSection({
     @required this.profileId,
+    @required this.myProfileView,
   });
 
   @override
@@ -133,22 +135,25 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                               ),
                             ],
                           )
-                        : Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  aboutMeEditStatus = true;
-                                });
-                              },
-                              child: IconCircle(
-                                width: 30.0,
-                                height: 30.0,
-                                iconType: Icons.edit,
-                                circleColor: Theme.of(context).backgroundColor,
+                        : !widget.myProfileView
+                            ? SizedBox()
+                            : Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      aboutMeEditStatus = true;
+                                    });
+                                  },
+                                  child: IconCircle(
+                                    width: 30.0,
+                                    height: 30.0,
+                                    iconType: Icons.edit,
+                                    circleColor:
+                                        Theme.of(context).backgroundColor,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
                   ],
                 ),
               ),

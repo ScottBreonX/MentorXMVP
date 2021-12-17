@@ -25,7 +25,6 @@ class MentoringScreen extends StatefulWidget {
 
 class _MentoringScreenState extends State<MentoringScreen> {
   bool aboutMeEditStatus = false;
-  // bool profilePhotoStatus = false;
   bool profilePhotoSelected = false;
   String aboutMeText;
   bool isLoading = false;
