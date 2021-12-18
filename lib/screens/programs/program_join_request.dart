@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/program.dart';
+import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 
 class ProgramJoinRequest extends StatefulWidget {
@@ -19,22 +21,36 @@ class ProgramJoinRequest extends StatefulWidget {
 }
 
 class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
-  TextEditingController searchController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController codeController = TextEditingController();
   String programCode;
+  bool hasRequested = false;
 
   @override
   void initState() {
     super.initState();
+    checkHasRequested();
+  }
+
+  checkHasRequested() async {
+    DocumentSnapshot doc = await programsRef
+        .doc(widget.program.id)
+        .collection('userRequested')
+        .doc(loggedInUser.id)
+        .get();
+    setState(() {
+      hasRequested = doc.exists;
+    });
   }
 
   Widget build(BuildContext context) {
-    final Program _program = widget.program;
-    final drawerItems = MentorXMenuList(loggedInUser: widget.loggedInUser);
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
+    final Program _program = widget.program;
+    final drawerItems = MentorXMenuList(loggedInUser: widget.loggedInUser);
 
     clearCode() {
-      searchController.clear();
+      codeController.clear();
       setState(() {
         programCode = null;
       });
@@ -45,6 +61,73 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
       setState(() {
         programCode = _code;
       });
+    }
+
+    Container buildButton({String text, Function function}) {
+      return Container(
+        padding: EdgeInsets.only(top: 2.0),
+        child: RoundedButton(
+          onPressed: function,
+          title: text,
+          buttonColor: hasRequested
+              ? Colors.grey
+              : Theme.of(context).buttonTheme.colorScheme.primary,
+          fontColor: hasRequested
+              ? Colors.grey[700]
+              : Theme.of(context).textTheme.button.color,
+          fontSize: 24,
+          minWidth: MediaQuery.of(context).size.width * 0.77,
+        ),
+      );
+    }
+
+    requestJoin() {
+      handleCode(codeController.text);
+      if (programCode == _program.programCode) {
+        setState(() {
+          hasRequested = true;
+        });
+        programsRef
+            .doc(widget.program.id)
+            .collection('userRequested')
+            .doc(loggedInUser.id)
+            .set({});
+      } else {
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title:
+                Text('The program code does not match. \n Please try again.'),
+            actions: [
+              TextButton(
+                child: Text(
+                  "Okay",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
+          ),
+          barrierDismissible: true,
+        );
+      }
+    }
+
+    buildRequestButton() {
+      if (hasRequested == false) {
+        return buildButton(
+          text: 'Request to Join',
+          function: requestJoin,
+        );
+      } else if (hasRequested == true) {
+        return buildButton(
+          text: 'Join Requested',
+          function: null,
+        );
+      }
     }
 
     return Scaffold(
@@ -82,52 +165,68 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                     ),
                   ),
                   SizedBox(height: 15),
-                  Text(
-                    'Enter program code:',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).textTheme.bodyText1.color,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  TextFormField(
-                    style: Theme.of(context).textTheme.subtitle2,
-                    controller: null,
-                    decoration: InputDecoration(
-                      hintText: (programCode == null || programCode.isEmpty)
-                          ? 'ENTER PROGRAM CODE'
-                          : programCode,
-                      hintStyle: Theme.of(context).textTheme.subtitle2,
-                      filled: true,
-                      fillColor: Colors.white,
-                      suffixIcon: IconButton(
-                        icon: Icon(Icons.clear),
-                        onPressed: clearCode,
-                      ),
-                    ),
-                    onFieldSubmitted: handleCode,
-                  ),
+                  !hasRequested
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              'Enter program code:',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    Theme.of(context).textTheme.bodyText1.color,
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            TextFormField(
+                              style: Theme.of(context).textTheme.subtitle2,
+                              key: formKey,
+                              controller: codeController,
+                              decoration: InputDecoration(
+                                hintText: 'ENTER PROGRAM CODE',
+                                hintStyle:
+                                    Theme.of(context).textTheme.subtitle2,
+                                filled: true,
+                                fillColor: Colors.white,
+                                suffixIcon: IconButton(
+                                  icon: Icon(Icons.clear),
+                                  onPressed: clearCode,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : Text(
+                          'You Have Requested to Join!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.secondary),
+                        ),
                 ],
               ),
               SizedBox(height: 35),
               Expanded(
                 child: Column(
                   children: [
-                    RoundedButton(
-                      title: 'Request to Join',
-                      fontColor: Theme.of(context).textTheme.button.color,
-                      fontSize: 24,
-                      minWidth: MediaQuery.of(context).size.width * 0.77,
-                    ),
-                    RoundedButton(
-                      title: 'Cancel',
-                      buttonColor:
-                          Theme.of(context).buttonTheme.colorScheme.background,
-                      fontColor: Theme.of(context).textTheme.button.color,
-                      fontSize: 24,
-                      minWidth: MediaQuery.of(context).size.width * 0.77,
-                    ),
+                    buildRequestButton(),
+                    !hasRequested
+                        ? RoundedButton(
+                            onPressed: () => Navigator.pop(context),
+                            title: 'Cancel',
+                            buttonColor: Theme.of(context)
+                                .buttonTheme
+                                .colorScheme
+                                .background,
+                            fontColor: Theme.of(context).textTheme.button.color,
+                            fontSize: 24,
+                            borderColor: Theme.of(context).colorScheme.primary,
+                            borderWidth: 5,
+                            minWidth: MediaQuery.of(context).size.width * 0.77,
+                          )
+                        : SizedBox(height: 0),
                   ],
                 ),
               ),
@@ -138,8 +237,9 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
               Text(
                 'Don\'t have a code? Contact the program administrator.',
                 style: TextStyle(
-                    fontSize: 20,
-                    color: Theme.of(context).textTheme.bodyText2.color),
+                  fontSize: 20,
+                  color: Theme.of(context).textTheme.bodyText2.color,
+                ),
               ),
               Container(
                 alignment: Alignment.center,
@@ -152,7 +252,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                     vertical: 8,
                   ),
                   child: Text(
-                    'SOMEBODY\'S NAME GOES HERE',
+                    '${_program.headAdmin}',
                     style: TextStyle(fontSize: 20, color: Colors.white70),
                   ),
                 ),

@@ -9,6 +9,8 @@ class RoundedButton extends StatelessWidget {
     this.minWidth,
     this.borderRadius = 30.0,
     this.fontSize,
+    this.borderColor,
+    this.borderWidth,
   });
 
   final Color buttonColor;
@@ -18,6 +20,8 @@ class RoundedButton extends StatelessWidget {
   final Function onPressed;
   final double minWidth;
   final double borderRadius;
+  final borderColor;
+  final borderWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,14 @@ class RoundedButton extends StatelessWidget {
         color: buttonColor,
         borderRadius: BorderRadius.circular(borderRadius),
         child: MaterialButton(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: borderColor != null ? borderColor : Colors.transparent,
+              width: borderWidth != null ? borderWidth * 1.0 : 0,
+              style: BorderStyle.solid,
+            ),
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
           onPressed: onPressed,
           minWidth: minWidth,
           height: 50.0,
