@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/authentication/welcome_screen.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
 import 'package:mentorx_mvp/screens/selection_screen/selection_screen.dart';
@@ -30,7 +32,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   PageController pageController;
   int pageIndex;
-  bool loggedIn = true;
+  bool loggedIn = false;
 
   @override
   void initState() {
@@ -39,16 +41,17 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  void getCurrentUser() async {
+  getCurrentUser() async {
     final auth = Provider.of<AuthBase>(context, listen: false);
-    try {
-      if (auth.currentUser != null) {
-        DocumentSnapshot doc = await usersRef.doc(auth.currentUser.uid).get();
-        loggedInUser = myUser.fromDocument(doc);
+    loggedInUser = myUser.fromDocument(
+        await usersRef.doc(auth.currentUser.uid).get().whenComplete(() {
+      if (mounted) {
+        setState(() {
+          loggedIn = true;
+        });
       }
-    } catch (e) {
-      print(e);
-    }
+    }));
+    print(loggedInUser.firstName);
   }
 
   @override
@@ -73,12 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (loggedInUser == null) {
-      return circularProgress();
+    if (loggedIn == false) {
+      return circularProgressBlue();
     }
-    setState(() {
-      getCurrentUser();
-    });
 
     return Scaffold(
       body: PageView(
