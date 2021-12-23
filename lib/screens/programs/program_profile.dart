@@ -1,5 +1,9 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
+import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
@@ -20,11 +24,61 @@ class ProgramProfile extends StatefulWidget {
 }
 
 class _ProgramProfileState extends State<ProgramProfile> {
+  bool hasRequested = false;
+
   @override
+  void initState() {
+    super.initState();
+    checkHasRequested();
+  }
+
+  checkHasRequested() async {
+    DocumentSnapshot doc = await programsRef
+        .doc(widget.programId)
+        .collection('userRequested')
+        .doc(loggedInUser.id)
+        .get();
+    setState(() {
+      hasRequested = doc.exists;
+    });
+  }
+
   Widget build(BuildContext context) {
     final drawerItems = MentorXMenuList(loggedInUser: widget.loggedInUser);
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
+
+    Container buildButton({String text, Function function}) {
+      return Container(
+        padding: EdgeInsets.only(top: 2.0),
+        child: RoundedButton(
+          onPressed: function,
+          title: text,
+          buttonColor: hasRequested
+              ? Colors.grey
+              : Theme.of(context).buttonTheme.colorScheme.primary,
+          fontColor: hasRequested
+              ? Colors.grey[700]
+              : Theme.of(context).textTheme.button.color,
+          fontSize: 24,
+          minWidth: MediaQuery.of(context).size.width * 0.77,
+        ),
+      );
+    }
+
+    buildJoinButton(Program program) {
+      if (!hasRequested) {
+        return buildButton(
+          text: "Want to Join?",
+          function: () => navigateSecondPage(program),
+        );
+      } else if (hasRequested) {
+        return buildButton(
+          text: "You have requested to join.",
+          function: () {},
+        );
+      }
+    }
 
     return FutureBuilder<Object>(
         future: programsRef.doc(widget.programId).get(),
@@ -157,34 +211,31 @@ class _ProgramProfileState extends State<ProgramProfile> {
                         ],
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProgramJoinRequest(
-                            loggedInUser: loggedInUser,
-                            program: program,
-                          ),
-                        ),
-                      ),
-                      child: Text(
-                        'Want to join?',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Theme.of(context).textTheme.button.color),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Theme.of(context)
-                            .buttonTheme
-                            .colorScheme
-                            .background,
-                      ),
-                    ),
+                    buildJoinButton(program),
                   ],
                 ),
               ),
             ),
           );
         });
+  }
+
+  void refreshData() {
+    checkHasRequested();
+  }
+
+  FutureOr onGoBack(dynamic value) {
+    refreshData();
+    setState(() {});
+  }
+
+  void navigateSecondPage(Program program) {
+    Route route = MaterialPageRoute(
+      builder: (context) => ProgramJoinRequest(
+        loggedInUser: loggedInUser,
+        program: program,
+      ),
+    );
+    Navigator.push(context, route).then(onGoBack);
   }
 }

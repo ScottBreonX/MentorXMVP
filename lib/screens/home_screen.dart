@@ -51,7 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       }
     }));
-    print(loggedInUser.firstName);
   }
 
   @override
