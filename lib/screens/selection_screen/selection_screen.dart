@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/icon_card.dart';
-import 'package:mentorx_mvp/components/rounded_button.dart';
-import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
+import '../../components/connection_card.dart';
 import '../../components/progress.dart';
 import '../home_screen.dart';
 
@@ -52,46 +50,88 @@ class _SelectionScreenState extends State<SelectionScreen> {
             ),
             body: Container(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  RoundedButton(
-                    title: 'Welcome, ${loggedInUser.firstName}!',
-                    fontSize: 24,
-                    buttonColor: Colors.blue,
-                    fontColor: Colors.white,
-                    onPressed: () => confirmSignOut(context),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 20.0,
+                      bottom: 10.0,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Text(
+                            'Welcome Back, ${loggedInUser.firstName}',
+                            style: Theme.of(context).textTheme.headline1,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    thickness: 2,
+                    color: Colors.grey,
+                    indent: 20,
+                    endIndent: 20,
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          top: 10,
+                        ),
+                        child: Text(
+                          'Connections',
+                          style: Theme.of(context).textTheme.headline1,
+                        ),
+                      ),
+                    ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Wrap(
-                        children: [
-                          IconCard(
-                            cardIcon: Icons.people,
-                            cardColor: Theme.of(context).cardColor,
-                            cardText: 'Programs',
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomeScreen(pageIndex: 2),
-                              ),
-                            ),
-                          ),
-                          IconCard(
-                            cardIcon: Icons.person,
-                            cardColor: Theme.of(context).cardColor,
-                            cardText: 'My Profile',
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomeScreen(pageIndex: 1),
-                              ),
-                            ),
-                          ),
-                        ],
+                      ConnectionCard(
+                        mentorClass: 'Mentor',
+                        mentorFName: 'Godric',
+                        mentorLName: 'Griffindor',
                       ),
                     ],
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ConnectionCard(
+                        mentorClass: 'Mentee',
+                        mentorClassTextColor: Colors.green,
+                        mentorFName: 'Helga',
+                        mentorLName: 'Hufflepuff',
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ConnectionCard(
+                        mentorClass: 'Mentee',
+                        mentorClassTextColor: Colors.green,
+                        mentorFName: 'Salazar',
+                        mentorLName: 'Slytherin',
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0, top: 20),
+                        child: Text(
+                          'Program Guides',
+                          style: Theme.of(context).textTheme.headline1,
+                        ),
+                      )
+                    ],
+                  )
                 ],
               ),
             ),

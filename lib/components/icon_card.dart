@@ -70,7 +70,7 @@ class IconCard extends StatelessWidget {
               children: [
                 imageAsset ??
                     Icon(
-                      cardIcon,
+                      cardIcon ?? Icons.person,
                       color: cardIconColor,
                       size: iconSize ?? 80,
                     ),
@@ -78,7 +78,7 @@ class IconCard extends StatelessWidget {
                   height: textSpacingHeight ?? 5,
                 ),
                 Text(
-                  cardText,
+                  cardText ?? '',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: cardTextColor,
