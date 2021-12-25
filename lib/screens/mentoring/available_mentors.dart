@@ -3,7 +3,6 @@ import 'package:mentorx_mvp/components/mentor_card.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
-import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -118,19 +117,8 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
   }
 
   Widget build(BuildContext context) {
-    final drawerItems = MentorXMenuList();
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
-
     return Scaffold(
-        key: _scaffoldKey,
-        drawer: Drawer(
-          child: Container(
-            child: drawerItems,
-          ),
-        ),
-        appBar: buildSearchField(),
-        body: buildMentorListContent(loggedInUser));
+        appBar: buildSearchField(), body: buildMentorListContent(loggedInUser));
   }
 }
 

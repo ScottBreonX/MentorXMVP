@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/program_tile.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 final _firestore = FirebaseFirestore.instance;
@@ -141,17 +140,7 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final drawerItems = MentorXMenuList(loggedInUser: widget.loggedInUser);
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
-
     return Scaffold(
-      key: _scaffoldKey,
-      drawer: Drawer(
-        child: Container(
-          child: drawerItems,
-        ),
-      ),
       appBar: buildSearchField(),
       body: buildProgramListContent(),
     );

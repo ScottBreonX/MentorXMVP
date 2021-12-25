@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
-import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 
 class ProgramJoinRequest extends StatefulWidget {
   static String id = 'program_join_request';
@@ -44,10 +43,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
   }
 
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
     final Program _program = widget.program;
-    final drawerItems = MentorXMenuList(loggedInUser: widget.loggedInUser);
 
     clearCode() {
       codeController.clear();
@@ -131,12 +127,6 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
     }
 
     return Scaffold(
-      key: _scaffoldKey,
-      drawer: Drawer(
-        child: Container(
-          child: drawerItems,
-        ),
-      ),
       appBar: AppBar(
         elevation: 5,
         title: Text('Request to Join'),

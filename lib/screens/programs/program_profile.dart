@@ -6,7 +6,6 @@ import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
-import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/screens/programs/program_join_request.dart';
 
 class ProgramProfile extends StatefulWidget {
@@ -44,10 +43,6 @@ class _ProgramProfileState extends State<ProgramProfile> {
   }
 
   Widget build(BuildContext context) {
-    final drawerItems = MentorXMenuList(loggedInUser: widget.loggedInUser);
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
-
     Container buildButton({String text, Function function}) {
       return Container(
         padding: EdgeInsets.only(top: 2.0),
@@ -88,12 +83,6 @@ class _ProgramProfileState extends State<ProgramProfile> {
           }
           Program program = Program.fromDocument(snapshot.data);
           return Scaffold(
-            key: _scaffoldKey,
-            drawer: Drawer(
-              child: Container(
-                child: drawerItems,
-              ),
-            ),
             appBar: AppBar(
               elevation: 5,
               title: Text('${program.programName}'),

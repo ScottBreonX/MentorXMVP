@@ -14,6 +14,7 @@ import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/screens/notifications/notifications_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/registration_profile_screen.dart';
+import 'package:mentorx_mvp/screens/profile/sections/edit_profile_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_join_request.dart';
 import 'package:mentorx_mvp/screens/programs/program_profile.dart';
 import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
@@ -75,6 +76,7 @@ class MentorX extends StatelessWidget {
           ProgramSelectionScreen.id: (context) => ProgramSelectionScreen(),
           ProgramProfile.id: (context) => ProgramProfile(),
           ProgramJoinRequest.id: (context) => ProgramJoinRequest(),
+          EditProfileScreen.id: (context) => EditProfileScreen(),
         },
       ),
     );

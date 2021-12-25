@@ -7,6 +7,7 @@ import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
+import 'package:mentorx_mvp/screens/profile/sections/edit_profile_screen.dart';
 import 'package:mentorx_mvp/screens/profile/sections/profile_mentee_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/profile_mentor_section.dart';
 
@@ -26,6 +27,15 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   bool aboutMeEditStatus = false;
   bool myProfileView = false;
+
+  void _editCoreProfileInfo(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (context) => EditProfileScreen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +141,9 @@ class _ProfileState extends State<Profile> {
                                 bottom: 20,
                                 right: 15,
                                 child: GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    _editCoreProfileInfo(context);
+                                  },
                                   child: IconCircle(
                                     height: 30.0,
                                     width: 30.0,

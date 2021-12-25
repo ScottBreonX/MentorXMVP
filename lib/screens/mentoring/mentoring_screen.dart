@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/mentee_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
-import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
@@ -60,35 +59,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // if (profileData == null) {
-    //   return Center(
-    //     child: CircularProgressIndicator(
-    //       backgroundColor: kMentorXPrimary,
-    //     ),
-    //   );
-    // }
-
-    // if (profileData['images'] == null) {
-    //   setState(() {
-    //     profilePhotoStatus = false;
-    //   });
-    // } else {
-    //   setState(() {
-    //     profilePhotoStatus = true;
-    //   });
-    // }
-
-    final drawerItems = MentorXMenuList();
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
-
     return Scaffold(
-      key: _scaffoldKey,
-      drawer: Drawer(
-        child: Container(
-          child: drawerItems,
-        ),
-      ),
       appBar: AppBar(
         backgroundColor: kMentorXPrimary,
         elevation: 5,
