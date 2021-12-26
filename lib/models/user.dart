@@ -11,19 +11,22 @@ class myUser {
   final String aboutMe;
   final String mentorAbout;
   final String menteeAbout;
+  final bool mentor;
+  final bool mentee;
 
-  myUser({
-    this.id,
-    this.email,
-    this.firstName,
-    this.lastName,
-    this.major,
-    this.yearInSchool,
-    this.mentorSlots,
-    this.aboutMe,
-    this.mentorAbout,
-    this.menteeAbout,
-  });
+  myUser(
+      {this.id,
+      this.email,
+      this.firstName,
+      this.lastName,
+      this.major,
+      this.yearInSchool,
+      this.mentorSlots,
+      this.aboutMe,
+      this.mentorAbout,
+      this.menteeAbout,
+      this.mentor,
+      this.mentee});
 
   factory myUser.fromDocument(DocumentSnapshot doc) {
     return myUser(
@@ -37,6 +40,8 @@ class myUser {
       aboutMe: doc['About Me'],
       mentorAbout: doc['Mentoring About'],
       menteeAbout: doc['Mentee About'],
+      mentor: doc['Mentor'],
+      mentee: doc['Mentee'],
     );
   }
   Map<String, dynamic> toMap() {
@@ -51,6 +56,8 @@ class myUser {
       'About Me': aboutMe,
       'Mentoring About': mentorAbout,
       'Mentee About': menteeAbout,
+      'Mentor': mentor,
+      'Mentee': mentee,
     };
   }
 }

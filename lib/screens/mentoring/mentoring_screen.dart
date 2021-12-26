@@ -1,9 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/icon_card.dart';
+import 'package:mentorx_mvp/components/progress.dart';
+import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/mentee_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentor_signup_screen.dart';
+import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
@@ -23,20 +28,28 @@ class MentoringScreen extends StatefulWidget {
 }
 
 class _MentoringScreenState extends State<MentoringScreen> {
-  bool aboutMeEditStatus = false;
   bool profilePhotoSelected = false;
-  String aboutMeText;
+  String roleChoice;
   bool isLoading = false;
+  bool hasMentees = false;
+  bool mentorSelected = false;
+  bool menteeSelected = false;
+  bool isMentor = false;
+  bool isMentee = false;
   List<Mentee> matches = [];
 
   @override
   void initState() {
-    getMatchData();
-    aboutMeEditStatus = false;
+    getMentorStatus();
     super.initState();
   }
 
-  dynamic matchData;
+  getMentorStatus() {
+    setState(() {
+      loggedInUser.mentor ? isMentor = true : isMentor = false;
+      loggedInUser.mentee ? isMentee = true : isMentee = false;
+    });
+  }
 
   Future<dynamic> getMatchData() async {
     setState(() {
@@ -44,30 +57,181 @@ class _MentoringScreenState extends State<MentoringScreen> {
     });
     QuerySnapshot snapshot =
         await mentorsRef.doc(loggedInUser.id).collection('userMentoring').get();
-    setState(() {
-      isLoading = false;
-      matches = snapshot.docs.map((doc) => Mentee.fromDocument(doc)).toList();
-    });
+    if (snapshot.docs.isNotEmpty) {
+      setState(() {
+        isLoading = false;
+        hasMentees = true;
+        matches = snapshot.docs.map((doc) => Mentee.fromDocument(doc)).toList();
+      });
+    }
+  }
+
+  setChoice(String selectedChoice) {
+    roleChoice = selectedChoice;
+    if (roleChoice == 'mentee') {
+      setState(() {
+        mentorSelected = false;
+        menteeSelected = true;
+      });
+    } else if (roleChoice == 'mentor') {
+      setState(() {
+        mentorSelected = true;
+        menteeSelected = false;
+      });
+    }
   }
 
   buildUserMentees() {
-    if (isLoading) {
-      return CircularProgressIndicator();
-    }
-    return Column(children: matches);
+    isLoading = true;
+    QuerySnapshot _snapshot;
+    return FutureBuilder(
+      future: mentorsRef.doc(loggedInUser.id).collection('userMentoring').get(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return circularProgress();
+        } else {
+          _snapshot = snapshot.data;
+          if (_snapshot.size > 0) {
+            matches =
+                _snapshot.docs.map((doc) => Mentee.fromDocument(doc)).toList();
+            return ListView(
+              children: <Widget>[Column(children: matches)],
+            );
+          } else {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 25),
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.warning_amber_rounded,
+                      size: 75,
+                    ),
+                    Text(
+                      'You do not have any mentees yet. You will be notified when you do!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).textTheme.headline1.color,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+        }
+      },
+    );
+  }
+
+  buildRoleSelection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 125, horizontal: 10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            'Select your role in the program',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).textTheme.bodyText1.color,
+            ),
+          ),
+          SizedBox(height: 50),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconCard(
+                cardIcon: Icons.group,
+                boxHeight: MediaQuery.of(context).size.width * 0.33,
+                boxWidth: MediaQuery.of(context).size.width * 0.33,
+                cardColor: mentorSelected
+                    ? Colors.grey[400]
+                    : Theme.of(context).cardColor,
+                borderColor: mentorSelected
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).buttonTheme.colorScheme.primary,
+                borderWidth: 5,
+                cardText: 'Be a Mentor',
+                onTap: () => setChoice('mentor'),
+              ),
+              IconCard(
+                cardIcon: Icons.school,
+                boxHeight: MediaQuery.of(context).size.width * 0.33,
+                boxWidth: MediaQuery.of(context).size.width * 0.33,
+                cardColor: menteeSelected
+                    ? Colors.grey[400]
+                    : Theme.of(context).cardColor,
+                borderColor: menteeSelected
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).buttonTheme.colorScheme.primary,
+                borderWidth: 5,
+                cardText: 'Be a Mentee',
+                onTap: () => setChoice('mentee'),
+              ),
+            ],
+          ),
+          RoundedButton(
+            title: 'Continue',
+            fontSize: 24,
+            fontColor: Theme.of(context).textTheme.button.color,
+            buttonColor: Theme.of(context).colorScheme.primary,
+            minWidth: MediaQuery.of(context).size.width * 0.5,
+            onPressed: () => (menteeSelected | mentorSelected)
+                ? {
+                    Navigator.push(
+                      context,
+                      mentorSelected
+                          ? MaterialPageRoute(
+                              builder: (context) => MentorSignupScreen(),
+                            )
+                          : MaterialPageRoute(
+                              builder: (context) => MentorSignupScreen(),
+                            ),
+                    )
+                  }
+                : {},
+          ),
+          TextButton(
+            onPressed: () => {Navigator.pop(context)},
+            child: Text(
+              'Cancel',
+              style: TextStyle(
+                fontSize: 24,
+                decoration: TextDecoration.underline,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final drawerItems = MentorXMenuList();
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
+
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: Drawer(
+        child: Container(
+          child: drawerItems,
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: kMentorXPrimary,
         elevation: 5,
-        title: Text('MentoringScreen'),
+        title: Text('Mentoring Screen'),
       ),
-      body: ListView(
-        children: <Widget>[buildUserMentees()],
-      ),
+      body: (isMentee | isMentor) ? buildUserMentees() : buildRoleSelection(),
     );
   }
 }
