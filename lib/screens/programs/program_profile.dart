@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/program.dart';
-import 'package:mentorx_mvp/screens/home_screen.dart';
+import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_join_request.dart';
 
 class ProgramProfile extends StatefulWidget {

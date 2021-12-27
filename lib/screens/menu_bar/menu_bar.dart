@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/home_screen.dart';
+import 'package:mentorx_mvp/screens/launch_screen.dart';
 
 class MentorXMenuHeader extends StatefulWidget {
   final myUser loggedInUser;
@@ -82,7 +82,7 @@ class MentorXMenuList extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomeScreen(pageIndex: 0),
+              builder: (context) => LaunchScreen(pageIndex: 0),
             ),
           ),
         ),
@@ -97,7 +97,7 @@ class MentorXMenuList extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomeScreen(pageIndex: 1),
+              builder: (context) => LaunchScreen(pageIndex: 1),
             ),
           ),
         ),
@@ -108,7 +108,7 @@ class MentorXMenuList extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomeScreen(pageIndex: 2),
+              builder: (context) => LaunchScreen(pageIndex: 2),
             ),
           ),
           title: Text(

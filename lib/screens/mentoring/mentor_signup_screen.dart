@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/home_screen.dart';
+import 'package:mentorx_mvp/screens/launch_screen.dart';
 
 class MentorSignupScreen extends StatefulWidget {
   final myUser loggedInUser;

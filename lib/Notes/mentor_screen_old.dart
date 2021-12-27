@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
-import 'package:mentorx_mvp/screens/home_screen.dart';
+import 'package:mentorx_mvp/screens/launch_screen.dart';
 
 User tempUser;
 
@@ -66,7 +66,7 @@ class _MentorScreenOldState extends State<MentorScreenOld> {
           IconButton(
             icon: Icon(Icons.home),
             onPressed: () {
-              Navigator.pushNamed(context, HomeScreen.id);
+              Navigator.pushNamed(context, LaunchScreen.id);
             },
           ),
         ],

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/authentication/welcome_screen.dart';
-import 'package:mentorx_mvp/screens/home_screen.dart';
+import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +34,7 @@ class _LandingPageState extends State<LandingPage> {
           }
           return Provider<Database>(
             create: (_) => FirestoreDatabase(),
-            child: HomeScreen(),
+            child: LaunchScreen(),
           );
         }
         return Scaffold(

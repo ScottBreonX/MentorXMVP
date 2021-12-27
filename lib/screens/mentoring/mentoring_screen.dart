@@ -6,10 +6,8 @@ import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/mentee_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/home_screen.dart';
+import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_signup_screen.dart';
-import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
-import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
 class MentoringScreen extends StatefulWidget {

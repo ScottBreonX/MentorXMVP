@@ -4,7 +4,6 @@ import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/models/login_model.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
-import 'package:mentorx_mvp/screens/home_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/registration_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';

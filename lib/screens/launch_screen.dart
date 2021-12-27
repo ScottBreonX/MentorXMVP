@@ -5,9 +5,9 @@ import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
-import 'package:mentorx_mvp/screens/selection_screen/selection_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
+import 'home_screen/home_screen.dart';
 import 'notifications/notifications_screen.dart';
 
 myUser loggedInUser;
@@ -16,18 +16,18 @@ final mentorsRef = FirebaseFirestore.instance.collection('mentors');
 final mentoringRef = FirebaseFirestore.instance.collection('mentoring');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({this.onSignOut, this.pageIndex});
+class LaunchScreen extends StatefulWidget {
+  const LaunchScreen({this.onSignOut, this.pageIndex});
 
-  static const String id = 'home_screen';
+  static const String id = 'launch_screen';
   final VoidCallback onSignOut;
   final int pageIndex;
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _LaunchScreenState createState() => _LaunchScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _LaunchScreenState extends State<LaunchScreen> {
   PageController pageController;
   int pageIndex;
   bool loggedIn = false;
@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: PageView(
         children: [
-          SelectionScreen(loggedInUser: loggedInUser),
+          HomeScreen(loggedInUser: loggedInUser),
           Profile(
             loggedInUser: loggedInUser.id,
             profileId: loggedInUser.id,

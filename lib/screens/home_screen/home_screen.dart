@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/program_card.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import '../../components/connection_card.dart';
 import '../../components/progress.dart';
-import '../home_screen.dart';
+import '../launch_screen.dart';
 
-class SelectionScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   final myUser loggedInUser;
 
-  const SelectionScreen({
+  const HomeScreen({
     Key key,
     this.loggedInUser,
   }) : super(key: key);
 
-  static const String id = 'selection_screen';
+  static const String id = 'home_screen';
 
   @override
-  _SelectionScreenState createState() => _SelectionScreenState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _SelectionScreenState extends State<SelectionScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
@@ -131,6 +132,35 @@ class _SelectionScreenState extends State<SelectionScreen> {
                         ),
                       )
                     ],
+                  ),
+                  Container(
+                    height: 150,
+                    child: ListView(
+                      children: [
+                        Container(
+                          height: 150.0,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              ProgramCard(
+                                programIcon: Icons.assignment_rounded,
+                                programTiming: 'This Week',
+                                programTitle: 'Resume 101',
+                                bodyText:
+                                    'Build a resume that will help you stand out and land interviews',
+                              ),
+                              ProgramCard(
+                                programIcon: Icons.chat,
+                                programTiming: 'Next Week',
+                                programTitle: 'Initial Chat',
+                                bodyText:
+                                    'Start an intro chat with your mentor',
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),

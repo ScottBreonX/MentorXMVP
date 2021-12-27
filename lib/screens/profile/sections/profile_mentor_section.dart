@@ -6,7 +6,7 @@ import '../../../constants.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/icon_circle.dart';
 import '../../../models/user.dart';
-import '../../home_screen.dart';
+import '../../launch_screen.dart';
 
 class ProfileMentorSection extends StatefulWidget {
   const ProfileMentorSection({
