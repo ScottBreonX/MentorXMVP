@@ -1,12 +1,11 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
-import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/home_screen.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentor_launch_screen.dart';
-import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 
 class MentorSignupScreen extends StatefulWidget {
   final myUser loggedInUser;
@@ -21,8 +20,6 @@ class MentorSignupScreen extends StatefulWidget {
 }
 
 class _MentorSignupScreenState extends State<MentorSignupScreen> {
-  final drawerItems = MentorXMenuList();
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TextEditingController traitOneController = TextEditingController();
   TextEditingController traitTwoController = TextEditingController();
   TextEditingController traitThreeController = TextEditingController();
@@ -78,11 +75,14 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              'Please list the top 3 skill sets you can mentor on',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Please list the top 3 skill sets you can mentor on',
+                  style: Theme.of(context).textTheme.headline4,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ],
@@ -119,11 +119,14 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              'What are your top 3 hobbies/activities?',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'What are your top 3 hobbies/activities?',
+                  style: Theme.of(context).textTheme.headline4,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ],
@@ -160,7 +163,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         title: const Text(
           'Skill Sets',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 15,
           ),
         ),
         isActive: currentStep == 0 ? true : false,
@@ -179,7 +182,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         title: const Text(
           'Hobbies',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 15,
           ),
         ),
         isActive: currentStep == 1 ? true : false,
@@ -198,7 +201,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         title: const Text(
           'X-Factor',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 15,
           ),
         ),
         isActive: currentStep == 2 ? true : false,
@@ -302,12 +305,6 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      drawer: Drawer(
-        child: Container(
-          child: drawerItems,
-        ),
-      ),
       appBar: AppBar(
         backgroundColor: kMentorXPrimary,
         elevation: 5,

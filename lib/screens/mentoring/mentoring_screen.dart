@@ -128,106 +128,91 @@ class _MentoringScreenState extends State<MentoringScreen> {
   }
 
   buildRoleSelection() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 125, horizontal: 10),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            'Select your role in the program',
-            textAlign: TextAlign.center,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Select your role in the program',
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headline1,
+        ),
+        SizedBox(height: 50),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconCard(
+              cardIcon: Icons.group,
+              boxHeight: MediaQuery.of(context).size.width * 0.33,
+              boxWidth: MediaQuery.of(context).size.width * 0.33,
+              cardColor: mentorSelected
+                  ? Colors.grey[400]
+                  : Theme.of(context).cardColor,
+              borderColor: mentorSelected
+                  ? Theme.of(context).colorScheme.secondary
+                  : Theme.of(context).buttonTheme.colorScheme.primary,
+              borderWidth: 5,
+              cardText: 'Be a Mentor',
+              textSize: 15,
+              onTap: () => setChoice('mentor'),
+            ),
+            IconCard(
+              cardIcon: Icons.school,
+              boxHeight: MediaQuery.of(context).size.width * 0.33,
+              boxWidth: MediaQuery.of(context).size.width * 0.33,
+              cardColor: menteeSelected
+                  ? Colors.grey[400]
+                  : Theme.of(context).cardColor,
+              borderColor: menteeSelected
+                  ? Theme.of(context).colorScheme.secondary
+                  : Theme.of(context).buttonTheme.colorScheme.primary,
+              borderWidth: 5,
+              cardText: 'Be a Mentee',
+              textSize: 15,
+              onTap: () => setChoice('mentee'),
+            ),
+          ],
+        ),
+        RoundedButton(
+          title: 'Continue',
+          fontSize: 24,
+          fontColor: Theme.of(context).textTheme.button.color,
+          buttonColor: Theme.of(context).colorScheme.primary,
+          minWidth: MediaQuery.of(context).size.width * 0.5,
+          onPressed: () => (menteeSelected | mentorSelected)
+              ? {
+                  Navigator.push(
+                    context,
+                    mentorSelected
+                        ? MaterialPageRoute(
+                            builder: (context) => MentorSignupScreen(),
+                          )
+                        : MaterialPageRoute(
+                            builder: (context) => MentorSignupScreen(),
+                          ),
+                  )
+                }
+              : {},
+        ),
+        TextButton(
+          onPressed: () => {Navigator.pop(context)},
+          child: Text(
+            'Cancel',
             style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).textTheme.bodyText1.color,
+              fontSize: 24,
+              decoration: TextDecoration.underline,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
-          SizedBox(height: 50),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconCard(
-                cardIcon: Icons.group,
-                boxHeight: MediaQuery.of(context).size.width * 0.33,
-                boxWidth: MediaQuery.of(context).size.width * 0.33,
-                cardColor: mentorSelected
-                    ? Colors.grey[400]
-                    : Theme.of(context).cardColor,
-                borderColor: mentorSelected
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).buttonTheme.colorScheme.primary,
-                borderWidth: 5,
-                cardText: 'Be a Mentor',
-                onTap: () => setChoice('mentor'),
-              ),
-              IconCard(
-                cardIcon: Icons.school,
-                boxHeight: MediaQuery.of(context).size.width * 0.33,
-                boxWidth: MediaQuery.of(context).size.width * 0.33,
-                cardColor: menteeSelected
-                    ? Colors.grey[400]
-                    : Theme.of(context).cardColor,
-                borderColor: menteeSelected
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).buttonTheme.colorScheme.primary,
-                borderWidth: 5,
-                cardText: 'Be a Mentee',
-                onTap: () => setChoice('mentee'),
-              ),
-            ],
-          ),
-          RoundedButton(
-            title: 'Continue',
-            fontSize: 24,
-            fontColor: Theme.of(context).textTheme.button.color,
-            buttonColor: Theme.of(context).colorScheme.primary,
-            minWidth: MediaQuery.of(context).size.width * 0.5,
-            onPressed: () => (menteeSelected | mentorSelected)
-                ? {
-                    Navigator.push(
-                      context,
-                      mentorSelected
-                          ? MaterialPageRoute(
-                              builder: (context) => MentorSignupScreen(),
-                            )
-                          : MaterialPageRoute(
-                              builder: (context) => MentorSignupScreen(),
-                            ),
-                    )
-                  }
-                : {},
-          ),
-          TextButton(
-            onPressed: () => {Navigator.pop(context)},
-            child: Text(
-              'Cancel',
-              style: TextStyle(
-                fontSize: 24,
-                decoration: TextDecoration.underline,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final drawerItems = MentorXMenuList();
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
-
     return Scaffold(
-      key: _scaffoldKey,
-      drawer: Drawer(
-        child: Container(
-          child: drawerItems,
-        ),
-      ),
+      backgroundColor: ThemeData.light().scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: kMentorXPrimary,
         elevation: 5,
         title: Text('Mentoring Screen'),
       ),

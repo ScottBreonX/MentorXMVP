@@ -5,7 +5,7 @@ class AppTheme {
   AppTheme._();
 
   static final ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: Colors.white70,
+    scaffoldBackgroundColor: const Color(0xB3FFFFFF),
     backgroundColor: Colors.white70,
     appBarTheme: AppBarTheme(
       color: Colors.blue,
@@ -57,6 +57,9 @@ class AppTheme {
       subtitle2: TextStyle(
         color: Colors.black45,
         fontSize: 18.0,
+      ),
+      button: TextStyle(
+        color: const Color(0xFFFFFFFF),
       ),
     ),
   );
