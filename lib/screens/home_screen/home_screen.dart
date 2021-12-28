@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/program_card.dart';
+import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
-import '../../components/connection_card.dart';
 import '../../components/progress.dart';
 import '../launch_screen.dart';
 
@@ -49,120 +48,100 @@ class _HomeScreenState extends State<HomeScreen> {
               elevation: 5,
               title: Text('Mentor+'),
             ),
-            body: Container(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 20.0,
-                      bottom: 10.0,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Text(
-                            'Welcome Back, ${loggedInUser.firstName}',
-                            style: Theme.of(context).textTheme.headline1,
+            body: SingleChildScrollView(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 80.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        LaunchScreen(pageIndex: 1),
+                                  ),
+                                );
+                              },
+                              child: CircleAvatar(
+                                radius: 50,
+                                backgroundColor: Colors.blue,
+                                child: Icon(
+                                  Icons.person,
+                                  size: 50,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Divider(
-                    thickness: 2,
-                    color: Colors.grey,
-                    indent: 20,
-                    endIndent: 20,
-                  ),
-                  Row(
-                    children: [
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Text(
+                              'Welcome Back, ${loggedInUser.firstName}',
+                              style: Theme.of(context).textTheme.headline1,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Divider(
+                        thickness: 2,
+                        color: Colors.grey,
+                        indent: 20,
+                        endIndent: 20,
+                      ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                          left: 10.0,
-                          top: 10,
-                        ),
-                        child: Text(
-                          'Connections',
-                          style: Theme.of(context).textTheme.headline1,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ConnectionCard(
-                        mentorClass: 'Mentor',
-                        mentorFName: 'Godric',
-                        mentorLName: 'Griffindor',
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ConnectionCard(
-                        mentorClass: 'Mentee',
-                        mentorClassTextColor: Colors.green,
-                        mentorFName: 'Helga',
-                        mentorLName: 'Hufflepuff',
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ConnectionCard(
-                        mentorClass: 'Mentee',
-                        mentorClassTextColor: Colors.green,
-                        mentorFName: 'Salazar',
-                        mentorLName: 'Slytherin',
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0, top: 20),
-                        child: Text(
-                          'Program Guides',
-                          style: Theme.of(context).textTheme.headline1,
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconCard(
+                              cardText: 'My Profile',
+                              cardTextColor: Colors.black54,
+                              cardColor: Colors.white,
+                              cardIcon: Icons.person,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        LaunchScreen(pageIndex: 1),
+                                  ),
+                                );
+                              },
+                            ),
+                            IconCard(
+                              cardText: 'Programs',
+                              cardTextColor: Colors.black54,
+                              cardColor: Colors.white,
+                              cardIcon: Icons.people_alt,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        LaunchScreen(pageIndex: 2),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
                         ),
                       )
                     ],
                   ),
-                  Container(
-                    height: 150,
-                    child: ListView(
-                      children: [
-                        Container(
-                          height: 150.0,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              ProgramCard(
-                                programIcon: Icons.assignment_rounded,
-                                programTiming: 'This Week',
-                                programTitle: 'Resume 101',
-                                bodyText:
-                                    'Build a resume that will help you stand out and land interviews',
-                              ),
-                              ProgramCard(
-                                programIcon: Icons.chat,
-                                programTiming: 'Next Week',
-                                programTitle: 'Initial Chat',
-                                bodyText:
-                                    'Start an intro chat with your mentor',
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                ),
               ),
             ),
           );
