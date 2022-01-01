@@ -86,11 +86,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Text(
-                              'Welcome Back, ${loggedInUser.firstName}',
-                              style: Theme.of(context).textTheme.headline1,
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'Welcome Back, ${loggedInUser.firstName}',
+                                style: Theme.of(context).textTheme.headline1,
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                         ],

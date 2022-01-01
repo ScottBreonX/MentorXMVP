@@ -44,7 +44,7 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
       onChanged: (value) => mentorText = value,
       style: Theme.of(context).textTheme.subtitle2,
       autocorrect: false,
-      decoration: kTextFieldDecoration,
+      decoration: kTextFieldDecoration.copyWith(fillColor: Colors.white),
     );
   }
 

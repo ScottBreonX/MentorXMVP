@@ -91,25 +91,27 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
   }
 
   buildMentorListContent(myUser loggedInUser) {
-    return ModalProgressHUD(
-      inAsyncCall: showSpinner,
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Available Mentors',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline1,
-              ),
-              AvailableMentorsStream(
-                searchString: searchString,
-                loggedInUser: loggedInUser,
-              ),
-            ],
+    return Scaffold(
+      body: ModalProgressHUD(
+        inAsyncCall: showSpinner,
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Available Mentors',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline1,
+                ),
+                AvailableMentorsStream(
+                  searchString: searchString,
+                  loggedInUser: loggedInUser,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -183,11 +185,12 @@ class AvailableMentorsStream extends StatelessWidget {
         return Flexible(
           fit: FlexFit.loose,
           child: ListView(
-              padding: EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 10.0,
-              ),
-              children: mentorBubbles),
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.0,
+              vertical: 10.0,
+            ),
+            children: mentorBubbles,
+          ),
         );
       },
     );

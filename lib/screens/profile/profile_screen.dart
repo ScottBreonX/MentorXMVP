@@ -7,6 +7,7 @@ import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
+import 'package:mentorx_mvp/screens/profile/sections/core_profile_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/profile_mentee_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/profile_mentor_section.dart';
 
@@ -25,6 +26,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   bool aboutMeEditStatus = false;
+  bool coreProfileEditStatus = false;
   bool myProfileView = false;
 
   @override
@@ -53,13 +55,14 @@ class _ProfileState extends State<Profile> {
           }
           myUser user = myUser.fromDocument(snapshot.data);
           return Scaffold(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             key: _scaffoldKey,
-            drawer: Drawer(
-              child: Container(
-                child: drawerItems,
-              ),
-            ),
+            drawer: !myProfileView
+                ? null
+                : Drawer(
+                    child: Container(
+                      child: drawerItems,
+                    ),
+                  ),
             appBar: AppBar(
               elevation: 5,
               title: Text(!myProfileView
@@ -79,8 +82,7 @@ class _ProfileState extends State<Profile> {
                           decoration: BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
+                                color: Colors.white,
                                 width: 3,
                               ),
                             ),
@@ -95,8 +97,7 @@ class _ProfileState extends State<Profile> {
                           child: Stack(
                             children: [
                               CircleAvatar(
-                                backgroundColor:
-                                    Theme.of(context).scaffoldBackgroundColor,
+                                backgroundColor: Colors.white,
                                 radius: circleSize + 3,
                                 child: ProfileImageCircle(
                                   iconSize: circleSize,
@@ -128,24 +129,6 @@ class _ProfileState extends State<Profile> {
                         !myProfileView
                             ? Container()
                             : Positioned(
-                                bottom: 20,
-                                right: 15,
-                                child: GestureDetector(
-                                  onTap: () {},
-                                  child: IconCircle(
-                                    height: 30.0,
-                                    width: 30.0,
-                                    iconType: Icons.edit,
-                                    circleColor:
-                                        Theme.of(context).backgroundColor,
-                                    iconColor:
-                                        Theme.of(context).iconTheme.color,
-                                  ),
-                                ),
-                              ),
-                        !myProfileView
-                            ? Container()
-                            : Positioned(
                                 top: 20,
                                 right: 10,
                                 child: IconCircle(
@@ -160,28 +143,12 @@ class _ProfileState extends State<Profile> {
                               ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15.0, top: 5.0),
-                          child: Text(
-                            '${user.firstName} ${user.lastName}',
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 15.0, top: 5.0, bottom: 15.0),
-                          child: Text(
-                            '${user.yearInSchool}, ${user.major}',
-                            style: Theme.of(context).textTheme.subtitle2,
-                          ),
-                        ),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: CoreProfileSection(
+                        profileId: user.id,
+                        myProfileView: myProfileView,
+                      ),
                     ),
                     const Divider(
                       thickness: 2,

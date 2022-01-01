@@ -43,7 +43,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
       onChanged: (value) => aboutMeText = value,
       style: Theme.of(context).textTheme.subtitle2,
       autocorrect: false,
-      decoration: kTextFieldDecoration,
+      decoration: kTextFieldDecoration.copyWith(fillColor: Colors.white),
     );
   }
 
