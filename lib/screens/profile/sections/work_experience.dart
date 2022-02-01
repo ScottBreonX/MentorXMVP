@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/screens/profile/profile_popups/work_experience_edit.dart';
 import '../../../components/progress.dart';
 import '../../launch_screen.dart';
 
@@ -49,7 +50,13 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                         padding: const EdgeInsets.only(right: 15.0),
                         child: GestureDetector(
                           onTap: () {
-                            setState(() {});
+                            setState(() {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return WorkExperienceEdit();
+                                  });
+                            });
                           },
                           child: Icon(
                             Icons.edit,
