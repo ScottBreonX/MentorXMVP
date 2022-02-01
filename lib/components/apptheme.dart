@@ -50,6 +50,12 @@ class AppTheme {
         fontWeight: FontWeight.bold,
         fontFamily: 'WorkSans-Regular',
       ),
+      headline5: TextStyle(
+        color: Colors.black54,
+        fontSize: 15.0,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'WorkSans-Regular',
+      ),
       subtitle1: TextStyle(
         color: Colors.white,
         fontSize: 20.0,

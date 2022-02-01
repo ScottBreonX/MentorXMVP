@@ -8,8 +8,8 @@ import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/core_profile_section.dart';
-import 'package:mentorx_mvp/screens/profile/sections/profile_mentee_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/profile_mentor_section.dart';
+import 'package:mentorx_mvp/screens/profile/sections/work_experience.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 
@@ -150,9 +150,12 @@ class _ProfileState extends State<Profile> {
                         myProfileView: myProfileView,
                       ),
                     ),
-                    const Divider(
-                      thickness: 2,
-                      color: Colors.white,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      child: const Divider(
+                        thickness: 4,
+                        color: Colors.grey,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10.0),
@@ -161,9 +164,12 @@ class _ProfileState extends State<Profile> {
                         myProfileView: myProfileView,
                       ),
                     ),
-                    const Divider(
-                      thickness: 2,
-                      color: Colors.white,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      child: const Divider(
+                        thickness: 4,
+                        color: Colors.grey,
+                      ),
                     ),
                     Row(
                       children: [
@@ -180,7 +186,48 @@ class _ProfileState extends State<Profile> {
                       profileId: user.id,
                       myProfileView: myProfileView,
                     ),
-                    ProfileMenteeSection(
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      child: const Divider(
+                        thickness: 4,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 8.0, top: 8.0, bottom: 10.0),
+                          child: Text(
+                            'Work Experience',
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {});
+                            },
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.pink,
+                              size: 30,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    WorkExperienceSection(
+                      profileId: user.id,
+                      myProfileView: myProfileView,
+                    ),
+                    WorkExperienceSection(
+                      profileId: user.id,
+                      myProfileView: myProfileView,
+                    ),
+                    WorkExperienceSection(
                       profileId: user.id,
                       myProfileView: myProfileView,
                     ),

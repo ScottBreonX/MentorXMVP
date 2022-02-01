@@ -8,7 +8,6 @@ import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'home_screen/home_screen.dart';
-import 'notifications/notifications_screen.dart';
 
 myUser loggedInUser;
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -81,12 +80,11 @@ class _LaunchScreenState extends State<LaunchScreen> {
       body: PageView(
         children: [
           HomeScreen(loggedInUser: loggedInUser),
+          ProgramSelectionScreen(loggedInUser: loggedInUser),
           Profile(
             loggedInUser: loggedInUser.id,
             profileId: loggedInUser.id,
           ),
-          ProgramSelectionScreen(loggedInUser: loggedInUser),
-          NotificationScreen(loggedInUser: loggedInUser),
         ],
         controller: pageController,
         onPageChanged: onPageChanged,
@@ -96,10 +94,21 @@ class _LaunchScreenState extends State<LaunchScreen> {
         currentIndex: pageIndex ?? widget.pageIndex ?? 0,
         onTap: onTap,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home)),
-          BottomNavigationBarItem(icon: Icon(Icons.person)),
-          BottomNavigationBarItem(icon: Icon(Icons.people)),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications_active)),
+          BottomNavigationBarItem(
+              icon: Icon(
+            Icons.home,
+            size: 40,
+          )),
+          BottomNavigationBarItem(
+              icon: Icon(
+            Icons.groups,
+            size: 50,
+          )),
+          BottomNavigationBarItem(
+              icon: Icon(
+            Icons.person,
+            size: 40,
+          )),
         ],
       ),
     );

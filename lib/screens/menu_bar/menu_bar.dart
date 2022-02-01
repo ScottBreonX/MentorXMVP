@@ -74,6 +74,7 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.home,
+            color: Colors.white,
           ),
           title: Text(
             'Home',
@@ -89,6 +90,7 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.person,
+            color: Colors.white,
           ),
           title: Text(
             'My Profile',
@@ -97,28 +99,31 @@ class MentorXMenuList extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => LaunchScreen(pageIndex: 1),
+              builder: (context) => LaunchScreen(pageIndex: 2),
             ),
           ),
         ),
         ListTile(
           leading: Icon(
-            Icons.people,
+            Icons.groups,
+            size: 30,
+            color: Colors.white,
           ),
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => LaunchScreen(pageIndex: 2),
+              builder: (context) => LaunchScreen(pageIndex: 1),
             ),
           ),
           title: Text(
-            'Mentoring',
+            'Programs',
             style: Theme.of(context).textTheme.headline2,
           ),
         ),
         ListTile(
           leading: Icon(
             Icons.settings,
+            color: Colors.white,
           ),
           title: Text(
             'Settings',
@@ -136,6 +141,7 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.exit_to_app_rounded,
+            color: Colors.white,
           ),
           title: Text(
             'Log Out',

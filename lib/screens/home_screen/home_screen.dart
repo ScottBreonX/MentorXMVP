@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        LaunchScreen(pageIndex: 1),
+                                        LaunchScreen(pageIndex: 2),
                                   ),
                                 );
                               },
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        LaunchScreen(pageIndex: 1),
+                                        LaunchScreen(pageIndex: 2),
                                   ),
                                 );
                               },
@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        LaunchScreen(pageIndex: 2),
+                                        LaunchScreen(pageIndex: 1),
                                   ),
                                 );
                               },
