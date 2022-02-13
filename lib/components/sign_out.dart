@@ -11,7 +11,7 @@ Future<void> confirmSignOut(BuildContext context) async {
     title: "Log Out",
     content: "Are you sure you want to log out?",
     defaultActionText: "Yes",
-    cancelActionText: "No",
+    cancelActionText: "Nope",
   );
   if (didRequestSignOut == true) {
     _auth.signOut();
