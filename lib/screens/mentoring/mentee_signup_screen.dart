@@ -32,19 +32,25 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
   bool complete = false;
 
   List<String> skillsets = [
-    'adfgdfgdf',
-    'bdfgdfg',
-    'cdfgdfgd',
-    'ddfgdfgdfg',
+    'coding',
+    'analytics',
+    'presenting',
+    'communication',
+    'finance',
+    'networking',
+    'managing up'
   ];
 
   List<String> hobbies = [
-    'golf',
+    'sports',
     'coding',
     'video games',
     'painting',
     'drawing',
-    'robotics'
+    'robotics',
+    'volunteering',
+    'crafts',
+    'travel'
   ];
 
   buildDropdownField({

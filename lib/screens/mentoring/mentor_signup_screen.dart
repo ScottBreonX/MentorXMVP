@@ -20,16 +20,84 @@ class MentorSignupScreen extends StatefulWidget {
 }
 
 class _MentorSignupScreenState extends State<MentorSignupScreen> {
-  TextEditingController traitOneController = TextEditingController();
-  TextEditingController traitTwoController = TextEditingController();
-  TextEditingController traitThreeController = TextEditingController();
-  TextEditingController hobbyOneController = TextEditingController();
-  TextEditingController hobbyTwoController = TextEditingController();
-  TextEditingController hobbyThreeController = TextEditingController();
+  String trait1;
+  String trait2;
+  String trait3;
+  String hobby1;
+  String hobby2;
+  String hobby3;
   TextEditingController makesMeGreatController = TextEditingController();
   List<Step> steps;
   int currentStep = 0;
   bool complete = false;
+  int mentorSlots = 1;
+
+  List<String> skillsets = [
+    'coding',
+    'analytics',
+    'presenting',
+    'communication',
+    'finance',
+    'networking',
+    'managing up'
+  ];
+
+  List<String> hobbies = [
+    'sports',
+    'coding',
+    'video games',
+    'painting',
+    'drawing',
+    'robotics',
+    'volunteering',
+    'crafts',
+    'travel'
+  ];
+
+  buildDropdownField({
+    String inputValue,
+    List listItems,
+    final void Function(String) inputFunction,
+  }) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 15),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Theme.of(context).colorScheme.secondary,
+          width: 3.0,
+        ),
+        borderRadius: BorderRadius.circular(15.0),
+        color: Colors.white,
+      ),
+      child: DropdownButtonHideUnderline(
+        child: ButtonTheme(
+          alignedDropdown: true,
+          child: DropdownButton<String>(
+            dropdownColor: Colors.white,
+            value: inputValue,
+            iconSize: 36,
+            isExpanded: true,
+            icon: Icon(Icons.arrow_drop_down, color: Colors.black),
+            items: listItems,
+            onChanged: inputFunction,
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
+      ),
+    );
+  }
+
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
+      );
 
   buildFormField({
     String hintString,
@@ -69,6 +137,57 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
     );
   }
 
+  void _incrementCounter() {
+    if (mentorSlots < 5) {
+      setState(() {
+        mentorSlots++;
+      });
+    }
+  }
+
+  void _decrementCounter() {
+    if (mentorSlots > 1) {
+      setState(() {
+        mentorSlots--;
+      });
+    }
+  }
+
+  buildCounterWidget() {
+    return Center(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        FloatingActionButton(
+          onPressed: _decrementCounter,
+          child: Icon(
+            Icons.remove,
+            size: 40,
+          ),
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.blue,
+          tooltip: 'Decrement',
+        ),
+        SizedBox(width: 25),
+        Text(
+          '$mentorSlots',
+          style: TextStyle(fontSize: 80.0),
+        ),
+        SizedBox(width: 25),
+        FloatingActionButton(
+          onPressed: _incrementCounter,
+          child: Icon(
+            Icons.add,
+            size: 40,
+          ),
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.blue,
+          tooltip: 'Increment',
+        ),
+      ],
+    ));
+  }
+
   buildQuestionnaire() {
     return Column(
       children: [
@@ -90,22 +209,39 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         SizedBox(height: 6),
         Column(
           children: [
-            buildFormField(
-              hintString: 'Skill set 1...',
-              icon: Icons.looks_one,
-              traitController: traitOneController,
+            Text(
+              'Skill set 1',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            buildDropdownField(
+              inputValue: trait1,
+              listItems: skillsets.map(buildMenuItem).toList(),
+              inputFunction: (trait1) => setState(() => this.trait1 = trait1),
+            ),
+            Text(
+              'Skill set 2',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            buildDropdownField(
+              inputValue: trait2,
+              listItems: skillsets.map(buildMenuItem).toList(),
+              inputFunction: (trait2) => setState(() => this.trait2 = trait2),
             ),
             SizedBox(height: 10),
-            buildFormField(
-              hintString: 'Skill set 2...',
-              icon: Icons.looks_two,
-              traitController: traitTwoController,
+            Text(
+              'Skill set 3',
+              style: TextStyle(
+                fontSize: 16,
+              ),
             ),
-            SizedBox(height: 10),
-            buildFormField(
-              hintString: 'Skill set 3...',
-              icon: Icons.looks_3,
-              traitController: traitThreeController,
+            buildDropdownField(
+              inputValue: trait3,
+              listItems: skillsets.map(buildMenuItem).toList(),
+              inputFunction: (trait3) => setState(() => this.trait3 = trait3),
             ),
           ],
         ),
@@ -134,22 +270,40 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         SizedBox(height: 6),
         Column(
           children: [
-            buildFormField(
-              hintString: 'Hobby 1...',
-              icon: Icons.looks_one,
-              traitController: hobbyOneController,
+            Text(
+              'Hobby/Activity 1',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            buildDropdownField(
+              inputValue: hobby1,
+              listItems: hobbies.map(buildMenuItem).toList(),
+              inputFunction: (hobby1) => setState(() => this.hobby1 = hobby1),
             ),
             SizedBox(height: 10),
-            buildFormField(
-              hintString: 'Hobby 2...',
-              icon: Icons.looks_two,
-              traitController: hobbyTwoController,
+            Text(
+              'Hobby/Activity 2',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            buildDropdownField(
+              inputValue: hobby2,
+              listItems: hobbies.map(buildMenuItem).toList(),
+              inputFunction: (hobby2) => setState(() => this.hobby2 = hobby2),
             ),
             SizedBox(height: 10),
-            buildFormField(
-              hintString: 'Hobby 3...',
-              icon: Icons.looks_3,
-              traitController: hobbyThreeController,
+            Text(
+              'Hobby/Activity 3',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            buildDropdownField(
+              inputValue: hobby3,
+              listItems: hobbies.map(buildMenuItem).toList(),
+              inputFunction: (hobby3) => setState(() => this.hobby3 = hobby3),
             ),
           ],
         ),
@@ -161,7 +315,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
     steps = [
       Step(
         title: const Text(
-          'Skill Sets',
+          'Skills',
           style: TextStyle(
             fontSize: 15,
           ),
@@ -169,9 +323,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         isActive: currentStep == 0 ? true : false,
         state: currentStep == 0
             ? StepState.editing
-            : ((traitOneController.text != '') &
-                    (traitTwoController.text != '') &
-                    (traitThreeController.text != ''))
+            : ((trait1 != null) & (trait2 != null) & (trait3 != null))
                 ? StepState.complete
                 : StepState.error,
         content: Column(
@@ -188,9 +340,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         isActive: currentStep == 1 ? true : false,
         state: currentStep == 1
             ? StepState.editing
-            : ((traitOneController.text != '') &
-                    (traitTwoController.text != '') &
-                    (traitThreeController.text != ''))
+            : ((hobby1 != null) & (hobby2 != null) & (hobby3 != null))
                 ? StepState.complete
                 : StepState.error,
         content: Column(
@@ -207,18 +357,57 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         isActive: currentStep == 2 ? true : false,
         state: currentStep == 2
             ? StepState.editing
-            : ((traitOneController.text != '') &
-                    (traitTwoController.text != '') &
-                    (traitThreeController.text != ''))
+            : makesMeGreatController.text != ''
                 ? StepState.complete
                 : StepState.error,
         content: Column(
           children: [
+            Text(
+              'What makes you a great mentor?',
+              style: Theme.of(context).textTheme.headline4,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 15),
             buildFormField(
               hintString: 'I would make a great mentor because...',
               traitController: makesMeGreatController,
               minLines: 7,
             ),
+          ],
+        ),
+      ),
+      Step(
+        title: const Text(
+          'Slots',
+          style: TextStyle(
+            fontSize: 15,
+          ),
+        ),
+        isActive: currentStep == 3 ? true : false,
+        state: currentStep == 3
+            ? StepState.editing
+            : makesMeGreatController.text != ''
+                ? StepState.complete
+                : StepState.error,
+        content: Column(
+          children: [
+            Text(
+              'How many mentees are you willing to mentor this cycle?',
+              style: Theme.of(context).textTheme.headline4,
+              textAlign: TextAlign.center,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 35),
+              child: Text(
+                'Recommended: 2',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).textTheme.headline3.color),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            buildCounterWidget(),
           ],
         ),
       ),
@@ -232,13 +421,14 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   ) async {
     try {
       await mentorsRef.doc(loggedInUser.id).set({
-        "Mentor Attribute 1": traitOneController.text,
-        "Mentor Attribute 2": traitTwoController.text,
-        "Mentor Attribute 3": traitThreeController.text,
-        "Hobby 1": hobbyOneController.text,
-        "Hobby 2": hobbyTwoController.text,
-        "Hobby 3": hobbyThreeController.text,
+        "Mentor Attribute 1": trait1,
+        "Mentor Attribute 2": trait2,
+        "Mentor Attribute 3": trait3,
+        "Hobby 1": hobby1,
+        "Hobby 2": hobby2,
+        "Hobby 3": hobby3,
         "XFactor": makesMeGreatController.text,
+        "Mentor Slots": mentorSlots,
       });
       await usersRef.doc(loggedInUser.id).update({
         "Mentor": true,
@@ -256,12 +446,12 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   next() {
     if (currentStep + 1 != steps.length) {
       goTo(currentStep + 1);
-    } else if ((traitOneController.text != '') &
-        (traitTwoController.text != '') &
-        (traitThreeController.text != '') &
-        (hobbyOneController.text != '') &
-        (hobbyTwoController.text != '') &
-        (hobbyThreeController.text != '') &
+    } else if ((trait1 != null) &
+        (trait2 != null) &
+        (trait3 != null) &
+        (hobby1 != null) &
+        (hobby2 != null) &
+        (hobby3 != null) &
         (makesMeGreatController.text != '')) {
       setState(() => complete = true);
       _updateMentoringAttributes(context);
@@ -298,8 +488,6 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
 
   goTo(int step) {
     setState(() => currentStep = step);
-    print(currentStep);
-    print(steps.length);
   }
 
   @override
