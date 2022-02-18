@@ -138,7 +138,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   }
 
   void _incrementCounter() {
-    if (mentorSlots < 5) {
+    if (mentorSlots < 4) {
       setState(() {
         mentorSlots++;
       });
@@ -504,8 +504,37 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
               ? Expanded(
                   child: Center(
                     child: AlertDialog(
-                      title: Text('Mentor Questionnaire Completed!'),
-                      content: Text('Thank you!'),
+                      backgroundColor: Colors.grey[200],
+                      title: Text(
+                        'Success! Thank you for enrolling as a Mentor!',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      content: SingleChildScrollView(
+                          child: Column(
+                        children: [
+                          SizedBox(height: 20),
+                          Text(
+                            'Next Steps: ',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color:
+                                  Theme.of(context).textTheme.headline1.color,
+                            ),
+                          ),
+                          Text(
+                            'Proceed to the mentorship launch screen and complete the required pre-read materials.',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.grey[800],
+                            ),
+                          ),
+                        ],
+                      )),
                       actions: [
                         TextButton(
                           child: Text('Close'),
