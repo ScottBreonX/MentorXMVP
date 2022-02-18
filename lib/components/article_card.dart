@@ -69,7 +69,7 @@ class ArticleCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         bodyText ?? 'Upcoming program TBD',
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                     )
                   ],

@@ -7,6 +7,7 @@ import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/mentee_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentee_signup_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_signup_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
@@ -83,7 +84,9 @@ class _MentoringScreenState extends State<MentoringScreen> {
     isLoading = true;
     QuerySnapshot _snapshot;
     return FutureBuilder(
-      future: mentorsRef.doc(loggedInUser.id).collection('userMentoring').get(),
+      future: isMentor
+          ? mentorsRef.doc(loggedInUser.id).collection('userMentoring').get()
+          : menteesRef.doc(loggedInUser.id).collection('userMentors').get(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return circularProgress();
@@ -107,7 +110,9 @@ class _MentoringScreenState extends State<MentoringScreen> {
                       size: 75,
                     ),
                     Text(
-                      'You do not have any mentees yet. You will be notified when you do!',
+                      isMentor
+                          ? 'You do not have any mentees yet. You will be notified when you do!'
+                          : 'You do not have a mentor yet. You will be notified when you do!',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 36,
@@ -185,7 +190,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                             builder: (context) => MentorSignupScreen(),
                           )
                         : MaterialPageRoute(
-                            builder: (context) => MentorSignupScreen(),
+                            builder: (context) => MenteeSignupScreen(),
                           ),
                   )
                 }

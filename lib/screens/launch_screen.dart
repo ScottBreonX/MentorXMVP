@@ -12,6 +12,7 @@ import 'home_screen/home_screen.dart';
 myUser loggedInUser;
 final usersRef = FirebaseFirestore.instance.collection('users');
 final mentorsRef = FirebaseFirestore.instance.collection('mentors');
+final menteesRef = FirebaseFirestore.instance.collection('mentees');
 final mentoringRef = FirebaseFirestore.instance.collection('mentoring');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 

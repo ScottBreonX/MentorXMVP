@@ -26,6 +26,7 @@ dependencies:
   provider:
   font_awesome_flutter:
   page_transition:
+  dropdownfield:
 
 
 
