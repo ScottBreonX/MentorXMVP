@@ -24,71 +24,57 @@ class AvailableMentorsScreen extends StatefulWidget {
 
 class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
   bool showSpinner = false;
-  TextEditingController searchController = TextEditingController();
-  String searchString;
+  // TextEditingController searchController = TextEditingController();
+  // String searchString;
 
   @override
   void initState() {
     super.initState();
   }
 
-  clearSearch() {
-    searchController.clear();
-    setState(() {
-      searchString = null;
-    });
-  }
+  // clearSearch() {
+  //   searchController.clear();
+  //   setState(() {
+  //     searchString = null;
+  //   });
+  // }
 
-  AppBar buildSearchField() {
-    return AppBar(
-      title: Container(
-        width: double.infinity,
-        height: 40,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
-        child: TextFormField(
-          style: Theme.of(context).textTheme.subtitle2,
-          controller: searchController,
-          decoration: InputDecoration(
-            hintText: 'Search for a mentor...',
-            hintStyle: Theme.of(context).textTheme.subtitle2,
-            filled: true,
-            fillColor: Colors.white,
-            prefixIcon: Icon(
-              Icons.account_box,
-              size: 30,
-            ),
-            suffixIcon: IconButton(
-              icon: Icon(Icons.clear),
-              onPressed: clearSearch,
-            ),
-          ),
-//           onFieldSubmitted: handleSearch),
-          onFieldSubmitted: handleSearch,
-        ),
-      ),
-    );
-  }
+//   AppBar buildSearchField() {
+//     return AppBar(
+//       title: Container(
+//         width: double.infinity,
+//         height: 40,
+//         decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
+//         child: TextFormField(
+//           style: Theme.of(context).textTheme.subtitle2,
+//           controller: searchController,
+//           decoration: InputDecoration(
+//             hintText: 'Search for a mentor...',
+//             hintStyle: Theme.of(context).textTheme.subtitle2,
+//             filled: true,
+//             fillColor: Colors.white,
+//             prefixIcon: Icon(
+//               Icons.account_box,
+//               size: 30,
+//             ),
+//             suffixIcon: IconButton(
+//               icon: Icon(Icons.clear),
+//               onPressed: clearSearch,
+//             ),
+//           ),
+// //           onFieldSubmitted: handleSearch),
+//           onFieldSubmitted: handleSearch,
+//         ),
+//       ),
+//     );
+//   }
 
-  handleSearch(String query) {
-    String _query = query;
-    setState(() {
-      searchString = _query;
-    });
-  }
-
-  buildNoContent() {
-    return Container(
-      child: Center(
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            Icon(Icons.search),
-            Text('Test'),
-          ],
-        ),
-      ),
-    );
-  }
+  // handleSearch(String query) {
+  //   String _query = query;
+  //   setState(() {
+  //     searchString = _query;
+  //   });
+  // }
 
   buildMentorListContent(myUser loggedInUser) {
     return Scaffold(
@@ -107,7 +93,7 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
                   style: Theme.of(context).textTheme.headline1,
                 ),
                 AvailableMentorsStream(
-                  searchString: searchString,
+                  // searchString: searchString,
                   loggedInUser: loggedInUser,
                 ),
               ],
@@ -120,48 +106,55 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: buildSearchField(), body: buildMentorListContent(loggedInUser));
+      // appBar: buildSearchField(),
+      appBar: AppBar(
+        elevation: 5,
+        title: Text('Available Mentors'),
+      ),
+      body: buildMentorListContent(loggedInUser),
+    );
   }
 }
 
 class AvailableMentorsStream extends StatelessWidget {
   final myUser loggedInUser;
-  final String searchString;
+  // final String searchString;
   final Stream mentorStream = _firestore
       .collection('users')
       .where('Mentor', isEqualTo: true)
+      .where('Mentor Slots', isGreaterThan: 0)
       .snapshots();
 
   AvailableMentorsStream({
-    this.searchString,
+    // this.searchString,
     this.loggedInUser,
   });
 
   @override
   Widget build(BuildContext context) {
-    var strStart = searchString == null
-        ? null
-        : searchString.substring(0, searchString.length - 1);
-    var strEnd = searchString == null
-        ? null
-        : String.fromCharCode(searchString.characters.last.codeUnitAt(0) + 1);
-    var limit = searchString != null ? (strStart + strEnd) : null;
+    // var strStart = searchString == null
+    //     ? null
+    //     : searchString.substring(0, searchString.length - 1);
+    // var strEnd = searchString == null
+    //     ? null
+    //     : String.fromCharCode(searchString.characters.last.codeUnitAt(0) + 1);
+    // var limit = searchString != null ? (strStart + strEnd) : null;
 
-    Stream searchStream = _firestore
-        .collection('users')
-        .where('First Name', isGreaterThanOrEqualTo: searchString)
-        .where('First Name', isLessThan: limit)
-        .where('Mentor', isEqualTo: true)
-        .snapshots();
+    // Stream searchStream = _firestore
+    //     .collection('users')
+    //     .where('First Name', isGreaterThanOrEqualTo: searchString)
+    //     .where('First Name', isLessThan: limit)
+    //     .where('Mentor', isEqualTo: true)
+    //     .snapshots();
 
     return StreamBuilder<QuerySnapshot>(
-      stream: searchString == null ? mentorStream : searchStream,
+      // stream: searchString == null ? mentorStream : searchStream,
+      stream: mentorStream,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center();
         }
         final mentors = snapshot.data.docs;
-        print(mentors);
 
         List<MentorCard> mentorBubbles = [];
 
