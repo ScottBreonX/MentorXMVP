@@ -172,6 +172,7 @@ class AvailableMentorsStream extends StatelessWidget {
             mentorEmail: user.email,
             mentorMajor: user.major,
             mentorYearInSchool: user.yearInSchool,
+            profileOnly: false,
           );
           mentorBubbles.add(mentorBubble);
         }

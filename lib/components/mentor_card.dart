@@ -11,6 +11,7 @@ class MentorCard extends StatelessWidget {
   final String mentorImgUrl;
   final String mentorMajor;
   final String mentorYearInSchool;
+  final bool profileOnly;
 
   MentorCard({
     this.mentorUID,
@@ -21,6 +22,7 @@ class MentorCard extends StatelessWidget {
     this.mentorImgUrl,
     this.mentorMajor,
     this.mentorYearInSchool,
+    this.profileOnly,
   });
 
   @override
@@ -121,27 +123,31 @@ class MentorCard extends StatelessWidget {
                           ),
                         ),
                         SizedBox(width: 25),
-                        FloatingActionButton.extended(
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MentorConfirm(
-                                mentorFname: mentorFname,
-                                mentorLname: mentorLname,
-                                mentorUID: mentorUID,
-                                mentorSlots: mentorSlots,
+                        profileOnly
+                            ? SizedBox(
+                                height: 5,
+                              )
+                            : FloatingActionButton.extended(
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MentorConfirm(
+                                      mentorFname: mentorFname,
+                                      mentorLname: mentorLname,
+                                      mentorUID: mentorUID,
+                                      mentorSlots: mentorSlots,
+                                    ),
+                                  ),
+                                ),
+                                heroTag: null,
+                                label: Text(
+                                  'Select Mentor',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          heroTag: null,
-                          label: Text(
-                            'Select Mentor',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
