@@ -3,7 +3,7 @@ import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import '../constants.dart';
 
-class MenteeCard extends StatelessWidget {
+class ProfileCard extends StatelessWidget {
   myUser user;
   final Color cardColor;
   final Color borderColor;
@@ -14,7 +14,7 @@ class MenteeCard extends StatelessWidget {
   final double boxHeight;
   final double boxWidth;
 
-  MenteeCard({
+  ProfileCard({
     Key key,
     @required this.user,
     this.cardTextColor,

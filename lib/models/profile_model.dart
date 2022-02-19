@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/mentee_card.dart';
+import 'package:mentorx_mvp/components/profile_card.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
@@ -35,7 +35,7 @@ class _MenteeState extends State<Mentee> {
           return circularProgress();
         }
         myUser user = myUser.fromDocument(snapshot.data);
-        return MenteeCard(
+        return ProfileCard(
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
-import 'package:mentorx_mvp/models/mentee_model.dart';
+import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentee_signup_screen.dart';
@@ -80,7 +80,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
     }
   }
 
-  buildUserMentees() {
+  buildUserConnections() {
     isLoading = true;
     QuerySnapshot _snapshot;
     return FutureBuilder(
@@ -219,7 +219,8 @@ class _MentoringScreenState extends State<MentoringScreen> {
         elevation: 5,
         title: Text('Mentoring Screen'),
       ),
-      body: (isMentee | isMentor) ? buildUserMentees() : buildRoleSelection(),
+      body:
+          (isMentee | isMentor) ? buildUserConnections() : buildRoleSelection(),
     );
   }
 }
