@@ -11,6 +11,7 @@ class RoundedButton extends StatelessWidget {
     this.fontSize,
     this.borderColor,
     this.borderWidth,
+    this.fontWeight,
   });
 
   final Color buttonColor;
@@ -22,6 +23,7 @@ class RoundedButton extends StatelessWidget {
   final double borderRadius;
   final borderColor;
   final borderWidth;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class RoundedButton extends StatelessWidget {
             style: TextStyle(
               color: fontColor,
               fontSize: fontSize,
+              fontWeight: fontWeight,
             ),
           ),
         ),
