@@ -1,11 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
+import 'package:mentorx_mvp/screens/authentication/reset_password_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:provider/provider.dart';
-import 'forgot_password_code_screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key key, @required this.bloc}) : super(key: key);
@@ -29,6 +30,8 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
+  final auth = FirebaseAuth.instance;
+  String _email;
 
   @override
   void dispose() {
@@ -42,7 +45,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
       textAlign: TextAlign.center,
-      onChanged: widget.bloc.updateEmail,
+      onChanged: (value) {
+        _email = value.trim();
+      },
       style: TextStyle(
         color: Colors.black54,
         fontWeight: FontWeight.w600,
@@ -147,8 +152,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: RoundedButton(
-                    onPressed: () => Navigator.pushNamed(
-                        context, ForgotPasswordCodeScreen.id),
+                    onPressed: () {
+                      auth.sendPasswordResetEmail(email: _email).then(
+                            (value) => Navigator.popAndPushNamed(
+                                context, ResetPasswordScreen.id),
+                          );
+                    },
                     title: 'Reset Password',
                     buttonColor: kMentorXPrimary,
                     minWidth: 500,

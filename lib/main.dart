@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mentorx_mvp/components/apptheme.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
-import 'package:mentorx_mvp/screens/authentication/forgot_password_code_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/authentication/login_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/reset_password_screen.dart';
@@ -79,12 +78,7 @@ class MentorX extends StatelessWidget {
           ProgramJoinRequest.id: (context) => ProgramJoinRequest(),
           ProgramLaunchScreen.id: (context) => ProgramLaunchScreen(),
           MentorConfirm.id: (context) => MentorConfirm(),
-          ForgotPasswordCodeScreen.id: (context) => ForgotPasswordCodeScreen(
-                bloc: bloc,
-              ),
-          ResetPasswordScreen.id: (context) => ResetPasswordScreen(
-                bloc: bloc,
-              ),
+          ResetPasswordScreen.id: (context) => ResetPasswordScreen(),
         },
       ),
     );
