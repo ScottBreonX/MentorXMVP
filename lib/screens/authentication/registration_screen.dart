@@ -31,7 +31,7 @@ class RegistrationScreen extends StatefulWidget {
   }
 
   void _signInWithEmail(BuildContext context) {
-    Navigator.of(context).push(
+    Navigator.of(context).pushReplacement(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
         builder: (context) => LoginScreenBlocBased.create(context),
@@ -48,6 +48,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordConfirmController =
       TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _passwordConfirmController.dispose();
+    super.dispose();
+  }
 
   Future<void> _submit() async {
     try {
@@ -97,17 +105,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       textAlign: TextAlign.center,
       onChanged: widget.bloc.updateEmail,
       style: TextStyle(
-        color: Colors.white,
+        color: Colors.black54,
         fontWeight: FontWeight.w600,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
-        labelText: 'Enter your email',
-        labelStyle: TextStyle(color: Colors.white),
+        prefixIcon: Icon(Icons.email),
+        labelText: 'Email',
+        alignLabelWithHint: true,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        labelStyle: TextStyle(color: Colors.grey.shade400),
         hintText: 'email@domain.com',
-        errorText: model.emailErrorText,
-        fillColor: Colors.white.withOpacity(0.1),
+        hintStyle: TextStyle(color: Colors.grey.shade400),
         filled: true,
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20.0),
+          ),
+        ),
       ),
     );
   }
@@ -120,15 +137,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updatePassword,
       style: TextStyle(
-        color: Colors.white,
+        color: Colors.black54,
         fontWeight: FontWeight.w600,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
-        labelText: 'Enter your password',
-        labelStyle: TextStyle(color: Colors.white),
+        prefixIcon: Icon(Icons.lock),
+        labelText: 'Password',
         errorText: model.passwordErrorText,
-        fillColor: Colors.white.withOpacity(0.10),
+        alignLabelWithHint: true,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        labelStyle: TextStyle(color: Colors.grey.shade400),
+        hintText: 'Password',
+        hintStyle: TextStyle(color: Colors.grey.shade400),
         filled: true,
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20.0),
+          ),
+        ),
       ),
     );
   }
@@ -141,15 +169,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updateConfirmPassword,
       style: TextStyle(
-        color: Colors.white,
+        color: Colors.black54,
         fontWeight: FontWeight.w600,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
-        labelText: 'Re-enter your password',
-        labelStyle: TextStyle(color: Colors.white),
+        prefixIcon: Icon(Icons.lock),
+        labelText: 'Re-Enter Password',
         errorText: model.passwordErrorText,
-        fillColor: Colors.white.withOpacity(0.10),
+        alignLabelWithHint: true,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        labelStyle: TextStyle(color: Colors.grey.shade400),
+        hintText: 'Re-Enter Password',
+        hintStyle: TextStyle(color: Colors.grey.shade400),
         filled: true,
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20.0),
+          ),
+        ),
       ),
     );
   }
@@ -203,7 +242,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           tag: 'logo',
                           child: Container(
                             height: 150.0,
-                            child: Image.asset('assets/images/MLogoWhite.png'),
+                            child: Image.asset('assets/images/MLogoPink.png'),
                           ),
                         ),
                         Padding(
@@ -240,9 +279,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 _submit();
                               }
                             },
-                            title: 'NEXT',
+                            title: 'Next',
                             buttonColor: kMentorXPrimary,
                             fontColor: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                             minWidth: 500.0,
                           ),
                         ),
@@ -252,8 +293,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             Text(
                               'Already have an account?  ',
                               softWrap: true,
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w300),
                             ),
                             InkWell(
                               child: Text(
@@ -261,8 +304,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 softWrap: true,
                                 style: TextStyle(
                                     fontSize: 20,
-                                    color: kMentorXPrimary,
-                                    fontWeight: FontWeight.w600),
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
                               ),
                               onTap: () => widget._signInWithEmail(context),
                             ),

@@ -4,6 +4,7 @@ import 'package:mentorx_mvp/components/apptheme.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/authentication/login_screen.dart';
+import 'package:mentorx_mvp/screens/authentication/reset_password_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/welcome_screen.dart';
 import 'package:mentorx_mvp/screens/chat/chat_screen.dart';
 import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
@@ -77,6 +78,7 @@ class MentorX extends StatelessWidget {
           ProgramJoinRequest.id: (context) => ProgramJoinRequest(),
           ProgramLaunchScreen.id: (context) => ProgramLaunchScreen(),
           MentorConfirm.id: (context) => MentorConfirm(),
+          ResetPasswordScreen.id: (context) => ResetPasswordScreen(),
         },
       ),
     );

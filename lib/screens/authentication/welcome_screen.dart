@@ -102,8 +102,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     child: Hero(
                       tag: 'logo',
                       child: Container(
-                        child: Image.asset('assets/images/MLogoWhite.png'),
-                        height: 200,
+                        child: Image.asset('assets/images/MentorWhite.png'),
+                        height: 350,
                       ),
                     ),
                   ),
@@ -117,6 +117,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 buttonColor: kMentorXPrimary,
                 fontColor: Colors.white,
                 fontSize: 20.0,
+                fontWeight: FontWeight.bold,
                 onPressed: () => widget._signInWithEmail(context),
                 minWidth: 250.0,
               ),
@@ -125,6 +126,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 buttonColor: Colors.white,
                 fontColor: kMentorXPrimary,
                 fontSize: 20.0,
+                fontWeight: FontWeight.bold,
                 onPressed: () => widget._createNewUser(context),
                 minWidth: 250.0,
               ),

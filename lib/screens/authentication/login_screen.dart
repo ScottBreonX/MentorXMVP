@@ -4,12 +4,13 @@ import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/models/login_model.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
-import 'package:mentorx_mvp/screens/authentication/registration_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:provider/provider.dart';
+
+import 'forgot_password_screen.dart';
 
 class LoginScreenBlocBased extends StatefulWidget {
   const LoginScreenBlocBased({Key key, @required this.bloc}) : super(key: key);
@@ -27,12 +28,12 @@ class LoginScreenBlocBased extends StatefulWidget {
     );
   }
 
-  void _createNewUser(BuildContext context) {
+  void _forgotPassword(BuildContext context) {
     Provider.of<AuthBase>(context, listen: false);
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => RegistrationScreen.create(context),
+        builder: (context) => ForgotPasswordScreen.create(context),
       ),
     );
   }
@@ -74,17 +75,26 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
       textAlign: TextAlign.center,
       onChanged: widget.bloc.updateEmail,
       style: TextStyle(
-        color: Colors.white,
+        color: Colors.black54,
         fontWeight: FontWeight.w600,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
-        labelText: 'Enter your email',
-        labelStyle: TextStyle(color: Colors.white),
+        prefixIcon: Icon(Icons.email),
+        labelText: 'Email',
+        alignLabelWithHint: true,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        labelStyle: TextStyle(color: Colors.grey.shade400),
         hintText: 'email@domain.com',
-        errorText: model.emailErrorText,
+        hintStyle: TextStyle(color: Colors.grey.shade400),
         filled: true,
-        fillColor: Colors.white.withOpacity(0.05),
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20.0),
+          ),
+        ),
       ),
     );
   }
@@ -97,15 +107,26 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updatePassword,
       style: TextStyle(
-        color: Colors.white,
+        color: Colors.black54,
         fontWeight: FontWeight.w600,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
-        labelText: 'Enter your password',
-        labelStyle: TextStyle(color: Colors.white),
+        prefixIcon: Icon(Icons.lock),
+        labelText: 'Password',
         errorText: model.passwordErrorText,
+        alignLabelWithHint: true,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        labelStyle: TextStyle(color: Colors.grey.shade400),
+        hintText: 'Password',
+        hintStyle: TextStyle(color: Colors.grey.shade400),
         filled: true,
-        fillColor: Colors.white.withOpacity(0.05),
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20.0),
+          ),
+        ),
       ),
     );
   }
@@ -152,14 +173,11 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        SizedBox(
-                          height: 0,
-                        ),
                         Hero(
                           tag: 'logo',
                           child: Container(
                             height: 150.0,
-                            child: Image.asset('assets/images/MLogoWhite.png'),
+                            child: Image.asset('assets/images/MLogoPink.png'),
                           ),
                         ),
                         SizedBox(
@@ -188,12 +206,16 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                               const EdgeInsets.only(left: 10.0, right: 10.0),
                           child: RoundedButton(
                             onPressed: model.canSubmit ? _submit : null,
-                            title: 'LOG IN',
+                            title: 'Log In',
                             buttonColor: model.canSubmit
                                 ? kMentorXPrimary
-                                : Colors.white.withOpacity(0.5),
+                                : Colors.grey.withOpacity(0.9),
                             minWidth: 500,
-                            fontColor: Colors.white,
+                            fontColor: model.canSubmit
+                                ? Colors.white
+                                : Colors.grey.shade400,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
                         ),
                         SizedBox(
@@ -202,20 +224,15 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              'Need an account? ',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
-                            ),
                             InkWell(
                               child: Text(
-                                'Register',
+                                'Forgot Password',
                                 style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600),
                               ),
-                              onTap: () => widget._createNewUser(context),
+                              onTap: () => widget._forgotPassword(context),
                             ),
                           ],
                         ),
