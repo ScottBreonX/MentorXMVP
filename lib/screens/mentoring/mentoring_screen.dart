@@ -85,7 +85,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
     QuerySnapshot _snapshot;
     return FutureBuilder(
       future: isMentor
-          ? mentorsRef.doc(loggedInUser.id).collection('userMentoring').get()
+          ? mentorsRef.doc(loggedInUser.id).collection('userMentees').get()
           : menteesRef.doc(loggedInUser.id).collection('userMentors').get(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
