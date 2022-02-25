@@ -19,8 +19,8 @@ class AvailableProgramsScreen extends StatefulWidget {
 }
 
 class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
-  TextEditingController searchController = TextEditingController();
-  String searchString;
+  // TextEditingController searchController = TextEditingController();
+  // String searchString;
   bool showSpinner = false;
 
   @override
@@ -28,49 +28,49 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
     super.initState();
   }
 
-  clearSearch() {
-    searchController.clear();
-    setState(() {
-      searchString = null;
-    });
-  }
+  // clearSearch() {
+  //   searchController.clear();
+  //   setState(() {
+  //     searchString = null;
+  //   });
+  // }
 
-  handleSearch(String query) {
-    String _query = query;
-    setState(() {
-      searchString = _query;
-    });
-  }
+  // handleSearch(String query) {
+  //   String _query = query;
+  //   setState(() {
+  //     searchString = _query;
+  //   });
+  // }
 
-  AppBar buildSearchField() {
-    return AppBar(
-      title: Container(
-        width: double.infinity,
-        height: 40,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
-        child: TextFormField(
-          style: Theme.of(context).textTheme.subtitle2,
-          controller: searchController,
-          decoration: InputDecoration(
-            hintText: 'Search for a program...',
-            hintStyle: Theme.of(context).textTheme.subtitle2,
-            filled: true,
-            fillColor: Colors.white,
-            prefixIcon: Icon(
-              Icons.account_box,
-              size: 30,
-            ),
-            suffixIcon: IconButton(
-              icon: Icon(Icons.clear),
-              onPressed: clearSearch,
-            ),
-          ),
-//           onFieldSubmitted: handleSearch),
-          onFieldSubmitted: handleSearch,
-        ),
-      ),
-    );
-  }
+//   AppBar buildSearchField() {
+//     return AppBar(
+//       title: Container(
+//         width: double.infinity,
+//         height: 40,
+//         decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
+//         child: TextFormField(
+//           style: Theme.of(context).textTheme.subtitle2,
+//           controller: searchController,
+//           decoration: InputDecoration(
+//             hintText: 'Search for a program...',
+//             hintStyle: Theme.of(context).textTheme.subtitle2,
+//             filled: true,
+//             fillColor: Colors.white,
+//             prefixIcon: Icon(
+//               Icons.account_box,
+//               size: 30,
+//             ),
+//             suffixIcon: IconButton(
+//               icon: Icon(Icons.clear),
+//               onPressed: clearSearch,
+//             ),
+//           ),
+// //           onFieldSubmitted: handleSearch),
+//           onFieldSubmitted: handleSearch,
+//         ),
+//       ),
+//     );
+//   }
 
   buildProgramListContent() {
     return ModalProgressHUD(
@@ -83,9 +83,13 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Available Programs',
+                'All Available Programs',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline1,
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.headline3.color,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               SizedBox(
                 height: 10,
@@ -97,19 +101,20 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
                 thickness: 2,
               ),
               SizedBox(
-                height: 35,
+                height: 20,
               ),
               Text(
-                'Mentor+ Career Programs',
+                'University Specific Programs',
                 style: TextStyle(
-                  fontSize: 18,
+                  color: Theme.of(context).textTheme.headline4.color,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Flexible(
                 child: AvailableProgramsStream(
-                  searchString: searchString,
-                  type: 'mentorX',
+                  // searchString: searchString,
+                  type: 'school',
                 ),
               ),
               Divider(
@@ -119,16 +124,17 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
                 thickness: 2,
               ),
               Text(
-                'School Mentorship Programs',
+                'Mentor+ Career Programs',
                 style: TextStyle(
-                  fontSize: 18,
+                  color: Theme.of(context).textTheme.headline4.color,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Flexible(
                 child: AvailableProgramsStream(
-                  searchString: searchString,
-                  type: 'school',
+                  // searchString: searchString,
+                  type: 'mentorX',
                 ),
               ),
             ],
@@ -141,7 +147,11 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildSearchField(),
+      // appBar: buildSearchField(),
+      appBar: AppBar(
+        elevation: 5,
+        title: Text('Available Programs'),
+      ),
       body: buildProgramListContent(),
     );
   }
@@ -150,11 +160,11 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
 // building class for stream of Available Programs
 
 class AvailableProgramsStream extends StatelessWidget {
-  final String searchString;
+  // final String searchString;
   final String type;
 
   AvailableProgramsStream({
-    this.searchString,
+    // this.searchString,
     this.type,
   });
 
@@ -164,23 +174,25 @@ class AvailableProgramsStream extends StatelessWidget {
         .collection('institutions')
         .where('type', isEqualTo: type)
         .snapshots();
-    var strStart = searchString == null
-        ? null
-        : searchString.substring(0, searchString.length - 1);
-    var strEnd = searchString == null
-        ? null
-        : String.fromCharCode(searchString.characters.last.codeUnitAt(0) + 1);
-    var limit = searchString != null ? (strStart + strEnd) : null;
 
-    Stream searchStream = _firestore
-        .collection('institutions')
-        .where('type', isEqualTo: type)
-        .where('programName', isGreaterThanOrEqualTo: searchString)
-        .where('programName', isLessThan: limit)
-        .snapshots();
+    // var strStart = searchString == null
+    //     ? null
+    //     : searchString.substring(0, searchString.length - 1);
+    // var strEnd = searchString == null
+    //     ? null
+    //     : String.fromCharCode(searchString.characters.last.codeUnitAt(0) + 1);
+    // var limit = searchString != null ? (strStart + strEnd) : null;
+
+    // Stream searchStream = _firestore
+    //     .collection('institutions')
+    //     .where('type', isEqualTo: type)
+    //     .where('programName', isGreaterThanOrEqualTo: searchString)
+    //     .where('programName', isLessThan: limit)
+    //     .snapshots();
 
     return StreamBuilder<QuerySnapshot>(
-      stream: searchString == null ? programStream : searchStream,
+      // stream: searchString == null ? programStream : searchStream,
+      stream: programStream,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center();

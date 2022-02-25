@@ -24,11 +24,13 @@ class ProgramProfile extends StatefulWidget {
 
 class _ProgramProfileState extends State<ProgramProfile> {
   bool hasRequested = false;
+  bool hasJoined = false;
 
   @override
   void initState() {
     super.initState();
-    checkHasRequested();
+    // checkHasRequested();
+    checkHasJoined();
   }
 
   checkHasRequested() async {
@@ -42,6 +44,17 @@ class _ProgramProfileState extends State<ProgramProfile> {
     });
   }
 
+  checkHasJoined() async {
+    DocumentSnapshot doc = await programsRef
+        .doc(widget.programId)
+        .collection('userSubscribed')
+        .doc(loggedInUser.id)
+        .get();
+    setState(() {
+      hasJoined = doc.exists;
+    });
+  }
+
   Widget build(BuildContext context) {
     Container buildButton({String text, Function function}) {
       return Container(
@@ -49,10 +62,16 @@ class _ProgramProfileState extends State<ProgramProfile> {
         child: RoundedButton(
           onPressed: function,
           title: text,
-          buttonColor: hasRequested
+          // buttonColor: hasRequested
+          //     ? Colors.grey
+          //     : Theme.of(context).buttonTheme.colorScheme.primary,
+          buttonColor: hasJoined
               ? Colors.grey
               : Theme.of(context).buttonTheme.colorScheme.primary,
-          fontColor: hasRequested
+          // fontColor: hasRequested
+          //     ? Colors.grey[700]
+          //     : Theme.of(context).textTheme.button.color,
+          fontColor: hasJoined
               ? Colors.grey[700]
               : Theme.of(context).textTheme.button.color,
           fontSize: 24,
@@ -61,15 +80,29 @@ class _ProgramProfileState extends State<ProgramProfile> {
       );
     }
 
+    // buildJoinButton(Program program) {
+    //   if (!hasRequested) {
+    //     return buildButton(
+    //       text: "Want to Join?",
+    //       function: () => navigateSecondPage(program),
+    //     );
+    //   } else if (hasRequested) {
+    //     return buildButton(
+    //       text: "You have requested to join.",
+    //       function: () {},
+    //     );
+    //   }
+    // }
+
     buildJoinButton(Program program) {
-      if (!hasRequested) {
+      if (!hasJoined) {
         return buildButton(
           text: "Want to Join?",
           function: () => navigateSecondPage(program),
         );
-      } else if (hasRequested) {
+      } else if (hasJoined) {
         return buildButton(
-          text: "You have requested to join.",
+          text: "You have already joined.",
           function: () {},
         );
       }
@@ -134,7 +167,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: Colors.grey,
+                              color: Colors.grey[200],
                             ),
                             height: 45,
                             child: Padding(
@@ -146,7 +179,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                 '${program.enrollmentType.toUpperCase()}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 30,
+                                  fontSize: 32,
                                   color: Theme.of(context)
                                       .textTheme
                                       .headline4
@@ -174,9 +207,10 @@ class _ProgramProfileState extends State<ProgramProfile> {
                           ),
                           SizedBox(height: 5),
                           Container(
-                            alignment: Alignment.center,
+                            height: 150,
+                            alignment: Alignment.topLeft,
                             decoration: BoxDecoration(
-                              color: Colors.grey,
+                              color: Colors.grey[200],
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Padding(
@@ -184,15 +218,17 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                 horizontal: 10,
                                 vertical: 5,
                               ),
-                              child: Text(
-                                '${program.aboutProgram}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 30,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .headline4
-                                      .color,
+                              child: SingleChildScrollView(
+                                child: Text(
+                                  '${program.aboutProgram}',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .headline4
+                                        .color,
+                                  ),
                                 ),
                               ),
                             ),
@@ -210,7 +246,8 @@ class _ProgramProfileState extends State<ProgramProfile> {
   }
 
   void refreshData() {
-    checkHasRequested();
+    // checkHasRequested();
+    checkHasJoined();
   }
 
   FutureOr onGoBack(dynamic value) {

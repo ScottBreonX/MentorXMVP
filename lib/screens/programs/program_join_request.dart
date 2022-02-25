@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
 
 class ProgramJoinRequest extends StatefulWidget {
   static String id = 'program_join_request';
@@ -24,21 +24,35 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
   final TextEditingController codeController = TextEditingController();
   String programCode;
   bool hasRequested = false;
+  bool hasJoined = false;
 
   @override
   void initState() {
     super.initState();
-    checkHasRequested();
+    // checkHasRequested();
+    checkHasJoined();
   }
 
-  checkHasRequested() async {
+  // for use when turning "request to join" feature on
+  // checkHasRequested() async {
+  //   DocumentSnapshot doc = await programsRef
+  //       .doc(widget.program.id)
+  //       .collection('userRequested')
+  //       .doc(loggedInUser.id)
+  //       .get();
+  //   setState(() {
+  //     hasRequested = doc.exists;
+  //   });
+  // }
+
+  checkHasJoined() async {
     DocumentSnapshot doc = await programsRef
         .doc(widget.program.id)
-        .collection('userRequested')
+        .collection('userSubscribed')
         .doc(loggedInUser.id)
         .get();
     setState(() {
-      hasRequested = doc.exists;
+      hasJoined = doc.exists;
     });
   }
 
@@ -59,35 +73,111 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
       });
     }
 
+    // Container buildButton({String text, Function function}) {
+    //   return Container(
+    //     padding: EdgeInsets.only(top: 2.0),
+    //     child: RoundedButton(
+    //       onPressed: function,
+    //       title: text,
+    //       buttonColor: hasRequested
+    //           ? Colors.grey
+    //           : Theme.of(context).buttonTheme.colorScheme.primary,
+    //       fontColor: hasRequested
+    //           ? Colors.grey[700]
+    //           : Theme.of(context).textTheme.button.color,
+    //       fontSize: 20,
+    //       minWidth: MediaQuery.of(context).size.width * 0.77,
+    //     ),
+    //   );
+    // }
+
     Container buildButton({String text, Function function}) {
       return Container(
         padding: EdgeInsets.only(top: 2.0),
         child: RoundedButton(
           onPressed: function,
           title: text,
-          buttonColor: hasRequested
+          buttonColor: hasJoined
               ? Colors.grey
               : Theme.of(context).buttonTheme.colorScheme.primary,
-          fontColor: hasRequested
+          fontColor: hasJoined
               ? Colors.grey[700]
               : Theme.of(context).textTheme.button.color,
-          fontSize: 24,
+          fontSize: 20,
           minWidth: MediaQuery.of(context).size.width * 0.77,
         ),
       );
     }
 
-    requestJoin() {
+    // enable for request to join feature
+    // requestJoin() {
+    //   handleCode(codeController.text);
+    //   if (programCode == _program.programCode) {
+    //     setState(() {
+    //       hasRequested = true;
+    //     });
+    //     programsRef
+    //         .doc(widget.program.id)
+    //         .collection('userRequested')
+    //         .doc(loggedInUser.id)
+    //         .set({});
+    //   } else {
+    //     showDialog(
+    //       context: context,
+    //       builder: (_) => AlertDialog(
+    //         title:
+    //             Text('The program code does not match. \n Please try again.'),
+    //         actions: [
+    //           TextButton(
+    //             child: Text(
+    //               "Okay",
+    //               style: TextStyle(
+    //                 fontSize: 18,
+    //                 fontWeight: FontWeight.bold,
+    //               ),
+    //             ),
+    //             onPressed: () => Navigator.pop(context),
+    //           ),
+    //         ],
+    //       ),
+    //       barrierDismissible: true,
+    //     );
+    //   }
+    // }
+
+    joinProgram() {
       handleCode(codeController.text);
       if (programCode == _program.programCode) {
         setState(() {
-          hasRequested = true;
+          hasJoined = true;
         });
         programsRef
             .doc(widget.program.id)
-            .collection('userRequested')
+            .collection('userSubscribed')
             .doc(loggedInUser.id)
             .set({});
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: Text('Congratulations! You have signed up for the \ '
+                '${_program.programName} mentorship program. You should now \ '
+                'head to your program landing page and select your role in \ '
+                'the program.'),
+            actions: [
+              TextButton(
+                child: Text('Go There Now!'),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    maintainState: false,
+                    builder: (context) => MentoringScreen(),
+                  ),
+                ),
+              )
+            ],
+          ),
+          barrierDismissible: true,
+        );
       } else {
         showDialog(
           context: context,
@@ -112,24 +202,39 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
       }
     }
 
-    buildRequestButton() {
-      if (hasRequested == false) {
+    // buildRequestButton() {
+    //   if (hasRequested == false) {
+    //     return buildButton(
+    //       text: 'Request to Join',
+    //       function: requestJoin,
+    //     );
+    //   } else if (hasRequested == true) {
+    //     return buildButton(
+    //       text: 'Join Requested',
+    //       function: null,
+    //     );
+    //   }
+    // }
+
+    buildJoinButton() {
+      if (hasJoined == false) {
         return buildButton(
-          text: 'Request to Join',
-          function: requestJoin,
+          text: 'Join the Program',
+          function: joinProgram,
         );
-      } else if (hasRequested == true) {
+      } else if (hasJoined == true) {
         return buildButton(
-          text: 'Join Requested',
+          text: 'You have joined!',
           function: null,
         );
       }
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 5,
-        title: Text('Request to Join'),
+        title: Text('Join ${_program.programName}'),
       ),
       body: Container(
         child: Padding(
@@ -145,27 +250,28 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'Request to Join ${_program.institutionName}\'s \n '
+                    'Join ${_program.institutionName}\'s \n '
                     '${_program.programName} Program',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 26,
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).textTheme.bodyText1.color,
+                      color: Theme.of(context).textTheme.headline4.color,
                     ),
                   ),
-                  SizedBox(height: 15),
-                  !hasRequested
+                  SizedBox(height: 35),
+                  // !hasRequested
+                  !hasJoined
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Text(
                               'Enter program code:',
                               style: TextStyle(
-                                fontSize: 30,
+                                fontSize: 26,
                                 fontWeight: FontWeight.bold,
                                 color:
-                                    Theme.of(context).textTheme.bodyText1.color,
+                                    Theme.of(context).textTheme.headline4.color,
                               ),
                             ),
                             SizedBox(height: 5),
@@ -188,7 +294,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                           ],
                         )
                       : Text(
-                          'You Have Requested to Join!',
+                          'You have joined the program!',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 24,
@@ -197,12 +303,14 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                         ),
                 ],
               ),
-              SizedBox(height: 35),
+              SizedBox(height: 10),
               Expanded(
                 child: Column(
                   children: [
-                    buildRequestButton(),
-                    !hasRequested
+                    // buildRequestButton(),
+                    buildJoinButton(),
+                    // !hasRequested
+                    !hasJoined
                         ? RoundedButton(
                             onPressed: () => Navigator.pop(context),
                             title: 'Cancel',
@@ -210,8 +318,9 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                                 .buttonTheme
                                 .colorScheme
                                 .background,
-                            fontColor: Theme.of(context).textTheme.button.color,
-                            fontSize: 24,
+                            fontColor:
+                                Theme.of(context).textTheme.headline3.color,
+                            fontSize: 20,
                             borderColor: Theme.of(context).colorScheme.primary,
                             borderWidth: 5,
                             minWidth: MediaQuery.of(context).size.width * 0.77,
@@ -225,28 +334,30 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                 color: Theme.of(context).dividerColor,
               ),
               Text(
-                'Don\'t have a code? Contact the program administrator.',
+                'Don\'t have a code? Contact your program administrator.',
                 style: TextStyle(
-                  fontSize: 20,
-                  color: Theme.of(context).textTheme.bodyText2.color,
+                  fontSize: 16,
+                  color: Theme.of(context).textTheme.headline4.color,
                 ),
               ),
-              Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 8,
-                  ),
-                  child: Text(
-                    '${_program.headAdmin}',
-                    style: TextStyle(fontSize: 20, color: Colors.white70),
-                  ),
-                ),
-              ),
+              // uncomment the text below to add in a box containing the
+              // program admin's name for contact purposes
+              // Container(
+              //   alignment: Alignment.center,
+              //   decoration: BoxDecoration(
+              //     color: Colors.grey,
+              //   ),
+              //   child: Padding(
+              //     padding: const EdgeInsets.symmetric(
+              //       horizontal: 8,
+              //       vertical: 8,
+              //     ),
+              //     child: Text(
+              //       '${_program.headAdmin}',
+              //       style: TextStyle(fontSize: 20, color: Colors.white70),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
