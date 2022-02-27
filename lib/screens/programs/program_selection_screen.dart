@@ -84,7 +84,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                     },
                   ),
                   IconCard(
-                    cardText: 'University of Northern Iowa College of Business',
+                    cardText: 'University of Northern Iowa',
                     textSize: 10,
                     cardTextColor: Colors.black54,
                     cardColor: Theme.of(context).cardColor,
