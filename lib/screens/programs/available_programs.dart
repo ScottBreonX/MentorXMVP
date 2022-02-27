@@ -77,7 +77,7 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
       inAsyncCall: showSpinner,
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 25, 0, 25),
+          padding: const EdgeInsets.fromLTRB(0, 25, 0, 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -86,8 +86,8 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
                 'All Available Programs',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Theme.of(context).textTheme.headline3.color,
-                  fontSize: 28,
+                  color: Theme.of(context).textTheme.headline4.color,
+                  fontSize: 32,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -107,14 +107,17 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
                 'University Specific Programs',
                 style: TextStyle(
                   color: Theme.of(context).textTheme.headline4.color,
-                  fontSize: 24,
+                  fontSize: 26,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Flexible(
-                child: AvailableProgramsStream(
-                  // searchString: searchString,
-                  type: 'school',
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 40),
+                  child: AvailableProgramsStream(
+                    // searchString: searchString,
+                    type: 'school',
+                  ),
                 ),
               ),
               Divider(
@@ -123,18 +126,24 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
                 indent: 75,
                 thickness: 2,
               ),
+              SizedBox(
+                height: 20,
+              ),
               Text(
                 'Mentor+ Career Programs',
                 style: TextStyle(
                   color: Theme.of(context).textTheme.headline4.color,
-                  fontSize: 24,
+                  fontSize: 26,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Flexible(
-                child: AvailableProgramsStream(
-                  // searchString: searchString,
-                  type: 'mentorX',
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 40),
+                  child: AvailableProgramsStream(
+                    // searchString: searchString,
+                    type: 'mentorX',
+                  ),
                 ),
               ),
             ],

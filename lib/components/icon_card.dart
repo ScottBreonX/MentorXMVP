@@ -58,35 +58,32 @@ class IconCard extends StatelessWidget {
               BoxShadow(
                 color: Colors.grey[700],
                 blurRadius: 5,
-                offset: Offset(5, 5),
+                offset: Offset(0, 7),
               ),
             ],
             color: cardColor,
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                imageAsset ??
-                    Icon(
-                      cardIcon ?? Icons.person,
-                      color: cardIconColor,
-                      size: iconSize ?? 80,
-                    ),
-                SizedBox(
-                  height: textSpacingHeight ?? 5,
-                ),
-                Text(
-                  cardText ?? '',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: cardTextColor,
-                    fontSize: textSize ?? 20,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              imageAsset ??
+                  Icon(
+                    cardIcon ?? Icons.person,
+                    color: cardIconColor,
+                    size: iconSize ?? 80,
                   ),
-                )
-              ],
-            ),
+              SizedBox(
+                height: textSpacingHeight ?? 5,
+              ),
+              Text(
+                cardText ?? '',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: cardTextColor,
+                  fontSize: textSize ?? 20,
+                ),
+              )
+            ],
           ),
           height: boxHeight ?? 150,
           width: boxWidth ?? 150,
