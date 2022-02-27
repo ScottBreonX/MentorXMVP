@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
+import 'package:mentorx_mvp/components/program_card.dart';
+import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/available_mentors.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
-import 'package:mentorx_mvp/services/database.dart';
+import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
+import 'package:mentorx_mvp/screens/programs/available_programs.dart';
+import '../../components/connection_card.dart';
+import '../../components/progress.dart';
+import '../launch_screen.dart';
 
-class MentorLaunch extends StatefulWidget {
+class MentorLaunchScreen extends StatefulWidget {
   final myUser loggedInUser;
 
-  MentorLaunch({
-    this.database,
+  const MentorLaunchScreen({
+    Key key,
     this.loggedInUser,
-  });
+  }) : super(key: key);
 
   static const String id = 'mentor_launch_screen';
-  final Database database;
 
   @override
-  _MentorLaunchState createState() => _MentorLaunchState();
+  _MentorLaunchScreenState createState() => _MentorLaunchScreenState();
 }
 
-class _MentorLaunchState extends State<MentorLaunch> {
+class _MentorLaunchScreenState extends State<MentorLaunchScreen> {
   @override
   void initState() {
     super.initState();
@@ -29,110 +32,198 @@ class _MentorLaunchState extends State<MentorLaunch> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 5,
-        title: Text('Mentoring'),
-      ),
-      body: Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 2,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Container(
-                      child: Image.asset(
-                        'assets/images/UMichLogo.png',
-                        height: 200,
-                      ),
-                    ),
-                  ),
-                  Flexible(
-                    child: Center(
-                      child: Text(
-                        'University of Michigan',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headline1,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: Center(
-                          child: Text(
-                            'Mentorship Program',
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
+    final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
+
+    return FutureBuilder<Object>(
+        future: usersRef.doc(loggedInUser.id).get(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return circularProgress();
+          }
+          return Scaffold(
+            appBar: AppBar(
+              elevation: 5,
+              title: Text('Mentor+'),
             ),
-            Divider(),
-            Column(
-              children: [
-                Wrap(
+            body: SingleChildScrollView(
+              child: Container(
+                child: Column(
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 20.0,
+                        bottom: 10.0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  'assets/images/UNILogo.png',
+                                  height: 120,
+                                ),
+                                Text(
+                                  'UNI College of Business',
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.headline4,
+                                ),
+                                Text(
+                                  'Mentorship Program',
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.headline4,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Divider(
+                      thickness: 2,
+                      color: Colors.grey,
+                      indent: 20,
+                      endIndent: 20,
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 10.0,
+                            top: 10,
+                          ),
+                          child: Text(
+                            'Connections',
+                            style: Theme.of(context).textTheme.headline1,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RoundedButton(
+                          title: 'View Available Mentors',
+                          buttonColor: Colors.pink,
+                          fontColor: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AvailableMentorsScreen(
+                                  loggedInUser: widget.loggedInUser,
+                                ),
+                              ),
+                            );
+                          },
+                          minWidth: 300,
+                        )
+                        // ConnectionCard(
+                        //   mentorClass: 'Mentor',
+                        //   mentorFName: 'Godric',
+                        //   mentorLName: 'Griffindor',
+                        // ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0, top: 20),
+                          child: Text(
+                            'Program Guides',
+                            style: Theme.of(context).textTheme.headline1,
+                          ),
+                        )
+                      ],
+                    ),
                     Container(
-                      child: IconCard(
-                        cardText: 'Mentoring',
-                        cardColor: Theme.of(context).cardColor,
-                        cardIcon: Icons.group,
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MentoringScreen(),
+                      height: 120,
+                      child: ListView(
+                        children: [
+                          Container(
+                            height: 120.0,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                ProgramCard(
+                                  programStartDate: 'This Week',
+                                  programEndDate: '',
+                                  programName: 'Resume 101',
+                                ),
+                                ProgramCard(
+                                  programStartDate: 'Next Week',
+                                  programEndDate: '',
+                                  programName: 'Initial Chat',
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
-                    IconCard(
-                      cardText: 'News Feed',
-                      cardColor: Theme.of(context).cardColor,
-                      cardIcon: Icons.article_outlined,
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LaunchScreen(pageIndex: 0),
-                        ),
-                      ),
-                    ),
-                    IconCard(
-                      cardText: 'Calendar',
-                      cardColor: Theme.of(context).cardColor,
-                      cardIcon: Icons.date_range,
-                      onTap: () {},
-                    ),
-                    IconCard(
-                      cardText: 'Program Info',
-                      cardColor: Theme.of(context).cardColor,
-                      cardIcon: Icons.info_outline,
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AvailableMentorsScreen(
-                            loggedInUser: widget.loggedInUser,
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0, top: 20),
+                          child: Text(
+                            'Resources',
+                            style: Theme.of(context).textTheme.headline1,
                           ),
-                        ),
+                        )
+                      ],
+                    ),
+                    Container(
+                      height: 120.0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconCard(
+                            cardColor: Colors.white,
+                            boxHeight: 110,
+                            boxWidth: 110,
+                            iconSize: 50,
+                            cardIconColor: Colors.black45,
+                            cardIcon: Icons.change_circle,
+                            cardText: 'Enrollment',
+                            textSize: 15,
+                            cardTextColor: Colors.black45,
+                          ),
+                          IconCard(
+                            cardColor: Colors.white,
+                            boxHeight: 110,
+                            boxWidth: 110,
+                            iconSize: 50,
+                            cardIconColor: Colors.black45,
+                            cardIcon: Icons.email_rounded,
+                            cardText: 'Contact Admin',
+                            textSize: 15,
+                            cardTextColor: Colors.black45,
+                          ),
+                          IconCard(
+                            cardColor: Colors.white,
+                            boxHeight: 110,
+                            boxWidth: 110,
+                            iconSize: 50,
+                            cardIconColor: Colors.black45,
+                            cardIcon: Icons.info_rounded,
+                            cardText: 'Program Info',
+                            textSize: 15,
+                            cardTextColor: Colors.black45,
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 80.0),
-              ],
+              ),
             ),
-          ],
-        ),
-      ),
-    );
+          );
+        });
   }
 }

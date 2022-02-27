@@ -9,7 +9,7 @@ class ProgramCard extends StatelessWidget {
     @required this.programEndDate,
   }) : super(key: key);
 
-  final Image programLogo;
+  final IconData programLogo;
   final String programName;
   final String programStartDate;
   final String programEndDate;
