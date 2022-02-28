@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/constants.dart';
@@ -13,11 +12,15 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/user.dart';
+import '../../services/database.dart';
+
 class RegistrationScreen extends StatefulWidget {
   RegistrationScreen({@required this.bloc});
 
   static const String id = 'registration_screen';
   final LoginBloc bloc;
+  final _auth = FirebaseAuth.instance;
 
   static Widget create(BuildContext context) {
     final auth = Provider.of<AuthBase>(context, listen: false);
@@ -57,9 +60,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     super.dispose();
   }
 
+  String uid;
+  String email;
+
   Future<void> _submit() async {
     try {
-      await widget.bloc.createUser();
+      await widget.bloc.createUser().then((_) {
+        uid = widget._auth.currentUser.uid;
+        email = widget._auth.currentUser.email;
+      });
       Navigator.of(context).popAndPushNamed(RegistrationProfileScreen.id);
     } on FirebaseAuthException catch (e) {
       print(e.toString());
@@ -94,6 +103,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         content: "Please enter a valid email and password",
         defaultActionText: "Ok",
       );
+    }
+  }
+
+  Future<void> _createProfile(BuildContext context) async {
+    try {
+      final database = FirestoreDatabase();
+      await database.createProfile(
+        myUser(
+          id: uid,
+          email: email,
+          firstName: '',
+          lastName: '',
+          major: '',
+          yearInSchool: '',
+          mentorSlots: 0,
+          aboutMe: '',
+          mentorAbout: '',
+          menteeAbout: '',
+          mentee: false,
+          mentor: false,
+        ),
+      );
+    } on FirebaseException catch (e) {
+      showAlertDialog(context,
+          title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
     }
   }
 
@@ -201,7 +235,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         initialData: LoginModel(),
         builder: (context, snapshot) {
           final LoginModel model = snapshot.data;
-          model.canSubmit;
+          // model.canSubmit;
 
           return Scaffold(
             extendBodyBehindAppBar: true,
@@ -276,7 +310,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   defaultActionText: "Ok",
                                 );
                               } else {
-                                _submit();
+                                _submit().then((_) {
+                                  _createProfile(context);
+                                });
                               }
                             },
                             title: 'Next',

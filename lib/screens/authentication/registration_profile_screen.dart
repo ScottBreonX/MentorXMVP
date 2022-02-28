@@ -8,6 +8,8 @@ import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
+import '../../components/progress.dart';
+
 class RegistrationProfileScreen extends StatefulWidget {
   static const String id = 'registration_profile_screen';
   @override
@@ -84,15 +86,25 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       textAlign: TextAlign.center,
       onChanged: (value) => firstName = value,
       style: TextStyle(
-        color: Colors.white,
+        color: Colors.black54,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
-        labelText: 'Enter your first name',
-        fillColor: Colors.white.withOpacity(0.05),
+        prefixIcon: Icon(Icons.person),
+        labelText: 'First Name',
+        alignLabelWithHint: true,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        labelStyle: TextStyle(color: Colors.grey.shade400),
+        hintStyle: TextStyle(color: Colors.grey.shade400),
         filled: true,
-//        errorText: model.emailErrorText,
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20.0),
+          ),
+        ),
       ),
     );
   }
@@ -105,15 +117,25 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       textAlign: TextAlign.center,
       onChanged: (value) => lastName = value,
       style: TextStyle(
-        color: Colors.white,
+        color: Colors.black54,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
-        labelText: 'Enter your last name',
-        fillColor: Colors.white.withOpacity(0.05),
+        prefixIcon: Icon(Icons.person),
+        labelText: 'Last Name',
+        alignLabelWithHint: true,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        labelStyle: TextStyle(color: Colors.grey.shade400),
+        hintStyle: TextStyle(color: Colors.grey.shade400),
         filled: true,
-//        errorText: model.emailErrorText,
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20.0),
+          ),
+        ),
       ),
     );
   }
@@ -121,6 +143,10 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
   @override
   Widget build(BuildContext context) {
     timeDilation = 2.0;
+
+    if (user.uid == null) {
+      return circularProgress();
+    }
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -175,12 +201,15 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                 ),
                 RoundedButton(
                   onPressed: () async {
-                    await _createProfile(context);
-                    Navigator.popAndPushNamed(context, LandingPage.id);
+                    await _createProfile(context).then((_) {
+                      Navigator.popAndPushNamed(context, LandingPage.id);
+                    });
                   },
                   title: 'Submit',
                   buttonColor: kMentorXPrimary,
                   fontColor: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                   minWidth: 500.0,
                 ),
               ],
