@@ -143,102 +143,38 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                       ),
                       Row(
                         children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                key: _formKey1,
-                                initialValue: user.firstName,
-                                textInputAction: TextInputAction.next,
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                                textAlign: TextAlign.start,
-                                onChanged: (value) => firstNameText = value,
-                                style: Theme.of(context).textTheme.subtitle2,
-                                autocorrect: false,
-                                decoration: kTextFieldDecoration.copyWith(
-                                  fillColor: Colors.white,
-                                  labelText: 'First Name',
-                                  labelStyle: TextStyle(
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                              ),
-                            ),
+                          coreProfileTextField(
+                            user,
+                            _formKey1,
+                            user.firstName,
+                            "First Name",
+                            (value) => firstNameText = value,
                           ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                key: _formKey2,
-                                initialValue: user.lastName,
-                                textInputAction: TextInputAction.next,
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                                textAlign: TextAlign.start,
-                                onChanged: (value) => lastNameText = value,
-                                style: Theme.of(context).textTheme.subtitle2,
-                                autocorrect: false,
-                                decoration: kTextFieldDecoration.copyWith(
-                                  fillColor: Colors.white,
-                                  labelText: 'Last Name',
-                                  labelStyle: TextStyle(
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                          coreProfileTextField(
+                            user,
+                            _formKey2,
+                            user.lastName,
+                            'Last Name',
+                            (value) => lastNameText = value,
+                          )
                         ],
                       ),
                       Row(
                         children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                key: _formKey3,
-                                initialValue: user.yearInSchool,
-                                textInputAction: TextInputAction.next,
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                                textAlign: TextAlign.start,
-                                onChanged: (value) => schoolYearText = value,
-                                style: Theme.of(context).textTheme.subtitle2,
-                                autocorrect: false,
-                                decoration: kTextFieldDecoration.copyWith(
-                                  fillColor: Colors.white,
-                                  labelText: 'Year in School',
-                                  labelStyle: TextStyle(
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                              ),
-                            ),
+                          coreProfileTextField(
+                            user,
+                            _formKey3,
+                            user.yearInSchool,
+                            'Year in School',
+                            (value) => schoolYearText = value,
                           ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                key: _formKey4,
-                                initialValue: user.major,
-                                textInputAction: TextInputAction.next,
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                                textAlign: TextAlign.start,
-                                onChanged: (value) => majorText = value,
-                                style: Theme.of(context).textTheme.subtitle2,
-                                autocorrect: false,
-                                decoration: kTextFieldDecoration.copyWith(
-                                  fillColor: Colors.white,
-                                  labelText: 'Field of Study',
-                                  labelStyle: TextStyle(
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                          coreProfileTextField(
+                            user,
+                            _formKey4,
+                            user.major,
+                            'Major',
+                            (value) => majorText = value,
+                          )
                         ],
                       ),
                     ],
@@ -294,6 +230,75 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
           ],
         );
       },
+    );
+  }
+
+  Expanded coreProfileTextField(myUser user, GlobalKey formKey,
+      String initialValue, String hintText, Function onChanged) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                hintText,
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  color: Colors.black45,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            Material(
+              elevation: 10,
+              shadowColor: Colors.black54,
+              borderRadius: BorderRadius.circular(20.0),
+              child: Column(
+                children: [
+                  TextFormField(
+                    key: formKey,
+                    initialValue: initialValue,
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    textAlign: TextAlign.start,
+                    onChanged: onChanged,
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    autocorrect: false,
+                    decoration: kTextFieldDecoration.copyWith(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 2.0),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10.0),
+                        ),
+                      ),
+                      alignLabelWithHint: true,
+                      hintText: hintText,
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      labelStyle: TextStyle(color: Colors.grey.shade400),
+                      hintStyle: TextStyle(color: Colors.grey.shade400),
+                      filled: true,
+                      fillColor: Colors.white,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue, width: 4.0),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -14,7 +14,6 @@ dependencies:
     sdk: flutter
 
   cupertino_icons:
-
   convex_bottom_bar:
   cloud_firestore:
   animated_text_kit:
@@ -28,6 +27,7 @@ dependencies:
   page_transition:
   dropdownfield:
   equatable:
+  image_picker:
 
 
 

@@ -1,5 +1,8 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mentorx_mvp/components/icon_circle.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
@@ -10,6 +13,7 @@ import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/core_profile_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/profile_mentor_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/work_experience.dart';
+import 'package:path/path.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 
@@ -25,6 +29,30 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final picker = ImagePicker();
+
+  Future pickImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _imageFile = File(pickedFile.path);
+    });
+  }
+
+  Future uploadImageToFirebase(BuildContext context) async {
+    String fileName = basename(_imageFile.path);
+    Reference firebaseStorageRef =
+        FirebaseStorage.instance.ref().child('profilePictures/$fileName');
+    UploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
+    TaskSnapshot taskSnapshot = await uploadTask;
+    taskSnapshot.ref.getDownloadURL().then(
+          (value) => print('Done: $value'),
+        );
+  }
+
+  //https://www.youtube.com/watch?v=nfrr5zdINSQ
+
+  File _imageFile;
   bool aboutMeEditStatus = false;
   bool coreProfileEditStatus = false;
   bool myProfileView = false;
@@ -110,14 +138,16 @@ class _ProfileState extends State<Profile> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
-                                    color: Theme.of(context).backgroundColor,
+                                    color: Colors.white,
                                   ),
-                                  height: 30.0,
-                                  width: 30.0,
+                                  height: 35.0,
+                                  width: 35.0,
                                   child: GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      pickImage();
+                                    },
                                     child: Icon(
-                                      Icons.photo_camera,
+                                      Icons.add_a_photo,
                                       color: Theme.of(context).iconTheme.color,
                                     ),
                                   ),
