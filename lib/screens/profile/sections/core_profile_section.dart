@@ -57,7 +57,7 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
       }
       if (schoolYearText != null) {
         await usersRef.doc(userID).update({
-          "Year In School": schoolYearText,
+          "Year in School": schoolYearText,
         });
       }
     } on FirebaseException catch (e) {

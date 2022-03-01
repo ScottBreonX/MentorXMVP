@@ -84,14 +84,16 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                     },
                   ),
                   IconCard(
-                    cardText: 'University of Michigan',
+                    cardText: 'University of Northern Iowa',
+                    textSize: 10,
+                    cardTextColor: Colors.black54,
                     cardColor: Theme.of(context).cardColor,
                     imageAsset: Image.asset(
-                      'assets/images/UMichLogo.png',
+                      'assets/images/UNILogo.png',
                       height: 60,
                     ),
                     onTap: () {
-                      Navigator.pushNamed(context, MentorLaunch.id);
+                      Navigator.pushNamed(context, MentorLaunchScreen.id);
                     },
                   ),
                   IconCard(
@@ -102,7 +104,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                       height: 60,
                     ),
                     onTap: () {
-                      Navigator.popAndPushNamed(context, MentorLaunch.id);
+                      Navigator.popAndPushNamed(context, MentorLaunchScreen.id);
                     },
                   ),
                   IconCard(
@@ -113,7 +115,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                       height: 60,
                     ),
                     onTap: () {
-                      Navigator.popAndPushNamed(context, MentorLaunch.id);
+                      Navigator.popAndPushNamed(context, MentorLaunchScreen.id);
                     },
                   ),
                 ],
