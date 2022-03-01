@@ -30,7 +30,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   List<Step> steps;
   int currentStep = 0;
   bool complete = false;
-  int mentorSlots = 1;
+  int mentorSlots = 2;
 
   List<String> skillsets = [
     'coding',
@@ -146,7 +146,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   }
 
   void _decrementCounter() {
-    if (mentorSlots > 1) {
+    if (mentorSlots > 2) {
       setState(() {
         mentorSlots--;
       });
@@ -321,11 +321,11 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
           ),
         ),
         isActive: currentStep == 0 ? true : false,
-        state: currentStep == 0
-            ? StepState.editing
-            : ((trait1 != null) & (trait2 != null) & (trait3 != null))
-                ? StepState.complete
-                : StepState.error,
+        // state: currentStep == 0
+        //     ? StepState.editing
+        //     : ((trait1 != null) & (trait2 != null) & (trait3 != null))
+        //         ? StepState.complete
+        //         : StepState.error,
         content: Column(
           children: [buildQuestionnaire()],
         ),
@@ -338,11 +338,11 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
           ),
         ),
         isActive: currentStep == 1 ? true : false,
-        state: currentStep == 1
-            ? StepState.editing
-            : ((hobby1 != null) & (hobby2 != null) & (hobby3 != null))
-                ? StepState.complete
-                : StepState.error,
+        // state: currentStep == 1
+        //     ? StepState.editing
+        //     : ((hobby1 != null) & (hobby2 != null) & (hobby3 != null))
+        //         ? StepState.complete
+        //         : StepState.error,
         content: Column(
           children: [buildHobbiesForm()],
         ),
@@ -355,11 +355,11 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
           ),
         ),
         isActive: currentStep == 2 ? true : false,
-        state: currentStep == 2
-            ? StepState.editing
-            : makesMeGreatController.text != ''
-                ? StepState.complete
-                : StepState.error,
+        // state: currentStep == 2
+        //     ? StepState.editing
+        //     : makesMeGreatController.text != ''
+        //         ? StepState.complete
+        //         : StepState.error,
         content: Column(
           children: [
             Text(
@@ -384,11 +384,11 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
           ),
         ),
         isActive: currentStep == 3 ? true : false,
-        state: currentStep == 3
-            ? StepState.editing
-            : makesMeGreatController.text != ''
-                ? StepState.complete
-                : StepState.error,
+        // state: currentStep == 3
+        //     ? StepState.editing
+        //     : makesMeGreatController.text != ''
+        //         ? StepState.complete
+        //         : StepState.error,
         content: Column(
           children: [
             Text(
@@ -550,7 +550,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
               : Expanded(
                   child: Stepper(
                     steps: buildStepList(steps),
-                    type: StepperType.horizontal,
+                    type: StepperType.vertical,
                     currentStep: currentStep,
                     onStepContinue: next,
                     onStepCancel: cancel,
