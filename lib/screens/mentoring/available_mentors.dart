@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mentorx_mvp/components/mentor_card.dart';
+import 'package:mentorx_mvp/models/mentor.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
@@ -104,6 +105,8 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
     );
   }
 
+  String _hobby1;
+
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: buildSearchField(),
@@ -162,16 +165,19 @@ class AvailableMentorsStream extends StatelessWidget {
           if (mentor.id == loggedInUser.id) {
             continue;
           }
-          myUser user = myUser.fromDocument(mentor);
+          Mentor mentorModel = Mentor.fromDocument(mentor);
 
           final mentorBubble = MentorCard(
             mentorUID: mentor.id.toString(),
-            mentorFname: user.firstName,
-            mentorLname: user.lastName,
-            mentorSlots: user.mentorSlots,
-            mentorEmail: user.email,
-            mentorMajor: user.major,
-            mentorYearInSchool: user.yearInSchool,
+            mentorFname: mentorModel.firstName,
+            mentorLname: mentorModel.lastName,
+            mentorSlots: mentorModel.mentorSlots,
+            mentorMajor: mentorModel.major,
+            mentorYearInSchool: mentorModel.yearInSchool,
+            mtrAtt1: mentorModel.mtrAtt1,
+            mtrAtt2: mentorModel.mtrAtt2,
+            mtrAtt3: mentorModel.mtrAtt3,
+            xFactor: mentorModel.xFactor,
             profileOnly: false,
           );
           mentorBubbles.add(mentorBubble);

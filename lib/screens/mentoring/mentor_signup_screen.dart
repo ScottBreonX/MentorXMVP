@@ -420,18 +420,18 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
     BuildContext context,
   ) async {
     try {
-      await mentorsRef.doc(loggedInUser.id).set({
+      await usersRef.doc(loggedInUser.id).update({
         "Mentor Attribute 1": trait1,
         "Mentor Attribute 2": trait2,
         "Mentor Attribute 3": trait3,
-        "Hobby 1": hobby1,
-        "Hobby 2": hobby2,
-        "Hobby 3": hobby3,
+        "Mtr Hobby 1": hobby1,
+        "Mtr Hobby 2": hobby2,
+        "Mtr Hobby 3": hobby3,
         "XFactor": makesMeGreatController.text,
-        "Mentor Slots": mentorSlots,
       });
       await usersRef.doc(loggedInUser.id).update({
         "Mentor": true,
+        "Mentor Slots": mentorSlots,
       });
       // re-fetch loggedInUser info to set Mentor status to true
       loggedInUser =
@@ -440,7 +440,6 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
     }
-    print('ATTRIBUTES UPDATED');
   }
 
   next() {

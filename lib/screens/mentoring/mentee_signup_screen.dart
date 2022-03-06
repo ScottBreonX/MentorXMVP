@@ -26,7 +26,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
   String hobby1;
   String hobby2;
   String hobby3;
-  TextEditingController makesMeGreatController = TextEditingController();
+  TextEditingController lookingFor = TextEditingController();
   List<Step> steps;
   int currentStep = 0;
   bool complete = false;
@@ -308,14 +308,14 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
         isActive: currentStep == 2 ? true : false,
         state: currentStep == 2
             ? StepState.editing
-            : makesMeGreatController.text != ''
+            : lookingFor.text != ''
                 ? StepState.complete
                 : StepState.error,
         content: Column(
           children: [
             buildFormField(
               hintString: 'What I\'m looking for in a mentor is...',
-              traitController: makesMeGreatController,
+              traitController: lookingFor,
               minLines: 7,
             ),
           ],
@@ -330,14 +330,14 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
     BuildContext context,
   ) async {
     try {
-      await menteesRef.doc(loggedInUser.id).set({
+      await usersRef.doc(loggedInUser.id).update({
         "Mentee Attribute 1": trait1,
         "Mentee Attribute 2": trait2,
         "Mentee Attribute 3": trait3,
         "Hobby 1": hobby1,
         "Hobby 2": hobby2,
         "Hobby 3": hobby3,
-        "LookingFor": makesMeGreatController.text,
+        "LookingFor": lookingFor.text,
       });
       await usersRef.doc(loggedInUser.id).update({
         "Mentee": true,
@@ -361,7 +361,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
         (hobby1 != '') &
         (hobby2 != '') &
         (hobby3 != '') &
-        (makesMeGreatController.text != '')) {
+        (lookingFor.text != '')) {
       setState(() => complete = true);
       _updateMenteeAttributes(context);
     } else {
