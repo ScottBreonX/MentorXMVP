@@ -201,6 +201,24 @@ class _ProfileState extends State<Profile> {
                         color: Colors.grey,
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20.0),
+                      child: WorkExperienceSection(
+                        profileId: user.id,
+                        myProfileView: myProfileView,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 8.0,
+                        right: 8.0,
+                        top: 15.0,
+                      ),
+                      child: const Divider(
+                        thickness: 4,
+                        color: Colors.grey,
+                      ),
+                    ),
                     Row(
                       children: [
                         Padding(
@@ -217,49 +235,15 @@ class _ProfileState extends State<Profile> {
                       myProfileView: myProfileView,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      padding: const EdgeInsets.only(
+                        left: 8.0,
+                        right: 8.0,
+                        top: 15.0,
+                      ),
                       child: const Divider(
                         thickness: 4,
                         color: Colors.grey,
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 8.0, top: 8.0, bottom: 10.0),
-                          child: Text(
-                            'Work Experience',
-                            style: Theme.of(context).textTheme.headline3,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 20.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {});
-                            },
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.pink,
-                              size: 30,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    WorkExperienceSection(
-                      profileId: user.id,
-                      myProfileView: myProfileView,
-                    ),
-                    WorkExperienceSection(
-                      profileId: user.id,
-                      myProfileView: myProfileView,
-                    ),
-                    WorkExperienceSection(
-                      profileId: user.id,
-                      myProfileView: myProfileView,
                     ),
                   ],
                 ),

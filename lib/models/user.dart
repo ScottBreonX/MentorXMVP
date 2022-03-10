@@ -9,6 +9,7 @@ class myUser {
   final String yearInSchool;
   final int mentorSlots;
   final String aboutMe;
+  final String workExperience;
   final String mentorAbout;
   final String menteeAbout;
   final bool mentor;
@@ -23,6 +24,7 @@ class myUser {
       this.yearInSchool,
       this.mentorSlots,
       this.aboutMe,
+      this.workExperience,
       this.mentorAbout,
       this.menteeAbout,
       this.mentor,
@@ -38,6 +40,7 @@ class myUser {
       yearInSchool: doc['Year in School'],
       mentorSlots: doc['Mentor Slots'],
       aboutMe: doc['About Me'],
+      workExperience: doc['Work Experience'],
       mentorAbout: doc['Mentoring About'],
       menteeAbout: doc['Mentee About'],
       mentor: doc['Mentor'],
@@ -54,6 +57,7 @@ class myUser {
       'Year in School': yearInSchool,
       'Mentor Slots': mentorSlots,
       'About Me': aboutMe,
+      'Work Experience': workExperience,
       'Mentoring About': mentorAbout,
       'Mentee About': menteeAbout,
       'Mentor': mentor,

@@ -29,6 +29,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
   String yearInSchool;
   int mentorSlots;
   String aboutMe;
+  String workExperience;
   String mentorAbout;
   String menteeAbout;
   bool mentor;
@@ -66,6 +67,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
           yearInSchool: yearInSchool ?? '',
           mentorSlots: mentorSlots ?? 0,
           aboutMe: aboutMe ?? '',
+          workExperience: workExperience ?? '',
           mentorAbout: mentorAbout ?? '',
           menteeAbout: menteeAbout ?? '',
           mentee: false,
