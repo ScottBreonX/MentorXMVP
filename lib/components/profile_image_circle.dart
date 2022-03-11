@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ProfileImageCircle extends StatelessWidget {
+class ProfileImageCircle extends StatefulWidget {
   const ProfileImageCircle({
     @required this.iconSize,
     @required this.circleSize,
+    this.profileImage,
     this.circleColor,
     this.iconColor = Colors.white,
     this.onTap,
@@ -13,43 +14,29 @@ class ProfileImageCircle extends StatelessWidget {
   final double circleSize;
   final Color circleColor;
   final Color iconColor;
+  final String profileImage;
   final Function onTap;
 
   @override
+  State<ProfileImageCircle> createState() => _ProfileImageCircleState();
+}
 
-  // replaced the code below; NK - 11/22/21
-  // Widget build(BuildContext context) {
-  //   return Container(
-  //     decoration: BoxDecoration(
-  //       shape: BoxShape.circle,
-  //     ),
-  //     child: CircleAvatar(
-  //       backgroundColor: circleColor,
-  //       radius: circleSize ?? 50,
-  //       child: CircleAvatar(
-  //         backgroundColor: circleColor,
-  //         radius: 45,
-  //         child: Icon(
-  //           Icons.person,
-  //           color: iconColor,
-  //           size: iconSize,
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
+class _ProfileImageCircleState extends State<ProfileImageCircle> {
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: circleSize * 2,
-      width: circleSize * 2,
+      height: widget.circleSize * 2,
+      width: widget.circleSize * 2,
       child: RawMaterialButton(
-        onPressed: onTap,
-        fillColor: circleColor ?? Theme.of(context).canvasColor,
-        child: Icon(
+        onPressed: widget.onTap,
+        fillColor: widget.circleColor ?? Theme.of(context).canvasColor,
+        child:
+            // CircleAvatar(backgroundImage: NetworkImage(widget.profileImage)),
+
+            Icon(
           Icons.person,
-          color: iconColor,
-          size: iconSize,
+          color: widget.iconColor,
+          size: widget.iconSize,
         ),
         padding: EdgeInsets.all(15.0),
         shape: CircleBorder(),

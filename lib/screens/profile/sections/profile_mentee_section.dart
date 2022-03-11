@@ -33,7 +33,7 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
   String menteeText;
   final _formKey1 = GlobalKey<FormState>();
 
-  TextFormField _buildMentorTextField(String userMenteeText) {
+  TextFormField _buildMenteeTextField(String userMenteeText) {
     return TextFormField(
       key: _formKey1,
       initialValue: userMenteeText,
@@ -83,7 +83,7 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
                     children: [
                       Expanded(
                         child: Text(
-                          'What makes me a good mentee',
+                          'As a mentee...',
                           style: Theme.of(context).textTheme.headline4,
                         ),
                       ),
@@ -161,7 +161,7 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
                   ),
                 ),
                 menteeEditStatus
-                    ? _buildMentorTextField(user.menteeAbout)
+                    ? _buildMenteeTextField(user.menteeAbout)
                     : Padding(
                         padding: const EdgeInsets.only(top: 8.0, right: 10.0),
                         child: Row(

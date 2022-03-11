@@ -85,7 +85,7 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
                     children: [
                       Expanded(
                         child: Text(
-                          'What makes me a good mentor',
+                          "As a mentor...",
                           style: Theme.of(context).textTheme.headline4,
                         ),
                       ),
