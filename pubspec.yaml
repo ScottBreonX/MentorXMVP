@@ -28,6 +28,8 @@ dependencies:
   dropdownfield:
   equatable:
   image_picker:
+  cached_network_image:
+
 
 
 
