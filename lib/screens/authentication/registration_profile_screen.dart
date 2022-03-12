@@ -72,6 +72,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
           menteeAbout: menteeAbout ?? '',
           mentee: false,
           mentor: false,
+          profilePicture: '',
         ),
       );
     } on FirebaseException catch (e) {

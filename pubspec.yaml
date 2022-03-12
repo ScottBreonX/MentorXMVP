@@ -29,6 +29,7 @@ dependencies:
   equatable:
   image_picker:
   cached_network_image:
+  image:
 
 
 

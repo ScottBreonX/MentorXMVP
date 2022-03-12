@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/models/user.dart';
@@ -25,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
+  bool profilePictureStatus;
   @override
   Widget build(BuildContext context) {
     final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
@@ -37,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (!snapshot.hasData) {
             return circularProgress();
           }
+
           return Scaffold(
             key: _scaffoldKey,
             drawer: Drawer(
@@ -73,11 +76,33 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: CircleAvatar(
                                 radius: 50,
                                 backgroundColor: Colors.blue,
-                                child: Icon(
-                                  Icons.person,
-                                  size: 50,
-                                  color: Colors.white,
+                                child: CachedNetworkImage(
+                                  imageUrl: loggedInUser.profilePicture,
+                                  imageBuilder: (context, imageProvider) =>
+                                      Container(
+                                    width: 150.0,
+                                    height: 150.0,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) => Icon(
+                                    Icons.person,
+                                    size: 50,
+                                    color: Colors.white,
+                                  ),
                                 ),
+                                // Icon(
+                                //   Icons.person,
+                                //   size: 50,
+                                //   color: Colors.white,
+                                // ),
                               ),
                             ),
                           ),

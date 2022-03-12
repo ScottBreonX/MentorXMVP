@@ -4,7 +4,6 @@ class ProfileImageCircle extends StatefulWidget {
   const ProfileImageCircle({
     @required this.iconSize,
     @required this.circleSize,
-    this.profileImage,
     this.circleColor,
     this.iconColor = Colors.white,
     this.onTap,
@@ -14,7 +13,6 @@ class ProfileImageCircle extends StatefulWidget {
   final double circleSize;
   final Color circleColor;
   final Color iconColor;
-  final String profileImage;
   final Function onTap;
 
   @override
@@ -30,10 +28,7 @@ class _ProfileImageCircleState extends State<ProfileImageCircle> {
       child: RawMaterialButton(
         onPressed: widget.onTap,
         fillColor: widget.circleColor ?? Theme.of(context).canvasColor,
-        child:
-            // CircleAvatar(backgroundImage: NetworkImage(widget.profileImage)),
-
-            Icon(
+        child: Icon(
           Icons.person,
           color: widget.iconColor,
           size: widget.iconSize,
