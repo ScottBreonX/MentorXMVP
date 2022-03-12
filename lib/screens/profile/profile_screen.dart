@@ -64,17 +64,129 @@ class _ProfileState extends State<Profile> {
         context: parentContext,
         builder: (context) {
           return SimpleDialog(
-            title: Text("Upload a photo"),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            title: Text(
+              "Upload a photo",
+              style: Theme.of(context).textTheme.headline4,
+            ),
             children: <Widget>[
               SimpleDialogOption(
-                  child: Text("Photo with Camera"), onPressed: handleTakePhoto),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.camera_alt,
+                          size: 30,
+                          color: Colors.blue,
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          "Photo with Camera",
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ),
+                    ],
+                  ),
+                  onPressed: handleTakePhoto),
               SimpleDialogOption(
-                  child: Text("Image from Gallery"),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.photo,
+                          size: 30,
+                          color: Colors.blue,
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          "Image from Gallery",
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ),
+                    ],
+                  ),
                   onPressed: handleChooseFromGallery),
               SimpleDialogOption(
-                child: Text("Cancel"),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.cancel,
+                        size: 30,
+                        color: Colors.red,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        "Remove Current Photo",
+                        style: Theme.of(context).textTheme.subtitle2,
+                      ),
+                    ),
+                  ],
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  removePhotoConfirm(context);
+                },
+              ),
+              SimpleDialogOption(
+                child: Text(
+                  "Cancel",
+                  style: Theme.of(context).textTheme.headline4,
+                ),
                 onPressed: () => Navigator.pop(context),
               )
+            ],
+          );
+        });
+  }
+
+  removePhotoConfirm(parentContext) {
+    return showDialog(
+        context: parentContext,
+        builder: (context) {
+          return SimpleDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            title: Center(
+              child: Text(
+                "Confirm Photo Removal",
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ),
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: RoundedButton(
+                        minWidth: 130,
+                        title: "Cancel",
+                        buttonColor: Colors.grey,
+                        fontColor: Colors.white,
+                        onPressed: () => Navigator.pop(context)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: RoundedButton(
+                      minWidth: 130,
+                      title: "Remove Photo",
+                      buttonColor: Colors.red,
+                      fontColor: Colors.white,
+                      onPressed: () => removeCurrentPhoto(),
+                    ),
+                  )
+                ],
+              ),
             ],
           );
         });
@@ -85,6 +197,7 @@ class _ProfileState extends State<Profile> {
   bool myProfileView = false;
   bool isUploading = false;
   String postId = Uuid().v4();
+  bool profilePhotoExist = false;
 
   clearImage() {
     setState(() {
@@ -111,12 +224,22 @@ class _ProfileState extends State<Profile> {
     return downloadUrl;
   }
 
-  createPostInFirestore({String mediaUrl}) {
+  savePhotoInUserCollection({String mediaUrl}) {
     usersRef.doc(loggedInUser.id).update({"Profile Picture": mediaUrl});
     setState(() {
       file = null;
       isUploading = false;
     });
+  }
+
+  removeCurrentPhoto() {
+    usersRef.doc(loggedInUser.id).update({"Profile Picture": ""});
+    Navigator.pop(context);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LaunchScreen(pageIndex: 2),
+        ));
   }
 
   handleSubmit() async {
@@ -125,7 +248,7 @@ class _ProfileState extends State<Profile> {
     });
     await compressImage();
     String mediaUrl = await uploadImage(file);
-    createPostInFirestore(mediaUrl: mediaUrl);
+    savePhotoInUserCollection(mediaUrl: mediaUrl);
   }
 
   Scaffold buildUploadScreen() {
@@ -257,6 +380,11 @@ class _ProfileState extends State<Profile> {
                 return circularProgress();
               }
               myUser user = myUser.fromDocument(snapshot.data);
+
+              if (user.profilePicture == "") {
+                profilePhotoExist = false;
+                print('profile photo gone');
+              }
               return Scaffold(
                 key: _scaffoldKey,
                 drawer: !myProfileView
@@ -301,31 +429,35 @@ class _ProfileState extends State<Profile> {
                               child: Stack(
                                 children: [
                                   CircleAvatar(
-                                      backgroundColor: Colors.blue,
-                                      radius: circleSize + 4,
-                                      child: CachedNetworkImage(
-                                        imageUrl: user.profilePicture,
-                                        imageBuilder:
-                                            (context, imageProvider) =>
-                                                Container(
-                                          width: 110.0,
-                                          height: 110.0,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            image: DecorationImage(
-                                                image: imageProvider,
-                                                fit: BoxFit.cover),
-                                          ),
-                                        ),
-                                        placeholder: (context, url) =>
-                                            CircularProgressIndicator(),
-                                        errorWidget: (context, url, error) =>
-                                            Icon(
-                                          Icons.person,
-                                          size: 50,
-                                          color: Colors.white,
-                                        ),
-                                      )),
+                                    backgroundColor: Colors.blue,
+                                    radius: circleSize + 4,
+                                    child: profilePhotoExist
+                                        ? CachedNetworkImage(
+                                            imageUrl: user.profilePicture,
+                                            imageBuilder:
+                                                (context, imageProvider) =>
+                                                    Container(
+                                              width: 110.0,
+                                              height: 110.0,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                image: DecorationImage(
+                                                    image: imageProvider,
+                                                    fit: BoxFit.cover),
+                                              ),
+                                            ),
+                                            placeholder: (context, url) =>
+                                                CircularProgressIndicator(),
+                                            errorWidget:
+                                                (context, url, error) => Icon(
+                                              Icons.person,
+                                              size: 50,
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        : Icon(Icons.person,
+                                            size: 50, color: Colors.white),
+                                  ),
                                   Positioned(
                                     bottom: 0,
                                     right: 5,
