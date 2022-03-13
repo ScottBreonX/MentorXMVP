@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  bool profilePictureStatus;
+  bool profilePictureStatus = false;
   @override
   Widget build(BuildContext context) {
     final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
@@ -38,6 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return circularProgress();
+          }
+
+          if (loggedInUser.profilePicture != "") {
+            profilePictureStatus = true;
           }
 
           return Scaffold(
@@ -74,35 +78,42 @@ class _HomeScreenState extends State<HomeScreen> {
                                 );
                               },
                               child: CircleAvatar(
-                                radius: 50,
-                                backgroundColor: Colors.blue,
-                                child: CachedNetworkImage(
-                                  imageUrl: loggedInUser.profilePicture,
-                                  imageBuilder: (context, imageProvider) =>
-                                      Container(
-                                    width: 150.0,
-                                    height: 150.0,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.cover,
+                                radius: profilePictureStatus ? 100 : 50,
+                                backgroundColor: profilePictureStatus
+                                    ? Colors.white
+                                    : Colors.blue,
+                                child: profilePictureStatus
+                                    ? CachedNetworkImage(
+                                        imageUrl: loggedInUser.profilePicture,
+                                        imageBuilder:
+                                            (context, imageProvider) =>
+                                                Container(
+                                          width:
+                                              profilePictureStatus ? 190 : 150,
+                                          height:
+                                              profilePictureStatus ? 190 : 150,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        placeholder: (context, url) =>
+                                            CircularProgressIndicator(),
+                                        errorWidget: (context, url, error) =>
+                                            Icon(
+                                          Icons.person,
+                                          size: 50,
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    : Icon(
+                                        Icons.person,
+                                        size: 50,
+                                        color: Colors.white,
                                       ),
-                                    ),
-                                  ),
-                                  placeholder: (context, url) =>
-                                      CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) => Icon(
-                                    Icons.person,
-                                    size: 50,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                // Icon(
-                                //   Icons.person,
-                                //   size: 50,
-                                //   color: Colors.white,
-                                // ),
                               ),
                             ),
                           ),

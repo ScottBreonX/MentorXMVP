@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mentorx_mvp/components/icon_circle.dart';
+import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
@@ -230,6 +231,17 @@ class _ProfileState extends State<Profile> {
       file = null;
       isUploading = false;
     });
+    Navigator.pop(context);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LaunchScreen(pageIndex: 0),
+        ));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LaunchScreen(pageIndex: 2),
+        ));
   }
 
   removeCurrentPhoto() {
@@ -381,9 +393,8 @@ class _ProfileState extends State<Profile> {
               }
               myUser user = myUser.fromDocument(snapshot.data);
 
-              if (user.profilePicture == "") {
-                profilePhotoExist = false;
-                print('profile photo gone');
+              if (user.profilePicture != "") {
+                profilePhotoExist = true;
               }
               return Scaffold(
                 key: _scaffoldKey,
@@ -428,17 +439,17 @@ class _ProfileState extends State<Profile> {
                                   const EdgeInsets.only(left: 8.0, top: 65.0),
                               child: Stack(
                                 children: [
-                                  CircleAvatar(
-                                    backgroundColor: Colors.blue,
-                                    radius: circleSize + 4,
-                                    child: profilePhotoExist
-                                        ? CachedNetworkImage(
+                                  profilePhotoExist
+                                      ? CircleAvatar(
+                                          backgroundColor: Colors.white,
+                                          radius: circleSize + 10,
+                                          child: CachedNetworkImage(
                                             imageUrl: user.profilePicture,
                                             imageBuilder:
                                                 (context, imageProvider) =>
                                                     Container(
-                                              width: 110.0,
-                                              height: 110.0,
+                                              width: 125.0,
+                                              height: 125.0,
                                               decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 image: DecorationImage(
@@ -454,31 +465,41 @@ class _ProfileState extends State<Profile> {
                                               size: 50,
                                               color: Colors.white,
                                             ),
-                                          )
-                                        : Icon(Icons.person,
-                                            size: 50, color: Colors.white),
-                                  ),
+                                          ),
+                                        )
+                                      : CircleAvatar(
+                                          backgroundColor: Colors.white,
+                                          radius: circleSize + 3,
+                                          child: ProfileImageCircle(
+                                            iconSize: circleSize,
+                                            circleSize: circleSize,
+                                          ),
+                                        ),
                                   Positioned(
                                     bottom: 0,
                                     right: 5,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.white,
-                                      ),
-                                      height: 35.0,
-                                      width: 35.0,
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          selectImage(context);
-                                        },
-                                        child: Icon(
-                                          Icons.add_a_photo,
-                                          color:
-                                              Theme.of(context).iconTheme.color,
-                                        ),
-                                      ),
-                                    ),
+                                    child: !myProfileView
+                                        ? Text("")
+                                        : Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: Colors.white,
+                                            ),
+                                            height: 35.0,
+                                            width: 35.0,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                selectImage(context);
+                                              },
+                                              child: Icon(
+                                                Icons.add_a_photo,
+                                                color: Theme.of(context)
+                                                    .iconTheme
+                                                    .color,
+                                              ),
+                                            ),
+                                          ),
                                   ),
                                 ],
                               ),

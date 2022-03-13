@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
@@ -21,6 +22,8 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
     super.initState();
   }
 
+  bool profilePictureStatus = false;
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Object>(
@@ -29,6 +32,11 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
           if (!snapshot.hasData) {
             return circularProgress();
           }
+
+          if (loggedInUser.profilePicture != "") {
+            profilePictureStatus = true;
+          }
+
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: UserAccountsDrawerHeader(
@@ -40,10 +48,31 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
                   Text('${loggedInUser.firstName} ${loggedInUser.lastName}'),
               accountEmail: Text('${loggedInUser.email}'),
               currentAccountPicture: CircleAvatar(
-                child: Icon(
-                  Icons.person,
-                  size: 40.0,
-                ),
+                child: profilePictureStatus
+                    ? CachedNetworkImage(
+                        imageUrl: loggedInUser.profilePicture,
+                        imageBuilder: (context, imageProvider) => Container(
+                          width: 110.0,
+                          height: 110.0,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: imageProvider, fit: BoxFit.cover),
+                          ),
+                        ),
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(
+                          Icons.person,
+                          size: 50,
+                          color: Colors.white,
+                        ),
+                      )
+                    : Icon(
+                        Icons.person,
+                        size: 50,
+                        color: Colors.white,
+                      ),
               ),
               otherAccountsPictures: [
                 CircleAvatar(
