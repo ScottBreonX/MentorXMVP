@@ -44,7 +44,7 @@ class _ProfileState extends State<Profile> {
         .getImage(source: ImageSource.camera, maxHeight: 675, maxWidth: 960);
     if (picked != null) {
       setState(() {
-        this.file = file;
+        file = File(picked.path);
       });
     }
   }
@@ -60,7 +60,11 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-  selectImage(parentContext) {
+  selectImage(parentContext, titleText, pictureType) {
+    setState(() {
+      this.pictureType = pictureType;
+    });
+
     return showDialog(
         context: parentContext,
         builder: (context) {
@@ -69,7 +73,7 @@ class _ProfileState extends State<Profile> {
               borderRadius: BorderRadius.circular(20),
             ),
             title: Text(
-              "Upload a photo",
+              titleText,
               style: Theme.of(context).textTheme.headline4,
             ),
             children: <Widget>[
@@ -134,7 +138,7 @@ class _ProfileState extends State<Profile> {
                 ),
                 onPressed: () {
                   Navigator.pop(context);
-                  removePhotoConfirm(context);
+                  removePhotoConfirm(context, pictureType);
                 },
               ),
               SimpleDialogOption(
@@ -149,7 +153,7 @@ class _ProfileState extends State<Profile> {
         });
   }
 
-  removePhotoConfirm(parentContext) {
+  removePhotoConfirm(parentContext, pictureType) {
     return showDialog(
         context: parentContext,
         builder: (context) {
@@ -183,7 +187,7 @@ class _ProfileState extends State<Profile> {
                       title: "Remove Photo",
                       buttonColor: Colors.red,
                       fontColor: Colors.white,
-                      onPressed: () => removeCurrentPhoto(),
+                      onPressed: () => removeCurrentPhoto(pictureType),
                     ),
                   )
                 ],
@@ -199,6 +203,8 @@ class _ProfileState extends State<Profile> {
   bool isUploading = false;
   String postId = Uuid().v4();
   bool profilePhotoExist = false;
+  bool coverPhotoExist = false;
+  String pictureType;
 
   clearImage() {
     setState(() {
@@ -211,7 +217,7 @@ class _ProfileState extends State<Profile> {
     final path = tempDir.path;
     Im.Image imageFile = Im.decodeImage(file.readAsBytesSync());
     final compressedImageFile = File('$path/img_$postId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 75));
     setState(() {
       file = compressedImageFile;
     });
@@ -225,8 +231,8 @@ class _ProfileState extends State<Profile> {
     return downloadUrl;
   }
 
-  savePhotoInUserCollection({String mediaUrl}) {
-    usersRef.doc(loggedInUser.id).update({"Profile Picture": mediaUrl});
+  savePhotoInUserCollection({String mediaUrl, String pictureType}) {
+    usersRef.doc(loggedInUser.id).update({pictureType: mediaUrl});
     setState(() {
       file = null;
       isUploading = false;
@@ -244,8 +250,8 @@ class _ProfileState extends State<Profile> {
         ));
   }
 
-  removeCurrentPhoto() {
-    usersRef.doc(loggedInUser.id).update({"Profile Picture": ""});
+  removeCurrentPhoto(pictureType) {
+    usersRef.doc(loggedInUser.id).update({pictureType: ""});
     Navigator.pop(context);
     Navigator.push(
         context,
@@ -254,21 +260,31 @@ class _ProfileState extends State<Profile> {
         ));
   }
 
-  handleSubmit() async {
+  handleSubmit(pictureType) async {
     setState(() {
       isUploading = true;
     });
     await compressImage();
     String mediaUrl = await uploadImage(file);
-    savePhotoInUserCollection(mediaUrl: mediaUrl);
+    savePhotoInUserCollection(mediaUrl: mediaUrl, pictureType: pictureType);
   }
 
-  Scaffold buildUploadScreen() {
+  Scaffold buildUploadScreen(pictureType) {
+    bool isCoverPhoto = false;
+
+    if (pictureType == "Cover Photo") {
+      setState(() {
+        print(pictureType);
+        isCoverPhoto = true;
+      });
+    }
+
+    print("$pictureType Upload Screen");
+    print(isCoverPhoto);
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Upload Profile Picture",
-          ),
+              isCoverPhoto ? "Upload Cover Photo" : "Upload Profile Picture"),
           actions: [
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -305,15 +321,36 @@ class _ProfileState extends State<Profile> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 20.0),
-                        child: Text(
-                          'Confirm Upload',
-                          style: Theme.of(context).textTheme.headline1,
+                        child: Column(
+                          children: [
+                            Text(
+                              'Confirm Upload of',
+                              style: Theme.of(context).textTheme.headline1,
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              isCoverPhoto ? 'Cover Photo' : 'Profile Photo',
+                              style: Theme.of(context).textTheme.headline1,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
                       ),
-                      CircleAvatar(
-                        radius: 120,
-                        backgroundImage: FileImage(file),
-                      ),
+                      isCoverPhoto
+                          ? Container(
+                              width: 500,
+                              height: 150.0,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: FileImage(file),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            )
+                          : CircleAvatar(
+                              radius: 120,
+                              backgroundImage: FileImage(file),
+                            ),
                       Padding(
                         padding: EdgeInsets.only(top: 10.0),
                       ),
@@ -334,11 +371,12 @@ class _ProfileState extends State<Profile> {
                                   : () {
                                       Navigator.pop(context);
                                       Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                LaunchScreen(pageIndex: 2),
-                                          ));
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              LaunchScreen(pageIndex: 2),
+                                        ),
+                                      );
                                     },
                             ),
                           ),
@@ -351,8 +389,9 @@ class _ProfileState extends State<Profile> {
                               minWidth: 150,
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              onPressed:
-                                  isUploading ? null : () => handleSubmit(),
+                              onPressed: isUploading
+                                  ? null
+                                  : () => handleSubmit(pictureType),
                             ),
                           ),
                         ],
@@ -383,8 +422,9 @@ class _ProfileState extends State<Profile> {
     final drawerItems = MentorXMenuList();
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
+
     return file != null
-        ? buildUploadScreen()
+        ? buildUploadScreen(pictureType)
         : FutureBuilder<Object>(
             future: usersRef.doc(widget.profileId).get(),
             builder: (context, snapshot) {
@@ -396,6 +436,11 @@ class _ProfileState extends State<Profile> {
               if (user.profilePicture != "") {
                 profilePhotoExist = true;
               }
+
+              if (user.coverPhoto != "") {
+                coverPhotoExist = true;
+              }
+
               return Scaffold(
                 key: _scaffoldKey,
                 drawer: !myProfileView
@@ -429,10 +474,36 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ),
                               ),
-                              child: Image.asset(
-                                'assets/images/MLogoBlue.png',
-                                fit: BoxFit.fitHeight,
-                              ),
+                              child: coverPhotoExist
+                                  ? CachedNetworkImage(
+                                      imageUrl: user.coverPhoto,
+                                      imageBuilder: (context, imageProvider) =>
+                                          Container(
+                                        width: 125.0,
+                                        height: 125.0,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      placeholder: (context, url) => SizedBox(
+                                        child: CircularProgressIndicator(),
+                                        height: 50,
+                                        width: 50,
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          Image.asset(
+                                        'assets/images/MLogoBlue.png',
+                                        fit: BoxFit.fitHeight,
+                                      ),
+                                    )
+                                  : Image.asset(
+                                      'assets/images/MLogoBlue.png',
+                                      fit: BoxFit.fitHeight,
+                                    ),
                             ),
                             Padding(
                               padding:
@@ -490,7 +561,10 @@ class _ProfileState extends State<Profile> {
                                             width: 35.0,
                                             child: GestureDetector(
                                               onTap: () {
-                                                selectImage(context);
+                                                selectImage(
+                                                    context,
+                                                    "Upload a Profile Photo",
+                                                    "Profile Picture");
                                               },
                                               child: Icon(
                                                 Icons.add_a_photo,
@@ -509,15 +583,23 @@ class _ProfileState extends State<Profile> {
                                 : Positioned(
                                     top: 20,
                                     right: 10,
-                                    child: IconCircle(
-                                      height: 30.0,
-                                      width: 30.0,
-                                      iconSize: 20.0,
-                                      iconType: Icons.edit,
-                                      circleColor:
-                                          Theme.of(context).backgroundColor,
-                                      iconColor:
-                                          Theme.of(context).iconTheme.color,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        selectImage(
+                                            context,
+                                            "Upload a Cover Photo",
+                                            "Cover Photo");
+                                      },
+                                      child: IconCircle(
+                                        height: 30.0,
+                                        width: 30.0,
+                                        iconSize: 20.0,
+                                        iconType: Icons.camera_alt,
+                                        circleColor:
+                                            Theme.of(context).backgroundColor,
+                                        iconColor:
+                                            Theme.of(context).iconTheme.color,
+                                      ),
                                     ),
                                   ),
                           ],

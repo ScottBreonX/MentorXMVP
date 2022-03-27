@@ -15,6 +15,7 @@ class myUser {
   final bool mentor;
   final bool mentee;
   final String profilePicture;
+  final String coverPhoto;
 
   myUser({
     this.id,
@@ -31,6 +32,7 @@ class myUser {
     this.mentor,
     this.mentee,
     this.profilePicture,
+    this.coverPhoto,
   });
 
   factory myUser.fromDocument(DocumentSnapshot doc) {
@@ -49,6 +51,7 @@ class myUser {
       mentor: doc['Mentor'],
       mentee: doc['Mentee'],
       profilePicture: doc['Profile Picture'],
+      coverPhoto: doc['Cover Photo'],
     );
   }
   Map<String, dynamic> toMap() {
@@ -67,6 +70,7 @@ class myUser {
       'Mentor': mentor,
       'Mentee': mentee,
       'Profile Picture': profilePicture,
+      'Cover Photo': coverPhoto,
     };
   }
 }
