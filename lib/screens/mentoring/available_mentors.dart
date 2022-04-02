@@ -91,7 +91,18 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
                 Text(
                   'Available Mentors',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline1,
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 35,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black45,
+                  ),
+                ),
+                Divider(
+                  indent: 30,
+                  endIndent: 30,
+                  color: Colors.black54,
+                  thickness: 2,
                 ),
                 AvailableMentorsStream(
                   // searchString: searchString,
@@ -105,14 +116,15 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
     );
   }
 
-  String _hobby1;
-
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: buildSearchField(),
       appBar: AppBar(
         elevation: 5,
-        title: Text('Available Mentors'),
+        title: Image.asset(
+          'assets/images/MentorPinkWhite.png',
+          height: 150,
+        ),
       ),
       body: buildMentorListContent(loggedInUser),
     );
@@ -171,6 +183,7 @@ class AvailableMentorsStream extends StatelessWidget {
             mentorUID: mentor.id.toString(),
             mentorFname: mentorModel.firstName,
             mentorLname: mentorModel.lastName,
+            mentorImgUrl: mentorModel.profilePic,
             mentorSlots: mentorModel.mentorSlots,
             mentorMajor: mentorModel.major,
             mentorYearInSchool: mentorModel.yearInSchool,

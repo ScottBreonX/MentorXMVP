@@ -4,6 +4,7 @@ class Mentor {
   final String id;
   final String firstName;
   final String lastName;
+  final String profilePic;
   final String major;
   final String yearInSchool;
   final int mentorSlots;
@@ -21,6 +22,7 @@ class Mentor {
     this.id,
     this.firstName,
     this.lastName,
+    this.profilePic,
     this.major,
     this.yearInSchool,
     this.mentorSlots,
@@ -40,6 +42,7 @@ class Mentor {
       id: doc['id'],
       firstName: doc['First Name'],
       lastName: doc['Last Name'],
+      profilePic: doc['Profile Picture'],
       major: doc['Major'],
       yearInSchool: doc['Year in School'],
       mentorSlots: doc['Mentor Slots'],
@@ -59,6 +62,7 @@ class Mentor {
       'id': id,
       'First Name': firstName,
       'Last Name': lastName,
+      'Profile Picture': profilePic,
       'Major': major,
       'Year in School': yearInSchool,
       'Mentor Slots': mentorSlots,

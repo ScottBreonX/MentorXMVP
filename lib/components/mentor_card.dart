@@ -1,4 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/profile_image_circle.dart';
+import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_confirmation.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 
@@ -40,139 +43,304 @@ class MentorCard extends StatelessWidget {
           builder: (context) => Profile(profileId: mentorUID),
         ),
       ),
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.94,
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          elevation: 10,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.94,
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            elevation: 10,
             child: Column(
               children: [
                 Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(25, 20, 20, 10),
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width * 0.20,
-                            maxHeight: MediaQuery.of(context).size.width * 0.20,
-                          ),
-                          child: Image.asset(
-                              mentorImgUrl != null
-                                  ? mentorImgUrl
-                                  : 'assets/images/UMichLogo.png',
-                              fit: BoxFit.fitHeight),
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          top: 10,
+                          right: 10,
+                        ),
+                        child: CircleAvatar(
+                          backgroundColor: Colors.grey,
+                          radius: 42,
+                          child: mentorImgUrl != ""
+                              ? CircleAvatar(
+                                  radius: 40,
+                                  child: CachedNetworkImage(
+                                    imageUrl: mentorImgUrl,
+                                    imageBuilder: (context, imageProvider) =>
+                                        Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          image: imageProvider,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    placeholder: (context, url) =>
+                                        CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) => Icon(
+                                      Icons.person,
+                                      size: 50,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                )
+                              : ProfileImageCircle(
+                                  circleColor: Colors.blue,
+                                  iconSize: 45,
+                                  iconColor: Colors.white,
+                                  circleSize: 40,
+                                ),
                         ),
                       ),
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: Text(
-                                '$mentorFname $mentorLname'.toUpperCase(),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  letterSpacing: 2,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Text(
+                                  '$mentorFname $mentorLname',
+                                  style: TextStyle(
+                                    fontFamily: 'WorkSans',
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black54,
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Text(
-                              'Available Slots: $mentorSlots',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontStyle: FontStyle.italic,
                               ),
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '$mtrAtt1',
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    Text(
-                                      '$mtrAtt2',
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    Text(
-                                      '$mtrAtt3',
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
+                                Text(
+                                  'Available Slots: ',
+                                  style: TextStyle(
+                                    fontFamily: 'WorkSans',
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black54,
+                                  ),
                                 ),
-                                SizedBox(
-                                  width: 15,
+                                Text(
+                                  '$mentorSlots',
+                                  style: TextStyle(
+                                    fontFamily: 'WorkSans',
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.blue,
+                                  ),
                                 ),
-                                profileOnly
-                                    ? SizedBox(height: 5)
-                                    : OutlinedButton(
-                                        onPressed: () => Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => MentorConfirm(
-                                              mentorFname: mentorFname,
-                                              mentorLname: mentorLname,
-                                              mentorUID: mentorUID,
-                                              mentorSlots: mentorSlots,
-                                            ),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Select Mentor',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        style: OutlinedButton.styleFrom(
-                                          side: BorderSide(
-                                              width: 2.0, color: Colors.grey),
-                                          backgroundColor: Theme.of(context)
-                                              .colorScheme
-                                              .secondary,
-                                        ),
-                                      ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5.0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Year in School: ',
+                                    style: TextStyle(
+                                      fontFamily: 'WorkSans',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                  Text(
+                                    '$mentorYearInSchool',
+                                    style: TextStyle(
+                                      fontFamily: 'WorkSans',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Major: ',
+                                  style: TextStyle(
+                                    fontFamily: 'WorkSans',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                                Container(
+                                  width: 200,
+                                  child: Text(
+                                    '$mentorMajor',
+                                    style: TextStyle(
+                                      fontFamily: 'WorkSans',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ]),
                     ]),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 25,
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                      ),
+                Column(
+                  children: [
+                    Divider(
+                      indent: 10,
+                      endIndent: 10,
+                      color: Colors.grey.shade300,
+                      thickness: 1,
                     ),
-                    child: Text(
-                      '$xFactor',
-                      style: TextStyle(
-                        fontSize: 12,
-                      ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0, top: 5),
+                          child: Text(
+                            "Top 3 Mentoring Skills",
+                            style: TextStyle(
+                              fontFamily: 'WorkSans',
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          width: 110,
+                          child: RoundedButton(
+                            title: '$mtrAtt1',
+                            buttonColor: Colors.grey.shade50,
+                            fontSize: 10,
+                            minWidth: 110,
+                            borderRadius: 15,
+                            fontColor: Colors.black54,
+                            fontWeight: FontWeight.bold,
+                            onPressed: () {},
+                          ),
+                        ),
+                        Container(
+                          width: 110,
+                          child: RoundedButton(
+                            title: '$mtrAtt2',
+                            buttonColor: Colors.grey.shade50,
+                            fontSize: 10,
+                            minWidth: 110,
+                            borderRadius: 15,
+                            fontColor: Colors.black54,
+                            fontWeight: FontWeight.bold,
+                            onPressed: () {},
+                          ),
+                        ),
+                        Container(
+                          width: 110,
+                          child: RoundedButton(
+                            title: '$mtrAtt3',
+                            buttonColor: Colors.grey.shade50,
+                            fontSize: 10,
+                            minWidth: 110,
+                            borderRadius: 15,
+                            fontColor: Colors.black54,
+                            fontWeight: FontWeight.bold,
+                            onPressed: () {},
+                          ),
+                        )
+                      ],
+                    ),
+                    Divider(
+                      indent: 10,
+                      endIndent: 10,
+                      color: Colors.grey.shade300,
+                      thickness: 1,
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0, top: 5),
+                          child: Text(
+                            "Why I'd be a great mentor:",
+                            style: TextStyle(
+                              fontFamily: 'WorkSans',
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10.0, top: 5.0, bottom: 10.0),
+                          child: Container(
+                            width: 330,
+                            child: Text(
+                              '$xFactor',
+                              style: TextStyle(
+                                fontFamily: 'WorkSans',
+                                fontSize: 15,
+                                color: Colors.black45,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        RoundedButton(
+                          title: 'Select Mentor',
+                          buttonColor: Colors.pink,
+                          borderRadius: 15,
+                          minWidth: 150,
+                          fontColor: Colors.white,
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MentorConfirm(
+                                mentorFname: mentorFname,
+                                mentorLname: mentorLname,
+                                mentorUID: mentorUID,
+                                mentorSlots: mentorSlots,
+                              ),
+                            ),
+                          ),
+                        ),
+                        RoundedButton(
+                          title: 'View Profile',
+                          borderRadius: 15,
+                          minWidth: 150,
+                          buttonColor: Colors.white,
+                          fontColor: Colors.pink,
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MentorConfirm(
+                                mentorFname: mentorFname,
+                                mentorLname: mentorLname,
+                                mentorUID: mentorUID,
+                                mentorSlots: mentorSlots,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),

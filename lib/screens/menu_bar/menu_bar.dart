@@ -184,6 +184,10 @@ class MentorXMenuList extends StatelessWidget {
             confirmSignOut(context);
           },
         ),
+        Image.asset(
+          'assets/images/MentorPinkWhite.png',
+          height: 250,
+        ),
       ],
     );
   }
