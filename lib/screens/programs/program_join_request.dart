@@ -234,7 +234,10 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 5,
-        title: Text('Join ${_program.programName}'),
+        title: Image.asset(
+          'assets/images/MentorPinkWhite.png',
+          height: 150,
+        ),
       ),
       body: Container(
         child: Padding(

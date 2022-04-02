@@ -118,7 +118,10 @@ class _ProgramProfileState extends State<ProgramProfile> {
           return Scaffold(
             appBar: AppBar(
               elevation: 5,
-              title: Text('${program.programName}'),
+              title: Image.asset(
+                'assets/images/MentorPinkWhite.png',
+                height: 150,
+              ),
             ),
             body: Container(
               child: Padding(

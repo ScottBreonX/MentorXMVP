@@ -53,7 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             appBar: AppBar(
               elevation: 5,
-              title: Text('Mentor+'),
+              title: Image.asset(
+                'assets/images/MentorPinkWhite.png',
+                height: 150,
+              ),
             ),
             body: SingleChildScrollView(
               child: Container(
@@ -78,42 +81,46 @@ class _HomeScreenState extends State<HomeScreen> {
                                 );
                               },
                               child: CircleAvatar(
-                                radius: profilePictureStatus ? 100 : 50,
-                                backgroundColor: profilePictureStatus
-                                    ? Colors.white
-                                    : Colors.blue,
-                                child: profilePictureStatus
-                                    ? CachedNetworkImage(
-                                        imageUrl: loggedInUser.profilePicture,
-                                        imageBuilder:
-                                            (context, imageProvider) =>
-                                                Container(
-                                          width:
-                                              profilePictureStatus ? 190 : 150,
-                                          height:
-                                              profilePictureStatus ? 190 : 150,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            image: DecorationImage(
-                                              image: imageProvider,
-                                              fit: BoxFit.cover,
+                                radius: 85,
+                                backgroundColor: Colors.white,
+                                child: CircleAvatar(
+                                  radius: 80,
+                                  backgroundColor: Colors.white,
+                                  child: profilePictureStatus
+                                      ? CachedNetworkImage(
+                                          imageUrl: loggedInUser.profilePicture,
+                                          imageBuilder:
+                                              (context, imageProvider) =>
+                                                  Container(
+                                            width: 190,
+                                            height: 190,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
+                                          placeholder: (context, url) =>
+                                              CircularProgressIndicator(),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(
+                                            Icons.person,
+                                            size: 90,
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      : CircleAvatar(
+                                          radius: 75,
+                                          backgroundColor: Colors.blue,
+                                          child: Icon(
+                                            Icons.person,
+                                            size: 90,
+                                            color: Colors.white,
+                                          ),
                                         ),
-                                        placeholder: (context, url) =>
-                                            CircularProgressIndicator(),
-                                        errorWidget: (context, url, error) =>
-                                            Icon(
-                                          Icons.person,
-                                          size: 50,
-                                          color: Colors.white,
-                                        ),
-                                      )
-                                    : Icon(
-                                        Icons.person,
-                                        size: 50,
-                                        color: Colors.white,
-                                      ),
+                                ),
                               ),
                             ),
                           ),
@@ -127,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 'Welcome Back, ${loggedInUser.firstName}',
-                                style: Theme.of(context).textTheme.headline1,
+                                style: Theme.of(context).textTheme.headline4,
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -135,10 +142,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       const Divider(
-                        thickness: 2,
+                        thickness: 4,
                         color: Colors.grey,
-                        indent: 20,
-                        endIndent: 20,
+                        indent: 40,
+                        endIndent: 40,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 20.0),

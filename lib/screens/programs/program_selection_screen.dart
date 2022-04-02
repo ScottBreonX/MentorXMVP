@@ -6,6 +6,8 @@ import 'package:mentorx_mvp/screens/mentoring/mentor_launch_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
+import '../../components/rounded_button.dart';
+
 class ProgramSelectionScreen extends StatefulWidget {
   final myUser loggedInUser;
   static const String id = 'program_selection_screen';
@@ -41,51 +43,73 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
       ),
       appBar: AppBar(
         elevation: 5,
-        title: Text('Program Selection'),
+        title: Image.asset(
+          'assets/images/MentorPinkWhite.png',
+          height: 150,
+        ),
       ),
       body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(25, 35, 25, 25),
-              child: Text(
-                'Enrolled Mentorship Programs',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline1,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 40.0),
+                child: RoundedButton(
+                  title: 'Join a new program',
+                  buttonColor: Colors.pink,
+                  fontColor: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AvailableProgramsScreen(
+                          loggedInUser: widget.loggedInUser,
+                        ),
+                      ),
+                    );
+                  },
+                  minWidth: 300,
+                ),
               ),
-            ),
-            Divider(
-              height: 2,
-              thickness: 2,
-              indent: 10,
-              endIndent: 10,
-            ),
-            SizedBox(
-              height: 75,
-            ),
-            Center(
-              child: Wrap(
+              Padding(
+                padding: const EdgeInsets.only(top: 100.0, bottom: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: Icon(
+                        Icons.check_circle,
+                        size: 40,
+                        color: Colors.blue,
+                      ),
+                    ),
+                    Text(
+                      'Enrolled Programs',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'WorkSans',
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black54,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Divider(
+                thickness: 4,
+                indent: 40,
+                endIndent: 40,
+                color: Colors.black45,
+              ),
+              Wrap(
                 children: [
                   IconCard(
-                    cardIcon: Icons.add,
-                    cardColor: Theme.of(context).cardColor,
-                    cardText: 'Join a Program',
-                    borderWidth: 3,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AvailableProgramsScreen(
-                            loggedInUser: widget.loggedInUser,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  IconCard(
                     cardText: 'University of Northern Iowa',
-                    textSize: 10,
+                    textSize: 15,
                     cardTextColor: Colors.black54,
                     cardColor: Theme.of(context).cardColor,
                     imageAsset: Image.asset(
@@ -96,32 +120,10 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                       Navigator.pushNamed(context, MentorLaunchScreen.id);
                     },
                   ),
-                  IconCard(
-                    cardText: 'Finance Careers Mentorship',
-                    cardColor: Theme.of(context).cardColor,
-                    imageAsset: Image.asset(
-                      'assets/images/MLogoBlue.png',
-                      height: 60,
-                    ),
-                    onTap: () {
-                      Navigator.popAndPushNamed(context, MentorLaunchScreen.id);
-                    },
-                  ),
-                  IconCard(
-                    cardText: 'Consulting Careers Mentorship',
-                    cardColor: Theme.of(context).cardColor,
-                    imageAsset: Image.asset(
-                      'assets/images/MLogoBlue.png',
-                      height: 60,
-                    ),
-                    onTap: () {
-                      Navigator.popAndPushNamed(context, MentorLaunchScreen.id);
-                    },
-                  ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

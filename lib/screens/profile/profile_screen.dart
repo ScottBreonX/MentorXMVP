@@ -452,9 +452,10 @@ class _ProfileState extends State<Profile> {
                       ),
                 appBar: AppBar(
                   elevation: 5,
-                  title: Text(!myProfileView
-                      ? '${user.firstName}\'s Profile'
-                      : 'My Profile'),
+                  title: Image.asset(
+                    'assets/images/MentorPinkWhite.png',
+                    height: 150,
+                  ),
                 ),
                 body: SingleChildScrollView(
                   child: Container(
@@ -489,11 +490,8 @@ class _ProfileState extends State<Profile> {
                                           ),
                                         ),
                                       ),
-                                      placeholder: (context, url) => SizedBox(
-                                        child: CircularProgressIndicator(),
-                                        height: 50,
-                                        width: 50,
-                                      ),
+                                      placeholder: (context, url) =>
+                                          circularProgress(),
                                       errorWidget: (context, url, error) =>
                                           Image.asset(
                                         'assets/images/MLogoBlue.png',

@@ -47,7 +47,10 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
             ),
             appBar: AppBar(
               elevation: 5,
-              title: Text('Mentor+'),
+              title: Image.asset(
+                'assets/images/MentorPinkWhite.png',
+                height: 150,
+              ),
             ),
             body: Container(
               child: Column(

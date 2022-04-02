@@ -48,31 +48,35 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
                   Text('${loggedInUser.firstName} ${loggedInUser.lastName}'),
               accountEmail: Text('${loggedInUser.email}'),
               currentAccountPicture: CircleAvatar(
-                child: profilePictureStatus
-                    ? CachedNetworkImage(
-                        imageUrl: loggedInUser.profilePicture,
-                        imageBuilder: (context, imageProvider) => Container(
-                          width: 110.0,
-                          height: 110.0,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                image: imageProvider, fit: BoxFit.cover),
+                backgroundColor: Colors.white,
+                child: CircleAvatar(
+                  radius: 34,
+                  child: profilePictureStatus
+                      ? CachedNetworkImage(
+                          imageUrl: loggedInUser.profilePicture,
+                          imageBuilder: (context, imageProvider) => Container(
+                            width: 110.0,
+                            height: 110.0,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: imageProvider, fit: BoxFit.cover),
+                            ),
                           ),
-                        ),
-                        placeholder: (context, url) =>
-                            CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => Icon(
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(
+                            Icons.person,
+                            size: 50,
+                            color: Colors.white,
+                          ),
+                        )
+                      : Icon(
                           Icons.person,
                           size: 50,
                           color: Colors.white,
                         ),
-                      )
-                    : Icon(
-                        Icons.person,
-                        size: 50,
-                        color: Colors.white,
-                      ),
+                ),
               ),
               otherAccountsPictures: [
                 CircleAvatar(

@@ -79,72 +79,108 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 25, 0, 10),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'All Available Programs',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Theme.of(context).textTheme.headline4.color,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Divider(
-                color: Colors.black,
-                endIndent: 75,
-                indent: 75,
-                thickness: 2,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'University Specific Programs',
-                style: TextStyle(
-                  color: Theme.of(context).textTheme.headline4.color,
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 40),
-                  child: AvailableProgramsStream(
-                    // searchString: searchString,
-                    type: 'school',
-                  ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0, bottom: 5.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: Icon(
+                        Icons.school,
+                        size: 40,
+                        color: Colors.pink,
+                      ),
+                    ),
+                    Text(
+                      'University Programs',
+                      style: TextStyle(
+                        fontFamily: 'WorkSans',
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black54,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Divider(
-                color: Colors.black,
-                endIndent: 75,
-                indent: 75,
-                thickness: 2,
+                thickness: 4,
+                indent: 40,
+                endIndent: 40,
+                color: Colors.black45,
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Mentor+ Career Programs',
-                style: TextStyle(
-                  color: Theme.of(context).textTheme.headline4.color,
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 40),
-                  child: AvailableProgramsStream(
-                    // searchString: searchString,
-                    type: 'mentorX',
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0, bottom: 30.0),
+                    child: Container(
+                      height: 150,
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10.0, right: 10),
+                        child: AvailableProgramsStream(
+                          // searchString: searchString,
+                          type: 'school',
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
+              ),
+              Stack(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/MentorPink.png',
+                        height: 150,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text(
+                          'Programs',
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            fontSize: 25,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Positioned(
+                    top: 110,
+                    right: 30,
+                    left: 30,
+                    child: Container(
+                      color: Colors.black45,
+                      height: 4,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 150,
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                      child: AvailableProgramsStream(
+                        // searchString: searchString,
+                        type: 'mentorX',
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -159,7 +195,10 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
       // appBar: buildSearchField(),
       appBar: AppBar(
         elevation: 5,
-        title: Text('Available Programs'),
+        title: Image.asset(
+          'assets/images/MentorPinkWhite.png',
+          height: 150,
+        ),
       ),
       body: buildProgramListContent(),
     );
@@ -221,13 +260,13 @@ class AvailableProgramsStream extends StatelessWidget {
           );
           programBubbles.add(programBubble);
         }
-        return ListView(
+        return Container(
+          height: 150,
+          child: ListView(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(
-              horizontal: 10.0,
-              vertical: 10.0,
-            ),
-            children: programBubbles);
+            children: programBubbles,
+          ),
+        );
       },
     );
   }

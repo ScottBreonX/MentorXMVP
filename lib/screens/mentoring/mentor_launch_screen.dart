@@ -4,9 +4,6 @@ import 'package:mentorx_mvp/components/program_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/available_mentors.dart';
-import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
-import 'package:mentorx_mvp/screens/programs/available_programs.dart';
-import '../../components/connection_card.dart';
 import '../../components/progress.dart';
 import '../launch_screen.dart';
 
@@ -32,10 +29,6 @@ class _MentorLaunchScreenState extends State<MentorLaunchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
-
     return FutureBuilder<Object>(
         future: usersRef.doc(loggedInUser.id).get(),
         builder: (context, snapshot) {
@@ -45,7 +38,10 @@ class _MentorLaunchScreenState extends State<MentorLaunchScreen> {
           return Scaffold(
             appBar: AppBar(
               elevation: 5,
-              title: Text('Mentor+'),
+              title: Image.asset(
+                'assets/images/MentorPinkWhite.png',
+                height: 150,
+              ),
             ),
             body: SingleChildScrollView(
               child: Container(

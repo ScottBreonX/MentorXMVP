@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 class ProgramCard extends StatelessWidget {
   const ProgramCard({
     Key key,
-    @required this.programLogo,
     @required this.programName,
     @required this.programStartDate,
     @required this.programEndDate,
   }) : super(key: key);
 
-  final IconData programLogo;
   final String programName;
   final String programStartDate;
   final String programEndDate;
@@ -44,11 +42,10 @@ class ProgramCard extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    programLogo ??
-                        Icon(
-                          Icons.school,
-                          size: 40,
-                        )
+                    Icon(
+                      Icons.school,
+                      size: 40,
+                    )
                   ],
                 ),
               ),
