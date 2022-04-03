@@ -5,7 +5,7 @@ import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_confirmation.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 
-class MentorCard extends StatelessWidget {
+class MentorCard extends StatefulWidget {
   final String mentorUID;
   final int mentorSlots;
   final String mentorFname;
@@ -35,42 +35,50 @@ class MentorCard extends StatelessWidget {
   });
 
   @override
+  State<MentorCard> createState() => _MentorCardState();
+}
+
+class _MentorCardState extends State<MentorCard> {
+  bool expandStatus = false;
+
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Profile(profileId: mentorUID),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.94,
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            elevation: 10,
-            child: Column(
-              children: [
-                Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 10.0,
-                          top: 10,
-                          right: 10,
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.94,
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          elevation: 10,
+          child: Column(
+            children: [
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 10.0,
+                        top: 10,
+                        right: 10,
+                      ),
+                      child: GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                Profile(profileId: widget.mentorUID),
+                          ),
                         ),
                         child: CircleAvatar(
                           backgroundColor: Colors.grey,
                           radius: 42,
-                          child: mentorImgUrl != ""
+                          child: widget.mentorImgUrl != ""
                               ? CircleAvatar(
                                   radius: 40,
                                   child: CachedNetworkImage(
-                                    imageUrl: mentorImgUrl,
+                                    imageUrl: widget.mentorImgUrl,
                                     imageBuilder: (context, imageProvider) =>
                                         Container(
                                       decoration: BoxDecoration(
@@ -98,75 +106,53 @@ class MentorCard extends StatelessWidget {
                                 ),
                         ),
                       ),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.5,
-                                child: Text(
-                                  '$mentorFname $mentorLname',
-                                  style: TextStyle(
-                                    fontFamily: 'WorkSans',
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black54,
-                                  ),
+                    ),
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              child: Text(
+                                '${widget.mentorFname} ${widget.mentorLname}',
+                                style: TextStyle(
+                                  fontFamily: 'WorkSans',
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black54,
                                 ),
                               ),
                             ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Available Slots: ',
-                                  style: TextStyle(
-                                    fontFamily: 'WorkSans',
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black54,
-                                  ),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Available Slots: ',
+                                style: TextStyle(
+                                  fontFamily: 'WorkSans',
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black54,
                                 ),
-                                Text(
-                                  '$mentorSlots',
-                                  style: TextStyle(
-                                    fontFamily: 'WorkSans',
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Year in School: ',
-                                    style: TextStyle(
-                                      fontFamily: 'WorkSans',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black54,
-                                    ),
-                                  ),
-                                  Text(
-                                    '$mentorYearInSchool',
-                                    style: TextStyle(
-                                      fontFamily: 'WorkSans',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                ],
                               ),
-                            ),
-                            Row(
+                              Text(
+                                '${widget.mentorSlots}',
+                                style: TextStyle(
+                                  fontFamily: 'WorkSans',
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 5.0),
+                            child: Row(
                               children: [
                                 Text(
-                                  'Major: ',
+                                  'Year in School: ',
                                   style: TextStyle(
                                     fontFamily: 'WorkSans',
                                     fontSize: 15,
@@ -174,176 +160,300 @@ class MentorCard extends StatelessWidget {
                                     color: Colors.black54,
                                   ),
                                 ),
-                                Container(
-                                  width: 200,
-                                  child: Text(
-                                    '$mentorMajor',
-                                    style: TextStyle(
-                                      fontFamily: 'WorkSans',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.blue,
-                                    ),
+                                Text(
+                                  '${widget.mentorYearInSchool}',
+                                  style: TextStyle(
+                                    fontFamily: 'WorkSans',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.blue,
                                   ),
                                 ),
                               ],
                             ),
-                          ]),
-                    ]),
-                Column(
-                  children: [
-                    Divider(
-                      indent: 10,
-                      endIndent: 10,
-                      color: Colors.grey.shade300,
-                      thickness: 1,
-                    ),
-                    Row(
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Major: ',
+                                style: TextStyle(
+                                  fontFamily: 'WorkSans',
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                              Container(
+                                width: 200,
+                                child: Text(
+                                  '${widget.mentorMajor}',
+                                  style: TextStyle(
+                                    fontFamily: 'WorkSans',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ]),
+                  ]),
+              expandStatus
+                  ? Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0, top: 5),
-                          child: Text(
-                            "Top 3 Mentoring Skills",
-                            style: TextStyle(
-                              fontFamily: 'WorkSans',
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black54,
-                            ),
-                          ),
+                        Divider(
+                          indent: 10,
+                          endIndent: 10,
+                          color: Colors.grey.shade300,
+                          thickness: 1,
                         ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          width: 110,
-                          child: RoundedButton(
-                            title: '$mtrAtt1',
-                            buttonColor: Colors.grey.shade50,
-                            fontSize: 10,
-                            minWidth: 110,
-                            borderRadius: 15,
-                            fontColor: Colors.black54,
-                            fontWeight: FontWeight.bold,
-                            onPressed: () {},
-                          ),
-                        ),
-                        Container(
-                          width: 110,
-                          child: RoundedButton(
-                            title: '$mtrAtt2',
-                            buttonColor: Colors.grey.shade50,
-                            fontSize: 10,
-                            minWidth: 110,
-                            borderRadius: 15,
-                            fontColor: Colors.black54,
-                            fontWeight: FontWeight.bold,
-                            onPressed: () {},
-                          ),
-                        ),
-                        Container(
-                          width: 110,
-                          child: RoundedButton(
-                            title: '$mtrAtt3',
-                            buttonColor: Colors.grey.shade50,
-                            fontSize: 10,
-                            minWidth: 110,
-                            borderRadius: 15,
-                            fontColor: Colors.black54,
-                            fontWeight: FontWeight.bold,
-                            onPressed: () {},
-                          ),
-                        )
-                      ],
-                    ),
-                    Divider(
-                      indent: 10,
-                      endIndent: 10,
-                      color: Colors.grey.shade300,
-                      thickness: 1,
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0, top: 5),
-                          child: Text(
-                            "Why I'd be a great mentor:",
-                            style: TextStyle(
-                              fontFamily: 'WorkSans',
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10.0, top: 5.0, bottom: 10.0),
-                          child: Container(
-                            width: 330,
-                            child: Text(
-                              '$xFactor',
-                              style: TextStyle(
-                                fontFamily: 'WorkSans',
-                                fontSize: 15,
-                                color: Colors.black45,
+                        Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10.0, top: 5),
+                              child: Text(
+                                "Top 3 Mentoring Skills",
+                                style: TextStyle(
+                                  fontFamily: 'WorkSans',
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black54,
+                                ),
                               ),
                             ),
-                          ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              width: 110,
+                              child: RoundedButton(
+                                title: '${widget.mtrAtt1}',
+                                buttonColor: Colors.grey.shade50,
+                                fontSize: 10,
+                                minWidth: 110,
+                                borderRadius: 15,
+                                fontColor: Colors.black54,
+                                fontWeight: FontWeight.bold,
+                                onPressed: () {},
+                              ),
+                            ),
+                            Container(
+                              width: 110,
+                              child: RoundedButton(
+                                title: '${widget.mtrAtt2}',
+                                buttonColor: Colors.grey.shade50,
+                                fontSize: 10,
+                                minWidth: 110,
+                                borderRadius: 15,
+                                fontColor: Colors.black54,
+                                fontWeight: FontWeight.bold,
+                                onPressed: () {},
+                              ),
+                            ),
+                            Container(
+                              width: 110,
+                              child: RoundedButton(
+                                title: '${widget.mtrAtt3}',
+                                buttonColor: Colors.grey.shade50,
+                                fontSize: 10,
+                                minWidth: 110,
+                                borderRadius: 15,
+                                fontColor: Colors.black54,
+                                fontWeight: FontWeight.bold,
+                                onPressed: () {},
+                              ),
+                            )
+                          ],
+                        ),
+                        Divider(
+                          indent: 10,
+                          endIndent: 10,
+                          color: Colors.grey.shade300,
+                          thickness: 1,
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10.0, top: 5),
+                              child: Text(
+                                "Why I'd be a great mentor:",
+                                style: TextStyle(
+                                  fontFamily: 'WorkSans',
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10.0, top: 5.0, bottom: 10.0),
+                              child: Container(
+                                width: 330,
+                                child: Text(
+                                  '${widget.xFactor}',
+                                  style: TextStyle(
+                                    fontFamily: 'WorkSans',
+                                    fontSize: 15,
+                                    color: Colors.black45,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          indent: 10,
+                          endIndent: 10,
+                          color: Colors.grey.shade300,
+                          thickness: 1,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            RoundedButton(
+                              title: 'Select Mentor',
+                              buttonColor: Colors.pink,
+                              borderRadius: 15,
+                              minWidth: 150,
+                              fontColor: Colors.white,
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MentorConfirm(
+                                    mentorFname: widget.mentorFname,
+                                    mentorLname: widget.mentorLname,
+                                    mentorUID: widget.mentorUID,
+                                    mentorSlots: widget.mentorSlots,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            RoundedButton(
+                              title: 'View Profile',
+                              borderRadius: 15,
+                              minWidth: 150,
+                              buttonColor: Colors.white,
+                              fontColor: Colors.pink,
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      Profile(profileId: widget.mentorUID),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 10.0, bottom: 5),
+                              child: Divider(
+                                indent: 10,
+                                endIndent: 10,
+                                color: Colors.grey.shade300,
+                                thickness: 1,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 10.0),
+                              child: Column(
+                                children: [
+                                  GestureDetector(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 5.0),
+                                          child: Icon(
+                                            Icons.remove_circle,
+                                            color: Colors.black45,
+                                          ),
+                                        ),
+                                        Text(
+                                          'Minimize Info',
+                                          style: TextStyle(
+                                            fontFamily: 'WorkSans',
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black45,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    onTap: () {
+                                      setState(() {
+                                        expandStatus = false;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    )
+                  : Column(
                       children: [
-                        RoundedButton(
-                          title: 'Select Mentor',
-                          buttonColor: Colors.pink,
-                          borderRadius: 15,
-                          minWidth: 150,
-                          fontColor: Colors.white,
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MentorConfirm(
-                                mentorFname: mentorFname,
-                                mentorLname: mentorLname,
-                                mentorUID: mentorUID,
-                                mentorSlots: mentorSlots,
-                              ),
-                            ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0, bottom: 5),
+                          child: Divider(
+                            indent: 10,
+                            endIndent: 10,
+                            color: Colors.grey.shade300,
+                            thickness: 1,
                           ),
                         ),
-                        RoundedButton(
-                          title: 'View Profile',
-                          borderRadius: 15,
-                          minWidth: 150,
-                          buttonColor: Colors.white,
-                          fontColor: Colors.pink,
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MentorConfirm(
-                                mentorFname: mentorFname,
-                                mentorLname: mentorLname,
-                                mentorUID: mentorUID,
-                                mentorSlots: mentorSlots,
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: Column(
+                            children: [
+                              GestureDetector(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 5.0),
+                                      child: Icon(Icons.add_circle),
+                                    ),
+                                    Text(
+                                      'More Info',
+                                      style: TextStyle(
+                                        fontFamily: 'WorkSans',
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    expandStatus = true;
+                                  });
+                                },
                               ),
-                            ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                  ],
-                ),
-              ],
-            ),
+            ],
           ),
         ),
       ),
