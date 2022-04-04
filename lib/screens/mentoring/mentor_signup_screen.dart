@@ -39,7 +39,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
     'communication',
     'finance',
     'networking',
-    'managing up'
+    'managing up',
   ];
 
   List<String> hobbies = [

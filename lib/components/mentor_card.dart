@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_confirmation.dart';
@@ -40,6 +41,150 @@ class MentorCard extends StatefulWidget {
 
 class _MentorCardState extends State<MentorCard> {
   bool expandStatus = false;
+
+  mentorAttributeIconOne() {
+    String mentoringAttribute = widget.mtrAtt1;
+    Icon attributeIcon;
+
+    (mentoringAttribute == "finance")
+        ? attributeIcon = Icon(
+            Icons.monetization_on,
+            size: 50,
+            color: Colors.green.shade300,
+          )
+        : (mentoringAttribute == "coding")
+            ? attributeIcon = Icon(
+                FontAwesomeIcons.code,
+                size: 50,
+                color: Colors.red.shade300,
+              )
+            : (mentoringAttribute == "analytics")
+                ? attributeIcon = Icon(
+                    Icons.numbers,
+                    size: 50,
+                    color: Colors.purple.shade300,
+                  )
+                : (mentoringAttribute == "presenting")
+                    ? attributeIcon = Icon(
+                        FontAwesomeIcons.chalkboardTeacher,
+                        size: 50,
+                        color: Colors.blue.shade300,
+                      )
+                    : (mentoringAttribute == "communication")
+                        ? attributeIcon = Icon(
+                            Icons.podcasts_rounded,
+                            size: 50,
+                            color: Colors.deepOrange.shade300,
+                          )
+                        : (mentoringAttribute == "networking")
+                            ? attributeIcon = Icon(
+                                Icons.people,
+                                size: 50,
+                                color: Colors.teal.shade300,
+                              )
+                            : attributeIcon = Icon(
+                                Icons.swipe_up_alt_rounded,
+                                size: 50,
+                                color: Colors.pink.shade300,
+                              );
+    return attributeIcon;
+  }
+
+  mentorAttributeIconTwo() {
+    String mentoringAttribute = widget.mtrAtt2;
+    Icon attributeIcon;
+
+    (mentoringAttribute == "finance")
+        ? attributeIcon = Icon(
+            Icons.monetization_on,
+            size: 50,
+            color: Colors.green.shade300,
+          )
+        : (mentoringAttribute == "coding")
+            ? attributeIcon = Icon(
+                FontAwesomeIcons.code,
+                size: 50,
+                color: Colors.red.shade300,
+              )
+            : (mentoringAttribute == "analytics")
+                ? attributeIcon = Icon(
+                    Icons.numbers,
+                    size: 50,
+                    color: Colors.purple.shade300,
+                  )
+                : (mentoringAttribute == "presenting")
+                    ? attributeIcon = Icon(
+                        FontAwesomeIcons.chalkboardTeacher,
+                        size: 50,
+                        color: Colors.blue.shade300,
+                      )
+                    : (mentoringAttribute == "communication")
+                        ? attributeIcon = Icon(
+                            Icons.podcasts_rounded,
+                            size: 50,
+                            color: Colors.deepOrange.shade300,
+                          )
+                        : (mentoringAttribute == "networking")
+                            ? attributeIcon = Icon(
+                                Icons.people,
+                                size: 50,
+                                color: Colors.teal.shade300,
+                              )
+                            : attributeIcon = Icon(
+                                Icons.swipe_up_alt_rounded,
+                                size: 50,
+                                color: Colors.pink.shade300,
+                              );
+    return attributeIcon;
+  }
+
+  mentorAttributeIconThree() {
+    String mentoringAttribute = widget.mtrAtt3;
+    Icon attributeIcon;
+
+    (mentoringAttribute == "finance")
+        ? attributeIcon = Icon(
+            Icons.monetization_on,
+            size: 50,
+            color: Colors.green.shade300,
+          )
+        : (mentoringAttribute == "coding")
+            ? attributeIcon = Icon(
+                FontAwesomeIcons.code,
+                size: 50,
+                color: Colors.red.shade300,
+              )
+            : (mentoringAttribute == "analytics")
+                ? attributeIcon = Icon(
+                    Icons.numbers,
+                    size: 50,
+                    color: Colors.purple.shade300,
+                  )
+                : (mentoringAttribute == "presenting")
+                    ? attributeIcon = Icon(
+                        FontAwesomeIcons.chalkboardTeacher,
+                        size: 50,
+                        color: Colors.blue.shade300,
+                      )
+                    : (mentoringAttribute == "communication")
+                        ? attributeIcon = Icon(
+                            Icons.podcasts_rounded,
+                            size: 50,
+                            color: Colors.deepOrange.shade300,
+                          )
+                        : (mentoringAttribute == "networking")
+                            ? attributeIcon = Icon(
+                                Icons.people,
+                                size: 50,
+                                color: Colors.teal.shade300,
+                              )
+                            : attributeIcon = Icon(
+                                Icons.swipe_up_alt_rounded,
+                                size: 50,
+                                color: Colors.pink.shade300,
+                              );
+    return attributeIcon;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -228,45 +373,72 @@ class _MentorCardState extends State<MentorCard> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Container(
-                              width: 110,
-                              child: RoundedButton(
-                                title: '${widget.mtrAtt1}',
-                                buttonColor: Colors.grey.shade50,
-                                fontSize: 10,
-                                minWidth: 110,
-                                borderRadius: 15,
-                                fontColor: Colors.black54,
-                                fontWeight: FontWeight.bold,
-                                onPressed: () {},
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 10.0, bottom: 10.0),
+                              child: Container(
+                                width: 110,
+                                child: Column(
+                                  children: [
+                                    mentorAttributeIconOne(),
+                                    Text(
+                                      '${widget.mtrAtt1}',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontFamily: 'WorkSans',
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black54,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            Container(
-                              width: 110,
-                              child: RoundedButton(
-                                title: '${widget.mtrAtt2}',
-                                buttonColor: Colors.grey.shade50,
-                                fontSize: 10,
-                                minWidth: 110,
-                                borderRadius: 15,
-                                fontColor: Colors.black54,
-                                fontWeight: FontWeight.bold,
-                                onPressed: () {},
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 10.0, bottom: 10.0),
+                              child: Container(
+                                width: 110,
+                                child: Column(
+                                  children: [
+                                    mentorAttributeIconTwo(),
+                                    Text(
+                                      '${widget.mtrAtt2}',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontFamily: 'WorkSans',
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black54,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            Container(
-                              width: 110,
-                              child: RoundedButton(
-                                title: '${widget.mtrAtt3}',
-                                buttonColor: Colors.grey.shade50,
-                                fontSize: 10,
-                                minWidth: 110,
-                                borderRadius: 15,
-                                fontColor: Colors.black54,
-                                fontWeight: FontWeight.bold,
-                                onPressed: () {},
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 10.0, bottom: 10.0),
+                              child: Container(
+                                width: 110,
+                                child: Column(
+                                  children: [
+                                    mentorAttributeIconThree(),
+                                    Text(
+                                      '${widget.mtrAtt3}',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontFamily: 'WorkSans',
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black54,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                         Divider(
