@@ -4,6 +4,7 @@ import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
+import 'package:mentorx_mvp/screens/program_creation/program_creation.dart';
 
 class MentorXMenuHeader extends StatefulWidget {
   final myUser loggedInUser;
@@ -155,19 +156,25 @@ class MentorXMenuList extends StatelessWidget {
         ),
         ListTile(
           leading: Icon(
+            Icons.create_new_folder_rounded,
+            color: Colors.white,
+          ),
+          title: Text(
+            'Create a Program',
+            style: Theme.of(context).textTheme.headline2,
+          ),
+          onTap: () {
+            Navigator.pushNamed(context, ProgramCreation.id);
+          },
+        ),
+        ListTile(
+          leading: Icon(
             Icons.settings,
             color: Colors.white,
           ),
           title: Text(
             'Settings',
             style: Theme.of(context).textTheme.headline2,
-          ),
-          onTap: () {},
-        ),
-        ListTile(
-          title: const Text(
-            '',
-            style: TextStyle(),
           ),
           onTap: () {},
         ),
@@ -184,9 +191,16 @@ class MentorXMenuList extends StatelessWidget {
             confirmSignOut(context);
           },
         ),
-        Image.asset(
-          'assets/images/MentorPinkWhite.png',
-          height: 250,
+        Padding(
+          padding: const EdgeInsets.only(left: 15.0),
+          child: Row(
+            children: [
+              Image.asset(
+                'assets/images/MentorPinkWhite.png',
+                height: 200,
+              ),
+            ],
+          ),
         ),
       ],
     );

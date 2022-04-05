@@ -33,4 +33,16 @@ class Program {
       programCode: doc['programCode'],
     );
   }
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'institutionName': institutionName,
+      'programName': programName,
+      'type': type,
+      'enrollmentType': enrollmentType,
+      'aboutProgram': aboutProgram,
+      'headAdmin': headAdmin,
+      'programCode': programCode,
+    };
+  }
 }
