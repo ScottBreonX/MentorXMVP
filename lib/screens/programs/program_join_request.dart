@@ -145,16 +145,21 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
     //   }
     // }
 
-    joinProgram() {
+    joinProgram() async {
       handleCode(codeController.text);
       if (programCode == _program.programCode) {
         setState(() {
           hasJoined = true;
         });
-        programsRef
+        await programsRef
             .doc(widget.program.id)
             .collection('userSubscribed')
             .doc(loggedInUser.id)
+            .set({});
+        await usersRef
+            .doc(loggedInUser.id)
+            .collection('enrolledPrograms')
+            .doc(widget.program.id)
             .set({});
         showDialog(
           context: context,

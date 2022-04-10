@@ -1,12 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/programs/available_programs.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentor_launch_screen.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/services/database.dart';
-
+import '../../components/progress.dart';
 import '../../components/rounded_button.dart';
+import '../../models/program_list.dart';
+
+myUser loggedInUser;
 
 class ProgramSelectionScreen extends StatefulWidget {
   final myUser loggedInUser;
@@ -26,6 +28,68 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
   @override
   void initState() {
     super.initState();
+  }
+
+  bool isLoading = false;
+  bool hasPrograms = false;
+  List<ProgramList> programs = [];
+
+  Future<dynamic> getProgramData() async {
+    setState(() {
+      isLoading = true;
+    });
+    QuerySnapshot snapshot = await usersRef
+        .doc(widget.loggedInUser.id)
+        .collection('enrolledPrograms')
+        .get();
+    if (snapshot.docs.isNotEmpty) {
+      setState(() {
+        isLoading = false;
+        hasPrograms = true;
+        programs =
+            snapshot.docs.map((doc) => ProgramList.fromDocument(doc)).toList();
+      });
+    }
+  }
+
+  buildEnrolledPrograms() {
+    String userID = widget.loggedInUser.id;
+    String collectionPath = 'enrolledPrograms';
+    isLoading = true;
+    QuerySnapshot _snapshot;
+    return FutureBuilder(
+      future: usersRef.doc(userID).collection(collectionPath).get(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return circularProgress();
+        } else {
+          _snapshot = snapshot.data;
+          if (_snapshot.size > 0) {
+            programs = _snapshot.docs
+                .map((doc) => ProgramList.fromDocument(doc))
+                .toList();
+            return Wrap(
+              children: programs,
+            );
+          } else {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 25),
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.warning_amber_rounded,
+                      size: 75,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+        }
+      },
+    );
   }
 
   @override
@@ -105,23 +169,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                 endIndent: 40,
                 color: Colors.black45,
               ),
-              Wrap(
-                children: [
-                  IconCard(
-                    cardText: 'University of Northern Iowa',
-                    textSize: 15,
-                    cardTextColor: Colors.black54,
-                    cardColor: Theme.of(context).cardColor,
-                    imageAsset: Image.asset(
-                      'assets/images/UNILogo.png',
-                      height: 60,
-                    ),
-                    onTap: () {
-                      Navigator.pushNamed(context, MentorLaunchScreen.id);
-                    },
-                  ),
-                ],
-              ),
+              buildEnrolledPrograms(),
             ],
           ),
         ),

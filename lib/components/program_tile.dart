@@ -7,23 +7,26 @@ class ProgramTile extends StatelessWidget {
   final String programName;
   final String institutionName;
   final String type;
+  final Function onPressed;
 
   ProgramTile({
     this.programId,
     this.programName,
     this.institutionName,
     this.type,
+    this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return IconCard(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ProgramProfile(programId: programId),
-        ),
-      ),
+      onTap: onPressed ??
+          () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProgramProfile(programId: programId),
+                ),
+              ),
       textSize: 15,
       cardText: '$programName',
       cardTextColor: Colors.black54,
