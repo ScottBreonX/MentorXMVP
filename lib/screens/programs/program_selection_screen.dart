@@ -78,9 +78,19 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.warning_amber_rounded,
-                      size: 75,
+                    Wrap(
+                      children: [
+                        Text(
+                          'You have not enrolled in any programs yet',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black45,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

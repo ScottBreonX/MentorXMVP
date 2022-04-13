@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class IconCard extends StatelessWidget {
@@ -19,6 +20,7 @@ class IconCard extends StatelessWidget {
     this.borderColor,
     this.borderWidth,
     this.textSpacingHeight,
+    this.cachedNetworkImage,
   }) : super(key: key);
 
   final Color cardColor;
@@ -33,6 +35,7 @@ class IconCard extends StatelessWidget {
   final double textSize;
   final double boxHeight;
   final Image imageAsset;
+  final CachedNetworkImage cachedNetworkImage;
   final double boxWidth;
   final Color borderColor;
   final double borderWidth;
@@ -66,7 +69,7 @@ class IconCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              imageAsset ??
+              cachedNetworkImage ??
                   Icon(
                     cardIcon ?? Icons.person,
                     color: cardIconColor,
@@ -75,12 +78,21 @@ class IconCard extends StatelessWidget {
               SizedBox(
                 height: textSpacingHeight ?? 5,
               ),
-              Text(
-                cardText ?? '',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: cardTextColor,
-                  fontSize: textSize ?? 20,
+              Flexible(
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Text(
+                      cardText ?? '',
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: cardTextColor,
+                        fontSize: textSize ?? 20,
+                      ),
+                    ),
+                  ),
                 ),
               )
             ],

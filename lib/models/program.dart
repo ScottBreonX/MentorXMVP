@@ -9,6 +9,7 @@ class Program {
   final String aboutProgram;
   final String headAdmin;
   final String programCode;
+  final String programLogo;
 
   Program({
     this.id,
@@ -19,6 +20,7 @@ class Program {
     this.aboutProgram,
     this.headAdmin,
     this.programCode,
+    this.programLogo,
   });
 
   factory Program.fromDocument(DocumentSnapshot doc) {
@@ -31,6 +33,7 @@ class Program {
       aboutProgram: doc['aboutProgram'],
       headAdmin: doc['headAdmin'],
       programCode: doc['programCode'],
+      programLogo: doc['programLogo'],
     );
   }
   Map<String, dynamic> toMap() {
@@ -43,6 +46,7 @@ class Program {
       'aboutProgram': aboutProgram,
       'headAdmin': headAdmin,
       'programCode': programCode,
+      'programLogo': programLogo,
     };
   }
 }

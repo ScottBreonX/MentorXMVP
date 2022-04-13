@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/program_creation/program_creation_detail.dart';
 import '../../components/alert_dialog.dart';
 import '../../components/progress.dart';
 import '../../constants.dart';
@@ -38,6 +39,7 @@ class _ProgramCreationState extends State<ProgramCreation> {
   String headAdmin;
   String programName;
   String programCode;
+  bool programIDExists = false;
 
   final TextEditingController _textController1 = TextEditingController();
   final TextEditingController _textController2 = TextEditingController();
@@ -58,9 +60,34 @@ class _ProgramCreationState extends State<ProgramCreation> {
               headAdmin: headAdmin,
               programName: programName,
               programCode: programCode,
+              programLogo: '',
             ),
           )
           .then((value) => programID = value);
+    } on FirebaseException catch (e) {
+      showAlertDialog(context,
+          title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
+    }
+  }
+
+  Future<void> _updateProgram(
+    BuildContext context,
+  ) async {
+    try {
+      final database = FirestoreDatabase();
+      await database.updateProgram(
+        Program(
+          institutionName: institutionName,
+          type: 'school',
+          enrollmentType: enrollmentType,
+          aboutProgram: aboutProgram,
+          headAdmin: headAdmin,
+          programName: programName,
+          programCode: programCode,
+          programLogo: '',
+        ),
+        programID,
+      );
     } on FirebaseException catch (e) {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
@@ -77,65 +104,6 @@ class _ProgramCreationState extends State<ProgramCreation> {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
     }
-  }
-
-  _successScreen(parentContext) {
-    setState(() {
-      isLoading = false;
-    });
-
-    return showDialog(
-        context: parentContext,
-        builder: (context) {
-          return SimpleDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            title: Text(
-              'Success!',
-              style: TextStyle(
-                fontFamily: 'Work Sans',
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.pink,
-              ),
-            ),
-            children: <Widget>[
-              SimpleDialogOption(
-                child: Row(
-                  children: [
-                    Container(
-                      width: 250,
-                      child: Column(
-                        children: [
-                          Text(
-                            '$programName succesfully created by ${loggedInUser.firstName} ${loggedInUser.lastName} as a $enrollmentType program with the passcode $programCode',
-                            style: Theme.of(context).textTheme.subtitle2,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SimpleDialogOption(
-                child: RoundedButton(
-                  title: 'Return to Home Screen',
-                  buttonColor: Colors.pink,
-                  fontColor: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LaunchScreen(pageIndex: 0),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          );
-        });
   }
 
   @override
@@ -238,6 +206,7 @@ class _ProgramCreationState extends State<ProgramCreation> {
           if (!snapshot.hasData) {
             return circularProgress();
           }
+
           return Scaffold(
             key: _scaffoldKey,
             appBar: AppBar(
@@ -391,18 +360,28 @@ class _ProgramCreationState extends State<ProgramCreation> {
                             minWidth: 160,
                           ),
                           RoundedButton(
-                            title: 'Save',
+                            title: 'Next',
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                             buttonColor: Colors.pink,
                             fontColor: Colors.white,
                             onPressed: () async {
-                              setState(() {
-                                isLoading = true;
-                              });
-                              await _createProgram(context);
+                              programIDExists
+                                  ? print(programID)
+                                  : await _createProgram(context);
+                              await _updateProgram(context);
                               await _updateProgramID(programID);
-                              await _successScreen(context);
+                              setState(() {
+                                programIDExists = true;
+                              });
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProgramCreationDetail(
+                                      programUID: programID),
+                                ),
+                              );
+                              // await _successScreen(context);
                             },
                             minWidth: 160,
                           ),

@@ -1,9 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
 
 class ProgramJoinRequest extends StatefulWidget {
   static String id = 'program_join_request';
@@ -163,47 +163,95 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
             .set({});
         showDialog(
           context: context,
-          builder: (_) => AlertDialog(
-            title: Text('Congratulations! You have signed up for the \ '
-                '${_program.programName} mentorship program. You should now \ '
-                'head to your program landing page and select your role in \ '
-                'the program.'),
-            actions: [
-              TextButton(
-                child: Text('Go There Now!'),
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    maintainState: false,
-                    builder: (context) => MentoringScreen(),
-                  ),
+          builder: (context) {
+            return SimpleDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              title: Center(
+                child: Text(
+                  "Congratulations! You have signed up for the "
+                  "\ ${_program.programName} mentorship program. You should now "
+                  "\ head to your program landing page and select your role in "
+                  "\ the program.",
+                  style: Theme.of(context).textTheme.headline4,
                 ),
-              )
-            ],
-          ),
-          barrierDismissible: true,
+              ),
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: RoundedButton(
+                        minWidth: 130,
+                        title: "OK",
+                        buttonColor: Colors.blue,
+                        fontColor: Colors.white,
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            );
+          },
         );
+        // showDialog(
+        //   context: context,
+        //   builder: (_) => AlertDialog(
+        //     title: Text('Congratulations! You have signed up for the \ '
+        //         '${_program.programName} mentorship program. You should now \ '
+        //         'head to your program landing page and select your role in \ '
+        //         'the program.'),
+        //     actions: [
+        //       TextButton(
+        //         child: Text('Go There Now!'),
+        //         onPressed: () => Navigator.push(
+        //           context,
+        //           MaterialPageRoute(
+        //             maintainState: false,
+        //             builder: (context) => MentoringScreen(),
+        //           ),
+        //         ),
+        //       )
+        //     ],
+        //   ),
+        //   barrierDismissible: true,
+        // );
       } else {
         showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-            title:
-                Text('The program code does not match. \n Please try again.'),
-            actions: [
-              TextButton(
-                child: Text(
-                  "Okay",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+            context: context,
+            builder: (context) {
+              return SimpleDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                title: Center(
+                  child: Text(
+                    "The program code does not match. \n\nPlease try again.",
+                    style: Theme.of(context).textTheme.headline4,
                   ),
                 ),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ],
-          ),
-          barrierDismissible: true,
-        );
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: RoundedButton(
+                          minWidth: 130,
+                          title: "OK",
+                          buttonColor: Colors.blue,
+                          fontColor: Colors.white,
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              );
+            });
       }
     }
 
@@ -250,20 +298,38 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(
-                Icons.monetization_on,
-                size: 150,
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: CachedNetworkImage(
+                  imageUrl: _program.programLogo,
+                  imageBuilder: (context, imageProvider) => Container(
+                    height: 150,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Image.asset(
+                    'assets/images/MLogoBlue.png',
+                    height: 150,
+                    width: 150,
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'Join ${_program.institutionName}\'s \n '
-                    '${_program.programName} Program',
+                    '${_program.programName}',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
                       color: Theme.of(context).textTheme.headline4.color,
                     ),
                   ),
@@ -274,28 +340,29 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Text(
-                              'Enter program code:',
+                              'Enter the program code:',
                               style: TextStyle(
-                                fontSize: 26,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color:
                                     Theme.of(context).textTheme.headline4.color,
                               ),
                             ),
-                            SizedBox(height: 5),
-                            TextFormField(
-                              style: Theme.of(context).textTheme.subtitle2,
-                              key: formKey,
-                              controller: codeController,
-                              decoration: InputDecoration(
-                                hintText: 'ENTER PROGRAM CODE',
-                                hintStyle:
-                                    Theme.of(context).textTheme.subtitle2,
-                                filled: true,
-                                fillColor: Colors.white,
-                                suffixIcon: IconButton(
-                                  icon: Icon(Icons.clear),
-                                  onPressed: clearCode,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: TextFormField(
+                                style: Theme.of(context).textTheme.subtitle2,
+                                key: formKey,
+                                controller: codeController,
+                                decoration: InputDecoration(
+                                  hintStyle:
+                                      Theme.of(context).textTheme.subtitle2,
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  suffixIcon: IconButton(
+                                    icon: Icon(Icons.clear),
+                                    onPressed: clearCode,
+                                  ),
                                 ),
                               ),
                             ),
@@ -329,8 +396,6 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                             fontColor:
                                 Theme.of(context).textTheme.headline3.color,
                             fontSize: 20,
-                            borderColor: Theme.of(context).colorScheme.primary,
-                            borderWidth: 5,
                             minWidth: MediaQuery.of(context).size.width * 0.77,
                           )
                         : SizedBox(height: 0),
@@ -341,11 +406,14 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                 thickness: 8,
                 color: Theme.of(context).dividerColor,
               ),
-              Text(
-                'Don\'t have a code? Contact your program administrator.',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Theme.of(context).textTheme.headline4.color,
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 25.0),
+                child: Text(
+                  'Don\'t have a code? Contact the program administrator.',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Theme.of(context).textTheme.headline4.color,
+                  ),
                 ),
               ),
               // uncomment the text below to add in a box containing the

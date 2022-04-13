@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/program_tile.dart';
@@ -42,7 +43,37 @@ class _ProgramListState extends State<ProgramList> {
         return ProgramTile(
           programId: programUID,
           programName: program.programName,
-          onPressed: () => Navigator.pushNamed(context, MentorLaunchScreen.id),
+          cachedNetworkImage: CachedNetworkImage(
+            imageUrl: program.programLogo,
+            imageBuilder: (context, imageProvider) => Container(
+              height: 70,
+              width: 70,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            placeholder: (context, url) => CircularProgressIndicator(),
+            errorWidget: (context, url, error) => Image.asset(
+              'assets/images/MLogoBlue.png',
+              height: 50,
+              width: 50,
+              fit: BoxFit.fill,
+            ),
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MentorLaunchScreen(
+                  programUID: programUID,
+                ),
+              ),
+            );
+          },
         );
       },
     );
