@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/programs/available_programs.dart';
 
 class ProgramTypeScreen extends StatefulWidget {
-  final myUser loggedInUser;
   static const String id = 'program_type_screen';
-
-  const ProgramTypeScreen({this.loggedInUser});
 
   @override
   _ProgramTypeScreenState createState() => _ProgramTypeScreenState();
@@ -22,7 +18,6 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: buildSearchField(),
       appBar: AppBar(
         elevation: 5,
         title: Image.asset(

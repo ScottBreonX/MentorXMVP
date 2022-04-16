@@ -210,27 +210,36 @@ class AvailableProgramsStream extends StatelessWidget {
             programName: prog.programName,
             institutionName: prog.institutionName,
             type: prog.type,
-            cachedNetworkImage: CachedNetworkImage(
-              imageUrl: prog.programLogo,
-              imageBuilder: (context, imageProvider) => Container(
-                height: 60,
-                width: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              placeholder: (context, url) => CircularProgressIndicator(),
-              errorWidget: (context, url, error) => Image.asset(
-                'assets/images/MLogoBlue.png',
-                height: 50,
-                width: 50,
-                fit: BoxFit.fill,
-              ),
-            ),
+            imageContainer: Container(
+                child: prog.programLogo == null || prog.programLogo.isEmpty
+                    ? Image.asset(
+                        'assets/images/MLogoBlue.png',
+                        height: 50,
+                        width: 50,
+                        fit: BoxFit.fill,
+                      )
+                    : CachedNetworkImage(
+                        imageUrl: prog.programLogo,
+                        imageBuilder: (context, imageProvider) => Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Image.asset(
+                          'assets/images/MLogoPink.png',
+                          height: 50,
+                          width: 50,
+                          fit: BoxFit.fill,
+                        ),
+                      )),
           );
           programBubbles.add(programBubble);
         }

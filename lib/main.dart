@@ -22,6 +22,7 @@ import 'package:mentorx_mvp/screens/authentication/registration_profile_screen.d
 import 'package:mentorx_mvp/screens/programs/program_join_request.dart';
 import 'package:mentorx_mvp/screens/programs/program_profile.dart';
 import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_type.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'screens/authentication/registration_screen.dart';
@@ -81,6 +82,7 @@ class MentorX extends StatelessWidget {
           MentorConfirm.id: (context) => MentorConfirm(),
           ResetPasswordScreen.id: (context) => ResetPasswordScreen(),
           ProgramCreation.id: (context) => ProgramCreation(),
+          ProgramTypeScreen.id: (context) => ProgramTypeScreen(),
         },
       ),
     );

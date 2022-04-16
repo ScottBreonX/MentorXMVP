@@ -134,16 +134,8 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                   fontColor: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProgramTypeScreen(
-                          loggedInUser: widget.loggedInUser,
-                        ),
-                      ),
-                    );
-                  },
+                  onPressed: () =>
+                      Navigator.pushNamed(context, ProgramTypeScreen.id),
                   minWidth: 300,
                 ),
               ),

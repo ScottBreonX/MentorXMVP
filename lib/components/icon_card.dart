@@ -69,7 +69,8 @@ class IconCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              cachedNetworkImage ??
+              imageAsset ??
+                  cachedNetworkImage ??
                   Icon(
                     cardIcon ?? Icons.person,
                     color: cardIconColor,

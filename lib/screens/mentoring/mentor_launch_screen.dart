@@ -16,7 +16,7 @@ class MentorLaunchScreen extends StatefulWidget {
   const MentorLaunchScreen({
     Key key,
     this.loggedInUser,
-    @required this.programUID,
+    this.programUID,
   }) : super(key: key);
 
   static const String id = 'mentor_launch_screen';
@@ -100,7 +100,9 @@ class _MentorLaunchScreenState extends State<MentorLaunchScreen> {
                                         errorWidget: (context, url, error) =>
                                             Image.asset(
                                           'assets/images/MLogoBlue.png',
-                                          fit: BoxFit.fitHeight,
+                                          height: 120,
+                                          width: 120,
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
                                       Container(

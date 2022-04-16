@@ -3,11 +3,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
-import 'package:mentorx_mvp/components/program_tile.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import '../../components/progress.dart';
-import '../../models/program.dart';
 import '../launch_screen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as Im;
@@ -415,11 +413,16 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(20.0),
-                                  child: ProgramTile(
+                                  child: IconCard(
+                                    cardColor: Colors.white,
+                                    textSize: 0,
+                                    imageAsset: Image.asset(
+                                      'assets/images/MLogoBlue.png',
+                                      height: 150,
+                                      width: 150,
+                                    ),
                                     boxHeight: 200,
                                     boxWidth: 200,
-                                    textSize: 0,
-                                    imageHeight: 120,
                                   ),
                                 ),
                               ],

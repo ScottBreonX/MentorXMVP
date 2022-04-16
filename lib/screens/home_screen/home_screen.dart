@@ -86,8 +86,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: CircleAvatar(
                                   radius: 80,
                                   backgroundColor: Colors.white,
-                                  child: profilePictureStatus
-                                      ? CachedNetworkImage(
+                                  child: loggedInUser.profilePicture.isEmpty ||
+                                          loggedInUser.profilePicture == null ||
+                                          loggedInUser.profilePicture == ""
+                                      ? CircleAvatar(
+                                          radius: 75,
+                                          backgroundColor: Colors.blue,
+                                          child: Icon(
+                                            Icons.person,
+                                            size: 90,
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      : CachedNetworkImage(
                                           imageUrl: loggedInUser.profilePicture,
                                           imageBuilder:
                                               (context, imageProvider) =>
@@ -106,15 +117,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                               CircularProgressIndicator(),
                                           errorWidget: (context, url, error) =>
                                               Icon(
-                                            Icons.person,
-                                            size: 90,
-                                            color: Colors.white,
-                                          ),
-                                        )
-                                      : CircleAvatar(
-                                          radius: 75,
-                                          backgroundColor: Colors.blue,
-                                          child: Icon(
                                             Icons.person,
                                             size: 90,
                                             color: Colors.white,

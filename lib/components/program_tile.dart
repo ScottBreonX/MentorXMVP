@@ -15,6 +15,7 @@ class ProgramTile extends StatelessWidget {
   final double imageHeight;
   final Image imageAsset;
   final CachedNetworkImage cachedNetworkImage;
+  final Container imageContainer;
 
   ProgramTile({
     this.programId,
@@ -29,6 +30,7 @@ class ProgramTile extends StatelessWidget {
     this.imageHeight,
     this.imageAsset,
     this.cachedNetworkImage,
+    this.imageContainer,
   });
 
   @override
@@ -66,7 +68,10 @@ class ProgramTile extends StatelessWidget {
                                           ProgramProfile(programId: programId),
                                     ),
                                   ),
-                          child: cachedNetworkImage ?? null,
+                          child: imageContainer ??
+                              imageAsset ??
+                              cachedNetworkImage ??
+                              null,
                         ),
                       ),
                       Column(
