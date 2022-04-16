@@ -10,9 +10,10 @@ final _firestore = FirebaseFirestore.instance;
 
 class AvailableProgramsScreen extends StatefulWidget {
   final myUser loggedInUser;
+  final String programType;
   static const String id = 'available_programs_screen';
 
-  const AvailableProgramsScreen({this.loggedInUser});
+  const AvailableProgramsScreen({this.loggedInUser, this.programType});
 
   @override
   _AvailableProgramsScreenState createState() =>
@@ -77,114 +78,65 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
     return ModalProgressHUD(
       inAsyncCall: showSpinner,
       child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 25, 0, 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0, bottom: 5.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: Icon(
-                        Icons.school,
-                        size: 40,
-                        color: Colors.pink,
-                      ),
-                    ),
-                    Text(
-                      'University Programs',
-                      style: TextStyle(
-                        fontFamily: 'WorkSans',
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black54,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Divider(
-                thickness: 4,
-                indent: 40,
-                endIndent: 40,
-                color: Colors.black45,
-              ),
-              Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0, bottom: 5.0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 20.0, bottom: 30.0),
-                    child: Container(
-                      height: 150,
-                      width: MediaQuery.of(context).size.width,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10),
-                        child: AvailableProgramsStream(
-                          // searchString: searchString,
-                          type: 'school',
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Stack(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/MentorPink.png',
-                        height: 150,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: Text(
-                          'Programs',
-                          style: TextStyle(
-                            fontFamily: 'WorkSans',
-                            fontSize: 25,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black54,
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: widget.programType == 'school'
+                        ? Icon(
+                            Icons.school,
+                            size: 40,
+                            color: Colors.pink,
+                          )
+                        : Image.asset(
+                            'assets/images/MLogoBlue.png',
+                            height: 50,
                           ),
-                        ),
-                      ),
-                    ],
                   ),
-                  Positioned(
-                    top: 110,
-                    right: 30,
-                    left: 30,
-                    child: Container(
-                      color: Colors.black45,
-                      height: 4,
-                      width: MediaQuery.of(context).size.width,
+                  Text(
+                    'Available Programs',
+                    style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontSize: 25,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black54,
                     ),
-                  )
+                  ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 150,
+            ),
+            Divider(
+              thickness: 4,
+              indent: 40,
+              endIndent: 40,
+              color: Colors.black45,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * .70,
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                      padding: const EdgeInsets.only(left: 10.0, right: 10),
                       child: AvailableProgramsStream(
                         // searchString: searchString,
-                        type: 'mentorX',
+                        type: '${widget.programType}',
                       ),
                     ),
                   ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -283,9 +235,8 @@ class AvailableProgramsStream extends StatelessWidget {
           programBubbles.add(programBubble);
         }
         return Container(
-          height: 150,
           child: ListView(
-            scrollDirection: Axis.horizontal,
+            scrollDirection: Axis.vertical,
             children: programBubbles,
           ),
         );

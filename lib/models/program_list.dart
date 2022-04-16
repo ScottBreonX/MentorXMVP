@@ -41,15 +41,18 @@ class _ProgramListState extends State<ProgramList> {
         Program program = Program.fromDocument(snapshot.data);
 
         return ProgramTile(
+          boxWidth: MediaQuery.of(context).size.width * 0.90,
           programId: programUID,
           programName: program.programName,
+          institutionName: program.institutionName,
+          programAbout: program.aboutProgram,
           cachedNetworkImage: CachedNetworkImage(
             imageUrl: program.programLogo,
             imageBuilder: (context, imageProvider) => Container(
-              height: 70,
-              width: 70,
+              height: 80,
+              width: 80,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(20),
                 image: DecorationImage(
                   image: imageProvider,
                   fit: BoxFit.cover,

@@ -153,6 +153,7 @@ class _ProgramCreationState extends State<ProgramCreation> {
       keyboardType: TextInputType.multiline,
       maxLines: null,
       onChanged: (value) {
+        setState(() {});
         if (fieldName == 'institutionName') {
           institutionName = value;
         } else if (fieldName == 'enrollmentType') {
@@ -192,6 +193,21 @@ class _ProgramCreationState extends State<ProgramCreation> {
   }
 
   bool isLoading = false;
+
+  final StringValidator instituionNameValidator = NonEmptyStringValidator();
+  final StringValidator enrollmentTypeValidator = NonEmptyStringValidator();
+  final StringValidator aboutProgramValidator = NonEmptyStringValidator();
+  final StringValidator headAdminValidator = NonEmptyStringValidator();
+  final StringValidator programNameValidator = NonEmptyStringValidator();
+  final StringValidator programCodeValidator = NonEmptyStringValidator();
+
+  bool get canSubmit {
+    return instituionNameValidator.isValid(institutionName) &&
+        aboutProgramValidator.isValid(aboutProgram) &&
+        headAdminValidator.isValid(headAdmin) &&
+        programNameValidator.isValid(programName) &&
+        programCodeValidator.isValid(programCode);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -363,26 +379,30 @@ class _ProgramCreationState extends State<ProgramCreation> {
                             title: 'Next',
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
-                            buttonColor: Colors.pink,
-                            fontColor: Colors.white,
-                            onPressed: () async {
-                              programIDExists
-                                  ? print(programID)
-                                  : await _createProgram(context);
-                              await _updateProgram(context);
-                              await _updateProgramID(programID);
-                              setState(() {
-                                programIDExists = true;
-                              });
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProgramCreationDetail(
-                                      programUID: programID),
-                                ),
-                              );
-                              // await _successScreen(context);
-                            },
+                            buttonColor: canSubmit ? Colors.pink : Colors.grey,
+                            fontColor:
+                                canSubmit ? Colors.white : Colors.grey.shade400,
+                            onPressed: canSubmit
+                                ? () async {
+                                    programIDExists
+                                        ? print(programID)
+                                        : await _createProgram(context);
+                                    await _updateProgram(context);
+                                    await _updateProgramID(programID);
+                                    setState(() {
+                                      programIDExists = true;
+                                    });
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProgramCreationDetail(
+                                                programUID: programID),
+                                      ),
+                                    );
+                                    // await _successScreen(context);
+                                  }
+                                : null,
                             minWidth: 160,
                           ),
                         ],
@@ -394,5 +414,19 @@ class _ProgramCreationState extends State<ProgramCreation> {
             ),
           );
         });
+  }
+}
+
+abstract class StringValidator {
+  bool isValid(String value);
+}
+
+class NonEmptyStringValidator implements StringValidator {
+  @override
+  bool isValid(String value) {
+    if (value == null) {
+      value = '';
+    }
+    return value.isNotEmpty;
   }
 }

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/programs/available_programs.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
+import 'package:mentorx_mvp/screens/programs/program_type.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import '../../components/progress.dart';
 import '../../components/rounded_button.dart';
@@ -138,7 +138,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AvailableProgramsScreen(
+                        builder: (context) => ProgramTypeScreen(
                           loggedInUser: widget.loggedInUser,
                         ),
                       ),
