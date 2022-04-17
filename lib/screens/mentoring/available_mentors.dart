@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mentorx_mvp/components/mentor_card.dart';
 import 'package:mentorx_mvp/models/mentor.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+
+import '../../components/profile_image_circle.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
@@ -183,7 +186,39 @@ class AvailableMentorsStream extends StatelessWidget {
             mentorUID: mentor.id.toString(),
             mentorFname: mentorModel.firstName,
             mentorLname: mentorModel.lastName,
-            mentorImgUrl: mentorModel.profilePic,
+            imageContainer: Container(
+              child: mentorModel.profilePic == null ||
+                      mentorModel.profilePic.isEmpty ||
+                      mentorModel.profilePic == ""
+                  ? ProfileImageCircle(
+                      circleColor: Colors.blue,
+                      iconSize: 45,
+                      iconColor: Colors.white,
+                      circleSize: 40,
+                    )
+                  : CircleAvatar(
+                      radius: 40,
+                      child: CachedNetworkImage(
+                        imageUrl: mentorModel.profilePic,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(
+                          Icons.person,
+                          size: 50,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+            ),
             mentorSlots: mentorModel.mentorSlots,
             mentorMajor: mentorModel.major,
             mentorYearInSchool: mentorModel.yearInSchool,

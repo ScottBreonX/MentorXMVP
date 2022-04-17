@@ -117,13 +117,14 @@ class ProgramTile extends StatelessWidget {
                               ],
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
+                              padding:
+                                  const EdgeInsets.only(top: 2.0, bottom: 5),
                               child: Container(
                                 width: 220,
                                 child: Text(
                                   '$programAbout',
                                   overflow: TextOverflow.ellipsis,
-                                  maxLines: 4,
+                                  maxLines: 3,
                                   style: TextStyle(
                                     fontFamily: 'WorkSans',
                                     fontSize: 12,

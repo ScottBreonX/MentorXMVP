@@ -131,83 +131,93 @@ class _MentoringScreenState extends State<MentoringScreen> {
   }
 
   buildRoleSelection() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'Select your role in the program',
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headline1,
-        ),
-        SizedBox(height: 50),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconCard(
-              cardIcon: Icons.group,
-              boxHeight: MediaQuery.of(context).size.width * 0.33,
-              boxWidth: MediaQuery.of(context).size.width * 0.33,
-              cardColor: mentorSelected
-                  ? Colors.grey[400]
-                  : Theme.of(context).cardColor,
-              borderColor: mentorSelected
-                  ? Theme.of(context).colorScheme.secondary
-                  : Theme.of(context).buttonTheme.colorScheme.primary,
-              borderWidth: 5,
-              cardText: 'Be a Mentor',
-              textSize: 15,
-              onTap: () => setChoice('mentor'),
-            ),
-            IconCard(
-              cardIcon: Icons.school,
-              boxHeight: MediaQuery.of(context).size.width * 0.33,
-              boxWidth: MediaQuery.of(context).size.width * 0.33,
-              cardColor: menteeSelected
-                  ? Colors.grey[400]
-                  : Theme.of(context).cardColor,
-              borderColor: menteeSelected
-                  ? Theme.of(context).colorScheme.secondary
-                  : Theme.of(context).buttonTheme.colorScheme.primary,
-              borderWidth: 5,
-              cardText: 'Be a Mentee',
-              textSize: 15,
-              onTap: () => setChoice('mentee'),
-            ),
-          ],
-        ),
-        RoundedButton(
-          title: 'Continue',
-          fontSize: 24,
-          fontColor: Theme.of(context).textTheme.button.color,
-          buttonColor: Theme.of(context).colorScheme.primary,
-          minWidth: MediaQuery.of(context).size.width * 0.5,
-          onPressed: () => (menteeSelected | mentorSelected)
-              ? {
-                  Navigator.push(
-                    context,
-                    mentorSelected
-                        ? MaterialPageRoute(
-                            builder: (context) => MentorSignupScreen(),
-                          )
-                        : MaterialPageRoute(
-                            builder: (context) => MenteeSignupScreen(),
-                          ),
-                  )
-                }
-              : {},
-        ),
-        TextButton(
-          onPressed: () => {Navigator.pop(context)},
-          child: Text(
-            'Cancel',
+    return Padding(
+      padding: const EdgeInsets.only(left: 40.0, right: 40.0, top: 100),
+      child: Column(
+        children: [
+          Text(
+            'Select your role in the program',
+            textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 24,
-              decoration: TextDecoration.underline,
-              color: Theme.of(context).colorScheme.primary,
+              fontFamily: 'WorkSans',
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              color: Colors.black54,
             ),
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(top: 40.0, bottom: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconCard(
+                  cardIcon: Icons.group,
+                  cardIconColor:
+                      mentorSelected ? Colors.white : Colors.grey[400],
+                  boxHeight: MediaQuery.of(context).size.width * 0.33,
+                  boxWidth: MediaQuery.of(context).size.width * 0.33,
+                  cardColor: mentorSelected ? Colors.blue : Colors.grey,
+                  cardText: 'Mentor',
+                  cardTextColor:
+                      mentorSelected ? Colors.white : Colors.grey[400],
+                  boxShadowColor:
+                      mentorSelected ? Colors.grey[700] : Colors.white,
+                  textSize: 20,
+                  onTap: () => setChoice('mentor'),
+                ),
+                IconCard(
+                  cardIcon: Icons.school,
+                  cardIconColor:
+                      menteeSelected ? Colors.white : Colors.grey[400],
+                  boxHeight: MediaQuery.of(context).size.width * 0.33,
+                  boxWidth: MediaQuery.of(context).size.width * 0.33,
+                  cardColor: menteeSelected ? Colors.blue : Colors.grey,
+                  boxShadowColor:
+                      menteeSelected ? Colors.grey[700] : Colors.white,
+                  cardText: 'Mentee',
+                  cardTextColor:
+                      menteeSelected ? Colors.white : Colors.grey[400],
+                  textSize: 20,
+                  onTap: () => setChoice('mentee'),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: RoundedButton(
+              title: 'Continue',
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+              fontColor: Theme.of(context).textTheme.button.color,
+              buttonColor: Colors.blue,
+              minWidth: MediaQuery.of(context).size.width * 0.7,
+              onPressed: () => (menteeSelected | mentorSelected)
+                  ? {
+                      Navigator.push(
+                        context,
+                        mentorSelected
+                            ? MaterialPageRoute(
+                                builder: (context) => MentorSignupScreen(),
+                              )
+                            : MaterialPageRoute(
+                                builder: (context) => MenteeSignupScreen(),
+                              ),
+                      )
+                    }
+                  : {},
+            ),
+          ),
+          RoundedButton(
+            onPressed: () => {Navigator.pop(context)},
+            buttonColor: Colors.white,
+            fontColor: Colors.blue,
+            minWidth: MediaQuery.of(context).size.width * .7,
+            fontSize: 24,
+            title: 'Cancel',
+          ),
+        ],
+      ),
     );
   }
 
@@ -217,10 +227,14 @@ class _MentoringScreenState extends State<MentoringScreen> {
       backgroundColor: ThemeData.light().scaffoldBackgroundColor,
       appBar: AppBar(
         elevation: 5,
-        title: Text('Mentoring Screen'),
+        title: Image.asset(
+          'assets/images/MentorPinkWhite.png',
+          height: 150,
+        ),
       ),
       body:
-          (isMentee | isMentor) ? buildUserConnections() : buildRoleSelection(),
+          // (isMentee | isMentor) ? buildUserConnections() :
+          buildRoleSelection(),
     );
   }
 }

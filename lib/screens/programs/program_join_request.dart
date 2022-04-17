@@ -300,27 +300,37 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: CachedNetworkImage(
-                  imageUrl: _program.programLogo,
-                  imageBuilder: (context, imageProvider) => Container(
-                    height: 150,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
+                child: _program.programLogo == null ||
+                        _program.programLogo.isEmpty ||
+                        _program.programLogo == ""
+                    ? Image.asset(
+                        'assets/images/MLogoBlue.png',
+                        height: 150,
+                        width: 150,
+                        fit: BoxFit.fill,
+                      )
+                    : CachedNetworkImage(
+                        imageUrl: _program.programLogo,
+                        imageBuilder: (context, imageProvider) => Container(
+                          height: 150,
+                          width: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Image.asset(
+                          'assets/images/MLogoBlue.png',
+                          height: 150,
+                          width: 150,
+                          fit: BoxFit.fill,
+                        ),
                       ),
-                    ),
-                  ),
-                  placeholder: (context, url) => CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => Image.asset(
-                    'assets/images/MLogoBlue.png',
-                    height: 150,
-                    width: 150,
-                    fit: BoxFit.fill,
-                  ),
-                ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

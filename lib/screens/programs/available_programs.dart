@@ -209,6 +209,7 @@ class AvailableProgramsStream extends StatelessWidget {
             programId: program.id.toString(),
             programName: prog.programName,
             institutionName: prog.institutionName,
+            programAbout: prog.aboutProgram,
             type: prog.type,
             imageContainer: Container(
                 child: prog.programLogo == null || prog.programLogo.isEmpty

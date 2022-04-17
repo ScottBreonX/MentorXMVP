@@ -6,6 +6,7 @@ import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/available_mentors.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
 import '../../components/progress.dart';
 import '../launch_screen.dart';
 
@@ -31,8 +32,6 @@ class _MentorLaunchScreenState extends State<MentorLaunchScreen> {
     super.initState();
   }
 
-  bool programLogo = false;
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Object>(
@@ -49,10 +48,6 @@ class _MentorLaunchScreenState extends State<MentorLaunchScreen> {
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
-                }
-
-                if (program.programLogo != "") {
-                  programLogo = true;
                 }
 
                 return Scaffold(
@@ -79,32 +74,42 @@ class _MentorLaunchScreenState extends State<MentorLaunchScreen> {
                                   padding: const EdgeInsets.only(left: 10.0),
                                   child: Column(
                                     children: [
-                                      CachedNetworkImage(
-                                        imageUrl: program.programLogo,
-                                        imageBuilder:
-                                            (context, imageProvider) =>
-                                                Container(
-                                          height: 120.0,
-                                          width: 120,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            image: DecorationImage(
-                                              image: imageProvider,
+                                      program.programLogo == null ||
+                                              program.programLogo.isEmpty ||
+                                              program.programLogo == ""
+                                          ? Image.asset(
+                                              'assets/images/MLogoBlue.png',
+                                              height: 120,
+                                              width: 120,
                                               fit: BoxFit.cover,
+                                            )
+                                          : CachedNetworkImage(
+                                              imageUrl: program.programLogo,
+                                              imageBuilder:
+                                                  (context, imageProvider) =>
+                                                      Container(
+                                                height: 120.0,
+                                                width: 120,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  image: DecorationImage(
+                                                    image: imageProvider,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              placeholder: (context, url) =>
+                                                  circularProgress(),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      Image.asset(
+                                                'assets/images/MLogoBlue.png',
+                                                height: 120,
+                                                width: 120,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                        placeholder: (context, url) =>
-                                            circularProgress(),
-                                        errorWidget: (context, url, error) =>
-                                            Image.asset(
-                                          'assets/images/MLogoBlue.png',
-                                          height: 120,
-                                          width: 120,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
                                       Container(
                                         width: 300,
                                         child: Row(
@@ -241,11 +246,20 @@ class _MentorLaunchScreenState extends State<MentorLaunchScreen> {
                                   boxHeight: 110,
                                   boxWidth: 110,
                                   iconSize: 50,
-                                  cardIconColor: Colors.black45,
+                                  cardIconColor: Colors.blue,
                                   cardIcon: Icons.change_circle,
                                   cardText: 'Enrollment',
                                   textSize: 15,
-                                  cardTextColor: Colors.black45,
+                                  cardTextColor: Colors.blue,
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MentoringScreen(
+                                            loggedInUser: loggedInUser),
+                                      ),
+                                    );
+                                  },
                                 ),
                                 IconCard(
                                   cardColor: Colors.white,

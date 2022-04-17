@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_confirmation.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
@@ -11,7 +9,7 @@ class MentorCard extends StatefulWidget {
   final int mentorSlots;
   final String mentorFname;
   final String mentorLname;
-  final String mentorImgUrl;
+  final Container imageContainer;
   final String mentorMajor;
   final String mentorYearInSchool;
   final String mtrAtt1;
@@ -25,7 +23,7 @@ class MentorCard extends StatefulWidget {
     this.mentorSlots,
     this.mentorFname,
     this.mentorLname,
-    this.mentorImgUrl,
+    this.imageContainer,
     this.mentorMajor,
     this.mentorYearInSchool,
     this.mtrAtt1,
@@ -219,36 +217,7 @@ class _MentorCardState extends State<MentorCard> {
                         child: CircleAvatar(
                           backgroundColor: Colors.grey,
                           radius: 42,
-                          child: widget.mentorImgUrl != ""
-                              ? CircleAvatar(
-                                  radius: 40,
-                                  child: CachedNetworkImage(
-                                    imageUrl: widget.mentorImgUrl,
-                                    imageBuilder: (context, imageProvider) =>
-                                        Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                          image: imageProvider,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    placeholder: (context, url) =>
-                                        CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) => Icon(
-                                      Icons.person,
-                                      size: 50,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                )
-                              : ProfileImageCircle(
-                                  circleColor: Colors.blue,
-                                  iconSize: 45,
-                                  iconColor: Colors.white,
-                                  circleSize: 40,
-                                ),
+                          child: widget.imageContainer ?? Container(),
                         ),
                       ),
                     ),
