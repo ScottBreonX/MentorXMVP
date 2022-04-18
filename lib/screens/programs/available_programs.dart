@@ -95,7 +95,7 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
                             color: Colors.pink,
                           )
                         : Image.asset(
-                            'assets/images/MLogoBlue.png',
+                            'assets/images/MLogoPink.png',
                             height: 50,
                           ),
                   ),
@@ -214,21 +214,21 @@ class AvailableProgramsStream extends StatelessWidget {
             imageContainer: Container(
                 child: prog.programLogo == null || prog.programLogo.isEmpty
                     ? Image.asset(
-                        'assets/images/MLogoBlue.png',
-                        height: 50,
-                        width: 50,
+                        'assets/images/MLogoPink.png',
+                        height: 70,
+                        width: 70,
                         fit: BoxFit.fill,
                       )
                     : CachedNetworkImage(
                         imageUrl: prog.programLogo,
                         imageBuilder: (context, imageProvider) => Container(
-                          height: 60,
-                          width: 60,
+                          height: 70,
+                          width: 70,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
                             image: DecorationImage(
                               image: imageProvider,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                             ),
                           ),
                         ),
@@ -236,8 +236,8 @@ class AvailableProgramsStream extends StatelessWidget {
                             CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Image.asset(
                           'assets/images/MLogoPink.png',
-                          height: 50,
-                          width: 50,
+                          height: 70,
+                          width: 70,
                           fit: BoxFit.fill,
                         ),
                       )),

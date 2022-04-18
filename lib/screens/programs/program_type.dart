@@ -151,8 +151,8 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
               ),
             ),
             Positioned(
-              top: 345,
-              right: 135,
+              top: 333,
+              right: 127,
               left: 0,
               child: GestureDetector(
                 onTap: () => Navigator.push(
@@ -166,7 +166,7 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
                 ),
                 child: Image.asset(
                   'assets/images/MentorPink.png',
-                  height: 140,
+                  height: 160,
                 ),
               ),
             ),

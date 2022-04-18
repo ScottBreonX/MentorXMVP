@@ -87,9 +87,9 @@ class ProgramTile extends StatelessWidget {
                                   maxLines: 1,
                                   style: TextStyle(
                                     fontFamily: 'WorkSans',
-                                    fontSize: 15,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.w600,
-                                    color: Colors.black,
+                                    color: Colors.black54,
                                   ),
                                 ),
                               ),
@@ -102,7 +102,7 @@ class ProgramTile extends StatelessWidget {
                                     fontFamily: 'WorkSans',
                                     fontSize: 10,
                                     fontWeight: FontWeight.w900,
-                                    color: Colors.black,
+                                    color: Colors.blue,
                                   ),
                                 ),
                                 Text(
@@ -118,7 +118,7 @@ class ProgramTile extends StatelessWidget {
                             ),
                             Padding(
                               padding:
-                                  const EdgeInsets.only(top: 2.0, bottom: 5),
+                                  const EdgeInsets.only(top: 5.0, bottom: 10),
                               child: Container(
                                 width: 220,
                                 child: Text(
@@ -128,7 +128,8 @@ class ProgramTile extends StatelessWidget {
                                   style: TextStyle(
                                     fontFamily: 'WorkSans',
                                     fontSize: 12,
-                                    color: Colors.black54,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black45,
                                   ),
                                 ),
                               ),

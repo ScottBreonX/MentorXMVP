@@ -78,9 +78,6 @@ class IconCard extends StatelessWidget {
                     color: cardIconColor,
                     size: iconSize ?? 80,
                   ),
-              SizedBox(
-                height: textSpacingHeight ?? 5,
-              ),
               Flexible(
                 child: Container(
                   child: Padding(

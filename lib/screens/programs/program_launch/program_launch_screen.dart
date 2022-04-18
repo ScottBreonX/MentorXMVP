@@ -7,26 +7,27 @@ import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/available_mentors.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
-import '../../components/progress.dart';
-import '../launch_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
+import '../../../components/progress.dart';
+import '../../launch_screen.dart';
 
-class MentorLaunchScreen extends StatefulWidget {
+class ProgramLaunchScreen extends StatefulWidget {
   final myUser loggedInUser;
   final String programUID;
 
-  const MentorLaunchScreen({
+  const ProgramLaunchScreen({
     Key key,
     this.loggedInUser,
     this.programUID,
   }) : super(key: key);
 
-  static const String id = 'mentor_launch_screen';
+  static const String id = 'program_launch_screen';
 
   @override
-  _MentorLaunchScreenState createState() => _MentorLaunchScreenState();
+  _ProgramLaunchScreenState createState() => _ProgramLaunchScreenState();
 }
 
-class _MentorLaunchScreenState extends State<MentorLaunchScreen> {
+class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
   @override
   void initState() {
     super.initState();
@@ -78,7 +79,7 @@ class _MentorLaunchScreenState extends State<MentorLaunchScreen> {
                                               program.programLogo.isEmpty ||
                                               program.programLogo == ""
                                           ? Image.asset(
-                                              'assets/images/MLogoBlue.png',
+                                              'assets/images/MLogoPink.png',
                                               height: 120,
                                               width: 120,
                                               fit: BoxFit.cover,
@@ -119,7 +120,7 @@ class _MentorLaunchScreenState extends State<MentorLaunchScreen> {
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          top: 20.0),
+                                                          top: 10.0),
                                                   child: Text(
                                                     '${program.programName}',
                                                     textAlign: TextAlign.center,
@@ -248,7 +249,7 @@ class _MentorLaunchScreenState extends State<MentorLaunchScreen> {
                                   iconSize: 50,
                                   cardIconColor: Colors.blue,
                                   cardIcon: Icons.change_circle,
-                                  cardText: 'Enrollment',
+                                  cardText: 'Mentoring Enrollment',
                                   textSize: 15,
                                   cardTextColor: Colors.blue,
                                   onTap: () {
@@ -266,11 +267,23 @@ class _MentorLaunchScreenState extends State<MentorLaunchScreen> {
                                   boxHeight: 110,
                                   boxWidth: 110,
                                   iconSize: 50,
-                                  cardIconColor: Colors.black45,
-                                  cardIcon: Icons.email_rounded,
-                                  cardText: 'Contact Admin',
+                                  cardIconColor: Colors.blue,
+                                  cardIcon: Icons.info_rounded,
+                                  cardText: 'Program Enrollment',
                                   textSize: 15,
-                                  cardTextColor: Colors.black45,
+                                  cardTextColor: Colors.blue,
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProgramEnrollmentScreen(
+                                          loggedInUser: loggedInUser,
+                                          programUID: program.id,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                                 IconCard(
                                   cardColor: Colors.white,
@@ -278,8 +291,8 @@ class _MentorLaunchScreenState extends State<MentorLaunchScreen> {
                                   boxWidth: 110,
                                   iconSize: 50,
                                   cardIconColor: Colors.black45,
-                                  cardIcon: Icons.info_rounded,
-                                  cardText: 'Program Info',
+                                  cardIcon: Icons.admin_panel_settings,
+                                  cardText: 'Program Admin',
                                   textSize: 15,
                                   cardTextColor: Colors.black45,
                                 ),

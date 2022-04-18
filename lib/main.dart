@@ -13,9 +13,9 @@ import 'package:mentorx_mvp/screens/mentoring/available_mentors.dart';
 import 'package:mentorx_mvp/screens/program_creation/program_creation.dart';
 import 'package:mentorx_mvp/screens/programs/available_programs.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_confirmation.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentor_launch_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
-import 'package:mentorx_mvp/screens/mentoring/program_launch_screen.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/screens/notifications/notifications_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/registration_profile_screen.dart';
@@ -67,7 +67,6 @@ class MentorX extends StatelessWidget {
               RegistrationProfileScreen(),
           LaunchScreen.id: (context) => LaunchScreen(),
           Profile.id: (context) => Profile(),
-          MentorLaunchScreen.id: (context) => MentorLaunchScreen(),
           LandingPage.id: (context) => LandingPage(),
           HomeScreen.id: (context) => HomeScreen(),
           NotificationScreen.id: (context) => NotificationScreen(),
@@ -79,6 +78,7 @@ class MentorX extends StatelessWidget {
           ProgramProfile.id: (context) => ProgramProfile(),
           ProgramJoinRequest.id: (context) => ProgramJoinRequest(),
           ProgramLaunchScreen.id: (context) => ProgramLaunchScreen(),
+          ProgramEnrollmentScreen.id: (context) => ProgramEnrollmentScreen(),
           MentorConfirm.id: (context) => MentorConfirm(),
           ResetPasswordScreen.id: (context) => ResetPasswordScreen(),
           ProgramCreation.id: (context) => ProgramCreation(),

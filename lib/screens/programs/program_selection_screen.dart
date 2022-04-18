@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_type.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import '../../components/progress.dart';
-import '../../components/rounded_button.dart';
 import '../../models/program_list.dart';
 
 myUser loggedInUser;
@@ -128,19 +129,25 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 40.0),
-                child: RoundedButton(
-                  title: 'Join a new program',
-                  buttonColor: Colors.pink,
-                  fontColor: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  onPressed: () =>
-                      Navigator.pushNamed(context, ProgramTypeScreen.id),
-                  minWidth: 300,
-                ),
+                child: ButtonCard(
+                    cardWidthPercent: .90,
+                    iconPadding: EdgeInsets.only(right: 10),
+                    buttonCardIconSize: 40,
+                    // cardIconBool: Container(),
+                    buttonCardIcon: Icons.add_circle_rounded,
+                    cardAlignment: MainAxisAlignment.center,
+                    buttonCardText: 'Join a new program',
+                    buttonCardColor: Colors.white,
+                    buttonCardTextSize: 25,
+                    buttonCardIconColor: Colors.pink,
+                    buttonCardTextColor: Colors.pink,
+                    buttonCardRadius: 20,
+                    onPressed: () {
+                      Navigator.pushNamed(context, ProgramTypeScreen.id);
+                    }),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 100.0, bottom: 5),
+                padding: const EdgeInsets.only(top: 50.0, bottom: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

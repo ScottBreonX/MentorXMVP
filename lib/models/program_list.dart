@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/program_tile.dart';
 import 'package:mentorx_mvp/models/program.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentor_launch_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 
 import '../components/progress.dart';
 
@@ -51,29 +51,29 @@ class _ProgramListState extends State<ProgramList> {
                     program.programLogo.isEmpty ||
                     program.programLogo == ""
                 ? Image.asset(
-                    'assets/images/MLogoBlue.png',
-                    height: 50,
-                    width: 50,
+                    'assets/images/MLogoPink.png',
+                    height: 70,
+                    width: 70,
                     fit: BoxFit.fill,
                   )
                 : CachedNetworkImage(
                     imageUrl: program.programLogo,
                     imageBuilder: (context, imageProvider) => Container(
-                      height: 80,
-                      width: 80,
+                      height: 70,
+                      width: 70,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         image: DecorationImage(
                           image: imageProvider,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                       ),
                     ),
                     placeholder: (context, url) => CircularProgressIndicator(),
                     errorWidget: (context, url, error) => Image.asset(
                       'assets/images/MLogoBlue.png',
-                      height: 50,
-                      width: 50,
+                      height: 70,
+                      width: 70,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -82,7 +82,7 @@ class _ProgramListState extends State<ProgramList> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => MentorLaunchScreen(
+                builder: (context) => ProgramLaunchScreen(
                   programUID: programUID,
                 ),
               ),

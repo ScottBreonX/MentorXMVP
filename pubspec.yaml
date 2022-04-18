@@ -51,10 +51,6 @@ flutter:
         - asset: assets/fonts/WorkSans-Regular.ttf
 
   assets:
-    - assets/images/XLogo.png
-    - assets/images/XLogoWhite.png
-    - assets/images/Mentor.png
-    - assets/images/MentorDark.png
     - assets/images/MentorWhite.png
     - assets/images/MLogoWhite.png
     - assets/images/MLogoBlue.png
@@ -62,5 +58,4 @@ flutter:
     - assets/images/MentorPinkWhite.png
     - assets/images/MentorPink.png
     - assets/images/UMichLogo.png
-    - assets/images/google_signin_button.png
     - assets/images/UNILogo.png
