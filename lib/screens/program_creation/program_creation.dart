@@ -27,7 +27,6 @@ class ProgramCreation extends StatefulWidget {
 class _ProgramCreationState extends State<ProgramCreation> {
   final _formKey1 = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
-  final _formKey3 = GlobalKey<FormState>();
   final _formKey4 = GlobalKey<FormState>();
   final _formKey6 = GlobalKey<FormState>();
 
@@ -43,7 +42,6 @@ class _ProgramCreationState extends State<ProgramCreation> {
 
   final TextEditingController _textController1 = TextEditingController();
   final TextEditingController _textController2 = TextEditingController();
-  final TextEditingController _textController3 = TextEditingController();
   final TextEditingController _textController4 = TextEditingController();
   final TextEditingController _textController6 = TextEditingController();
 
@@ -57,7 +55,7 @@ class _ProgramCreationState extends State<ProgramCreation> {
               type: 'school',
               enrollmentType: enrollmentType,
               aboutProgram: aboutProgram,
-              headAdmin: headAdmin,
+              headAdmin: '${loggedInUser.firstName} ${loggedInUser.lastName}',
               programName: programName,
               programCode: programCode,
               programLogo: '',
@@ -81,7 +79,7 @@ class _ProgramCreationState extends State<ProgramCreation> {
           type: 'school',
           enrollmentType: enrollmentType,
           aboutProgram: aboutProgram,
-          headAdmin: headAdmin,
+          headAdmin: '${loggedInUser.firstName} ${loggedInUser.lastName}',
           programName: programName,
           programCode: programCode,
           programLogo: '',
@@ -100,6 +98,11 @@ class _ProgramCreationState extends State<ProgramCreation> {
           .collection('institutions')
           .doc(programID)
           .update({"id": programID});
+      await programsRef
+          .doc(programID)
+          .collection('programAdmins')
+          .doc(loggedInUser.id)
+          .set({});
     } on FirebaseException catch (e) {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
@@ -160,8 +163,6 @@ class _ProgramCreationState extends State<ProgramCreation> {
           enrollmentType = value;
         } else if (fieldName == 'aboutProgram') {
           aboutProgram = value;
-        } else if (fieldName == 'headAdmin') {
-          headAdmin = value;
         } else if (fieldName == 'programName') {
           programName = value;
         } else if (fieldName == 'programCode') {
@@ -197,14 +198,12 @@ class _ProgramCreationState extends State<ProgramCreation> {
   final StringValidator instituionNameValidator = NonEmptyStringValidator();
   final StringValidator enrollmentTypeValidator = NonEmptyStringValidator();
   final StringValidator aboutProgramValidator = NonEmptyStringValidator();
-  final StringValidator headAdminValidator = NonEmptyStringValidator();
   final StringValidator programNameValidator = NonEmptyStringValidator();
   final StringValidator programCodeValidator = NonEmptyStringValidator();
 
   bool get canSubmit {
     return instituionNameValidator.isValid(institutionName) &&
         aboutProgramValidator.isValid(aboutProgram) &&
-        headAdminValidator.isValid(headAdmin) &&
         programNameValidator.isValid(programName) &&
         programCodeValidator.isValid(programCode);
   }
@@ -268,17 +267,6 @@ class _ProgramCreationState extends State<ProgramCreation> {
                           'Institution or College',
                           Icon(Icons.school),
                           _textController2),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: _buildTextField(
-                        context,
-                        _formKey3,
-                        'headAdmin',
-                        'Administrator of Program',
-                        Icon(Icons.person),
-                        _textController3,
-                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),

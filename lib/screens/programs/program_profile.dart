@@ -133,28 +133,38 @@ class _ProgramProfileState extends State<ProgramProfile> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: CachedNetworkImage(
-                          imageUrl: program.programLogo,
-                          imageBuilder: (context, imageProvider) => Container(
-                            height: 120,
-                            width: 120,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
+                        child: program.programLogo.isEmpty ||
+                                program.programLogo == null ||
+                                program.programLogo == ""
+                            ? Image.asset(
+                                'assets/images/MLogoPink.png',
+                                height: 120,
+                                width: 120,
+                              )
+                            : CachedNetworkImage(
+                                imageUrl: program.programLogo,
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  height: 120,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                placeholder: (context, url) =>
+                                    CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    Image.asset(
+                                  'assets/images/MLogoBlue.png',
+                                  height: 120,
+                                  width: 120,
+                                  fit: BoxFit.fill,
+                                ),
                               ),
-                            ),
-                          ),
-                          placeholder: (context, url) =>
-                              CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Image.asset(
-                            'assets/images/MLogoBlue.png',
-                            height: 120,
-                            width: 120,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(5.0),

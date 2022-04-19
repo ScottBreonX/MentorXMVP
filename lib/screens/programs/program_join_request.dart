@@ -169,12 +169,48 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                 borderRadius: BorderRadius.circular(20),
               ),
               title: Center(
-                child: Text(
-                  "Congratulations! You have signed up for the "
-                  "\ ${_program.programName} mentorship program. You should now "
-                  "\ head to your program landing page and select your role in "
-                  "\ the program.",
-                  style: Theme.of(context).textTheme.headline4,
+                child: Column(
+                  children: [
+                    // You should now "
+                    // "\ head to your program landing page and select your role in "
+                    //     "\ the program.",
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Success!",
+                        style: TextStyle(
+                          fontFamily: 'Work Sans',
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Text(
+                        "You have signed up for ${_program.programName}",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontFamily: 'Work Sans',
+                          fontSize: 20,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Text(
+                        "Head to your program landing page to finish enrollment",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontFamily: 'Work Sans',
+                          fontSize: 20,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               children: <Widget>[
@@ -184,10 +220,12 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: RoundedButton(
-                        minWidth: 130,
+                        minWidth: 200,
                         title: "OK",
                         buttonColor: Colors.blue,
                         fontColor: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
                         onPressed: () => Navigator.pop(context),
                       ),
                     )
@@ -244,7 +282,9 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                           title: "OK",
                           buttonColor: Colors.blue,
                           fontColor: Colors.white,
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                         ),
                       )
                     ],
@@ -304,7 +344,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                         _program.programLogo.isEmpty ||
                         _program.programLogo == ""
                     ? Image.asset(
-                        'assets/images/MLogoBlue.png',
+                        'assets/images/MLogoPink.png',
                         height: 150,
                         width: 150,
                         fit: BoxFit.fill,
@@ -325,7 +365,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                         placeholder: (context, url) =>
                             CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Image.asset(
-                          'assets/images/MLogoBlue.png',
+                          'assets/images/MLogoPink.png',
                           height: 150,
                           width: 150,
                           fit: BoxFit.fill,
@@ -420,6 +460,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                 padding: const EdgeInsets.only(top: 10, bottom: 25.0),
                 child: Text(
                   'Don\'t have a code? Contact the program administrator.',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,
                     color: Theme.of(context).textTheme.headline4.color,
