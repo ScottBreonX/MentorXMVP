@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   bool profilePictureStatus = false;
+
   @override
   Widget build(BuildContext context) {
     final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
@@ -41,6 +42,14 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           if (loggedInUser.profilePicture != "") {
+            profilePictureStatus = true;
+          }
+
+          if (loggedInUser.profilePicture.isEmpty ||
+              loggedInUser.profilePicture == null ||
+              loggedInUser.profilePicture == "") {
+            profilePictureStatus = false;
+          } else {
             profilePictureStatus = true;
           }
 
@@ -81,14 +90,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 );
                               },
                               child: CircleAvatar(
-                                radius: 85,
+                                radius: profilePictureStatus ? 85 : 80,
                                 backgroundColor: Colors.white,
                                 child: CircleAvatar(
                                   radius: 80,
                                   backgroundColor: Colors.white,
-                                  child: loggedInUser.profilePicture.isEmpty ||
-                                          loggedInUser.profilePicture == null ||
-                                          loggedInUser.profilePicture == ""
+                                  child: !profilePictureStatus
                                       ? CircleAvatar(
                                           radius: 75,
                                           backgroundColor: Colors.blue,

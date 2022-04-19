@@ -13,6 +13,7 @@ import 'package:mentorx_mvp/screens/mentoring/available_mentors.dart';
 import 'package:mentorx_mvp/screens/program_creation/program_creation.dart';
 import 'package:mentorx_mvp/screens/programs/available_programs.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_confirmation.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_admin_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
@@ -83,6 +84,7 @@ class MentorX extends StatelessWidget {
           ResetPasswordScreen.id: (context) => ResetPasswordScreen(),
           ProgramCreation.id: (context) => ProgramCreation(),
           ProgramTypeScreen.id: (context) => ProgramTypeScreen(),
+          ProgramAdminScreen.id: (context) => ProgramAdminScreen(),
         },
       ),
     );

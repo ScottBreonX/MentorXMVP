@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,11 +17,13 @@ final Reference storageRef = FirebaseStorage.instance.ref();
 class ProgramCreationDetail extends StatefulWidget {
   final myUser loggedInUser;
   final String programUID;
+  final String programLogo;
 
   const ProgramCreationDetail({
     Key key,
     this.loggedInUser,
     @required this.programUID,
+    this.programLogo,
   }) : super(key: key);
 
   static const String id = 'program_creation_detail';
@@ -415,14 +418,49 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                                   padding: const EdgeInsets.all(20.0),
                                   child: IconCard(
                                     cardColor: Colors.white,
+                                    imageAsset: widget.programLogo == null ||
+                                            widget.programLogo.isEmpty ||
+                                            widget.programLogo == ""
+                                        ? Image.asset(
+                                            'assets/images/MLogoPink.png',
+                                            height: 120,
+                                            width: 120,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : null,
+                                    cachedNetworkImage: widget.programLogo ==
+                                                null ||
+                                            widget.programLogo.isEmpty ||
+                                            widget.programLogo == ""
+                                        ? null
+                                        : CachedNetworkImage(
+                                            imageUrl: widget.programLogo,
+                                            imageBuilder:
+                                                (context, imageProvider) =>
+                                                    Container(
+                                              height: 125.0,
+                                              width: 125,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                                image: DecorationImage(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            placeholder: (context, url) =>
+                                                circularProgress(),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    Image.asset(
+                                              'assets/images/MLogoBlue.png',
+                                              height: 120,
+                                              width: 120,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                     textSize: 0,
-                                    imageAsset: Image.asset(
-                                      'assets/images/MLogoBlue.png',
-                                      height: 150,
-                                      width: 150,
-                                    ),
-                                    boxHeight: 200,
-                                    boxWidth: 200,
                                   ),
                                 ),
                               ],

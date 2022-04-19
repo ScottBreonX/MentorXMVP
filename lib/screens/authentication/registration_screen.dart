@@ -123,6 +123,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           menteeAbout: '',
           mentee: false,
           mentor: false,
+          profilePicture: '',
+          coverPhoto: '',
         ),
       );
     } on FirebaseException catch (e) {
@@ -276,7 +278,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           tag: 'logo',
                           child: Container(
                             height: 150.0,
-                            child: Image.asset('assets/images/MLogoPink.png'),
+                            child: Image.asset('assets/images/MLogoWhite.png'),
                           ),
                         ),
                         Padding(

@@ -25,9 +25,19 @@ class FirestoreDatabase implements Database {
         data: program.toMap(),
       );
 
+  Future<void> editProgram(Program program, String programUID) => _updateData(
+        path: 'institutions/$programUID',
+        data: program.toMap(),
+      );
+
   Future<void> _setData({String path, Map<String, dynamic> data}) async {
     final reference = FirebaseFirestore.instance.doc(path);
     await reference.set(data);
+  }
+
+  Future<void> _updateData({String path, Map<String, dynamic> data}) async {
+    final reference = FirebaseFirestore.instance.doc(path);
+    await reference.update(data);
   }
 
   Future<String> _setCollectionData(

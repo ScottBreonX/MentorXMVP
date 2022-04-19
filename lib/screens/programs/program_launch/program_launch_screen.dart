@@ -7,9 +7,11 @@ import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/available_mentors.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_admin_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 import '../../../components/progress.dart';
 import '../../launch_screen.dart';
+import '../../menu_bar/menu_bar.dart';
 
 class ProgramLaunchScreen extends StatefulWidget {
   final myUser loggedInUser;
@@ -50,8 +52,18 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
+                final drawerItems =
+                    MentorXMenuList(loggedInUser: widget.loggedInUser);
+                final GlobalKey<ScaffoldState> _scaffoldKey =
+                    new GlobalKey<ScaffoldState>();
 
                 return Scaffold(
+                  key: _scaffoldKey,
+                  drawer: Drawer(
+                    child: Container(
+                      child: drawerItems,
+                    ),
+                  ),
                   appBar: AppBar(
                     elevation: 5,
                     title: Image.asset(
@@ -286,15 +298,35 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                   },
                                 ),
                                 IconCard(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProgramAdminScreen(
+                                                  loggedInUser: loggedInUser,
+                                                  programUID: program.id,
+                                                  enrollmentType:
+                                                      program.enrollmentType,
+                                                  aboutProgram:
+                                                      program.aboutProgram,
+                                                  institutionName:
+                                                      program.institutionName,
+                                                  programName:
+                                                      program.programName,
+                                                  programCode:
+                                                      program.programCode,
+                                                )));
+                                  },
                                   cardColor: Colors.white,
                                   boxHeight: 110,
                                   boxWidth: 110,
                                   iconSize: 50,
-                                  cardIconColor: Colors.black45,
+                                  cardIconColor: Colors.blue,
                                   cardIcon: Icons.admin_panel_settings,
                                   cardText: 'Program Admin',
                                   textSize: 15,
-                                  cardTextColor: Colors.black45,
+                                  cardTextColor: Colors.blue,
                                 ),
                               ],
                             ),

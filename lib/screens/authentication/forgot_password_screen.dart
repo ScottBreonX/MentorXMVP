@@ -73,9 +73,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     );
   }
 
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     timeDilation = 2.0;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -84,91 +87,122 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
-      body: Container(
-        padding: EdgeInsets.only(top: 100),
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-              Colors.blue,
-              Colors.pink,
-            ])),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 24.0,
-            ),
-            child: Column(
-              children: [
-                Hero(
-                  tag: 'logo',
-                  child: Container(
-                    child: Image.asset(
-                      'assets/images/MLogoPink.png',
-                      height: 200,
+      body: Stack(
+        children: [
+          isLoading
+              ? Container(
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Opacity(
+                          opacity: 1.0,
+                          child: CircularProgressIndicator(),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
+                )
+              : Text(""),
+          Opacity(
+            opacity: isLoading ? 0.2 : 1.0,
+            child: Container(
+              padding: EdgeInsets.only(top: 100),
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                    Colors.blue,
+                    Colors.pink,
+                  ])),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 24.0,
+                  ),
                   child: Column(
                     children: [
-                      Text(
-                        'Forgot Password?',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
+                      Hero(
+                        tag: 'logo',
+                        child: Container(
+                          child: Image.asset(
+                            'assets/images/MLogoWhite.png',
+                            height: 200,
+                          ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Text(
-                          'Reset password by entering email address below',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w300,
-                          ),
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Forgot Password?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Text(
+                                'Reset password by entering email address below',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                        child: Container(
+                          child: _buildEmailTextField(),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                        child: RoundedButton(
+                          onPressed: () async {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            await auth
+                                .sendPasswordResetEmail(email: _email)
+                                .then(
+                                  (value) => Navigator.popAndPushNamed(
+                                      context, ResetPasswordScreen.id),
+                                );
+                            Future.delayed(Duration(seconds: 3));
+                            setState(() {
+                              isLoading = false;
+                            });
+                          },
+                          title: 'Reset Password',
+                          buttonColor: kMentorXPrimary,
+                          minWidth: 500,
+                          fontColor: Colors.white,
+                          fontSize: 20,
                         ),
                       ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: Container(
-                    child: _buildEmailTextField(),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: RoundedButton(
-                    onPressed: () {
-                      auth.sendPasswordResetEmail(email: _email).then(
-                            (value) => Navigator.popAndPushNamed(
-                                context, ResetPasswordScreen.id),
-                          );
-                    },
-                    title: 'Reset Password',
-                    buttonColor: kMentorXPrimary,
-                    minWidth: 500,
-                    fontColor: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

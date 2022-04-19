@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import '../../../components/progress.dart';
@@ -30,7 +29,7 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
     super.initState();
   }
 
-  _confirmLeaveScreen(parentContext) {
+  _confirmLeaveScreen(parentContext, programUID) {
     return showDialog(
         context: parentContext,
         builder: (context) {
@@ -87,7 +86,7 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                       minWidth: 120,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
-                      onPressed: () {},
+                      onPressed: () => _leaveProgram(programUID),
                     ),
                   ),
                   SimpleDialogOption(
@@ -123,6 +122,25 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
             ],
           );
         });
+  }
+
+  _leaveProgram(programUID) {
+    usersRef
+        .doc(loggedInUser.id)
+        .collection('enrolledPrograms')
+        .doc(programUID)
+        .delete();
+    programsRef
+        .doc(programUID)
+        .collection('userSubscribed')
+        .doc(loggedInUser.id)
+        .delete();
+    Navigator.pop(context);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LaunchScreen(pageIndex: 1),
+        ));
   }
 
   @override
@@ -273,7 +291,8 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                             buttonCardIcon: Icons.exit_to_app,
                             buttonCardIconSize: 40,
                             buttonCardIconColor: Colors.blue,
-                            onPressed: () => _confirmLeaveScreen(context),
+                            onPressed: () =>
+                                _confirmLeaveScreen(context, program.id),
                           ),
                         ],
                       ),

@@ -192,8 +192,18 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                     child: Image.asset('assets/images/MLogoWhite.png'),
                   ),
                 ),
-                SizedBox(
-                  height: 48.0,
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    'Enter your first and last name',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 _buildFirstNameTextField(context),
                 SizedBox(

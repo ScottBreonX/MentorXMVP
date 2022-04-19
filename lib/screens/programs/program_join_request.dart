@@ -226,7 +226,16 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                         fontColor: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LaunchScreen(
+                                  pageIndex: 1,
+                                ),
+                              ));
+                        },
                       ),
                     )
                   ],
@@ -268,7 +277,13 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                 title: Center(
                   child: Text(
                     "The program code does not match. \n\nPlease try again.",
-                    style: Theme.of(context).textTheme.headline4,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontSize: 20,
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 children: <Widget>[
@@ -278,8 +293,10 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: RoundedButton(
-                          minWidth: 130,
-                          title: "OK",
+                          minWidth: 200,
+                          title: "Ok",
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                           buttonColor: Colors.blue,
                           fontColor: Colors.white,
                           onPressed: () {

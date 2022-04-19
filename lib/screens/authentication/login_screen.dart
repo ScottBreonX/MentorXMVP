@@ -177,7 +177,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                           tag: 'logo',
                           child: Container(
                             height: 150.0,
-                            child: Image.asset('assets/images/MLogoPink.png'),
+                            child: Image.asset('assets/images/MLogoWhite.png'),
                           ),
                         ),
                         SizedBox(

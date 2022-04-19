@@ -63,7 +63,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   tag: 'logo',
                   child: Container(
                     child: Image.asset(
-                      'assets/images/MLogoPink.png',
+                      'assets/images/MLogoWhite.png',
                       height: 200,
                     ),
                   ),
