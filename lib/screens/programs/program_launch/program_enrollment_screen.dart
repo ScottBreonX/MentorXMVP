@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_overview_screen.dart';
 import '../../../components/progress.dart';
 import '../../../components/rounded_button.dart';
 import '../../launch_screen.dart';
@@ -261,6 +262,17 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                             endIndent: 20,
                           ),
                           ButtonCard(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProgramOverview(
+                                    programId: program.id,
+                                    loggedInUser: loggedInUser,
+                                  ),
+                                ),
+                              );
+                            },
                             buttonCardText: 'Program Overview',
                             buttonCardTextSize: 25,
                             buttonCardRadius: 20,

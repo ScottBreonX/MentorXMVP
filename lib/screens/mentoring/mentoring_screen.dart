@@ -15,11 +15,13 @@ class MentoringScreen extends StatefulWidget {
   final myUser loggedInUser;
   static const String id = 'mentoring_screen';
   final Database database;
+  final String programUID;
 
   const MentoringScreen({
     Key key,
     this.loggedInUser,
     this.database,
+    this.programUID,
   }) : super(key: key);
 
   @override
@@ -160,8 +162,9 @@ class _MentoringScreenState extends State<MentoringScreen> {
                   cardText: 'Mentor',
                   cardTextColor:
                       mentorSelected ? Colors.white : Colors.grey[400],
-                  boxShadowColor:
-                      mentorSelected ? Colors.grey[700] : Colors.white,
+                  boxShadowColor: mentorSelected
+                      ? Colors.grey[700]
+                      : Colors.grey.withOpacity(0),
                   textSize: 20,
                   onTap: () => setChoice('mentor'),
                 ),
@@ -172,8 +175,9 @@ class _MentoringScreenState extends State<MentoringScreen> {
                   boxHeight: MediaQuery.of(context).size.width * 0.33,
                   boxWidth: MediaQuery.of(context).size.width * 0.33,
                   cardColor: menteeSelected ? Colors.blue : Colors.grey,
-                  boxShadowColor:
-                      menteeSelected ? Colors.grey[700] : Colors.white,
+                  boxShadowColor: menteeSelected
+                      ? Colors.grey[700]
+                      : Colors.grey.withOpacity(0),
                   cardText: 'Mentee',
                   cardTextColor:
                       menteeSelected ? Colors.white : Colors.grey[400],
@@ -198,7 +202,9 @@ class _MentoringScreenState extends State<MentoringScreen> {
                         context,
                         mentorSelected
                             ? MaterialPageRoute(
-                                builder: (context) => MentorSignupScreen(),
+                                builder: (context) => MentorSignupScreen(
+                                  programUID: widget.programUID,
+                                ),
                               )
                             : MaterialPageRoute(
                                 builder: (context) => MenteeSignupScreen(),
@@ -224,7 +230,6 @@ class _MentoringScreenState extends State<MentoringScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ThemeData.light().scaffoldBackgroundColor,
       appBar: AppBar(
         elevation: 5,
         title: Image.asset(

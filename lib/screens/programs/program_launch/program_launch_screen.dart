@@ -269,7 +269,9 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => MentoringScreen(
-                                            loggedInUser: loggedInUser),
+                                          loggedInUser: loggedInUser,
+                                          programUID: widget.programUID,
+                                        ),
                                       ),
                                     );
                                   },

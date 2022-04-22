@@ -170,6 +170,24 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
     }
   }
 
+  Future<void> _adminCollection(
+    BuildContext context,
+  ) async {
+    try {
+      QueryDocumentSnapshot<Map<String, dynamic>> queryDocumentSnapshot;
+      await programsRef
+          .doc(widget.programUID)
+          .collection('programAdmins')
+          .get()
+          .then((querySnapshot) =>
+              {queryDocumentSnapshot = querySnapshot.docs[0]});
+      print(queryDocumentSnapshot);
+    } on FirebaseException catch (e) {
+      showAlertDialog(context,
+          title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
+    }
+  }
+
   bool isLoading = false;
 
   @override
