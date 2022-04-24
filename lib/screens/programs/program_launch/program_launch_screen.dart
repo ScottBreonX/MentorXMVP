@@ -5,12 +5,12 @@ import 'package:mentorx_mvp/components/program_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/mentoring/available_mentors.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_admin_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 import '../../../components/progress.dart';
 import '../../launch_screen.dart';
+import '../../mentoring/available_mentors.dart';
 import '../../menu_bar/menu_bar.dart';
 
 class ProgramLaunchScreen extends StatefulWidget {
@@ -192,6 +192,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                       builder: (context) =>
                                           AvailableMentorsScreen(
                                         loggedInUser: widget.loggedInUser,
+                                        programUID: widget.programUID,
                                       ),
                                     ),
                                   );

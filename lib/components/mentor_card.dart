@@ -229,7 +229,7 @@ class _MentorCardState extends State<MentorCard> {
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.5,
                               child: Text(
-                                '${widget.mentorFname} ${widget.mentorLname}',
+                                '${widget.mentorFname}',
                                 style: TextStyle(
                                   fontFamily: 'WorkSans',
                                   fontSize: 25,

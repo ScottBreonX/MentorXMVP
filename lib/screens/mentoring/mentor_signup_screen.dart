@@ -618,10 +618,14 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   }
 
   Future<void> _updateMentoringAttributes(
-    BuildContext context,
-  ) async {
+      BuildContext context, String programUID) async {
+    print(programUID);
     try {
-      await usersRef.doc(loggedInUser.id).update({
+      await programsRef
+          .doc(programUID)
+          .collection('mentors')
+          .doc(loggedInUser.id)
+          .set({
         "Mentor Attribute 1": trait1,
         "Mentor Attribute 2": trait2,
         "Mentor Attribute 3": trait3,
@@ -629,7 +633,18 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         "Mtr Hobby 2": hobby2,
         "Mtr Hobby 3": hobby3,
         "XFactor": makesMeGreatController.text,
+        "mentorSlots": mentorSlots,
+        "id": loggedInUser.id,
       });
+      // await usersRef.doc(loggedInUser.id).update({
+      //   "Mentor Attribute 1": trait1,
+      //   "Mentor Attribute 2": trait2,
+      //   "Mentor Attribute 3": trait3,
+      //   "Mtr Hobby 1": hobby1,
+      //   "Mtr Hobby 2": hobby2,
+      //   "Mtr Hobby 3": hobby3,
+      //   "XFactor": makesMeGreatController.text,
+      // });
       await usersRef.doc(loggedInUser.id).update({
         "Mentor": true,
         "Mentor Slots": mentorSlots,
@@ -653,7 +668,8 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         (hobby2 != null) &
         (hobby3 != null) &
         (makesMeGreatController.text != '')) {
-      await _updateMentoringAttributes(context);
+      await _updateMentoringAttributes(context, widget.programUID);
+      print('successful update');
       _enrollmentSuccess(context, widget.programUID);
     } else {
       showDialog(

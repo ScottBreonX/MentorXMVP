@@ -7,19 +7,20 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-
 import '../../components/profile_image_circle.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
 class AvailableMentorsScreen extends StatefulWidget {
   final myUser loggedInUser;
+  final String programUID;
   static const String id = 'available_mentors_screen';
   final Database database;
 
   AvailableMentorsScreen({
     this.loggedInUser,
     this.database,
+    this.programUID,
   });
 
   @override
@@ -82,9 +83,9 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
 
   buildMentorListContent(myUser loggedInUser) {
     return Scaffold(
-      body: ModalProgressHUD(
-        inAsyncCall: showSpinner,
-        child: SafeArea(
+      body: SingleChildScrollView(
+        child: ModalProgressHUD(
+          inAsyncCall: showSpinner,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
             child: Column(
@@ -110,6 +111,7 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
                 AvailableMentorsStream(
                   // searchString: searchString,
                   loggedInUser: loggedInUser,
+                  programUID: widget.programUID,
                 ),
               ],
             ),
@@ -135,18 +137,21 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
 }
 
 class AvailableMentorsStream extends StatelessWidget {
-  final myUser loggedInUser;
-  // final String searchString;
-  final Stream mentorStream = _firestore
-      .collection('users')
-      .where('Mentor', isEqualTo: true)
-      .where('Mentor Slots', isGreaterThan: 0)
-      .snapshots();
-
   AvailableMentorsStream({
     // this.searchString,
     this.loggedInUser,
+    this.programUID,
   });
+
+  final String programUID;
+  final myUser loggedInUser;
+  // final String searchString;
+  Stream get mentorStream => _firestore
+      .collection('institutions')
+      .doc(programUID)
+      .collection('mentors')
+      // .where('Mentor Slots', isGreaterThan: 0)
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -172,74 +177,87 @@ class AvailableMentorsStream extends StatelessWidget {
         if (!snapshot.hasData) {
           return Center();
         }
-        final mentors = snapshot.data.docs;
 
+        final mentors = snapshot.data.docs;
         List<MentorCard> mentorBubbles = [];
 
         for (var mentor in mentors) {
           if (mentor.id == loggedInUser.id) {
             continue;
           }
+
           Mentor mentorModel = Mentor.fromDocument(mentor);
 
-          final mentorBubble = MentorCard(
-            mentorUID: mentor.id.toString(),
-            mentorFname: mentorModel.firstName,
-            mentorLname: mentorModel.lastName,
-            imageContainer: Container(
-              child: mentorModel.profilePic == null ||
-                      mentorModel.profilePic.isEmpty ||
-                      mentorModel.profilePic == ""
-                  ? ProfileImageCircle(
-                      circleColor: Colors.blue,
-                      iconSize: 45,
-                      iconColor: Colors.white,
-                      circleSize: 40,
-                    )
-                  : CircleAvatar(
-                      radius: 40,
-                      child: CachedNetworkImage(
-                        imageUrl: mentorModel.profilePic,
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
+          return StreamBuilder<QuerySnapshot>(
+              stream: usersRef.where('id', isEqualTo: mentor.id).snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return CircularProgressIndicator();
+                }
+
+                final users = snapshot.data.docs;
+                for (var user in users) {
+                  myUser userModel = myUser.fromDocument(user);
+
+                  final mentorBubble = MentorCard(
+                    mentorUID: mentor.id,
+                    mentorFname: userModel.firstName,
+                    mentorLname: userModel.lastName,
+                    imageContainer: Container(
+                      child: userModel.profilePicture == null ||
+                              userModel.profilePicture.isEmpty ||
+                              userModel.profilePicture == ""
+                          ? ProfileImageCircle(
+                              circleColor: Colors.blue,
+                              iconSize: 45,
+                              iconColor: Colors.white,
+                              circleSize: 40,
+                            )
+                          : CircleAvatar(
+                              radius: 40,
+                              child: CachedNetworkImage(
+                                imageUrl: userModel.profilePicture,
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                placeholder: (context, url) =>
+                                    CircularProgressIndicator(),
+                                errorWidget: (context, url, error) => Icon(
+                                  Icons.person,
+                                  size: 50,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        placeholder: (context, url) =>
-                            CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => Icon(
-                          Icons.person,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                      ),
                     ),
-            ),
-            mentorSlots: mentorModel.mentorSlots,
-            mentorMajor: mentorModel.major,
-            mentorYearInSchool: mentorModel.yearInSchool,
-            mtrAtt1: mentorModel.mtrAtt1,
-            mtrAtt2: mentorModel.mtrAtt2,
-            mtrAtt3: mentorModel.mtrAtt3,
-            xFactor: mentorModel.xFactor,
-            profileOnly: false,
-          );
-          mentorBubbles.add(mentorBubble);
+                    mentorSlots: mentorModel.mentorSlots,
+                    mentorMajor: userModel.major,
+                    mentorYearInSchool: userModel.yearInSchool,
+                    mtrAtt1: mentorModel.mtrAtt1,
+                    mtrAtt2: mentorModel.mtrAtt2,
+                    mtrAtt3: mentorModel.mtrAtt3,
+                    xFactor: mentorModel.xFactor,
+                    profileOnly: false,
+                  );
+                  mentorBubbles.add(mentorBubble);
+                }
+                return Container(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: mentorBubbles,
+                    ),
+                  ),
+                );
+              });
         }
-        return Flexible(
-          fit: FlexFit.loose,
-          child: ListView(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10.0,
-              vertical: 10.0,
-            ),
-            children: mentorBubbles,
-          ),
-        );
+        return Container();
       },
     );
   }
