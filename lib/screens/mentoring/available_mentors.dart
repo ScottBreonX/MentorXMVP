@@ -150,7 +150,7 @@ class AvailableMentorsStream extends StatelessWidget {
       .collection('institutions')
       .doc(programUID)
       .collection('mentors')
-      // .where('Mentor Slots', isGreaterThan: 0)
+      .where('mentorSlots', isGreaterThan: 0)
       .snapshots();
 
   @override

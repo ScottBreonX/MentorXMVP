@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/mentor_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 
 class MentorConfirm extends StatelessWidget {
   static const String id = 'mentor_confirm_screen';
@@ -38,9 +41,9 @@ class MentorConfirm extends StatelessWidget {
         .doc(programUID)
         .collection('userSubscribed')
         .doc(loggedInUser.id)
-        .set({
-      'mentorSelected': mentorUID,
-    });
+        .collection('matchedMentors')
+        .doc(mentorUID)
+        .set({});
     // make selected user a MENTOR of current user
     // menteesRef
     //     .doc(loggedInUser.id)
@@ -48,9 +51,12 @@ class MentorConfirm extends StatelessWidget {
     //     .doc(mentorUID)
     //     .set({});
     // decrement mentor's mentor slots
-    usersRef.doc(mentorUID).update({
-      "Mentor Slots": mentorSlots - 1,
-    });
+
+    programsRef
+        .doc(programUID)
+        .collection('mentors')
+        .doc(mentorUID)
+        .update({"mentorSlots": max(0, mentorSlots - 1)});
   }
 
   _successfulMatch(parentContext) {
@@ -110,7 +116,16 @@ class MentorConfirm extends StatelessWidget {
                       minWidth: 200,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
-                      onPressed: () => handleConfirmSelection(),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProgramLaunchScreen(
+                              programUID: programUID,
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -142,70 +157,73 @@ class MentorConfirm extends StatelessWidget {
         title: Text('Confirm Selection'),
       ),
       body: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Text(
-                    'Confirm selection of mentor:',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'WorkSans',
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.pink,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-                    child: MentorCard(
-                      mentorUID: mentorUID,
-                      mentorFname: mentorFname,
-                      mentorLname: mentorLname,
-                      imageContainer: mentorPicContainer,
-                      mentorMajor: mentorMajor,
-                      mentorYearInSchool: mentorYearInSchool,
-                      mtrAtt1: mtrAtt1,
-                      mtrAtt2: mtrAtt2,
-                      mtrAtt3: mtrAtt3,
-                      xFactor: xFactor,
-                      mentorSlots: mentorSlots,
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 100),
+            child: Column(
+              children: [
+                Column(
                   children: [
-                    RoundedButton(
-                      title: 'Back',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      minWidth: 150,
-                      buttonColor: Colors.white,
-                      fontColor: Colors.pink,
-                      onPressed: () => Navigator.pop(context),
+                    Text(
+                      'Confirm selection of mentor:',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'WorkSans',
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.pink,
+                      ),
                     ),
-                    RoundedButton(
-                      title: 'Confirm',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      minWidth: 150,
-                      buttonColor: Colors.pink,
-                      fontColor: Colors.white,
-                      onPressed: () async {
-                        await handleConfirmSelection();
-                        _successfulMatch(context);
-                      },
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                      child: MentorCard(
+                        mentorUID: mentorUID,
+                        mentorFname: mentorFname,
+                        mentorLname: mentorLname,
+                        imageContainer: mentorPicContainer,
+                        mentorMajor: mentorMajor,
+                        mentorYearInSchool: mentorYearInSchool,
+                        mtrAtt1: mtrAtt1,
+                        mtrAtt2: mtrAtt2,
+                        mtrAtt3: mtrAtt3,
+                        xFactor: xFactor,
+                        mentorSlots: mentorSlots,
+                        moreInfoExpand: Container(),
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RoundedButton(
+                        title: 'Back',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        minWidth: 150,
+                        buttonColor: Colors.white,
+                        fontColor: Colors.pink,
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                      RoundedButton(
+                        title: 'Confirm',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        minWidth: 150,
+                        buttonColor: Colors.pink,
+                        fontColor: Colors.white,
+                        onPressed: () async {
+                          await handleConfirmSelection();
+                          _successfulMatch(context);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -18,22 +18,23 @@ class MentorCard extends StatefulWidget {
   final String xFactor;
   final bool profileOnly;
   final String programUID;
+  final Container moreInfoExpand;
 
-  MentorCard({
-    this.mentorUID,
-    this.mentorSlots,
-    this.mentorFname,
-    this.mentorLname,
-    this.imageContainer,
-    this.mentorMajor,
-    this.mentorYearInSchool,
-    this.mtrAtt1,
-    this.mtrAtt2,
-    this.mtrAtt3,
-    this.xFactor,
-    this.profileOnly,
-    this.programUID,
-  });
+  MentorCard(
+      {this.mentorUID,
+      this.mentorSlots,
+      this.mentorFname,
+      this.mentorLname,
+      this.imageContainer,
+      this.mentorMajor,
+      this.mentorYearInSchool,
+      this.mtrAtt1,
+      this.mtrAtt2,
+      this.mtrAtt3,
+      this.xFactor,
+      this.profileOnly,
+      this.programUID,
+      this.moreInfoExpand});
 
   @override
   State<MentorCard> createState() => _MentorCardState();
@@ -354,14 +355,17 @@ class _MentorCardState extends State<MentorCard> {
                                 child: Column(
                                   children: [
                                     mentorAttributeIconOne(),
-                                    Text(
-                                      '${widget.mtrAtt1}',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontFamily: 'WorkSans',
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black54,
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: Text(
+                                        '${widget.mtrAtt1}',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: 'WorkSans',
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black54,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -376,14 +380,17 @@ class _MentorCardState extends State<MentorCard> {
                                 child: Column(
                                   children: [
                                     mentorAttributeIconTwo(),
-                                    Text(
-                                      '${widget.mtrAtt2}',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontFamily: 'WorkSans',
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black54,
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: Text(
+                                        '${widget.mtrAtt2}',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: 'WorkSans',
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black54,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -398,14 +405,17 @@ class _MentorCardState extends State<MentorCard> {
                                 child: Column(
                                   children: [
                                     mentorAttributeIconThree(),
-                                    Text(
-                                      '${widget.mtrAtt3}',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontFamily: 'WorkSans',
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black54,
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: Text(
+                                        '${widget.mtrAtt3}',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: 'WorkSans',
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black54,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -567,46 +577,49 @@ class _MentorCardState extends State<MentorCard> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0, bottom: 5),
-                          child: Divider(
-                            indent: 10,
-                            endIndent: 10,
-                            color: Colors.grey.shade300,
-                            thickness: 1,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10.0),
-                          child: Column(
-                            children: [
-                              GestureDetector(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 5.0),
-                                      child: Icon(Icons.add_circle),
-                                    ),
-                                    Text(
-                                      'More Info',
-                                      style: TextStyle(
-                                        fontFamily: 'WorkSans',
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.blue,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    expandStatus = true;
-                                  });
-                                },
+                          child: widget.moreInfoExpand ??
+                              Divider(
+                                indent: 10,
+                                endIndent: 10,
+                                color: Colors.grey.shade300,
+                                thickness: 1,
                               ),
-                            ],
-                          ),
                         ),
+                        widget.moreInfoExpand ??
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 10.0),
+                              child: Column(
+                                children: [
+                                  GestureDetector(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 5.0),
+                                          child: Icon(Icons.add_circle),
+                                        ),
+                                        Text(
+                                          'More Info',
+                                          style: TextStyle(
+                                            fontFamily: 'WorkSans',
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    onTap: () {
+                                      setState(() {
+                                        expandStatus = true;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
                       ],
                     ),
             ],
