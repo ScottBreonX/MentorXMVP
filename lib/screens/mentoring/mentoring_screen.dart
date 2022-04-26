@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
-import 'package:mentorx_mvp/models/profile_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentee_signup_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_signup_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
+
+import '../../models/mentoring_model.dart';
 
 class MentoringScreen extends StatefulWidget {
   final myUser loggedInUser;
@@ -41,15 +41,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
 
   @override
   void initState() {
-    getMentorStatus();
     super.initState();
-  }
-
-  getMentorStatus() {
-    setState(() {
-      loggedInUser.mentor ? isMentor = true : isMentor = false;
-      loggedInUser.mentee ? isMentee = true : isMentee = false;
-    });
   }
 
   Future<dynamic> getMatchData() async {
@@ -207,7 +199,9 @@ class _MentoringScreenState extends State<MentoringScreen> {
                                 ),
                               )
                             : MaterialPageRoute(
-                                builder: (context) => MenteeSignupScreen(),
+                                builder: (context) => MenteeSignupScreen(
+                                  programUID: widget.programUID,
+                                ),
                               ),
                       )
                     }

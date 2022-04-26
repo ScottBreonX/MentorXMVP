@@ -17,6 +17,7 @@ class MentorCard extends StatefulWidget {
   final String mtrAtt3;
   final String xFactor;
   final bool profileOnly;
+  final String programUID;
 
   MentorCard({
     this.mentorUID,
@@ -31,6 +32,7 @@ class MentorCard extends StatefulWidget {
     this.mtrAtt3,
     this.xFactor,
     this.profileOnly,
+    this.programUID,
   });
 
   @override
@@ -227,12 +229,14 @@ class _MentorCardState extends State<MentorCard> {
                           Padding(
                             padding: const EdgeInsets.only(top: 10.0),
                             child: Container(
-                              width: MediaQuery.of(context).size.width * 0.5,
+                              width: MediaQuery.of(context).size.width * 0.60,
                               child: Text(
-                                '${widget.mentorFname}',
+                                '${widget.mentorFname} ${widget.mentorLname}',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
                                 style: TextStyle(
                                   fontFamily: 'WorkSans',
-                                  fontSize: 25,
+                                  fontSize: 23,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black54,
                                 ),
@@ -442,6 +446,8 @@ class _MentorCardState extends State<MentorCard> {
                                 width: 330,
                                 child: Text(
                                   '${widget.xFactor}',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
                                   style: TextStyle(
                                     fontFamily: 'WorkSans',
                                     fontSize: 15,
@@ -471,10 +477,19 @@ class _MentorCardState extends State<MentorCard> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => MentorConfirm(
+                                    mentorUID: widget.mentorUID,
                                     mentorFname: widget.mentorFname,
                                     mentorLname: widget.mentorLname,
-                                    mentorUID: widget.mentorUID,
+                                    mentorMajor: widget.mentorMajor,
+                                    mentorYearInSchool:
+                                        widget.mentorYearInSchool,
+                                    mtrAtt1: widget.mtrAtt1,
+                                    mtrAtt2: widget.mtrAtt2,
+                                    mtrAtt3: widget.mtrAtt3,
+                                    xFactor: widget.xFactor,
+                                    mentorPicContainer: widget.imageContainer,
                                     mentorSlots: widget.mentorSlots,
+                                    programUID: widget.programUID,
                                   ),
                                 ),
                               ),

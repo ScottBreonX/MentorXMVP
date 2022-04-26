@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mentorx_mvp/components/mentor_card.dart';
-import 'package:mentorx_mvp/models/mentor.dart';
+import 'package:mentorx_mvp/models/mentor_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
@@ -245,6 +245,7 @@ class AvailableMentorsStream extends StatelessWidget {
                     mtrAtt3: mentorModel.mtrAtt3,
                     xFactor: mentorModel.xFactor,
                     profileOnly: false,
+                    programUID: programUID,
                   );
                   mentorBubbles.add(mentorBubble);
                 }

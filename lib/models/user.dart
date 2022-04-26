@@ -7,13 +7,10 @@ class myUser {
   final String lastName;
   final String major;
   final String yearInSchool;
-  final int mentorSlots;
   final String aboutMe;
   final String workExperience;
   final String mentorAbout;
   final String menteeAbout;
-  final bool mentor;
-  final bool mentee;
   final String profilePicture;
   final String coverPhoto;
 
@@ -24,13 +21,10 @@ class myUser {
     this.lastName,
     this.major,
     this.yearInSchool,
-    this.mentorSlots,
     this.aboutMe,
     this.workExperience,
     this.mentorAbout,
     this.menteeAbout,
-    this.mentor,
-    this.mentee,
     this.profilePicture,
     this.coverPhoto,
   });
@@ -43,13 +37,10 @@ class myUser {
       lastName: doc['Last Name'],
       major: doc['Major'],
       yearInSchool: doc['Year in School'],
-      mentorSlots: doc['Mentor Slots'],
       aboutMe: doc['About Me'],
       workExperience: doc['Work Experience'],
       mentorAbout: doc['Mentoring About'],
       menteeAbout: doc['Mentee About'],
-      mentor: doc['Mentor'],
-      mentee: doc['Mentee'],
       profilePicture: doc['Profile Picture'],
       coverPhoto: doc['Cover Photo'],
     );
@@ -62,13 +53,10 @@ class myUser {
       'Last Name': lastName,
       'Major': major,
       'Year in School': yearInSchool,
-      'Mentor Slots': mentorSlots,
       'About Me': aboutMe,
       'Work Experience': workExperience,
       'Mentoring About': mentorAbout,
       'Mentee About': menteeAbout,
-      'Mentor': mentor,
-      'Mentee': mentee,
       'Profile Picture': profilePicture,
       'Cover Photo': coverPhoto,
     };

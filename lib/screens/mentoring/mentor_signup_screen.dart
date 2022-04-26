@@ -602,7 +602,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                 padding:
                     const EdgeInsets.only(left: 10.0, right: 10.0, top: 0.0),
                 child: Text(
-                  'Next Steps:Proceed to the mentorship launch screen and complete the required pre-read materials.',
+                  'Next Steps: Proceed to the launch screen and complete the required pre-read materials.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'WorkSans',

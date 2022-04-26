@@ -136,6 +136,16 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
         .collection('userSubscribed')
         .doc(loggedInUser.id)
         .delete();
+    programsRef
+        .doc(programUID)
+        .collection('mentors')
+        .doc(loggedInUser.id)
+        .delete();
+    programsRef
+        .doc(programUID)
+        .collection('mentees')
+        .doc(loggedInUser.id)
+        .delete();
     Navigator.pop(context);
     Navigator.push(
         context,
