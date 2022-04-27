@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/program_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:mentorx_mvp/models/match_list.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
@@ -12,6 +14,9 @@ import '../../../components/progress.dart';
 import '../../launch_screen.dart';
 import '../../mentoring/available_mentors.dart';
 import '../../menu_bar/menu_bar.dart';
+
+final usersRef = FirebaseFirestore.instance.collection('users');
+final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class ProgramLaunchScreen extends StatefulWidget {
   final myUser loggedInUser;
@@ -35,12 +40,87 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
     super.initState();
   }
 
-  Stream get matchesStream => programsRef
-      .doc(widget.programUID)
-      .collection('userSubscribed')
-      .doc(loggedInUser.id)
-      .collection('matchedMentors')
-      .snapshots();
+  bool isLoading = false;
+  bool hasMatches = false;
+  List<MatchList> matches = [];
+
+  Future<dynamic> getMatches() async {
+    setState(() {
+      isLoading = true;
+    });
+    QuerySnapshot snapshot = await usersRef
+        .doc(widget.programUID)
+        .collection('userSubscribed')
+        .doc(loggedInUser.id)
+        .collection('matchedMentors')
+        .get();
+    if (snapshot.docs.isNotEmpty) {
+      setState(() {
+        isLoading = false;
+        hasMatches = true;
+        matches = snapshot.docs
+            .map((doc) => MatchList.fromDocument(doc, widget.programUID))
+            .toList();
+      });
+    }
+  }
+
+  buildMatches() {
+    isLoading = true;
+    QuerySnapshot _snapshot;
+    return FutureBuilder(
+      future: programsRef
+          .doc(widget.programUID)
+          .collection('userSubscribed')
+          .doc(loggedInUser.id)
+          .collection('matchedMentors')
+          .get(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return circularProgress();
+        } else {
+          _snapshot = snapshot.data;
+          if (_snapshot.size > 0) {
+            matches = _snapshot.docs
+                .map((doc) => MatchList.fromDocument(doc, widget.programUID))
+                .toList();
+            return Container(
+              height: 150,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: matches,
+              ),
+            );
+          } else {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RoundedButton(
+                  title: 'View Available Mentors',
+                  buttonColor: Colors.pink,
+                  fontColor: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AvailableMentorsScreen(
+                          loggedInUser: widget.loggedInUser,
+                          programUID: widget.programUID,
+                        ),
+                      ),
+                    );
+                  },
+                  minWidth: 300,
+                )
+              ],
+            );
+          }
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -173,30 +253,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        RoundedButton(
-                          title: 'View Available Mentors',
-                          buttonColor: Colors.pink,
-                          fontColor: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AvailableMentorsScreen(
-                                  loggedInUser: widget.loggedInUser,
-                                  programUID: widget.programUID,
-                                ),
-                              ),
-                            );
-                          },
-                          minWidth: 300,
-                        )
-                      ],
-                    ),
+                    buildMatches(),
                     Row(
                       children: [
                         Padding(

@@ -10,6 +10,8 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../../components/profile_image_circle.dart';
 
 final _firestore = FirebaseFirestore.instance;
+final usersRef = FirebaseFirestore.instance.collection('users');
+final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class AvailableMentorsScreen extends StatefulWidget {
   final myUser loggedInUser;

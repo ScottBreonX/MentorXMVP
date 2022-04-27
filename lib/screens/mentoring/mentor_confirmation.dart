@@ -1,10 +1,14 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/mentor_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
+
+final usersRef = FirebaseFirestore.instance.collection('users');
+final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class MentorConfirm extends StatelessWidget {
   static const String id = 'mentor_confirm_screen';
@@ -37,6 +41,7 @@ class MentorConfirm extends StatelessWidget {
   });
 
   handleConfirmSelection() {
+    //add mentor to mentee match collection
     programsRef
         .doc(programUID)
         .collection('userSubscribed')
@@ -44,19 +49,25 @@ class MentorConfirm extends StatelessWidget {
         .collection('matchedMentors')
         .doc(mentorUID)
         .set({});
-    // make selected user a MENTOR of current user
-    // menteesRef
-    //     .doc(loggedInUser.id)
-    //     .collection('userMentors')
-    //     .doc(mentorUID)
-    //     .set({});
-    // decrement mentor's mentor slots
-
+    //add mentee to mentor match collection
+    programsRef
+        .doc(programUID)
+        .collection('userSubscribed')
+        .doc(mentorUID)
+        .collection('matchedMentees')
+        .doc(loggedInUser.id)
+        .set({});
+    //decrement mentor available slots
     programsRef
         .doc(programUID)
         .collection('mentors')
         .doc(mentorUID)
         .update({"mentorSlots": max(0, mentorSlots - 1)});
+    programsRef
+        .doc(programUID)
+        .collection('matchedPairs')
+        .doc(mentorUID + loggedInUser.id)
+        .set({});
   }
 
   _successfulMatch(parentContext) {
@@ -189,6 +200,10 @@ class MentorConfirm extends StatelessWidget {
                         xFactor: xFactor,
                         mentorSlots: mentorSlots,
                         moreInfoExpand: Container(),
+                        dividerExpand: Divider(
+                          height: 0,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ],

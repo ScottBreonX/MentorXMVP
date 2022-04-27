@@ -1,20 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Matches {
-  final String mentorSelected;
+class MatchModel {
+  final String id;
+  final String notes;
 
-  Matches({
-    this.mentorSelected,
+  MatchModel({
+    this.id,
+    this.notes,
   });
 
-  factory Matches.fromDocument(DocumentSnapshot doc) {
-    return Matches(
-      mentorSelected: doc['mentorSelected'],
+  factory MatchModel.fromDocument(DocumentSnapshot doc) {
+    return MatchModel(
+      id: doc['id'],
+      notes: doc['notes'],
     );
   }
   Map<String, dynamic> toMap() {
     return {
-      'mentorSelected': mentorSelected,
+      'id': id,
+      'notes': notes,
     };
   }
 }

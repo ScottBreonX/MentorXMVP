@@ -1,8 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_confirmation.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
+import '../screens/authentication/landing_page.dart';
+
+final usersRef = FirebaseFirestore.instance.collection('users');
+final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class MentorCard extends StatefulWidget {
   final String mentorUID;
@@ -19,6 +25,7 @@ class MentorCard extends StatefulWidget {
   final bool profileOnly;
   final String programUID;
   final Container moreInfoExpand;
+  final Divider dividerExpand;
 
   MentorCard(
       {this.mentorUID,
@@ -34,7 +41,8 @@ class MentorCard extends StatefulWidget {
       this.xFactor,
       this.profileOnly,
       this.programUID,
-      this.moreInfoExpand});
+      this.moreInfoExpand,
+      this.dividerExpand});
 
   @override
   State<MentorCard> createState() => _MentorCardState();
@@ -42,6 +50,121 @@ class MentorCard extends StatefulWidget {
 
 class _MentorCardState extends State<MentorCard> {
   bool expandStatus = false;
+
+  _confirmRemoveMentor(parentContext, programUID) {
+    return showDialog(
+        context: parentContext,
+        builder: (context) {
+          return SimpleDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            title: Center(
+              child: Text(
+                'Confirm Removing Mentor',
+                style: TextStyle(
+                  fontFamily: 'Work Sans',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.pink,
+                ),
+              ),
+            ),
+            children: <Widget>[
+              SimpleDialogOption(
+                padding: EdgeInsets.only(left: 10, right: 10, bottom: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 250,
+                      child: Column(
+                        children: [
+                          Text(
+                            'Are you sure you want to remove this mentor?',
+                            style: TextStyle(
+                              fontFamily: 'WorkSans',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black45,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SimpleDialogOption(
+                    padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+                    child: RoundedButton(
+                      title: 'Yes',
+                      buttonColor: Colors.pink,
+                      fontColor: Colors.white,
+                      minWidth: 120,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      onPressed: () =>
+                          _removeMentor(widget.mentorUID, widget.programUID),
+                    ),
+                  ),
+                  SimpleDialogOption(
+                    padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+                    child: RoundedButton(
+                      title: 'Cancel',
+                      buttonColor: Colors.pink,
+                      fontColor: Colors.white,
+                      minWidth: 120,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 10.0, right: 10.0, top: 0.0),
+                child: Text(
+                  'You will lose all related mentoring information',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    color: Colors.grey,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 15,
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
+  _removeMentor(programUID, matchUID) {
+    programsRef
+        .doc(programUID)
+        .collection('userSubscribed')
+        .doc(loggedInUser.id)
+        .collection('matchedMentors')
+        .doc(matchUID)
+        .delete();
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProgramLaunchScreen(
+          programUID: programUID,
+        ),
+      ),
+    );
+  }
 
   mentorAttributeIconOne() {
     String mentoringAttribute = widget.mtrAtt1;
@@ -246,24 +369,28 @@ class _MentorCardState extends State<MentorCard> {
                           ),
                           Row(
                             children: [
-                              Text(
-                                'Available Slots: ',
-                                style: TextStyle(
-                                  fontFamily: 'WorkSans',
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                              Text(
-                                '${widget.mentorSlots}',
-                                style: TextStyle(
-                                  fontFamily: 'WorkSans',
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.blue,
-                                ),
-                              ),
+                              widget.mentorSlots == null
+                                  ? Container()
+                                  : Text(
+                                      'Available Slots: ',
+                                      style: TextStyle(
+                                        fontFamily: 'WorkSans',
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black54,
+                                      ),
+                                    ),
+                              widget.mentorSlots == null
+                                  ? Container()
+                                  : Text(
+                                      '${widget.mentorSlots}',
+                                      style: TextStyle(
+                                        fontFamily: 'WorkSans',
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.blue,
+                                      ),
+                                    ),
                             ],
                           ),
                           Padding(
@@ -577,7 +704,7 @@ class _MentorCardState extends State<MentorCard> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0, bottom: 5),
-                          child: widget.moreInfoExpand ??
+                          child: widget.dividerExpand ??
                               Divider(
                                 indent: 10,
                                 endIndent: 10,

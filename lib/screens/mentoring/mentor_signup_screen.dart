@@ -10,6 +10,9 @@ import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 
+final usersRef = FirebaseFirestore.instance.collection('users');
+final programsRef = FirebaseFirestore.instance.collection('institutions');
+
 class MentorSignupScreen extends StatefulWidget {
   final myUser loggedInUser;
   final String programUID;
