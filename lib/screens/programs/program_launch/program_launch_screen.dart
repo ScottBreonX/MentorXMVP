@@ -69,57 +69,85 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
     isLoading = true;
     QuerySnapshot _snapshot;
     return FutureBuilder(
-      future: programsRef
-          .doc(widget.programUID)
-          .collection('userSubscribed')
-          .doc(loggedInUser.id)
-          .collection('matchedMentors')
-          .get(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return circularProgress();
-        } else {
-          _snapshot = snapshot.data;
-          if (_snapshot.size > 0) {
-            matches = _snapshot.docs
-                .map((doc) => MatchList.fromDocument(doc, widget.programUID))
-                .toList();
-            return Container(
-              height: 150,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: matches,
-              ),
-            );
+        future: programsRef
+            .doc(widget.programUID)
+            .collection('userSubscribed')
+            .doc(loggedInUser.id)
+            .collection('matchedMentors')
+            .get(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return circularProgress();
           } else {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                RoundedButton(
-                  title: 'View Available Mentors',
-                  buttonColor: Colors.pink,
-                  fontColor: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AvailableMentorsScreen(
-                          loggedInUser: widget.loggedInUser,
-                          programUID: widget.programUID,
-                        ),
-                      ),
-                    );
-                  },
-                  minWidth: 300,
-                )
-              ],
-            );
+            _snapshot = snapshot.data;
+            if (_snapshot.size > 0) {
+              matches = _snapshot.docs
+                  .map((doc) => MatchList.fromDocument(doc, widget.programUID))
+                  .toList();
+              return Container(
+                height: 150,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: matches,
+                ),
+              );
+            } else {
+              return FutureBuilder(
+                  future: programsRef
+                      .doc(widget.programUID)
+                      .collection('userSubscribed')
+                      .doc(loggedInUser.id)
+                      .collection('matchedMentees')
+                      .get(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return circularProgress();
+                    } else {
+                      _snapshot = snapshot.data;
+                      if (_snapshot.size > 0) {
+                        matches = _snapshot.docs
+                            .map((doc) =>
+                                MatchList.fromDocument(doc, widget.programUID))
+                            .toList();
+                        return Container(
+                          height: 150,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: matches,
+                          ),
+                        );
+                      } else {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundedButton(
+                              title: 'View Available Mentors',
+                              buttonColor: Colors.pink,
+                              fontColor: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        AvailableMentorsScreen(
+                                      loggedInUser: widget.loggedInUser,
+                                      programUID: widget.programUID,
+                                    ),
+                                  ),
+                                );
+                              },
+                              minWidth: 300,
+                            )
+                          ],
+                        );
+                      }
+                    }
+                  });
+            }
           }
-        }
-      },
-    );
+        });
   }
 
   @override

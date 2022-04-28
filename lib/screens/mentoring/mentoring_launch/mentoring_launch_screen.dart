@@ -16,12 +16,14 @@ class MentoringLaunchScreen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
+  final String matchID;
 
   const MentoringLaunchScreen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
     this.programUID,
+    this.matchID,
   }) : super(key: key);
 
   static const String id = 'mentoring_launch_screen';
@@ -45,13 +47,13 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
         stream: programsRef
             .doc(widget.programUID)
             .collection('matchedPairs')
-            .doc(widget.mentorUID + loggedInUser.id)
+            .doc(widget.matchID)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return circularProgress();
           }
-          MatchModel matchInfo = MatchModel.fromDocument(snapshot.data);
+          // MatchModel matchInfo = MatchModel.fromDocument(snapshot.data);
 
           return StreamBuilder<Object>(
               stream: usersRef.doc(widget.loggedInUser.id).snapshots(),
