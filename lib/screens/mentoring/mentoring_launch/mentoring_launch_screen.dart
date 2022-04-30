@@ -3,10 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
-import 'package:mentorx_mvp/components/icon_circle.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_launch_manage.dart';
 import '../../../components/progress.dart';
-import '../../../models/match_model.dart';
 import '../../launch_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -44,183 +43,177 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Object>(
-        stream: programsRef
-            .doc(widget.programUID)
-            .collection('matchedPairs')
-            .doc(widget.matchID)
-            .snapshots(),
+        stream: usersRef.doc(widget.loggedInUser.id).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return circularProgress();
           }
-          // MatchModel matchInfo = MatchModel.fromDocument(snapshot.data);
-
+          myUser user = myUser.fromDocument(snapshot.data);
           return StreamBuilder<Object>(
-              stream: usersRef.doc(widget.loggedInUser.id).snapshots(),
+              stream: usersRef.doc(widget.mentorUID).snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                myUser user = myUser.fromDocument(snapshot.data);
-                return StreamBuilder<Object>(
-                    stream: usersRef.doc(widget.mentorUID).snapshots(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return circularProgress();
-                      }
-                      myUser mentor = myUser.fromDocument(snapshot.data);
+                myUser mentor = myUser.fromDocument(snapshot.data);
 
-                      if (user.profilePicture == null ||
-                          user.profilePicture == "") {
-                        userProfilePic = false;
-                      } else {
-                        userProfilePic = true;
-                      }
-                      if (mentor.profilePicture == null ||
-                          mentor.profilePicture == "") {
-                        mentorProfilePic = false;
-                      } else {
-                        mentorProfilePic = true;
-                      }
+                if (user.profilePicture == null || user.profilePicture == "") {
+                  userProfilePic = false;
+                } else {
+                  userProfilePic = true;
+                }
+                if (mentor.profilePicture == null ||
+                    mentor.profilePicture == "") {
+                  mentorProfilePic = false;
+                } else {
+                  mentorProfilePic = true;
+                }
 
-                      return Scaffold(
-                        appBar: AppBar(
-                          elevation: 5,
-                          title: Image.asset(
-                            'assets/images/MentorPinkWhite.png',
-                            height: 150,
-                          ),
-                        ),
-                        body: SingleChildScrollView(
-                          child: Container(
-                            child: Column(
+                return Scaffold(
+                  appBar: AppBar(
+                    elevation: 5,
+                    title: Image.asset(
+                      'assets/images/MentorPinkWhite.png',
+                      height: 150,
+                    ),
+                  ),
+                  body: SingleChildScrollView(
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 50.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 50.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          ImageCircle(
-                                              profilePicBool: userProfilePic,
-                                              myUserRef: user),
-                                          Container(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 10.0),
-                                              child: Text(
-                                                '${user.firstName} ${user.lastName}',
-                                                style: TextStyle(
-                                                  fontFamily: 'WorkSans',
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black45,
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        ],
+                                Column(
+                                  children: [
+                                    ImageCircle(
+                                        profilePicBool: userProfilePic,
+                                        myUserRef: user),
+                                    Container(
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 10.0),
+                                        child: Text(
+                                          '${user.firstName} ${user.lastName}',
+                                          style: TextStyle(
+                                            fontFamily: 'WorkSans',
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black45,
+                                          ),
+                                        ),
                                       ),
-                                      Column(
-                                        children: [
-                                          ImageCircle(
-                                              profilePicBool: mentorProfilePic,
-                                              myUserRef: mentor),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 10.0),
-                                            child: Container(
-                                              child: Text(
-                                                '${mentor.firstName} ${mentor.lastName}',
-                                                style: TextStyle(
-                                                  fontFamily: 'WorkSans',
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black45,
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                    )
+                                  ],
                                 ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20.0, right: 20),
-                                  child: Divider(
-                                    thickness: 2,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20.0, right: 20.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      IconCard(
-                                        boxHeight: 140,
-                                        boxWidth: 140,
-                                        iconSize: 60,
-                                        cardColor: Colors.white,
-                                        cardIcon:
-                                            CupertinoIcons.chat_bubble_2_fill,
-                                        cardText: 'Chat',
+                                Column(
+                                  children: [
+                                    ImageCircle(
+                                        profilePicBool: mentorProfilePic,
+                                        myUserRef: mentor),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: Container(
+                                        child: Text(
+                                          '${mentor.firstName} ${mentor.lastName}',
+                                          style: TextStyle(
+                                            fontFamily: 'WorkSans',
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black45,
+                                          ),
+                                        ),
                                       ),
-                                      IconCard(
-                                        boxHeight: 140,
-                                        boxWidth: 140,
-                                        iconSize: 60,
-                                        cardColor: Colors.white,
-                                        cardIcon: Icons.map,
-                                        cardText: 'Guides',
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20.0, right: 20.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      IconCard(
-                                        boxHeight: 140,
-                                        boxWidth: 140,
-                                        iconSize: 60,
-                                        cardColor: Colors.white,
-                                        cardIcon: Icons.note_rounded,
-                                        cardText: 'Notes',
-                                      ),
-                                      IconCard(
-                                        boxHeight: 140,
-                                        boxWidth: 140,
-                                        iconSize: 60,
-                                        cardColor: Colors.white,
-                                        cardIcon: Icons.settings,
-                                        cardText: 'Manage',
-                                      ),
-                                    ],
-                                  ),
+                                    )
+                                  ],
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                      );
-                    });
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 20),
+                            child: Divider(
+                              thickness: 2,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                IconCard(
+                                  boxHeight: 140,
+                                  boxWidth: 140,
+                                  iconSize: 60,
+                                  cardColor: Colors.white,
+                                  cardIcon: CupertinoIcons.chat_bubble_2_fill,
+                                  cardText: 'Chat',
+                                ),
+                                IconCard(
+                                  boxHeight: 140,
+                                  boxWidth: 140,
+                                  iconSize: 60,
+                                  cardColor: Colors.white,
+                                  cardIcon: Icons.map,
+                                  cardText: 'Guides',
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                IconCard(
+                                  boxHeight: 140,
+                                  boxWidth: 140,
+                                  iconSize: 60,
+                                  cardColor: Colors.white,
+                                  cardIcon: Icons.note_rounded,
+                                  cardText: 'Notes',
+                                ),
+                                IconCard(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            MentoringLaunchManage(
+                                          loggedInUser: loggedInUser,
+                                          programUID: widget.programUID,
+                                          mentorUser: mentor,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  boxHeight: 140,
+                                  boxWidth: 140,
+                                  iconSize: 60,
+                                  cardColor: Colors.white,
+                                  cardIcon: Icons.settings,
+                                  cardText: 'Manage',
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
               });
         });
   }

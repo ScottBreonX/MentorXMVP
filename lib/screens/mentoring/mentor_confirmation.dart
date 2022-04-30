@@ -46,7 +46,7 @@ class MentorConfirm extends StatelessWidget {
         .doc(programUID)
         .collection('userSubscribed')
         .doc(loggedInUser.id)
-        .collection('matchedMentors')
+        .collection('matches')
         .doc(mentorUID)
         .set({});
     //add matchID to mentee
@@ -54,7 +54,7 @@ class MentorConfirm extends StatelessWidget {
         .doc(programUID)
         .collection('userSubscribed')
         .doc(loggedInUser.id)
-        .collection('matchedMentors')
+        .collection('matches')
         .doc(mentorUID)
         .set({"matchID": mentorUID + loggedInUser.id});
     //add mentee to mentor match collection
@@ -62,7 +62,7 @@ class MentorConfirm extends StatelessWidget {
         .doc(programUID)
         .collection('userSubscribed')
         .doc(mentorUID)
-        .collection('matchedMentees')
+        .collection('matches')
         .doc(loggedInUser.id)
         .set({});
     //addMatchIDtoMentor
@@ -70,7 +70,7 @@ class MentorConfirm extends StatelessWidget {
         .doc(programUID)
         .collection('userSubscribed')
         .doc(mentorUID)
-        .collection('matchedMentees')
+        .collection('matches')
         .doc(loggedInUser.id)
         .set({"matchID": mentorUID + loggedInUser.id});
     //decrement mentor available slots

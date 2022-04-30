@@ -1,24 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MatchModel {
-  final String id;
-  final String notes;
+  final String matchID;
 
   MatchModel({
-    this.id,
-    this.notes,
+    this.matchID,
   });
 
   factory MatchModel.fromDocument(DocumentSnapshot doc) {
     return MatchModel(
-      id: doc['id'],
-      notes: doc['notes'],
+      matchID: doc['matchID'],
     );
   }
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'notes': notes,
+      'matchID': matchID,
     };
   }
 }
