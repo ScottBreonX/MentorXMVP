@@ -1,15 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mentorx_mvp/models/message_model.dart';
+import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:mentorx_mvp/components/sign_out.dart';
 
-User tempUser;
-final _firestore = FirebaseFirestore.instance;
+import '../../models/user.dart';
+
+final usersRef = FirebaseFirestore.instance.collection('users');
+final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class ChatScreen extends StatefulWidget {
+  final myUser loggedInUser;
+  final String mentorUID;
+  final String programUID;
+  final String matchID;
+
+  const ChatScreen({
+    Key key,
+    this.loggedInUser,
+    this.mentorUID,
+    this.programUID,
+    this.matchID,
+  }) : super(key: key);
+
   static const String id = 'chat_screen';
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -18,15 +33,12 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final messageTextController = TextEditingController();
   bool showSpinner = false;
-  final _auth = FirebaseAuth.instance;
   String messageText;
   bool canSubmit = false;
 
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
-    getProfileData();
   }
 
   @override
@@ -35,28 +47,23 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
-  void getCurrentUser() {
-    try {
-      final user = _auth.currentUser;
-      if (user != null) {
-        tempUser = user;
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
   Future<void> _submit() async {
     try {
       messageTextController.clear();
-      await _firestore.collection('messages').add({
+      await programsRef
+          .doc(widget.programUID)
+          .collection('matchedPairs')
+          .doc(widget.matchID)
+          .collection('messages')
+          .add({
         'text': messageText,
-        'sender': tempUser.email,
-        'senderFName': profileData['First Name'],
-        'senderLName': profileData['Last Name'],
+        'sender': widget.loggedInUser.email,
+        'senderFName': widget.loggedInUser.firstName,
+        'senderLName': widget.loggedInUser.lastName,
         'timestamp': DateTime.now(),
       });
     } catch (e) {
+      print(e);
       showAlertDialog(
         context,
         title: "Message Error",
@@ -64,21 +71,6 @@ class _ChatScreenState extends State<ChatScreen> {
         defaultActionText: "Ok",
       );
     }
-  }
-
-  dynamic profileData;
-
-  Future<dynamic> getProfileData() async {
-    await FirebaseFirestore.instance
-        .collection('users/${tempUser.uid}/profile')
-        .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        setState(() {
-          profileData = result.data();
-        });
-      });
-    });
   }
 
 //  void messagesStream() async {
@@ -96,14 +88,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () {
-              confirmSignOut(context);
-            },
-          ),
-        ],
+        actions: [],
         title: Text(
           'Chat Room',
           style: TextStyle(fontSize: 15),
@@ -117,7 +102,11 @@ class _ChatScreenState extends State<ChatScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              MessagesStream(),
+              MessagesStream(
+                loggedInUser: widget.loggedInUser,
+                matchID: widget.matchID,
+                programUID: widget.programUID,
+              ),
               Container(
                 decoration: kMessageContainerDecoration,
                 child: Row(
@@ -163,53 +152,84 @@ class _ChatScreenState extends State<ChatScreen> {
 }
 
 class MessagesStream extends StatelessWidget {
+  const MessagesStream({
+    Key key,
+    @required this.loggedInUser,
+    @required this.programUID,
+    @required this.matchID,
+  }) : super(key: key);
+
+  final String programUID;
+  final myUser loggedInUser;
+  final String matchID;
+
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream:
-          _firestore.collection('messages').orderBy('timestamp').snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Center(
-            child: CircularProgressIndicator(
-              backgroundColor: kMentorXPrimary,
-            ),
+    return FutureBuilder(
+        future: usersRef.doc(loggedInUser.id).get(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(
+                backgroundColor: kMentorXPrimary,
+              ),
+            );
+          }
+          myUser user = myUser.fromDocument(snapshot.data);
+
+          return StreamBuilder<QuerySnapshot>(
+            stream: programsRef
+                .doc(programUID)
+                .collection('matchedPairs')
+                .doc(matchID)
+                .collection('messages')
+                .orderBy('timestamp')
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: kMentorXPrimary,
+                  ),
+                );
+              }
+
+              final messages = snapshot.data.docs.reversed;
+              List<MessageBubble> messageBubbles = [];
+
+              for (var message in messages) {
+                final messageData = message;
+                MessageModel messageModel =
+                    MessageModel.fromDocument(messageData);
+
+                final messageText = messageModel.messageText;
+                final senderFName = messageModel.senderFName;
+                final senderLName = messageModel.senderLName;
+                final messageSender = messageModel.sender;
+                final currentUser = user.email;
+
+                final messageBubble = MessageBubble(
+                  senderFName: senderFName,
+                  senderLName: senderLName,
+                  sender: messageSender,
+                  text: messageText,
+                  isMe: currentUser == messageSender,
+                );
+                messageBubbles.add(messageBubble);
+              }
+              return Expanded(
+                child: ListView(
+                  reverse: true,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.0,
+                    vertical: 20.0,
+                  ),
+                  children: messageBubbles,
+                ),
+              );
+            },
           );
-        }
-
-        final messages = snapshot.data.docs.reversed;
-        List<MessageBubble> messageBubbles = [];
-
-        for (var message in messages) {
-          final messageData = message;
-
-          final messageText = messageData['text'];
-          final senderFName = messageData['senderFName'];
-          final senderLName = messageData['senderLName'];
-          final messageSender = messageData['sender'];
-          final currentUser = tempUser.email;
-
-          final messageBubble = MessageBubble(
-            senderFName: senderFName,
-            senderLName: senderLName,
-            sender: messageSender,
-            text: messageText,
-            isMe: currentUser == messageSender,
-          );
-          messageBubbles.add(messageBubble);
-        }
-        return Expanded(
-          child: ListView(
-            reverse: true,
-            padding: EdgeInsets.symmetric(
-              horizontal: 10.0,
-              vertical: 20.0,
-            ),
-            children: messageBubbles,
-          ),
-        );
-      },
-    );
+        });
   }
 }
 
