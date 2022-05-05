@@ -52,15 +52,15 @@ const kMessageTextFieldDecoration = InputDecoration(
 
 const kMessageContainerDecoration = BoxDecoration(
   border: Border(
-    top: BorderSide(color: kMentorXPrimary, width: 2.0),
+    top: BorderSide(color: Colors.black),
+    bottom: BorderSide(color: Colors.black),
+    right: BorderSide(color: Colors.black),
+    left: BorderSide(color: Colors.black),
+  ),
+  borderRadius: BorderRadius.all(
+    Radius.circular(10),
   ),
 );
-
-const kSendButtonTextStyle = TextStyle(
-    color: kMentorXPrimary, fontWeight: FontWeight.bold, fontSize: 18.0);
-
-const kInactiveSendButtonTextStyle =
-    TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 18.0);
 
 //Color pallette themes
 const kMentorXPrimary = Colors.blue;

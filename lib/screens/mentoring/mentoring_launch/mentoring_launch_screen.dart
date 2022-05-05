@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/chat/chat_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_launch_guides.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_launch_manage.dart';
 import '../../../components/progress.dart';
 import '../../launch_screen.dart';
@@ -167,6 +168,7 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                         builder: (context) => ChatScreen(
                                           programUID: widget.programUID,
                                           loggedInUser: widget.loggedInUser,
+                                          mentorUID: widget.mentorUID,
                                           matchID: widget.matchID,
                                         ),
                                       ),
@@ -174,13 +176,21 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                   },
                                 ),
                                 IconCard(
-                                  boxHeight: 140,
-                                  boxWidth: 140,
-                                  iconSize: 60,
-                                  cardColor: Colors.white,
-                                  cardIcon: Icons.map,
-                                  cardText: 'Guides',
-                                ),
+                                    boxHeight: 140,
+                                    boxWidth: 140,
+                                    iconSize: 60,
+                                    cardColor: Colors.white,
+                                    cardIcon: Icons.map,
+                                    cardText: 'Guides',
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              MentoringLaunchGuides(),
+                                        ),
+                                      );
+                                    }),
                               ],
                             ),
                           ),

@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
-import 'package:mentorx_mvp/components/program_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/match_list.dart';
 import 'package:mentorx_mvp/models/program.dart';
@@ -253,42 +252,42 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                       ],
                     ),
                     buildMatches(),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0, top: 20),
-                          child: Text(
-                            'Program Guides',
-                            style: Theme.of(context).textTheme.headline1,
-                          ),
-                        )
-                      ],
-                    ),
-                    Container(
-                      height: 120,
-                      child: ListView(
-                        children: [
-                          Container(
-                            height: 120.0,
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: [
-                                ProgramCard(
-                                  programStartDate: 'This Week',
-                                  programEndDate: '',
-                                  programName: 'Resume 101',
-                                ),
-                                ProgramCard(
-                                  programStartDate: 'Next Week',
-                                  programEndDate: '',
-                                  programName: 'Initial Chat',
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Padding(
+                    //       padding: const EdgeInsets.only(left: 10.0, top: 20),
+                    //       child: Text(
+                    //         'Program Guides',
+                    //         style: Theme.of(context).textTheme.headline1,
+                    //       ),
+                    //     )
+                    //   ],
+                    // ),
+                    // Container(
+                    //   height: 120,
+                    //   child: ListView(
+                    //     children: [
+                    //       Container(
+                    //         height: 120.0,
+                    //         child: ListView(
+                    //           scrollDirection: Axis.horizontal,
+                    //           children: [
+                    //             ProgramCard(
+                    //               programStartDate: 'This Week',
+                    //               programEndDate: '',
+                    //               programName: 'Resume 101',
+                    //             ),
+                    //             ProgramCard(
+                    //               programStartDate: 'Next Week',
+                    //               programEndDate: '',
+                    //               programName: 'Initial Chat',
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     Row(
                       children: [
                         Padding(
