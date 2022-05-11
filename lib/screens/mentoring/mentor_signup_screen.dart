@@ -639,6 +639,13 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         "mentorSlots": mentorSlots,
         "id": loggedInUser.id,
       });
+      await programsRef
+          .doc(programUID)
+          .collection('userSubscribed')
+          .doc(loggedInUser.id)
+          .set({
+        "enrollmentStatus": 'mentor',
+      });
       // await usersRef.doc(loggedInUser.id).update({
       //   "Mentor Attribute 1": trait1,
       //   "Mentor Attribute 2": trait2,
@@ -648,10 +655,10 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
       //   "Mtr Hobby 3": hobby3,
       //   "XFactor": makesMeGreatController.text,
       // });
-      await usersRef.doc(loggedInUser.id).update({
-        "Mentor": true,
-        "Mentor Slots": mentorSlots,
-      });
+      // await usersRef.doc(loggedInUser.id).update({
+      //   "Mentor": true,
+      //   "Mentor Slots": mentorSlots,
+      // });
       // re-fetch loggedInUser info to set Mentor status to true
       loggedInUser =
           myUser.fromDocument(await usersRef.doc(loggedInUser.id).get());

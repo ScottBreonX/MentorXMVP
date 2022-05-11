@@ -156,6 +156,11 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
             .collection('userSubscribed')
             .doc(loggedInUser.id)
             .set({});
+        await programsRef
+            .doc(widget.program.id)
+            .collection('userSubscribed')
+            .doc(loggedInUser.id)
+            .set({'enrollmentStatus': ''});
         await usersRef
             .doc(loggedInUser.id)
             .collection('enrolledPrograms')
