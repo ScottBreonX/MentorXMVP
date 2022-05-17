@@ -26,7 +26,9 @@ class Mentor {
   factory Mentor.fromDocument(DocumentSnapshot doc) {
     return Mentor(
       id: doc['id'],
-      mentorSlots: doc['mentorSlots'],
+      mentorSlots: doc.data().toString().contains('mentorSlots')
+          ? doc['mentorSlots']
+          : '2',
       mtrHobby1: doc['Mtr Hobby 1'],
       mtrHobby2: doc['Mtr Hobby 2'],
       mtrHobby3: doc['Mtr Hobby 3'],

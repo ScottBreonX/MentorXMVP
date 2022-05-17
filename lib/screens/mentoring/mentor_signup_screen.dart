@@ -1,11 +1,10 @@
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
+import 'package:mentorx_mvp/models/mentor_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
@@ -38,7 +37,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   List<Step> steps;
   int currentStep = 0;
   bool complete = false;
-  int mentorSlots = 2;
+  int mentorSlots;
 
   List<String> skillsets = [
     'coding',
@@ -189,222 +188,285 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   }
 
   buildCounterWidget() {
-    return Center(
-        child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        FloatingActionButton(
-          onPressed: _decrementCounter,
-          child: Icon(
-            Icons.remove,
-            size: 40,
-          ),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.blue,
-          tooltip: 'Decrement',
-        ),
-        SizedBox(width: 25),
-        Text(
-          '$mentorSlots',
-          style: TextStyle(fontSize: 80.0),
-        ),
-        SizedBox(width: 25),
-        FloatingActionButton(
-          onPressed: _incrementCounter,
-          child: Icon(
-            Icons.add,
-            size: 40,
-          ),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.blue,
-          tooltip: 'Increment',
-        ),
-      ],
-    ));
+    bool slotSelection = false;
+
+    return StreamBuilder<Object>(
+        stream: programsRef
+            .doc(widget.programUID)
+            .collection('mentors')
+            .doc(loggedInUser.id)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return CircularProgressIndicator();
+          }
+
+          Mentor mentorModel = Mentor.fromDocument(snapshot.data);
+          if (mentorSlots == null) {
+            mentorSlots = mentorModel.mentorSlots;
+          } else {
+            slotSelection = true;
+          }
+          return Center(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FloatingActionButton(
+                heroTag: 'decrement1',
+                onPressed: _decrementCounter,
+                child: Icon(
+                  Icons.remove,
+                  size: 40,
+                ),
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.blue,
+                tooltip: 'Decrement',
+              ),
+              SizedBox(width: 25),
+              slotSelection
+                  ? Text(
+                      '$mentorSlots',
+                      style: TextStyle(fontSize: 80.0),
+                    )
+                  : Text(
+                      '${mentorModel.mentorSlots}',
+                      style: TextStyle(fontSize: 80.0),
+                    ),
+              SizedBox(width: 25),
+              FloatingActionButton(
+                heroTag: 'increment1',
+                onPressed: _incrementCounter,
+                child: Icon(
+                  Icons.add,
+                  size: 40,
+                ),
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.blue,
+                tooltip: 'Increment',
+              ),
+            ],
+          ));
+        });
   }
 
   buildQuestionnaire() {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'What are the top 3 skill sets you can mentor on?',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54,
-                    fontSize: 20,
-                  ),
-                  // textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.only(left: 20.0, top: 20.0, bottom: 10.0),
-              child: Row(
+    return StreamBuilder<Object>(
+        stream: programsRef
+            .doc(widget.programUID)
+            .collection('mentors')
+            .doc(loggedInUser.id)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return CircularProgressIndicator();
+          }
+          Mentor mentorModel = Mentor.fromDocument(snapshot.data);
+
+          return Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'Skill #1',
-                    style: TextStyle(
-                      fontFamily: 'WorkSans',
-                      color: Colors.black54,
-                      fontSize: 20,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'What are the top 3 skill sets you can mentor on?',
+                        style: TextStyle(
+                          fontFamily: 'WorkSans',
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                          fontSize: 20,
+                        ),
+                        // textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ],
               ),
-            ),
-            buildDropdownField(
-              inputValue: trait1,
-              iconItems: skillIcons.map(buildIconItem).toList(),
-              listItems: skillsets.map(buildMenuItem).toList(),
-              inputFunction: (trait1) => setState(() => this.trait1 = trait1),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 20.0, bottom: 10.0),
-              child: Row(
+              Column(
                 children: [
-                  Text(
-                    'Skill #2',
-                    style: TextStyle(
-                      fontFamily: 'WorkSans',
-                      color: Colors.black54,
-                      fontSize: 20,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, top: 20.0, bottom: 10.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Skill #1',
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            color: Colors.black54,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
                     ),
+                  ),
+                  buildDropdownField(
+                    inputValue: trait1 ?? mentorModel.mtrAtt1,
+                    // iconItems: skillIcons.map(buildIconItem).toList(),
+                    listItems: skillsets.map(buildMenuItem).toList(),
+                    inputFunction: (trait1) =>
+                        setState(() => this.trait1 = trait1),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20, top: 20.0, bottom: 10.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Skill #2',
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            color: Colors.black54,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  buildDropdownField(
+                    inputValue: trait2 ?? mentorModel.mtrAtt2,
+                    listItems: skillsets.map(buildMenuItem).toList(),
+                    inputFunction: (trait2) =>
+                        setState(() => this.trait2 = trait2),
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20, top: 20.0, bottom: 10.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Skill #3',
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            color: Colors.black54,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  buildDropdownField(
+                    inputValue: trait3 ?? mentorModel.mtrAtt3,
+                    listItems: skillsets.map(buildMenuItem).toList(),
+                    inputFunction: (trait3) =>
+                        setState(() => this.trait3 = trait3),
                   ),
                 ],
               ),
-            ),
-            buildDropdownField(
-              inputValue: trait2,
-              listItems: skillsets.map(buildMenuItem).toList(),
-              inputFunction: (trait2) => setState(() => this.trait2 = trait2),
-            ),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 20.0, bottom: 10.0),
-              child: Row(
-                children: [
-                  Text(
-                    'Skill #3',
-                    style: TextStyle(
-                      fontFamily: 'WorkSans',
-                      color: Colors.black54,
-                      fontSize: 20,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            buildDropdownField(
-              inputValue: trait3,
-              listItems: skillsets.map(buildMenuItem).toList(),
-              inputFunction: (trait3) => setState(() => this.trait3 = trait3),
-            ),
-          ],
-        ),
-      ],
-    );
+            ],
+          );
+        });
   }
 
   buildHobbiesForm() {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'What are your top 3 hobbies or activities?',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.black54,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 20, bottom: 10.0),
-              child: Row(
+    return StreamBuilder<Object>(
+        stream: programsRef
+            .doc(widget.programUID)
+            .collection('mentors')
+            .doc(loggedInUser.id)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return CircularProgressIndicator();
+          }
+          Mentor mentorModel = Mentor.fromDocument(snapshot.data);
+          return Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'Hobby / Activity #1',
-                    style: TextStyle(
-                      fontFamily: 'WorkSans',
-                      color: Colors.black54,
-                      fontSize: 20,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'What are your top 3 hobbies or activities?',
+                        style: TextStyle(
+                          fontFamily: 'WorkSans',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.black54,
+                        ),
+                      ),
                     ),
                   ),
                 ],
               ),
-            ),
-            buildDropdownField(
-              inputValue: hobby1,
-              listItems: hobbies.map(buildMenuItem).toList(),
-              inputFunction: (hobby1) => setState(() => this.hobby1 = hobby1),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 20, bottom: 10.0),
-              child: Row(
+              Column(
                 children: [
-                  Text(
-                    'Hobby / Activity #2',
-                    style: TextStyle(
-                      fontFamily: 'WorkSans',
-                      color: Colors.black54,
-                      fontSize: 20,
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20, top: 20, bottom: 10.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Hobby / Activity #1',
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            color: Colors.black54,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
                     ),
+                  ),
+                  buildDropdownField(
+                    inputValue: hobby1 ?? mentorModel.mtrHobby1,
+                    listItems: hobbies.map(buildMenuItem).toList(),
+                    inputFunction: (hobby1) =>
+                        setState(() => this.hobby1 = hobby1),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20, top: 20, bottom: 10.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Hobby / Activity #2',
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            color: Colors.black54,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  buildDropdownField(
+                    inputValue: hobby2 ?? mentorModel.mtrHobby2,
+                    listItems: hobbies.map(buildMenuItem).toList(),
+                    inputFunction: (hobby2) =>
+                        setState(() => this.hobby2 = hobby2),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20, top: 20, bottom: 10.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Hobby / Activity #3',
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            color: Colors.black54,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  buildDropdownField(
+                    inputValue: hobby3 ?? mentorModel.mtrHobby3,
+                    listItems: hobbies.map(buildMenuItem).toList(),
+                    inputFunction: (hobby3) =>
+                        setState(() => this.hobby3 = hobby3),
                   ),
                 ],
               ),
-            ),
-            buildDropdownField(
-              inputValue: hobby2,
-              listItems: hobbies.map(buildMenuItem).toList(),
-              inputFunction: (hobby2) => setState(() => this.hobby2 = hobby2),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 20, bottom: 10.0),
-              child: Row(
-                children: [
-                  Text(
-                    'Hobby / Activity #3',
-                    style: TextStyle(
-                      fontFamily: 'WorkSans',
-                      color: Colors.black54,
-                      fontSize: 20,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            buildDropdownField(
-              inputValue: hobby3,
-              listItems: hobbies.map(buildMenuItem).toList(),
-              inputFunction: (hobby3) => setState(() => this.hobby3 = hobby3),
-            ),
-          ],
-        ),
-      ],
-    );
+            ],
+          );
+        });
   }
 
   buildStepList(steps) {
@@ -646,20 +708,6 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
           .set({
         "enrollmentStatus": 'mentor',
       });
-      // await usersRef.doc(loggedInUser.id).update({
-      //   "Mentor Attribute 1": trait1,
-      //   "Mentor Attribute 2": trait2,
-      //   "Mentor Attribute 3": trait3,
-      //   "Mtr Hobby 1": hobby1,
-      //   "Mtr Hobby 2": hobby2,
-      //   "Mtr Hobby 3": hobby3,
-      //   "XFactor": makesMeGreatController.text,
-      // });
-      // await usersRef.doc(loggedInUser.id).update({
-      //   "Mentor": true,
-      //   "Mentor Slots": mentorSlots,
-      // });
-      // re-fetch loggedInUser info to set Mentor status to true
       loggedInUser =
           myUser.fromDocument(await usersRef.doc(loggedInUser.id).get());
     } on FirebaseException catch (e) {

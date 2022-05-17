@@ -7,7 +7,9 @@ class EnrollmentModel {
 
   factory EnrollmentModel.fromDocument(DocumentSnapshot doc) {
     return EnrollmentModel(
-      enrollmentStatus: doc['enrollmentStatus'],
+      enrollmentStatus: doc.data().toString().contains('enrollmentStatus')
+          ? doc['enrollmentStatus']
+          : '',
     );
   }
   Map<String, dynamic> toMap() {

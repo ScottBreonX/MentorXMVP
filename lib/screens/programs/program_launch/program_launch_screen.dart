@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:mentorx_mvp/models/enrollment_model.dart';
 import 'package:mentorx_mvp/models/match_list.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
@@ -43,26 +44,26 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
   bool hasMatches = false;
   List<MatchList> matches = [];
 
-  Future<dynamic> getMatches() async {
-    setState(() {
-      isLoading = true;
-    });
-    QuerySnapshot snapshot = await usersRef
-        .doc(widget.programUID)
-        .collection('userSubscribed')
-        .doc(loggedInUser.id)
-        .collection('matchedMentors')
-        .get();
-    if (snapshot.docs.isNotEmpty) {
-      setState(() {
-        isLoading = false;
-        hasMatches = true;
-        matches = snapshot.docs
-            .map((doc) => MatchList.fromDocument(doc, widget.programUID))
-            .toList();
-      });
-    }
-  }
+  // Future<dynamic> getMatches() async {
+  //   setState(() {
+  //     isLoading = true;
+  //   });
+  //   QuerySnapshot snapshot = await usersRef
+  //       .doc(widget.programUID)
+  //       .collection('userSubscribed')
+  //       .doc(loggedInUser.id)
+  //       .collection('matchedMentors')
+  //       .get();
+  //   if (snapshot.docs.isNotEmpty) {
+  //     setState(() {
+  //       isLoading = false;
+  //       hasMatches = true;
+  //       matches = snapshot.docs
+  //           .map((doc) => MatchList.fromDocument(doc, widget.programUID))
+  //           .toList();
+  //     });
+  //   }
+  // }
 
   buildMatches() {
     isLoading = true;
@@ -91,30 +92,71 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                 ),
               );
             } else {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  RoundedButton(
-                    title: 'View Available Mentors',
-                    buttonColor: Colors.pink,
-                    fontColor: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AvailableMentorsScreen(
-                            loggedInUser: widget.loggedInUser,
-                            programUID: widget.programUID,
-                          ),
-                        ),
+              return StreamBuilder<Object>(
+                  stream: programsRef
+                      .doc(widget.programUID)
+                      .collection('userSubscribed')
+                      .doc(loggedInUser.id)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return circularProgress();
+                    }
+                    EnrollmentModel enrollmentModel =
+                        EnrollmentModel.fromDocument(snapshot.data);
+
+                    if (enrollmentModel.enrollmentStatus == '') {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundedButton(
+                            title: 'Finish Enrollment',
+                            buttonColor: Colors.blue,
+                            fontColor: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MentoringScreen(
+                                    loggedInUser: loggedInUser,
+                                    programUID: widget.programUID,
+                                  ),
+                                ),
+                              );
+                            },
+                            minWidth: 300,
+                          )
+                        ],
                       );
-                    },
-                    minWidth: 300,
-                  )
-                ],
-              );
+                    } else {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundedButton(
+                            title: 'View Available Mentors',
+                            buttonColor: Colors.pink,
+                            fontColor: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AvailableMentorsScreen(
+                                    loggedInUser: widget.loggedInUser,
+                                    programUID: widget.programUID,
+                                  ),
+                                ),
+                              );
+                            },
+                            minWidth: 300,
+                          )
+                        ],
+                      );
+                    }
+                  });
             }
           }
         });
@@ -252,42 +294,6 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                       ],
                     ),
                     buildMatches(),
-                    // Row(
-                    //   children: [
-                    //     Padding(
-                    //       padding: const EdgeInsets.only(left: 10.0, top: 20),
-                    //       child: Text(
-                    //         'Program Guides',
-                    //         style: Theme.of(context).textTheme.headline1,
-                    //       ),
-                    //     )
-                    //   ],
-                    // ),
-                    // Container(
-                    //   height: 120,
-                    //   child: ListView(
-                    //     children: [
-                    //       Container(
-                    //         height: 120.0,
-                    //         child: ListView(
-                    //           scrollDirection: Axis.horizontal,
-                    //           children: [
-                    //             ProgramCard(
-                    //               programStartDate: 'This Week',
-                    //               programEndDate: '',
-                    //               programName: 'Resume 101',
-                    //             ),
-                    //             ProgramCard(
-                    //               programStartDate: 'Next Week',
-                    //               programEndDate: '',
-                    //               programName: 'Initial Chat',
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     Row(
                       children: [
                         Padding(

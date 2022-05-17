@@ -6,6 +6,7 @@ import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
+import '../../components/progress.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -159,96 +160,117 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
   }
 
   buildQuestionnaire() {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'What are the top 3 skills you are looking to develop?',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54,
-                    fontSize: 20,
-                  ),
-                  // textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.only(left: 20.0, top: 20.0, bottom: 10.0),
-              child: Row(
+    return StreamBuilder<DocumentSnapshot>(
+        stream: programsRef
+            .doc(widget.programUID)
+            .collection('mentees')
+            .doc(loggedInUser.id)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return circularProgress();
+          }
+          if (!snapshot.data.exists) {
+            print('gone');
+          }
+
+          return Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'Skill #1',
-                    style: TextStyle(
-                      fontFamily: 'WorkSans',
-                      color: Colors.black54,
-                      fontSize: 20,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'What are the top 3 skills you are looking to develop?',
+                        style: TextStyle(
+                          fontFamily: 'WorkSans',
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                          fontSize: 20,
+                        ),
+                        // textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ],
               ),
-            ),
-            buildDropdownField(
-              inputValue: trait1,
-              listItems: skillsets.map(buildMenuItem).toList(),
-              inputFunction: (trait1) => setState(() => this.trait1 = trait1),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 20.0, bottom: 10.0),
-              child: Row(
+              Column(
                 children: [
-                  Text(
-                    'Skill #2',
-                    style: TextStyle(
-                      fontFamily: 'WorkSans',
-                      color: Colors.black54,
-                      fontSize: 20,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, top: 20.0, bottom: 10.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Skill #1',
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            color: Colors.black54,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
                     ),
+                  ),
+                  buildDropdownField(
+                    inputValue: trait1,
+                    listItems: skillsets.map(buildMenuItem).toList(),
+                    inputFunction: (trait1) => setState(() {
+                      this.trait1 = trait1;
+                    }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20, top: 20.0, bottom: 10.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Skill #2',
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            color: Colors.black54,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  buildDropdownField(
+                    inputValue: trait2,
+                    listItems: skillsets.map(buildMenuItem).toList(),
+                    inputFunction: (trait2) =>
+                        setState(() => this.trait2 = trait2),
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20, top: 20.0, bottom: 10.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Skill #3',
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            color: Colors.black54,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  buildDropdownField(
+                    inputValue: trait3,
+                    listItems: skillsets.map(buildMenuItem).toList(),
+                    inputFunction: (trait3) =>
+                        setState(() => this.trait3 = trait3),
                   ),
                 ],
               ),
-            ),
-            buildDropdownField(
-              inputValue: trait2,
-              listItems: skillsets.map(buildMenuItem).toList(),
-              inputFunction: (trait2) => setState(() => this.trait2 = trait2),
-            ),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 20.0, bottom: 10.0),
-              child: Row(
-                children: [
-                  Text(
-                    'Skill #3',
-                    style: TextStyle(
-                      fontFamily: 'WorkSans',
-                      color: Colors.black54,
-                      fontSize: 20,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            buildDropdownField(
-              inputValue: trait3,
-              listItems: skillsets.map(buildMenuItem).toList(),
-              inputFunction: (trait3) => setState(() => this.trait3 = trait3),
-            ),
-          ],
-        ),
-      ],
-    );
+            ],
+          );
+        });
   }
 
   buildHobbiesForm() {
@@ -515,9 +537,9 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
           .collection('mentees')
           .doc(loggedInUser.id)
           .set({
-        "Mentee Attribute 1": trait1,
-        "Mentee Attribute 2": trait2,
-        "Mentee Attribute 3": trait3,
+        trait1 ?? "Mentee Attribute 1": trait1,
+        trait2 ?? "Mentee Attribute 2": trait2,
+        trait3 ?? "Mentee Attribute 3": trait3,
         "Mentee Hobby 1": hobby1,
         "Mentee Hobby 2": hobby2,
         "Mentee Hobby 3": hobby3,
@@ -531,19 +553,6 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
           .set({
         "enrollmentStatus": 'mentee',
       });
-      // await usersRef.doc(loggedInUser.id).update({
-      //   "Mentor Attribute 1": trait1,
-      //   "Mentor Attribute 2": trait2,
-      //   "Mentor Attribute 3": trait3,
-      //   "Mtr Hobby 1": hobby1,
-      //   "Mtr Hobby 2": hobby2,
-      //   "Mtr Hobby 3": hobby3,
-      //   "XFactor": makesMeGreatController.text,
-      // });
-      // await usersRef.doc(loggedInUser.id).update({
-      //   "Mentee": true,
-      // });
-      // re-fetch loggedInUser info to set Mentor status to true
       loggedInUser =
           myUser.fromDocument(await usersRef.doc(loggedInUser.id).get());
     } on FirebaseException catch (e) {
@@ -555,13 +564,13 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
   next() async {
     if (currentStep + 1 != steps.length) {
       goTo(currentStep + 1);
-    } else if ((trait1 != null) &
-        (trait2 != null) &
-        (trait3 != null) &
-        (hobby1 != null) &
-        (hobby2 != null) &
-        (hobby3 != null) &
-        (whatImLookingForController.text != '')) {
+      // } else if ((trait1 != null) &
+      //     (trait2 != null) &
+      //     (trait3 != null) &
+      //     (hobby1 != null) &
+      //     (hobby2 != null) &
+      //     (hobby3 != null) &
+      //     (whatImLookingForController.text != '')) {
       await _updateMenteeAttributes(context, widget.programUID);
       print('successful update');
       _enrollmentSuccess(context, widget.programUID);
