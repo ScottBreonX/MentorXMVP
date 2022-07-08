@@ -38,10 +38,12 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
   @override
   void initState() {
     super.initState();
+    checkIsAdmin();
   }
 
   bool isLoading = false;
   bool hasMatches = false;
+  bool isAdmin = false;
   List<MatchList> matches = [];
 
   // Future<dynamic> getMatches() async {
@@ -64,6 +66,19 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
   //     });
   //   }
   // }
+
+  checkIsAdmin() async {
+    DocumentSnapshot doc = await programsRef
+        .doc(widget.programUID)
+        .collection('programAdmins')
+        .doc(loggedInUser.id)
+        .get();
+    if (doc.exists) {
+      setState(() {
+        isAdmin = true;
+      });
+    }
+  }
 
   buildMatches() {
     isLoading = true;
@@ -354,33 +369,42 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                               );
                             },
                           ),
-                          IconCard(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ProgramAdminScreen(
-                                            loggedInUser: loggedInUser,
-                                            programUID: program.id,
-                                            enrollmentType:
-                                                program.enrollmentType,
-                                            aboutProgram: program.aboutProgram,
-                                            institutionName:
-                                                program.institutionName,
-                                            programName: program.programName,
-                                            programCode: program.programCode,
-                                          )));
-                            },
-                            cardColor: Colors.white,
-                            boxHeight: 110,
-                            boxWidth: 110,
-                            iconSize: 50,
-                            cardIconColor: Colors.blue,
-                            cardIcon: Icons.admin_panel_settings,
-                            cardText: 'Program Admin',
-                            textSize: 15,
-                            cardTextColor: Colors.blue,
-                          ),
+                          isAdmin
+                              ? IconCard(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProgramAdminScreen(
+                                                  loggedInUser: loggedInUser,
+                                                  programUID: program.id,
+                                                  enrollmentType:
+                                                      program.enrollmentType,
+                                                  aboutProgram:
+                                                      program.aboutProgram,
+                                                  institutionName:
+                                                      program.institutionName,
+                                                  programName:
+                                                      program.programName,
+                                                  programCode:
+                                                      program.programCode,
+                                                )));
+                                  },
+                                  cardColor: Colors.white,
+                                  boxHeight: 110,
+                                  boxWidth: 110,
+                                  iconSize: 50,
+                                  cardIconColor: Colors.blue,
+                                  cardIcon: Icons.admin_panel_settings,
+                                  cardText: 'Program Admin',
+                                  textSize: 15,
+                                  cardTextColor: Colors.blue,
+                                )
+                              : SizedBox(
+                                  height: 0,
+                                  width: 0,
+                                ),
                         ],
                       ),
                     ),
