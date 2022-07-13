@@ -37,7 +37,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   List<Step> steps;
   int currentStep = 0;
   bool complete = false;
-  int mentorSlots;
+  int mentorSlots = 2;
 
   List<String> skillsets = [
     'coding',
@@ -188,7 +188,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   }
 
   buildCounterWidget() {
-    bool slotSelection = false;
+    // bool slotSelection = false;
 
     return FutureBuilder<Object>(
         future: programsRef
@@ -201,12 +201,12 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
             return CircularProgressIndicator();
           }
 
-          Mentor mentorModel = Mentor.fromDocument(snapshot.data);
-          if (mentorSlots == null) {
-            mentorSlots = mentorModel.mentorSlots;
-          } else {
-            slotSelection = true;
-          }
+          // Mentor mentorModel = Mentor.fromDocument(snapshot.data);
+          // if (mentorSlots == null) {
+          //   mentorSlots = mentorModel.mentorSlots;
+          // } else {
+          //   slotSelection = true;
+          // }
           return Center(
               child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -223,15 +223,10 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                 tooltip: 'Decrement',
               ),
               SizedBox(width: 25),
-              slotSelection
-                  ? Text(
-                      '$mentorSlots',
-                      style: TextStyle(fontSize: 80.0),
-                    )
-                  : Text(
-                      '${mentorModel.mentorSlots}',
-                      style: TextStyle(fontSize: 80.0),
-                    ),
+              Text(
+                '$mentorSlots',
+                style: TextStyle(fontSize: 80.0),
+              ),
               SizedBox(width: 25),
               FloatingActionButton(
                 heroTag: 'increment1',
@@ -260,7 +255,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
           if (!snapshot.hasData) {
             return CircularProgressIndicator();
           }
-          Mentor mentorModel = Mentor.fromDocument(snapshot.data);
+          // Mentor mentorModel = Mentor.fromDocument(snapshot.data);
 
           return Column(
             children: [
@@ -303,7 +298,9 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                     ),
                   ),
                   buildDropdownField(
-                    inputValue: trait1 ?? mentorModel.mtrAtt1,
+                    inputValue: trait1
+                    // ?? mentorModel.mtrAtt1
+                    ,
                     // iconItems: skillIcons.map(buildIconItem).toList(),
                     listItems: skillsets.map(buildMenuItem).toList(),
                     inputFunction: (trait1) =>
@@ -326,7 +323,9 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                     ),
                   ),
                   buildDropdownField(
-                    inputValue: trait2 ?? mentorModel.mtrAtt2,
+                    inputValue: trait2
+                    // ?? mentorModel.mtrAtt2
+                    ,
                     listItems: skillsets.map(buildMenuItem).toList(),
                     inputFunction: (trait2) =>
                         setState(() => this.trait2 = trait2),
@@ -349,7 +348,9 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                     ),
                   ),
                   buildDropdownField(
-                    inputValue: trait3 ?? mentorModel.mtrAtt3,
+                    inputValue: trait3
+                    // ?? mentorModel.mtrAtt3
+                    ,
                     listItems: skillsets.map(buildMenuItem).toList(),
                     inputFunction: (trait3) =>
                         setState(() => this.trait3 = trait3),
@@ -372,7 +373,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
           if (!snapshot.hasData) {
             return CircularProgressIndicator();
           }
-          Mentor mentorModel = Mentor.fromDocument(snapshot.data);
+          // Mentor mentorModel = Mentor.fromDocument(snapshot.data);
           return Column(
             children: [
               Row(
@@ -413,7 +414,9 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                     ),
                   ),
                   buildDropdownField(
-                    inputValue: hobby1 ?? mentorModel.mtrHobby1,
+                    inputValue: hobby1
+                    // ?? mentorModel.mtrHobby1
+                    ,
                     listItems: hobbies.map(buildMenuItem).toList(),
                     inputFunction: (hobby1) =>
                         setState(() => this.hobby1 = hobby1),
@@ -435,7 +438,9 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                     ),
                   ),
                   buildDropdownField(
-                    inputValue: hobby2 ?? mentorModel.mtrHobby2,
+                    inputValue: hobby2
+                    // ?? mentorModel.mtrHobby2
+                    ,
                     listItems: hobbies.map(buildMenuItem).toList(),
                     inputFunction: (hobby2) =>
                         setState(() => this.hobby2 = hobby2),
@@ -457,7 +462,9 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                     ),
                   ),
                   buildDropdownField(
-                    inputValue: hobby3 ?? mentorModel.mtrHobby3,
+                    inputValue: hobby3
+                    // ?? mentorModel.mtrHobby3
+                    ,
                     listItems: hobbies.map(buildMenuItem).toList(),
                     inputFunction: (hobby3) =>
                         setState(() => this.hobby3 = hobby3),
@@ -684,7 +691,6 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
 
   Future<void> _updateMentoringAttributes(
       BuildContext context, String programUID) async {
-    print(programUID);
     try {
       await programsRef
           .doc(programUID)

@@ -468,7 +468,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                       child: Column(
                         children: [
                           Text(
-                            'Thank you for enrolling as a Mentor',
+                            'Thank you for enrolling as a Mentee',
                             style: TextStyle(
                               fontFamily: 'WorkSans',
                               fontWeight: FontWeight.bold,
@@ -564,13 +564,13 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
   next() async {
     if (currentStep + 1 != steps.length) {
       goTo(currentStep + 1);
-      // } else if ((trait1 != null) &
-      //     (trait2 != null) &
-      //     (trait3 != null) &
-      //     (hobby1 != null) &
-      //     (hobby2 != null) &
-      //     (hobby3 != null) &
-      //     (whatImLookingForController.text != '')) {
+    } else if ((trait1 != null) &
+        (trait2 != null) &
+        (trait3 != null) &
+        (hobby1 != null) &
+        (hobby2 != null) &
+        (hobby3 != null) &
+        (whatImLookingForController.text != '')) {
       await _updateMenteeAttributes(context, widget.programUID);
       print('successful update');
       _enrollmentSuccess(context, widget.programUID);
