@@ -190,12 +190,12 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   buildCounterWidget() {
     bool slotSelection = false;
 
-    return StreamBuilder<Object>(
-        stream: programsRef
+    return FutureBuilder<Object>(
+        future: programsRef
             .doc(widget.programUID)
             .collection('mentors')
             .doc(loggedInUser.id)
-            .snapshots(),
+            .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return CircularProgressIndicator();
@@ -250,12 +250,12 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   }
 
   buildQuestionnaire() {
-    return StreamBuilder<Object>(
-        stream: programsRef
+    return FutureBuilder<Object>(
+        future: programsRef
             .doc(widget.programUID)
             .collection('mentors')
             .doc(loggedInUser.id)
-            .snapshots(),
+            .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return CircularProgressIndicator();
@@ -362,12 +362,12 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   }
 
   buildHobbiesForm() {
-    return StreamBuilder<Object>(
-        stream: programsRef
+    return FutureBuilder<Object>(
+        future: programsRef
             .doc(widget.programUID)
             .collection('mentors')
             .doc(loggedInUser.id)
-            .snapshots(),
+            .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return CircularProgressIndicator();
