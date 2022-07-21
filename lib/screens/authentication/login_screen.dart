@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/models/login_model.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
+import 'package:mentorx_mvp/screens/authentication/verify_email_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/constants.dart';
@@ -45,6 +47,7 @@ class LoginScreenBlocBased extends StatefulWidget {
 class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool isEmailVerified = false;
 
   @override
   void dispose() {
@@ -53,10 +56,21 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
     super.dispose();
   }
 
+  Future checkEmailVerified() async {
+    await FirebaseAuth.instance.currentUser.reload();
+
+    setState(() {
+      isEmailVerified = FirebaseAuth.instance.currentUser.emailVerified;
+    });
+  }
+
   Future<void> _submit() async {
     try {
       await widget.bloc.submit();
-      Navigator.of(context).popAndPushNamed(LandingPage.id);
+      await checkEmailVerified();
+      isEmailVerified
+          ? Navigator.of(context).popAndPushNamed(LandingPage.id)
+          : Navigator.of(context).popAndPushNamed(VerifyEmailScreen.id);
     } catch (e) {
       showAlertDialog(
         context,
