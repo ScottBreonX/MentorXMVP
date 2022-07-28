@@ -5,6 +5,7 @@ import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/authentication/login_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/reset_password_screen.dart';
+import 'package:mentorx_mvp/screens/authentication/verify_email_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/welcome_screen.dart';
 import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
@@ -65,6 +66,7 @@ class MentorX extends StatelessWidget {
               ),
           RegistrationProfileScreen.id: (context) =>
               RegistrationProfileScreen(),
+          VerifyEmailScreen.id: (context) => VerifyEmailScreen(),
           LaunchScreen.id: (context) => LaunchScreen(),
           Profile.id: (context) => Profile(),
           LandingPage.id: (context) => LandingPage(),

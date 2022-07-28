@@ -5,7 +5,7 @@ import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
+import 'package:mentorx_mvp/screens/authentication/verify_email_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
 
 import '../../components/progress.dart';
@@ -213,7 +213,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                 RoundedButton(
                   onPressed: () async {
                     await _createProfile(context).then((_) {
-                      Navigator.popAndPushNamed(context, LandingPage.id);
+                      Navigator.popAndPushNamed(context, VerifyEmailScreen.id);
                     });
                   },
                   title: 'Submit',
