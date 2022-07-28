@@ -169,17 +169,6 @@ class MentorXMenuList extends StatelessWidget {
         ),
         ListTile(
           leading: Icon(
-            Icons.settings,
-            color: Colors.white,
-          ),
-          title: Text(
-            'Settings',
-            style: Theme.of(context).textTheme.headline2,
-          ),
-          onTap: () {},
-        ),
-        ListTile(
-          leading: Icon(
             Icons.exit_to_app_rounded,
             color: Colors.white,
           ),
