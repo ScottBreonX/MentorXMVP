@@ -13,6 +13,7 @@ class RoundedButton extends StatelessWidget {
     this.borderWidth,
     this.fontWeight,
     this.prefixIcon,
+    this.textAlignment,
   });
 
   final Color buttonColor;
@@ -26,6 +27,7 @@ class RoundedButton extends StatelessWidget {
   final borderWidth;
   final FontWeight fontWeight;
   final Icon prefixIcon;
+  final MainAxisAlignment textAlignment;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class RoundedButton extends StatelessWidget {
           minWidth: minWidth,
           height: 50.0,
           child: Row(
+            mainAxisAlignment: textAlignment ?? MainAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 10.0),

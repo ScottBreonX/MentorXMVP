@@ -300,6 +300,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: RoundedButton(
+                            textAlignment: MainAxisAlignment.center,
                             onPressed: () {
                               if (model.password != model.confirmPassword) {
                                 showAlertDialog(

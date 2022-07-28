@@ -211,6 +211,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                   height: 20.0,
                 ),
                 RoundedButton(
+                  textAlignment: MainAxisAlignment.center,
                   onPressed: () async {
                     await _createProfile(context).then((_) {
                       Navigator.popAndPushNamed(context, VerifyEmailScreen.id);
