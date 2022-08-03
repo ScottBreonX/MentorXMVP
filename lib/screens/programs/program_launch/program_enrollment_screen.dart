@@ -291,22 +291,6 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                             buttonCardIconColor: Colors.blue,
                           ),
                           ButtonCard(
-                            buttonCardText: 'Submit Feedback',
-                            buttonCardTextSize: 25,
-                            buttonCardRadius: 20,
-                            buttonCardIcon: Icons.feedback,
-                            buttonCardIconSize: 40,
-                            buttonCardIconColor: Colors.blue,
-                          ),
-                          ButtonCard(
-                            buttonCardText: 'Contact Admin',
-                            buttonCardTextSize: 25,
-                            buttonCardRadius: 20,
-                            buttonCardIcon: Icons.mail,
-                            buttonCardIconSize: 40,
-                            buttonCardIconColor: Colors.blue,
-                          ),
-                          ButtonCard(
                             buttonCardText: 'Leave Program',
                             buttonCardTextSize: 25,
                             buttonCardRadius: 20,

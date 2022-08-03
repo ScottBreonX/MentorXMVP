@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/chat/chat_screen.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_launch_guides.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_launch_manage.dart';
 import '../../../components/progress.dart';
 import '../../launch_screen.dart';
@@ -147,52 +145,6 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                           ),
                           SizedBox(
                             height: 20,
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 20.0, right: 20.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                IconCard(
-                                  boxHeight: 140,
-                                  boxWidth: 140,
-                                  iconSize: 60,
-                                  cardColor: Colors.white,
-                                  cardIcon: CupertinoIcons.chat_bubble_2_fill,
-                                  cardText: 'Chat',
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ChatScreen(
-                                          programUID: widget.programUID,
-                                          loggedInUser: widget.loggedInUser,
-                                          mentorUID: widget.mentorUID,
-                                          matchID: widget.matchID,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                                IconCard(
-                                    boxHeight: 140,
-                                    boxWidth: 140,
-                                    iconSize: 60,
-                                    cardColor: Colors.white,
-                                    cardIcon: Icons.map,
-                                    cardText: 'Guides',
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              MentoringLaunchGuides(),
-                                        ),
-                                      );
-                                    }),
-                              ],
-                            ),
                           ),
                           Padding(
                             padding:

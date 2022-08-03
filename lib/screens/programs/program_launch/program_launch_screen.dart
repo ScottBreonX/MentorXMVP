@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/enrollment_model.dart';
 import 'package:mentorx_mvp/models/match_list.dart';
@@ -320,93 +319,77 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                         )
                       ],
                     ),
-                    Container(
-                      height: 120.0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconCard(
-                            cardColor: Colors.white,
-                            boxHeight: 110,
-                            boxWidth: 110,
-                            iconSize: 50,
-                            cardIconColor: Colors.blue,
-                            cardIcon: Icons.change_circle,
-                            cardText: 'Mentoring Enrollment',
-                            textSize: 15,
-                            cardTextColor: Colors.blue,
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MentoringScreen(
-                                    loggedInUser: loggedInUser,
-                                    programUID: widget.programUID,
-                                  ),
+                    Column(
+                      children: [
+                        ButtonCard(
+                          buttonCardText: 'Mentoring Enrollment',
+                          buttonCardIcon: Icons.change_circle,
+                          buttonCardTextSize: 25,
+                          buttonCardRadius: 20,
+                          buttonCardIconSize: 40,
+                          buttonCardIconColor: Colors.blue,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MentoringScreen(
+                                  loggedInUser: loggedInUser,
+                                  programUID: widget.programUID,
                                 ),
-                              );
-                            },
-                          ),
-                          IconCard(
-                            cardColor: Colors.white,
-                            boxHeight: 110,
-                            boxWidth: 110,
-                            iconSize: 50,
-                            cardIconColor: Colors.blue,
-                            cardIcon: Icons.info_rounded,
-                            cardText: 'Program Enrollment',
-                            textSize: 15,
-                            cardTextColor: Colors.blue,
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProgramEnrollmentScreen(
-                                    loggedInUser: loggedInUser,
-                                    programUID: program.id,
-                                  ),
+                              ),
+                            );
+                          },
+                        ),
+                        ButtonCard(
+                          buttonCardText: 'Program Info',
+                          buttonCardIcon: Icons.people,
+                          buttonCardTextSize: 25,
+                          buttonCardRadius: 20,
+                          buttonCardIconSize: 40,
+                          buttonCardIconColor: Colors.blue,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProgramEnrollmentScreen(
+                                  loggedInUser: loggedInUser,
+                                  programUID: program.id,
                                 ),
-                              );
-                            },
-                          ),
-                          isAdmin
-                              ? IconCard(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ProgramAdminScreen(
-                                                  loggedInUser: loggedInUser,
-                                                  programUID: program.id,
-                                                  enrollmentType:
-                                                      program.enrollmentType,
-                                                  aboutProgram:
-                                                      program.aboutProgram,
-                                                  institutionName:
-                                                      program.institutionName,
-                                                  programName:
-                                                      program.programName,
-                                                  programCode:
-                                                      program.programCode,
-                                                )));
-                                  },
-                                  cardColor: Colors.white,
-                                  boxHeight: 110,
-                                  boxWidth: 110,
-                                  iconSize: 50,
-                                  cardIconColor: Colors.blue,
-                                  cardIcon: Icons.admin_panel_settings,
-                                  cardText: 'Program Admin',
-                                  textSize: 15,
-                                  cardTextColor: Colors.blue,
-                                )
-                              : SizedBox(
-                                  height: 0,
-                                  width: 0,
-                                ),
-                        ],
-                      ),
+                              ),
+                            );
+                          },
+                        ),
+                        isAdmin
+                            ? ButtonCard(
+                                buttonCardText: 'Program Info',
+                                buttonCardIcon: Icons.admin_panel_settings,
+                                buttonCardTextSize: 25,
+                                buttonCardRadius: 20,
+                                buttonCardIconSize: 40,
+                                buttonCardIconColor: Colors.blue,
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProgramAdminScreen(
+                                                loggedInUser: loggedInUser,
+                                                programUID: program.id,
+                                                enrollmentType:
+                                                    program.enrollmentType,
+                                                aboutProgram:
+                                                    program.aboutProgram,
+                                                institutionName:
+                                                    program.institutionName,
+                                                programName:
+                                                    program.programName,
+                                                programCode:
+                                                    program.programCode,
+                                              )));
+                                },
+                              )
+                            : Container(),
+                      ],
                     ),
                   ],
                 ),

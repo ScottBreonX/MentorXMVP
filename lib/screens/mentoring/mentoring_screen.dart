@@ -163,6 +163,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0),
                   child: RoundedButton(
+                    textAlignment: MainAxisAlignment.center,
                     title: 'Continue',
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
@@ -190,6 +191,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                   ),
                 ),
                 RoundedButton(
+                  textAlignment: MainAxisAlignment.center,
                   onPressed: () => {Navigator.pop(context)},
                   buttonColor: Colors.white,
                   fontColor: Colors.blue,

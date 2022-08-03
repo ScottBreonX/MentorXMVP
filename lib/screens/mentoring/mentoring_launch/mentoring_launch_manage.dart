@@ -308,14 +308,6 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                                   endIndent: 20,
                                 ),
                                 ButtonCard(
-                                  buttonCardText: 'Contact Admin',
-                                  buttonCardTextSize: 25,
-                                  buttonCardRadius: 20,
-                                  buttonCardIcon: Icons.mail,
-                                  buttonCardIconSize: 40,
-                                  buttonCardIconColor: Colors.blue,
-                                ),
-                                ButtonCard(
                                   buttonCardText: 'Remove Match',
                                   buttonCardTextSize: 25,
                                   buttonCardRadius: 20,
