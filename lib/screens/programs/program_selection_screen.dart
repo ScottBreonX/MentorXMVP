@@ -9,7 +9,7 @@ import 'package:mentorx_mvp/services/database.dart';
 import '../../components/progress.dart';
 import '../../models/program_list.dart';
 
-myUser loggedInUser;
+// myUser loggedInUser;
 
 class ProgramSelectionScreen extends StatefulWidget {
   final myUser loggedInUser;
@@ -111,11 +111,11 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
 
     return Scaffold(
       key: _scaffoldKey,
-      drawer: Drawer(
-        child: Container(
-          child: drawerItems,
-        ),
-      ),
+      // drawer: Drawer(
+      //   child: Container(
+      //     child: drawerItems,
+      //   ),
+      // ),
       appBar: AppBar(
         elevation: 5,
         title: Image.asset(
@@ -127,25 +127,25 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 40.0),
-                child: ButtonCard(
-                    cardWidthPercent: .90,
-                    iconPadding: EdgeInsets.only(right: 10),
-                    buttonCardIconSize: 40,
-                    // cardIconBool: Container(),
-                    buttonCardIcon: Icons.add_circle_rounded,
-                    cardAlignment: MainAxisAlignment.center,
-                    buttonCardText: 'Join a new program',
-                    buttonCardColor: Colors.white,
-                    buttonCardTextSize: 25,
-                    buttonCardIconColor: Colors.pink,
-                    buttonCardTextColor: Colors.pink,
-                    buttonCardRadius: 20,
-                    onPressed: () {
-                      Navigator.pushNamed(context, ProgramTypeScreen.id);
-                    }),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 40.0),
+              //   child: ButtonCard(
+              //       cardWidthPercent: .90,
+              //       iconPadding: EdgeInsets.only(right: 10),
+              //       buttonCardIconSize: 40,
+              //       // cardIconBool: Container(),
+              //       buttonCardIcon: Icons.add_circle_rounded,
+              //       cardAlignment: MainAxisAlignment.center,
+              //       buttonCardText: 'Join a new program',
+              //       buttonCardColor: Colors.white,
+              //       buttonCardTextSize: 25,
+              //       buttonCardIconColor: Colors.pink,
+              //       buttonCardTextColor: Colors.pink,
+              //       buttonCardRadius: 20,
+              //       onPressed: () {
+              //         Navigator.pushNamed(context, ProgramTypeScreen.id);
+              //       }),
+              // ),
               Padding(
                 padding: const EdgeInsets.only(top: 50.0, bottom: 5),
                 child: Row(

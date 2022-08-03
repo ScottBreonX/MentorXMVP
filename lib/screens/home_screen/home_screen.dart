@@ -1,15 +1,21 @@
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/article_card.dart';
-import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
+import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
+import 'package:mentorx_mvp/screens/programs/available_programs.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_type.dart';
 import '../../components/progress.dart';
 import '../launch_screen.dart';
+
+final usersRef = FirebaseFirestore.instance.collection('users');
 
 class HomeScreen extends StatefulWidget {
   final myUser loggedInUser;
@@ -221,16 +227,43 @@ class _HomeScreenState extends State<HomeScreen> {
                             HomeMenuButton(
                                 buttonText: 'Edit Profile',
                                 iconType: Icons.edit,
-                                onPressed: () {}),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Profile(
+                                        loggedInUser: loggedInUser.id,
+                                        profileId: loggedInUser.id,
+                                      ),
+                                    ),
+                                  );
+                                }),
                             HomeMenuButton(
                               buttonText: 'Enrolled Programs',
                               iconType: Icons.people,
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        ProgramSelectionScreen(
+                                      loggedInUser: loggedInUser,
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                             HomeMenuButton(
                               buttonText: 'Join New Program',
                               iconType: Icons.add,
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProgramTypeScreen(),
+                                  ),
+                                );
+                              },
                             )
                           ],
                         ),

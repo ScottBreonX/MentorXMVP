@@ -174,6 +174,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                         child: RoundedButton(
+                          textAlignment: MainAxisAlignment.center,
                           onPressed: () async {
                             setState(() {
                               isLoading = true;

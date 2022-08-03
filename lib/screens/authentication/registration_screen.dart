@@ -72,7 +72,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       });
       Navigator.of(context).popAndPushNamed(RegistrationProfileScreen.id);
     } on FirebaseAuthException catch (e) {
-      print(e.toString());
       if (e.code == 'invalid-email') {
         showAlertDialog(
           context,

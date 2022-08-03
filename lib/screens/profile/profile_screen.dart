@@ -443,13 +443,13 @@ class _ProfileState extends State<Profile> {
 
               return Scaffold(
                 key: _scaffoldKey,
-                drawer: !myProfileView
-                    ? null
-                    : Drawer(
-                        child: Container(
-                          child: drawerItems,
-                        ),
-                      ),
+                // drawer: !myProfileView
+                //     ? null
+                //     : Drawer(
+                //         child: Container(
+                //           child: drawerItems,
+                //         ),
+                //       ),
                 appBar: AppBar(
                   elevation: 5,
                   title: Image.asset(

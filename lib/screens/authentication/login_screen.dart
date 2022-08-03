@@ -218,6 +218,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                           padding:
                               const EdgeInsets.only(left: 10.0, right: 10.0),
                           child: RoundedButton(
+                            textAlignment: MainAxisAlignment.center,
                             onPressed: model.canSubmit ? _submit : null,
                             title: 'Log In',
                             buttonColor: model.canSubmit
