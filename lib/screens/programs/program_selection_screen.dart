@@ -3,13 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
-import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
-import 'package:mentorx_mvp/screens/programs/program_type.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import '../../components/progress.dart';
 import '../../models/program_list.dart';
 
 // myUser loggedInUser;
+final usersRef = FirebaseFirestore.instance.collection('users');
 
 class ProgramSelectionScreen extends StatefulWidget {
   final myUser loggedInUser;

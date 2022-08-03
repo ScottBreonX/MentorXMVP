@@ -1,10 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/program_creation/program_creation.dart';
+import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
+import '../profile/profile_screen.dart';
+
+final usersRef = FirebaseFirestore.instance.collection('users');
 
 class MentorXMenuHeader extends StatefulWidget {
   final myUser loggedInUser;
@@ -117,7 +123,9 @@ class MentorXMenuList extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => LaunchScreen(pageIndex: 0),
+              builder: (context) => HomeScreen(
+                loggedInUser: loggedInUser,
+              ),
             ),
           ),
         ),
@@ -133,7 +141,10 @@ class MentorXMenuList extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => LaunchScreen(pageIndex: 2),
+              builder: (context) => Profile(
+                loggedInUser: loggedInUser.id,
+                profileId: loggedInUser.id,
+              ),
             ),
           ),
         ),
@@ -146,11 +157,32 @@ class MentorXMenuList extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => LaunchScreen(pageIndex: 1),
+              builder: (context) => ProgramSelectionScreen(
+                loggedInUser: loggedInUser,
+              ),
             ),
           ),
           title: Text(
-            'Programs',
+            'Enrolled Programs',
+            style: Theme.of(context).textTheme.headline2,
+          ),
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.add_circle_rounded,
+            size: 30,
+            color: Colors.white,
+          ),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProgramSelectionScreen(
+                loggedInUser: loggedInUser,
+              ),
+            ),
+          ),
+          title: Text(
+            'Join New Program',
             style: Theme.of(context).textTheme.headline2,
           ),
         ),
