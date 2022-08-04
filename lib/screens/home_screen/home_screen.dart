@@ -8,7 +8,9 @@ import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_type.dart';
+import 'package:provider/provider.dart';
 import '../../components/progress.dart';
+import '../../services/auth.dart';
 import '../launch_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -28,15 +30,34 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool loggedIn = false;
+
   @override
   void initState() {
     super.initState();
+    getCurrentUser();
+  }
+
+  getCurrentUser() async {
+    final auth = Provider.of<AuthBase>(context, listen: false);
+    loggedInUser = myUser.fromDocument(
+        await usersRef.doc(auth.currentUser.uid).get().whenComplete(() {
+      if (mounted) {
+        setState(() {
+          loggedIn = true;
+        });
+      }
+    }));
   }
 
   bool profilePictureStatus = false;
 
   @override
   Widget build(BuildContext context) {
+    if (loggedIn == false || loggedInUser == null) {
+      return circularProgressBlue();
+    }
+
     final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();

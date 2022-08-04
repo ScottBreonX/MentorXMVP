@@ -36,11 +36,7 @@ class _LandingPageState extends State<LandingPage> {
             return WelcomeScreen.create(context);
           }
           return Provider<Database>(
-            create: (_) => FirestoreDatabase(),
-            child: HomeScreen(
-              loggedInUser: loggedInUser,
-            ),
-          );
+              create: (_) => FirestoreDatabase(), child: HomeScreen());
         }
         return Scaffold(
           body: Center(
