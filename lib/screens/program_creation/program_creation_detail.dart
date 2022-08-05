@@ -6,8 +6,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 import '../../components/progress.dart';
-import '../launch_screen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
@@ -347,7 +348,7 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LaunchScreen(pageIndex: 0),
+                          builder: (context) => HomeScreen(),
                         ),
                       ),
                     ),
@@ -377,7 +378,7 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
               // Program program = Program.fromDocument(snapshot.data);
 
               return FutureBuilder<Object>(
-                  future: usersRef.doc(loggedInUser.id).get(),
+                  future: usersRef.doc(widget.loggedInUser.id).get(),
                   builder: (context, snapshot) {
                     if (isLoading == true) {
                       return circularProgress();
@@ -466,27 +467,34 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                               ],
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 20.0),
+                              padding: const EdgeInsets.only(
+                                  top: 20.0, left: 30, right: 30),
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  RoundedButton(
-                                    title: 'Upload Logo',
-                                    minWidth: 200,
-                                    buttonColor: Colors.pink,
-                                    fontColor: Colors.white,
-                                    fontSize: 20,
+                                  ButtonCard(
+                                    buttonCardText: 'Upload Logo',
+                                    cardAlignment: MainAxisAlignment.center,
+                                    cardIconBool: Container(),
+                                    buttonCardHeight: 70,
+                                    buttonCardColor: Colors.pink,
+                                    buttonCardTextColor: Colors.white,
+                                    buttonCardTextSize: 25,
+                                    buttonCardRadius: 20,
                                     onPressed: () async {
                                       await selectImage(context, 'Upload Logo');
                                     },
                                   ),
-                                  RoundedButton(
-                                    title: 'Not Now',
-                                    minWidth: 200,
-                                    fontSize: 20,
-                                    buttonColor: Colors.white,
-                                    fontColor: Colors.black45,
+                                  ButtonCard(
+                                    buttonCardText: 'Not Now',
+                                    cardAlignment: MainAxisAlignment.center,
+                                    cardIconBool: Container(),
+                                    buttonCardHeight: 70,
+                                    buttonCardColor: Colors.white,
+                                    buttonCardTextColor: Colors.pink,
+                                    buttonCardTextSize: 25,
+                                    buttonCardRadius: 20,
                                     onPressed: () {
                                       _successScreen(context);
                                     },

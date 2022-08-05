@@ -34,7 +34,7 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
               child: Column(
                 children: [
                   Text(
-                    'Program Type:',
+                    'Program Type',
                     style: TextStyle(
                       fontFamily: 'WorkSans',
                       fontSize: 40,
@@ -51,6 +51,8 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
                     ),
                     child: Divider(
                       thickness: 3,
+                      endIndent: 15,
+                      indent: 15,
                       color: Colors.grey,
                     ),
                   ),
@@ -75,7 +77,7 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
                             child: Card(
                               elevation: 10,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50),
+                                borderRadius: BorderRadius.circular(20),
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -123,7 +125,7 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
                         child: Card(
                           elevation: 10,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

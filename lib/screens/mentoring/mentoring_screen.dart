@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
-import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/enrollment_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
@@ -11,6 +10,7 @@ import 'package:mentorx_mvp/services/database.dart';
 
 import '../../components/progress.dart';
 import '../../models/mentoring_model.dart';
+import '../programs/program_launch/program_enrollment_screen.dart';
 
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
@@ -161,15 +161,21 @@ class _MentoringScreenState extends State<MentoringScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: RoundedButton(
-                    textAlignment: MainAxisAlignment.center,
-                    title: 'Continue',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                    fontColor: Theme.of(context).textTheme.button.color,
-                    buttonColor: Colors.blue,
-                    minWidth: MediaQuery.of(context).size.width * 0.7,
+                  padding:
+                      const EdgeInsets.only(top: 20.0, left: 20, right: 20),
+                  child: ButtonCard(
+                    buttonCardText: 'Continue',
+                    buttonCardHeight: 70,
+                    buttonCardTextSize: 20,
+                    buttonCardRadius: 20,
+                    buttonCardColor: menteeSelected || mentorSelected
+                        ? Colors.blue
+                        : Colors.grey,
+                    buttonCardTextColor: menteeSelected || mentorSelected
+                        ? Colors.white
+                        : Colors.grey.shade600,
+                    cardAlignment: MainAxisAlignment.center,
+                    cardIconBool: Container(),
                     onPressed: () => (menteeSelected | mentorSelected)
                         ? {
                             Navigator.push(
@@ -190,14 +196,21 @@ class _MentoringScreenState extends State<MentoringScreen> {
                         : {},
                   ),
                 ),
-                RoundedButton(
-                  textAlignment: MainAxisAlignment.center,
-                  onPressed: () => {Navigator.pop(context)},
-                  buttonColor: Colors.white,
-                  fontColor: Colors.blue,
-                  minWidth: MediaQuery.of(context).size.width * .7,
-                  fontSize: 24,
-                  title: 'Cancel',
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0, right: 20),
+                  child: ButtonCard(
+                    buttonCardHeight: 70,
+                    buttonCardText: 'Cancel',
+                    buttonCardTextSize: 20,
+                    buttonCardRadius: 20,
+                    buttonCardColor: Colors.white,
+                    buttonCardTextColor: Colors.blue,
+                    cardAlignment: MainAxisAlignment.center,
+                    cardIconBool: Container(),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                 ),
               ],
             ),

@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/enrollment_model.dart';
 import 'package:mentorx_mvp/models/match_list.dart';
 import 'package:mentorx_mvp/models/program.dart';
@@ -123,12 +122,15 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          RoundedButton(
-                            title: 'Finish Enrollment',
-                            buttonColor: Colors.blue,
-                            fontColor: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                          ButtonCard(
+                            buttonCardText: 'Finish Enrollment',
+                            buttonCardTextSize: 25,
+                            buttonCardRadius: 20,
+                            buttonCardIconSize: 40,
+                            buttonCardColor: Colors.blue,
+                            buttonCardTextColor: Colors.white,
+                            cardAlignment: MainAxisAlignment.center,
+                            cardIconBool: Container(),
                             onPressed: () {
                               Navigator.push(
                                 context,
@@ -140,7 +142,29 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                 ),
                               );
                             },
-                            minWidth: 300,
+                          ),
+                        ],
+                      );
+                    }
+                    if (enrollmentModel.enrollmentStatus == 'mentor') {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 12.0, right: 15.0, top: 5.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * .90,
+                              child: Text(
+                                'No new matches yet, please check back after matching period has closed',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  overflow: TextOverflow.visible,
+                                ),
+                              ),
+                            ),
                           )
                         ],
                       );

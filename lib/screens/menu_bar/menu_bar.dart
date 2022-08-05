@@ -105,7 +105,9 @@ class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
 class MentorXMenuList extends StatelessWidget {
   final myUser loggedInUser;
 
-  MentorXMenuList({this.loggedInUser});
+  MentorXMenuList({
+    this.loggedInUser,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -185,19 +187,28 @@ class MentorXMenuList extends StatelessWidget {
             style: Theme.of(context).textTheme.headline2,
           ),
         ),
-        ListTile(
-          leading: Icon(
-            Icons.create_new_folder_rounded,
-            color: Colors.white,
-          ),
-          title: Text(
-            'Create a Program',
-            style: Theme.of(context).textTheme.headline2,
-          ),
-          onTap: () {
-            Navigator.pushNamed(context, ProgramCreation.id);
-          },
-        ),
+        loggedInUser.canCreateProgram
+            ? ListTile(
+                leading: Icon(
+                  Icons.create_new_folder_rounded,
+                  color: Colors.white,
+                ),
+                title: Text(
+                  'Create a Program',
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProgramCreation(
+                        loggedInUser: loggedInUser,
+                      ),
+                    ),
+                  );
+                },
+              )
+            : Container(),
         ListTile(
           leading: Icon(
             Icons.exit_to_app_rounded,

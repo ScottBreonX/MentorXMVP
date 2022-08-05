@@ -8,17 +8,18 @@ import '../../components/progress.dart';
 import '../../constants.dart';
 import '../../models/program.dart';
 import '../../services/database.dart';
-import '../launch_screen.dart';
+
+final usersRef = FirebaseFirestore.instance.collection('users');
+final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class ProgramCreation extends StatefulWidget {
   final myUser loggedInUser;
 
-  const ProgramCreation({
-    Key key,
-    this.loggedInUser,
-  }) : super(key: key);
-
   static const String id = 'program_creation';
+
+  const ProgramCreation({
+    this.loggedInUser,
+  });
 
   @override
   _ProgramCreationState createState() => _ProgramCreationState();
@@ -55,7 +56,8 @@ class _ProgramCreationState extends State<ProgramCreation> {
               type: 'school',
               enrollmentType: enrollmentType,
               aboutProgram: aboutProgram,
-              headAdmin: '${loggedInUser.firstName} ${loggedInUser.lastName}',
+              headAdmin:
+                  '${widget.loggedInUser.firstName} ${widget.loggedInUser.lastName}',
               programName: programName,
               programCode: programCode,
               programLogo: '',
@@ -79,7 +81,8 @@ class _ProgramCreationState extends State<ProgramCreation> {
           type: 'school',
           enrollmentType: enrollmentType,
           aboutProgram: aboutProgram,
-          headAdmin: '${loggedInUser.firstName} ${loggedInUser.lastName}',
+          headAdmin:
+              '${widget.loggedInUser.firstName} ${widget.loggedInUser.lastName}',
           programName: programName,
           programCode: programCode,
           programLogo: '',
@@ -101,7 +104,7 @@ class _ProgramCreationState extends State<ProgramCreation> {
       await programsRef
           .doc(programID)
           .collection('programAdmins')
-          .doc(loggedInUser.id)
+          .doc(widget.loggedInUser.id)
           .set({});
     } on FirebaseException catch (e) {
       showAlertDialog(context,
@@ -213,7 +216,7 @@ class _ProgramCreationState extends State<ProgramCreation> {
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
     return FutureBuilder<Object>(
-        future: usersRef.doc(loggedInUser.id).get(),
+        future: usersRef.doc(widget.loggedInUser.id).get(),
         builder: (context, snapshot) {
           if (isLoading == true) {
             return circularProgress();
@@ -385,6 +388,8 @@ class _ProgramCreationState extends State<ProgramCreation> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             ProgramCreationDetail(
+                                                loggedInUser:
+                                                    widget.loggedInUser,
                                                 programUID: programID),
                                       ),
                                     );

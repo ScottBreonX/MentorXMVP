@@ -15,6 +15,7 @@ import '../../services/auth.dart';
 import '../launch_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
+final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class HomeScreen extends StatefulWidget {
   final myUser loggedInUser;
@@ -111,8 +112,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      LaunchScreen(pageIndex: 2),
+                                  builder: (context) => Profile(
+                                    loggedInUser: loggedInUser.id,
+                                    profileId: loggedInUser.id,
+                                  ),
                                 ),
                               );
                             },
