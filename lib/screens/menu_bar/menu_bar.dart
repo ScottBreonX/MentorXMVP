@@ -8,6 +8,7 @@ import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/program_creation/program_creation.dart';
 import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_type.dart';
 import '../profile/profile_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -176,9 +177,7 @@ class MentorXMenuList extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ProgramSelectionScreen(
-                loggedInUser: loggedInUser,
-              ),
+              builder: (context) => ProgramTypeScreen(),
             ),
           ),
           title: Text(

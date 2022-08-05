@@ -9,7 +9,6 @@ import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
-import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/core_profile_section.dart';
@@ -419,10 +418,6 @@ class _ProfileState extends State<Profile> {
 
     double circleSize = 55.0;
 
-    final drawerItems = MentorXMenuList();
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
-
     return file != null
         ? buildUploadScreen(pictureType)
         : FutureBuilder<Object>(
@@ -442,14 +437,6 @@ class _ProfileState extends State<Profile> {
               }
 
               return Scaffold(
-                key: _scaffoldKey,
-                // drawer: !myProfileView
-                //     ? null
-                //     : Drawer(
-                //         child: Container(
-                //           child: drawerItems,
-                //         ),
-                //       ),
                 appBar: AppBar(
                   elevation: 5,
                   title: Image.asset(
@@ -532,7 +519,7 @@ class _ProfileState extends State<Profile> {
                                                 (context, url, error) => Icon(
                                               Icons.person,
                                               size: 50,
-                                              color: Colors.white,
+                                              color: Colors.blue,
                                             ),
                                           ),
                                         )
@@ -542,6 +529,7 @@ class _ProfileState extends State<Profile> {
                                           child: ProfileImageCircle(
                                             iconSize: circleSize,
                                             circleSize: circleSize,
+                                            circleColor: Colors.grey,
                                           ),
                                         ),
                                   Positioned(

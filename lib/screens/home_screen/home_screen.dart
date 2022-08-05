@@ -6,6 +6,7 @@ import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_type.dart';
 import 'package:provider/provider.dart';
@@ -103,7 +104,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.only(
+                              left: 30.0, right: 10, bottom: 10, top: 30),
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -122,8 +124,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 backgroundColor: Colors.white,
                                 child: !profilePictureStatus
                                     ? CircleAvatar(
-                                        radius: 25,
-                                        backgroundColor: Colors.blue,
+                                        radius: 38,
+                                        backgroundColor: Colors.grey,
                                         child: Icon(
                                           Icons.person,
                                           size: 40,
@@ -160,7 +162,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
+                            padding:
+                                const EdgeInsets.only(right: 8.0, top: 20.0),
                             child: Stack(
                               children: [
                                 Row(
@@ -229,35 +232,44 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     const Divider(
-                      thickness: 4,
+                      thickness: 2,
                       color: Colors.grey,
-                      indent: 40,
-                      endIndent: 40,
+                      indent: 20,
+                      endIndent: 20,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 20.0),
                       child: Padding(
-                        padding: const EdgeInsets.all(50.0),
+                        padding: const EdgeInsets.all(20.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            HomeMenuButton(
-                                buttonText: 'Edit Profile',
-                                iconType: Icons.edit,
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Profile(
-                                        loggedInUser: loggedInUser.id,
-                                        profileId: loggedInUser.id,
-                                      ),
+                            ButtonCard(
+                              buttonCardText: 'Edit Profile',
+                              buttonCardIcon: Icons.edit,
+                              buttonCardTextSize: 25,
+                              buttonCardRadius: 20,
+                              buttonCardIconSize: 40,
+                              buttonCardIconColor: Colors.blue,
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Profile(
+                                      loggedInUser: loggedInUser.id,
+                                      profileId: loggedInUser.id,
                                     ),
-                                  );
-                                }),
-                            HomeMenuButton(
-                              buttonText: 'Enrolled Programs',
-                              iconType: Icons.people,
+                                  ),
+                                );
+                              },
+                            ),
+                            ButtonCard(
+                              buttonCardText: 'Enrolled Programs',
+                              buttonCardIcon: Icons.people,
+                              buttonCardTextSize: 25,
+                              buttonCardRadius: 20,
+                              buttonCardIconSize: 40,
+                              buttonCardIconColor: Colors.blue,
                               onPressed: () {
                                 Navigator.push(
                                   context,
@@ -270,9 +282,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 );
                               },
                             ),
-                            HomeMenuButton(
-                              buttonText: 'Join New Program',
-                              iconType: Icons.add,
+                            ButtonCard(
+                              buttonCardText: 'Join a New Program',
+                              buttonCardIcon: Icons.add,
+                              buttonCardTextSize: 25,
+                              buttonCardRadius: 20,
+                              buttonCardIconSize: 40,
+                              buttonCardIconColor: Colors.blue,
                               onPressed: () {
                                 Navigator.push(
                                   context,
@@ -281,7 +297,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 );
                               },
-                            )
+                            ),
                           ],
                         ),
                       ),

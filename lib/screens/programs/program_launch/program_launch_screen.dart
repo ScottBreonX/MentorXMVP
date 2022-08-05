@@ -148,12 +148,15 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          RoundedButton(
-                            title: 'View Available Mentors',
-                            buttonColor: Colors.pink,
-                            fontColor: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                          ButtonCard(
+                            buttonCardText: 'View Available Mentors',
+                            buttonCardTextSize: 25,
+                            buttonCardRadius: 20,
+                            buttonCardIconSize: 40,
+                            buttonCardColor: Colors.blue,
+                            buttonCardTextColor: Colors.white,
+                            cardAlignment: MainAxisAlignment.center,
+                            cardIconBool: Container(),
                             onPressed: () {
                               Navigator.push(
                                 context,
@@ -165,8 +168,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                 ),
                               );
                             },
-                            minWidth: 300,
-                          )
+                          ),
                         ],
                       );
                     }
@@ -186,8 +188,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
           }
           Program program = Program.fromDocument(snapshot.data);
 
-          final drawerItems =
-              MentorXMenuList(loggedInUser: widget.loggedInUser);
+          final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
           final GlobalKey<ScaffoldState> _scaffoldKey =
               new GlobalKey<ScaffoldState>();
 

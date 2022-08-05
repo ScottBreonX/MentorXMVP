@@ -362,13 +362,14 @@ class ButtonCard extends StatelessWidget {
               children: [
                 cardIconBool ??
                     Padding(
-                        padding: iconPadding ??
-                            EdgeInsets.only(left: 15.0, right: 15.0),
-                        child: Icon(
-                          buttonCardIcon ?? Icons.school,
-                          size: buttonCardIconSize ?? 40,
-                          color: buttonCardIconColor ?? Colors.pink,
-                        )),
+                      padding: iconPadding ??
+                          EdgeInsets.only(left: 15.0, right: 15.0),
+                      child: Icon(
+                        buttonCardIcon ?? Icons.school,
+                        size: buttonCardIconSize ?? 40,
+                        color: buttonCardIconColor ?? Colors.pink,
+                      ),
+                    ),
                 Text(
                   buttonCardText ?? '',
                   style: TextStyle(
