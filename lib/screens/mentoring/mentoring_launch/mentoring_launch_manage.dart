@@ -7,6 +7,7 @@ import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 import '../../../components/progress.dart';
 import '../../../components/rounded_button.dart';
+import '../../../models/mentor_model.dart';
 import '../../launch_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -30,8 +31,8 @@ class MentoringLaunchManage extends StatefulWidget {
   _MentoringLaunchManageState createState() => _MentoringLaunchManageState();
 }
 
-_confirmRemoveMatch(
-    parentContext, mentorFname, mentorLname, programUID, mentorUID, matchID) {
+_confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
+    mentorUID, matchID, mentorSlots) {
   return showDialog(
       context: parentContext,
       builder: (context) {
@@ -89,7 +90,8 @@ _confirmRemoveMatch(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     onPressed: () {
-                      _removeMatch(context, programUID, mentorUID, matchID);
+                      _removeMatch(
+                          context, programUID, mentorUID, matchID, mentorSlots);
                     },
                   ),
                 ),
@@ -127,7 +129,7 @@ _confirmRemoveMatch(
       });
 }
 
-_removeMatch(context, programUID, mentorUID, matchID) async {
+_removeMatch(context, programUID, mentorUID, matchID, mentorSlots) async {
   //remove match from loggedInUser collection
   await programsRef
       .doc(programUID)
@@ -144,6 +146,13 @@ _removeMatch(context, programUID, mentorUID, matchID) async {
       .collection('matches')
       .doc(loggedInUser.id)
       .delete();
+  //add back mentor slot to mentor
+  await programsRef
+      .doc(programUID)
+      .collection('mentors')
+      .doc(mentorUID)
+      .update({"mentorSlots": mentorSlots + 1});
+
   //remove match from programs collection
   await programsRef
       .doc(programUID)
@@ -199,97 +208,123 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                         return circularProgress();
                       }
 
-                      return Scaffold(
-                        appBar: AppBar(
-                          elevation: 5,
-                          title: Image.asset(
-                            'assets/images/MentorPinkWhite.png',
-                            height: 150,
-                          ),
-                        ),
-                        body: SingleChildScrollView(
-                          child: Container(
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 10.0,
-                                    bottom: 10.0,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                      return FutureBuilder<Object>(
+                          future: programsRef
+                              .doc(program.id)
+                              .collection('mentors')
+                              .doc(widget.mentorUser.id)
+                              .get(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return circularProgress();
+                            }
+                            Mentor mentor = Mentor.fromDocument(snapshot.data);
+
+                            return Scaffold(
+                              appBar: AppBar(
+                                elevation: 5,
+                                title: Image.asset(
+                                  'assets/images/MentorPinkWhite.png',
+                                  height: 150,
+                                ),
+                              ),
+                              body: SingleChildScrollView(
+                                child: Container(
+                                  child: Column(
                                     children: [
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Column(
+                                        padding: const EdgeInsets.only(
+                                          top: 10.0,
+                                          bottom: 10.0,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
-                                            program.programLogo == null ||
-                                                    program
-                                                        .programLogo.isEmpty ||
-                                                    program.programLogo == ""
-                                                ? Image.asset(
-                                                    'assets/images/MLogoBlue.png',
-                                                    height: 100,
-                                                    width: 100,
-                                                    fit: BoxFit.cover,
-                                                  )
-                                                : CachedNetworkImage(
-                                                    imageUrl:
-                                                        program.programLogo,
-                                                    imageBuilder: (context,
-                                                            imageProvider) =>
-                                                        Container(
-                                                      height: 100.0,
-                                                      width: 100,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12),
-                                                        image: DecorationImage(
-                                                          image: imageProvider,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    placeholder:
-                                                        (context, url) =>
-                                                            circularProgress(),
-                                                    errorWidget:
-                                                        (context, url, error) =>
-                                                            Image.asset(
-                                                      'assets/images/MLogoBlue.png',
-                                                      height: 120,
-                                                      width: 120,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                            Container(
-                                              width: 300,
-                                              child: Row(
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10.0),
+                                              child: Column(
                                                 children: [
-                                                  Flexible(
-                                                    child: Center(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                top: 10.0),
-                                                        child: Text(
-                                                          '${program.programName}',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: TextStyle(
-                                                            fontFamily:
-                                                                'WorkSans',
-                                                            fontSize: 25,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color:
-                                                                Colors.black54,
+                                                  program.programLogo == null ||
+                                                          program.programLogo
+                                                              .isEmpty ||
+                                                          program.programLogo ==
+                                                              ""
+                                                      ? Image.asset(
+                                                          'assets/images/MLogoBlue.png',
+                                                          height: 100,
+                                                          width: 100,
+                                                          fit: BoxFit.cover,
+                                                        )
+                                                      : CachedNetworkImage(
+                                                          imageUrl: program
+                                                              .programLogo,
+                                                          imageBuilder: (context,
+                                                                  imageProvider) =>
+                                                              Container(
+                                                            height: 100.0,
+                                                            width: 100,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12),
+                                                              image:
+                                                                  DecorationImage(
+                                                                image:
+                                                                    imageProvider,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          placeholder: (context,
+                                                                  url) =>
+                                                              circularProgress(),
+                                                          errorWidget: (context,
+                                                                  url, error) =>
+                                                              Image.asset(
+                                                            'assets/images/MLogoBlue.png',
+                                                            height: 120,
+                                                            width: 120,
+                                                            fit: BoxFit.cover,
                                                           ),
                                                         ),
-                                                      ),
+                                                  Container(
+                                                    width: 300,
+                                                    child: Row(
+                                                      children: [
+                                                        Flexible(
+                                                          child: Center(
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      top:
+                                                                          10.0),
+                                                              child: Text(
+                                                                '${program.programName}',
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      'WorkSans',
+                                                                  fontSize: 25,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color: Colors
+                                                                      .black54,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ],
@@ -298,38 +333,37 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                                           ],
                                         ),
                                       ),
+                                      const Divider(
+                                        thickness: 2,
+                                        color: Colors.grey,
+                                        indent: 20,
+                                        endIndent: 20,
+                                      ),
+                                      ButtonCard(
+                                        buttonCardText: 'Remove Match',
+                                        buttonCardTextSize: 25,
+                                        buttonCardRadius: 20,
+                                        buttonCardIcon: Icons.remove_circle,
+                                        buttonCardIconSize: 40,
+                                        buttonCardIconColor: Colors.red,
+                                        onPressed: () {
+                                          _confirmRemoveMatch(
+                                            context,
+                                            widget.mentorUser.firstName,
+                                            widget.mentorUser.lastName,
+                                            widget.programUID,
+                                            widget.mentorUser.id,
+                                            matchInfo.matchID,
+                                            mentor.mentorSlots,
+                                          );
+                                        },
+                                      ),
                                     ],
                                   ),
                                 ),
-                                const Divider(
-                                  thickness: 2,
-                                  color: Colors.grey,
-                                  indent: 20,
-                                  endIndent: 20,
-                                ),
-                                ButtonCard(
-                                  buttonCardText: 'Remove Match',
-                                  buttonCardTextSize: 25,
-                                  buttonCardRadius: 20,
-                                  buttonCardIcon: Icons.remove_circle,
-                                  buttonCardIconSize: 40,
-                                  buttonCardIconColor: Colors.red,
-                                  onPressed: () {
-                                    _confirmRemoveMatch(
-                                      context,
-                                      widget.mentorUser.firstName,
-                                      widget.mentorUser.lastName,
-                                      widget.programUID,
-                                      widget.mentorUser.id,
-                                      matchInfo.matchID,
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
+                              ),
+                            );
+                          });
                     });
               });
         });

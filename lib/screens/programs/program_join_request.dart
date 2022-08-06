@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 
 class ProgramJoinRequest extends StatefulWidget {
   static String id = 'program_join_request';
@@ -90,24 +91,6 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
     //     ),
     //   );
     // }
-
-    Container buildButton({String text, Function function}) {
-      return Container(
-        padding: EdgeInsets.only(top: 2.0),
-        child: RoundedButton(
-          onPressed: function,
-          title: text,
-          buttonColor: hasJoined
-              ? Colors.grey
-              : Theme.of(context).buttonTheme.colorScheme.primary,
-          fontColor: hasJoined
-              ? Colors.grey[700]
-              : Theme.of(context).textTheme.button.color,
-          fontSize: 20,
-          minWidth: MediaQuery.of(context).size.width * 0.77,
-        ),
-      );
-    }
 
     // enable for request to join feature
     // requestJoin() {
@@ -333,14 +316,26 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
 
     buildJoinButton() {
       if (hasJoined == false) {
-        return buildButton(
-          text: 'Join the Program',
-          function: joinProgram,
+        return ButtonCard(
+          buttonCardText: 'Join the Program',
+          buttonCardTextSize: 25,
+          buttonCardTextColor: Colors.white,
+          buttonCardColor: Colors.blue,
+          cardAlignment: MainAxisAlignment.center,
+          cardIconBool: Container(),
+          buttonCardRadius: 20,
+          onPressed: joinProgram,
         );
       } else if (hasJoined == true) {
-        return buildButton(
-          text: 'You have joined!',
-          function: null,
+        return ButtonCard(
+          buttonCardText: 'You have joined',
+          buttonCardTextSize: 25,
+          buttonCardTextColor: Colors.grey.shade600,
+          buttonCardColor: Colors.grey,
+          cardAlignment: MainAxisAlignment.center,
+          cardIconBool: Container(),
+          buttonCardRadius: 20,
+          onPressed: null,
         );
       }
     }
@@ -367,15 +362,15 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                         _program.programLogo == ""
                     ? Image.asset(
                         'assets/images/MLogoPink.png',
-                        height: 150,
-                        width: 150,
+                        height: 120,
+                        width: 120,
                         fit: BoxFit.fill,
                       )
                     : CachedNetworkImage(
                         imageUrl: _program.programLogo,
                         imageBuilder: (context, imageProvider) => Container(
-                          height: 150,
-                          width: 150,
+                          height: 120,
+                          width: 120,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
                             image: DecorationImage(
@@ -388,8 +383,8 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                             CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Image.asset(
                           'assets/images/MLogoPink.png',
-                          height: 150,
-                          width: 150,
+                          height: 120,
+                          width: 120,
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -405,7 +400,16 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                       color: Theme.of(context).textTheme.headline4.color,
                     ),
                   ),
-                  SizedBox(height: 35),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0, bottom: 20),
+                    child: Divider(
+                      indent: 10,
+                      endIndent: 10,
+                      thickness: 2,
+                      color: Theme.of(context).dividerColor,
+                    ),
+                  ),
+
                   // !hasRequested
                   !hasJoined
                       ? Column(
@@ -415,22 +419,23 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                               'Enter the program code:',
                               style: TextStyle(
                                 fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color:
-                                    Theme.of(context).textTheme.headline4.color,
+                                // fontWeight: FontWeight.bold,
+                                color: Colors.black54,
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 10.0),
                               child: TextFormField(
-                                style: Theme.of(context).textTheme.subtitle2,
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontFamily: 'WorkSans',
+                                  color: Colors.black54,
+                                ),
                                 key: formKey,
                                 controller: codeController,
                                 decoration: InputDecoration(
-                                  hintStyle:
-                                      Theme.of(context).textTheme.subtitle2,
                                   filled: true,
-                                  fillColor: Colors.white,
+                                  fillColor: Colors.white.withOpacity(0.8),
                                   suffixIcon: IconButton(
                                     icon: Icon(Icons.clear),
                                     onPressed: clearCode,
@@ -441,12 +446,14 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                           ],
                         )
                       : Text(
-                          'You have joined the program!',
+                          'You have joined the program',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.secondary),
+                            fontSize: 25,
+                            fontFamily: 'Work Sans',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black54,
+                          ),
                         ),
                 ],
               ),
@@ -458,28 +465,26 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                     buildJoinButton(),
                     // !hasRequested
                     !hasJoined
-                        ? RoundedButton(
+                        ? ButtonCard(
+                            buttonCardText: 'Cancel',
                             onPressed: () => Navigator.pop(context),
-                            title: 'Cancel',
-                            buttonColor: Theme.of(context)
-                                .buttonTheme
-                                .colorScheme
-                                .background,
-                            fontColor:
-                                Theme.of(context).textTheme.headline3.color,
-                            fontSize: 20,
-                            minWidth: MediaQuery.of(context).size.width * 0.77,
+                            buttonCardColor: Colors.white,
+                            buttonCardTextColor: Colors.blue,
+                            buttonCardTextSize: 25,
+                            buttonCardRadius: 20,
+                            cardIconBool: Container(),
+                            cardAlignment: MainAxisAlignment.center,
                           )
                         : SizedBox(height: 0),
                   ],
                 ),
               ),
               Divider(
-                thickness: 8,
+                thickness: 2,
                 color: Theme.of(context).dividerColor,
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 10, bottom: 25.0),
+                padding: const EdgeInsets.only(top: 10, bottom: 45.0),
                 child: Text(
                   'Don\'t have a code? Contact the program administrator.',
                   textAlign: TextAlign.center,

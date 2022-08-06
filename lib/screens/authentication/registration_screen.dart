@@ -7,7 +7,6 @@ import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/models/login_model.dart';
 import 'package:mentorx_mvp/screens/authentication/login_screen.dart';
 import 'package:mentorx_mvp/screens/authentication/registration_profile_screen.dart';
-import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
@@ -122,6 +121,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           menteeAbout: '',
           profilePicture: '',
           coverPhoto: '',
+          canCreateProgram: false,
         ),
       );
     } on FirebaseException catch (e) {
@@ -310,8 +310,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   defaultActionText: "Ok",
                                 );
                               } else {
-                                _submit().then((_) {
-                                  _createProfile(context);
+                                _submit().then((_) async {
+                                  await _createProfile(context);
                                 });
                               }
                             },

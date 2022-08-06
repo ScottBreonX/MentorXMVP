@@ -4,10 +4,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
-import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_join_request.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 
 class ProgramProfile extends StatefulWidget {
   final loggedInUser;
@@ -60,23 +60,15 @@ class _ProgramProfileState extends State<ProgramProfile> {
     Container buildButton({String text, Function function}) {
       return Container(
         padding: EdgeInsets.only(top: 2.0),
-        child: RoundedButton(
+        child: ButtonCard(
+          buttonCardText: text,
           onPressed: function,
-          title: text,
-          // buttonColor: hasRequested
-          //     ? Colors.grey
-          //     : Theme.of(context).buttonTheme.colorScheme.primary,
-          buttonColor: hasJoined
-              ? Colors.grey
-              : Theme.of(context).buttonTheme.colorScheme.primary,
-          // fontColor: hasRequested
-          //     ? Colors.grey[700]
-          //     : Theme.of(context).textTheme.button.color,
-          fontColor: hasJoined
-              ? Colors.grey[700]
-              : Theme.of(context).textTheme.button.color,
-          fontSize: 24,
-          minWidth: MediaQuery.of(context).size.width * 0.77,
+          cardIconBool: Container(),
+          cardAlignment: MainAxisAlignment.center,
+          buttonCardColor: hasJoined ? Colors.grey : Colors.blue,
+          buttonCardTextColor: hasJoined ? Colors.grey.shade600 : Colors.white,
+          buttonCardTextSize: 25,
+          buttonCardRadius: 20,
         ),
       );
     }
@@ -194,8 +186,10 @@ class _ProgramProfileState extends State<ProgramProfile> {
                         ),
                       ),
                       Divider(
-                        thickness: 6,
-                        color: Colors.black45,
+                        thickness: 2,
+                        indent: 20,
+                        endIndent: 20,
+                        color: Colors.grey.shade400,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
