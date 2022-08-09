@@ -42,4 +42,5 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"/>
     </application>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 </manifest>
