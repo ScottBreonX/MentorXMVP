@@ -6,6 +6,9 @@ import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 
+final usersRef = FirebaseFirestore.instance.collection('users');
+final programsRef = FirebaseFirestore.instance.collection('institutions');
+
 class ProgramJoinRequest extends StatefulWidget {
   static String id = 'program_join_request';
   final loggedInUser;

@@ -1,11 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_overview_screen.dart';
 import '../../../components/progress.dart';
 import '../../../components/rounded_button.dart';
 import '../../launch_screen.dart';
+
+final usersRef = FirebaseFirestore.instance.collection('users');
+final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class ProgramEnrollmentScreen extends StatefulWidget {
   final myUser loggedInUser;
@@ -150,7 +155,9 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => LaunchScreen(pageIndex: 1),
+          builder: (context) => HomeScreen(
+            loggedInUser: loggedInUser,
+          ),
         ));
   }
 
