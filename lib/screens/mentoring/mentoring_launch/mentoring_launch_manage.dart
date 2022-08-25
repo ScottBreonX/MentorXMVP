@@ -212,13 +212,15 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                           future: programsRef
                               .doc(program.id)
                               .collection('mentors')
+                              //need to dynamically generate who is mentor and who is mentee
                               .doc(widget.mentorUser.id)
                               .get(),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) {
                               return circularProgress();
                             }
-                            Mentor mentor = Mentor.fromDocument(snapshot.data);
+                            print('Mentor User ID is ${widget.mentorUser.id}');
+                            // Mentor mentor = Mentor.fromDocument(snapshot.data);
 
                             return Scaffold(
                               appBar: AppBar(
@@ -354,7 +356,8 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                                             widget.programUID,
                                             widget.mentorUser.id,
                                             matchInfo.matchID,
-                                            mentor.mentorSlots,
+                                            // mentor.mentorSlots,
+                                            2,
                                           );
                                         },
                                       ),

@@ -79,11 +79,12 @@ class MentorConfirm extends StatelessWidget {
         .collection('mentors')
         .doc(mentorUID)
         .update({"mentorSlots": max(0, mentorSlots - 1)});
+    //add mentor ID and mentee ID to matchID section
     programsRef
         .doc(programUID)
         .collection('matchedPairs')
         .doc(mentorUID + loggedInUser.id)
-        .set({});
+        .set({"mentor": mentorUID, "mentee": loggedInUser.id});
   }
 
   _successfulMatch(parentContext) {
