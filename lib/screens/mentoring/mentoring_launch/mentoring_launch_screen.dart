@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_launch_manage.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_notes/mentoring_notes.dart';
 import '../../../components/progress.dart';
 import '../../launch_screen.dart';
 
@@ -159,10 +160,17 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                   cardColor: Colors.white,
                                   cardIcon: Icons.note_rounded,
                                   cardText: 'Notes',
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MentoringNotes(),
+                                      ),
+                                    );
+                                  },
                                 ),
                                 IconCard(
                                   onTap: () {
-                                    print(mentor.id);
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
