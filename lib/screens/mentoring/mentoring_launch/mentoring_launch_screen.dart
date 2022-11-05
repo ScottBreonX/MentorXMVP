@@ -164,7 +164,12 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => MentoringNotes(),
+                                        builder: (context) => MentoringNotes(
+                                          loggedInUser: loggedInUser,
+                                          matchID: widget.matchID,
+                                          mentorUID: widget.mentorUID,
+                                          programUID: widget.programUID,
+                                        ),
                                       ),
                                     );
                                   },
