@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/notes_tile.dart';
-import 'package:mentorx_mvp/models/notes.dart';
+import 'package:mentorx_mvp/models/notes_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_notes/mentoring_notes_add.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -111,6 +112,7 @@ class _MentoringNotesState extends State<MentoringNotes> {
                   child: AvailableNotesStream(
                     programUID: widget.programUID,
                     matchID: widget.matchID,
+                    mentorUID: widget.mentorUID,
                   ),
                 ),
               ),
@@ -125,8 +127,9 @@ class _MentoringNotesState extends State<MentoringNotes> {
 class AvailableNotesStream extends StatelessWidget {
   final String programUID;
   final String matchID;
+  final String mentorUID;
 
-  AvailableNotesStream({this.programUID, this.matchID});
+  AvailableNotesStream({this.programUID, this.matchID, this.mentorUID});
 
   @override
   Widget build(BuildContext context) {
@@ -154,6 +157,10 @@ class AvailableNotesStream extends StatelessWidget {
             titleText: noteInfo.titleText,
             noteText: noteInfo.noteText,
             noteID: noteInfo.noteID,
+            loggedInUser: loggedInUser,
+            mentorUID: mentorUID,
+            matchID: matchID,
+            programUID: programUID,
           );
           noteBubbles.add(noteBubble);
         }
