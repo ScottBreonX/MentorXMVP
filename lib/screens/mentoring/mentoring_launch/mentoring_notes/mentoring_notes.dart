@@ -138,7 +138,8 @@ class AvailableNotesStream extends StatelessWidget {
         .collection('matchedPairs')
         .doc(matchID)
         .collection('Notes')
-        .where('Private or Public', isEqualTo: 'Private')
+        // .where('Private or Public', isEqualTo: 'Private')
+        .orderBy('timeStamp', descending: true)
         .snapshots();
     return StreamBuilder<QuerySnapshot>(
       stream: noteStream,
@@ -161,6 +162,7 @@ class AvailableNotesStream extends StatelessWidget {
             mentorUID: mentorUID,
             matchID: matchID,
             programUID: programUID,
+            dateID: noteInfo.dateID,
           );
           noteBubbles.add(noteBubble);
         }

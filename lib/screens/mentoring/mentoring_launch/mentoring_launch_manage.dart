@@ -7,7 +7,6 @@ import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 import '../../../components/progress.dart';
 import '../../../components/rounded_button.dart';
-import '../../../models/mentor_model.dart';
 import '../../launch_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -146,12 +145,6 @@ _removeMatch(context, programUID, mentorUID, matchID, mentorSlots) async {
       .collection('matches')
       .doc(loggedInUser.id)
       .delete();
-  //add back mentor slot to mentor
-  await programsRef
-      .doc(programUID)
-      .collection('mentors')
-      .doc(mentorUID)
-      .update({"mentorSlots": mentorSlots + 1});
 
   //remove match from programs collection
   await programsRef
@@ -159,8 +152,16 @@ _removeMatch(context, programUID, mentorUID, matchID, mentorSlots) async {
       .collection('matchedPairs')
       .doc(matchID)
       .delete();
+
+  //add back mentor slot to mentor
+  await programsRef
+      .doc(programUID)
+      .collection('mentors')
+      .doc(mentorUID)
+      .update({"mentorSlots": mentorSlots + 1});
+
   Navigator.pop(context);
-  Navigator.push(
+  Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => ProgramLaunchScreen(

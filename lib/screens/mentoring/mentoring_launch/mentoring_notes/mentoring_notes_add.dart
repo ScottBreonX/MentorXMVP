@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 
 import '../../../../components/alert_dialog.dart';
+import '../../../../components/rounded_button.dart';
 import '../../../../models/user.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -53,6 +54,7 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
         "Notes": noteText ?? "",
         "Private or Public": "Private",
         "Owner": loggedInUser.id,
+        "timeStamp": Timestamp.now(),
         "id": "",
       }).then((value) => noteID = value.id);
     } on FirebaseException catch (e) {
@@ -82,57 +84,19 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: 135,
-        leading: TextButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10.0),
-            child: Row(
-              children: [
-                Text(
-                  'CANCEL',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'WorkSans',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        actions: [
-          TextButton(
-              onPressed: () async {
-                await _addNotes(
-                    widget.programUID, widget.matchID, loggedInUser);
-                await _updateNoteID(widget.programUID, widget.matchID, noteID)
-                    .then((value) => Navigator.pop(context));
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(right: 10.0),
-                child: Text(
-                  'SAVE',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'WorkSans',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ))
-        ],
         elevation: 5,
+        title: Image.asset(
+          'assets/images/MentorPinkWhite.png',
+          height: 150,
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding:
+                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 20),
                 child: TextFormField(
                   key: _formKey1,
                   onChanged: (value) => titleText = value,
@@ -161,7 +125,8 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(
+                    left: 20.0, right: 20.0, bottom: 20.0, top: 40),
                 child: TextFormField(
                   key: _formKey2,
                   onChanged: (value) => noteText = value,
@@ -169,9 +134,9 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 20,
                     color: Colors.black54,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                   ),
                   textAlign: TextAlign.start,
                   autocorrect: false,
@@ -188,6 +153,46 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
                     ),
                   ),
                 ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RoundedButton(
+                    minWidth: 150,
+                    title: 'Cancel',
+                    prefixIcon: Icon(
+                      Icons.close,
+                      color: Colors.black45,
+                      size: 20,
+                    ),
+                    textAlignment: MainAxisAlignment.center,
+                    buttonColor: Colors.white,
+                    fontSize: 20,
+                    fontColor: Colors.black45,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  RoundedButton(
+                    minWidth: 150,
+                    title: 'Save',
+                    prefixIcon: Icon(
+                      Icons.save,
+                      color: Colors.white,
+                    ),
+                    textAlignment: MainAxisAlignment.center,
+                    buttonColor: Colors.blue,
+                    fontSize: 20,
+                    fontColor: Colors.white,
+                    onPressed: () async {
+                      await _addNotes(
+                          widget.programUID, widget.matchID, loggedInUser);
+                      await _updateNoteID(
+                              widget.programUID, widget.matchID, noteID)
+                          .then((value) => Navigator.pop(context));
+                    },
+                  ),
+                ],
               ),
             ],
           ),

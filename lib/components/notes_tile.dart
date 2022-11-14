@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_notes/mentoring_notes_view.dart';
 
@@ -10,19 +12,30 @@ class NotesTile extends StatelessWidget {
   final String programUID;
   final String noteID;
   final String matchID;
+  final Timestamp dateID;
 
-  NotesTile({
-    this.titleText,
-    this.noteText,
-    this.noteID,
-    this.mentorUID,
-    this.loggedInUser,
-    this.programUID,
-    this.matchID,
-  });
+  NotesTile(
+      {this.titleText,
+      this.noteText,
+      this.noteID,
+      this.mentorUID,
+      this.loggedInUser,
+      this.programUID,
+      this.matchID,
+      this.dateID});
 
   @override
   Widget build(BuildContext context) {
+    String dateMonthDay(Timestamp dateID) {
+      var format = DateFormat('MMMd'); // <- use skeleton here
+      return format.format(dateID.toDate());
+    }
+
+    String dateYear(Timestamp dateID) {
+      var format = DateFormat('yyy'); // <- use skeleton here
+      return format.format(dateID.toDate());
+    }
+
     return Container(
       child: GestureDetector(
         onTap: () {
@@ -46,24 +59,86 @@ class NotesTile extends StatelessWidget {
           child: Container(
             width: 220,
             height: 100,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Column(
               children: [
-                Container(
-                  width: 350,
-                  child: Center(
-                    child: Text(
-                      '$titleText',
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: TextStyle(
-                        fontFamily: 'WorkSans',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black54,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 10.0, bottom: 10, top: 10, right: 10.0),
+                      child: Container(
+                        child: Text(
+                          '${dateMonthDay(dateID)}, ${dateYear(dateID)}',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            fontSize: 15,
+                            color: Colors.black54,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 10.0, bottom: 10, top: 10, right: 10.0),
+                      child: Container(
+                        child: Text(
+                          'View / Edit',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                      child: Container(
+                        child: Text(
+                          '$titleText',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 10.0, right: 10.0, top: 5),
+                      child: Container(
+                        width: 350,
+                        child: Text(
+                          '$noteText',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            fontSize: 15,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

@@ -4,11 +4,13 @@ class Notes {
   final String titleText;
   final String noteText;
   final String noteID;
+  final Timestamp dateID;
 
   Notes({
     this.titleText,
     this.noteText,
     this.noteID,
+    this.dateID,
   });
 
   factory Notes.fromDocument(DocumentSnapshot doc) {
@@ -16,6 +18,7 @@ class Notes {
       titleText: doc['Title Text'],
       noteText: doc['Notes'],
       noteID: doc['id'],
+      dateID: doc['timeStamp'],
     );
   }
   Map<String, dynamic> toMap() {
@@ -23,6 +26,7 @@ class Notes {
       'Title Text': titleText,
       'Notes': noteText,
       'id': noteID,
+      'timeStamp': dateID,
     };
   }
 }

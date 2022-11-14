@@ -31,6 +31,7 @@ dependencies:
   cached_network_image:
   image:
   firebase_messaging:
+  intl: ^0.17.0
 
 
 
