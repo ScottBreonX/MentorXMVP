@@ -133,6 +133,8 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
         fontWeight: FontWeight.bold,
       ),
       controller: traitController,
+      autocorrect: true,
+      textCapitalization: TextCapitalization.sentences,
       minLines: minLines,
       maxLines: minLines == null ? 1 : minLines + 1,
       decoration: InputDecoration(

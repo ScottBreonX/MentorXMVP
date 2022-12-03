@@ -261,6 +261,7 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                   TextFormField(
                     key: formKey,
                     initialValue: initialValue,
+                    textCapitalization: TextCapitalization.sentences,
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.multiline,
                     maxLines: null,

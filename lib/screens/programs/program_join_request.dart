@@ -6,6 +6,7 @@ import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -34,21 +35,8 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
   @override
   void initState() {
     super.initState();
-    // checkHasRequested();
     checkHasJoined();
   }
-
-  // for use when turning "request to join" feature on
-  // checkHasRequested() async {
-  //   DocumentSnapshot doc = await programsRef
-  //       .doc(widget.program.id)
-  //       .collection('userRequested')
-  //       .doc(loggedInUser.id)
-  //       .get();
-  //   setState(() {
-  //     hasRequested = doc.exists;
-  //   });
-  // }
 
   checkHasJoined() async {
     DocumentSnapshot doc = await programsRef
@@ -77,60 +65,6 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
         programCode = _code;
       });
     }
-
-    // Container buildButton({String text, Function function}) {
-    //   return Container(
-    //     padding: EdgeInsets.only(top: 2.0),
-    //     child: RoundedButton(
-    //       onPressed: function,
-    //       title: text,
-    //       buttonColor: hasRequested
-    //           ? Colors.grey
-    //           : Theme.of(context).buttonTheme.colorScheme.primary,
-    //       fontColor: hasRequested
-    //           ? Colors.grey[700]
-    //           : Theme.of(context).textTheme.button.color,
-    //       fontSize: 20,
-    //       minWidth: MediaQuery.of(context).size.width * 0.77,
-    //     ),
-    //   );
-    // }
-
-    // enable for request to join feature
-    // requestJoin() {
-    //   handleCode(codeController.text);
-    //   if (programCode == _program.programCode) {
-    //     setState(() {
-    //       hasRequested = true;
-    //     });
-    //     programsRef
-    //         .doc(widget.program.id)
-    //         .collection('userRequested')
-    //         .doc(loggedInUser.id)
-    //         .set({});
-    //   } else {
-    //     showDialog(
-    //       context: context,
-    //       builder: (_) => AlertDialog(
-    //         title:
-    //             Text('The program code does not match. \n Please try again.'),
-    //         actions: [
-    //           TextButton(
-    //             child: Text(
-    //               "Okay",
-    //               style: TextStyle(
-    //                 fontSize: 18,
-    //                 fontWeight: FontWeight.bold,
-    //               ),
-    //             ),
-    //             onPressed: () => Navigator.pop(context),
-    //           ),
-    //         ],
-    //       ),
-    //       barrierDismissible: true,
-    //     );
-    //   }
-    // }
 
     joinProgram() async {
       handleCode(codeController.text);
@@ -163,9 +97,6 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
               title: Center(
                 child: Column(
                   children: [
-                    // You should now "
-                    // "\ head to your program landing page and select your role in "
-                    //     "\ the program.",
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
@@ -223,7 +154,8 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => HomeScreen(
+                                builder: (context) => ProgramLaunchScreen(
+                                  programUID: _program.id,
                                   loggedInUser: loggedInUser,
                                 ),
                               ));
@@ -236,28 +168,6 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
             );
           },
         );
-        // showDialog(
-        //   context: context,
-        //   builder: (_) => AlertDialog(
-        //     title: Text('Congratulations! You have signed up for the \ '
-        //         '${_program.programName} mentorship program. You should now \ '
-        //         'head to your program landing page and select your role in \ '
-        //         'the program.'),
-        //     actions: [
-        //       TextButton(
-        //         child: Text('Go There Now!'),
-        //         onPressed: () => Navigator.push(
-        //           context,
-        //           MaterialPageRoute(
-        //             maintainState: false,
-        //             builder: (context) => MentoringScreen(),
-        //           ),
-        //         ),
-        //       )
-        //     ],
-        //   ),
-        //   barrierDismissible: true,
-        // );
       } else {
         showDialog(
             context: context,
@@ -303,20 +213,6 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
             });
       }
     }
-
-    // buildRequestButton() {
-    //   if (hasRequested == false) {
-    //     return buildButton(
-    //       text: 'Request to Join',
-    //       function: requestJoin,
-    //     );
-    //   } else if (hasRequested == true) {
-    //     return buildButton(
-    //       text: 'Join Requested',
-    //       function: null,
-    //     );
-    //   }
-    // }
 
     buildJoinButton() {
       if (hasJoined == false) {
@@ -498,24 +394,6 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                   ),
                 ),
               ),
-              // uncomment the text below to add in a box containing the
-              // program admin's name for contact purposes
-              // Container(
-              //   alignment: Alignment.center,
-              //   decoration: BoxDecoration(
-              //     color: Colors.grey,
-              //   ),
-              //   child: Padding(
-              //     padding: const EdgeInsets.symmetric(
-              //       horizontal: 8,
-              //       vertical: 8,
-              //     ),
-              //     child: Text(
-              //       '${_program.headAdmin}',
-              //       style: TextStyle(fontSize: 20, color: Colors.white70),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),

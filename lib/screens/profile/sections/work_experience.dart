@@ -37,12 +37,13 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
       key: _formKey1,
       initialValue: userWorkExperienceText,
       textInputAction: TextInputAction.next,
+      textCapitalization: TextCapitalization.sentences,
       keyboardType: TextInputType.multiline,
       maxLines: null,
       textAlign: TextAlign.start,
       onChanged: (value) => workExperienceText = value,
       style: Theme.of(context).textTheme.subtitle2,
-      autocorrect: false,
+      autocorrect: true,
       decoration: kTextFieldDecoration.copyWith(fillColor: Colors.white),
     );
   }

@@ -35,6 +35,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
   TextFormField _buildAboutMeTextField(String userAboutMeText) {
     return TextFormField(
       key: _formKey1,
+      textCapitalization: TextCapitalization.sentences,
       initialValue: userAboutMeText,
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.multiline,
@@ -42,7 +43,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
       textAlign: TextAlign.start,
       onChanged: (value) => aboutMeText = value,
       style: Theme.of(context).textTheme.subtitle2,
-      autocorrect: false,
+      autocorrect: true,
       decoration: kTextFieldDecoration.copyWith(fillColor: Colors.white),
     );
   }

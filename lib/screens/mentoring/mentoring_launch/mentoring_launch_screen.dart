@@ -8,6 +8,7 @@ import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_launch_
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_notes/mentoring_notes.dart';
 import '../../../components/progress.dart';
 import '../../launch_screen.dart';
+import '../../profile/profile_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -89,9 +90,13 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                               children: [
                                 Column(
                                   children: [
-                                    ImageCircle(
+                                    GestureDetector(
+                                      child: ImageCircle(
                                         profilePicBool: userProfilePic,
-                                        myUserRef: user),
+                                        myUserRef: user,
+                                      ),
+                                      onTap: () {},
+                                    ),
                                     Container(
                                       child: Padding(
                                         padding:
@@ -111,9 +116,19 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                 ),
                                 Column(
                                   children: [
-                                    ImageCircle(
+                                    GestureDetector(
+                                      child: ImageCircle(
                                         profilePicBool: mentorProfilePic,
-                                        myUserRef: mentor),
+                                        myUserRef: mentor,
+                                      ),
+                                      onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              Profile(profileId: mentor.id),
+                                        ),
+                                      ),
+                                    ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 10.0),
                                       child: Container(

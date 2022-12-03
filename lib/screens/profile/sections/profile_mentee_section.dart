@@ -38,12 +38,13 @@ class _ProfileMenteeSectionState extends State<ProfileMenteeSection> {
       key: _formKey1,
       initialValue: userMenteeText,
       textInputAction: TextInputAction.next,
+      textCapitalization: TextCapitalization.sentences,
       keyboardType: TextInputType.multiline,
       maxLines: null,
       textAlign: TextAlign.start,
       onChanged: (value) => menteeText = value,
       style: Theme.of(context).textTheme.subtitle2,
-      autocorrect: false,
+      autocorrect: true,
       decoration: kTextFieldDecoration.copyWith(fillColor: Colors.white),
     );
   }

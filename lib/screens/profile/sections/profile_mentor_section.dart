@@ -37,13 +37,14 @@ class _ProfileMentorSectionState extends State<ProfileMentorSection> {
     return TextFormField(
       key: _formKey1,
       initialValue: userMentorText,
+      textCapitalization: TextCapitalization.sentences,
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.multiline,
       maxLines: null,
       textAlign: TextAlign.start,
       onChanged: (value) => mentorText = value,
       style: Theme.of(context).textTheme.subtitle2,
-      autocorrect: false,
+      autocorrect: true,
       decoration: kTextFieldDecoration.copyWith(fillColor: Colors.white),
     );
   }
