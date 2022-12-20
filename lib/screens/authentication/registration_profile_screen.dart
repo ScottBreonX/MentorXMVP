@@ -7,7 +7,6 @@ import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/authentication/verify_email_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
-
 import '../../components/progress.dart';
 
 class RegistrationProfileScreen extends StatefulWidget {
@@ -93,7 +92,10 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
-        prefixIcon: Icon(Icons.person),
+        prefixIcon: Icon(
+          Icons.person,
+          color: kMentorXPAccentMed,
+        ),
         labelText: 'First Name',
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -102,7 +104,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
         filled: true,
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderSide: BorderSide(color: kMentorXPAccentMed, width: 4.0),
           borderRadius: BorderRadius.all(
             Radius.circular(20.0),
           ),
@@ -124,7 +126,10 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
-        prefixIcon: Icon(Icons.person),
+        prefixIcon: Icon(
+          Icons.person,
+          color: kMentorXPAccentMed,
+        ),
         labelText: 'Last Name',
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -133,7 +138,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
         filled: true,
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderSide: BorderSide(color: kMentorXPAccentMed, width: 4.0),
           borderRadius: BorderRadius.all(
             Radius.circular(20.0),
           ),
@@ -144,8 +149,6 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 2.0;
-
     if (user.uid == null) {
       return circularProgress();
     }
@@ -163,11 +166,11 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
             colors: [
-              Colors.blue,
-              Colors.pink,
+              Colors.grey.shade600,
+              kMentorXPPrimary,
             ],
           ),
         ),
@@ -187,7 +190,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                   tag: 'logo',
                   child: Container(
                     height: 150.0,
-                    child: Image.asset('assets/images/MLogoWhite.png'),
+                    child: Image.asset('assets/images/MentorXP.png'),
                   ),
                 ),
                 Padding(
@@ -196,7 +199,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                     'Enter your first and last name',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: 'WorkSans',
+                      fontFamily: 'Montserrat',
                       fontSize: 20,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -219,7 +222,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                     });
                   },
                   title: 'Submit',
-                  buttonColor: kMentorXPrimary,
+                  buttonColor: kMentorXPSecondary,
                   fontColor: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,

@@ -35,7 +35,8 @@ class ProfileCard extends StatelessWidget {
         onTap: onTap,
         child: Container(
           decoration: BoxDecoration(
-            border: Border.all(color: borderColor ?? kMentorXPrimary, width: 8),
+            border:
+                Border.all(color: borderColor ?? kMentorXPPrimary, width: 8),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(

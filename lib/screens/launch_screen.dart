@@ -66,8 +66,8 @@ class _LaunchScreenState extends State<LaunchScreen> {
   onTap(int pageIndex) {
     pageController.animateToPage(
       pageIndex,
-      duration: Duration(milliseconds: 200),
-      curve: Curves.linear,
+      duration: Duration(milliseconds: 50000),
+      curve: Curves.bounceInOut,
     );
   }
 

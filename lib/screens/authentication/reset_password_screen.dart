@@ -31,10 +31,10 @@ class ResetPasswordScreen extends StatefulWidget {
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
-    timeDilation = 2.0;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
@@ -46,11 +46,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         height: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
                 colors: [
-              Colors.blue,
-              Colors.pink,
+              Colors.grey.shade600,
+              kMentorXPPrimary,
             ])),
         child: SingleChildScrollView(
           child: Padding(
@@ -63,65 +63,69 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   tag: 'logo',
                   child: Container(
                     child: Image.asset(
-                      'assets/images/MLogoWhite.png',
+                      'assets/images/MentorXP.png',
                       height: 200,
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
+                  padding: const EdgeInsets.only(left: 10.0, right: 10),
                   child: Column(
                     children: [
                       Text(
                         'Check your email for a password reset link',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: kMentorXPAccentMed,
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Text(
-                          'Can\'t find the email? Check your junk or spam folders.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w300,
-                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: Container(),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: Container(),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  padding:
+                      const EdgeInsets.only(left: 20.0, right: 20.0, top: 40),
                   child: RoundedButton(
                     textAlignment: MainAxisAlignment.center,
                     onPressed: () {
                       Navigator.pop(context);
                     },
                     title: 'Return to log in',
-                    buttonColor: kMentorXPrimary,
+                    buttonColor: kMentorXPSecondary,
                     minWidth: 500,
                     fontColor: Colors.white,
+                    fontWeight: FontWeight.bold,
                     fontSize: 20,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Can\'t find the password resent email?',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Montserrat',
+                          fontSize: 15,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: Text(
+                          'Try checking your spam folder',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: kMentorXPAccentMed,
+                              fontFamily: 'Montserrat',
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

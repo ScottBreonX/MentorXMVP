@@ -42,7 +42,8 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
       maxLines: null,
       textAlign: TextAlign.start,
       onChanged: (value) => workExperienceText = value,
-      style: Theme.of(context).textTheme.subtitle2,
+      style: TextStyle(
+          fontFamily: 'Montserrat', color: Colors.black54, fontSize: 18),
       autocorrect: true,
       decoration: kTextFieldDecoration.copyWith(fillColor: Colors.white),
     );
@@ -87,7 +88,12 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                   children: [
                     Text(
                       'Work Experience',
-                      style: Theme.of(context).textTheme.headline3,
+                      style: TextStyle(
+                        color: kMentorXPSecondary,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
+                      ),
                     ),
                     workExperienceEditStatus
                         ? Row(
@@ -104,7 +110,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
-                                      color: Colors.green,
+                                      color: kMentorXPSecondary,
                                     ),
                                     height: 40.0,
                                     width: 40.0,
@@ -127,13 +133,13 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
-                                      color: Colors.red,
+                                      color: Colors.white,
                                     ),
                                     height: 40.0,
                                     width: 40.0,
                                     child: Icon(
                                       Icons.close,
-                                      color: Colors.white,
+                                      color: kMentorXPSecondary,
                                     ),
                                   ),
                                 ),
@@ -154,8 +160,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                                     width: 30.0,
                                     height: 30.0,
                                     iconType: Icons.edit,
-                                    circleColor:
-                                        Theme.of(context).backgroundColor,
+                                    iconColor: kMentorXPAccentDark,
                                   ),
                                 ),
                               ),
@@ -171,7 +176,11 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                           Flexible(
                             child: Text(
                               "${user.workExperience}",
-                              style: Theme.of(context).textTheme.subtitle2,
+                              style: TextStyle(
+                                color: Colors.black54,
+                                fontSize: 18,
+                                fontFamily: 'Montserrat',
+                              ),
                             ),
                           ),
                         ],

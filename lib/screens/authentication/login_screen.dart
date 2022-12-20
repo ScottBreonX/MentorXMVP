@@ -93,7 +93,10 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
-        prefixIcon: Icon(Icons.email),
+        prefixIcon: Icon(
+          Icons.email,
+          color: kMentorXPAccentMed,
+        ),
         labelText: 'Email',
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -103,7 +106,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
         filled: true,
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderSide: BorderSide(color: kMentorXPAccentMed, width: 4.0),
           borderRadius: BorderRadius.all(
             Radius.circular(20.0),
           ),
@@ -124,7 +127,10 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
         fontWeight: FontWeight.w600,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
-        prefixIcon: Icon(Icons.lock),
+        prefixIcon: Icon(
+          Icons.lock,
+          color: kMentorXPAccentMed,
+        ),
         labelText: 'Password',
         errorText: model.passwordErrorText,
         alignLabelWithHint: true,
@@ -135,7 +141,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
         filled: true,
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderSide: BorderSide(color: kMentorXPAccentMed, width: 4.0),
           borderRadius: BorderRadius.all(
             Radius.circular(20.0),
           ),
@@ -168,13 +174,15 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
               width: double.infinity,
               height: double.infinity,
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                    Colors.blue,
-                    Colors.pink,
-                  ])),
+                gradient: LinearGradient(
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
+                  colors: [
+                    Colors.grey.shade600,
+                    kMentorXPPrimary,
+                  ],
+                ),
+              ),
               child: ModalProgressHUD(
                 inAsyncCall: model.showSpinner,
                 child: SingleChildScrollView(
@@ -190,7 +198,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                           tag: 'logo',
                           child: Container(
                             height: 150.0,
-                            child: Image.asset('assets/images/MLogoWhite.png'),
+                            child: Image.asset('assets/images/MentorXP.png'),
                           ),
                         ),
                         SizedBox(
@@ -218,11 +226,12 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                           padding:
                               const EdgeInsets.only(left: 10.0, right: 10.0),
                           child: RoundedButton(
+                            borderRadius: 20,
                             textAlignment: MainAxisAlignment.center,
                             onPressed: model.canSubmit ? _submit : null,
                             title: 'Log In',
                             buttonColor: model.canSubmit
-                                ? kMentorXPrimary
+                                ? kMentorXPSecondary
                                 : Colors.grey.withOpacity(0.9),
                             minWidth: 500,
                             fontColor: model.canSubmit
@@ -242,9 +251,11 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                               child: Text(
                                 'Forgot Password',
                                 style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
+                                  fontSize: 20,
+                                  color: kMentorXPAccentMed,
+                                  fontWeight: FontWeight.w900,
+                                  fontFamily: 'Montserrat',
+                                ),
                               ),
                               onTap: () => widget._forgotPassword(context),
                             ),

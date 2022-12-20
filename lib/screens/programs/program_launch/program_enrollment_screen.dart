@@ -382,9 +382,9 @@ class ButtonCard extends StatelessWidget {
                 Text(
                   buttonCardText ?? '',
                   style: TextStyle(
-                    fontFamily: 'WorkSans',
+                    fontFamily: 'Montserrat',
                     fontSize: buttonCardTextSize ?? 20,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.bold,
                     color: buttonCardTextColor ?? Colors.black45,
                   ),
                 ),

@@ -51,6 +51,13 @@ flutter:
     - family: WorkSans
       fonts:
         - asset: assets/fonts/WorkSans-Regular.ttf
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+
 
   assets:
     - assets/images/MentorWhite.png
@@ -61,3 +68,4 @@ flutter:
     - assets/images/MentorPink.png
     - assets/images/UMichLogo.png
     - assets/images/UNILogo.png
+    - assets/images/MentorXP.png

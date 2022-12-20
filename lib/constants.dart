@@ -62,8 +62,12 @@ const kMessageContainerDecoration = BoxDecoration(
   ),
 );
 
-//Color pallette themes
-const kMentorXPrimary = Colors.blue;
+//Color palette themes
+const kMentorXPPrimary = Color.fromRGBO(38, 70, 83, 1);
+const kMentorXPSecondary = Color.fromRGBO(42, 157, 143, 1);
+const kMentorXPAccentLight = Color.fromRGBO(233, 196, 106, 1);
+const kMentorXPAccentMed = Color.fromRGBO(244, 162, 97, 1);
+const kMentorXPAccentDark = Color.fromRGBO(231, 111, 81, 1);
 const kUMichBlue = Color.fromRGBO(20, 24, 70, 1.0);
 const kDrawerItems = Colors.white;
 

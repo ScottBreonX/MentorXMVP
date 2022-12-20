@@ -54,7 +54,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
-        prefixIcon: Icon(Icons.email),
+        prefixIcon: Icon(
+          Icons.email,
+          color: kMentorXPAccentMed,
+        ),
         labelText: 'Email',
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -64,7 +67,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         filled: true,
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderSide: BorderSide(color: kMentorXPAccentMed, width: 4.0),
           borderRadius: BorderRadius.all(
             Radius.circular(20.0),
           ),
@@ -112,11 +115,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               height: double.infinity,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
                       colors: [
-                    Colors.blue,
-                    Colors.pink,
+                    Colors.grey.shade600,
+                    kMentorXPPrimary,
                   ])),
               child: SingleChildScrollView(
                 child: Padding(
@@ -129,7 +132,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         tag: 'logo',
                         child: Container(
                           child: Image.asset(
-                            'assets/images/MLogoWhite.png',
+                            'assets/images/MentorXP.png',
                             height: 200,
                           ),
                         ),
@@ -142,7 +145,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               'Forgot Password?',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Colors.white,
+                                color: kMentorXPAccentMed,
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -191,7 +194,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             });
                           },
                           title: 'Reset Password',
-                          buttonColor: kMentorXPrimary,
+                          buttonColor: kMentorXPSecondary,
                           minWidth: 500,
                           fontColor: Colors.white,
                           fontSize: 20,

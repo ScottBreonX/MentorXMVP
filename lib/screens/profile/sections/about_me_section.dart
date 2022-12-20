@@ -42,9 +42,15 @@ class _AboutMeSectionState extends State<AboutMeSection> {
       maxLines: null,
       textAlign: TextAlign.start,
       onChanged: (value) => aboutMeText = value,
-      style: Theme.of(context).textTheme.subtitle2,
+      style: TextStyle(
+        fontFamily: 'Montserrat',
+        color: Colors.black54,
+        fontSize: 18,
+      ),
       autocorrect: true,
-      decoration: kTextFieldDecoration.copyWith(fillColor: Colors.white),
+      decoration: kTextFieldDecoration.copyWith(
+        fillColor: Colors.white,
+      ),
     );
   }
 
@@ -85,7 +91,12 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                   children: [
                     Text(
                       'About Me',
-                      style: Theme.of(context).textTheme.headline3,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
+                        fontSize: 20,
+                        color: kMentorXPSecondary,
+                      ),
                     ),
                     aboutMeEditStatus
                         ? Row(
@@ -102,7 +113,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
-                                      color: Colors.green,
+                                      color: kMentorXPSecondary,
                                     ),
                                     height: 40.0,
                                     width: 40.0,
@@ -125,13 +136,13 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
-                                      color: Colors.red,
+                                      color: Colors.white,
                                     ),
                                     height: 40.0,
                                     width: 40.0,
                                     child: Icon(
                                       Icons.close,
-                                      color: Colors.white,
+                                      color: kMentorXPSecondary,
                                     ),
                                   ),
                                 ),
@@ -152,8 +163,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                                     width: 30.0,
                                     height: 30.0,
                                     iconType: Icons.edit,
-                                    circleColor:
-                                        Theme.of(context).backgroundColor,
+                                    iconColor: kMentorXPAccentDark,
                                   ),
                                 ),
                               ),
@@ -169,7 +179,11 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                           Flexible(
                             child: Text(
                               "${user.aboutMe}",
-                              style: Theme.of(context).textTheme.subtitle2,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontFamily: 'Montserrat',
+                                color: Colors.black54,
+                              ),
                             ),
                           ),
                         ],

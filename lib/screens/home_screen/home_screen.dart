@@ -83,18 +83,40 @@ class _HomeScreenState extends State<HomeScreen> {
             profilePictureStatus = true;
           }
 
+          pageTransition(Widget page, double offSetLow, double offSetHigh) {
+            return PageRouteBuilder(
+              transitionDuration: const Duration(milliseconds: 700),
+              pageBuilder: (context, animation, secondaryAnimation) => page,
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, page) {
+                var begin = Offset.fromDirection(offSetLow, offSetHigh);
+                var end = Offset.zero;
+                var curve = Curves.ease;
+
+                var tween = Tween(begin: begin, end: end)
+                    .chain(CurveTween(curve: curve));
+                return SlideTransition(
+                  position: animation.drive(tween),
+                  child: page,
+                );
+              },
+            );
+          }
+
           return Scaffold(
             key: _scaffoldKey,
             drawer: Drawer(
               child: Container(
+                color: kMentorXPPrimary,
                 child: drawerItems,
               ),
             ),
             appBar: AppBar(
               elevation: 5,
+              backgroundColor: Color.fromRGBO(38, 70, 83, 1),
               title: Image.asset(
-                'assets/images/MentorPinkWhite.png',
-                height: 150,
+                'assets/images/MentorXP.png',
+                height: 100,
               ),
             ),
             body: SingleChildScrollView(
@@ -111,12 +133,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => Profile(
-                                    loggedInUser: loggedInUser.id,
-                                    profileId: loggedInUser.id,
-                                  ),
-                                ),
+                                pageTransition(
+                                    Profile(
+                                      loggedInUser: loggedInUser.id,
+                                      profileId: loggedInUser.id,
+                                    ),
+                                    0.0,
+                                    1.0),
                               );
                             },
                             child: CircleAvatar(
@@ -202,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         style: TextStyle(
                                             fontSize: 12,
                                             fontFamily: 'WorkSans',
-                                            color: kMentorXPrimary,
+                                            color: kMentorXPPrimary,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
@@ -253,15 +276,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               buttonCardTextSize: 25,
                               buttonCardRadius: 20,
                               buttonCardIconSize: 40,
-                              buttonCardIconColor: Colors.blue,
+                              buttonCardIconColor: kMentorXPSecondary,
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Profile(
+                                  pageTransition(
+                                    Profile(
                                       loggedInUser: loggedInUser.id,
                                       profileId: loggedInUser.id,
                                     ),
+                                    1.5,
+                                    1.0,
                                   ),
                                 );
                               },
@@ -272,15 +297,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               buttonCardTextSize: 25,
                               buttonCardRadius: 20,
                               buttonCardIconSize: 40,
-                              buttonCardIconColor: Colors.blue,
+                              buttonCardIconColor: kMentorXPSecondary,
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        ProgramSelectionScreen(
+                                  pageTransition(
+                                    ProgramSelectionScreen(
                                       loggedInUser: loggedInUser,
                                     ),
+                                    0.0,
+                                    1.0,
                                   ),
                                 );
                               },
@@ -291,12 +317,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               buttonCardTextSize: 25,
                               buttonCardRadius: 20,
                               buttonCardIconSize: 40,
-                              buttonCardIconColor: Colors.blue,
+                              buttonCardIconColor: kMentorXPSecondary,
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ProgramTypeScreen(),
+                                  pageTransition(
+                                    ProgramTypeScreen(),
+                                    0,
+                                    1.0,
                                   ),
                                 );
                               },

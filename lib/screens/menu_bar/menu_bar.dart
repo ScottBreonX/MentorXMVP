@@ -13,95 +13,6 @@ import '../profile/profile_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 
-class MentorXMenuHeader extends StatefulWidget {
-  final myUser loggedInUser;
-
-  MentorXMenuHeader({this.loggedInUser});
-
-  @override
-  _MentorXMenuHeaderState createState() => _MentorXMenuHeaderState();
-}
-
-class _MentorXMenuHeaderState extends State<MentorXMenuHeader> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  bool profilePictureStatus = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<Object>(
-        future: usersRef.doc(loggedInUser.id).get(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return circularProgress();
-          }
-
-          if (loggedInUser.profilePicture != "") {
-            profilePictureStatus = true;
-          }
-
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: UserAccountsDrawerHeader(
-              key: _scaffoldKey,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              accountName:
-                  Text('${loggedInUser.firstName} ${loggedInUser.lastName}'),
-              accountEmail: Text('${loggedInUser.email}'),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: CircleAvatar(
-                  radius: 34,
-                  child: profilePictureStatus
-                      ? CachedNetworkImage(
-                          imageUrl: loggedInUser.profilePicture,
-                          imageBuilder: (context, imageProvider) => Container(
-                            width: 110.0,
-                            height: 110.0,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: imageProvider, fit: BoxFit.cover),
-                            ),
-                          ),
-                          placeholder: (context, url) =>
-                              CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(
-                            Icons.person,
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                        )
-                      : Icon(
-                          Icons.person,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                ),
-              ),
-              otherAccountsPictures: [
-                CircleAvatar(
-                  child: GestureDetector(
-                    onTap: () => Navigator.of(context).pop(),
-                    child: Icon(
-                      Icons.close,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          );
-        });
-  }
-}
-
 class MentorXMenuList extends StatelessWidget {
   final myUser loggedInUser;
 
@@ -113,7 +24,31 @@ class MentorXMenuList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        MentorXMenuHeader(loggedInUser: loggedInUser),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset(
+              'assets/images/MentorXP.png',
+              width: 200,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0, right: 15, bottom: 20),
+              child: GestureDetector(
+                child: Icon(
+                  Icons.close_outlined,
+                  size: 20,
+                  color: Colors.white,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 40,
+        ),
         ListTile(
           leading: Icon(
             Icons.home,
@@ -221,17 +156,6 @@ class MentorXMenuList extends StatelessWidget {
           onTap: () {
             confirmSignOut(context);
           },
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 15.0),
-          child: Row(
-            children: [
-              Image.asset(
-                'assets/images/MentorPinkWhite.png',
-                height: 200,
-              ),
-            ],
-          ),
         ),
       ],
     );

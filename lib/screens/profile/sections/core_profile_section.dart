@@ -75,7 +75,7 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
       future: usersRef.doc(widget.profileId).get(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return circularProgress();
+          return Container();
         }
         myUser user = myUser.fromDocument(snapshot.data);
         return Column(
@@ -85,9 +85,6 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: coreProfileEditStatus
-                            ? CrossAxisAlignment.center
-                            : CrossAxisAlignment.end,
                         children: [
                           Row(
                             children: [
@@ -103,7 +100,7 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
-                                      color: Colors.green,
+                                      color: kMentorXPSecondary,
                                     ),
                                     height: 40.0,
                                     width: 40.0,
@@ -126,13 +123,13 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
-                                      color: Colors.red,
+                                      color: Colors.white,
                                     ),
                                     height: 40.0,
                                     width: 40.0,
                                     child: Icon(
                                       Icons.close,
-                                      color: Colors.white,
+                                      color: kMentorXPSecondary,
                                     ),
                                   ),
                                 ),
@@ -141,91 +138,81 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          coreProfileTextField(
-                            user,
-                            _formKey1,
-                            user.firstName,
-                            "First Name",
-                            (value) => firstNameText = value,
-                          ),
-                          coreProfileTextField(
-                            user,
-                            _formKey2,
-                            user.lastName,
-                            'Last Name',
-                            (value) => lastNameText = value,
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          coreProfileTextField(
-                            user,
-                            _formKey3,
-                            user.yearInSchool,
-                            'Year in School',
-                            (value) => schoolYearText = value,
-                          ),
-                          coreProfileTextField(
-                            user,
-                            _formKey4,
-                            user.major,
-                            'Major',
-                            (value) => majorText = value,
-                          )
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            coreProfileTextField(
+                              user,
+                              _formKey1,
+                              user.firstName,
+                              "First Name",
+                              (value) => firstNameText = value,
+                            ),
+                            coreProfileTextField(
+                              user,
+                              _formKey2,
+                              user.lastName,
+                              'Last Name',
+                              (value) => lastNameText = value,
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   )
-                : Padding(
-                    padding: const EdgeInsets.only(left: 15.0, top: 5.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                "${user.firstName} ${user.lastName}",
-                                style: Theme.of(context).textTheme.headline4,
-                              ),
-                            ),
-                            widget.myProfileView
-                                ? Padding(
-                                    padding: const EdgeInsets.only(right: 10.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          coreProfileEditStatus = true;
-                                        });
-                                      },
+                : Column(
+                    children: [
+                      widget.myProfileView
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    right: 10.0,
+                                  ),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        coreProfileEditStatus = true;
+                                      });
+                                    },
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 15.0),
                                       child: IconCircle(
                                         width: 30.0,
                                         height: 30.0,
                                         iconType: Icons.edit,
-                                        circleColor:
-                                            Theme.of(context).backgroundColor,
+                                        iconColor: kMentorXPAccentDark,
                                       ),
                                     ),
-                                  )
-                                : Container(),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
+                                  ),
+                                )
+                              ],
+                            )
+                          : Container(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 20.0),
                               child: Text(
-                                "${user.yearInSchool}, ${user.major}",
-                                style: Theme.of(context).textTheme.subtitle2,
+                                "${user.firstName} ${user.lastName}",
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black54,
+                                  fontSize: 30,
+                                ),
                               ),
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
           ],
         );
@@ -268,8 +255,10 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                     textAlign: TextAlign.start,
                     onChanged: onChanged,
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: Colors.black54,
                       fontWeight: FontWeight.w600,
+                      fontFamily: 'Montserrat',
+                      fontSize: 20,
                     ),
                     autocorrect: false,
                     decoration: kTextFieldDecoration.copyWith(

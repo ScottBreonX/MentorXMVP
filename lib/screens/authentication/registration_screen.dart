@@ -11,7 +11,6 @@ import 'package:mentorx_mvp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:provider/provider.dart';
-
 import '../../models/user.dart';
 import '../../services/database.dart';
 
@@ -143,7 +142,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
-        prefixIcon: Icon(Icons.email),
+        prefixIcon: Icon(
+          Icons.email,
+          color: kMentorXPAccentMed,
+        ),
         labelText: 'Email',
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -153,7 +155,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         filled: true,
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderSide: BorderSide(color: kMentorXPAccentMed, width: 4.0),
           borderRadius: BorderRadius.all(
             Radius.circular(20.0),
           ),
@@ -174,7 +176,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         fontWeight: FontWeight.w600,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
-        prefixIcon: Icon(Icons.lock),
+        prefixIcon: Icon(
+          Icons.lock,
+          color: kMentorXPAccentMed,
+        ),
         labelText: 'Password',
         errorText: model.passwordErrorText,
         alignLabelWithHint: true,
@@ -185,7 +190,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         filled: true,
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderSide: BorderSide(color: kMentorXPAccentMed, width: 4.0),
           borderRadius: BorderRadius.all(
             Radius.circular(20.0),
           ),
@@ -206,7 +211,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         fontWeight: FontWeight.w600,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
-        prefixIcon: Icon(Icons.lock),
+        prefixIcon: Icon(
+          Icons.lock,
+          color: kMentorXPAccentMed,
+        ),
         labelText: 'Re-Enter Password',
         errorText: model.passwordErrorText,
         alignLabelWithHint: true,
@@ -217,7 +225,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         filled: true,
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderSide: BorderSide(color: kMentorXPAccentMed, width: 4.0),
           borderRadius: BorderRadius.all(
             Radius.circular(20.0),
           ),
@@ -228,7 +236,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 2.0;
     return StreamBuilder<LoginModel>(
         stream: widget.bloc.modelStream,
         initialData: LoginModel(),
@@ -249,11 +256,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               width: double.infinity,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
                   colors: [
-                    Colors.blue,
-                    Colors.pink,
+                    Colors.grey.shade600,
+                    kMentorXPPrimary,
                   ],
                 ),
               ),
@@ -275,7 +282,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           tag: 'logo',
                           child: Container(
                             height: 150.0,
-                            child: Image.asset('assets/images/MLogoWhite.png'),
+                            child: Image.asset('assets/images/MentorXP.png'),
                           ),
                         ),
                         Padding(
@@ -316,7 +323,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               }
                             },
                             title: 'Next',
-                            buttonColor: kMentorXPrimary,
+                            buttonColor: kMentorXPAccentMed,
                             fontColor: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -330,18 +337,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               'Already have an account?  ',
                               softWrap: true,
                               style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w300),
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300,
+                                fontFamily: 'Montserrat',
+                              ),
                             ),
                             InkWell(
                               child: Text(
                                 'Log In',
                                 softWrap: true,
                                 style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                                  fontSize: 20,
+                                  color: kMentorXPAccentMed,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Montserrat',
+                                ),
                               ),
                               onTap: () => widget._signInWithEmail(context),
                             ),

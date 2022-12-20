@@ -82,63 +82,64 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
             colors: [
-              Colors.blue,
-              Colors.pink,
+              Colors.grey.shade600,
+              kMentorXPPrimary,
             ],
           ),
         ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 0,
-                  ),
-                  Flexible(
-                    child: Hero(
-                      tag: 'logo',
-                      child: Container(
-                        child: Image.asset('assets/images/MentorWhite.png'),
-                        height: 350,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 0,
+                ),
+                Flexible(
+                  child: Hero(
+                    tag: 'logo',
+                    child: Container(
+                      child: Image.asset(
+                        'assets/images/MentorXP.png',
+                        fit: BoxFit.fitWidth,
                       ),
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 0.0,
-              ),
-              Container(
-                width: 300,
-                child: RoundedButton(
-                  title: 'Sign in',
-                  buttonColor: kMentorXPrimary,
-                  fontColor: Colors.white,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  onPressed: () => widget._signInWithEmail(context),
-                  textAlignment: MainAxisAlignment.center,
                 ),
+              ],
+            ),
+            SizedBox(
+              height: 0.0,
+            ),
+            Container(
+              width: 300,
+              child: RoundedButton(
+                borderRadius: 20,
+                title: 'SIGN IN',
+                buttonColor: kMentorXPSecondary,
+                fontColor: Colors.white,
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                onPressed: () => widget._signInWithEmail(context),
+                textAlignment: MainAxisAlignment.center,
               ),
-              Container(
-                width: 300,
-                child: RoundedButton(
-                  title: 'Sign up',
-                  buttonColor: Colors.white,
-                  fontColor: kMentorXPrimary,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  onPressed: () => widget._createNewUser(context),
-                  minWidth: 250.0,
-                  textAlignment: MainAxisAlignment.center,
-                ),
+            ),
+            Container(
+              width: 300,
+              child: RoundedButton(
+                borderRadius: 20,
+                title: 'NEW USER',
+                buttonColor: Colors.white,
+                fontColor: kMentorXPSecondary,
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                onPressed: () => widget._createNewUser(context),
+                minWidth: 250.0,
+                textAlignment: MainAxisAlignment.center,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

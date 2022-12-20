@@ -675,7 +675,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kMentorXPrimary,
+        backgroundColor: kMentorXPPrimary,
         elevation: 5,
         title: Text('Mentee Sign Up'),
       ),

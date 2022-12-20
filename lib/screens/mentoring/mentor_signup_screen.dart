@@ -836,7 +836,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kMentorXPrimary,
+        backgroundColor: kMentorXPPrimary,
         elevation: 5,
         title: Text('Mentor Sign Up'),
       ),

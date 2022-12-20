@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/enrollment_model.dart';
 import 'package:mentorx_mvp/models/match_list.dart';
 import 'package:mentorx_mvp/models/program.dart';
@@ -220,6 +221,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
             key: _scaffoldKey,
             drawer: Drawer(
               child: Container(
+                color: kMentorXPPrimary,
                 child: drawerItems,
               ),
             ),

@@ -62,6 +62,7 @@ class RoundedButton extends StatelessWidget {
                   color: fontColor,
                   fontSize: fontSize,
                   fontWeight: fontWeight,
+                  fontFamily: 'Montserrat',
                 ),
               ),
             ],

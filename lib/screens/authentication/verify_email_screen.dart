@@ -2,7 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mentorx_mvp/components/article_card.dart';
+import 'package:mentorx_mvp/components/icon_circle.dart';
+import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
+import 'package:mentorx_mvp/screens/launch_screen.dart';
+
+import '../mentoring/mentoring_launch/mentoring_launch_manage.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
   static const String id = 'verify_email_screen';
@@ -63,49 +70,65 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
       ? LandingPage()
       : Scaffold(
           appBar: AppBar(
-            title: Text('Verify Email'),
+            leading: GestureDetector(
+              child: Icon(Icons.close),
+              onTap: () {
+                Navigator.popAndPushNamed(context, LandingPage.id);
+              },
+            ),
+            backgroundColor: kMentorXPPrimary,
+            title: Text(
+              'Verify Email',
+              style: TextStyle(
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           body: Padding(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.only(top: 100, left: 40, right: 40),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'A verification email has been sent to your email address. You must verify your email address before continuing.',
-                  style: TextStyle(fontSize: 20),
+                  'Verification email sent to your email address.',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.bold,
+                    color: kMentorXPPrimary,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'If you don\'nt see the email in your inbox please check your Spam folder. The email will be sent from MentorX.',
-                  style: TextStyle(fontSize: 12),
+                  'Please verify your email address before continuing.',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: 'Montserrat',
+                    color: Colors.black54,
+                  ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 24),
-                ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size.fromHeight(50),
-                    ),
-                    icon: Icon(Icons.email, size: 32),
-                    label: Text(
-                      'Resend Email',
-                      style: TextStyle(fontSize: 24),
-                    ),
-                    onPressed: canResendEmail ? sendVerificationEmail : null),
-                SizedBox(height: 8),
-                TextButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size.fromHeight(50),
+                SizedBox(height: 40),
+                RoundedButton(
+                  title: 'Resend Email',
+                  buttonColor: kMentorXPSecondary,
+                  fontColor: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  textAlignment: MainAxisAlignment.center,
+                  onPressed: canResendEmail ? sendVerificationEmail : null,
+                ),
+                Text(
+                  'If you don\'nt see an email in your inbox please check your Spam folder. The email will be sent from The MentorXP Team.',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w100,
+                    color: Colors.black54,
                   ),
-                  child: Text(
-                    'Cancel',
-                    style: TextStyle(fontSize: 24),
-                  ),
-                  onPressed: () {
-                    FirebaseAuth.instance.signOut();
-                    Navigator.popAndPushNamed(context, LandingPage.id);
-                  },
-                )
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
           ),
