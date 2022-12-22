@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/enrollment_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentee_signup_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_signup_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
-
 import '../../components/progress.dart';
 import '../../models/mentoring_model.dart';
 import '../programs/program_launch/program_enrollment_screen.dart';
@@ -114,7 +114,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                   'Select your role in the program',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'WorkSans',
+                    fontFamily: 'Montserrat',
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: Colors.black54,
@@ -131,7 +131,8 @@ class _MentoringScreenState extends State<MentoringScreen> {
                             mentorSelected ? Colors.white : Colors.grey[400],
                         boxHeight: MediaQuery.of(context).size.width * 0.33,
                         boxWidth: MediaQuery.of(context).size.width * 0.33,
-                        cardColor: mentorSelected ? Colors.blue : Colors.grey,
+                        cardColor:
+                            mentorSelected ? kMentorXPSecondary : Colors.grey,
                         cardText: 'Mentor',
                         cardTextColor:
                             mentorSelected ? Colors.white : Colors.grey[400],
@@ -147,7 +148,8 @@ class _MentoringScreenState extends State<MentoringScreen> {
                             menteeSelected ? Colors.white : Colors.grey[400],
                         boxHeight: MediaQuery.of(context).size.width * 0.33,
                         boxWidth: MediaQuery.of(context).size.width * 0.33,
-                        cardColor: menteeSelected ? Colors.blue : Colors.grey,
+                        cardColor:
+                            menteeSelected ? kMentorXPSecondary : Colors.grey,
                         boxShadowColor: menteeSelected
                             ? Colors.grey[700]
                             : Colors.grey.withOpacity(0),
@@ -169,7 +171,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                     buttonCardTextSize: 20,
                     buttonCardRadius: 20,
                     buttonCardColor: menteeSelected || mentorSelected
-                        ? Colors.blue
+                        ? kMentorXPSecondary
                         : Colors.grey,
                     buttonCardTextColor: menteeSelected || mentorSelected
                         ? Colors.white
@@ -204,7 +206,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                     buttonCardTextSize: 20,
                     buttonCardRadius: 20,
                     buttonCardColor: Colors.white,
-                    buttonCardTextColor: Colors.blue,
+                    buttonCardTextColor: kMentorXPSecondary,
                     cardAlignment: MainAxisAlignment.center,
                     cardIconBool: Container(),
                     onPressed: () {
@@ -223,9 +225,10 @@ class _MentoringScreenState extends State<MentoringScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 5,
+        backgroundColor: kMentorXPPrimary,
         title: Image.asset(
-          'assets/images/MentorPinkWhite.png',
-          height: 150,
+          'assets/images/MentorXP.png',
+          height: 100,
         ),
       ),
       body: buildRoleSelection(),

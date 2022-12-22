@@ -56,7 +56,12 @@ class ProgramCard extends StatelessWidget {
                     children: [
                       Text(
                         programName ?? 'TBD',
-                        style: Theme.of(context).textTheme.subtitle2,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Montserrat',
+                          color: Colors.black54,
+                        ),
                       ),
                     ],
                   ),

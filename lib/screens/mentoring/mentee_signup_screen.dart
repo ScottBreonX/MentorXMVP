@@ -70,7 +70,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
       padding: EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.blue,
+          color: kMentorXPSecondary,
           width: 3.0,
         ),
         borderRadius: BorderRadius.circular(12.0),
@@ -88,9 +88,9 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
             items: listItems,
             onChanged: inputFunction,
             style: TextStyle(
-              fontFamily: 'WorkSans',
+              fontFamily: 'Montserrat',
               fontSize: 20,
-              color: Colors.blue,
+              color: kMentorXPSecondary,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -115,7 +115,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
         child: Icon(
           icon,
           size: 10,
-          color: Colors.blue,
+          color: kMentorXPSecondary,
         ),
       );
 
@@ -128,7 +128,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
     return TextFormField(
       style: TextStyle(
         color: Colors.black54,
-        fontFamily: 'WorkSans',
+        fontFamily: 'Montserrat',
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
@@ -152,7 +152,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
           borderSide: BorderSide(
-            color: Colors.blue,
+            color: kMentorXPSecondary,
             width: 3.0,
           ),
         ),
@@ -187,7 +187,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                       child: Text(
                         'What are the top 3 skills you are looking to develop?',
                         style: TextStyle(
-                          fontFamily: 'WorkSans',
+                          fontFamily: 'Montserrat',
                           fontWeight: FontWeight.bold,
                           color: Colors.black54,
                           fontSize: 20,
@@ -208,7 +208,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                         Text(
                           'Skill #1',
                           style: TextStyle(
-                            fontFamily: 'WorkSans',
+                            fontFamily: 'Montserrat',
                             color: Colors.black54,
                             fontSize: 20,
                           ),
@@ -231,7 +231,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                         Text(
                           'Skill #2',
                           style: TextStyle(
-                            fontFamily: 'WorkSans',
+                            fontFamily: 'Montserrat',
                             color: Colors.black54,
                             fontSize: 20,
                           ),
@@ -254,7 +254,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                         Text(
                           'Skill #3',
                           style: TextStyle(
-                            fontFamily: 'WorkSans',
+                            fontFamily: 'Montserrat',
                             color: Colors.black54,
                             fontSize: 20,
                           ),
@@ -287,7 +287,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                 child: Text(
                   'What are your top 3 hobbies or activities?',
                   style: TextStyle(
-                    fontFamily: 'WorkSans',
+                    fontFamily: 'Montserrat',
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     color: Colors.black54,
@@ -306,7 +306,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                   Text(
                     'Hobby / Activity #1',
                     style: TextStyle(
-                      fontFamily: 'WorkSans',
+                      fontFamily: 'Montserrat',
                       color: Colors.black54,
                       fontSize: 20,
                     ),
@@ -326,7 +326,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                   Text(
                     'Hobby / Activity #2',
                     style: TextStyle(
-                      fontFamily: 'WorkSans',
+                      fontFamily: 'Montserrat',
                       color: Colors.black54,
                       fontSize: 20,
                     ),
@@ -346,7 +346,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                   Text(
                     'Hobby / Activity #3',
                     style: TextStyle(
-                      fontFamily: 'WorkSans',
+                      fontFamily: 'Montserrat',
                       color: Colors.black54,
                       fontSize: 20,
                     ),
@@ -371,18 +371,13 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
         title: const Text(
           'Skills',
           style: TextStyle(
-            fontFamily: 'WorkSans',
+            fontFamily: 'Montserrat',
             fontWeight: FontWeight.bold,
             color: Colors.black54,
             fontSize: 25,
           ),
         ),
         isActive: currentStep == 0 ? true : false,
-        // state: currentStep == 0
-        //     ? StepState.editing
-        //     : ((trait1 != null) & (trait2 != null) & (trait3 != null))
-        //         ? StepState.complete
-        //         : StepState.error,
         content: Column(
           children: [buildQuestionnaire()],
         ),
@@ -391,7 +386,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
         title: const Text(
           'Hobbies',
           style: TextStyle(
-            fontFamily: 'WorkSans',
+            fontFamily: 'Montserrat',
             fontWeight: FontWeight.bold,
             color: Colors.black54,
             fontSize: 25,
@@ -406,7 +401,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
         title: const Text(
           'Free Form',
           style: TextStyle(
-            fontFamily: 'WorkSans',
+            fontFamily: 'Montserrat',
             fontWeight: FontWeight.bold,
             color: Colors.black54,
             fontSize: 25,
@@ -420,7 +415,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
               child: Text(
                 'What are you looking to get out of a mentor?',
                 style: TextStyle(
-                  fontFamily: 'WorkSans',
+                  fontFamily: 'Montserrat',
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Colors.black54,
@@ -452,10 +447,10 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
               child: Text(
                 'Enrollment Success',
                 style: TextStyle(
-                  fontFamily: 'Work Sans',
+                  fontFamily: 'Montserrat',
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
-                  color: Colors.pink,
+                  color: kMentorXPPrimary,
                 ),
               ),
             ),
@@ -472,7 +467,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                           Text(
                             'Thank you for enrolling as a Mentee',
                             style: TextStyle(
-                              fontFamily: 'WorkSans',
+                              fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                               color: Colors.black45,
@@ -492,7 +487,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                     padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                     child: RoundedButton(
                       title: 'Continue',
-                      buttonColor: Colors.pink,
+                      buttonColor: kMentorXPSecondary,
                       fontColor: Colors.white,
                       minWidth: 200,
                       fontSize: 15,
@@ -518,7 +513,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                   'Next Steps: Proceed to the program launch screen and complete the required pre-read materials.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'WorkSans',
+                    fontFamily: 'Montserrat',
                     color: Colors.grey,
                     fontStyle: FontStyle.italic,
                     fontSize: 15,
@@ -532,7 +527,6 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
 
   Future<void> _updateMenteeAttributes(
       BuildContext context, String programUID) async {
-    print(programUID);
     try {
       await programsRef
           .doc(programUID)
@@ -587,9 +581,9 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
             child: Text(
               'Questionnaire Incomplete',
               style: TextStyle(
-                fontFamily: 'Work Sans',
+                fontFamily: 'Montserrat',
                 fontSize: 20,
-                color: Colors.blue,
+                color: kMentorXPSecondary,
               ),
             ),
           ),
@@ -607,7 +601,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                         Text(
                           'Please fill in entire questionnaire.',
                           style: TextStyle(
-                            fontFamily: 'WorkSans',
+                            fontFamily: 'Montserrat',
                             fontSize: 20,
                             color: Colors.black45,
                           ),
@@ -626,7 +620,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                   padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                   child: RoundedButton(
                     title: 'Ok',
-                    buttonColor: Colors.blue,
+                    buttonColor: kMentorXPSecondary,
                     fontColor: Colors.white,
                     minWidth: 200,
                     fontSize: 15,
@@ -638,22 +632,6 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
             ),
           ],
         ),
-
-        //     AlertDialog(
-        //   title: Text('Questionnaire incomplete'),
-        //   actions: [
-        //     TextButton(
-        //       child: Text(
-        //         "Okay",
-        //         style: TextStyle(
-        //           fontSize: 18,
-        //           fontWeight: FontWeight.bold,
-        //         ),
-        //       ),
-        //       onPressed: () => Navigator.pop(context),
-        //     ),
-        //   ],
-        // ),
         barrierDismissible: true,
       );
     }
@@ -692,7 +670,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                         padding: const EdgeInsets.only(left: 20.0),
                         child: RoundedButton(
                           title: 'Next',
-                          buttonColor: Colors.blue,
+                          buttonColor: kMentorXPSecondary,
                           fontColor: Colors.white,
                           onPressed: next,
                           fontSize: 15,
@@ -706,7 +684,7 @@ class _MenteeSignupScreenState extends State<MenteeSignupScreen> {
                         child: RoundedButton(
                           title: 'Back',
                           buttonColor: Colors.white,
-                          fontColor: Colors.blue,
+                          fontColor: kMentorXPSecondary,
                           onPressed: cancel,
                           fontSize: 15,
                           fontWeight: FontWeight.bold,

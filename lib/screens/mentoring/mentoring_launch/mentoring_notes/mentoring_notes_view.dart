@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/notes_model.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 
@@ -56,7 +57,7 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
               child: Text(
                 'Delete Note Confirmation',
                 style: TextStyle(
-                  fontFamily: 'Work Sans',
+                  fontFamily: 'Montserrat',
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Colors.black54,
@@ -76,7 +77,7 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                           Text(
                             'Are you sure you want to delete this note?',
                             style: TextStyle(
-                              fontFamily: 'WorkSans',
+                              fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                               color: Colors.black45,
@@ -96,8 +97,12 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                     padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                     child: RoundedButton(
                       title: 'Cancel',
-                      buttonColor: Colors.grey,
-                      fontColor: Colors.white,
+                      prefixIcon: Icon(
+                        Icons.close,
+                        color: kMentorXPSecondary,
+                      ),
+                      buttonColor: Colors.white,
+                      fontColor: Colors.black54,
                       minWidth: 120,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
@@ -114,7 +119,7 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                         Icons.delete,
                         color: Colors.white,
                       ),
-                      buttonColor: Colors.redAccent,
+                      buttonColor: kMentorXPPrimary,
                       fontColor: Colors.white,
                       minWidth: 120,
                       fontSize: 15,
@@ -189,9 +194,10 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
     return Scaffold(
       appBar: AppBar(
         elevation: 5,
+        backgroundColor: kMentorXPPrimary,
         title: Image.asset(
-          'assets/images/MentorPinkWhite.png',
-          height: 150,
+          'assets/images/MentorXP.png',
+          height: 100,
         ),
       ),
       body: SingleChildScrollView(
@@ -234,13 +240,15 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                         decoration: InputDecoration(
                           hintText: 'Title',
                           hintStyle: TextStyle(
-                              fontSize: 20,
-                              color: Colors.grey,
-                              fontWeight: FontWeight.normal),
+                            fontSize: 20,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: 'Montserrat',
+                          ),
                           prefixIcon: Icon(
                             Icons.book,
                             size: 40,
-                            color: Colors.blue,
+                            color: kMentorXPSecondary,
                           ),
                         ),
                       ),
@@ -264,6 +272,7 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                         decoration: InputDecoration(
                           hintText: 'Notes',
                           hintStyle: TextStyle(
+                            fontFamily: 'Montserrat',
                             fontSize: 20,
                             color: Colors.grey,
                             fontWeight: FontWeight.normal,
@@ -271,7 +280,7 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                           prefixIcon: Icon(
                             Icons.notes,
                             size: 40,
-                            color: Colors.blue,
+                            color: kMentorXPSecondary,
                           ),
                         ),
                       ),
@@ -288,28 +297,19 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                             color: Colors.white,
                           ),
                           fontSize: 15,
-                          buttonColor: Colors.redAccent,
+                          buttonColor: kMentorXPPrimary,
                           fontColor: Colors.white,
                           onPressed: () {
                             _confirmDeleteNote(context, widget.programUID,
                                 widget.matchID, widget.noteID);
                           },
-                          // onPressed: () async {
-                          //   await _deleteNote(
-                          //     widget.programUID,
-                          //     widget.matchID,
-                          //     loggedInUser,
-                          //     widget.noteID,
-                          //   );
-                          //   Navigator.pop(context);
-                          // },
                         ),
                         RoundedButton(
                           minWidth: 120,
                           title: 'Cancel',
                           prefixIcon: Icon(
                             Icons.close,
-                            color: Colors.black45,
+                            color: kMentorXPSecondary,
                           ),
                           textAlignment: MainAxisAlignment.center,
                           buttonColor: Colors.white,
@@ -328,7 +328,7 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                             color: Colors.white,
                           ),
                           fontSize: 15,
-                          buttonColor: Colors.blue,
+                          buttonColor: kMentorXPSecondary,
                           fontColor: Colors.white,
                           onPressed: () async {
                             await _updateNotes(

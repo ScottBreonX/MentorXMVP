@@ -90,6 +90,7 @@ class IconCard extends StatelessWidget {
                       style: TextStyle(
                         color: cardTextColor,
                         fontSize: textSize ?? 20,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
                   ),

@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_notes/mentoring_notes_view.dart';
 
+import '../constants.dart';
+
 class NotesTile extends StatelessWidget {
   final String titleText;
   final String noteText;
@@ -73,7 +75,7 @@ class NotesTile extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
-                            fontFamily: 'WorkSans',
+                            fontFamily: 'Montserrat',
                             fontSize: 15,
                             color: Colors.black54,
                           ),
@@ -89,10 +91,10 @@ class NotesTile extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
-                            fontFamily: 'WorkSans',
+                            fontFamily: 'Montserrat',
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
-                            color: Colors.blue,
+                            color: kMentorXPSecondary,
                           ),
                         ),
                       ),
@@ -109,7 +111,7 @@ class NotesTile extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
-                            fontFamily: 'WorkSans',
+                            fontFamily: 'Montserrat',
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
                             color: Colors.black54,
@@ -131,7 +133,7 @@ class NotesTile extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
-                            fontFamily: 'WorkSans',
+                            fontFamily: 'Montserrat',
                             fontSize: 15,
                             color: Colors.black54,
                           ),

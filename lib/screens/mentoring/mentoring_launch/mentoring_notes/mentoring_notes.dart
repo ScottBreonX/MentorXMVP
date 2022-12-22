@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/notes_tile.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/notes_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
@@ -41,9 +42,10 @@ class _MentoringNotesState extends State<MentoringNotes> {
     return Scaffold(
       appBar: AppBar(
         elevation: 5,
+        backgroundColor: kMentorXPPrimary,
         title: Image.asset(
-          'assets/images/MentorPinkWhite.png',
-          height: 150,
+          'assets/images/MentorXP.png',
+          height: 100,
         ),
       ),
       body: SingleChildScrollView(
@@ -57,7 +59,7 @@ class _MentoringNotesState extends State<MentoringNotes> {
                   child: IconCard(
                     cardColor: Colors.white,
                     cardIcon: Icons.add,
-                    cardIconColor: Colors.blue,
+                    cardIconColor: kMentorXPAccentDark,
                     iconSize: 50,
                     cardText: 'Add Note',
                     textSize: 20,
@@ -79,20 +81,6 @@ class _MentoringNotesState extends State<MentoringNotes> {
                     },
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15.0),
-                  child: IconCard(
-                    cardColor: Colors.white,
-                    cardIcon: Icons.share,
-                    cardIconColor: Colors.blue,
-                    iconSize: 50,
-                    cardText: 'Shared Notes',
-                    textSize: 20,
-                    cardTextColor: Colors.black54,
-                    boxWidth: 180,
-                    boxHeight: 120,
-                  ),
-                )
               ],
             ),
             Padding(
@@ -138,7 +126,6 @@ class AvailableNotesStream extends StatelessWidget {
         .collection('matchedPairs')
         .doc(matchID)
         .collection('Notes')
-        // .where('Private or Public', isEqualTo: 'Private')
         .orderBy('timeStamp', descending: true)
         .snapshots();
     return StreamBuilder<QuerySnapshot>(

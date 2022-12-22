@@ -190,16 +190,14 @@ class AvailableProgramsStream extends StatelessWidget {
             imageContainer: Container(
                 child: prog.programLogo == null || prog.programLogo.isEmpty
                     ? Image.asset(
-                        'assets/images/MLogoPink.png',
-                        height: 70,
-                        width: 70,
+                        'assets/images/MXPDark.png',
+                        height: 60,
                         fit: BoxFit.fill,
                       )
                     : CachedNetworkImage(
                         imageUrl: prog.programLogo,
                         imageBuilder: (context, imageProvider) => Container(
-                          height: 70,
-                          width: 70,
+                          height: 60,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
                             image: DecorationImage(
@@ -211,7 +209,7 @@ class AvailableProgramsStream extends StatelessWidget {
                         placeholder: (context, url) =>
                             CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Image.asset(
-                          'assets/images/MLogoPink.png',
+                          'assets/images/MXPDark.png',
                           height: 70,
                           width: 70,
                           fit: BoxFit.fill,

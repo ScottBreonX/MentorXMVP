@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/match_model.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
@@ -43,10 +44,10 @@ _confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
             child: Text(
               'Confirm Removing Match',
               style: TextStyle(
-                fontFamily: 'Work Sans',
+                fontFamily: 'Montserrat',
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
-                color: Colors.pink,
+                color: kMentorXPSecondary,
               ),
             ),
           ),
@@ -63,7 +64,7 @@ _confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
                         Text(
                           'Are you sure you want to remove $mentorFname $mentorLname as a mentor connection?',
                           style: TextStyle(
-                            fontFamily: 'WorkSans',
+                            fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                             color: Colors.black45,
@@ -83,7 +84,7 @@ _confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
                   padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                   child: RoundedButton(
                     title: 'Yes',
-                    buttonColor: Colors.pink,
+                    buttonColor: kMentorXPSecondary,
                     fontColor: Colors.white,
                     minWidth: 120,
                     fontSize: 15,
@@ -99,7 +100,7 @@ _confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
                   child: RoundedButton(
                     title: 'Cancel',
                     buttonColor: Colors.white,
-                    fontColor: Colors.pink,
+                    fontColor: kMentorXPSecondary,
                     minWidth: 120,
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
@@ -220,15 +221,14 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                             if (!snapshot.hasData) {
                               return circularProgress();
                             }
-                            print('Mentor User ID is ${widget.mentorUser.id}');
-                            // Mentor mentor = Mentor.fromDocument(snapshot.data);
 
                             return Scaffold(
                               appBar: AppBar(
                                 elevation: 5,
+                                backgroundColor: kMentorXPPrimary,
                                 title: Image.asset(
-                                  'assets/images/MentorPinkWhite.png',
-                                  height: 150,
+                                  'assets/images/MentorXP.png',
+                                  height: 100,
                                 ),
                               ),
                               body: SingleChildScrollView(
@@ -255,9 +255,8 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                                                           program.programLogo ==
                                                               ""
                                                       ? Image.asset(
-                                                          'assets/images/MLogoBlue.png',
-                                                          height: 100,
-                                                          width: 100,
+                                                          'assets/images/MXPDark.png',
+                                                          height: 150,
                                                           fit: BoxFit.cover,
                                                         )
                                                       : CachedNetworkImage(
@@ -289,9 +288,8 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                                                           errorWidget: (context,
                                                                   url, error) =>
                                                               Image.asset(
-                                                            'assets/images/MLogoBlue.png',
-                                                            height: 120,
-                                                            width: 120,
+                                                            'assets/images/MXPDark.png',
+                                                            height: 150,
                                                             fit: BoxFit.cover,
                                                           ),
                                                         ),
@@ -315,7 +313,7 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                                                                 style:
                                                                     TextStyle(
                                                                   fontFamily:
-                                                                      'WorkSans',
+                                                                      'Montserrat',
                                                                   fontSize: 25,
                                                                   fontWeight:
                                                                       FontWeight

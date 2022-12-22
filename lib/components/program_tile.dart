@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/programs/program_profile.dart';
 
+import '../constants.dart';
+
 class ProgramTile extends StatelessWidget {
   final String programId;
   final String programName;
@@ -86,9 +88,9 @@ class ProgramTile extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                   style: TextStyle(
-                                    fontFamily: 'WorkSans',
+                                    fontFamily: 'Montserrat',
                                     fontSize: 20,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.bold,
                                     color: Colors.black54,
                                   ),
                                 ),
@@ -99,16 +101,16 @@ class ProgramTile extends StatelessWidget {
                                 Text(
                                   'Institution: ',
                                   style: TextStyle(
-                                    fontFamily: 'WorkSans',
+                                    fontFamily: 'Montserrat',
                                     fontSize: 10,
                                     fontWeight: FontWeight.w900,
-                                    color: Colors.blue,
+                                    color: kMentorXPSecondary,
                                   ),
                                 ),
                                 Text(
                                   '$institutionName',
                                   style: TextStyle(
-                                    fontFamily: 'WorkSans',
+                                    fontFamily: 'Montserrat',
                                     fontSize: 10,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black54,
@@ -126,7 +128,7 @@ class ProgramTile extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 3,
                                   style: TextStyle(
-                                    fontFamily: 'WorkSans',
+                                    fontFamily: 'Montserrat',
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black45,
@@ -142,22 +144,5 @@ class ProgramTile extends StatelessWidget {
         ),
       ),
     );
-
-    //   IconCard(
-    //   boxWidth: boxWidth ?? 150,
-    //   boxHeight: boxHeight ?? 150,
-    //   onTap: onPressed ??
-    //       () => Navigator.push(
-    //             context,
-    //             MaterialPageRoute(
-    //               builder: (context) => ProgramProfile(programId: programId),
-    //             ),
-    //           ),
-    //   textSize: textSize ?? 15,
-    //   cardText: programName ?? "",
-    //   cardTextColor: Colors.black54,
-    //   cardColor: Theme.of(context).cardColor,
-    //   cachedNetworkImage: cachedNetworkImage ?? null,
-    // );
   }
 }

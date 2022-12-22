@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 
 import '../../../../components/alert_dialog.dart';
@@ -85,9 +86,10 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
     return Scaffold(
       appBar: AppBar(
         elevation: 5,
+        backgroundColor: kMentorXPPrimary,
         title: Image.asset(
-          'assets/images/MentorPinkWhite.png',
-          height: 150,
+          'assets/images/MentorXP.png',
+          height: 100,
         ),
       ),
       body: SingleChildScrollView(
@@ -105,21 +107,23 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
                   maxLines: null,
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.black54,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: 25,
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat'),
                   autocorrect: false,
                   decoration: InputDecoration(
                     hintText: 'Title',
                     hintStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.normal),
+                      fontSize: 20,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.normal,
+                      fontFamily: 'Montserrat',
+                    ),
                     prefixIcon: Icon(
                       Icons.book,
                       size: 40,
-                      color: Colors.blue,
+                      color: kMentorXPSecondary,
                     ),
                   ),
                 ),
@@ -143,13 +147,15 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
                   decoration: InputDecoration(
                     hintText: 'Notes',
                     hintStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.normal),
+                      fontSize: 20,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.normal,
+                      fontFamily: 'Montserrat',
+                    ),
                     prefixIcon: Icon(
                       Icons.notes,
                       size: 40,
-                      color: Colors.blue,
+                      color: kMentorXPSecondary,
                     ),
                   ),
                 ),
@@ -162,7 +168,7 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
                     title: 'Cancel',
                     prefixIcon: Icon(
                       Icons.close,
-                      color: Colors.black45,
+                      color: kMentorXPSecondary,
                       size: 20,
                     ),
                     textAlignment: MainAxisAlignment.center,
@@ -181,7 +187,7 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
                       color: Colors.white,
                     ),
                     textAlignment: MainAxisAlignment.center,
-                    buttonColor: Colors.blue,
+                    buttonColor: kMentorXPSecondary,
                     fontSize: 20,
                     fontColor: Colors.white,
                     onPressed: () async {

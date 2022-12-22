@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_launch_manage.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_notes/mentoring_notes.dart';
@@ -73,10 +74,11 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
 
                 return Scaffold(
                   appBar: AppBar(
+                    backgroundColor: kMentorXPPrimary,
                     elevation: 5,
                     title: Image.asset(
-                      'assets/images/MentorPinkWhite.png',
-                      height: 150,
+                      'assets/images/MentorXP.png',
+                      height: 100,
                     ),
                   ),
                   body: SingleChildScrollView(
@@ -98,16 +100,19 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                       onTap: () {},
                                     ),
                                     Container(
+                                      width: 200,
                                       child: Padding(
                                         padding:
                                             const EdgeInsets.only(top: 10.0),
                                         child: Text(
                                           '${user.firstName} ${user.lastName}',
+                                          textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            fontFamily: 'WorkSans',
+                                            fontFamily: 'Montserrat',
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black45,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                       ),
@@ -132,13 +137,16 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                     Padding(
                                       padding: const EdgeInsets.only(top: 10.0),
                                       child: Container(
+                                        width: 200,
                                         child: Text(
                                           '${mentor.firstName} ${mentor.lastName}',
+                                          textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            fontFamily: 'WorkSans',
+                                            fontFamily: 'Montserrat',
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black45,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                       ),
@@ -176,6 +184,7 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                   iconSize: 60,
                                   cardColor: Colors.white,
                                   cardIcon: Icons.note_rounded,
+                                  cardIconColor: kMentorXPSecondary,
                                   cardText: 'Notes',
                                   onTap: () {
                                     Navigator.push(
@@ -210,6 +219,7 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                   iconSize: 60,
                                   cardColor: Colors.white,
                                   cardIcon: Icons.settings,
+                                  cardIconColor: kMentorXPSecondary,
                                   cardText: 'Manage',
                                 ),
                               ],
