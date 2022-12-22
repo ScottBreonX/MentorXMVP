@@ -13,8 +13,6 @@ import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/core_profile_section.dart';
-import 'package:mentorx_mvp/screens/profile/sections/profile_mentee_section.dart';
-import 'package:mentorx_mvp/screens/profile/sections/profile_mentor_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/work_experience.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as Im;
@@ -76,49 +74,72 @@ class _ProfileState extends State<Profile> {
             ),
             title: Text(
               titleText,
-              style: Theme.of(context).textTheme.headline4,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: kMentorXPAccentDark,
+                fontFamily: 'Montserrat',
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Divider(
+                  height: 4,
+                  color: Colors.grey,
+                ),
+              ),
               SimpleDialogOption(
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.camera_alt,
-                          size: 30,
-                          color: Colors.blue,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.camera_alt,
+                        size: 30,
+                        color: kMentorXPSecondary,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        "Photo with Camera",
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontFamily: 'Montserrat',
+                          fontSize: 20,
                         ),
                       ),
-                      Expanded(
-                        child: Text(
-                          "Photo with Camera",
-                          style: Theme.of(context).textTheme.subtitle2,
-                        ),
-                      ),
-                    ],
-                  ),
-                  onPressed: handleTakePhoto),
+                    ),
+                  ],
+                ),
+                onPressed: handleTakePhoto,
+              ),
               SimpleDialogOption(
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.photo,
-                          size: 30,
-                          color: Colors.blue,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.photo,
+                        size: 30,
+                        color: kMentorXPSecondary,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        "Image from Gallery",
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontFamily: 'Montserrat',
+                          fontSize: 20,
                         ),
                       ),
-                      Expanded(
-                        child: Text(
-                          "Image from Gallery",
-                          style: Theme.of(context).textTheme.subtitle2,
-                        ),
-                      ),
-                    ],
-                  ),
-                  onPressed: handleChooseFromGallery),
+                    ),
+                  ],
+                ),
+                onPressed: handleChooseFromGallery,
+              ),
               SimpleDialogOption(
                 child: Row(
                   children: [
@@ -127,13 +148,17 @@ class _ProfileState extends State<Profile> {
                       child: Icon(
                         Icons.cancel,
                         size: 30,
-                        color: Colors.red,
+                        color: kMentorXPAccentDark,
                       ),
                     ),
                     Expanded(
                       child: Text(
                         "Remove Current Photo",
-                        style: Theme.of(context).textTheme.subtitle2,
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontFamily: 'Montserrat',
+                          fontSize: 20,
+                        ),
                       ),
                     ),
                   ],
@@ -144,11 +169,16 @@ class _ProfileState extends State<Profile> {
                 },
               ),
               SimpleDialogOption(
-                child: Text(
-                  "Cancel",
-                  style: Theme.of(context).textTheme.headline4,
+                child: RoundedButton(
+                  title: 'Cancel',
+                  textAlignment: MainAxisAlignment.center,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  buttonColor: kMentorXPAccentDark,
+                  fontColor: Colors.white,
+                  onPressed: () => Navigator.pop(context),
                 ),
-                onPressed: () => Navigator.pop(context),
+                onPressed: () {},
               )
             ],
           );
@@ -243,12 +273,10 @@ class _ProfileState extends State<Profile> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => LaunchScreen(pageIndex: 0),
-        ));
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LaunchScreen(pageIndex: 2),
+          builder: (context) => Profile(
+            profileId: loggedInUser.id,
+            loggedInUser: loggedInUser.id,
+          ),
         ));
   }
 
@@ -258,7 +286,10 @@ class _ProfileState extends State<Profile> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => LaunchScreen(pageIndex: 2),
+          builder: (context) => Profile(
+            loggedInUser: loggedInUser.id,
+            profileId: loggedInUser.id,
+          ),
         ));
   }
 
@@ -372,8 +403,7 @@ class _ProfileState extends State<Profile> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              LaunchScreen(pageIndex: 2),
+                                          builder: (context) => Profile(),
                                         ),
                                       );
                                     },
@@ -426,7 +456,7 @@ class _ProfileState extends State<Profile> {
             future: usersRef.doc(widget.profileId).get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return Container();
+                return circularProgress();
               }
               myUser user = myUser.fromDocument(snapshot.data);
 
@@ -463,7 +493,6 @@ class _ProfileState extends State<Profile> {
                           children: [
                             Container(
                               height: coverPhotoHeight,
-                              width: double.infinity,
                               decoration: BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
@@ -495,6 +524,7 @@ class _ProfileState extends State<Profile> {
                             Positioned(
                               top: top,
                               child: Stack(
+                                clipBehavior: Clip.none,
                                 children: [
                                   profilePhotoExist
                                       ? CircleAvatar(
@@ -534,12 +564,12 @@ class _ProfileState extends State<Profile> {
                                             circleColor: Colors.grey,
                                           ),
                                         ),
-                                  Positioned(
-                                    bottom: 0,
-                                    right: 5,
-                                    child: !myProfileView
-                                        ? Text("")
-                                        : GestureDetector(
+                                  !myProfileView
+                                      ? Container()
+                                      : Positioned(
+                                          right: 0,
+                                          bottom: 0,
+                                          child: GestureDetector(
                                             onTap: () {
                                               selectImage(
                                                 context,
@@ -562,7 +592,7 @@ class _ProfileState extends State<Profile> {
                                               ),
                                             ),
                                           ),
-                                  ),
+                                        ),
                                 ],
                               ),
                             ),

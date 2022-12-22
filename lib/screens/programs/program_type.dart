@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/programs/available_programs.dart';
 
@@ -19,10 +20,11 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: kMentorXPPrimary,
         elevation: 5,
         title: Image.asset(
-          'assets/images/MentorPinkWhite.png',
-          height: 150,
+          'assets/images/MentorXP.png',
+          height: 100,
         ),
       ),
       body: Padding(
@@ -36,7 +38,7 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
                   Text(
                     'Program Type',
                     style: TextStyle(
-                      fontFamily: 'WorkSans',
+                      fontFamily: 'Montserrat',
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
                       color: Colors.black45,
@@ -87,15 +89,15 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
                                     child: Icon(
                                       Icons.school,
                                       size: 40,
-                                      color: Colors.pink,
+                                      color: kMentorXPPrimary,
                                     ),
                                   ),
                                   Text(
                                     'University Programs',
                                     style: TextStyle(
-                                      fontFamily: 'WorkSans',
+                                      fontFamily: 'Montserrat',
                                       fontSize: 25,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.bold,
                                       color: Colors.black45,
                                     ),
                                   ),
@@ -136,9 +138,9 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
                                 child: Text(
                                   'Programs',
                                   style: TextStyle(
-                                    fontFamily: 'WorkSans',
-                                    fontSize: 27,
-                                    fontWeight: FontWeight.w600,
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
                                     color: Colors.black45,
                                   ),
                                 ),
@@ -153,8 +155,8 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
               ),
             ),
             Positioned(
-              top: 333,
-              right: 127,
+              top: 363,
+              right: 150,
               left: 0,
               child: GestureDetector(
                 onTap: () => Navigator.push(
@@ -167,8 +169,8 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
                   ),
                 ),
                 child: Image.asset(
-                  'assets/images/MentorPink.png',
-                  height: 160,
+                  'assets/images/MentorXPDark.png',
+                  height: 110,
                 ),
               ),
             ),

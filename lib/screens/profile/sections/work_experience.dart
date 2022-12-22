@@ -45,7 +45,21 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
       style: TextStyle(
           fontFamily: 'Montserrat', color: Colors.black54, fontSize: 18),
       autocorrect: true,
-      decoration: kTextFieldDecoration.copyWith(fillColor: Colors.white),
+      decoration: kTextFieldDecoration.copyWith(
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: kMentorXPSecondary, width: 4.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: kMentorXPSecondary, width: 2.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          ),
+        ),
+      ),
     );
   }
 

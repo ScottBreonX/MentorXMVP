@@ -6,6 +6,7 @@ import 'package:mentorx_mvp/models/enrollment_model.dart';
 import 'package:mentorx_mvp/models/match_list.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_admin_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
@@ -44,27 +45,6 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
   bool hasMatches = false;
   bool isAdmin = false;
   List<MatchList> matches = [];
-
-  // Future<dynamic> getMatches() async {
-  //   setState(() {
-  //     isLoading = true;
-  //   });
-  //   QuerySnapshot snapshot = await usersRef
-  //       .doc(widget.programUID)
-  //       .collection('userSubscribed')
-  //       .doc(loggedInUser.id)
-  //       .collection('matchedMentors')
-  //       .get();
-  //   if (snapshot.docs.isNotEmpty) {
-  //     setState(() {
-  //       isLoading = false;
-  //       hasMatches = true;
-  //       matches = snapshot.docs
-  //           .map((doc) => MatchList.fromDocument(doc, widget.programUID))
-  //           .toList();
-  //     });
-  //   }
-  // }
 
   checkIsAdmin() async {
     DocumentSnapshot doc = await programsRef
@@ -128,7 +108,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                             buttonCardTextSize: 25,
                             buttonCardRadius: 20,
                             buttonCardIconSize: 40,
-                            buttonCardColor: Colors.blue,
+                            buttonCardColor: kMentorXPAccentDark,
                             buttonCardTextColor: Colors.white,
                             cardAlignment: MainAxisAlignment.center,
                             cardIconBool: Container(),
@@ -159,7 +139,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                               child: Text(
                                 'No new matches yet, please check back after matching period has closed',
                                 style: TextStyle(
-                                  color: Colors.blue,
+                                  color: Colors.black54,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   overflow: TextOverflow.visible,
@@ -178,7 +158,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                             buttonCardTextSize: 25,
                             buttonCardRadius: 20,
                             buttonCardIconSize: 40,
-                            buttonCardColor: Colors.blue,
+                            buttonCardColor: kMentorXPSecondary,
                             buttonCardTextColor: Colors.white,
                             cardAlignment: MainAxisAlignment.center,
                             cardIconBool: Container(),
@@ -227,9 +207,10 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
             ),
             appBar: AppBar(
               elevation: 5,
+              backgroundColor: kMentorXPPrimary,
               title: Image.asset(
-                'assets/images/MentorPinkWhite.png',
-                height: 150,
+                'assets/images/MentorXP.png',
+                height: 100,
               ),
             ),
             body: SingleChildScrollView(
@@ -252,9 +233,8 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                         program.programLogo.isEmpty ||
                                         program.programLogo == ""
                                     ? Image.asset(
-                                        'assets/images/MLogoPink.png',
-                                        height: 120,
-                                        width: 120,
+                                        'assets/images/MXPDark.png',
+                                        height: 150,
                                         fit: BoxFit.cover,
                                       )
                                     : CachedNetworkImage(
@@ -262,8 +242,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                         imageBuilder:
                                             (context, imageProvider) =>
                                                 Container(
-                                          height: 120.0,
-                                          width: 120,
+                                          height: 150.0,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(12),
@@ -277,9 +256,8 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                             circularProgress(),
                                         errorWidget: (context, url, error) =>
                                             Image.asset(
-                                          'assets/images/MLogoBlue.png',
-                                          height: 120,
-                                          width: 120,
+                                          'assets/images/MXPDark.png',
+                                          height: 150,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -291,14 +269,15 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                         child: Center(
                                           child: Padding(
                                             padding: const EdgeInsets.only(
-                                                top: 10.0),
+                                              top: 10.0,
+                                            ),
                                             child: Text(
                                               '${program.programName}',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                fontFamily: 'WorkSans',
+                                                fontFamily: 'Montserrat',
                                                 fontSize: 25,
-                                                fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.bold,
                                                 color: Colors.black54,
                                               ),
                                             ),
@@ -329,7 +308,12 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                           ),
                           child: Text(
                             'Connections',
-                            style: Theme.of(context).textTheme.headline1,
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontFamily: 'Montserrat',
+                              color: Colors.black54,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
@@ -341,82 +325,106 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                           padding: const EdgeInsets.only(left: 10.0, top: 20),
                           child: Text(
                             'Resources',
-                            style: Theme.of(context).textTheme.headline1,
+                            style: TextStyle(
+                              color: Colors.black54,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              fontFamily: 'Montserrat',
+                            ),
                           ),
                         )
                       ],
                     ),
-                    Column(
-                      children: [
-                        ButtonCard(
-                          buttonCardText: 'Mentoring Enrollment',
-                          buttonCardIcon: Icons.change_circle,
-                          buttonCardTextSize: 25,
-                          buttonCardRadius: 20,
-                          buttonCardIconSize: 40,
-                          buttonCardIconColor: Colors.blue,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MentoringScreen(
-                                  loggedInUser: loggedInUser,
-                                  programUID: widget.programUID,
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 50.0),
+                      child: Column(
+                        children: [
+                          ButtonCard(
+                            buttonCardText: 'Mentoring Enrollment',
+                            buttonCardIcon: Icons.change_circle,
+                            buttonCardTextSize: 25,
+                            buttonCardRadius: 20,
+                            buttonCardIconSize: 40,
+                            buttonCardIconColor: kMentorXPSecondary,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MentoringScreen(
+                                    loggedInUser: loggedInUser,
+                                    programUID: widget.programUID,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                        ButtonCard(
-                          buttonCardText: 'Program Info',
-                          buttonCardIcon: Icons.people,
-                          buttonCardTextSize: 25,
-                          buttonCardRadius: 20,
-                          buttonCardIconSize: 40,
-                          buttonCardIconColor: Colors.blue,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ProgramEnrollmentScreen(
-                                  loggedInUser: loggedInUser,
-                                  programUID: program.id,
+                              );
+                            },
+                          ),
+                          ButtonCard(
+                            buttonCardText: 'Program Info',
+                            buttonCardIcon: Icons.info,
+                            buttonCardTextSize: 25,
+                            buttonCardRadius: 20,
+                            buttonCardIconSize: 40,
+                            buttonCardIconColor: kMentorXPSecondary,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProgramEnrollmentScreen(
+                                    loggedInUser: loggedInUser,
+                                    programUID: program.id,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                        isAdmin
-                            ? ButtonCard(
-                                buttonCardText: 'Program Info',
-                                buttonCardIcon: Icons.admin_panel_settings,
-                                buttonCardTextSize: 25,
-                                buttonCardRadius: 20,
-                                buttonCardIconSize: 40,
-                                buttonCardIconColor: Colors.blue,
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ProgramAdminScreen(
-                                                loggedInUser: loggedInUser,
-                                                programUID: program.id,
-                                                enrollmentType:
-                                                    program.enrollmentType,
-                                                aboutProgram:
-                                                    program.aboutProgram,
-                                                institutionName:
-                                                    program.institutionName,
-                                                programName:
-                                                    program.programName,
-                                                programCode:
-                                                    program.programCode,
-                                              )));
-                                },
-                              )
-                            : Container(),
-                      ],
+                              );
+                            },
+                          ),
+                          isAdmin
+                              ? ButtonCard(
+                                  buttonCardText: 'Program Management',
+                                  buttonCardIcon: Icons.manage_accounts,
+                                  buttonCardTextSize: 25,
+                                  buttonCardRadius: 20,
+                                  buttonCardIconSize: 40,
+                                  buttonCardIconColor: kMentorXPSecondary,
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProgramAdminScreen(
+                                                  loggedInUser: loggedInUser,
+                                                  programUID: program.id,
+                                                  enrollmentType:
+                                                      program.enrollmentType,
+                                                  aboutProgram:
+                                                      program.aboutProgram,
+                                                  institutionName:
+                                                      program.institutionName,
+                                                  programName:
+                                                      program.programName,
+                                                  programCode:
+                                                      program.programCode,
+                                                )));
+                                  },
+                                )
+                              : Container(),
+                          ButtonCard(
+                            buttonCardText: 'Back to Home Screen',
+                            buttonCardIcon: Icons.keyboard_return,
+                            buttonCardTextSize: 25,
+                            buttonCardRadius: 20,
+                            buttonCardIconSize: 40,
+                            buttonCardIconColor: kMentorXPSecondary,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

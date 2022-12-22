@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/program.dart';
-import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
@@ -102,7 +102,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                       child: Text(
                         "Success!",
                         style: TextStyle(
-                          fontFamily: 'Work Sans',
+                          fontFamily: 'Montserrat',
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                           color: Colors.black54,
@@ -110,24 +110,34 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 20),
                       child: Text(
-                        "You have signed up for ${_program.programName}",
-                        textAlign: TextAlign.start,
+                        "You have signed up for",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontFamily: 'Work Sans',
+                          fontFamily: 'Montserrat',
                           fontSize: 20,
                           color: Colors.black54,
                         ),
+                      ),
+                    ),
+                    Text(
+                      "${_program.programName}",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 20,
+                        color: kMentorXPPrimary,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 20.0),
                       child: Text(
                         "Head to your program landing page to finish enrollment",
-                        textAlign: TextAlign.start,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontFamily: 'Work Sans',
+                          fontFamily: 'Montserrat',
                           fontSize: 20,
                           color: Colors.black54,
                         ),
@@ -145,7 +155,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                       child: RoundedButton(
                         minWidth: 200,
                         title: "OK",
-                        buttonColor: Colors.blue,
+                        buttonColor: kMentorXPAccentDark,
                         fontColor: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -178,10 +188,10 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                 ),
                 title: Center(
                   child: Text(
-                    "The program code does not match. \n\nPlease try again.",
+                    "The program code entered does not match. \n\nPlease try again.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: 'WorkSans',
+                      fontFamily: 'Montserrat',
                       fontSize: 20,
                       color: Colors.black54,
                       fontWeight: FontWeight.bold,
@@ -199,7 +209,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                           title: "Ok",
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          buttonColor: Colors.blue,
+                          buttonColor: kMentorXPAccentDark,
                           fontColor: Colors.white,
                           onPressed: () {
                             Navigator.pop(context);
@@ -220,7 +230,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
           buttonCardText: 'Join the Program',
           buttonCardTextSize: 25,
           buttonCardTextColor: Colors.white,
-          buttonCardColor: Colors.blue,
+          buttonCardColor: kMentorXPAccentDark,
           cardAlignment: MainAxisAlignment.center,
           cardIconBool: Container(),
           buttonCardRadius: 20,
@@ -244,9 +254,10 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 5,
+        backgroundColor: kMentorXPPrimary,
         title: Image.asset(
-          'assets/images/MentorPinkWhite.png',
-          height: 150,
+          'assets/images/MentorXP.png',
+          height: 100,
         ),
       ),
       body: Container(
@@ -261,16 +272,14 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                         _program.programLogo.isEmpty ||
                         _program.programLogo == ""
                     ? Image.asset(
-                        'assets/images/MLogoPink.png',
-                        height: 120,
-                        width: 120,
+                        'assets/images/MXPDark.png',
+                        height: 150,
                         fit: BoxFit.fill,
                       )
                     : CachedNetworkImage(
                         imageUrl: _program.programLogo,
                         imageBuilder: (context, imageProvider) => Container(
-                          height: 120,
-                          width: 120,
+                          height: 150,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
                             image: DecorationImage(
@@ -282,9 +291,8 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                         placeholder: (context, url) =>
                             CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Image.asset(
-                          'assets/images/MLogoPink.png',
-                          height: 120,
-                          width: 120,
+                          'assets/images/MXPDark.png',
+                          height: 150,
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -297,7 +305,9 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 30,
-                      color: Theme.of(context).textTheme.headline4.color,
+                      fontFamily: 'Montserrat',
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Padding(
@@ -318,27 +328,54 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                             Text(
                               'Enter the program code:',
                               style: TextStyle(
-                                fontSize: 20,
-                                // fontWeight: FontWeight.bold,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
                                 color: Colors.black54,
+                                fontFamily: 'Montserrat',
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 10.0),
-                              child: TextFormField(
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  fontFamily: 'WorkSans',
-                                  color: Colors.black54,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 10.0,
+                                      spreadRadius: 2,
+                                    )
+                                  ],
                                 ),
-                                key: formKey,
-                                controller: codeController,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white.withOpacity(0.8),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(Icons.clear),
-                                    onPressed: clearCode,
+                                child: TextFormField(
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.black54,
+                                  ),
+                                  key: formKey,
+                                  controller: codeController,
+                                  cursorColor: kMentorXPAccentDark,
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.transparent),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: kMentorXPAccentDark,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        Icons.clear,
+                                        color: kMentorXPAccentDark,
+                                      ),
+                                      onPressed: clearCode,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -369,7 +406,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                             buttonCardText: 'Cancel',
                             onPressed: () => Navigator.pop(context),
                             buttonCardColor: Colors.white,
-                            buttonCardTextColor: Colors.blue,
+                            buttonCardTextColor: kMentorXPAccentDark,
                             buttonCardTextSize: 25,
                             buttonCardRadius: 20,
                             cardIconBool: Container(),

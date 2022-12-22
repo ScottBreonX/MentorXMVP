@@ -28,8 +28,6 @@ import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'screens/authentication/registration_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'services/auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

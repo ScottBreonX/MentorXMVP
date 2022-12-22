@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
@@ -47,10 +48,10 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
               child: Text(
                 'Confirm Leaving Program',
                 style: TextStyle(
-                  fontFamily: 'Work Sans',
+                  fontFamily: 'Montserrat',
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
-                  color: Colors.pink,
+                  color: Colors.black54,
                 ),
               ),
             ),
@@ -67,7 +68,7 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                           Text(
                             'Are you sure you want to leave the program?',
                             style: TextStyle(
-                              fontFamily: 'WorkSans',
+                              fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                               color: Colors.black45,
@@ -87,10 +88,10 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                     padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                     child: RoundedButton(
                       title: 'Yes',
-                      buttonColor: Colors.pink,
+                      buttonColor: kMentorXPSecondary,
                       fontColor: Colors.white,
-                      minWidth: 120,
-                      fontSize: 15,
+                      minWidth: 150,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       onPressed: () => _leaveProgram(programUID),
                     ),
@@ -99,10 +100,10 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                     padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                     child: RoundedButton(
                       title: 'Cancel',
-                      buttonColor: Colors.pink,
+                      buttonColor: Colors.grey,
                       fontColor: Colors.white,
-                      minWidth: 120,
-                      fontSize: 15,
+                      minWidth: 150,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       onPressed: () {
                         Navigator.pop(context);
@@ -118,7 +119,7 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                   'You will lose all program-related mentoring information',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'WorkSans',
+                    fontFamily: 'Montserrat',
                     color: Colors.grey,
                     fontStyle: FontStyle.italic,
                     fontSize: 15,
@@ -182,9 +183,10 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                 return Scaffold(
                   appBar: AppBar(
                     elevation: 5,
+                    backgroundColor: kMentorXPPrimary,
                     title: Image.asset(
-                      'assets/images/MentorPinkWhite.png',
-                      height: 150,
+                      'assets/images/MentorXP.png',
+                      height: 100,
                     ),
                   ),
                   body: SingleChildScrollView(
@@ -207,9 +209,8 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                                               program.programLogo.isEmpty ||
                                               program.programLogo == ""
                                           ? Image.asset(
-                                              'assets/images/MLogoBlue.png',
-                                              height: 100,
-                                              width: 100,
+                                              'assets/images/MXPDark.png',
+                                              height: 150,
                                               fit: BoxFit.cover,
                                             )
                                           : CachedNetworkImage(
@@ -217,8 +218,7 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                                               imageBuilder:
                                                   (context, imageProvider) =>
                                                       Container(
-                                                height: 100.0,
-                                                width: 100,
+                                                height: 150.0,
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(12),
@@ -233,9 +233,8 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                                               errorWidget:
                                                   (context, url, error) =>
                                                       Image.asset(
-                                                'assets/images/MLogoBlue.png',
-                                                height: 120,
-                                                width: 120,
+                                                'assets/images/MXPDark.png',
+                                                height: 150,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -253,10 +252,10 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                                                     '${program.programName}',
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
-                                                      fontFamily: 'WorkSans',
+                                                      fontFamily: 'Montserrat',
                                                       fontSize: 25,
                                                       fontWeight:
-                                                          FontWeight.w600,
+                                                          FontWeight.bold,
                                                       color: Colors.black54,
                                                     ),
                                                   ),
@@ -295,7 +294,7 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                             buttonCardRadius: 20,
                             buttonCardIcon: Icons.info,
                             buttonCardIconSize: 40,
-                            buttonCardIconColor: Colors.blue,
+                            buttonCardIconColor: kMentorXPSecondary,
                           ),
                           ButtonCard(
                             buttonCardText: 'Leave Program',
@@ -303,7 +302,7 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                             buttonCardRadius: 20,
                             buttonCardIcon: Icons.exit_to_app,
                             buttonCardIconSize: 40,
-                            buttonCardIconColor: Colors.blue,
+                            buttonCardIconColor: kMentorXPSecondary,
                             onPressed: () =>
                                 _confirmLeaveScreen(context, program.id),
                           ),

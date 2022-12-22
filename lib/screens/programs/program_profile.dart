@@ -1,9 +1,9 @@
 import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_join_request.dart';
@@ -33,7 +33,6 @@ class _ProgramProfileState extends State<ProgramProfile> {
   @override
   void initState() {
     super.initState();
-    // checkHasRequested();
     checkHasJoined();
   }
 
@@ -68,27 +67,13 @@ class _ProgramProfileState extends State<ProgramProfile> {
           onPressed: function,
           cardIconBool: Container(),
           cardAlignment: MainAxisAlignment.center,
-          buttonCardColor: hasJoined ? Colors.grey : Colors.blue,
+          buttonCardColor: hasJoined ? Colors.grey : kMentorXPAccentDark,
           buttonCardTextColor: hasJoined ? Colors.grey.shade600 : Colors.white,
           buttonCardTextSize: 25,
           buttonCardRadius: 20,
         ),
       );
     }
-
-    // buildJoinButton(Program program) {
-    //   if (!hasRequested) {
-    //     return buildButton(
-    //       text: "Want to Join?",
-    //       function: () => navigateSecondPage(program),
-    //     );
-    //   } else if (hasRequested) {
-    //     return buildButton(
-    //       text: "You have requested to join.",
-    //       function: () {},
-    //     );
-    //   }
-    // }
 
     buildJoinButton(Program program) {
       if (!hasJoined) {
@@ -114,9 +99,10 @@ class _ProgramProfileState extends State<ProgramProfile> {
           return Scaffold(
             appBar: AppBar(
               elevation: 5,
+              backgroundColor: kMentorXPPrimary,
               title: Image.asset(
-                'assets/images/MentorPinkWhite.png',
-                height: 150,
+                'assets/images/MentorXP.png',
+                height: 100,
               ),
             ),
             body: SingleChildScrollView(
@@ -132,9 +118,8 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                 program.programLogo == null ||
                                 program.programLogo == ""
                             ? Image.asset(
-                                'assets/images/MLogoPink.png',
-                                height: 120,
-                                width: 120,
+                                'assets/images/MXPDark.png',
+                                height: 150,
                               )
                             : CachedNetworkImage(
                                 imageUrl: program.programLogo,
@@ -154,7 +139,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                     CircularProgressIndicator(),
                                 errorWidget: (context, url, error) =>
                                     Image.asset(
-                                  'assets/images/MLogoBlue.png',
+                                  'assets/images/MXPDark.png',
                                   height: 120,
                                   width: 120,
                                   fit: BoxFit.fill,
@@ -208,10 +193,8 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 25,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .headline1
-                                      .color,
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.black54,
                                 ),
                               ),
                             ),
@@ -234,10 +217,8 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 30,
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .headline4
-                                          .color,
+                                      color: Colors.black54,
+                                      fontFamily: 'Montserrat',
                                     ),
                                   ),
                                 ),
@@ -256,8 +237,8 @@ class _ProgramProfileState extends State<ProgramProfile> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 24,
-                                color:
-                                    Theme.of(context).textTheme.headline1.color,
+                                fontFamily: 'Montserrat',
+                                color: Colors.black54,
                               ),
                             ),
                             SizedBox(height: 5),
@@ -279,10 +260,8 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontSize: 20,
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .headline4
-                                          .color,
+                                      fontFamily: 'Montserrat',
+                                      color: Colors.black54,
                                     ),
                                   ),
                                 ),

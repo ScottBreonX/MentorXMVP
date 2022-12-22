@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 
@@ -35,9 +36,10 @@ class _ProgramOverviewState extends State<ProgramOverview> {
           return Scaffold(
             appBar: AppBar(
               elevation: 5,
+              backgroundColor: kMentorXPPrimary,
               title: Image.asset(
-                'assets/images/MentorPinkWhite.png',
-                height: 150,
+                'assets/images/MentorXP.png',
+                height: 100,
               ),
             ),
             body: SingleChildScrollView(
@@ -53,16 +55,14 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                                 program.programLogo == null ||
                                 program.programLogo == ""
                             ? Image.asset(
-                                'assets/images/MLogoPink.png',
-                                height: 120,
-                                width: 120,
+                                'assets/images/MXPDark.png',
+                                height: 150,
                               )
                             : CachedNetworkImage(
                                 imageUrl: program.programLogo,
                                 imageBuilder: (context, imageProvider) =>
                                     Container(
-                                  height: 120,
-                                  width: 120,
+                                  height: 150,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12),
                                     image: DecorationImage(
@@ -75,9 +75,8 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                                     CircularProgressIndicator(),
                                 errorWidget: (context, url, error) =>
                                     Image.asset(
-                                  'assets/images/MLogoBlue.png',
-                                  height: 120,
-                                  width: 120,
+                                  'assets/images/MXPDark.png',
+                                  height: 150,
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -98,10 +97,9 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                                   maxLines: 2,
                                   style: TextStyle(
                                     fontSize: 30,
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .headline4
-                                        .color,
+                                    color: Colors.black54,
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
@@ -109,9 +107,12 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                           ],
                         ),
                       ),
-                      Divider(
-                        thickness: 6,
-                        color: Colors.black45,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                        child: Divider(
+                          thickness: 2,
+                          color: Colors.black45,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -127,10 +128,8 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 25,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .headline1
-                                      .color,
+                                  color: Colors.black54,
+                                  fontFamily: 'Montserrat',
                                 ),
                               ),
                             ),
@@ -153,10 +152,8 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 30,
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .headline4
-                                          .color,
+                                      color: Colors.black54,
+                                      fontFamily: 'Montserrat',
                                     ),
                                   ),
                                 ),
@@ -175,8 +172,8 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 24,
-                                color:
-                                    Theme.of(context).textTheme.headline1.color,
+                                color: Colors.black54,
+                                fontFamily: 'Montserrat',
                               ),
                             ),
                             SizedBox(height: 5),
@@ -198,10 +195,8 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontSize: 20,
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .headline4
-                                          .color,
+                                      color: Colors.black54,
+                                      fontFamily: 'Montserrat',
                                     ),
                                   ),
                                 ),

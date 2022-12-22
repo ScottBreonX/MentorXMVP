@@ -50,6 +50,18 @@ class _AboutMeSectionState extends State<AboutMeSection> {
       autocorrect: true,
       decoration: kTextFieldDecoration.copyWith(
         fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: kMentorXPSecondary, width: 4.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: kMentorXPSecondary, width: 2.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          ),
+        ),
       ),
     );
   }

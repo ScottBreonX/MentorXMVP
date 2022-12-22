@@ -7,10 +7,9 @@ import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'login_screen.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
-import 'registration_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key key, @required this.bloc}) : super(key: key);
+  const WelcomeScreen({Key key, this.bloc}) : super(key: key);
   final LoginBloc bloc;
   static const String id = 'welcome_screen';
 

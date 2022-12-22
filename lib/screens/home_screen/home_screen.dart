@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     if (loggedIn == false || loggedInUser == null) {
-      return circularProgressBlue();
+      return circularProgress();
     }
 
     final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           pageTransition(Widget page, double offSetLow, double offSetHigh) {
             return PageRouteBuilder(
-              transitionDuration: const Duration(milliseconds: 700),
+              transitionDuration: const Duration(milliseconds: 300),
               pageBuilder: (context, animation, secondaryAnimation) => page,
               transitionsBuilder:
                   (context, animation, secondaryAnimation, page) {
@@ -138,15 +138,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                       loggedInUser: loggedInUser.id,
                                       profileId: loggedInUser.id,
                                     ),
-                                    0.0,
+                                    1.5,
                                     1.0),
                               );
                             },
                             child: CircleAvatar(
-                              radius: profilePictureStatus ? 43 : 40,
+                              radius: 50,
                               backgroundColor: Colors.white,
                               child: CircleAvatar(
-                                radius: 40,
+                                radius: 45,
                                 backgroundColor: Colors.white,
                                 child: !profilePictureStatus
                                     ? CircleAvatar(
@@ -174,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                         ),
                                         placeholder: (context, url) =>
-                                            CircularProgressIndicator(),
+                                            Container(),
                                         errorWidget: (context, url, error) =>
                                             Icon(
                                           Icons.person,
@@ -190,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Padding(
                             padding:
                                 const EdgeInsets.only(right: 8.0, top: 20.0),
-                            child: Stack(
+                            child: Column(
                               children: [
                                 Row(
                                   children: [
@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 20,
-                                            fontFamily: 'WorkSans',
+                                            fontFamily: 'Montserrat',
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black54,
                                           ),
@@ -214,42 +214,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Row(
                                   children: [
-                                    Image.asset(
-                                      'assets/images/MentorPink.png',
-                                      width: 70,
-                                    ),
                                     Padding(
-                                      padding: const EdgeInsets.only(top: 5.0),
+                                      padding: const EdgeInsets.only(
+                                        left: 7.0,
+                                        top: 2,
+                                      ),
                                       child: Text(
-                                        'Premium Member',
+                                        '${loggedInUser.email}',
                                         style: TextStyle(
-                                            fontSize: 12,
-                                            fontFamily: 'WorkSans',
-                                            color: kMentorXPPrimary,
-                                            fontWeight: FontWeight.bold),
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 15,
+                                          color: Colors.black54,
+                                        ),
                                       ),
                                     ),
                                   ],
-                                ),
-                                Positioned(
-                                  top: 50,
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 7.0, top: 2),
-                                        child: Text(
-                                          '${loggedInUser.email}',
-                                          style: TextStyle(
-                                            fontFamily: 'WorkSans',
-                                            fontSize: 12,
-                                            color: Colors.black54,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
                                 )
                               ],
                             ),

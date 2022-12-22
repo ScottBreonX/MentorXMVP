@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../../../components/progress.dart';
 import '../../../constants.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/icon_circle.dart';
@@ -35,8 +34,6 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
   String schoolYearText;
   final _formKey1 = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
-  final _formKey3 = GlobalKey<FormState>();
-  final _formKey4 = GlobalKey<FormState>();
 
   Future<void> _updateCoreProfile(String userID) async {
     try {
@@ -48,16 +45,6 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
       if (lastNameText != null) {
         await usersRef.doc(userID).update({
           "Last Name": lastNameText,
-        });
-      }
-      if (majorText != null) {
-        await usersRef.doc(userID).update({
-          "Major": majorText,
-        });
-      }
-      if (schoolYearText != null) {
-        await usersRef.doc(userID).update({
-          "Year in School": schoolYearText,
         });
       }
     } on FirebaseException catch (e) {
@@ -276,7 +263,8 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                       filled: true,
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue, width: 4.0),
+                        borderSide:
+                            BorderSide(color: kMentorXPSecondary, width: 4.0),
                         borderRadius: BorderRadius.all(
                           Radius.circular(10.0),
                         ),

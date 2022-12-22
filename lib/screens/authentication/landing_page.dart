@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/authentication/welcome_screen.dart';
 import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
@@ -30,12 +32,34 @@ class _LandingPageState extends State<LandingPage> {
           final User user = snapshot.data;
 
           if (user == null) {
-            return WelcomeScreen.create(context);
+            return FutureBuilder(
+              future: Future.delayed(
+                const Duration(seconds: 3),
+              ),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState != ConnectionState.done) {
+                  return Scaffold(
+                    backgroundColor: kMentorXPPrimary,
+                    body: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Lottie.asset(
+                          'assets/MentorXP.mp4.lottie.json',
+                          fit: BoxFit.fill,
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                return WelcomeScreen.create(context);
+              },
+            );
           }
           return Provider<Database>(
               create: (_) => FirestoreDatabase(), child: HomeScreen());
         }
         return Scaffold(
+          backgroundColor: kMentorXPPrimary,
           body: Center(
             child: CircularProgressIndicator(),
           ),

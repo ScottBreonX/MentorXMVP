@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import '../../components/progress.dart';
 import '../../models/program_list.dart';
@@ -104,47 +104,19 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final drawerItems = MentorXMenuList(loggedInUser: widget.loggedInUser);
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
-
     return Scaffold(
-      key: _scaffoldKey,
-      // drawer: Drawer(
-      //   child: Container(
-      //     child: drawerItems,
-      //   ),
-      // ),
       appBar: AppBar(
+        backgroundColor: kMentorXPPrimary,
         elevation: 5,
         title: Image.asset(
-          'assets/images/MentorPinkWhite.png',
-          height: 150,
+          'assets/images/MentorXP.png',
+          height: 100,
         ),
       ),
       body: Container(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 40.0),
-              //   child: ButtonCard(
-              //       cardWidthPercent: .90,
-              //       iconPadding: EdgeInsets.only(right: 10),
-              //       buttonCardIconSize: 40,
-              //       // cardIconBool: Container(),
-              //       buttonCardIcon: Icons.add_circle_rounded,
-              //       cardAlignment: MainAxisAlignment.center,
-              //       buttonCardText: 'Join a new program',
-              //       buttonCardColor: Colors.white,
-              //       buttonCardTextSize: 25,
-              //       buttonCardIconColor: Colors.pink,
-              //       buttonCardTextColor: Colors.pink,
-              //       buttonCardRadius: 20,
-              //       onPressed: () {
-              //         Navigator.pushNamed(context, ProgramTypeScreen.id);
-              //       }),
-              // ),
               Padding(
                 padding: const EdgeInsets.only(top: 50.0, bottom: 5),
                 child: Row(
@@ -155,16 +127,16 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                       child: Icon(
                         Icons.check_circle,
                         size: 40,
-                        color: Colors.blue,
+                        color: kMentorXPAccentDark,
                       ),
                     ),
                     Text(
                       'Enrolled Programs',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontFamily: 'WorkSans',
+                        fontFamily: 'Montserrat',
                         fontSize: 25,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.bold,
                         color: Colors.black54,
                       ),
                     ),
@@ -172,7 +144,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                 ),
               ),
               Divider(
-                thickness: 4,
+                thickness: 3,
                 indent: 40,
                 endIndent: 40,
                 color: Colors.black45,
