@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mentorx_mvp/components/mentor_card.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/mentor_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:flutter/material.dart';
@@ -31,57 +32,11 @@ class AvailableMentorsScreen extends StatefulWidget {
 
 class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
   bool showSpinner = false;
-  // TextEditingController searchController = TextEditingController();
-  // String searchString;
 
   @override
   void initState() {
     super.initState();
   }
-
-  // clearSearch() {
-  //   searchController.clear();
-  //   setState(() {
-  //     searchString = null;
-  //   });
-  // }
-
-//   AppBar buildSearchField() {
-//     return AppBar(
-//       title: Container(
-//         width: double.infinity,
-//         height: 40,
-//         decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
-//         child: TextFormField(
-//           style: Theme.of(context).textTheme.subtitle2,
-//           controller: searchController,
-//           decoration: InputDecoration(
-//             hintText: 'Search for a mentor...',
-//             hintStyle: Theme.of(context).textTheme.subtitle2,
-//             filled: true,
-//             fillColor: Colors.white,
-//             prefixIcon: Icon(
-//               Icons.account_box,
-//               size: 30,
-//             ),
-//             suffixIcon: IconButton(
-//               icon: Icon(Icons.clear),
-//               onPressed: clearSearch,
-//             ),
-//           ),
-// //           onFieldSubmitted: handleSearch),
-//           onFieldSubmitted: handleSearch,
-//         ),
-//       ),
-//     );
-//   }
-
-  // handleSearch(String query) {
-  //   String _query = query;
-  //   setState(() {
-  //     searchString = _query;
-  //   });
-  // }
 
   buildMentorListContent(myUser loggedInUser) {
     return Scaffold(
@@ -98,10 +53,10 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
                   'Available Mentors',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'WorkSans',
+                    fontFamily: 'Montserrat',
                     fontSize: 35,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black45,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
                   ),
                 ),
                 Divider(
@@ -127,10 +82,11 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
     return Scaffold(
       // appBar: buildSearchField(),
       appBar: AppBar(
+        backgroundColor: kMentorXPPrimary,
         elevation: 5,
         title: Image.asset(
-          'assets/images/MentorPinkWhite.png',
-          height: 150,
+          'assets/images/MentorXP.png',
+          height: 100,
         ),
       ),
       body: buildMentorListContent(loggedInUser),
@@ -140,14 +96,12 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
 
 class AvailableMentorsStream extends StatelessWidget {
   AvailableMentorsStream({
-    // this.searchString,
     this.loggedInUser,
     this.programUID,
   });
 
   final String programUID;
   final myUser loggedInUser;
-  // final String searchString;
   Stream get mentorStream => _firestore
       .collection('institutions')
       .doc(programUID)
@@ -157,23 +111,7 @@ class AvailableMentorsStream extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var strStart = searchString == null
-    //     ? null
-    //     : searchString.substring(0, searchString.length - 1);
-    // var strEnd = searchString == null
-    //     ? null
-    //     : String.fromCharCode(searchString.characters.last.codeUnitAt(0) + 1);
-    // var limit = searchString != null ? (strStart + strEnd) : null;
-
-    // Stream searchStream = _firestore
-    //     .collection('users')
-    //     .where('First Name', isGreaterThanOrEqualTo: searchString)
-    //     .where('First Name', isLessThan: limit)
-    //     .where('Mentor', isEqualTo: true)
-    //     .snapshots();
-
     return StreamBuilder<QuerySnapshot>(
-      // stream: searchString == null ? mentorStream : searchStream,
       stream: mentorStream,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {

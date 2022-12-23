@@ -519,7 +519,10 @@ class _ProfileState extends State<Profile> {
                                       errorWidget: (context, url, error) =>
                                           Container(),
                                     )
-                                  : Container(),
+                                  : Image.asset(
+                                      'assets/images/defaultCover.png',
+                                      fit: BoxFit.cover,
+                                    ),
                             ),
                             Positioned(
                               top: top,
@@ -557,10 +560,11 @@ class _ProfileState extends State<Profile> {
                                         )
                                       : CircleAvatar(
                                           backgroundColor: Colors.white,
-                                          radius: circleSize + 3,
+                                          radius: profilePhotoHeight / 2,
                                           child: ProfileImageCircle(
-                                            iconSize: circleSize,
-                                            circleSize: circleSize,
+                                            iconSize: profilePhotoHeight / 2,
+                                            circleSize:
+                                                profilePhotoHeight / 2 * .95,
                                             circleColor: Colors.grey,
                                           ),
                                         ),

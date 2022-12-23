@@ -73,6 +73,7 @@ flutter:
     - assets/images/MentorXP.png
     - assets/images/MentorXPDark.png
     - assets/images/MXPDark.png
+    - assets/images/defaultCover.png
     - assets/MentorXP.mp4.lottie.json
 
 

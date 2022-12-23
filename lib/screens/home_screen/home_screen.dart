@@ -134,12 +134,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.push(
                                 context,
                                 pageTransition(
-                                    Profile(
-                                      loggedInUser: loggedInUser.id,
-                                      profileId: loggedInUser.id,
-                                    ),
-                                    1.5,
-                                    1.0),
+                                  Profile(
+                                    loggedInUser: loggedInUser.id,
+                                    profileId: loggedInUser.id,
+                                  ),
+                                  1.5,
+                                  1.0,
+                                ),
                               );
                             },
                             child: CircleAvatar(
@@ -150,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 backgroundColor: Colors.white,
                                 child: !profilePictureStatus
                                     ? CircleAvatar(
-                                        radius: 38,
+                                        radius: 50,
                                         backgroundColor: Colors.grey,
                                         child: Icon(
                                           Icons.person,
