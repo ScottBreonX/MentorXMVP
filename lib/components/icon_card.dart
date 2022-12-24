@@ -22,6 +22,7 @@ class IconCard extends StatelessWidget {
     this.textSpacingHeight,
     this.cachedNetworkImage,
     this.boxShadowColor,
+    this.boxBorderRadius,
   }) : super(key: key);
 
   final Color cardColor;
@@ -42,6 +43,7 @@ class IconCard extends StatelessWidget {
   final double borderWidth;
   final double textSpacingHeight;
   final Color boxShadowColor;
+  final double boxBorderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,7 @@ class IconCard extends StatelessWidget {
                   : Colors.white.withOpacity(1.0),
               width: borderWidth != null ? borderWidth : 0,
             ),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(boxBorderRadius ?? 20),
             boxShadow: [
               BoxShadow(
                 color: boxShadowColor ?? Colors.grey[700],
@@ -78,6 +80,9 @@ class IconCard extends StatelessWidget {
                     color: cardIconColor,
                     size: iconSize ?? 80,
                   ),
+              SizedBox(
+                height: textSpacingHeight ?? 0,
+              ),
               Flexible(
                 child: Container(
                   child: Padding(

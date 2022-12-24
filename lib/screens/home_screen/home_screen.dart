@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/icon_circle_single.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
@@ -250,6 +251,28 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                IconCircleSingle(
+                                  cardIcon: Icons.person,
+                                ),
+                                IconCircleSingle(
+                                  cardIcon: Icons.add,
+                                ),
+                                IconCircleSingle(
+                                  cardIcon: Icons.people,
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 5.0, right: 5.0, top: 20, bottom: 10),
+                              child: Divider(
+                                thickness: 2,
+                                color: Colors.grey,
+                              ),
+                            ),
                             ButtonCard(
                               buttonCardText: 'Edit Profile',
                               buttonCardIcon: Icons.edit,
