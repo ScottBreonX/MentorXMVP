@@ -2,16 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_circle_single.dart';
-import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
-import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
-import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_type.dart';
 import 'package:provider/provider.dart';
 import '../../components/progress.dart';
+import '../../models/program_list.dart';
 import '../../services/auth.dart';
 import '../launch_screen.dart';
 
@@ -51,6 +49,78 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       }
     }));
+  }
+
+  bool isLoading = false;
+  bool hasPrograms = false;
+  List<ProgramList> programs = [];
+
+  Future<dynamic> getProgramData() async {
+    setState(() {
+      isLoading = true;
+    });
+    QuerySnapshot snapshot = await usersRef
+        .doc(widget.loggedInUser.id)
+        .collection('enrolledPrograms')
+        .get();
+    if (snapshot.docs.isNotEmpty) {
+      setState(() {
+        isLoading = false;
+        hasPrograms = true;
+        programs =
+            snapshot.docs.map((doc) => ProgramList.fromDocument(doc)).toList();
+      });
+    }
+  }
+
+  buildEnrolledPrograms() {
+    String userID = loggedInUser.id;
+    String collectionPath = 'enrolledPrograms';
+    isLoading = true;
+    QuerySnapshot _snapshot;
+    return FutureBuilder(
+      future: usersRef.doc(userID).collection(collectionPath).get(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return circularProgress();
+        } else {
+          _snapshot = snapshot.data;
+          if (_snapshot.size > 0) {
+            programs = _snapshot.docs
+                .map((doc) => ProgramList.fromDocument(doc))
+                .toList();
+            return Wrap(
+              children: programs,
+            );
+          } else {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 25),
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Wrap(
+                      children: [
+                        Text(
+                          'You have not enrolled in any programs yet',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black45,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+        }
+      },
+    );
   }
 
   bool profilePictureStatus = false;
@@ -246,94 +316,155 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 20.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                IconCircleSingle(
-                                  cardIcon: Icons.person,
+                                Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          pageTransition(
+                                            Profile(
+                                              loggedInUser: loggedInUser.id,
+                                              profileId: loggedInUser.id,
+                                            ),
+                                            1.5,
+                                            1.0,
+                                          ),
+                                        );
+                                      },
+                                      child: IconCircleSingle(
+                                        cardIcon: Icons.person,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: Text(
+                                        'My',
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          color: kMentorXPSecondary,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      'Profile',
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: kMentorXPSecondary,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                IconCircleSingle(
-                                  cardIcon: Icons.add,
+                                Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          pageTransition(
+                                            ProgramTypeScreen(),
+                                            0,
+                                            1.0,
+                                          ),
+                                        );
+                                      },
+                                      child: IconCircleSingle(
+                                        cardIcon: Icons.add,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: Text(
+                                        'Join a',
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          color: kMentorXPSecondary,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      'Program',
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: kMentorXPSecondary,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                IconCircleSingle(
-                                  cardIcon: Icons.people,
+                                Column(
+                                  children: [
+                                    IconCircleSingle(
+                                      cardIcon: Icons.psychology,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'Knowledge',
+                                            style: TextStyle(
+                                              fontFamily: 'Montserrat',
+                                              color: kMentorXPSecondary,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Center',
+                                            style: TextStyle(
+                                              fontFamily: 'Montserrat',
+                                              color: kMentorXPSecondary,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 5.0, right: 5.0, top: 20, bottom: 10),
-                              child: Divider(
-                                thickness: 2,
-                                color: Colors.grey,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 5.0, right: 5.0, top: 20, bottom: 10),
+                            child: Divider(
+                              thickness: 2,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10.0),
+                            child: Text(
+                              'Enrolled Programs',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: kMentorXPSecondary,
                               ),
                             ),
-                            ButtonCard(
-                              buttonCardText: 'Edit Profile',
-                              buttonCardIcon: Icons.edit,
-                              buttonCardTextSize: 25,
-                              buttonCardRadius: 20,
-                              buttonCardIconSize: 40,
-                              buttonCardIconColor: kMentorXPSecondary,
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  pageTransition(
-                                    Profile(
-                                      loggedInUser: loggedInUser.id,
-                                      profileId: loggedInUser.id,
-                                    ),
-                                    1.5,
-                                    1.0,
-                                  ),
-                                );
-                              },
-                            ),
-                            ButtonCard(
-                              buttonCardText: 'Enrolled Programs',
-                              buttonCardIcon: Icons.people,
-                              buttonCardTextSize: 25,
-                              buttonCardRadius: 20,
-                              buttonCardIconSize: 40,
-                              buttonCardIconColor: kMentorXPSecondary,
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  pageTransition(
-                                    ProgramSelectionScreen(
-                                      loggedInUser: loggedInUser,
-                                    ),
-                                    0.0,
-                                    1.0,
-                                  ),
-                                );
-                              },
-                            ),
-                            ButtonCard(
-                              buttonCardText: 'Join a New Program',
-                              buttonCardIcon: Icons.add,
-                              buttonCardTextSize: 25,
-                              buttonCardRadius: 20,
-                              buttonCardIconSize: 40,
-                              buttonCardIconColor: kMentorXPSecondary,
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  pageTransition(
-                                    ProgramTypeScreen(),
-                                    0,
-                                    1.0,
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
+                          ),
+                          buildEnrolledPrograms(),
+                        ],
                       ),
                     )
                   ],
@@ -342,33 +473,5 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         });
-  }
-}
-
-class HomeMenuButton extends StatelessWidget {
-  const HomeMenuButton({
-    @required this.buttonText,
-    @required this.iconType,
-    @required this.onPressed,
-  });
-
-  final IconData iconType;
-  final String buttonText;
-  final Function onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return RoundedButton(
-      prefixIcon: Icon(
-        iconType,
-        color: Colors.blue,
-      ),
-      title: buttonText,
-      buttonColor: Colors.white,
-      fontColor: Colors.blue,
-      fontSize: 20,
-      onPressed: onPressed,
-      minWidth: 200,
-    );
   }
 }

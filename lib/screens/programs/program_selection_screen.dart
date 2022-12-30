@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
@@ -7,7 +6,6 @@ import 'package:mentorx_mvp/services/database.dart';
 import '../../components/progress.dart';
 import '../../models/program_list.dart';
 
-// myUser loggedInUser;
 final usersRef = FirebaseFirestore.instance.collection('users');
 
 class ProgramSelectionScreen extends StatefulWidget {
