@@ -33,6 +33,7 @@ dependencies:
   firebase_messaging:
   intl: ^0.17.0
   lottie: ^1.4.2
+  dropdown_button2: ^1.9.2
 
 
 

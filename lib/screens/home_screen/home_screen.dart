@@ -342,6 +342,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       },
                                       child: IconCircleSingle(
                                         cardIcon: Icons.person,
+                                        cardIconSize: 50,
                                       ),
                                     ),
                                     Padding(
@@ -382,6 +383,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       },
                                       child: IconCircleSingle(
                                         cardIcon: Icons.add,
+                                        cardIconSize: 50,
                                       ),
                                     ),
                                     Padding(
@@ -411,6 +413,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     IconCircleSingle(
                                       cardIcon: Icons.psychology,
+                                      cardIconSize: 50,
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 10.0),
