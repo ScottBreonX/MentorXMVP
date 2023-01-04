@@ -23,7 +23,7 @@ class RoundedButton extends StatelessWidget {
   final Function onPressed;
   final double minWidth;
   final double borderRadius;
-  final borderColor;
+  final Color borderColor;
   final borderWidth;
   final FontWeight fontWeight;
   final Icon prefixIcon;

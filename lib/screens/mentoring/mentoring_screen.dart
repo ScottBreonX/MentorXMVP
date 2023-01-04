@@ -5,9 +5,10 @@ import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/enrollment_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentee_signup_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentee_enrollment/mentee_enrollment_skills.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_signup_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
+import '../../components/alert_dialog.dart';
 import '../../components/progress.dart';
 import '../../models/mentoring_model.dart';
 import '../programs/program_launch/program_enrollment_screen.dart';
@@ -180,20 +181,16 @@ class _MentoringScreenState extends State<MentoringScreen> {
                     cardIconBool: Container(),
                     onPressed: () => (menteeSelected | mentorSelected)
                         ? {
-                            Navigator.push(
-                              context,
-                              mentorSelected
-                                  ? MaterialPageRoute(
+                            mentorSelected
+                                ? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
                                       builder: (context) => MentorSignupScreen(
                                         programUID: widget.programUID,
                                       ),
-                                    )
-                                  : MaterialPageRoute(
-                                      builder: (context) => MenteeSignupScreen(
-                                        programUID: widget.programUID,
-                                      ),
-                                    ),
-                            )
+                                    ))
+                                : _createMenteeFields(
+                                    context, widget.programUID)
                           }
                         : {},
                   ),
@@ -233,5 +230,30 @@ class _MentoringScreenState extends State<MentoringScreen> {
       ),
       body: buildRoleSelection(),
     );
+  }
+}
+
+Future<void> _createMenteeFields(
+    BuildContext context, String programUID) async {
+  try {
+    await programsRef
+        .doc(programUID)
+        .collection('userSubscribed')
+        .doc(loggedInUser.id)
+        .set({
+      "enrollmentStatus": 'mentee',
+    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MenteeEnrollmentSkillsScreen(
+          loggedInUser: loggedInUser,
+          programUID: programUID,
+        ),
+      ),
+    );
+  } on FirebaseException catch (e) {
+    showAlertDialog(context,
+        title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
   }
 }
