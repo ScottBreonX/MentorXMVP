@@ -7,39 +7,39 @@ import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/progress.dart';
-import '../../../models/mentor_match_models/mentee_model.dart';
+import '../../../models/mentor_match_models/mentor_model.dart';
 import '../../launch_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class MenteeEnrollmentHobbies extends StatefulWidget {
+class MentorEnrollmentHobbies extends StatefulWidget {
   final myUser loggedInUser;
   final String programUID;
-  static const String id = 'mentee_enrollment_hobbies_screen';
+  static const String id = 'mentor_enrollment_hobbies_screen';
 
-  const MenteeEnrollmentHobbies({
+  const MentorEnrollmentHobbies({
     this.loggedInUser,
     this.programUID,
   });
 
   @override
-  State<MenteeEnrollmentHobbies> createState() =>
-      _MenteeEnrollmentHobbiesState();
+  State<MentorEnrollmentHobbies> createState() =>
+      _MentorEnrollmentHobbiesState();
 }
 
-class _MenteeEnrollmentHobbiesState extends State<MenteeEnrollmentHobbies> {
+class _MentorEnrollmentHobbiesState extends State<MentorEnrollmentHobbies> {
   Future<void> _updateMenteeHobbies(
       BuildContext context, String programUID) async {
     try {
       await programsRef
           .doc(programUID)
-          .collection('mentees')
+          .collection('mentors')
           .doc(loggedInUser.id)
           .update({
-        "Mentee Hobby 1": hobby1,
-        "Mentee Hobby 2": hobby2,
-        "Mentee Hobby 3": hobby3,
+        "Mentor Hobby 1": hobby1,
+        "Mentor Hobby 2": hobby2,
+        "Mentor Hobby 3": hobby3,
         "id": loggedInUser.id,
       });
       Navigator.push(
@@ -93,7 +93,7 @@ class _MenteeEnrollmentHobbiesState extends State<MenteeEnrollmentHobbies> {
     return FutureBuilder<Object>(
         future: programsRef
             .doc(widget.programUID)
-            .collection('mentees')
+            .collection('mentors')
             .doc(loggedInUser.id)
             .get(),
         builder: (context, snapshot) {
@@ -101,8 +101,8 @@ class _MenteeEnrollmentHobbiesState extends State<MenteeEnrollmentHobbies> {
             return circularProgress();
           }
 
-          final mentee = snapshot.data;
-          Mentee menteeSkills = Mentee.fromDocument(mentee);
+          final mentor = snapshot.data;
+          Mentor mentorSkills = Mentor.fromDocument(mentor);
 
           return Scaffold(
             appBar: AppBar(
@@ -133,31 +133,31 @@ class _MenteeEnrollmentHobbiesState extends State<MenteeEnrollmentHobbies> {
                     titleText: 'Hobby #1',
                     skillValue: hobby1,
                     inputFunction: (value) => setState(() {
-                      hobby1 = value ?? menteeSkills.menteeHobby1;
+                      hobby1 = value ?? mentorSkills.mentorHobby1;
                       hobby1Changed = true;
                     }),
                     skillChanged: hobby1Changed,
-                    currentValue: menteeSkills.menteeHobby1,
+                    currentValue: mentorSkills.mentorHobby1,
                   ),
                   dropDownSection(
                     titleText: 'Hobby #2',
                     skillValue: hobby2,
                     inputFunction: (value) => setState(() {
-                      hobby2 = value ?? menteeSkills.menteeHobby2;
+                      hobby2 = value ?? mentorSkills.mentorHobby2;
                       hobby2Changed = true;
                     }),
                     skillChanged: hobby2Changed,
-                    currentValue: menteeSkills.menteeHobby2,
+                    currentValue: mentorSkills.mentorHobby2,
                   ),
                   dropDownSection(
                     titleText: 'Hobby #3',
                     skillValue: hobby3,
                     inputFunction: (value) => setState(() {
-                      hobby3 = value ?? menteeSkills.menteeHobby1;
+                      hobby3 = value ?? mentorSkills.mentorHobby1;
                       hobby3Changed = true;
                     }),
                     skillChanged: hobby3Changed,
-                    currentValue: menteeSkills.menteeHobby3,
+                    currentValue: mentorSkills.mentorHobby3,
                   ),
                   SizedBox(
                     height: 50,
@@ -188,13 +188,13 @@ class _MenteeEnrollmentHobbiesState extends State<MenteeEnrollmentHobbies> {
                         minWidth: 150,
                         onPressed: () {
                           if (hobby1 == null) {
-                            hobby1 = menteeSkills.menteeHobby1;
+                            hobby1 = mentorSkills.mentorHobby1;
                           }
                           if (hobby2 == null) {
-                            hobby2 = menteeSkills.menteeHobby2;
+                            hobby2 = mentorSkills.mentorHobby2;
                           }
                           if (hobby3 == null) {
-                            hobby3 = menteeSkills.menteeHobby3;
+                            hobby3 = mentorSkills.mentorHobby3;
                           }
                           _updateMenteeHobbies(context, widget.programUID);
                         },

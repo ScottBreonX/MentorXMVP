@@ -7,7 +7,7 @@ import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentee_enrollment/mentee_enrollment_hobbies.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/progress.dart';
-import '../../../models/mentee_model.dart';
+import '../../../models/mentor_match_models/mentee_model.dart';
 import '../../launch_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');

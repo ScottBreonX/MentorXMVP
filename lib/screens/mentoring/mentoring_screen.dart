@@ -6,7 +6,7 @@ import 'package:mentorx_mvp/models/enrollment_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentee_enrollment/mentee_enrollment_skills.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentor_signup_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentor_enrollment/mentor_enrollment_skills.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import '../../components/alert_dialog.dart';
 import '../../components/progress.dart';
@@ -182,15 +182,8 @@ class _MentoringScreenState extends State<MentoringScreen> {
                     onPressed: () => (menteeSelected | mentorSelected)
                         ? {
                             mentorSelected
-                                ? Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MentorSignupScreen(
-                                        programUID: widget.programUID,
-                                      ),
-                                    ))
-                                : _createMenteeFields(
-                                    context, widget.programUID)
+                                ? _createMentor(context, widget.programUID)
+                                : createMentee(context, widget.programUID)
                           }
                         : {},
                   ),
@@ -233,8 +226,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
   }
 }
 
-Future<void> _createMenteeFields(
-    BuildContext context, String programUID) async {
+Future<void> createMentee(BuildContext context, String programUID) async {
   try {
     await programsRef
         .doc(programUID)
@@ -243,10 +235,76 @@ Future<void> _createMenteeFields(
         .set({
       "enrollmentStatus": 'mentee',
     });
+    await programsRef
+        .doc(programUID)
+        .collection('mentees')
+        .doc(loggedInUser.id)
+        .get()
+        .then((docSnapshot) => {
+              if (!docSnapshot.exists)
+                {
+                  programsRef
+                      .doc(programUID)
+                      .collection('mentees')
+                      .doc(loggedInUser.id)
+                      .set({})
+                }
+            });
+
+    await programsRef
+        .doc(programUID)
+        .collection('mentors')
+        .doc(loggedInUser.id)
+        .delete();
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => MenteeEnrollmentSkillsScreen(
+          loggedInUser: loggedInUser,
+          programUID: programUID,
+        ),
+      ),
+    );
+  } on FirebaseException catch (e) {
+    showAlertDialog(context,
+        title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
+  }
+}
+
+Future<void> _createMentor(BuildContext context, String programUID) async {
+  try {
+    await programsRef
+        .doc(programUID)
+        .collection('userSubscribed')
+        .doc(loggedInUser.id)
+        .set({
+      "enrollmentStatus": 'mentor',
+    });
+    await programsRef
+        .doc(programUID)
+        .collection('mentors')
+        .doc(loggedInUser.id)
+        .get()
+        .then((docSnapshot) => {
+              if (!docSnapshot.exists)
+                {
+                  programsRef
+                      .doc(programUID)
+                      .collection('mentors')
+                      .doc(loggedInUser.id)
+                      .set({})
+                }
+            });
+
+    await programsRef
+        .doc(programUID)
+        .collection('mentees')
+        .doc(loggedInUser.id)
+        .delete();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MentorEnrollmentSkillsScreen(
           loggedInUser: loggedInUser,
           programUID: programUID,
         ),
