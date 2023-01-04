@@ -51,7 +51,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
   List<IconData> skillIcons = [
     Icons.code,
     Icons.numbers,
-    FontAwesomeIcons.chalkboardTeacher,
+    FontAwesomeIcons.chalkboardUser,
     Icons.podcasts_rounded,
     Icons.monetization_on,
     Icons.people,

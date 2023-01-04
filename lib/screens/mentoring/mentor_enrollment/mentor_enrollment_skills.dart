@@ -237,7 +237,7 @@ class _MentorEnrollmentSkillsScreenState
               children: const [
                 Expanded(
                   child: Text(
-                    'Select Item',
+                    '<None Selected>',
                     style: TextStyle(
                       fontSize: 20,
                       fontFamily: 'Montserrat',
@@ -277,9 +277,9 @@ class _MentorEnrollmentSkillsScreenState
             value: skillChanged ? skillValue : currentValue,
             onChanged: inputFunction,
             icon: const Icon(
-              Icons.arrow_drop_down_circle_rounded,
+              Icons.arrow_drop_down,
             ),
-            iconSize: 30,
+            iconSize: 50,
             iconEnabledColor: Colors.white,
             buttonHeight: 60,
             buttonPadding: const EdgeInsets.only(left: 14, right: 14),
@@ -288,7 +288,9 @@ class _MentorEnrollmentSkillsScreenState
               border: Border.all(
                 color: Colors.white,
               ),
-              color: kMentorXPSecondary,
+              color: (currentValue == null && skillValue == null)
+                  ? Colors.grey
+                  : kMentorXPSecondary,
             ),
             buttonElevation: 4,
             itemHeight: 40,
@@ -300,8 +302,8 @@ class _MentorEnrollmentSkillsScreenState
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
               ),
-              border: Border.all(color: Colors.white),
-              color: Colors.grey,
+              border: Border.all(color: Colors.white, width: 2),
+              color: kMentorXPSecondary,
             ),
             dropdownElevation: 8,
             scrollbarRadius: const Radius.circular(50),

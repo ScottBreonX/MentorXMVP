@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentor_enrollment/mentor_enrollment_free_form.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/progress.dart';
 import '../../../models/mentor_match_models/mentor_model.dart';
@@ -29,7 +29,7 @@ class MentorEnrollmentHobbies extends StatefulWidget {
 }
 
 class _MentorEnrollmentHobbiesState extends State<MentorEnrollmentHobbies> {
-  Future<void> _updateMenteeHobbies(
+  Future<void> _updateMentorHobbies(
       BuildContext context, String programUID) async {
     try {
       await programsRef
@@ -45,7 +45,7 @@ class _MentorEnrollmentHobbiesState extends State<MentorEnrollmentHobbies> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ProgramLaunchScreen(
+          builder: (context) => MentorEnrollmentFreeForm(
             loggedInUser: loggedInUser,
             programUID: programUID,
           ),
@@ -196,7 +196,7 @@ class _MentorEnrollmentHobbiesState extends State<MentorEnrollmentHobbies> {
                           if (hobby3 == null) {
                             hobby3 = mentorSkills.mentorHobby3;
                           }
-                          _updateMenteeHobbies(context, widget.programUID);
+                          _updateMentorHobbies(context, widget.programUID);
                         },
                       ),
                     ],
@@ -291,7 +291,9 @@ class _MentorEnrollmentHobbiesState extends State<MentorEnrollmentHobbies> {
               border: Border.all(
                 color: Colors.white,
               ),
-              color: kMentorXPSecondary,
+              color: (currentValue == null && skillValue == null)
+                  ? Colors.grey
+                  : kMentorXPSecondary,
             ),
             buttonElevation: 4,
             itemHeight: 40,
@@ -304,7 +306,7 @@ class _MentorEnrollmentHobbiesState extends State<MentorEnrollmentHobbies> {
                 bottomRight: Radius.circular(20),
               ),
               border: Border.all(color: Colors.white),
-              color: Colors.grey,
+              color: kMentorXPSecondary,
             ),
             dropdownElevation: 8,
             scrollbarRadius: const Radius.circular(50),
