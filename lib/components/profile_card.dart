@@ -67,7 +67,7 @@ class ProfileCard extends StatelessWidget {
                 style: TextStyle(
                   color: cardTextColor ?? Colors.black,
                   fontSize: primaryTextSize ?? 15,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               SizedBox(

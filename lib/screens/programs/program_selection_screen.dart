@@ -84,7 +84,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                           style: TextStyle(
                             fontFamily: 'WorkSans',
                             fontSize: 20,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w500,
                             color: Colors.black45,
                           ),
                         ),
@@ -134,7 +134,7 @@ class _ProgramSelectionScreenState extends State<ProgramSelectionScreen> {
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 25,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                         color: Colors.black54,
                       ),
                     ),

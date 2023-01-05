@@ -79,7 +79,7 @@ class _ProfileState extends State<Profile> {
                 color: kMentorXPAccentDark,
                 fontFamily: 'Montserrat',
                 fontSize: 25,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
               ),
             ),
             children: <Widget>[
@@ -173,7 +173,7 @@ class _ProfileState extends State<Profile> {
                   title: 'Cancel',
                   textAlignment: MainAxisAlignment.center,
                   fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   buttonColor: kMentorXPAccentDark,
                   fontColor: Colors.white,
                   onPressed: () => Navigator.pop(context),
@@ -395,7 +395,7 @@ class _ProfileState extends State<Profile> {
                               fontColor: Colors.black45,
                               minWidth: 150,
                               fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                               onPressed: isUploading
                                   ? null
                                   : () {
@@ -417,7 +417,7 @@ class _ProfileState extends State<Profile> {
                               fontColor: Colors.white,
                               minWidth: 150,
                               fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                               onPressed: isUploading
                                   ? null
                                   : () => handleSubmit(pictureType),
@@ -447,8 +447,6 @@ class _ProfileState extends State<Profile> {
         myProfileView = true;
       });
     }
-
-    double circleSize = 40.0;
 
     return file != null
         ? buildUploadScreen(pictureType)

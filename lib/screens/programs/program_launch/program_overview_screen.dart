@@ -99,7 +99,7 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                                     fontSize: 30,
                                     color: Colors.black54,
                                     fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
@@ -126,7 +126,7 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                                 'Type of program',
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 25,
                                   color: Colors.black54,
                                   fontFamily: 'Montserrat',
@@ -150,7 +150,7 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                                   child: Text(
                                     '${program.enrollmentType.toUpperCase()}',
                                     style: TextStyle(
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w500,
                                       fontSize: 30,
                                       color: Colors.black54,
                                       fontFamily: 'Montserrat',
@@ -170,7 +170,7 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                             Text(
                               'About this program',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w500,
                                 fontSize: 24,
                                 color: Colors.black54,
                                 fontFamily: 'Montserrat',

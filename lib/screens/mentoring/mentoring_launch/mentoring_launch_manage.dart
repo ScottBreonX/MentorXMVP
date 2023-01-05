@@ -45,7 +45,7 @@ _confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
               'Confirm Removing Match',
               style: TextStyle(
                 fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
                 fontSize: 20,
                 color: kMentorXPSecondary,
               ),
@@ -65,7 +65,7 @@ _confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
                           'Are you sure you want to remove $mentorFname $mentorLname as a mentor connection?',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                             fontSize: 20,
                             color: Colors.black45,
                           ),
@@ -88,7 +88,7 @@ _confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
                     fontColor: Colors.white,
                     minWidth: 120,
                     fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     onPressed: () {
                       _removeMatch(
                           context, programUID, mentorUID, matchID, mentorSlots);
@@ -103,7 +103,7 @@ _confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
                     fontColor: kMentorXPSecondary,
                     minWidth: 120,
                     fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -436,7 +436,7 @@ class ButtonCard extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'WorkSans',
                     fontSize: buttonCardTextSize ?? 20,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                     color: buttonCardTextColor ?? Colors.black45,
                   ),
                 ),

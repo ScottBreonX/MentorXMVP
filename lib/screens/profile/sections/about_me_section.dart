@@ -104,7 +104,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                     Text(
                       'About Me',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                         fontFamily: 'Montserrat',
                         fontSize: 20,
                         color: kMentorXPSecondary,

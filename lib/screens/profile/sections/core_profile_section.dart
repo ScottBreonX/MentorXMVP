@@ -190,7 +190,7 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                                 "${user.firstName} ${user.lastName}",
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
                                   color: Colors.black54,
                                   fontSize: 30,
                                 ),
@@ -243,7 +243,7 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                     onChanged: onChanged,
                     style: TextStyle(
                       color: Colors.black54,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w500,
                       fontFamily: 'Montserrat',
                       fontSize: 20,
                     ),

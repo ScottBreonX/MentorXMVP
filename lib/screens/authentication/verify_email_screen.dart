@@ -2,14 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mentorx_mvp/components/article_card.dart';
-import 'package:mentorx_mvp/components/icon_circle.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
-import 'package:mentorx_mvp/screens/launch_screen.dart';
-
-import '../mentoring/mentoring_launch/mentoring_launch_manage.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
   static const String id = 'verify_email_screen';
@@ -81,7 +76,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
               'Verify Email',
               style: TextStyle(
                 fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
@@ -94,7 +89,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   style: TextStyle(
                     fontSize: 30,
                     fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     color: kMentorXPPrimary,
                   ),
                   textAlign: TextAlign.center,
@@ -114,7 +109,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   title: 'Resend Email',
                   buttonColor: kMentorXPSecondary,
                   fontColor: Colors.white,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   fontSize: 20,
                   textAlignment: MainAxisAlignment.center,
                   onPressed: canResendEmail ? sendVerificationEmail : null,

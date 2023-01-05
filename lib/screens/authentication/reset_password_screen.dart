@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
@@ -78,7 +77,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         style: TextStyle(
                           color: kMentorXPAccentMed,
                           fontSize: 25,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
@@ -96,7 +95,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     buttonColor: kMentorXPSecondary,
                     minWidth: 500,
                     fontColor: Colors.white,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     fontSize: 20,
                   ),
                 ),
@@ -122,7 +121,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               color: kMentorXPAccentMed,
                               fontFamily: 'Montserrat',
                               fontSize: 15,
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
                     ],

@@ -40,7 +40,7 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 40,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       color: Colors.black45,
                     ),
                   ),
@@ -97,7 +97,7 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
                                     style: TextStyle(
                                       fontFamily: 'Montserrat',
                                       fontSize: 25,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black45,
                                     ),
                                   ),
@@ -140,7 +140,7 @@ class _ProgramTypeScreenState extends State<ProgramTypeScreen> {
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 25,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w500,
                                     color: Colors.black45,
                                   ),
                                 ),

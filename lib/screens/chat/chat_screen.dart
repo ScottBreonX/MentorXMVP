@@ -162,7 +162,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 30,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   fontFamily: 'WorkSans',
                   color: Colors.black54,
                 ),

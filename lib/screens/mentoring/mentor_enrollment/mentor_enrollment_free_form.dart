@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentor_enrollment/mentor_enrollment_review.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/progress.dart';
 import '../../../models/mentor_match_models/mentor_model.dart';
@@ -41,7 +41,7 @@ class _MentorEnrollmentFreeFormState extends State<MentorEnrollmentFreeForm> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ProgramLaunchScreen(
+          builder: (context) => MentorEnrollmentReview(
             loggedInUser: loggedInUser,
             programUID: programUID,
           ),
@@ -113,7 +113,7 @@ class _MentorEnrollmentFreeFormState extends State<MentorEnrollmentFreeForm> {
                           borderWidth: 2,
                           borderRadius: 20,
                           fontColor: kMentorXPSecondary,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           minWidth: 150,
                           fontSize: 20,
                           onPressed: () {
@@ -124,7 +124,7 @@ class _MentorEnrollmentFreeFormState extends State<MentorEnrollmentFreeForm> {
                           title: 'Next -->',
                           buttonColor: kMentorXPSecondary,
                           fontColor: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           fontSize: 20,
                           borderRadius: 20,
                           minWidth: 150,
@@ -158,7 +158,7 @@ class _MentorEnrollmentFreeFormState extends State<MentorEnrollmentFreeForm> {
         color: Colors.black54,
         fontFamily: 'Montserrat',
         fontSize: 20,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
       ),
       autocorrect: true,
       initialValue: currentFreeFormResponse,

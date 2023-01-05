@@ -37,4 +37,4 @@ ENV['COCOAPODS_DISABLE_STATS'] = 'true'
    installer.pods_project.targets.each do |target|
      flutter_additional_ios_build_settings(target)
    end
- end 
+ end

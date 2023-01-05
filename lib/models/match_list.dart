@@ -128,7 +128,7 @@ class _MatchListState extends State<MatchList> {
                         //           fontColor: Colors.white,
                         //           minWidth: 150,
                         //           fontSize: 15,
-                        //           fontWeight: FontWeight.bold,
+                        //           fontWeight: FontWeight.w500,
                         //           onPressed: () {
                         //             Navigator.push(
                         //               context,
@@ -144,7 +144,7 @@ class _MatchListState extends State<MatchList> {
                         //           buttonColor: Colors.white,
                         //           fontColor: Colors.pink,
                         //           fontSize: 15,
-                        //           fontWeight: FontWeight.bold,
+                        //           fontWeight: FontWeight.w500,
                         //           minWidth: 150,
                         //           onPressed: () {
                         //             _confirmRemoveMentor(context, user.id, widget.programUID);

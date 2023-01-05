@@ -26,23 +26,26 @@ class MentorCard extends StatefulWidget {
   final String programUID;
   final Container moreInfoExpand;
   final Divider dividerExpand;
+  final bool previewStatus;
 
-  MentorCard(
-      {this.mentorUID,
-      this.mentorSlots,
-      this.mentorFname,
-      this.mentorLname,
-      this.imageContainer,
-      this.mentorMajor,
-      this.mentorYearInSchool,
-      this.mtrAtt1,
-      this.mtrAtt2,
-      this.mtrAtt3,
-      this.xFactor,
-      this.profileOnly,
-      this.programUID,
-      this.moreInfoExpand,
-      this.dividerExpand});
+  MentorCard({
+    this.mentorUID,
+    this.mentorSlots,
+    this.mentorFname,
+    this.mentorLname,
+    this.imageContainer,
+    this.mentorMajor,
+    this.mentorYearInSchool,
+    this.mtrAtt1,
+    this.mtrAtt2,
+    this.mtrAtt3,
+    this.xFactor,
+    this.profileOnly,
+    this.programUID,
+    this.moreInfoExpand,
+    this.dividerExpand,
+    this.previewStatus = false,
+  });
 
   @override
   State<MentorCard> createState() => _MentorCardState();
@@ -64,7 +67,7 @@ class _MentorCardState extends State<MentorCard> {
                 'Confirm Removing Mentor',
                 style: TextStyle(
                   fontFamily: 'Work Sans',
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   fontSize: 20,
                   color: Colors.pink,
                 ),
@@ -84,7 +87,7 @@ class _MentorCardState extends State<MentorCard> {
                             'Are you sure you want to remove this mentor?',
                             style: TextStyle(
                               fontFamily: 'WorkSans',
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                               fontSize: 20,
                               color: Colors.black45,
                             ),
@@ -107,7 +110,7 @@ class _MentorCardState extends State<MentorCard> {
                       fontColor: Colors.white,
                       minWidth: 120,
                       fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       onPressed: () =>
                           _removeMentor(widget.mentorUID, widget.programUID),
                     ),
@@ -120,7 +123,7 @@ class _MentorCardState extends State<MentorCard> {
                       fontColor: Colors.white,
                       minWidth: 120,
                       fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -190,7 +193,7 @@ class _MentorCardState extends State<MentorCard> {
                   )
                 : (mentoringAttribute == "presenting")
                     ? attributeIcon = Icon(
-                        FontAwesomeIcons.chalkboardTeacher,
+                        FontAwesomeIcons.chalkboardUser,
                         size: 50,
                         color: Colors.blue.shade300,
                       )
@@ -238,7 +241,7 @@ class _MentorCardState extends State<MentorCard> {
                   )
                 : (mentoringAttribute == "presenting")
                     ? attributeIcon = Icon(
-                        FontAwesomeIcons.chalkboardTeacher,
+                        FontAwesomeIcons.chalkboardUser,
                         size: 50,
                         color: Colors.blue.shade300,
                       )
@@ -286,7 +289,7 @@ class _MentorCardState extends State<MentorCard> {
                   )
                 : (mentoringAttribute == "presenting")
                     ? attributeIcon = Icon(
-                        FontAwesomeIcons.chalkboardTeacher,
+                        FontAwesomeIcons.chalkboardUser,
                         size: 50,
                         color: Colors.blue.shade300,
                       )
@@ -361,7 +364,7 @@ class _MentorCardState extends State<MentorCard> {
                                 style: TextStyle(
                                   fontFamily: 'WorkSans',
                                   fontSize: 23,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w500,
                                   color: Colors.black54,
                                 ),
                               ),
@@ -376,7 +379,7 @@ class _MentorCardState extends State<MentorCard> {
                                       style: TextStyle(
                                         fontFamily: 'WorkSans',
                                         fontSize: 10,
-                                        fontWeight: FontWeight.w600,
+                                        fontWeight: FontWeight.w500,
                                         color: Colors.black54,
                                       ),
                                     ),
@@ -387,60 +390,10 @@ class _MentorCardState extends State<MentorCard> {
                                       style: TextStyle(
                                         fontFamily: 'WorkSans',
                                         fontSize: 10,
-                                        fontWeight: FontWeight.w600,
+                                        fontWeight: FontWeight.w500,
                                         color: Colors.blue,
                                       ),
                                     ),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5.0),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Year in School: ',
-                                  style: TextStyle(
-                                    fontFamily: 'WorkSans',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black54,
-                                  ),
-                                ),
-                                Text(
-                                  '${widget.mentorYearInSchool}',
-                                  style: TextStyle(
-                                    fontFamily: 'WorkSans',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Major: ',
-                                style: TextStyle(
-                                  fontFamily: 'WorkSans',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                              Container(
-                                width: 200,
-                                child: Text(
-                                  '${widget.mentorMajor}',
-                                  style: TextStyle(
-                                    fontFamily: 'WorkSans',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
                         ]),
@@ -464,7 +417,7 @@ class _MentorCardState extends State<MentorCard> {
                                 style: TextStyle(
                                   fontFamily: 'WorkSans',
                                   fontSize: 15,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
                                   color: Colors.black54,
                                 ),
                               ),
@@ -490,7 +443,7 @@ class _MentorCardState extends State<MentorCard> {
                                         style: TextStyle(
                                           fontFamily: 'WorkSans',
                                           fontSize: 10,
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.w500,
                                           color: Colors.black54,
                                         ),
                                       ),
@@ -515,7 +468,7 @@ class _MentorCardState extends State<MentorCard> {
                                         style: TextStyle(
                                           fontFamily: 'WorkSans',
                                           fontSize: 10,
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.w500,
                                           color: Colors.black54,
                                         ),
                                       ),
@@ -540,7 +493,7 @@ class _MentorCardState extends State<MentorCard> {
                                         style: TextStyle(
                                           fontFamily: 'WorkSans',
                                           fontSize: 10,
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.w500,
                                           color: Colors.black54,
                                         ),
                                       ),
@@ -567,7 +520,7 @@ class _MentorCardState extends State<MentorCard> {
                                 style: TextStyle(
                                   fontFamily: 'WorkSans',
                                   fontSize: 15,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
                                   color: Colors.black54,
                                 ),
                               ),
@@ -604,47 +557,52 @@ class _MentorCardState extends State<MentorCard> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            RoundedButton(
-                              title: 'Select Mentor',
-                              buttonColor: Colors.pink,
-                              borderRadius: 15,
-                              minWidth: 150,
-                              fontColor: Colors.white,
-                              onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MentorConfirm(
-                                    mentorUID: widget.mentorUID,
-                                    mentorFname: widget.mentorFname,
-                                    mentorLname: widget.mentorLname,
-                                    mentorMajor: widget.mentorMajor,
-                                    mentorYearInSchool:
-                                        widget.mentorYearInSchool,
-                                    mtrAtt1: widget.mtrAtt1,
-                                    mtrAtt2: widget.mtrAtt2,
-                                    mtrAtt3: widget.mtrAtt3,
-                                    xFactor: widget.xFactor,
-                                    mentorPicContainer: widget.imageContainer,
-                                    mentorSlots: widget.mentorSlots,
-                                    programUID: widget.programUID,
+                            widget.previewStatus
+                                ? Container()
+                                : RoundedButton(
+                                    title: 'Select Mentor',
+                                    buttonColor: Colors.pink,
+                                    borderRadius: 15,
+                                    minWidth: 150,
+                                    fontColor: Colors.white,
+                                    onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MentorConfirm(
+                                          mentorUID: widget.mentorUID,
+                                          mentorFname: widget.mentorFname,
+                                          mentorLname: widget.mentorLname,
+                                          mentorMajor: widget.mentorMajor,
+                                          mentorYearInSchool:
+                                              widget.mentorYearInSchool,
+                                          mtrAtt1: widget.mtrAtt1,
+                                          mtrAtt2: widget.mtrAtt2,
+                                          mtrAtt3: widget.mtrAtt3,
+                                          xFactor: widget.xFactor,
+                                          mentorPicContainer:
+                                              widget.imageContainer,
+                                          mentorSlots: widget.mentorSlots,
+                                          programUID: widget.programUID,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
-                            RoundedButton(
-                              title: 'View Profile',
-                              borderRadius: 15,
-                              minWidth: 150,
-                              buttonColor: Colors.white,
-                              fontColor: Colors.pink,
-                              onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      Profile(profileId: widget.mentorUID),
-                                ),
-                              ),
-                            ),
+                            widget.previewStatus
+                                ? Container()
+                                : RoundedButton(
+                                    title: 'View Profile',
+                                    borderRadius: 15,
+                                    minWidth: 150,
+                                    buttonColor: Colors.white,
+                                    fontColor: Colors.pink,
+                                    onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Profile(
+                                            profileId: widget.mentorUID),
+                                      ),
+                                    ),
+                                  ),
                           ],
                         ),
                         Column(
@@ -652,12 +610,14 @@ class _MentorCardState extends State<MentorCard> {
                             Padding(
                               padding:
                                   const EdgeInsets.only(top: 10.0, bottom: 5),
-                              child: Divider(
-                                indent: 10,
-                                endIndent: 10,
-                                color: Colors.grey.shade300,
-                                thickness: 1,
-                              ),
+                              child: widget.previewStatus
+                                  ? Container()
+                                  : Divider(
+                                      indent: 10,
+                                      endIndent: 10,
+                                      color: Colors.grey.shade300,
+                                      thickness: 1,
+                                    ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 10.0),
@@ -681,7 +641,7 @@ class _MentorCardState extends State<MentorCard> {
                                           style: TextStyle(
                                             fontFamily: 'WorkSans',
                                             fontSize: 15,
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.w500,
                                             color: Colors.black45,
                                           ),
                                         ),
@@ -732,7 +692,7 @@ class _MentorCardState extends State<MentorCard> {
                                           style: TextStyle(
                                             fontFamily: 'WorkSans',
                                             fontSize: 15,
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.w500,
                                             color: Colors.blue,
                                           ),
                                         ),

@@ -102,7 +102,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
               fontFamily: 'Montserrat',
               fontSize: 20,
               color: kMentorXPSecondary,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ),
@@ -115,7 +115,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         child: Text(
           item,
           style: TextStyle(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w500,
             fontSize: 20,
           ),
         ),
@@ -141,7 +141,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
         color: Colors.black54,
         fontFamily: 'Montserrat',
         fontSize: 20,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
       ),
       controller: traitController,
       autocorrect: true,
@@ -263,7 +263,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                         'What are the top 3 skill sets you can mentor on?',
                         style: TextStyle(
                           fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           color: Colors.black54,
                           fontSize: 20,
                         ),
@@ -380,7 +380,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                         'What are your top 3 hobbies or activities?',
                         style: TextStyle(
                           fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           fontSize: 20,
                           color: Colors.black54,
                         ),
@@ -477,7 +477,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
           'Skills',
           style: TextStyle(
             fontFamily: 'Montserrat',
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w500,
             color: Colors.black54,
             fontSize: 25,
           ),
@@ -492,7 +492,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
           'Hobbies',
           style: TextStyle(
             fontFamily: 'Montserrat',
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w500,
             color: Colors.black54,
             fontSize: 25,
           ),
@@ -507,7 +507,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
           'X-Factor',
           style: TextStyle(
             fontFamily: 'Montserrat',
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w500,
             color: Colors.black54,
             fontSize: 25,
           ),
@@ -521,7 +521,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                 'What makes you a great mentor?',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   fontSize: 20,
                   color: Colors.black54,
                 ),
@@ -540,7 +540,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
           'Slots',
           style: TextStyle(
             fontFamily: 'Montserrat',
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w500,
             color: Colors.black54,
             fontSize: 25,
           ),
@@ -559,7 +559,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                 'Recommended: 2',
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   color: kMentorXPSecondary,
                 ),
                 textAlign: TextAlign.center,
@@ -587,7 +587,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                 'Enrollment Success',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   fontSize: 20,
                   color: kMentorXPSecondary,
                 ),
@@ -607,7 +607,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                             'Thank you for enrolling as a Mentor',
                             style: TextStyle(
                               fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                               fontSize: 20,
                               color: Colors.black45,
                             ),
@@ -630,7 +630,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                       fontColor: Colors.white,
                       minWidth: 200,
                       fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -764,7 +764,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                     fontColor: Colors.white,
                     minWidth: 200,
                     fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     onPressed: () => Navigator.pop(context),
                   ),
                 ),
@@ -814,7 +814,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                           fontColor: Colors.white,
                           onPressed: next,
                           fontSize: 15,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           borderRadius: 12,
                           minWidth: 120,
                         ),
@@ -827,7 +827,7 @@ class _MentorSignupScreenState extends State<MentorSignupScreen> {
                           fontColor: kMentorXPSecondary,
                           onPressed: cancel,
                           fontSize: 15,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           borderRadius: 12,
                           minWidth: 120,
                         ),

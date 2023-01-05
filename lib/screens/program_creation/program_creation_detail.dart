@@ -261,7 +261,7 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                                 fontColor: Colors.black45,
                                 minWidth: 150,
                                 fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w500,
                                 onPressed: isUploading
                                     ? null
                                     : () {
@@ -279,7 +279,7 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                                 fontColor: Colors.white,
                                 minWidth: 150,
                                 fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w500,
                                 onPressed:
                                     isUploading ? null : () => handleSubmit(),
                               ),
@@ -313,7 +313,7 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                 'Success!',
                 style: TextStyle(
                   fontFamily: 'Work Sans',
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   fontSize: 20,
                   color: Colors.pink,
                 ),
@@ -347,7 +347,7 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                       fontColor: Colors.white,
                       minWidth: 200,
                       fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -411,7 +411,7 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                                   fontFamily: 'Work Sans',
                                   fontSize: 30,
                                   color: Colors.black54,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),

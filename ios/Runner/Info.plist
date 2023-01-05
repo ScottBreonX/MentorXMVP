@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Allow access to MentorX for audio capture</string>
+	<string>Allow access to MentorUp for audio capture</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Allow access to MentorX for image capture</string>
+	<string>Allow access to MentorUp for image capture</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow access to MentorX for image upload</string>
+	<string>Allow access to MentorUp for image upload</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Mentor+</string>
+	<string>MentorUp</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Mentor+</string>
+	<string>MentorUp</string>
 	<key>CFBundleDisplayName</key>
-	<string>Mentor+</string>
+	<string>MentorUp</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>CFBundleDevelopmentRegion</key>

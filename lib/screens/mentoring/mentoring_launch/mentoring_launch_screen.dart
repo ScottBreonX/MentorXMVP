@@ -110,7 +110,7 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                           style: TextStyle(
                                             fontFamily: 'Montserrat',
                                             fontSize: 20,
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.w500,
                                             color: Colors.black45,
                                             overflow: TextOverflow.ellipsis,
                                           ),
@@ -144,7 +144,7 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                           style: TextStyle(
                                             fontFamily: 'Montserrat',
                                             fontSize: 20,
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.w500,
                                             color: Colors.black45,
                                             overflow: TextOverflow.ellipsis,
                                           ),

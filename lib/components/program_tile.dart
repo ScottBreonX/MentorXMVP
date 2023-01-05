@@ -90,7 +90,7 @@ class ProgramTile extends StatelessWidget {
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w500,
                                     color: Colors.black54,
                                   ),
                                 ),
@@ -103,7 +103,6 @@ class ProgramTile extends StatelessWidget {
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 10,
-                                    fontWeight: FontWeight.w900,
                                     color: kMentorXPSecondary,
                                   ),
                                 ),
@@ -112,7 +111,6 @@ class ProgramTile extends StatelessWidget {
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 10,
-                                    fontWeight: FontWeight.w600,
                                     color: Colors.black54,
                                   ),
                                 ),
@@ -130,7 +128,6 @@ class ProgramTile extends StatelessWidget {
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 12,
-                                    fontWeight: FontWeight.bold,
                                     color: Colors.black45,
                                   ),
                                 ),

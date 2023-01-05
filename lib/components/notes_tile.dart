@@ -93,7 +93,7 @@ class NotesTile extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                             color: kMentorXPSecondary,
                           ),
                         ),
@@ -113,7 +113,7 @@ class NotesTile extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 20,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w500,
                             color: Colors.black54,
                           ),
                         ),

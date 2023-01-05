@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="scottbreon.mentorx_mvp">
     <application
-        android:label="Mentor+"
+        android:label="MentorUp"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

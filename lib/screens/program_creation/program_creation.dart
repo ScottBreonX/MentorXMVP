@@ -247,7 +247,7 @@ class _ProgramCreationState extends State<ProgramCreation> {
                           fontFamily: 'Work Sans',
                           fontSize: 25,
                           color: Colors.black54,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -293,7 +293,7 @@ class _ProgramCreationState extends State<ProgramCreation> {
                             style: TextStyle(
                               fontFamily: 'Work Sans',
                               fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                               color: Colors.black45,
                             ),
                           ),
@@ -324,7 +324,7 @@ class _ProgramCreationState extends State<ProgramCreation> {
                                   fontFamily: 'Work Sans',
                                   fontSize: 20,
                                   color: Colors.blue,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
                                 ),
                                 onChanged: (String newValue) {
                                   setState(() {
@@ -357,7 +357,7 @@ class _ProgramCreationState extends State<ProgramCreation> {
                         children: [
                           RoundedButton(
                             title: 'Cancel',
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                             fontSize: 20,
                             buttonColor: Colors.white,
                             fontColor: Colors.pink,
@@ -368,7 +368,7 @@ class _ProgramCreationState extends State<ProgramCreation> {
                           ),
                           RoundedButton(
                             title: 'Next',
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                             fontSize: 20,
                             buttonColor: canSubmit ? Colors.pink : Colors.grey,
                             fontColor:

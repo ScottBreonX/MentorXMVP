@@ -58,7 +58,7 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                 'Delete Note Confirmation',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   fontSize: 20,
                   color: Colors.black54,
                 ),
@@ -78,7 +78,7 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                             'Are you sure you want to delete this note?',
                             style: TextStyle(
                               fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                               fontSize: 20,
                               color: Colors.black45,
                             ),
@@ -105,7 +105,7 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                       fontColor: Colors.black54,
                       minWidth: 120,
                       fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -123,7 +123,7 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                       fontColor: Colors.white,
                       minWidth: 120,
                       fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       onPressed: () async {
                         await _deleteNote(programUID, matchID, noteID);
                         Navigator.pop(context);
@@ -234,7 +234,7 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                         style: TextStyle(
                           fontSize: 25,
                           color: Colors.black54,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                         ),
                         autocorrect: false,
                         decoration: InputDecoration(

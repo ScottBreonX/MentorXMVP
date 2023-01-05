@@ -53,7 +53,7 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
                         style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontSize: 25,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           color: Colors.black54,
                         ),
                       ),
@@ -72,7 +72,7 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 25,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                             color: kMentorXPPrimary,
                           ),
                         ),
@@ -85,7 +85,7 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
                         style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontSize: 15,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           color: kMentorXPAccentMed,
                         ),
                       ),
@@ -99,7 +99,7 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 25,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                             color: kMentorXPPrimary,
                           ),
                         ),

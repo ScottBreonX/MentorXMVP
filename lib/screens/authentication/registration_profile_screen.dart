@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
@@ -202,7 +201,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                       fontFamily: 'Montserrat',
                       fontSize: 20,
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
@@ -225,7 +224,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                   buttonColor: kMentorXPSecondary,
                   fontColor: Colors.white,
                   fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   minWidth: 500.0,
                 ),
               ],

@@ -109,7 +109,7 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
                   style: TextStyle(
                       fontSize: 25,
                       color: Colors.black54,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       fontFamily: 'Montserrat'),
                   autocorrect: false,
                   decoration: InputDecoration(

@@ -55,7 +55,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 widget.title,
                 style: TextStyle(
                   fontSize: widget.titleFontSize,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w500,
                   color: Colors.white,
                 ),
               ),
@@ -84,7 +84,7 @@ class _CustomDialogState extends State<CustomDialog> {
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w500,
                           ),
                         )),
                   ),
@@ -97,7 +97,7 @@ class _CustomDialogState extends State<CustomDialog> {
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w500,
                           ),
                         )),
                   ),

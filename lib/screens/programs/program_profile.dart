@@ -191,7 +191,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                 'Type of program',
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 25,
                                   fontFamily: 'Montserrat',
                                   color: Colors.black54,
@@ -215,7 +215,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                   child: Text(
                                     '${program.enrollmentType.toUpperCase()}',
                                     style: TextStyle(
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w500,
                                       fontSize: 30,
                                       color: Colors.black54,
                                       fontFamily: 'Montserrat',
@@ -235,7 +235,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
                             Text(
                               'About this program',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w500,
                                 fontSize: 24,
                                 fontFamily: 'Montserrat',
                                 color: Colors.black54,

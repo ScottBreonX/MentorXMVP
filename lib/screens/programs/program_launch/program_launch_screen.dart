@@ -141,7 +141,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                 style: TextStyle(
                                   color: Colors.black54,
                                   fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
                                   overflow: TextOverflow.visible,
                                 ),
                               ),
@@ -277,7 +277,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                               style: TextStyle(
                                                 fontFamily: 'Montserrat',
                                                 fontSize: 25,
-                                                fontWeight: FontWeight.bold,
+                                                fontWeight: FontWeight.w500,
                                                 color: Colors.black54,
                                               ),
                                             ),
@@ -312,7 +312,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                               fontSize: 25,
                               fontFamily: 'Montserrat',
                               color: Colors.black54,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
@@ -327,7 +327,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                             'Resources',
                             style: TextStyle(
                               color: Colors.black54,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                               fontSize: 25,
                               fontFamily: 'Montserrat',
                             ),

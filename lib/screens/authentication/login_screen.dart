@@ -89,7 +89,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
       onChanged: widget.bloc.updateEmail,
       style: TextStyle(
         color: Colors.black54,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
@@ -124,7 +124,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
       onChanged: widget.bloc.updatePassword,
       style: TextStyle(
         color: Colors.black54,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
         prefixIcon: Icon(
@@ -237,7 +237,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                             fontColor: model.canSubmit
                                 ? Colors.white
                                 : Colors.grey.shade400,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                             fontSize: 20,
                           ),
                         ),
@@ -253,7 +253,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: kMentorXPAccentMed,
-                                  fontWeight: FontWeight.w900,
+                                  fontWeight: FontWeight.w500,
                                   fontFamily: 'Montserrat',
                                 ),
                               ),

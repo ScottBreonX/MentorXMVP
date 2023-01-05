@@ -289,7 +289,7 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                               fontFamily: 'Work Sans',
                               fontSize: 25,
                               color: Colors.black54,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
@@ -337,7 +337,7 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                                 style: TextStyle(
                                   fontFamily: 'Work Sans',
                                   fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
                                   color: Colors.black45,
                                 ),
                               ),
@@ -368,7 +368,7 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                                       fontFamily: 'Work Sans',
                                       fontSize: 20,
                                       color: Colors.blue,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                     onChanged: (String newValue) {
                                       setState(() {
@@ -401,7 +401,7 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                             children: [
                               RoundedButton(
                                 title: 'Cancel',
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w500,
                                 fontSize: 20,
                                 buttonColor: Colors.white,
                                 fontColor: Colors.pink,
@@ -412,7 +412,7 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                               ),
                               RoundedButton(
                                 title: 'Save',
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w500,
                                 fontSize: 20,
                                 buttonColor: Colors.pink,
                                 fontColor: Colors.white,

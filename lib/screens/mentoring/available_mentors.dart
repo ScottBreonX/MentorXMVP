@@ -55,7 +55,7 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: 35,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     color: Colors.black54,
                   ),
                 ),

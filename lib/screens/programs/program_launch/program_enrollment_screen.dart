@@ -49,7 +49,7 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                 'Confirm Leaving Program',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   fontSize: 20,
                   color: Colors.black54,
                 ),
@@ -69,7 +69,7 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                             'Are you sure you want to leave the program?',
                             style: TextStyle(
                               fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                               fontSize: 20,
                               color: Colors.black45,
                             ),
@@ -92,7 +92,7 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                       fontColor: Colors.white,
                       minWidth: 150,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       onPressed: () => _leaveProgram(programUID),
                     ),
                   ),
@@ -104,7 +104,7 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                       fontColor: Colors.white,
                       minWidth: 150,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -255,7 +255,7 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                                                       fontFamily: 'Montserrat',
                                                       fontSize: 25,
                                                       fontWeight:
-                                                          FontWeight.bold,
+                                                          FontWeight.w500,
                                                       color: Colors.black54,
                                                     ),
                                                   ),
@@ -383,7 +383,7 @@ class ButtonCard extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: buttonCardTextSize ?? 20,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     color: buttonCardTextColor ?? Colors.black45,
                   ),
                 ),

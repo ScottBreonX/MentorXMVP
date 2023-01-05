@@ -105,7 +105,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                       style: TextStyle(
                         color: kMentorXPSecondary,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                         fontFamily: 'Montserrat',
                       ),
                     ),

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
@@ -138,7 +137,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       onChanged: widget.bloc.updateEmail,
       style: TextStyle(
         color: Colors.black54,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
@@ -173,7 +172,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       onChanged: widget.bloc.updatePassword,
       style: TextStyle(
         color: Colors.black54,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
         prefixIcon: Icon(
@@ -208,7 +207,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       onChanged: widget.bloc.updateConfirmPassword,
       style: TextStyle(
         color: Colors.black54,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
       ),
       decoration: kTextFieldDecorationLight.copyWith(
         prefixIcon: Icon(
@@ -325,7 +324,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             title: 'Next',
                             buttonColor: kMentorXPAccentMed,
                             fontColor: Colors.white,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                             fontSize: 20,
                             minWidth: 500.0,
                           ),
@@ -350,7 +349,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: kMentorXPAccentMed,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
                                   fontFamily: 'Montserrat',
                                 ),
                               ),

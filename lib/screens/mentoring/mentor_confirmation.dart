@@ -100,7 +100,7 @@ class MentorConfirm extends StatelessWidget {
                 'Successful Mentor Match!',
                 style: TextStyle(
                   fontFamily: 'Work Sans',
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   fontSize: 20,
                   color: Colors.pink,
                 ),
@@ -120,7 +120,7 @@ class MentorConfirm extends StatelessWidget {
                             'You have been successfully matched with $mentorFname $mentorLname',
                             style: TextStyle(
                               fontFamily: 'WorkSans',
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                               fontSize: 20,
                               color: Colors.black45,
                             ),
@@ -143,7 +143,7 @@ class MentorConfirm extends StatelessWidget {
                       fontColor: Colors.white,
                       minWidth: 200,
                       fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -198,7 +198,7 @@ class MentorConfirm extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'WorkSans',
                         fontSize: 30,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                         color: Colors.pink,
                       ),
                     ),
@@ -232,7 +232,7 @@ class MentorConfirm extends StatelessWidget {
                     children: [
                       RoundedButton(
                         title: 'Back',
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                         fontSize: 20,
                         minWidth: 150,
                         buttonColor: Colors.white,
@@ -241,7 +241,7 @@ class MentorConfirm extends StatelessWidget {
                       ),
                       RoundedButton(
                         title: 'Confirm',
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                         fontSize: 20,
                         minWidth: 150,
                         buttonColor: Colors.pink,

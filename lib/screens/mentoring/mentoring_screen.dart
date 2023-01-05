@@ -117,7 +117,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: 30,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     color: Colors.black54,
                   ),
                 ),

@@ -104,7 +104,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                         style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontSize: 30,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           color: Colors.black54,
                         ),
                       ),
@@ -128,7 +128,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                         fontFamily: 'Montserrat',
                         fontSize: 20,
                         color: kMentorXPPrimary,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     Padding(
@@ -157,7 +157,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                         title: "OK",
                         buttonColor: kMentorXPAccentDark,
                         fontColor: Colors.white,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                         fontSize: 20,
                         onPressed: () {
                           Navigator.pop(context);
@@ -194,7 +194,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                       fontFamily: 'Montserrat',
                       fontSize: 20,
                       color: Colors.black54,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
@@ -208,7 +208,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                           minWidth: 200,
                           title: "Ok",
                           fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           buttonColor: kMentorXPAccentDark,
                           fontColor: Colors.white,
                           onPressed: () {
@@ -307,7 +307,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                       fontSize: 30,
                       fontFamily: 'Montserrat',
                       color: Colors.black54,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   Padding(
@@ -329,7 +329,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                               'Enter the program code:',
                               style: TextStyle(
                                 fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w500,
                                 color: Colors.black54,
                                 fontFamily: 'Montserrat',
                               ),
@@ -388,7 +388,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                           style: TextStyle(
                             fontSize: 25,
                             fontFamily: 'Work Sans',
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                             color: Colors.black54,
                           ),
                         ),

@@ -30,31 +30,27 @@ class AppTheme {
       headline1: TextStyle(
         color: Colors.black54,
         fontSize: 30.0,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'WorkSans-Regular',
+        fontFamily: 'Montserrat',
       ),
       headline2: TextStyle(
         color: Colors.white,
         fontSize: 20,
-        fontFamily: 'WorkSans-Regular',
+        fontFamily: 'Montserrat',
       ),
       headline3: TextStyle(
         color: Colors.blue,
         fontSize: 20,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'WorkSans-Regular',
+        fontFamily: 'Montserrat',
       ),
       headline4: TextStyle(
         color: Colors.black54,
         fontSize: 20,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'WorkSans-Regular',
+        fontFamily: 'Montserrat',
       ),
       headline5: TextStyle(
         color: Colors.black54,
         fontSize: 15.0,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'WorkSans-Regular',
+        fontFamily: 'Montserrat',
       ),
       subtitle1: TextStyle(
         color: Colors.white,

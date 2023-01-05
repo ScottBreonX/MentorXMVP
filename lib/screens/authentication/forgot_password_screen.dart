@@ -50,7 +50,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       },
       style: TextStyle(
         color: Colors.black54,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
@@ -147,7 +147,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               style: TextStyle(
                                 color: kMentorXPAccentMed,
                                 fontSize: 30,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                             Padding(
