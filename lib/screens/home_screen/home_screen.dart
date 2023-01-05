@@ -342,6 +342,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                         );
                                       },
                                       child: IconCircleSingle(
+                                        cardHeight:
+                                            MediaQuery.of(context).size.width *
+                                                .80 /
+                                                3,
+                                        cardWidth:
+                                            MediaQuery.of(context).size.width *
+                                                .80 /
+                                                3,
                                         cardIcon: Icons.person,
                                         cardIconSize: 50,
                                       ),
@@ -383,6 +391,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                         );
                                       },
                                       child: IconCircleSingle(
+                                        cardHeight:
+                                            MediaQuery.of(context).size.width *
+                                                .80 /
+                                                3,
+                                        cardWidth:
+                                            MediaQuery.of(context).size.width *
+                                                .80 /
+                                                3,
                                         cardIcon: Icons.add,
                                         cardIconSize: 50,
                                       ),
@@ -413,6 +429,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Column(
                                   children: [
                                     IconCircleSingle(
+                                      cardHeight:
+                                          MediaQuery.of(context).size.width *
+                                              .80 /
+                                              3,
+                                      cardWidth:
+                                          MediaQuery.of(context).size.width *
+                                              .80 /
+                                              3,
                                       cardIcon: Icons.psychology,
                                       cardIconSize: 50,
                                     ),

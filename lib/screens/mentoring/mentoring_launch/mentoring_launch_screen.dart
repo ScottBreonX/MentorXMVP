@@ -83,12 +83,14 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                   ),
                   body: SingleChildScrollView(
                     child: Container(
+                      width: MediaQuery.of(context).size.width,
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 50.0),
+                            padding: const EdgeInsets.only(
+                                top: 50.0, left: 20, right: 20),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Column(
                                   children: [
@@ -99,11 +101,10 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                       ),
                                       onTap: () {},
                                     ),
-                                    Container(
-                                      width: 200,
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 10.0),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: Container(
+                                        width: 100,
                                         child: Text(
                                           '${user.firstName} ${user.lastName}',
                                           textAlign: TextAlign.center,
@@ -112,7 +113,6 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                             fontSize: 20,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.black45,
-                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                       ),
@@ -137,7 +137,7 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                     Padding(
                                       padding: const EdgeInsets.only(top: 10.0),
                                       child: Container(
-                                        width: 200,
+                                        width: 100,
                                         child: Text(
                                           '${mentor.firstName} ${mentor.lastName}',
                                           textAlign: TextAlign.center,
@@ -146,7 +146,6 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                             fontSize: 20,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.black45,
-                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                       ),
@@ -248,7 +247,7 @@ class ImageCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      radius: profilePicBool ? 75 : 70,
+      radius: profilePicBool ? 60 : 60,
       backgroundColor: Colors.white,
       child: CircleAvatar(
         radius: 72,

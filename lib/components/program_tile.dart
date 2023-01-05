@@ -46,9 +46,8 @@ class ProgramTile extends StatelessWidget {
                 ),
               ),
       child: Padding(
-        padding: const EdgeInsets.only(top: 10.0),
+        padding: const EdgeInsets.all(10.0),
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.90,
           child: Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.0),
@@ -60,7 +59,7 @@ class ProgramTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.only(top: 10.0),
                         child: GestureDetector(
                           onTap: onPressed ??
                               () => Navigator.push(
@@ -79,19 +78,21 @@ class ProgramTile extends StatelessWidget {
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: Container(
-                                width: 220,
-                                child: Text(
-                                  '$programName',
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black54,
+                            Container(
+                              width: MediaQuery.of(context).size.width * .7,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: Container(
+                                  child: Text(
+                                    '$programName $programName',
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black54,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -120,7 +121,7 @@ class ProgramTile extends StatelessWidget {
                               padding:
                                   const EdgeInsets.only(top: 5.0, bottom: 10),
                               child: Container(
-                                width: 220,
+                                width: MediaQuery.of(context).size.width * 0.70,
                                 child: Text(
                                   '$programAbout',
                                   overflow: TextOverflow.ellipsis,

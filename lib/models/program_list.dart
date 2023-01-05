@@ -52,7 +52,7 @@ class _ProgramListState extends State<ProgramList> {
                     program.programLogo == ""
                 ? Image.asset(
                     'assets/images/MXPDark.png',
-                    height: 60,
+                    height: 50,
                     fit: BoxFit.fill,
                   )
                 : CachedNetworkImage(

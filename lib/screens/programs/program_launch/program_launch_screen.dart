@@ -262,7 +262,8 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                         ),
                                       ),
                                 Container(
-                                  width: 300,
+                                  width:
+                                      MediaQuery.of(context).size.width * .90,
                                   child: Row(
                                     children: [
                                       Flexible(
@@ -342,7 +343,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                           ButtonCard(
                             buttonCardText: 'Mentoring Enrollment',
                             buttonCardIcon: Icons.change_circle,
-                            buttonCardTextSize: 25,
+                            buttonCardTextSize: 20,
                             buttonCardRadius: 20,
                             buttonCardIconSize: 40,
                             buttonCardIconColor: kMentorXPSecondary,
@@ -361,7 +362,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                           ButtonCard(
                             buttonCardText: 'Program Info',
                             buttonCardIcon: Icons.info,
-                            buttonCardTextSize: 25,
+                            buttonCardTextSize: 20,
                             buttonCardRadius: 20,
                             buttonCardIconSize: 40,
                             buttonCardIconColor: kMentorXPSecondary,
@@ -381,7 +382,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                               ? ButtonCard(
                                   buttonCardText: 'Program Management',
                                   buttonCardIcon: Icons.manage_accounts,
-                                  buttonCardTextSize: 25,
+                                  buttonCardTextSize: 20,
                                   buttonCardRadius: 20,
                                   buttonCardIconSize: 40,
                                   buttonCardIconColor: kMentorXPSecondary,
@@ -410,7 +411,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                           ButtonCard(
                             buttonCardText: 'Back to Home Screen',
                             buttonCardIcon: Icons.keyboard_return,
-                            buttonCardTextSize: 25,
+                            buttonCardTextSize: 20,
                             buttonCardRadius: 20,
                             buttonCardIconSize: 40,
                             buttonCardIconColor: kMentorXPSecondary,

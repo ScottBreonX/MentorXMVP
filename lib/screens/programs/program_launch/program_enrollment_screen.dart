@@ -378,13 +378,16 @@ class ButtonCard extends StatelessWidget {
                         color: buttonCardIconColor ?? Colors.pink,
                       ),
                     ),
-                Text(
-                  buttonCardText ?? '',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: buttonCardTextSize ?? 20,
-                    fontWeight: FontWeight.w500,
-                    color: buttonCardTextColor ?? Colors.black45,
+                Container(
+                  width: MediaQuery.of(context).size.width * .7,
+                  child: Text(
+                    buttonCardText ?? '',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: buttonCardTextSize ?? 20,
+                      fontWeight: FontWeight.w500,
+                      color: buttonCardTextColor ?? Colors.black45,
+                    ),
                   ),
                 ),
               ],

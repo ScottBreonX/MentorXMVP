@@ -31,107 +31,100 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
   buildProgramListContent() {
     return ModalProgressHUD(
       inAsyncCall: showSpinner,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          widget.programType == 'school'
-              ? Padding(
-                  padding: const EdgeInsets.only(top: 40.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.school,
-                        size: 40,
-                        color: kMentorXPAccentDark,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        'University Programs',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 25,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black54,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            widget.programType == 'school'
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 40.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.school,
+                          size: 40,
+                          color: kMentorXPAccentDark,
                         ),
-                      ),
-                    ],
-                  ),
-                )
-              : Padding(
-                  padding: const EdgeInsets.only(top: 40.0, bottom: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15.0),
-                        child: Text(
-                          'Mentor',
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Text(
+                          'University Programs',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 25,
                             fontWeight: FontWeight.w500,
-                            color: kMentorXPPrimary,
+                            color: Colors.black54,
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        'XP',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: kMentorXPAccentMed,
+                      ],
+                    ),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.only(top: 40.0, bottom: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15.0),
+                          child: Text(
+                            'Mentor',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500,
+                              color: kMentorXPPrimary,
+                            ),
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15.0),
-                        child: Text(
-                          'Programs',
+                        SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          'XP',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
-                            fontSize: 25,
+                            fontSize: 15,
                             fontWeight: FontWeight.w500,
-                            color: kMentorXPPrimary,
+                            color: kMentorXPAccentMed,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-          Divider(
-            thickness: 4,
-            indent: 40,
-            endIndent: 40,
-            color: Colors.black45,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * .70,
-                  width: MediaQuery.of(context).size.width,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10.0, right: 10),
-                    child: AvailableProgramsStream(
-                      type: '${widget.programType}',
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15.0),
+                          child: Text(
+                            'Programs',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500,
+                              color: kMentorXPPrimary,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+            Divider(
+              thickness: 4,
+              indent: 40,
+              endIndent: 40,
+              color: Colors.black45,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 5000,
+                child: AvailableProgramsStream(
+                  type: '${widget.programType}',
                 ),
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -191,13 +184,13 @@ class AvailableProgramsStream extends StatelessWidget {
                 child: prog.programLogo == null || prog.programLogo.isEmpty
                     ? Image.asset(
                         'assets/images/MXPDark.png',
-                        height: 60,
+                        height: 45,
                         fit: BoxFit.fill,
                       )
                     : CachedNetworkImage(
                         imageUrl: prog.programLogo,
                         imageBuilder: (context, imageProvider) => Container(
-                          height: 60,
+                          height: 45,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
                             image: DecorationImage(
@@ -210,8 +203,8 @@ class AvailableProgramsStream extends StatelessWidget {
                             CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Image.asset(
                           'assets/images/MXPDark.png',
-                          height: 70,
-                          width: 70,
+                          height: 40,
+                          width: 40,
                           fit: BoxFit.fill,
                         ),
                       )),
