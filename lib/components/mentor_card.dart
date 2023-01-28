@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_confirmation.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
-import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
-import '../screens/authentication/landing_page.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -16,12 +14,13 @@ class MentorCard extends StatefulWidget {
   final String mentorFname;
   final String mentorLname;
   final Container imageContainer;
-  final String mentorMajor;
-  final String mentorYearInSchool;
   final String mtrAtt1;
   final String mtrAtt2;
   final String mtrAtt3;
   final String xFactor;
+  final String mtrHobby1;
+  final String mtrHobby2;
+  final String mtrHobby3;
   final bool profileOnly;
   final String programUID;
   final Container moreInfoExpand;
@@ -34,8 +33,6 @@ class MentorCard extends StatefulWidget {
     this.mentorFname,
     this.mentorLname,
     this.imageContainer,
-    this.mentorMajor,
-    this.mentorYearInSchool,
     this.mtrAtt1,
     this.mtrAtt2,
     this.mtrAtt3,
@@ -45,6 +42,9 @@ class MentorCard extends StatefulWidget {
     this.moreInfoExpand,
     this.dividerExpand,
     this.previewStatus = false,
+    this.mtrHobby1,
+    this.mtrHobby2,
+    this.mtrHobby3,
   });
 
   @override
@@ -54,264 +54,23 @@ class MentorCard extends StatefulWidget {
 class _MentorCardState extends State<MentorCard> {
   bool expandStatus = false;
 
-  _confirmRemoveMentor(parentContext, programUID) {
-    return showDialog(
-        context: parentContext,
-        builder: (context) {
-          return SimpleDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            title: Center(
-              child: Text(
-                'Confirm Removing Mentor',
-                style: TextStyle(
-                  fontFamily: 'Work Sans',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                  color: Colors.pink,
-                ),
-              ),
-            ),
-            children: <Widget>[
-              SimpleDialogOption(
-                padding: EdgeInsets.only(left: 10, right: 10, bottom: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 250,
-                      child: Column(
-                        children: [
-                          Text(
-                            'Are you sure you want to remove this mentor?',
-                            style: TextStyle(
-                              fontFamily: 'WorkSans',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20,
-                              color: Colors.black45,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SimpleDialogOption(
-                    padding: EdgeInsets.only(left: 10, right: 10, top: 10),
-                    child: RoundedButton(
-                      title: 'Yes',
-                      buttonColor: Colors.pink,
-                      fontColor: Colors.white,
-                      minWidth: 120,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      onPressed: () =>
-                          _removeMentor(widget.mentorUID, widget.programUID),
-                    ),
-                  ),
-                  SimpleDialogOption(
-                    padding: EdgeInsets.only(left: 10, right: 10, top: 10),
-                    child: RoundedButton(
-                      title: 'Cancel',
-                      buttonColor: Colors.pink,
-                      fontColor: Colors.white,
-                      minWidth: 120,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 10.0, right: 10.0, top: 0.0),
-                child: Text(
-                  'You will lose all related mentoring information',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    color: Colors.grey,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ],
-          );
-        });
-  }
-
-  _removeMentor(programUID, matchUID) {
-    programsRef
-        .doc(programUID)
-        .collection('userSubscribed')
-        .doc(loggedInUser.id)
-        .collection('matchedMentors')
-        .doc(matchUID)
-        .delete();
-    Navigator.pop(context);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ProgramLaunchScreen(
-          programUID: programUID,
-        ),
-      ),
-    );
-  }
-
-  mentorAttributeIconOne() {
-    String mentoringAttribute = widget.mtrAtt1;
-    Icon attributeIcon;
-
-    (mentoringAttribute == "finance")
-        ? attributeIcon = Icon(
-            Icons.monetization_on,
-            size: 50,
-            color: Colors.green.shade300,
-          )
-        : (mentoringAttribute == "coding")
-            ? attributeIcon = Icon(
-                FontAwesomeIcons.code,
-                size: 50,
-                color: Colors.red.shade300,
-              )
-            : (mentoringAttribute == "analytics")
-                ? attributeIcon = Icon(
-                    Icons.numbers,
-                    size: 50,
-                    color: Colors.purple.shade300,
-                  )
-                : (mentoringAttribute == "presenting")
-                    ? attributeIcon = Icon(
-                        FontAwesomeIcons.chalkboardUser,
-                        size: 50,
-                        color: Colors.blue.shade300,
-                      )
-                    : (mentoringAttribute == "communication")
-                        ? attributeIcon = Icon(
-                            Icons.podcasts_rounded,
-                            size: 50,
-                            color: Colors.deepOrange.shade300,
-                          )
-                        : (mentoringAttribute == "networking")
-                            ? attributeIcon = Icon(
-                                Icons.people,
-                                size: 50,
-                                color: Colors.teal.shade300,
-                              )
-                            : attributeIcon = Icon(
-                                Icons.swipe_up_alt_rounded,
-                                size: 50,
-                                color: Colors.pink.shade300,
-                              );
-    return attributeIcon;
-  }
-
-  mentorAttributeIconTwo() {
-    String mentoringAttribute = widget.mtrAtt2;
-    Icon attributeIcon;
-
-    (mentoringAttribute == "finance")
-        ? attributeIcon = Icon(
-            Icons.monetization_on,
-            size: 50,
-            color: Colors.green.shade300,
-          )
-        : (mentoringAttribute == "coding")
-            ? attributeIcon = Icon(
-                FontAwesomeIcons.code,
-                size: 50,
-                color: Colors.red.shade300,
-              )
-            : (mentoringAttribute == "analytics")
-                ? attributeIcon = Icon(
-                    Icons.numbers,
-                    size: 50,
-                    color: Colors.purple.shade300,
-                  )
-                : (mentoringAttribute == "presenting")
-                    ? attributeIcon = Icon(
-                        FontAwesomeIcons.chalkboardUser,
-                        size: 50,
-                        color: Colors.blue.shade300,
-                      )
-                    : (mentoringAttribute == "communication")
-                        ? attributeIcon = Icon(
-                            Icons.podcasts_rounded,
-                            size: 50,
-                            color: Colors.deepOrange.shade300,
-                          )
-                        : (mentoringAttribute == "networking")
-                            ? attributeIcon = Icon(
-                                Icons.people,
-                                size: 50,
-                                color: Colors.teal.shade300,
-                              )
-                            : attributeIcon = Icon(
-                                Icons.swipe_up_alt_rounded,
-                                size: 50,
-                                color: Colors.pink.shade300,
-                              );
-    return attributeIcon;
-  }
-
-  mentorAttributeIconThree() {
-    String mentoringAttribute = widget.mtrAtt3;
-    Icon attributeIcon;
-
-    (mentoringAttribute == "finance")
-        ? attributeIcon = Icon(
-            Icons.monetization_on,
-            size: 50,
-            color: Colors.green.shade300,
-          )
-        : (mentoringAttribute == "coding")
-            ? attributeIcon = Icon(
-                FontAwesomeIcons.code,
-                size: 50,
-                color: Colors.red.shade300,
-              )
-            : (mentoringAttribute == "analytics")
-                ? attributeIcon = Icon(
-                    Icons.numbers,
-                    size: 50,
-                    color: Colors.purple.shade300,
-                  )
-                : (mentoringAttribute == "presenting")
-                    ? attributeIcon = Icon(
-                        FontAwesomeIcons.chalkboardUser,
-                        size: 50,
-                        color: Colors.blue.shade300,
-                      )
-                    : (mentoringAttribute == "communication")
-                        ? attributeIcon = Icon(
-                            Icons.podcasts_rounded,
-                            size: 50,
-                            color: Colors.deepOrange.shade300,
-                          )
-                        : (mentoringAttribute == "networking")
-                            ? attributeIcon = Icon(
-                                Icons.people,
-                                size: 50,
-                                color: Colors.teal.shade300,
-                              )
-                            : attributeIcon = Icon(
-                                Icons.swipe_up_alt_rounded,
-                                size: 50,
-                                color: Colors.pink.shade300,
-                              );
-    return attributeIcon;
-  }
+  Map<String, IconData> skillMap = {
+    'Coding': Icons.code,
+    'Analytics': Icons.numbers,
+    'Presenting': Icons.co_present,
+    'Communication': Icons.podcasts_rounded,
+    'Finance': Icons.monetization_on,
+    'Networking': Icons.people,
+    'Managing up': Icons.swipe_up_alt_rounded,
+    'Crafts': Icons.format_paint,
+    'Drawing': Icons.draw,
+    'Painting': Icons.picture_as_pdf,
+    'Robotics': Icons.military_tech,
+    'Sports': Icons.sports,
+    'Travel': Icons.travel_explore,
+    'Video Games': Icons.gamepad,
+    'Volunteering': Icons.help,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -378,7 +137,7 @@ class _MentorCardState extends State<MentorCard> {
                                       'Available Slots: ',
                                       style: TextStyle(
                                         fontFamily: 'WorkSans',
-                                        fontSize: 10,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black54,
                                       ),
@@ -389,9 +148,9 @@ class _MentorCardState extends State<MentorCard> {
                                       '${widget.mentorSlots}',
                                       style: TextStyle(
                                         fontFamily: 'WorkSans',
-                                        fontSize: 10,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.w500,
-                                        color: Colors.blue,
+                                        color: kMentorXPAccentDark,
                                       ),
                                     ),
                             ],
@@ -401,109 +160,6 @@ class _MentorCardState extends State<MentorCard> {
               expandStatus
                   ? Column(
                       children: [
-                        Divider(
-                          indent: 10,
-                          endIndent: 10,
-                          color: Colors.grey.shade300,
-                          thickness: 1,
-                        ),
-                        Row(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 10.0, top: 5),
-                              child: Text(
-                                "Top 3 Mentoring Skills",
-                                style: TextStyle(
-                                  fontFamily: 'WorkSans',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 10.0, bottom: 10.0),
-                              child: Container(
-                                width: 110,
-                                child: Column(
-                                  children: [
-                                    mentorAttributeIconOne(),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10.0),
-                                      child: Text(
-                                        '${widget.mtrAtt1}',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontFamily: 'WorkSans',
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black54,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 10.0, bottom: 10.0),
-                              child: Container(
-                                width: 110,
-                                child: Column(
-                                  children: [
-                                    mentorAttributeIconTwo(),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10.0),
-                                      child: Text(
-                                        '${widget.mtrAtt2}',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontFamily: 'WorkSans',
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black54,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 10.0, bottom: 10.0),
-                              child: Container(
-                                width: 110,
-                                child: Column(
-                                  children: [
-                                    mentorAttributeIconThree(),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10.0),
-                                      child: Text(
-                                        '${widget.mtrAtt3}',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontFamily: 'WorkSans',
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black54,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                         Divider(
                           indent: 10,
                           endIndent: 10,
@@ -554,6 +210,40 @@ class _MentorCardState extends State<MentorCard> {
                           color: Colors.grey.shade300,
                           thickness: 1,
                         ),
+                        buildSkillsSection(
+                          'My Mentoring Focus',
+                          kMentorXPAccentDark,
+                          skillMap['${widget.mtrAtt1}'],
+                          skillMap['${widget.mtrAtt2}'],
+                          skillMap['${widget.mtrAtt3}'],
+                          widget.mtrAtt1 ?? '',
+                          widget.mtrAtt2 ?? '',
+                          widget.mtrAtt3 ?? '',
+                        ),
+                        Divider(
+                          indent: 10,
+                          endIndent: 10,
+                          color: Colors.grey.shade300,
+                          thickness: 1,
+                        ),
+                        buildSkillsSection(
+                          'My Hobbies',
+                          kMentorXPAccentDark,
+                          skillMap['${widget.mtrHobby1}'],
+                          skillMap['${widget.mtrHobby2}'],
+                          skillMap['${widget.mtrHobby3}'],
+                          widget.mtrHobby1 ?? '',
+                          widget.mtrHobby2 ?? '',
+                          widget.mtrHobby3 ?? '',
+                        ),
+                        widget.previewStatus
+                            ? Container()
+                            : Divider(
+                                indent: 10,
+                                endIndent: 10,
+                                color: Colors.grey.shade300,
+                                thickness: 1,
+                              ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -561,7 +251,7 @@ class _MentorCardState extends State<MentorCard> {
                                 ? Container()
                                 : RoundedButton(
                                     title: 'Select Mentor',
-                                    buttonColor: Colors.pink,
+                                    buttonColor: kMentorXPAccentDark,
                                     borderRadius: 15,
                                     minWidth: 150,
                                     fontColor: Colors.white,
@@ -572,9 +262,6 @@ class _MentorCardState extends State<MentorCard> {
                                           mentorUID: widget.mentorUID,
                                           mentorFname: widget.mentorFname,
                                           mentorLname: widget.mentorLname,
-                                          mentorMajor: widget.mentorMajor,
-                                          mentorYearInSchool:
-                                              widget.mentorYearInSchool,
                                           mtrAtt1: widget.mtrAtt1,
                                           mtrAtt2: widget.mtrAtt2,
                                           mtrAtt3: widget.mtrAtt3,
@@ -593,8 +280,8 @@ class _MentorCardState extends State<MentorCard> {
                                     title: 'View Profile',
                                     borderRadius: 15,
                                     minWidth: 150,
-                                    buttonColor: Colors.white,
-                                    fontColor: Colors.pink,
+                                    buttonColor: Colors.grey,
+                                    fontColor: Colors.white,
                                     onPressed: () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -623,36 +310,38 @@ class _MentorCardState extends State<MentorCard> {
                               padding: const EdgeInsets.only(bottom: 10.0),
                               child: Column(
                                 children: [
-                                  GestureDetector(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 5.0),
-                                          child: Icon(
-                                            Icons.remove_circle,
-                                            color: Colors.black45,
+                                  widget.previewStatus
+                                      ? Container()
+                                      : GestureDetector(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 5.0),
+                                                child: Icon(
+                                                  Icons.remove_circle,
+                                                  color: Colors.black45,
+                                                ),
+                                              ),
+                                              Text(
+                                                'Minimize Info',
+                                                style: TextStyle(
+                                                  fontFamily: 'WorkSans',
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.black45,
+                                                ),
+                                              ),
+                                            ],
                                           ),
+                                          onTap: () {
+                                            setState(() {
+                                              expandStatus = false;
+                                            });
+                                          },
                                         ),
-                                        Text(
-                                          'Minimize Info',
-                                          style: TextStyle(
-                                            fontFamily: 'WorkSans',
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.black45,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    onTap: () {
-                                      setState(() {
-                                        expandStatus = false;
-                                      });
-                                    },
-                                  ),
                                 ],
                               ),
                             ),
@@ -685,7 +374,10 @@ class _MentorCardState extends State<MentorCard> {
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(right: 5.0),
-                                          child: Icon(Icons.add_circle),
+                                          child: Icon(
+                                            Icons.add_circle,
+                                            color: Colors.grey,
+                                          ),
                                         ),
                                         Text(
                                           'More Info',
@@ -693,7 +385,7 @@ class _MentorCardState extends State<MentorCard> {
                                             fontFamily: 'WorkSans',
                                             fontSize: 15,
                                             fontWeight: FontWeight.w500,
-                                            color: Colors.blue,
+                                            color: Colors.grey,
                                           ),
                                         ),
                                       ],
@@ -713,6 +405,127 @@ class _MentorCardState extends State<MentorCard> {
           ),
         ),
       ),
+    );
+  }
+
+  Column buildSkillsSection(
+    String titleText,
+    Color iconColor,
+    IconData iconOne,
+    IconData iconTwo,
+    IconData iconThree,
+    skillOneText,
+    skillTwoText,
+    skillThreeText,
+  ) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0, top: 5),
+              child: Text(
+                titleText,
+                style: TextStyle(
+                  fontFamily: 'WorkSans',
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black54,
+                ),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+              child: Container(
+                width: 110,
+                child: Column(
+                  children: [
+                    Icon(
+                      iconOne,
+                      color: iconColor,
+                      size: 40,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Text(
+                        skillOneText,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'WorkSans',
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+              child: Container(
+                width: 110,
+                child: Column(
+                  children: [
+                    Icon(
+                      iconTwo,
+                      color: iconColor,
+                      size: 40,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Text(
+                        skillTwoText,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'WorkSans',
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+              child: Container(
+                width: 110,
+                child: Column(
+                  children: [
+                    Icon(
+                      iconThree,
+                      color: iconColor,
+                      size: 40,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Text(
+                        skillThreeText,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'WorkSans',
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

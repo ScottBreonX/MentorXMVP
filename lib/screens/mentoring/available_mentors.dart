@@ -178,8 +178,6 @@ class AvailableMentorsStream extends StatelessWidget {
                             ),
                     ),
                     mentorSlots: mentorModel.mentorSlots,
-                    mentorMajor: userModel.major,
-                    mentorYearInSchool: userModel.yearInSchool,
                     mtrAtt1: mentorModel.mentorSkill1,
                     mtrAtt2: mentorModel.mentorSkill2,
                     mtrAtt3: mentorModel.mentorSkill3,

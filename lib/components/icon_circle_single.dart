@@ -36,7 +36,7 @@ class IconCircleSingle extends StatelessWidget {
             borderRadius: BorderRadius.circular(circleRadius ?? 100),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey[700],
+                color: Colors.grey[600],
                 blurRadius: 5,
                 offset: Offset(0, 7),
               ),

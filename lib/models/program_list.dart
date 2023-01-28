@@ -41,6 +41,7 @@ class _ProgramListState extends State<ProgramList> {
         Program program = Program.fromDocument(snapshot.data);
 
         return ProgramTile(
+          boxHeight: 500,
           boxWidth: MediaQuery.of(context).size.width * 0.90,
           programId: programUID,
           programName: program.programName,
@@ -52,7 +53,7 @@ class _ProgramListState extends State<ProgramList> {
                     program.programLogo == ""
                 ? Image.asset(
                     'assets/images/MXPDark.png',
-                    height: 50,
+                    height: 60,
                     fit: BoxFit.fill,
                   )
                 : CachedNetworkImage(

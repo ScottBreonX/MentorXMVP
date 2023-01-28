@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/mentor_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 
@@ -181,6 +182,7 @@ class MentorConfirm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: kMentorXPPrimary,
         elevation: 5,
         title: Text('Confirm Selection'),
       ),
@@ -192,14 +194,17 @@ class MentorConfirm extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    Text(
-                      'Confirm selection of mentor:',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'WorkSans',
-                        fontSize: 30,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.pink,
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        'Confirm selection of mentor:',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 35,
+                          fontWeight: FontWeight.w500,
+                          color: kMentorXPPrimary,
+                        ),
                       ),
                     ),
                     Padding(
@@ -209,8 +214,6 @@ class MentorConfirm extends StatelessWidget {
                         mentorFname: mentorFname,
                         mentorLname: mentorLname,
                         imageContainer: mentorPicContainer,
-                        mentorMajor: mentorMajor,
-                        mentorYearInSchool: mentorYearInSchool,
                         mtrAtt1: mtrAtt1,
                         mtrAtt2: mtrAtt2,
                         mtrAtt3: mtrAtt3,
@@ -236,7 +239,7 @@ class MentorConfirm extends StatelessWidget {
                         fontSize: 20,
                         minWidth: 150,
                         buttonColor: Colors.white,
-                        fontColor: Colors.pink,
+                        fontColor: Colors.black45,
                         onPressed: () => Navigator.pop(context),
                       ),
                       RoundedButton(
@@ -244,7 +247,7 @@ class MentorConfirm extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         fontSize: 20,
                         minWidth: 150,
-                        buttonColor: Colors.pink,
+                        buttonColor: kMentorXPAccentDark,
                         fontColor: Colors.white,
                         onPressed: () async {
                           await handleConfirmSelection();

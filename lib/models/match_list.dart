@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/mentor_card.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/match_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_launch_screen.dart';
@@ -85,7 +86,7 @@ class _MatchListState extends State<MatchList> {
                                   user.profilePicture.isEmpty ||
                                   user.profilePicture == ""
                               ? ProfileImageCircle(
-                                  circleColor: Colors.blue,
+                                  circleColor: kMentorXPPrimary,
                                   iconSize: 45,
                                   iconColor: Colors.white,
                                   circleSize: 40,
@@ -114,8 +115,7 @@ class _MatchListState extends State<MatchList> {
                                   ),
                                 ),
                         ),
-                        mentorMajor: user.major,
-                        mentorYearInSchool: user.yearInSchool,
+
                         moreInfoExpand: Container(),
 
                         // Container(

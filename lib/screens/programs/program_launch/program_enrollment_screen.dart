@@ -333,6 +333,7 @@ class ButtonCard extends StatelessWidget {
     this.cardIconBool,
     this.iconPadding,
     this.buttonCardHeight,
+    this.buttonCardTextAlign,
   }) : super(key: key);
 
   final String buttonCardText;
@@ -349,6 +350,7 @@ class ButtonCard extends StatelessWidget {
   final Container cardIconBool;
   final EdgeInsets iconPadding;
   final double buttonCardHeight;
+  final TextAlign buttonCardTextAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -382,6 +384,7 @@ class ButtonCard extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .7,
                   child: Text(
                     buttonCardText ?? '',
+                    textAlign: buttonCardTextAlign ?? TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: buttonCardTextSize ?? 20,

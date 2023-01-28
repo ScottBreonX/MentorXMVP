@@ -48,12 +48,14 @@ class ProgramTile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Container(
+          height: 110,
           child: Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.0),
             ),
             elevation: 10,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,7 +91,7 @@ class ProgramTile extends StatelessWidget {
                                     maxLines: 1,
                                     style: TextStyle(
                                       fontFamily: 'Montserrat',
-                                      fontSize: 18,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black54,
                                     ),
@@ -103,16 +105,21 @@ class ProgramTile extends StatelessWidget {
                                   'Institution: ',
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
-                                    fontSize: 10,
+                                    fontSize: 15,
                                     color: kMentorXPSecondary,
                                   ),
                                 ),
-                                Text(
-                                  '$institutionName',
-                                  style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 10,
-                                    color: Colors.black54,
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * .50,
+                                  child: Text(
+                                    '$institutionName',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 15,
+                                      color: Colors.black54,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -128,7 +135,7 @@ class ProgramTile extends StatelessWidget {
                                   maxLines: 3,
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
-                                    fontSize: 12,
+                                    fontSize: 15,
                                     color: Colors.black45,
                                   ),
                                 ),
