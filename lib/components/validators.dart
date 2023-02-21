@@ -9,15 +9,18 @@ class NonEmptyStringValidator implements StringValidator {
   }
 }
 
+class ProfileValidators {
+  final StringValidator fNameValidator = NonEmptyStringValidator();
+  final StringValidator lNameValidator = NonEmptyStringValidator();
+  final String invalidFNameErrorText = 'Email can\'t be empty';
+  final String invalidLNameErrorText = 'Email can\'t be empty';
+}
+
 class EmailAndPasswordValidators {
   final StringValidator emailValidator = NonEmptyStringValidator();
   final StringValidator passwordValidator = NonEmptyStringValidator();
   final String invalidEmailErrorText = 'Email can\'t be empty';
   final String invalidPasswordErrorText = 'Email can\'t be empty';
-}
-
-class ChatMessageValidator {
-  final StringValidator messageValidator = NonEmptyStringValidator();
 }
 
 class CreateProgramValidator {

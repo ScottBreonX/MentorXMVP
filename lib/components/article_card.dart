@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 
-class ArticleCard extends StatelessWidget {
+class ArticleCard extends StatefulWidget {
   const ArticleCard({
     Key key,
     this.bodyText,
@@ -18,11 +18,16 @@ class ArticleCard extends StatelessWidget {
   final Function markComplete;
 
   @override
+  State<ArticleCard> createState() => _ArticleCardState();
+}
+
+class _ArticleCardState extends State<ArticleCard> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: GestureDetector(
-        onTap: onTap,
+        onTap: widget.onTap,
         child: Container(
           width: 200,
           decoration: BoxDecoration(
@@ -48,7 +53,7 @@ class ArticleCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Icon(
-                      articleIcon ?? Icons.assignment_rounded,
+                      widget.articleIcon ?? Icons.assignment_rounded,
                       size: 40,
                       color: kMentorXPAccentDark,
                     ),
@@ -59,7 +64,7 @@ class ArticleCard extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 5.0),
                           child: Text(
-                            articleTitle ?? 'Upcoming',
+                            widget.articleTitle ?? 'Upcoming',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontFamily: 'Montserrat',
@@ -86,7 +91,7 @@ class ArticleCard extends StatelessWidget {
                         width: 190,
                         height: 40,
                         child: Text(
-                          bodyText ?? '',
+                          widget.bodyText ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: 'Montserrat',
@@ -107,26 +112,18 @@ class ArticleCard extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(right: 5.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          print('Complete');
-                        },
-                        child: Icon(
-                          Icons.check_box_outline_blank,
-                          color: Colors.grey,
-                          size: 19,
-                        ),
+                      child: Container(
+                        height: 25,
+                        width: 25,
+                        child: CheckBox(),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: markComplete,
-                      child: Text(
-                        'Mark Complete',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black45,
-                            fontFamily: 'Montserrat'),
-                      ),
+                    Text(
+                      'Mark Complete',
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black45,
+                          fontFamily: 'Montserrat'),
                     ),
                   ],
                 )
@@ -135,6 +132,33 @@ class ArticleCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CheckBox extends StatefulWidget {
+  @override
+  State<CheckBox> createState() => _CheckBoxState();
+}
+
+class _CheckBoxState extends State<CheckBox> {
+  bool isChecked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    Color getColor(Set<MaterialState> states) {
+      return isChecked ? kMentorXPPrimary : kMentorXPAccentDark;
+    }
+
+    return Checkbox(
+      checkColor: Colors.white,
+      fillColor: MaterialStateProperty.resolveWith(getColor),
+      value: isChecked,
+      onChanged: (bool value) {
+        setState(() {
+          isChecked = value;
+        });
+      },
     );
   }
 }

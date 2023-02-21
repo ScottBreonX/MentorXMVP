@@ -112,8 +112,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           email: email,
           firstName: '',
           lastName: '',
-          major: '',
-          yearInSchool: '',
           aboutMe: '',
           mentorAbout: '',
           menteeAbout: '',
@@ -306,25 +304,32 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           padding: const EdgeInsets.all(10.0),
                           child: RoundedButton(
                             textAlignment: MainAxisAlignment.center,
-                            onPressed: () {
-                              if (model.password != model.confirmPassword) {
-                                showAlertDialog(
-                                  context,
-                                  title: "Confirm Password",
-                                  content:
-                                      "Passwords do not match. Please re-enter password.",
-                                  defaultActionText: "Ok",
-                                );
-                              } else {
-                                _submit().then((_) async {
-                                  await _createProfile(context);
-                                });
-                              }
-                            },
+                            onPressed: !model.canSubmit
+                                ? () {}
+                                : () {
+                                    if (model.password !=
+                                        model.confirmPassword) {
+                                      showAlertDialog(
+                                        context,
+                                        title: "Confirm Password",
+                                        content:
+                                            "Passwords do not match. Please re-enter password.",
+                                        defaultActionText: "Ok",
+                                      );
+                                    } else {
+                                      _submit().then((_) async {
+                                        await _createProfile(context);
+                                      });
+                                    }
+                                  },
                             title: 'Next',
-                            buttonColor: kMentorXPAccentMed,
-                            fontColor: Colors.white,
-                            fontWeight: FontWeight.w500,
+                            buttonColor: model.canSubmit
+                                ? kMentorXPAccentMed
+                                : Colors.grey,
+                            fontColor: model.canSubmit
+                                ? Colors.white
+                                : Colors.grey.shade400,
+                            fontWeight: FontWeight.w800,
                             fontSize: 20,
                             minWidth: 500.0,
                           ),

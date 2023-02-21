@@ -84,7 +84,10 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       controller: _firstNameController,
       textInputAction: TextInputAction.next,
       textAlign: TextAlign.center,
-      onChanged: (value) => firstName = value,
+      onChanged: (value) {
+        firstName = value;
+        setState(() {});
+      },
       style: TextStyle(
         color: Colors.black54,
         fontWeight: FontWeight.w400,
@@ -118,7 +121,10 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       controller: _lastNameController,
       textInputAction: TextInputAction.next,
       textAlign: TextAlign.center,
-      onChanged: (value) => lastName = value,
+      onChanged: (value) {
+        lastName = value;
+        setState(() {});
+      },
       style: TextStyle(
         color: Colors.black54,
         fontWeight: FontWeight.w400,
@@ -215,13 +221,20 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                 ),
                 RoundedButton(
                   textAlignment: MainAxisAlignment.center,
-                  onPressed: () async {
-                    await _createProfile(context).then((_) {
-                      Navigator.popAndPushNamed(context, VerifyEmailScreen.id);
-                    });
-                  },
+                  onPressed: (_firstNameController.value.text.isEmpty ||
+                          _lastNameController.value.text.isEmpty)
+                      ? () {}
+                      : () async {
+                          await _createProfile(context).then((_) {
+                            Navigator.popAndPushNamed(
+                                context, VerifyEmailScreen.id);
+                          });
+                        },
                   title: 'Submit',
-                  buttonColor: kMentorXPSecondary,
+                  buttonColor: (_firstNameController.value.text.isEmpty ||
+                          _lastNameController.value.text.isEmpty)
+                      ? Colors.grey
+                      : kMentorXPAccentDark,
                   fontColor: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
