@@ -403,7 +403,10 @@ class _ProfileState extends State<Profile> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => Profile(),
+                                          builder: (context) => Profile(
+                                            loggedInUser: widget.loggedInUser,
+                                            profileId: widget.loggedInUser,
+                                          ),
                                         ),
                                       );
                                     },

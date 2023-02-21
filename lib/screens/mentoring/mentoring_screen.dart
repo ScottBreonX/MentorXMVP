@@ -7,7 +7,6 @@ import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentee_enrollment/mentee_enrollment_skills.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_enrollment/mentor_enrollment_skills.dart';
-import 'package:mentorx_mvp/services/database.dart';
 import '../../components/alert_dialog.dart';
 import '../../components/progress.dart';
 import '../../models/mentoring_model.dart';
@@ -18,13 +17,11 @@ final programsRef = FirebaseFirestore.instance.collection('institutions');
 class MentoringScreen extends StatefulWidget {
   final myUser loggedInUser;
   static const String id = 'mentoring_screen';
-  final Database database;
   final String programUID;
 
   const MentoringScreen({
     Key key,
     this.loggedInUser,
-    this.database,
     this.programUID,
   }) : super(key: key);
 

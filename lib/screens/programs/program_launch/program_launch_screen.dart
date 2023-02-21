@@ -9,6 +9,7 @@ import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_overview_screen.dart';
 import '../../../components/icon_circle_single.dart';
 import '../../../components/progress.dart';
 import '../../launch_screen.dart';
@@ -23,13 +24,13 @@ class ProgramLaunchScreen extends StatefulWidget {
   final myUser loggedInUser;
   final String programUID;
 
+  static const String id = 'program_launch_screen';
+
   const ProgramLaunchScreen({
     Key key,
     this.loggedInUser,
     this.programUID,
   }) : super(key: key);
-
-  static const String id = 'program_launch_screen';
 
   @override
   _ProgramLaunchScreenState createState() => _ProgramLaunchScreenState();
@@ -39,7 +40,9 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
   @override
   void initState() {
     super.initState();
-    checkIsAdmin();
+    // checkIsAdmin();
+    print(widget.programUID);
+    // dispose();
   }
 
   bool isLoading = false;
@@ -168,7 +171,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => AvailableMentorsScreen(
-                                    loggedInUser: widget.loggedInUser,
+                                    loggedInUser: loggedInUser,
                                     programUID: widget.programUID,
                                   ),
                                 ),
@@ -440,12 +443,13 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                       children: [
                         CircleIconWithText(
                           onTap: () {
+                            print(widget.loggedInUser.firstName);
                             Navigator.push(
                               context,
                               pageTransition(
                                 Profile(
-                                  loggedInUser: loggedInUser.id,
-                                  profileId: loggedInUser.id,
+                                  loggedInUser: widget.loggedInUser.id,
+                                  profileId: widget.loggedInUser.id,
                                 ),
                                 1.5,
                                 1.0,
@@ -460,13 +464,11 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                           onTap: () {
                             Navigator.push(
                               context,
-                              pageTransition(
-                                MentoringScreen(
+                              MaterialPageRoute(
+                                builder: (context) => MentoringScreen(
                                   loggedInUser: loggedInUser,
                                   programUID: widget.programUID,
                                 ),
-                                1.5,
-                                1.0,
                               ),
                             );
                           },
@@ -478,13 +480,11 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                           onTap: () {
                             Navigator.push(
                               context,
-                              pageTransition(
-                                ProgramEnrollmentScreen(
+                              MaterialPageRoute(
+                                builder: (context) => ProgramOverview(
+                                  programId: widget.programUID,
                                   loggedInUser: loggedInUser,
-                                  programUID: program.id,
                                 ),
-                                1.5,
-                                1.0,
                               ),
                             );
                           },

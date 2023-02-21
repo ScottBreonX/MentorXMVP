@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/authentication/welcome_screen.dart';
 import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
-import 'package:mentorx_mvp/services/database.dart';
 import 'package:provider/provider.dart';
 
+import '../../components/progress.dart';
 import '../../models/user.dart';
 
 myUser loggedInUser;
@@ -50,13 +51,30 @@ class _LandingPageState extends State<LandingPage> {
                     ),
                   );
                 }
-
                 return WelcomeScreen.create(context);
               },
             );
           }
-          return Provider<Database>(
-              create: (_) => FirestoreDatabase(), child: HomeScreen());
+
+          return FutureBuilder<DocumentSnapshot>(
+              future: usersRef.doc(user.uid).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                myUser _user = myUser.fromDocument(snapshot.data);
+
+                if (_user.program == "") {
+                  return HomeScreen(
+                    loggedInUser: _user,
+                  );
+                }
+
+                return ProgramLaunchScreen(
+                  programUID: _user.program,
+                  loggedInUser: _user,
+                );
+              });
         }
         return Scaffold(
           backgroundColor: kMentorXPPrimary,

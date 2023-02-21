@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/icon_circle_single.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
-import 'package:mentorx_mvp/screens/programs/program_type.dart';
 import 'package:provider/provider.dart';
 import '../../components/progress.dart';
 import '../../models/program_list.dart';
@@ -102,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Wrap(
                       children: [
                         Text(
-                          'You have not enrolled in any programs yet',
+                          'You have not enrolled in any programs yet, view available programs below',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: 'WorkSans',
@@ -135,8 +133,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 
-    return FutureBuilder<Object>(
-        future: usersRef.doc(loggedInUser.id).get(),
+    return StreamBuilder<DocumentSnapshot>(
+        stream: usersRef.doc(loggedInUser.id).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return circularProgress();
@@ -320,164 +318,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Column(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          pageTransition(
-                                            Profile(
-                                              loggedInUser: loggedInUser.id,
-                                              profileId: loggedInUser.id,
-                                            ),
-                                            1.5,
-                                            1.0,
-                                          ),
-                                        );
-                                      },
-                                      child: IconCircleSingle(
-                                        cardHeight:
-                                            MediaQuery.of(context).size.width *
-                                                .80 /
-                                                3,
-                                        cardWidth:
-                                            MediaQuery.of(context).size.width *
-                                                .80 /
-                                                3,
-                                        cardIcon: Icons.person,
-                                        cardIconSize: 50,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10.0),
-                                      child: Text(
-                                        'My',
-                                        style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          color: kMentorXPSecondary,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      'Profile',
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        color: kMentorXPSecondary,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          pageTransition(
-                                            ProgramTypeScreen(),
-                                            0,
-                                            1.0,
-                                          ),
-                                        );
-                                      },
-                                      child: IconCircleSingle(
-                                        cardHeight:
-                                            MediaQuery.of(context).size.width *
-                                                .80 /
-                                                3,
-                                        cardWidth:
-                                            MediaQuery.of(context).size.width *
-                                                .80 /
-                                                3,
-                                        cardIcon: Icons.add,
-                                        cardIconSize: 50,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10.0),
-                                      child: Text(
-                                        'Join a',
-                                        style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          color: kMentorXPSecondary,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      'Program',
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        color: kMentorXPSecondary,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    IconCircleSingle(
-                                      cardHeight:
-                                          MediaQuery.of(context).size.width *
-                                              .80 /
-                                              3,
-                                      cardWidth:
-                                          MediaQuery.of(context).size.width *
-                                              .80 /
-                                              3,
-                                      cardIcon: Icons.psychology,
-                                      cardIconSize: 50,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10.0),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            'Knowledge',
-                                            style: TextStyle(
-                                              fontFamily: 'Montserrat',
-                                              color: kMentorXPSecondary,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Center',
-                                            style: TextStyle(
-                                              fontFamily: 'Montserrat',
-                                              color: kMentorXPSecondary,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 5.0, right: 5.0, top: 20, bottom: 10),
-                            child: Divider(
-                              thickness: 2,
-                              color: Colors.grey,
-                            ),
-                          ),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 10.0),
                             child: Text(

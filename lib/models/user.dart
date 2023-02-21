@@ -11,6 +11,7 @@ class myUser {
   final String workExperience;
   final String mentorAbout;
   final String menteeAbout;
+  final String program;
   final String profilePicture;
   final String coverPhoto;
   final bool canCreateProgram;
@@ -26,6 +27,7 @@ class myUser {
     this.workExperience,
     this.mentorAbout,
     this.menteeAbout,
+    this.program,
     this.profilePicture,
     this.coverPhoto,
     this.canCreateProgram,
@@ -43,6 +45,7 @@ class myUser {
       workExperience: doc['Work Experience'],
       mentorAbout: doc['Mentoring About'],
       menteeAbout: doc['Mentee About'],
+      program: doc['Program'],
       profilePicture: doc['Profile Picture'],
       coverPhoto: doc['Cover Photo'],
       canCreateProgram: doc['Can Create Program'],
@@ -60,6 +63,7 @@ class myUser {
       'Work Experience': workExperience,
       'Mentoring About': mentorAbout,
       'Mentee About': menteeAbout,
+      'Program': program,
       'Profile Picture': profilePicture,
       'Cover Photo': coverPhoto,
       'Can Create Program': canCreateProgram,
