@@ -4,8 +4,7 @@ import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
 import 'package:mentorx_mvp/screens/program_creation/program_creation.dart';
-import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
-import 'package:mentorx_mvp/screens/programs/program_type.dart';
+import 'package:mentorx_mvp/screens/programs/available_programs.dart';
 import '../profile/profile_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -85,25 +84,6 @@ class MentorXMenuList extends StatelessWidget {
         ),
         ListTile(
           leading: Icon(
-            Icons.groups,
-            size: 30,
-            color: Colors.white,
-          ),
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ProgramSelectionScreen(
-                loggedInUser: loggedInUser,
-              ),
-            ),
-          ),
-          title: Text(
-            'Enrolled Programs',
-            style: Theme.of(context).textTheme.headline2,
-          ),
-        ),
-        ListTile(
-          leading: Icon(
             Icons.add_circle_rounded,
             size: 30,
             color: Colors.white,
@@ -111,7 +91,9 @@ class MentorXMenuList extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ProgramTypeScreen(),
+              builder: (context) => AvailableProgramsScreen(
+                loggedInUser: loggedInUser,
+              ),
             ),
           ),
           title: Text(

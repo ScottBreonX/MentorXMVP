@@ -8,7 +8,6 @@ class ProgramTile extends StatelessWidget {
   final String programId;
   final String programName;
   final String institutionName;
-  final String type;
   final String programAbout;
   final Function onPressed;
   final double boxHeight;
@@ -24,7 +23,6 @@ class ProgramTile extends StatelessWidget {
     this.programName,
     this.institutionName,
     this.programAbout,
-    this.type,
     this.onPressed,
     this.boxHeight,
     this.boxWidth,

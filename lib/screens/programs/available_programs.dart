@@ -1,19 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/mentor_card.dart';
 import 'package:mentorx_mvp/components/program_tile.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-final _firestore = FirebaseFirestore.instance;
-
 class AvailableProgramsScreen extends StatefulWidget {
   final myUser loggedInUser;
-  final String programType;
   static const String id = 'available_programs_screen';
-  const AvailableProgramsScreen({this.loggedInUser, this.programType});
+  const AvailableProgramsScreen({this.loggedInUser});
 
   @override
   _AvailableProgramsScreenState createState() =>
@@ -35,79 +33,31 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            widget.programType == 'school'
-                ? Padding(
-                    padding: const EdgeInsets.only(top: 40.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.school,
-                          size: 40,
-                          color: kMentorXPAccentDark,
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Text(
-                          'University Programs',
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 25,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black54,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.only(top: 40.0, bottom: 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15.0),
-                          child: Text(
-                            'Mentor',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 25,
-                              fontWeight: FontWeight.w500,
-                              color: kMentorXPPrimary,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 3,
-                        ),
-                        Text(
-                          'XP',
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            color: kMentorXPAccentMed,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15.0),
-                          child: Text(
-                            'Programs',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 25,
-                              fontWeight: FontWeight.w500,
-                              color: kMentorXPPrimary,
-                            ),
-                          ),
-                        ),
-                      ],
+            Padding(
+              padding: const EdgeInsets.only(top: 40.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.school,
+                    size: 40,
+                    color: kMentorXPAccentDark,
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    'Available Programs',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 25,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black54,
                     ),
                   ),
+                ],
+              ),
+            ),
             Divider(
               thickness: 4,
               indent: 40,
@@ -118,9 +68,7 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 height: 5000,
-                child: AvailableProgramsStream(
-                  type: '${widget.programType}',
-                ),
+                child: AvailableProgramsStream(),
               ),
             ),
           ],
@@ -148,18 +96,11 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
 // building class for stream of Available Programs
 
 class AvailableProgramsStream extends StatelessWidget {
-  final String type;
-
-  AvailableProgramsStream({
-    this.type,
-  });
+  AvailableProgramsStream();
 
   @override
   Widget build(BuildContext context) {
-    final Stream programStream = _firestore
-        .collection('institutions')
-        .where('type', isEqualTo: type)
-        .snapshots();
+    final Stream programStream = programsRef.snapshots();
 
     return StreamBuilder<QuerySnapshot>(
       stream: programStream,
@@ -179,7 +120,6 @@ class AvailableProgramsStream extends StatelessWidget {
             programName: prog.programName,
             institutionName: prog.institutionName,
             programAbout: prog.aboutProgram,
-            type: prog.type,
             imageContainer: Container(
                 child: prog.programLogo == null || prog.programLogo.isEmpty
                     ? Image.asset(

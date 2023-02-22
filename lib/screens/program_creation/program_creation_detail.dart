@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
@@ -77,29 +78,42 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
             ),
             title: Text(
               titleText,
-              style: Theme.of(context).textTheme.headline4,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Montserrat',
+                fontSize: 25,
+                color: kMentorXPAccentDark,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             children: <Widget>[
-              SimpleDialogOption(
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.camera_alt,
-                          size: 30,
-                          color: Colors.blue,
+              Padding(
+                padding: const EdgeInsets.only(top: 15.0),
+                child: SimpleDialogOption(
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.camera_alt,
+                            size: 30,
+                            color: kMentorXPPrimary,
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          "Photo with Camera",
-                          style: Theme.of(context).textTheme.subtitle2,
+                        Expanded(
+                          child: Text(
+                            "Photo with Camera",
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 20,
+                              color: Colors.black45,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  onPressed: handleTakePhoto),
+                      ],
+                    ),
+                    onPressed: handleTakePhoto),
+              ),
               SimpleDialogOption(
                   child: Row(
                     children: [
@@ -108,24 +122,37 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                         child: Icon(
                           Icons.photo,
                           size: 30,
-                          color: Colors.blue,
+                          color: kMentorXPPrimary,
                         ),
                       ),
                       Expanded(
                         child: Text(
                           "Image from Gallery",
-                          style: Theme.of(context).textTheme.subtitle2,
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 20,
+                            color: Colors.black45,
+                          ),
                         ),
                       ),
                     ],
                   ),
                   onPressed: handleChooseFromGallery),
-              SimpleDialogOption(
-                child: Text(
-                  "Cancel",
-                  style: Theme.of(context).textTheme.headline4,
+              Padding(
+                padding: const EdgeInsets.only(top: 15.0),
+                child: SimpleDialogOption(
+                  child: Text(
+                    "Cancel",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 25,
+                      color: kMentorXPAccentDark,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onPressed: () => Navigator.pop(context),
                 ),
-                onPressed: () => Navigator.pop(context),
               )
             ],
           );
@@ -182,16 +209,8 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
   Scaffold buildUploadScreen() {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: kMentorXPPrimary,
           title: Text("Upload Program Logo"),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                child: Icon(Icons.cancel_rounded),
-                onTap: () => Navigator.pop(context),
-              ),
-            ),
-          ],
         ),
         body: Stack(
           children: [
@@ -224,12 +243,20 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                             children: [
                               Text(
                                 'Confirm Upload of',
-                                style: Theme.of(context).textTheme.headline1,
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 25,
+                                  color: Colors.black45,
+                                ),
                                 textAlign: TextAlign.center,
                               ),
                               Text(
                                 'Program Logo',
-                                style: Theme.of(context).textTheme.headline1,
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 25,
+                                  color: Colors.black45,
+                                ),
                                 textAlign: TextAlign.center,
                               ),
                             ],
@@ -240,9 +267,9 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                           textSize: 0,
                           imageAsset: Image.file(
                             file,
-                            width: 150,
-                            height: 150,
-                            fit: BoxFit.fill,
+                            width: 200,
+                            height: 200,
+                            fit: BoxFit.cover,
                           ),
                           boxHeight: 200,
                           boxWidth: 200,
@@ -250,15 +277,36 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                         Padding(
                           padding: EdgeInsets.only(top: 10.0),
                         ),
-                        Row(
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.only(
+                                right: 100.0,
+                                left: 100,
+                              ),
+                              child: RoundedButton(
+                                title: 'Upload',
+                                textAlignment: MainAxisAlignment.center,
+                                buttonColor: kMentorXPPrimary,
+                                fontColor: Colors.white,
+                                minWidth: 150,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                onPressed:
+                                    isUploading ? null : () => handleSubmit(),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                right: 100.0,
+                                left: 100,
+                              ),
                               child: RoundedButton(
                                 title: 'Cancel',
+                                textAlignment: MainAxisAlignment.center,
                                 buttonColor: Colors.white,
-                                fontColor: Colors.black45,
+                                fontColor: kMentorXPPrimary,
                                 minWidth: 150,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500,
@@ -269,19 +317,6 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                                           clearImage();
                                         });
                                       },
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: RoundedButton(
-                                title: 'Upload',
-                                buttonColor: Colors.blue,
-                                fontColor: Colors.white,
-                                minWidth: 150,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                onPressed:
-                                    isUploading ? null : () => handleSubmit(),
                               ),
                             ),
                           ],
@@ -312,24 +347,30 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
               child: Text(
                 'Success!',
                 style: TextStyle(
-                  fontFamily: 'Work Sans',
+                  fontFamily: 'Montserrat',
                   fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                  color: Colors.pink,
+                  fontSize: 25,
+                  color: kMentorXPPrimary,
                 ),
               ),
             ),
             children: <Widget>[
               SimpleDialogOption(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       width: 250,
                       child: Column(
                         children: [
                           Text(
-                            'Program successfully created!',
-                            style: Theme.of(context).textTheme.subtitle2,
+                            'Program successfully created',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              color: Colors.black45,
+                              fontSize: 20,
+                            ),
                           ),
                         ],
                       ),
@@ -343,7 +384,7 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                   children: [
                     RoundedButton(
                       title: 'Return to Home',
-                      buttonColor: Colors.pink,
+                      buttonColor: kMentorXPPrimary,
                       fontColor: Colors.white,
                       minWidth: 200,
                       fontSize: 15,
@@ -392,10 +433,11 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                     return Scaffold(
                       key: _scaffoldKey,
                       appBar: AppBar(
+                        backgroundColor: kMentorXPPrimary,
                         elevation: 5,
                         title: Image.asset(
-                          'assets/images/MentorPinkWhite.png',
-                          height: 150,
+                          'assets/images/MentorXP.png',
+                          height: 100,
                         ),
                       ),
                       body: SingleChildScrollView(
@@ -408,10 +450,10 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                                 'Update Program Logo?',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontFamily: 'Work Sans',
-                                  fontSize: 30,
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 25,
+                                  color: Colors.black45,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
@@ -426,7 +468,7 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                                             widget.programLogo.isEmpty ||
                                             widget.programLogo == ""
                                         ? Image.asset(
-                                            'assets/images/MLogoPink.png',
+                                            'assets/images/MXPDark.png',
                                             height: 120,
                                             width: 120,
                                             fit: BoxFit.cover,
@@ -458,7 +500,7 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
-                                              'assets/images/MLogoBlue.png',
+                                              'assets/images/MXPDark.png',
                                               height: 120,
                                               width: 120,
                                               fit: BoxFit.cover,
@@ -477,14 +519,14 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   ButtonCard(
-                                    buttonCardText: 'Upload Logo',
+                                    buttonCardText: 'Upload New Logo',
                                     cardAlignment: MainAxisAlignment.center,
                                     cardIconBool: Container(),
                                     buttonCardHeight: 70,
-                                    buttonCardColor: Colors.pink,
+                                    buttonCardColor: kMentorXPPrimary,
                                     buttonCardTextColor: Colors.white,
                                     buttonCardTextSize: 25,
-                                    buttonCardRadius: 20,
+                                    buttonCardRadius: 30,
                                     onPressed: () async {
                                       await selectImage(context, 'Upload Logo');
                                     },
@@ -495,9 +537,9 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                                     cardIconBool: Container(),
                                     buttonCardHeight: 70,
                                     buttonCardColor: Colors.white,
-                                    buttonCardTextColor: Colors.pink,
+                                    buttonCardTextColor: kMentorXPPrimary,
                                     buttonCardTextSize: 25,
-                                    buttonCardRadius: 20,
+                                    buttonCardRadius: 30,
                                     onPressed: () {
                                       _successScreen(context);
                                     },

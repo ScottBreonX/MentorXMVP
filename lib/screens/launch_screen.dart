@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
-import 'package:mentorx_mvp/screens/programs/program_selection_screen.dart';
 import 'package:mentorx_mvp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'home_screen/home_screen.dart';
@@ -81,7 +80,6 @@ class _LaunchScreenState extends State<LaunchScreen> {
       body: PageView(
         children: [
           HomeScreen(loggedInUser: loggedInUser),
-          ProgramSelectionScreen(loggedInUser: loggedInUser),
           Profile(
             loggedInUser: loggedInUser.id,
             profileId: loggedInUser.id,

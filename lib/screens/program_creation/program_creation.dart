@@ -33,8 +33,6 @@ class _ProgramCreationState extends State<ProgramCreation> {
 
   String programID;
   String institutionName;
-  String type;
-  String enrollmentType = 'Private';
   String aboutProgram;
   String headAdmin;
   String programName;
@@ -53,8 +51,6 @@ class _ProgramCreationState extends State<ProgramCreation> {
           .createProgram(
             Program(
               institutionName: institutionName,
-              type: 'school',
-              enrollmentType: enrollmentType,
               aboutProgram: aboutProgram,
               headAdmin:
                   '${widget.loggedInUser.firstName} ${widget.loggedInUser.lastName}',
@@ -78,8 +74,6 @@ class _ProgramCreationState extends State<ProgramCreation> {
       await database.updateProgram(
         Program(
           institutionName: institutionName,
-          type: 'school',
-          enrollmentType: enrollmentType,
           aboutProgram: aboutProgram,
           headAdmin:
               '${widget.loggedInUser.firstName} ${widget.loggedInUser.lastName}',
@@ -117,38 +111,6 @@ class _ProgramCreationState extends State<ProgramCreation> {
     super.initState();
   }
 
-  List<DropdownMenuItem<String>> get dropdownItems {
-    List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 5.0, left: 5.0),
-              child: Icon(Icons.public),
-            ),
-            Text("Public"),
-          ],
-        ),
-        value: "Public",
-        alignment: Alignment.center,
-      ),
-      DropdownMenuItem(
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 5.0, left: 5.0),
-              child: Icon(Icons.lock),
-            ),
-            Text("Private"),
-          ],
-        ),
-        value: "Private",
-        alignment: Alignment.center,
-      ),
-    ];
-    return menuItems;
-  }
-
   TextField _buildTextField(BuildContext context, Key _key, String fieldName,
       String labelText, Icon _prefixIcon, TextEditingController _textEditor) {
     return TextField(
@@ -162,8 +124,6 @@ class _ProgramCreationState extends State<ProgramCreation> {
         setState(() {});
         if (fieldName == 'institutionName') {
           institutionName = value;
-        } else if (fieldName == 'enrollmentType') {
-          enrollmentType = value;
         } else if (fieldName == 'aboutProgram') {
           aboutProgram = value;
         } else if (fieldName == 'programName') {
@@ -187,7 +147,7 @@ class _ProgramCreationState extends State<ProgramCreation> {
         filled: true,
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderSide: BorderSide(color: kMentorXPAccentDark, width: 4.0),
           borderRadius: BorderRadius.all(
             Radius.circular(20.0),
           ),
@@ -228,10 +188,11 @@ class _ProgramCreationState extends State<ProgramCreation> {
           return Scaffold(
             key: _scaffoldKey,
             appBar: AppBar(
+              backgroundColor: kMentorXPPrimary,
               elevation: 5,
               title: Image.asset(
-                'assets/images/MentorPinkWhite.png',
-                height: 150,
+                'assets/images/MentorXP.png',
+                height: 100,
               ),
             ),
             body: SingleChildScrollView(
@@ -244,10 +205,10 @@ class _ProgramCreationState extends State<ProgramCreation> {
                       child: Text(
                         'Create a Program',
                         style: TextStyle(
-                          fontFamily: 'Work Sans',
+                          fontFamily: 'Montserrat',
                           fontSize: 25,
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w500,
+                          color: Colors.black45,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -258,7 +219,10 @@ class _ProgramCreationState extends State<ProgramCreation> {
                           _formKey1,
                           'programName',
                           'Name of Program',
-                          Icon(Icons.edit),
+                          Icon(
+                            Icons.edit,
+                            color: kMentorXPAccentDark,
+                          ),
                           _textController1),
                     ),
                     Padding(
@@ -268,7 +232,10 @@ class _ProgramCreationState extends State<ProgramCreation> {
                           _formKey2,
                           'institutionName',
                           'Institution or College',
-                          Icon(Icons.school),
+                          Icon(
+                            Icons.school,
+                            color: kMentorXPAccentDark,
+                          ),
                           _textController2),
                     ),
                     Padding(
@@ -278,65 +245,12 @@ class _ProgramCreationState extends State<ProgramCreation> {
                         _formKey4,
                         'aboutProgram',
                         'Description of Program',
-                        Icon(Icons.edit),
+                        Icon(
+                          Icons.edit,
+                          color: kMentorXPAccentDark,
+                        ),
                         _textController4,
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 40, bottom: 40, left: 15.0, right: 20.0),
-                          child: Text(
-                            'Enrollment',
-                            style: TextStyle(
-                              fontFamily: 'Work Sans',
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black45,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 20.0),
-                          child: Container(
-                            width: 150,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 2,
-                                  offset: Offset(2, 3),
-                                  color: Colors.grey[700],
-                                ),
-                              ],
-                              color: Colors.white,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: DropdownButton(
-                                underline: Container(),
-                                isExpanded: true,
-                                dropdownColor: Colors.white,
-                                value: enrollmentType,
-                                style: TextStyle(
-                                  fontFamily: 'Work Sans',
-                                  fontSize: 20,
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    enrollmentType = newValue;
-                                  });
-                                },
-                                items: dropdownItems,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -345,7 +259,10 @@ class _ProgramCreationState extends State<ProgramCreation> {
                         _formKey6,
                         'programCode',
                         'Program Password',
-                        Icon(Icons.key),
+                        Icon(
+                          Icons.key,
+                          color: kMentorXPAccentDark,
+                        ),
                         _textController6,
                       ),
                     ),
@@ -357,10 +274,10 @@ class _ProgramCreationState extends State<ProgramCreation> {
                         children: [
                           RoundedButton(
                             title: 'Cancel',
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.bold,
                             fontSize: 20,
                             buttonColor: Colors.white,
-                            fontColor: Colors.pink,
+                            fontColor: kMentorXPPrimary,
                             onPressed: () {
                               Navigator.pop(context);
                             },
@@ -370,7 +287,8 @@ class _ProgramCreationState extends State<ProgramCreation> {
                             title: 'Next',
                             fontWeight: FontWeight.w500,
                             fontSize: 20,
-                            buttonColor: canSubmit ? Colors.pink : Colors.grey,
+                            buttonColor:
+                                canSubmit ? kMentorXPPrimary : Colors.grey,
                             fontColor:
                                 canSubmit ? Colors.white : Colors.grey.shade400,
                             onPressed: canSubmit
