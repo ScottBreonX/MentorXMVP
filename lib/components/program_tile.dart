@@ -46,7 +46,7 @@ class ProgramTile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Container(
-          height: 110,
+          height: 100,
           child: Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.0),

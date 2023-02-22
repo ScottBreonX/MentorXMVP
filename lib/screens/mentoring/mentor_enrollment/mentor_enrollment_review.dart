@@ -87,13 +87,16 @@ class _MentorEnrollmentReviewState extends State<MentorEnrollmentReview> {
                           const EdgeInsets.only(left: 20.0, right: 20, top: 40),
                       child: Column(
                         children: [
-                          Text(
-                            'Review your Mentor selection card',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 30,
-                              color: Colors.black54,
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10.0),
+                            child: Text(
+                              'Review your Mentor selection card',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 30,
+                                color: Colors.black54,
+                              ),
                             ),
                           ),
                           MentorCard(
@@ -113,7 +116,7 @@ class _MentorEnrollmentReviewState extends State<MentorEnrollmentReview> {
                                       userProfile.profilePicture.isEmpty ||
                                       userProfile.profilePicture == ""
                                   ? ProfileImageCircle(
-                                      circleColor: Colors.blue,
+                                      circleColor: Colors.grey,
                                       iconSize: 45,
                                       iconColor: Colors.white,
                                       circleSize: 40,

@@ -4,7 +4,6 @@ class Program {
   final String id;
   final String institutionName;
   final String programName;
-  final String enrollmentType;
   final String aboutProgram;
   final String headAdmin;
   final String programCode;
@@ -14,7 +13,6 @@ class Program {
     this.id,
     this.institutionName,
     this.programName,
-    this.enrollmentType,
     this.aboutProgram,
     this.headAdmin,
     this.programCode,
@@ -26,7 +24,6 @@ class Program {
       id: doc['id'],
       institutionName: doc['institutionName'],
       programName: doc['programName'],
-      enrollmentType: doc['enrollmentType'],
       aboutProgram: doc['aboutProgram'],
       headAdmin: doc['headAdmin'],
       programCode: doc['programCode'],
@@ -38,7 +35,6 @@ class Program {
       'id': id,
       'institutionName': institutionName,
       'programName': programName,
-      'enrollmentType': enrollmentType,
       'aboutProgram': aboutProgram,
       'headAdmin': headAdmin,
       'programCode': programCode,

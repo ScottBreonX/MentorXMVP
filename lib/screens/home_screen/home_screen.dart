@@ -5,9 +5,11 @@ import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
+import '../../components/program_tile.dart';
 import '../../components/progress.dart';
-import '../../models/program_list.dart';
+import '../../models/program.dart';
 import '../../services/auth.dart';
 import '../launch_screen.dart';
 
@@ -30,6 +32,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool loggedIn = false;
+  bool showSpinner = false;
 
   @override
   void initState() {
@@ -49,75 +52,15 @@ class _HomeScreenState extends State<HomeScreen> {
     }));
   }
 
-  bool isLoading = false;
-  bool hasPrograms = false;
-  List<ProgramList> programs = [];
-
-  Future<dynamic> getProgramData() async {
-    setState(() {
-      isLoading = true;
-    });
-    QuerySnapshot snapshot = await usersRef
-        .doc(widget.loggedInUser.id)
-        .collection('enrolledPrograms')
-        .get();
-    if (snapshot.docs.isNotEmpty) {
-      setState(() {
-        isLoading = false;
-        hasPrograms = true;
-        programs =
-            snapshot.docs.map((doc) => ProgramList.fromDocument(doc)).toList();
-      });
-    }
-  }
-
-  buildEnrolledPrograms() {
-    String userID = loggedInUser.id;
-    String collectionPath = 'enrolledPrograms';
-    isLoading = true;
-    QuerySnapshot _snapshot;
-    return FutureBuilder(
-      future: usersRef.doc(userID).collection(collectionPath).get(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return circularProgress();
-        } else {
-          _snapshot = snapshot.data;
-          if (_snapshot.size > 0) {
-            programs = _snapshot.docs
-                .map((doc) => ProgramList.fromDocument(doc))
-                .toList();
-            return Wrap(
-              children: programs,
-            );
-          } else {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 25),
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Wrap(
-                      children: [
-                        Text(
-                          'You have not enrolled in any programs yet, view available programs below',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'WorkSans',
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black45,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }
-        }
-      },
+  buildProgramListContent() {
+    return ModalProgressHUD(
+      inAsyncCall: showSpinner,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          AvailableProgramsStream(),
+        ],
+      ),
     );
   }
 
@@ -314,14 +257,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       endIndent: 20,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
+                      padding:
+                          const EdgeInsets.only(top: 20.0, left: 0, right: 0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 10.0),
+                            padding:
+                                const EdgeInsets.only(bottom: 10.0, top: 10),
                             child: Text(
-                              'Enrolled Programs',
+                              'Join a Program',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontFamily: 'Montserrat',
@@ -331,7 +276,30 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                          buildEnrolledPrograms(),
+                          Wrap(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 40.0),
+                                child: Text(
+                                  'You are not currently enrolled in any programs. Join a program below:',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: 'WorkSans',
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black45,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Divider(
+                            color: kMentorXPSecondary,
+                            indent: 20,
+                            endIndent: 20,
+                            thickness: 2,
+                          ),
+                          buildProgramListContent(),
                         ],
                       ),
                     )
@@ -341,5 +309,78 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         });
+  }
+}
+
+class AvailableProgramsStream extends StatelessWidget {
+  AvailableProgramsStream();
+
+  @override
+  Widget build(BuildContext context) {
+    final Stream programStream = programsRef.snapshots();
+
+    return StreamBuilder<QuerySnapshot>(
+      stream: programStream,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center();
+        }
+        final programs = snapshot.data.docs;
+
+        List<ProgramTile> programBubbles = [];
+
+        for (var program in programs) {
+          Program prog = Program.fromDocument(program);
+
+          final programBubble = ProgramTile(
+            programId: program.id.toString(),
+            programName: prog.programName,
+            institutionName: prog.institutionName,
+            programAbout: prog.aboutProgram,
+            imageContainer: Container(
+                child: prog.programLogo == null || prog.programLogo.isEmpty
+                    ? Padding(
+                        padding: const EdgeInsets.only(
+                            left: 5, right: 5, top: 5, bottom: 5),
+                        child: Image.asset(
+                          'assets/images/MXPDark.png',
+                          height: 50,
+                          fit: BoxFit.fill,
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.only(
+                            left: 12, right: 12, top: 5, bottom: 5),
+                        child: CachedNetworkImage(
+                          imageUrl: prog.programLogo,
+                          imageBuilder: (context, imageProvider) => Container(
+                            height: 60,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Image.asset(
+                            'assets/images/MXPDark.png',
+                            height: 40,
+                            width: 40,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      )),
+          );
+          programBubbles.add(programBubble);
+        }
+        return Wrap(
+          children: programBubbles,
+        );
+      },
+    );
   }
 }

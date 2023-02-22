@@ -272,12 +272,14 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                     ? Image.asset(
                         'assets/images/MXPDark.png',
                         height: 150,
+                        width: 150,
                         fit: BoxFit.fill,
                       )
                     : CachedNetworkImage(
                         imageUrl: _program.programLogo,
                         imageBuilder: (context, imageProvider) => Container(
                           height: 150,
+                          width: 150,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
                             image: DecorationImage(
@@ -291,6 +293,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                         errorWidget: (context, url, error) => Image.asset(
                           'assets/images/MXPDark.png',
                           height: 150,
+                          width: 150,
                           fit: BoxFit.fill,
                         ),
                       ),

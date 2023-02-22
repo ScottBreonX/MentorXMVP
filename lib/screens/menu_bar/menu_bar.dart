@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
+import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/program_creation/program_creation.dart';
 import 'package:mentorx_mvp/screens/programs/available_programs.dart';
 import '../profile/profile_screen.dart';
@@ -51,15 +51,17 @@ class MentorXMenuList extends StatelessWidget {
             color: Colors.white,
           ),
           title: Text(
-            'Home',
-            style: Theme.of(context).textTheme.headline2,
+            'Program Home',
+            style: TextStyle(
+              fontFamily: 'Montserrat',
+              color: Colors.white,
+              fontSize: 20,
+            ),
           ),
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomeScreen(
-                loggedInUser: loggedInUser,
-              ),
+              builder: (context) => LandingPage(),
             ),
           ),
         ),
@@ -70,7 +72,11 @@ class MentorXMenuList extends StatelessWidget {
           ),
           title: Text(
             'My Profile',
-            style: Theme.of(context).textTheme.headline2,
+            style: TextStyle(
+              fontFamily: 'Montserrat',
+              color: Colors.white,
+              fontSize: 20,
+            ),
           ),
           onTap: () => Navigator.push(
             context,
@@ -98,7 +104,11 @@ class MentorXMenuList extends StatelessWidget {
           ),
           title: Text(
             'Join New Program',
-            style: Theme.of(context).textTheme.headline2,
+            style: TextStyle(
+              fontFamily: 'Montserrat',
+              color: Colors.white,
+              fontSize: 20,
+            ),
           ),
         ),
         loggedInUser.canCreateProgram
@@ -130,7 +140,11 @@ class MentorXMenuList extends StatelessWidget {
           ),
           title: Text(
             'Log Out',
-            style: Theme.of(context).textTheme.headline2,
+            style: TextStyle(
+              fontFamily: 'Montserrat',
+              color: Colors.white,
+              fontSize: 20,
+            ),
           ),
           onTap: () {
             confirmSignOut(context);

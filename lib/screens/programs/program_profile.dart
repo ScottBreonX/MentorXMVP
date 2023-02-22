@@ -180,65 +180,21 @@ class _ProgramProfileState extends State<ProgramProfile> {
                         color: Colors.grey.shade400,
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10.0, bottom: 10),
+                              padding: const EdgeInsets.only(
+                                  left: 10.0, bottom: 10.0),
                               child: Text(
-                                'Type of program',
-                                textAlign: TextAlign.left,
+                                'About this program',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 25,
+                                  fontSize: 24,
                                   fontFamily: 'Montserrat',
-                                  color: Colors.black54,
+                                  color: Colors.black45,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 10.0),
-                              child: Container(
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Colors.grey[200],
-                                ),
-                                height: 45,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 5,
-                                  ),
-                                  child: Text(
-                                    '${program.enrollmentType.toUpperCase()}',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 30,
-                                      color: Colors.black54,
-                                      fontFamily: 'Montserrat',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              'About this program',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 24,
-                                fontFamily: 'Montserrat',
-                                color: Colors.black54,
                               ),
                             ),
                             SizedBox(height: 5),

@@ -29,50 +29,45 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
   buildProgramListContent() {
     return ModalProgressHUD(
       inAsyncCall: showSpinner,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 40.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.school,
-                    size: 40,
-                    color: kMentorXPAccentDark,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 40.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.school,
+                  size: 40,
+                  color: kMentorXPAccentDark,
+                ),
+                SizedBox(
+                  width: 15,
+                ),
+                Text(
+                  'Available Programs',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black54,
                   ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    'Available Programs',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 25,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black54,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Divider(
-              thickness: 4,
-              indent: 40,
-              endIndent: 40,
-              color: Colors.black45,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 5000,
-                child: AvailableProgramsStream(),
-              ),
-            ),
-          ],
-        ),
+          ),
+          Divider(
+            thickness: 2,
+            indent: 40,
+            endIndent: 40,
+            color: Colors.grey,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: AvailableProgramsStream(),
+          ),
+        ],
       ),
     );
   }
@@ -88,7 +83,9 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
           height: 100,
         ),
       ),
-      body: buildProgramListContent(),
+      body: SingleChildScrollView(
+        child: buildProgramListContent(),
+      ),
     );
   }
 }
@@ -122,40 +119,46 @@ class AvailableProgramsStream extends StatelessWidget {
             programAbout: prog.aboutProgram,
             imageContainer: Container(
                 child: prog.programLogo == null || prog.programLogo.isEmpty
-                    ? Image.asset(
-                        'assets/images/MXPDark.png',
-                        height: 45,
-                        fit: BoxFit.fill,
+                    ? Padding(
+                        padding: const EdgeInsets.only(
+                            left: 5, right: 5, top: 5, bottom: 5),
+                        child: Image.asset(
+                          'assets/images/MXPDark.png',
+                          height: 50,
+                          fit: BoxFit.fill,
+                        ),
                       )
-                    : CachedNetworkImage(
-                        imageUrl: prog.programLogo,
-                        imageBuilder: (context, imageProvider) => Container(
-                          height: 45,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.fill,
+                    : Padding(
+                        padding: const EdgeInsets.only(
+                            left: 12, right: 12, top: 5, bottom: 5),
+                        child: CachedNetworkImage(
+                          imageUrl: prog.programLogo,
+                          imageBuilder: (context, imageProvider) => Container(
+                            height: 60,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
-                        ),
-                        placeholder: (context, url) =>
-                            CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => Image.asset(
-                          'assets/images/MXPDark.png',
-                          height: 40,
-                          width: 40,
-                          fit: BoxFit.fill,
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Image.asset(
+                            'assets/images/MXPDark.png',
+                            height: 40,
+                            width: 40,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       )),
           );
           programBubbles.add(programBubble);
         }
-        return Container(
-          child: ListView(
-            scrollDirection: Axis.vertical,
-            children: programBubbles,
-          ),
+        return Wrap(
+          children: programBubbles,
         );
       },
     );

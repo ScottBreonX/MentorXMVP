@@ -473,7 +473,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                             );
                           },
                           cardIcon: Icons.change_circle,
-                          textDescription1: 'Program',
+                          textDescription1: 'Mentoring',
                           textDescription2: 'Enrollment',
                         ),
                         CircleIconWithText(
@@ -571,7 +571,6 @@ class CircleIconWithText extends StatelessWidget {
                 fontSize: 20,
                 color: Colors.black45,
                 fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -581,7 +580,6 @@ class CircleIconWithText extends StatelessWidget {
               fontSize: 20,
               color: Colors.black45,
               fontFamily: 'Montserrat',
-              fontWeight: FontWeight.bold,
             ),
           ),
         ],

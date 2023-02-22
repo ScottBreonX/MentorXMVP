@@ -110,19 +110,19 @@ class _MentorCardState extends State<MentorCard> {
                       ),
                     ),
                     Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
+                            padding: const EdgeInsets.only(top: 35.0),
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.60,
                               child: Text(
                                 '${widget.mentorFname} ${widget.mentorLname}',
                                 overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
+                                maxLines: 1,
                                 style: TextStyle(
                                   fontFamily: 'WorkSans',
-                                  fontSize: 23,
+                                  fontSize: 25,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black54,
                                 ),
@@ -297,51 +297,47 @@ class _MentorCardState extends State<MentorCard> {
                             Padding(
                               padding:
                                   const EdgeInsets.only(top: 10.0, bottom: 5),
-                              child: widget.previewStatus
-                                  ? Container()
-                                  : Divider(
-                                      indent: 10,
-                                      endIndent: 10,
-                                      color: Colors.grey.shade300,
-                                      thickness: 1,
-                                    ),
+                              child: Divider(
+                                indent: 10,
+                                endIndent: 10,
+                                color: Colors.grey.shade300,
+                                thickness: 1,
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 10.0),
                               child: Column(
                                 children: [
-                                  widget.previewStatus
-                                      ? Container()
-                                      : GestureDetector(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 5.0),
-                                                child: Icon(
-                                                  Icons.remove_circle,
-                                                  color: Colors.black45,
-                                                ),
-                                              ),
-                                              Text(
-                                                'Minimize Info',
-                                                style: TextStyle(
-                                                  fontFamily: 'WorkSans',
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.black45,
-                                                ),
-                                              ),
-                                            ],
+                                  GestureDetector(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 5.0),
+                                          child: Icon(
+                                            Icons.remove_circle,
+                                            color: Colors.black45,
                                           ),
-                                          onTap: () {
-                                            setState(() {
-                                              expandStatus = false;
-                                            });
-                                          },
                                         ),
+                                        Text(
+                                          'Minimize Info',
+                                          style: TextStyle(
+                                            fontFamily: 'WorkSans',
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black45,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    onTap: () {
+                                      setState(() {
+                                        expandStatus = false;
+                                      });
+                                    },
+                                  ),
                                 ],
                               ),
                             ),
