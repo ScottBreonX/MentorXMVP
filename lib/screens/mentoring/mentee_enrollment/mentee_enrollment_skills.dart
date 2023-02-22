@@ -34,21 +34,21 @@ class _MenteeEnrollmentSkillsScreenState
       BuildContext context, String programUID) async {
     try {
       await programsRef
-          .doc(programUID)
+          .doc(widget.programUID)
           .collection('mentees')
-          .doc(loggedInUser.id)
+          .doc(widget.loggedInUser.id)
           .update({
         "Mentee Skill 1": skill1,
         "Mentee Skill 2": skill2,
         "Mentee Skill 3": skill3,
-        "id": loggedInUser.id,
+        "id": widget.loggedInUser.id,
       });
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => MenteeEnrollmentHobbies(
-                    loggedInUser: loggedInUser,
-                    programUID: programUID,
+                    loggedInUser: widget.loggedInUser,
+                    programUID: widget.programUID,
                   )));
     } on FirebaseException catch (e) {
       showAlertDialog(context,
@@ -89,7 +89,7 @@ class _MenteeEnrollmentSkillsScreenState
         future: programsRef
             .doc(widget.programUID)
             .collection('mentees')
-            .doc(loggedInUser.id)
+            .doc(widget.loggedInUser.id)
             .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {

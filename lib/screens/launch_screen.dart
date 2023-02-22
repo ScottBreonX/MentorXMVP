@@ -81,7 +81,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
         children: [
           HomeScreen(loggedInUser: loggedInUser),
           Profile(
-            loggedInUser: loggedInUser.id,
+            loggedInUser: loggedInUser,
             profileId: loggedInUser.id,
           ),
         ],

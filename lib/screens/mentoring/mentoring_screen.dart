@@ -3,27 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/enrollment_model.dart';
-import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentee_enrollment/mentee_enrollment_skills.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_enrollment/mentor_enrollment_skills.dart';
 import '../../components/alert_dialog.dart';
 import '../../components/progress.dart';
 import '../../models/mentoring_model.dart';
+import '../../models/user.dart';
 import '../programs/program_launch/program_enrollment_screen.dart';
 
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class MentoringScreen extends StatefulWidget {
-  final myUser loggedInUser;
   static const String id = 'mentoring_screen';
   final String programUID;
+  final myUser loggedInUser;
 
-  const MentoringScreen({
-    Key key,
-    this.loggedInUser,
-    this.programUID,
-  }) : super(key: key);
+  const MentoringScreen({Key key, this.programUID, this.loggedInUser})
+      : super(key: key);
 
   @override
   _MentoringScreenState createState() => _MentoringScreenState();
@@ -50,8 +47,10 @@ class _MentoringScreenState extends State<MentoringScreen> {
     setState(() {
       isLoading = true;
     });
-    QuerySnapshot snapshot =
-        await mentorsRef.doc(loggedInUser.id).collection('userMentoring').get();
+    QuerySnapshot snapshot = await mentorsRef
+        .doc(widget.loggedInUser.id)
+        .collection('userMentoring')
+        .get();
     if (snapshot.docs.isNotEmpty) {
       setState(() {
         isLoading = false;
@@ -81,7 +80,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
         future: programsRef
             .doc(widget.programUID)
             .collection('userSubscribed')
-            .doc(loggedInUser.id)
+            .doc(widget.loggedInUser.id)
             .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -160,46 +159,41 @@ class _MentoringScreenState extends State<MentoringScreen> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 20.0, left: 20, right: 20),
-                  child: ButtonCard(
-                    buttonCardText: 'Continue',
-                    buttonCardHeight: 70,
-                    buttonCardTextSize: 20,
-                    buttonCardRadius: 20,
-                    buttonCardColor: menteeSelected || mentorSelected
-                        ? kMentorXPSecondary
-                        : Colors.grey,
-                    buttonCardTextColor: menteeSelected || mentorSelected
-                        ? Colors.white
-                        : Colors.grey.shade600,
-                    cardAlignment: MainAxisAlignment.center,
-                    cardIconBool: Container(),
-                    onPressed: () => (menteeSelected | mentorSelected)
-                        ? {
-                            mentorSelected
-                                ? _createMentor(context, widget.programUID)
-                                : createMentee(context, widget.programUID)
-                          }
-                        : {},
-                  ),
+                ButtonCard(
+                  buttonCardText: 'Continue',
+                  buttonCardHeight: 70,
+                  buttonCardTextSize: 20,
+                  buttonCardRadius: 20,
+                  buttonCardColor: menteeSelected || mentorSelected
+                      ? kMentorXPSecondary
+                      : Colors.grey,
+                  buttonCardTextColor: menteeSelected || mentorSelected
+                      ? Colors.white
+                      : Colors.grey.shade600,
+                  cardAlignment: MainAxisAlignment.center,
+                  cardIconBool: Container(),
+                  onPressed: () => (menteeSelected | mentorSelected)
+                      ? {
+                          mentorSelected
+                              ? _createMentor(context, widget.programUID,
+                                  widget.loggedInUser)
+                              : createMentee(context, widget.programUID,
+                                  widget.loggedInUser)
+                        }
+                      : {},
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0, right: 20),
-                  child: ButtonCard(
-                    buttonCardHeight: 70,
-                    buttonCardText: 'Cancel',
-                    buttonCardTextSize: 20,
-                    buttonCardRadius: 20,
-                    buttonCardColor: Colors.white,
-                    buttonCardTextColor: kMentorXPSecondary,
-                    cardAlignment: MainAxisAlignment.center,
-                    cardIconBool: Container(),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
+                ButtonCard(
+                  buttonCardHeight: 70,
+                  buttonCardText: 'Cancel',
+                  buttonCardTextSize: 20,
+                  buttonCardRadius: 20,
+                  buttonCardColor: Colors.white,
+                  buttonCardTextColor: kMentorXPSecondary,
+                  cardAlignment: MainAxisAlignment.center,
+                  cardIconBool: Container(),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
               ],
             ),
@@ -223,7 +217,8 @@ class _MentoringScreenState extends State<MentoringScreen> {
   }
 }
 
-Future<void> createMentee(BuildContext context, String programUID) async {
+Future<void> createMentee(
+    BuildContext context, String programUID, myUser loggedInUser) async {
   try {
     await programsRef
         .doc(programUID)
@@ -268,7 +263,8 @@ Future<void> createMentee(BuildContext context, String programUID) async {
   }
 }
 
-Future<void> _createMentor(BuildContext context, String programUID) async {
+Future<void> _createMentor(
+    BuildContext context, String programUID, myUser loggedInUser) async {
   try {
     await programsRef
         .doc(programUID)

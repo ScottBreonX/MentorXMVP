@@ -82,7 +82,7 @@ class MentorXMenuList extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => Profile(
-                loggedInUser: loggedInUser.id,
+                loggedInUser: loggedInUser,
                 profileId: loggedInUser.id,
               ),
             ),

@@ -8,7 +8,6 @@ import 'package:mentorx_mvp/screens/mentoring/mentor_enrollment/mentor_enrollmen
 import '../../../components/alert_dialog.dart';
 import '../../../components/progress.dart';
 import '../../../models/mentor_match_models/mentor_model.dart';
-import '../../launch_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -34,21 +33,21 @@ class _MentorEnrollmentSkillsScreenState
       BuildContext context, String programUID) async {
     try {
       await programsRef
-          .doc(programUID)
+          .doc(widget.programUID)
           .collection('mentors')
-          .doc(loggedInUser.id)
+          .doc(widget.loggedInUser.id)
           .update({
         "Mentor Skill 1": skill1,
         "Mentor Skill 2": skill2,
         "Mentor Skill 3": skill3,
-        "id": loggedInUser.id,
+        "id": widget.loggedInUser.id,
       });
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => MentorEnrollmentHobbies(
-            loggedInUser: loggedInUser,
-            programUID: programUID,
+            loggedInUser: widget.loggedInUser,
+            programUID: widget.programUID,
           ),
         ),
       );
@@ -91,7 +90,7 @@ class _MentorEnrollmentSkillsScreenState
         future: programsRef
             .doc(widget.programUID)
             .collection('mentors')
-            .doc(loggedInUser.id)
+            .doc(widget.loggedInUser.id)
             .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {

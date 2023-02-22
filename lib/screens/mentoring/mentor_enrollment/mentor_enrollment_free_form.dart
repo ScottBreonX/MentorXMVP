@@ -32,9 +32,9 @@ class _MentorEnrollmentFreeFormState extends State<MentorEnrollmentFreeForm> {
       BuildContext context, String programUID, String freeFormResponse) async {
     try {
       await programsRef
-          .doc(programUID)
+          .doc(widget.programUID)
           .collection('mentors')
-          .doc(loggedInUser.id)
+          .doc(widget.loggedInUser.id)
           .update({
         "Mentor Free Form": mentorFreeForm,
       });
@@ -42,8 +42,8 @@ class _MentorEnrollmentFreeFormState extends State<MentorEnrollmentFreeForm> {
         context,
         MaterialPageRoute(
           builder: (context) => MentorEnrollmentReview(
-            loggedInUser: loggedInUser,
-            programUID: programUID,
+            loggedInUser: widget.loggedInUser,
+            programUID: widget.programUID,
           ),
         ),
       );
@@ -62,7 +62,7 @@ class _MentorEnrollmentFreeFormState extends State<MentorEnrollmentFreeForm> {
         future: programsRef
             .doc(widget.programUID)
             .collection('mentors')
-            .doc(loggedInUser.id)
+            .doc(widget.loggedInUser.id)
             .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {

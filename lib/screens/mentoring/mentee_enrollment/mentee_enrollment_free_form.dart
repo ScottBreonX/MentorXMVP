@@ -6,7 +6,6 @@ import 'package:mentorx_mvp/models/user.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/progress.dart';
 import '../../../models/mentor_match_models/mentee_model.dart';
-import '../../launch_screen.dart';
 import 'mentee_enrollment_review.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -32,9 +31,9 @@ class _MenteeEnrollmentFreeFormState extends State<MenteeEnrollmentFreeForm> {
       BuildContext context, String programUID, String freeFormResponse) async {
     try {
       await programsRef
-          .doc(programUID)
+          .doc(widget.programUID)
           .collection('mentees')
-          .doc(loggedInUser.id)
+          .doc(widget.loggedInUser.id)
           .update({
         "Mentee Free Form": menteeFreeForm,
       });
@@ -42,8 +41,8 @@ class _MenteeEnrollmentFreeFormState extends State<MenteeEnrollmentFreeForm> {
         context,
         MaterialPageRoute(
           builder: (context) => MenteeEnrollmentReview(
-            loggedInUser: loggedInUser,
-            programUID: programUID,
+            loggedInUser: widget.loggedInUser,
+            programUID: widget.programUID,
           ),
         ),
       );
@@ -62,7 +61,7 @@ class _MenteeEnrollmentFreeFormState extends State<MenteeEnrollmentFreeForm> {
         future: programsRef
             .doc(widget.programUID)
             .collection('mentees')
-            .doc(loggedInUser.id)
+            .doc(widget.loggedInUser.id)
             .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {

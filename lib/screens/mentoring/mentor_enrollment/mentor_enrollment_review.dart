@@ -37,8 +37,8 @@ class _MentorEnrollmentReviewState extends State<MentorEnrollmentReview> {
         context,
         MaterialPageRoute(
           builder: (context) => ProgramLaunchScreen(
-            loggedInUser: loggedInUser,
-            programUID: programUID,
+            loggedInUser: widget.loggedInUser,
+            programUID: widget.programUID,
           ),
         ),
       );
@@ -51,7 +51,7 @@ class _MentorEnrollmentReviewState extends State<MentorEnrollmentReview> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Object>(
-        future: usersRef.doc(loggedInUser.id).get(),
+        future: usersRef.doc(widget.loggedInUser.id).get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return circularProgress();
@@ -62,7 +62,7 @@ class _MentorEnrollmentReviewState extends State<MentorEnrollmentReview> {
               future: programsRef
                   .doc(widget.programUID)
                   .collection('mentors')
-                  .doc(loggedInUser.id)
+                  .doc(widget.loggedInUser.id)
                   .get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
@@ -100,7 +100,7 @@ class _MentorEnrollmentReviewState extends State<MentorEnrollmentReview> {
                             ),
                           ),
                           MentorCard(
-                            mentorUID: loggedInUser.id,
+                            mentorUID: widget.loggedInUser.id,
                             mentorFname: userProfile.firstName,
                             mentorLname: userProfile.lastName,
                             mtrAtt1: mentorSkills.mentorSkill1,

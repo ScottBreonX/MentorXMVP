@@ -81,7 +81,7 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                       title: 'Yes',
                       buttonColor: kMentorXPSecondary,
                       fontColor: Colors.white,
-                      minWidth: 150,
+                      minWidth: 120,
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
                       onPressed: () => _leaveProgram(programUID),
@@ -93,7 +93,7 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                       title: 'Cancel',
                       buttonColor: Colors.grey,
                       fontColor: Colors.white,
-                      minWidth: 150,
+                      minWidth: 120,
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
                       onPressed: () {
@@ -252,8 +252,7 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                               child: Text(
                                 'About this program',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 24,
+                                  fontSize: 25,
                                   color: Colors.black45,
                                   fontFamily: 'Montserrat',
                                 ),
@@ -292,8 +291,8 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                               buttonCardIcon: Icons.exit_to_app,
                               buttonCardIconSize: 40,
                               buttonCardIconColor: kMentorXPSecondary,
-                              onPressed: () =>
-                                  _confirmLeaveScreen(context, program.id),
+                              onPressed: () => _confirmLeaveScreen(
+                                  context, widget.programId),
                             ),
                           ],
                         ),

@@ -33,21 +33,21 @@ class _MentorEnrollmentHobbiesState extends State<MentorEnrollmentHobbies> {
       BuildContext context, String programUID) async {
     try {
       await programsRef
-          .doc(programUID)
+          .doc(widget.programUID)
           .collection('mentors')
-          .doc(loggedInUser.id)
+          .doc(widget.loggedInUser.id)
           .update({
         "Mentor Hobby 1": hobby1,
         "Mentor Hobby 2": hobby2,
         "Mentor Hobby 3": hobby3,
-        "id": loggedInUser.id,
+        "id": widget.loggedInUser.id,
       });
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => MentorEnrollmentFreeForm(
-            loggedInUser: loggedInUser,
-            programUID: programUID,
+            loggedInUser: widget.loggedInUser,
+            programUID: widget.programUID,
           ),
         ),
       );
@@ -94,7 +94,7 @@ class _MentorEnrollmentHobbiesState extends State<MentorEnrollmentHobbies> {
         future: programsRef
             .doc(widget.programUID)
             .collection('mentors')
-            .doc(loggedInUser.id)
+            .doc(widget.loggedInUser.id)
             .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {

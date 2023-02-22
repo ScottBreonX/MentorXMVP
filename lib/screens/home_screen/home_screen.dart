@@ -148,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 context,
                                 pageTransition(
                                   Profile(
-                                    loggedInUser: loggedInUser.id,
+                                    loggedInUser: loggedInUser,
                                     profileId: loggedInUser.id,
                                   ),
                                   1.5,

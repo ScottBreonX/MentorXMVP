@@ -121,7 +121,6 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => MentoringScreen(
-                                    loggedInUser: loggedInUser,
                                     programUID: widget.programUID,
                                   ),
                                 ),
@@ -221,8 +220,8 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                 context,
                 pageTransition(
                   Profile(
-                    loggedInUser: loggedInUser.id,
-                    profileId: loggedInUser.id,
+                    loggedInUser: widget.loggedInUser,
+                    profileId: widget.loggedInUser.id,
                   ),
                   1.5,
                   1.0,
@@ -277,7 +276,8 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
           }
           Program program = Program.fromDocument(snapshot.data);
 
-          final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
+          final drawerItems =
+              MentorXMenuList(loggedInUser: widget.loggedInUser);
           final GlobalKey<ScaffoldState> _scaffoldKey =
               new GlobalKey<ScaffoldState>();
 
@@ -443,16 +443,13 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                       children: [
                         CircleIconWithText(
                           onTap: () {
-                            print(widget.loggedInUser.firstName);
                             Navigator.push(
                               context,
-                              pageTransition(
-                                Profile(
-                                  loggedInUser: widget.loggedInUser.id,
+                              MaterialPageRoute(
+                                builder: (context) => Profile(
+                                  loggedInUser: widget.loggedInUser,
                                   profileId: widget.loggedInUser.id,
                                 ),
-                                1.5,
-                                1.0,
                               ),
                             );
                           },
@@ -466,7 +463,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => MentoringScreen(
-                                  loggedInUser: loggedInUser,
+                                  loggedInUser: widget.loggedInUser,
                                   programUID: widget.programUID,
                                 ),
                               ),

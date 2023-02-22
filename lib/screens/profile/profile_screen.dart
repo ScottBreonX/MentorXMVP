@@ -22,7 +22,7 @@ final usersRef = FirebaseFirestore.instance.collection('users');
 final Reference storageRef = FirebaseStorage.instance.ref();
 
 class Profile extends StatefulWidget {
-  final String loggedInUser;
+  final myUser loggedInUser;
   final String profileId;
   static String id = 'mentor_screen';
 
@@ -275,7 +275,7 @@ class _ProfileState extends State<Profile> {
         MaterialPageRoute(
           builder: (context) => Profile(
             profileId: loggedInUser.id,
-            loggedInUser: loggedInUser.id,
+            loggedInUser: loggedInUser,
           ),
         ));
   }
@@ -287,7 +287,7 @@ class _ProfileState extends State<Profile> {
         context,
         MaterialPageRoute(
           builder: (context) => Profile(
-            loggedInUser: loggedInUser.id,
+            loggedInUser: loggedInUser,
             profileId: loggedInUser.id,
           ),
         ));
@@ -405,7 +405,7 @@ class _ProfileState extends State<Profile> {
                                         MaterialPageRoute(
                                           builder: (context) => Profile(
                                             loggedInUser: widget.loggedInUser,
-                                            profileId: widget.loggedInUser,
+                                            profileId: widget.loggedInUser.id,
                                           ),
                                         ),
                                       );
@@ -445,7 +445,7 @@ class _ProfileState extends State<Profile> {
       return circularProgress();
     }
 
-    if (widget.profileId == loggedInUser.id) {
+    if (widget.profileId == widget.loggedInUser.id) {
       setState(() {
         myProfileView = true;
       });
