@@ -28,8 +28,6 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
   int mentorSlots;
   String aboutMe;
   String workExperience;
-  String mentorAbout;
-  String menteeAbout;
   bool mentor;
 
   final TextEditingController _firstNameController = TextEditingController();
@@ -61,12 +59,9 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
           email: user.email,
           firstName: firstName,
           lastName: lastName,
-          major: major ?? '',
-          yearInSchool: yearInSchool ?? '',
           aboutMe: aboutMe ?? '',
           workExperience: workExperience ?? '',
-          mentorAbout: mentorAbout ?? '',
-          menteeAbout: menteeAbout ?? '',
+          program: '',
           profilePicture: '',
           coverPhoto: '',
           canCreateProgram: false,

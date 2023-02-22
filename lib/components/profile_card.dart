@@ -70,17 +70,6 @@ class ProfileCard extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                '${user.major} - ${user.yearInSchool}',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: cardTextColor ?? Colors.black,
-                  fontSize: secondaryTextSize ?? 15,
-                ),
-              ),
             ],
           ),
           height: boxHeight ?? 150,
