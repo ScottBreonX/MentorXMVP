@@ -26,6 +26,7 @@ class MentorCard extends StatefulWidget {
   final Container moreInfoExpand;
   final Divider dividerExpand;
   final bool previewStatus;
+  final bool menteePreview;
 
   MentorCard({
     this.mentorUID,
@@ -42,6 +43,7 @@ class MentorCard extends StatefulWidget {
     this.moreInfoExpand,
     this.dividerExpand,
     this.previewStatus = false,
+    this.menteePreview = false,
     this.mtrHobby1,
     this.mtrHobby2,
     this.mtrHobby3,
@@ -172,12 +174,14 @@ class _MentorCardState extends State<MentorCard> {
                               padding:
                                   const EdgeInsets.only(left: 10.0, top: 5),
                               child: Text(
-                                "Why I'd be a great mentor:",
+                                widget.menteePreview
+                                    ? "What I'm looking for in a mentor:"
+                                    : "Why I'd be a great mentor:",
                                 style: TextStyle(
                                   fontFamily: 'WorkSans',
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black54,
+                                  color: kMentorXPPrimary,
                                 ),
                               ),
                             ),
@@ -211,7 +215,9 @@ class _MentorCardState extends State<MentorCard> {
                           thickness: 1,
                         ),
                         buildSkillsSection(
-                          'My Mentoring Focus',
+                          widget.menteePreview
+                              ? 'Skills I am looking to develop'
+                              : 'My Mentoring Focus',
                           kMentorXPAccentDark,
                           skillMap['${widget.mtrAtt1}'],
                           skillMap['${widget.mtrAtt2}'],
@@ -228,7 +234,7 @@ class _MentorCardState extends State<MentorCard> {
                         ),
                         buildSkillsSection(
                           'My Hobbies',
-                          kMentorXPAccentDark,
+                          kMentorXPSecondary,
                           skillMap['${widget.mtrHobby1}'],
                           skillMap['${widget.mtrHobby2}'],
                           skillMap['${widget.mtrHobby3}'],
@@ -426,7 +432,7 @@ class _MentorCardState extends State<MentorCard> {
                   fontFamily: 'WorkSans',
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
-                  color: Colors.black54,
+                  color: kMentorXPPrimary,
                 ),
               ),
             ),

@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/progress.dart';
 import '../../../models/mentor_match_models/mentee_model.dart';
 import '../../launch_screen.dart';
+import 'mentee_enrollment_free_form.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -45,7 +45,7 @@ class _MenteeEnrollmentHobbiesState extends State<MenteeEnrollmentHobbies> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ProgramLaunchScreen(
+          builder: (context) => MenteeEnrollmentFreeForm(
             loggedInUser: loggedInUser,
             programUID: programUID,
           ),
@@ -240,7 +240,7 @@ class _MenteeEnrollmentHobbiesState extends State<MenteeEnrollmentHobbies> {
               children: const [
                 Expanded(
                   child: Text(
-                    'Select Item',
+                    '<None Selected>',
                     style: TextStyle(
                       fontSize: 20,
                       fontFamily: 'Montserrat',
@@ -291,7 +291,9 @@ class _MenteeEnrollmentHobbiesState extends State<MenteeEnrollmentHobbies> {
               border: Border.all(
                 color: Colors.white,
               ),
-              color: kMentorXPSecondary,
+              color: (currentValue == null && skillValue == null)
+                  ? Colors.grey
+                  : kMentorXPSecondary,
             ),
             buttonElevation: 4,
             itemHeight: 40,

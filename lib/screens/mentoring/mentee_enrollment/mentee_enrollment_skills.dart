@@ -235,7 +235,7 @@ class _MenteeEnrollmentSkillsScreenState
               children: const [
                 Expanded(
                   child: Text(
-                    'Select Item',
+                    '<None Selected>',
                     style: TextStyle(
                       fontSize: 20,
                       fontFamily: 'Montserrat',
@@ -286,7 +286,9 @@ class _MenteeEnrollmentSkillsScreenState
               border: Border.all(
                 color: Colors.white,
               ),
-              color: kMentorXPSecondary,
+              color: (currentValue == null && skillValue == null)
+                  ? Colors.grey
+                  : kMentorXPSecondary,
             ),
             buttonElevation: 4,
             itemHeight: 40,

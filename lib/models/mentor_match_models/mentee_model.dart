@@ -8,16 +8,17 @@ class Mentee {
   final String menteeHobby1;
   final String menteeHobby2;
   final String menteeHobby3;
+  final String menteeFreeForm;
 
-  Mentee({
-    this.id,
-    this.menteeSkill1,
-    this.menteeSkill2,
-    this.menteeSkill3,
-    this.menteeHobby1,
-    this.menteeHobby2,
-    this.menteeHobby3,
-  });
+  Mentee(
+      {this.id,
+      this.menteeSkill1,
+      this.menteeSkill2,
+      this.menteeSkill3,
+      this.menteeHobby1,
+      this.menteeHobby2,
+      this.menteeHobby3,
+      this.menteeFreeForm});
 
   factory Mentee.fromDocument(DocumentSnapshot doc) {
     return Mentee(
@@ -40,6 +41,9 @@ class Mentee {
       menteeHobby3: doc.data().toString().contains('Mentee Hobby 3')
           ? doc['Mentee Hobby 3']
           : null,
+      menteeFreeForm: doc.data().toString().contains('Mentee Free Form')
+          ? doc['Mentee Free Form']
+          : null,
     );
   }
   Map<String, dynamic> toMap() {
@@ -51,6 +55,7 @@ class Mentee {
       'Mentee Hobby 1': menteeHobby1,
       'Mentee Hobby 2': menteeHobby2,
       'Mentee Hobby 3': menteeHobby3,
+      'Mentee Free Form': menteeFreeForm,
     };
   }
 }
