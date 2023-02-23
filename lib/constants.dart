@@ -20,8 +20,8 @@ const kTextFieldDecoration = InputDecoration(
 
 const kTextFieldDecorationLight = InputDecoration(
   labelText: 'Enter a value',
-  labelStyle: TextStyle(color: Colors.white),
-  hintStyle: TextStyle(color: Colors.white70),
+  labelStyle: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
+  hintStyle: TextStyle(color: Colors.white70, fontFamily: 'Montserrat'),
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   enabledBorder: OutlineInputBorder(
     borderSide: BorderSide(color: Colors.grey, width: 4.0),

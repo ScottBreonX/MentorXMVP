@@ -142,8 +142,10 @@ class _ProgramCreationState extends State<ProgramCreation> {
         labelText: '$labelText',
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
-        labelStyle: TextStyle(color: Colors.grey.shade400),
-        hintStyle: TextStyle(color: Colors.grey.shade400),
+        labelStyle:
+            TextStyle(color: Colors.grey.shade400, fontFamily: 'Montserrat'),
+        hintStyle:
+            TextStyle(color: Colors.grey.shade400, fontFamily: 'Montserrat'),
         filled: true,
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
@@ -208,7 +210,6 @@ class _ProgramCreationState extends State<ProgramCreation> {
                           fontFamily: 'Montserrat',
                           fontSize: 25,
                           color: Colors.black45,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -274,7 +275,6 @@ class _ProgramCreationState extends State<ProgramCreation> {
                         children: [
                           RoundedButton(
                             title: 'Cancel',
-                            fontWeight: FontWeight.bold,
                             fontSize: 20,
                             buttonColor: Colors.white,
                             fontColor: kMentorXPPrimary,

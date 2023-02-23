@@ -35,8 +35,8 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   File file;
   final imagePicker = ImagePicker();
-  final double coverPhotoHeight = 280;
-  final double profilePhotoHeight = 200;
+  final double coverPhotoHeight = 200;
+  final double profilePhotoHeight = 150;
 
   handleTakePhoto() async {
     Navigator.pop(context);
@@ -313,17 +313,11 @@ class _ProfileState extends State<Profile> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-              isCoverPhoto ? "Upload Cover Photo" : "Upload Profile Picture"),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                child: Icon(Icons.cancel_rounded),
-                onTap: () => Navigator.pop(context),
-              ),
-            ),
-          ],
+          backgroundColor: kMentorXPPrimary,
+          title: Center(
+            child: Text(
+                isCoverPhoto ? "Upload Cover Photo" : "Upload Profile Picture"),
+          ),
         ),
         body: Stack(
           children: [
@@ -416,7 +410,7 @@ class _ProfileState extends State<Profile> {
                             padding: const EdgeInsets.all(8.0),
                             child: RoundedButton(
                               title: 'Upload',
-                              buttonColor: Colors.blue,
+                              buttonColor: kMentorXPAccentDark,
                               fontColor: Colors.white,
                               minWidth: 150,
                               fontSize: 20,
@@ -479,9 +473,11 @@ class _ProfileState extends State<Profile> {
                       Navigator.pop(context);
                     },
                   ),
-                  title: Image.asset(
-                    'assets/images/MentorXP.png',
-                    height: 100,
+                  title: Center(
+                    child: Image.asset(
+                      'assets/images/MentorXP.png',
+                      height: 100,
+                    ),
                   ),
                 ),
                 body: SingleChildScrollView(
@@ -494,6 +490,7 @@ class _ProfileState extends State<Profile> {
                           children: [
                             Container(
                               height: coverPhotoHeight,
+                              width: double.infinity,
                               decoration: BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
@@ -511,7 +508,7 @@ class _ProfileState extends State<Profile> {
                                           shape: BoxShape.rectangle,
                                           image: DecorationImage(
                                             image: imageProvider,
-                                            fit: BoxFit.cover,
+                                            fit: BoxFit.fitWidth,
                                           ),
                                         ),
                                       ),
@@ -522,7 +519,7 @@ class _ProfileState extends State<Profile> {
                                     )
                                   : Image.asset(
                                       'assets/images/defaultCover.png',
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.fitWidth,
                                     ),
                             ),
                             Positioned(
@@ -539,8 +536,8 @@ class _ProfileState extends State<Profile> {
                                             imageBuilder:
                                                 (context, imageProvider) =>
                                                     Container(
-                                              width: 190.0,
-                                              height: 190.0,
+                                              // width: 180.0,
+                                              height: 140.0,
                                               decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 image: DecorationImage(
@@ -572,8 +569,8 @@ class _ProfileState extends State<Profile> {
                                   !myProfileView
                                       ? Container()
                                       : Positioned(
-                                          right: 0,
-                                          bottom: 0,
+                                          right: 5,
+                                          top: 5,
                                           child: GestureDetector(
                                             onTap: () {
                                               selectImage(
@@ -586,14 +583,17 @@ class _ProfileState extends State<Profile> {
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(50),
-                                                color: Colors.white,
+                                                color: Colors.white
+                                                    .withOpacity(0.9),
                                               ),
-                                              height: 55.0,
-                                              width: 55.0,
-                                              child: Icon(
-                                                Icons.add_a_photo,
-                                                color: kMentorXPAccentDark,
-                                                size: 30,
+                                              height: 35.0,
+                                              width: 35.0,
+                                              child: GestureDetector(
+                                                child: Icon(
+                                                  Icons.edit,
+                                                  color: kMentorXPAccentDark,
+                                                  size: 25,
+                                                ),
                                               ),
                                             ),
                                           ),

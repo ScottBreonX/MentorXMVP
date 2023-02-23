@@ -272,7 +272,6 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                     ? Image.asset(
                         'assets/images/MXPDark.png',
                         height: 150,
-                        width: 150,
                         fit: BoxFit.fill,
                       )
                     : CachedNetworkImage(
@@ -344,8 +343,8 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.grey,
-                                      blurRadius: 10.0,
-                                      spreadRadius: 2,
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1,
                                     )
                                   ],
                                 ),

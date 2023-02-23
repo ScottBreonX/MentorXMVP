@@ -190,10 +190,9 @@ class _ProgramProfileState extends State<ProgramProfile> {
                               child: Text(
                                 'About this program',
                                 style: TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 25,
                                   fontFamily: 'Montserrat',
                                   color: Colors.black45,
-                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),

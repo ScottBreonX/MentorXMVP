@@ -7,13 +7,14 @@ import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 
 import '../../../components/rounded_button.dart';
+import '../../../models/user.dart';
 import '../../authentication/landing_page.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class ProgramOverview extends StatefulWidget {
-  final loggedInUser;
+  final myUser loggedInUser;
   final String programId;
   static String id = 'program_overview_screen';
 
@@ -84,7 +85,7 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                       minWidth: 120,
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
-                      onPressed: () => _leaveProgram(programUID),
+                      onPressed: () => _leaveProgram(),
                     ),
                   ),
                   SimpleDialogOption(
@@ -122,20 +123,20 @@ class _ProgramOverviewState extends State<ProgramOverview> {
         });
   }
 
-  _leaveProgram(programUID) {
+  _leaveProgram() {
     usersRef.doc(widget.loggedInUser.id).update({'Program': ""});
     programsRef
-        .doc(programUID)
+        .doc(widget.programId)
         .collection('userSubscribed')
         .doc(widget.loggedInUser.id)
         .delete();
     programsRef
-        .doc(programUID)
+        .doc(widget.programId)
         .collection('mentors')
         .doc(widget.loggedInUser.id)
         .delete();
     programsRef
-        .doc(programUID)
+        .doc(widget.programId)
         .collection('mentees')
         .doc(widget.loggedInUser.id)
         .delete();
@@ -190,11 +191,12 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                                 imageBuilder: (context, imageProvider) =>
                                     Container(
                                   height: 150,
+                                  width: 150,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12),
                                     image: DecorationImage(
                                       image: imageProvider,
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.fitWidth,
                                     ),
                                   ),
                                 ),

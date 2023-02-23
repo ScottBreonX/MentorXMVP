@@ -84,7 +84,7 @@ class ProgramTile extends StatelessWidget {
                                 padding: const EdgeInsets.only(top: 10.0),
                                 child: Container(
                                   child: Text(
-                                    '$programName $programName',
+                                    '$programName',
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
                                     style: TextStyle(
@@ -130,7 +130,7 @@ class ProgramTile extends StatelessWidget {
                                 child: Text(
                                   '$programAbout',
                                   overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
+                                  maxLines: 1,
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 15,

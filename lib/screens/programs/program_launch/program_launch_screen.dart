@@ -249,25 +249,6 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    pageTransition(Widget page, double offSetLow, double offSetHigh) {
-      return PageRouteBuilder(
-        transitionDuration: const Duration(milliseconds: 300),
-        pageBuilder: (context, animation, secondaryAnimation) => page,
-        transitionsBuilder: (context, animation, secondaryAnimation, page) {
-          var begin = Offset.fromDirection(offSetLow, offSetHigh);
-          var end = Offset.zero;
-          var curve = Curves.ease;
-
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-          return SlideTransition(
-            position: animation.drive(tween),
-            child: page,
-          );
-        },
-      );
-    }
-
     return StreamBuilder<Object>(
         stream: programsRef.doc(widget.programUID).snapshots(),
         builder: (context, snapshot) {
@@ -294,9 +275,11 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
             appBar: AppBar(
               elevation: 5,
               backgroundColor: kMentorXPPrimary,
-              title: Image.asset(
-                'assets/images/MentorXP.png',
-                height: 100,
+              title: Center(
+                child: Image.asset(
+                  'assets/images/MentorXP.png',
+                  height: 100,
+                ),
               ),
             ),
             body: SingleChildScrollView(
@@ -329,6 +312,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                             (context, imageProvider) =>
                                                 Container(
                                           height: 150.0,
+                                          width: 150.0,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(12),
@@ -480,7 +464,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                               MaterialPageRoute(
                                 builder: (context) => ProgramOverview(
                                   programId: widget.programUID,
-                                  loggedInUser: loggedInUser,
+                                  loggedInUser: widget.loggedInUser,
                                 ),
                               ),
                             );

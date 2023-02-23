@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (loggedIn == false || loggedInUser == null) {
+    if (loggedIn == false || widget.loggedInUser == null) {
       return circularProgress();
     }
 
@@ -77,19 +77,19 @@ class _HomeScreenState extends State<HomeScreen> {
         new GlobalKey<ScaffoldState>();
 
     return StreamBuilder<DocumentSnapshot>(
-        stream: usersRef.doc(loggedInUser.id).snapshots(),
+        stream: usersRef.doc(widget.loggedInUser.id).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return circularProgress();
           }
 
-          if (loggedInUser.profilePicture != "") {
+          if (widget.loggedInUser.profilePicture != "") {
             profilePictureStatus = true;
           }
 
-          if (loggedInUser.profilePicture.isEmpty ||
-              loggedInUser.profilePicture == null ||
-              loggedInUser.profilePicture == "") {
+          if (widget.loggedInUser.profilePicture.isEmpty ||
+              widget.loggedInUser.profilePicture == null ||
+              widget.loggedInUser.profilePicture == "") {
             profilePictureStatus = false;
           } else {
             profilePictureStatus = true;
@@ -148,8 +148,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 context,
                                 pageTransition(
                                   Profile(
-                                    loggedInUser: loggedInUser,
-                                    profileId: loggedInUser.id,
+                                    loggedInUser: widget.loggedInUser,
+                                    profileId: widget.loggedInUser.id,
                                   ),
                                   1.5,
                                   1.0,
@@ -173,7 +173,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       )
                                     : CachedNetworkImage(
-                                        imageUrl: loggedInUser.profilePicture,
+                                        imageUrl:
+                                            widget.loggedInUser.profilePicture,
                                         imageBuilder:
                                             (context, imageProvider) =>
                                                 Container(
@@ -360,7 +361,7 @@ class AvailableProgramsStream extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12),
                               image: DecorationImage(
                                 image: imageProvider,
-                                fit: BoxFit.fill,
+                                fit: BoxFit.fitWidth,
                               ),
                             ),
                           ),

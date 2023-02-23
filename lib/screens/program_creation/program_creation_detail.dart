@@ -8,7 +8,7 @@ import 'package:mentorx_mvp/components/icon_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
+import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 import '../../components/progress.dart';
 import 'package:path_provider/path_provider.dart';
@@ -83,7 +83,6 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                 fontFamily: 'Montserrat',
                 fontSize: 25,
                 color: kMentorXPAccentDark,
-                fontWeight: FontWeight.bold,
               ),
             ),
             children: <Widget>[
@@ -148,7 +147,6 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                       fontFamily: 'Montserrat',
                       fontSize: 25,
                       color: kMentorXPAccentDark,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
@@ -392,7 +390,7 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomeScreen(),
+                          builder: (context) => LandingPage(),
                         ),
                       ),
                     ),
@@ -453,7 +451,6 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                                   fontFamily: 'Montserrat',
                                   fontSize: 25,
                                   color: Colors.black45,
-                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),

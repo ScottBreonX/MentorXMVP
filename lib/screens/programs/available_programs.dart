@@ -119,28 +119,24 @@ class AvailableProgramsStream extends StatelessWidget {
             programAbout: prog.aboutProgram,
             imageContainer: Container(
                 child: prog.programLogo == null || prog.programLogo.isEmpty
-                    ? Padding(
-                        padding: const EdgeInsets.only(
-                            left: 5, right: 5, top: 5, bottom: 5),
-                        child: Image.asset(
-                          'assets/images/MXPDark.png',
-                          height: 50,
-                          fit: BoxFit.fill,
-                        ),
+                    ? Image.asset(
+                        'assets/images/MXPDark.png',
+                        height: 50,
+                        fit: BoxFit.fill,
                       )
                     : Padding(
-                        padding: const EdgeInsets.only(
-                            left: 12, right: 12, top: 5, bottom: 5),
+                        padding:
+                            const EdgeInsets.only(left: 8.0, right: 8, top: 3),
                         child: CachedNetworkImage(
                           imageUrl: prog.programLogo,
                           imageBuilder: (context, imageProvider) => Container(
-                            height: 60,
-                            width: 60,
+                            height: 55,
+                            width: 55,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               image: DecorationImage(
                                 image: imageProvider,
-                                fit: BoxFit.fill,
+                                fit: BoxFit.fitWidth,
                               ),
                             ),
                           ),
