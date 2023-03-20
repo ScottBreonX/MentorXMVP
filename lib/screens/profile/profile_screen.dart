@@ -9,7 +9,6 @@ import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
-import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/core_profile_section.dart';
@@ -264,7 +263,7 @@ class _ProfileState extends State<Profile> {
   }
 
   savePhotoInUserCollection({String mediaUrl, String pictureType}) {
-    usersRef.doc(loggedInUser.id).update({pictureType: mediaUrl});
+    usersRef.doc(widget.loggedInUser.id).update({pictureType: mediaUrl});
     setState(() {
       file = null;
       isUploading = false;
@@ -274,21 +273,21 @@ class _ProfileState extends State<Profile> {
         context,
         MaterialPageRoute(
           builder: (context) => Profile(
-            profileId: loggedInUser.id,
-            loggedInUser: loggedInUser,
+            profileId: widget.loggedInUser.id,
+            loggedInUser: widget.loggedInUser,
           ),
         ));
   }
 
   removeCurrentPhoto(pictureType) {
-    usersRef.doc(loggedInUser.id).update({pictureType: ""});
+    usersRef.doc(widget.loggedInUser.id).update({pictureType: ""});
     Navigator.pop(context);
     Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => Profile(
-            loggedInUser: loggedInUser,
-            profileId: loggedInUser.id,
+            loggedInUser: widget.loggedInUser,
+            profileId: widget.loggedInUser.id,
           ),
         ));
   }
