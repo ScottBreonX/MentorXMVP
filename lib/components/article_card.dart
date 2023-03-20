@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 
+import '../models/user.dart';
+import '../screens/authentication/landing_page.dart';
+
 class ArticleCard extends StatefulWidget {
   const ArticleCard({
     Key key,
@@ -9,13 +12,17 @@ class ArticleCard extends StatefulWidget {
     this.articleIcon,
     this.onTap,
     this.markComplete,
+    this.loggedInUser,
+    this.cardRequirement,
   }) : super(key: key);
 
   final String bodyText;
   final String articleTitle;
   final IconData articleIcon;
   final Function onTap;
-  final Function markComplete;
+  final bool markComplete;
+  final myUser loggedInUser;
+  final String cardRequirement;
 
   @override
   State<ArticleCard> createState() => _ArticleCardState();
@@ -115,7 +122,10 @@ class _ArticleCardState extends State<ArticleCard> {
                       child: Container(
                         height: 25,
                         width: 25,
-                        child: CheckBox(),
+                        child: CheckBox(
+                          loggedInUser: widget.loggedInUser,
+                          cardRequirement: widget.cardRequirement,
+                        ),
                       ),
                     ),
                     Text(
@@ -137,6 +147,14 @@ class _ArticleCardState extends State<ArticleCard> {
 }
 
 class CheckBox extends StatefulWidget {
+  const CheckBox({
+    Key key,
+    this.loggedInUser,
+    this.cardRequirement,
+  }) : super(key: key);
+
+  final myUser loggedInUser;
+  final String cardRequirement;
   @override
   State<CheckBox> createState() => _CheckBoxState();
 }
@@ -154,7 +172,10 @@ class _CheckBoxState extends State<CheckBox> {
       checkColor: Colors.white,
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked,
-      onChanged: (bool value) {
+      onChanged: (bool value) async {
+        await usersRef
+            .doc(widget.loggedInUser.id)
+            .update({"${widget.cardRequirement}": value});
         setState(() {
           isChecked = value;
         });

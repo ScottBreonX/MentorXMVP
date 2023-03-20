@@ -40,9 +40,6 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
   @override
   void initState() {
     super.initState();
-    // checkIsAdmin();
-    print(widget.programUID);
-    // dispose();
   }
 
   bool isLoading = false;
@@ -187,6 +184,10 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
   }
 
   buildProgramToDoList() {
+    bool profileComplete = false;
+    bool guidelinesComplete = false;
+    bool enrollmentComplete = false;
+
     pageTransition(Widget page, double offSetLow, double offSetHigh) {
       return PageRouteBuilder(
         transitionDuration: const Duration(milliseconds: 300),
@@ -211,37 +212,46 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          ArticleCard(
-            articleIcon: Icons.person,
-            articleTitle: 'My Profile',
-            bodyText: 'Finish filling out your mentorship profile',
-            onTap: () {
-              Navigator.push(
-                context,
-                pageTransition(
-                  Profile(
-                    loggedInUser: widget.loggedInUser,
-                    profileId: widget.loggedInUser.id,
-                  ),
-                  1.5,
-                  1.0,
+          profileComplete
+              ? Container()
+              : ArticleCard(
+                  articleIcon: Icons.person,
+                  articleTitle: 'My Profile',
+                  cardRequirement: "Profile Complete",
+                  bodyText: 'Finish filling out your mentorship profile',
+                  loggedInUser: widget.loggedInUser,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      pageTransition(
+                        Profile(
+                          loggedInUser: widget.loggedInUser,
+                          profileId: widget.loggedInUser.id,
+                        ),
+                        1.5,
+                        1.0,
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
-            markComplete: () {
-              print('complete profile');
-            },
-          ),
-          ArticleCard(
-            articleIcon: Icons.info,
-            articleTitle: 'Guidelines',
-            bodyText: 'Read through and agree to program guidelines',
-          ),
-          ArticleCard(
-            articleIcon: Icons.change_circle,
-            articleTitle: 'Enrollment',
-            bodyText: 'Enroll in the program as a mentor or mentee',
-          ),
+          guidelinesComplete
+              ? Container()
+              : ArticleCard(
+                  loggedInUser: widget.loggedInUser,
+                  cardRequirement: "Guideline Complete",
+                  articleIcon: Icons.info,
+                  articleTitle: 'Guidelines',
+                  bodyText: 'Read through and agree to program guidelines',
+                ),
+          enrollmentComplete
+              ? Container()
+              : ArticleCard(
+                  loggedInUser: widget.loggedInUser,
+                  cardRequirement: "Enrollment Complete",
+                  articleIcon: Icons.change_circle,
+                  articleTitle: 'Enrollment',
+                  bodyText: 'Enroll in the program as a mentor or mentee',
+                ),
         ],
       ),
     );
