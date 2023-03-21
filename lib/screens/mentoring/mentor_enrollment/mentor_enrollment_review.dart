@@ -10,7 +10,6 @@ import '../../../components/mentor_card.dart';
 import '../../../components/profile_image_circle.dart';
 import '../../../components/progress.dart';
 import '../../../models/mentor_match_models/mentor_model.dart';
-import '../../launch_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -168,7 +167,7 @@ class _MentorEnrollmentReviewState extends State<MentorEnrollmentReview> {
                                 },
                               ),
                               RoundedButton(
-                                title: 'Next -->',
+                                title: 'Save',
                                 buttonColor: kMentorXPSecondary,
                                 fontColor: Colors.white,
                                 fontWeight: FontWeight.w500,

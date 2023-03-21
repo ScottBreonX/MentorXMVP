@@ -86,6 +86,7 @@ class _MatchListState extends State<MatchList> {
                       padding: const EdgeInsets.only(left: 5),
                       child: MentorCard(
                         mentorUID: user.id,
+                        loggedInUser: widget.loggedInUser,
                         mentorFname: user.firstName,
                         mentorLname: user.lastName,
                         imageContainer: Container(

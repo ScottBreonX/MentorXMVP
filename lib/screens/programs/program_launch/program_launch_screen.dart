@@ -135,13 +135,14 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
-                                left: 12.0, right: 15.0, top: 5.0),
+                                left: 12.0, right: 15.0, top: 5.0, bottom: 5.0),
                             child: Container(
                               width: MediaQuery.of(context).size.width * .90,
                               child: Text(
                                 'No new matches yet, please check back after matching period has closed',
                                 style: TextStyle(
-                                  color: Colors.black54,
+                                  color: kMentorXPAccentDark,
+                                  fontFamily: 'MontSerrat',
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
                                   overflow: TextOverflow.visible,

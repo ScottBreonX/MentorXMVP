@@ -128,8 +128,10 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                       onTap: () => Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              Profile(profileId: mentor.id),
+                                          builder: (context) => Profile(
+                                            profileId: widget.mentorUID,
+                                            loggedInUser: widget.loggedInUser,
+                                          ),
                                         ),
                                       ),
                                     ),
