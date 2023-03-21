@@ -148,7 +148,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
                         cardColor:
                             menteeSelected ? kMentorXPSecondary : Colors.grey,
                         boxShadowColor: menteeSelected
-                            ? Colors.grey[700]
+                            ? Colors.grey[800]
                             : Colors.grey.withOpacity(0),
                         cardText: 'Mentee',
                         cardTextColor:
