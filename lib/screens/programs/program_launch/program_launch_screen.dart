@@ -186,11 +186,8 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
         });
   }
 
-  buildProgramToDoList() {
-    bool profileComplete = false;
-    bool guidelinesComplete = false;
-    bool enrollmentComplete = false;
-
+  buildProgramToDoList(
+      profileComplete, guidelinesComplete, enrollmentComplete) {
     pageTransition(Widget page, double offSetLow, double offSetHigh) {
       return PageRouteBuilder(
         transitionDuration: const Duration(milliseconds: 300),
@@ -223,6 +220,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                   cardRequirement: "Profile Complete",
                   bodyText: 'Finish filling out your mentorship profile',
                   loggedInUser: widget.loggedInUser,
+                  programUID: widget.programUID,
                   onTap: () {
                     Navigator.push(
                       context,
@@ -241,10 +239,11 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
               ? Container()
               : ArticleCard(
                   loggedInUser: widget.loggedInUser,
-                  cardRequirement: "Guideline Complete",
+                  cardRequirement: "Guidelines Complete",
                   articleIcon: Icons.info,
                   articleTitle: 'Guidelines',
                   bodyText: 'Read through and agree to program guidelines',
+                  programUID: widget.programUID,
                 ),
           enrollmentComplete
               ? Container()
@@ -254,6 +253,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                   articleIcon: Icons.change_circle,
                   articleTitle: 'Enrollment',
                   bodyText: 'Enroll in the program as a mentor or mentee',
+                  programUID: widget.programUID,
                 ),
         ],
       ),
@@ -275,97 +275,125 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
           final GlobalKey<ScaffoldState> _scaffoldKey =
               new GlobalKey<ScaffoldState>();
 
-          bool programToDoComplete = true;
+          return StreamBuilder<Object>(
+              stream: programsRef
+                  .doc(widget.programUID)
+                  .collection('userSubscribed')
+                  .doc(widget.loggedInUser.id)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                EnrollmentModel enrollmentModel =
+                    EnrollmentModel.fromDocument(snapshot.data);
 
-          return Scaffold(
-            key: _scaffoldKey,
-            drawer: Drawer(
-              child: Container(
-                color: kMentorXPPrimary,
-                child: drawerItems,
-              ),
-            ),
-            appBar: AppBar(
-              elevation: 5,
-              backgroundColor: kMentorXPPrimary,
-              title: Center(
-                child: Image.asset(
-                  'assets/images/MentorXP.png',
-                  height: 100,
-                ),
-              ),
-            ),
-            body: SingleChildScrollView(
-              child: Container(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 20.0,
-                        bottom: 10.0,
+                bool programToDoComplete;
+
+                if ((enrollmentModel.profileComplete) &&
+                    (enrollmentModel.enrollmentComplete) &&
+                    (enrollmentModel.guidelinesComplete)) {
+                  programToDoComplete = true;
+                } else {
+                  programToDoComplete = false;
+                }
+
+                return Scaffold(
+                  key: _scaffoldKey,
+                  drawer: Drawer(
+                    child: Container(
+                      color: kMentorXPPrimary,
+                      child: drawerItems,
+                    ),
+                  ),
+                  appBar: AppBar(
+                    elevation: 5,
+                    backgroundColor: kMentorXPPrimary,
+                    title: Center(
+                      child: Image.asset(
+                        'assets/images/MentorXP.png',
+                        height: 100,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    ),
+                  ),
+                  body: SingleChildScrollView(
+                    child: Container(
+                      child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Column(
+                            padding: const EdgeInsets.only(
+                              top: 20.0,
+                              bottom: 10.0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                program.programLogo == null ||
-                                        program.programLogo.isEmpty ||
-                                        program.programLogo == ""
-                                    ? Image.asset(
-                                        'assets/images/MXPDark.png',
-                                        height: 150,
-                                        fit: BoxFit.cover,
-                                      )
-                                    : CachedNetworkImage(
-                                        imageUrl: program.programLogo,
-                                        imageBuilder:
-                                            (context, imageProvider) =>
-                                                Container(
-                                          height: 150.0,
-                                          width: 150.0,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            image: DecorationImage(
-                                              image: imageProvider,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                        placeholder: (context, url) =>
-                                            circularProgress(),
-                                        errorWidget: (context, url, error) =>
-                                            Image.asset(
-                                          'assets/images/MXPDark.png',
-                                          height: 150,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * .90,
-                                  child: Row(
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10.0),
+                                  child: Column(
                                     children: [
-                                      Flexible(
-                                        child: Center(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                              top: 10.0,
-                                            ),
-                                            child: Text(
-                                              '${program.programName}',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                fontFamily: 'Montserrat',
-                                                fontSize: 25,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.black54,
+                                      program.programLogo == null ||
+                                              program.programLogo.isEmpty ||
+                                              program.programLogo == ""
+                                          ? Image.asset(
+                                              'assets/images/MXPDark.png',
+                                              height: 150,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : CachedNetworkImage(
+                                              imageUrl: program.programLogo,
+                                              imageBuilder:
+                                                  (context, imageProvider) =>
+                                                      Container(
+                                                height: 150.0,
+                                                width: 150.0,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  image: DecorationImage(
+                                                    image: imageProvider,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              placeholder: (context, url) =>
+                                                  circularProgress(),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      Image.asset(
+                                                'assets/images/MXPDark.png',
+                                                height: 150,
+                                                fit: BoxFit.cover,
                                               ),
                                             ),
-                                          ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                .90,
+                                        child: Row(
+                                          children: [
+                                            Flexible(
+                                              child: Center(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                    top: 10.0,
+                                                  ),
+                                                  child: Text(
+                                                    '${program.programName}',
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      fontFamily: 'Montserrat',
+                                                      fontSize: 25,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.black54,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -374,156 +402,160 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    const Divider(
-                      thickness: 2,
-                      color: Colors.grey,
-                      indent: 20,
-                      endIndent: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                      child: Row(
-                        children: [
+                          const Divider(
+                            thickness: 2,
+                            color: Colors.grey,
+                            indent: 20,
+                            endIndent: 20,
+                          ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                              left: 10.0,
-                              top: 10,
+                            padding:
+                                const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 10.0,
+                                    top: 10,
+                                  ),
+                                  child: Text(
+                                    programToDoComplete
+                                        ? 'Connections'
+                                        : 'Program To-Do List:',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontFamily: 'Montserrat',
+                                      color: Colors.black54,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            child: Text(
-                              programToDoComplete
-                                  ? 'Connections'
-                                  : 'Program To-Do List:',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontFamily: 'Montserrat',
-                                color: Colors.black54,
-                                fontWeight: FontWeight.w500,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 15.0),
+                            child: programToDoComplete
+                                ? buildMatches()
+                                : buildProgramToDoList(
+                                    enrollmentModel.profileComplete,
+                                    enrollmentModel.guidelinesComplete,
+                                    enrollmentModel.enrollmentComplete,
+                                  ),
+                          ),
+                          const Divider(
+                            thickness: 2,
+                            color: Colors.grey,
+                            indent: 20,
+                            endIndent: 20,
+                          ),
+                          Row(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 10.0, top: 20),
+                                child: Text(
+                                  'Resources',
+                                  style: TextStyle(
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 25,
+                                    fontFamily: 'Montserrat',
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              CircleIconWithText(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Profile(
+                                        loggedInUser: widget.loggedInUser,
+                                        profileId: widget.loggedInUser.id,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                cardIcon: Icons.person,
+                                textDescription1: 'My',
+                                textDescription2: 'Profile',
                               ),
-                            ),
+                              CircleIconWithText(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MentoringScreen(
+                                        loggedInUser: widget.loggedInUser,
+                                        programUID: widget.programUID,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                cardIcon: Icons.change_circle,
+                                textDescription1: 'Mentoring',
+                                textDescription2: 'Enrollment',
+                              ),
+                              CircleIconWithText(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ProgramOverview(
+                                        programId: widget.programUID,
+                                        loggedInUser: widget.loggedInUser,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                cardIcon: Icons.info,
+                                textDescription1: 'Program',
+                                textDescription2: 'Info',
+                              ),
+                              // isAdmin
+                              //     ? ButtonCard(
+                              //         buttonCardText: 'Program Management',
+                              //         buttonCardIcon: Icons.manage_accounts,
+                              //         buttonCardTextSize: 25,
+                              //         buttonCardTextAlign: TextAlign.start,
+                              //         buttonCardRadius: 20,
+                              //         buttonCardIconSize: 40,
+                              //         buttonCardIconColor: kMentorXPSecondary,
+                              //         onPressed: () {
+                              //           Navigator.push(
+                              //               context,
+                              //               MaterialPageRoute(
+                              //                   builder: (context) =>
+                              //                       ProgramAdminScreen(
+                              //                         loggedInUser: loggedInUser,
+                              //                         programUID: program.id,
+                              //                         enrollmentType:
+                              //                             program.enrollmentType,
+                              //                         aboutProgram:
+                              //                             program.aboutProgram,
+                              //                         institutionName:
+                              //                             program.institutionName,
+                              //                         programName:
+                              //                             program.programName,
+                              //                         programCode:
+                              //                             program.programCode,
+                              //                       )));
+                              //         },
+                              //       )
+                              //     : Container(),
+                            ],
                           ),
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 15.0),
-                      child: programToDoComplete
-                          ? buildMatches()
-                          : buildProgramToDoList(),
-                    ),
-                    const Divider(
-                      thickness: 2,
-                      color: Colors.grey,
-                      indent: 20,
-                      endIndent: 20,
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0, top: 20),
-                          child: Text(
-                            'Resources',
-                            style: TextStyle(
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 25,
-                              fontFamily: 'Montserrat',
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CircleIconWithText(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Profile(
-                                  loggedInUser: widget.loggedInUser,
-                                  profileId: widget.loggedInUser.id,
-                                ),
-                              ),
-                            );
-                          },
-                          cardIcon: Icons.person,
-                          textDescription1: 'My',
-                          textDescription2: 'Profile',
-                        ),
-                        CircleIconWithText(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MentoringScreen(
-                                  loggedInUser: widget.loggedInUser,
-                                  programUID: widget.programUID,
-                                ),
-                              ),
-                            );
-                          },
-                          cardIcon: Icons.change_circle,
-                          textDescription1: 'Mentoring',
-                          textDescription2: 'Enrollment',
-                        ),
-                        CircleIconWithText(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ProgramOverview(
-                                  programId: widget.programUID,
-                                  loggedInUser: widget.loggedInUser,
-                                ),
-                              ),
-                            );
-                          },
-                          cardIcon: Icons.info,
-                          textDescription1: 'Program',
-                          textDescription2: 'Info',
-                        ),
-                        // isAdmin
-                        //     ? ButtonCard(
-                        //         buttonCardText: 'Program Management',
-                        //         buttonCardIcon: Icons.manage_accounts,
-                        //         buttonCardTextSize: 25,
-                        //         buttonCardTextAlign: TextAlign.start,
-                        //         buttonCardRadius: 20,
-                        //         buttonCardIconSize: 40,
-                        //         buttonCardIconColor: kMentorXPSecondary,
-                        //         onPressed: () {
-                        //           Navigator.push(
-                        //               context,
-                        //               MaterialPageRoute(
-                        //                   builder: (context) =>
-                        //                       ProgramAdminScreen(
-                        //                         loggedInUser: loggedInUser,
-                        //                         programUID: program.id,
-                        //                         enrollmentType:
-                        //                             program.enrollmentType,
-                        //                         aboutProgram:
-                        //                             program.aboutProgram,
-                        //                         institutionName:
-                        //                             program.institutionName,
-                        //                         programName:
-                        //                             program.programName,
-                        //                         programCode:
-                        //                             program.programCode,
-                        //                       )));
-                        //         },
-                        //       )
-                        //     : Container(),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
+                  ),
+                );
+              });
         });
   }
 }

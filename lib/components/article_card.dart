@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/mentor_card.dart';
 import 'package:mentorx_mvp/constants.dart';
 
 import '../models/user.dart';
-import '../screens/authentication/landing_page.dart';
 
 class ArticleCard extends StatefulWidget {
   const ArticleCard({
@@ -14,6 +14,7 @@ class ArticleCard extends StatefulWidget {
     this.markComplete,
     this.loggedInUser,
     this.cardRequirement,
+    this.programUID,
   }) : super(key: key);
 
   final String bodyText;
@@ -22,11 +23,14 @@ class ArticleCard extends StatefulWidget {
   final Function onTap;
   final bool markComplete;
   final myUser loggedInUser;
+  final String programUID;
   final String cardRequirement;
 
   @override
   State<ArticleCard> createState() => _ArticleCardState();
 }
+
+bool isChecked = false;
 
 class _ArticleCardState extends State<ArticleCard> {
   @override
@@ -74,6 +78,9 @@ class _ArticleCardState extends State<ArticleCard> {
                             widget.articleTitle ?? 'Upcoming',
                             textAlign: TextAlign.center,
                             style: TextStyle(
+                              decoration: isChecked
+                                  ? TextDecoration.lineThrough
+                                  : TextDecoration.none,
                               fontFamily: 'Montserrat',
                               fontSize: 20,
                               color: Colors.black45,
@@ -125,6 +132,7 @@ class _ArticleCardState extends State<ArticleCard> {
                         child: CheckBox(
                           loggedInUser: widget.loggedInUser,
                           cardRequirement: widget.cardRequirement,
+                          programUID: widget.programUID,
                         ),
                       ),
                     ),
@@ -151,10 +159,12 @@ class CheckBox extends StatefulWidget {
     Key key,
     this.loggedInUser,
     this.cardRequirement,
+    this.programUID,
   }) : super(key: key);
 
   final myUser loggedInUser;
   final String cardRequirement;
+  final String programUID;
   @override
   State<CheckBox> createState() => _CheckBoxState();
 }
@@ -173,12 +183,15 @@ class _CheckBoxState extends State<CheckBox> {
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked,
       onChanged: (bool value) async {
-        await usersRef
-            .doc(widget.loggedInUser.id)
-            .update({"${widget.cardRequirement}": value});
         setState(() {
           isChecked = value;
         });
+        await Future.delayed(Duration(seconds: 1));
+        await programsRef
+            .doc(widget.programUID)
+            .collection('userSubscribed')
+            .doc(widget.loggedInUser.id)
+            .update({"${widget.cardRequirement}": value});
       },
     );
   }

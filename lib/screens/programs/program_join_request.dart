@@ -81,7 +81,12 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
             .doc(widget.program.id)
             .collection('userSubscribed')
             .doc(loggedInUser.id)
-            .set({'enrollmentStatus': ''});
+            .update({
+          'enrollmentStatus': '',
+          'Profile Complete': false,
+          'Enrollment Complete': false,
+          'Guideline Complete': false,
+        });
         await usersRef.doc(loggedInUser.id).update({
           'Program': widget.program.id,
         });
