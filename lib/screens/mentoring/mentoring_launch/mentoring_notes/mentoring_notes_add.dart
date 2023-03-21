@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
-import 'package:mentorx_mvp/screens/launch_screen.dart';
-
 import '../../../../components/alert_dialog.dart';
 import '../../../../components/rounded_button.dart';
 import '../../../../models/user.dart';
@@ -191,8 +189,8 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
                     fontSize: 20,
                     fontColor: Colors.white,
                     onPressed: () async {
-                      await _addNotes(
-                          widget.programUID, widget.matchID, loggedInUser);
+                      await _addNotes(widget.programUID, widget.matchID,
+                          widget.loggedInUser);
                       await _updateNoteID(
                               widget.programUID, widget.matchID, noteID)
                           .then((value) => Navigator.pop(context));

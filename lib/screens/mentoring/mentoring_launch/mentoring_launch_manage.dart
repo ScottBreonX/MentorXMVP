@@ -8,7 +8,6 @@ import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 import '../../../components/progress.dart';
 import '../../../components/rounded_button.dart';
-import '../../launch_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -32,7 +31,7 @@ class MentoringLaunchManage extends StatefulWidget {
 }
 
 _confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
-    mentorUID, matchID, mentorSlots) {
+    mentorUID, matchID, mentorSlots, loggedInUser) {
   return showDialog(
       context: parentContext,
       builder: (context) {
@@ -90,8 +89,8 @@ _confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                     onPressed: () {
-                      _removeMatch(
-                          context, programUID, mentorUID, matchID, mentorSlots);
+                      _removeMatch(context, programUID, mentorUID, matchID,
+                          mentorSlots, loggedInUser);
                     },
                   ),
                 ),
@@ -129,7 +128,8 @@ _confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
       });
 }
 
-_removeMatch(context, programUID, mentorUID, matchID, mentorSlots) async {
+_removeMatch(
+    context, programUID, mentorUID, matchID, mentorSlots, loggedInUser) async {
   //remove match from loggedInUser collection
   await programsRef
       .doc(programUID)
@@ -167,6 +167,7 @@ _removeMatch(context, programUID, mentorUID, matchID, mentorSlots) async {
       MaterialPageRoute(
         builder: (context) => ProgramLaunchScreen(
           programUID: programUID,
+          loggedInUser: loggedInUser,
         ),
       ));
 }
@@ -183,7 +184,7 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
         future: programsRef
             .doc(widget.programUID)
             .collection('userSubscribed')
-            .doc(loggedInUser.id)
+            .doc(widget.loggedInUser.id)
             .collection('matches')
             .doc(widget.mentorUser.id)
             .get(),
@@ -204,7 +205,7 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                 Program program = Program.fromDocument(snapshot.data);
 
                 return FutureBuilder<Object>(
-                    future: usersRef.doc(loggedInUser.id).get(),
+                    future: usersRef.doc(widget.loggedInUser.id).get(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
                         return circularProgress();
@@ -355,8 +356,8 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                                             widget.programUID,
                                             widget.mentorUser.id,
                                             matchInfo.matchID,
-                                            // mentor.mentorSlots,
                                             2,
+                                            widget.loggedInUser,
                                           );
                                         },
                                       ),

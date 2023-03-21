@@ -5,10 +5,13 @@ import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentor_confirmation.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 
+import '../models/user.dart';
+
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class MentorCard extends StatefulWidget {
+  final myUser loggedInUser;
   final String mentorUID;
   final int mentorSlots;
   final String mentorFname;
@@ -29,6 +32,7 @@ class MentorCard extends StatefulWidget {
   final bool menteePreview;
 
   MentorCard({
+    this.loggedInUser,
     this.mentorUID,
     this.mentorSlots,
     this.mentorFname,
@@ -87,78 +91,81 @@ class _MentorCardState extends State<MentorCard> {
           elevation: 10,
           child: Column(
             children: [
-              Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 10.0,
-                        top: 10,
-                        right: 10,
-                      ),
-                      child: GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                Profile(profileId: widget.mentorUID),
-                          ),
-                        ),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          radius: 42,
-                          child: widget.imageContainer ?? Container(),
+              Row(children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 10.0,
+                    top: 10,
+                    right: 10,
+                  ),
+                  child: GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Profile(
+                          profileId: widget.mentorUID,
+                          loggedInUser: widget.loggedInUser,
                         ),
                       ),
                     ),
-                    Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(top: 35.0),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.60,
-                              child: Text(
-                                '${widget.mentorFname} ${widget.mentorLname}',
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                style: TextStyle(
-                                  fontFamily: 'WorkSans',
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black54,
-                                ),
-                              ),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      radius: 42,
+                      child: widget.imageContainer ?? Container(),
+                    ),
+                  ),
+                ),
+                Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 35.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.60,
+                          child: Text(
+                            '${widget.mentorFname} ${widget.mentorLname}',
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontFamily: 'WorkSans',
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black54,
                             ),
                           ),
-                          Row(
-                            children: [
-                              widget.mentorSlots == null
-                                  ? Container()
-                                  : Text(
-                                      'Available Slots: ',
-                                      style: TextStyle(
-                                        fontFamily: 'WorkSans',
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black54,
-                                      ),
-                                    ),
-                              widget.mentorSlots == null
-                                  ? Container()
-                                  : Text(
-                                      '${widget.mentorSlots}',
-                                      style: TextStyle(
-                                        fontFamily: 'WorkSans',
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        color: kMentorXPAccentDark,
-                                      ),
-                                    ),
-                            ],
-                          ),
-                        ]),
-                  ]),
+                        ),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          widget.mentorSlots == null
+                              ? Container()
+                              : Text(
+                                  'Available Slots: ',
+                                  style: TextStyle(
+                                    fontFamily: 'WorkSans',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black54,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                          widget.mentorSlots == null
+                              ? Container()
+                              : Text(
+                                  '${widget.mentorSlots}',
+                                  style: TextStyle(
+                                    fontFamily: 'WorkSans',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: kMentorXPAccentDark,
+                                  ),
+                                ),
+                        ],
+                      ),
+                    ]),
+              ]),
               expandStatus
                   ? Column(
                       children: [
@@ -265,6 +272,7 @@ class _MentorCardState extends State<MentorCard> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => MentorConfirm(
+                                          loggedInUser: widget.loggedInUser,
                                           mentorUID: widget.mentorUID,
                                           mentorFname: widget.mentorFname,
                                           mentorLname: widget.mentorLname,
@@ -292,7 +300,9 @@ class _MentorCardState extends State<MentorCard> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => Profile(
-                                            profileId: widget.mentorUID),
+                                          profileId: widget.mentorUID,
+                                          loggedInUser: widget.loggedInUser,
+                                        ),
                                       ),
                                     ),
                                   ),

@@ -5,14 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/mentor_card.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
-import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
+
+import '../../models/user.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class MentorConfirm extends StatelessWidget {
   static const String id = 'mentor_confirm_screen';
+  final myUser loggedInUser;
   final String mentorUID;
   final String mentorFname;
   final String mentorLname;
@@ -27,6 +29,7 @@ class MentorConfirm extends StatelessWidget {
   final String programUID;
 
   MentorConfirm({
+    this.loggedInUser,
     this.mentorUID,
     this.mentorPicContainer,
     this.mentorFname,
@@ -100,10 +103,10 @@ class MentorConfirm extends StatelessWidget {
               child: Text(
                 'Successful Mentor Match!',
                 style: TextStyle(
-                  fontFamily: 'Work Sans',
+                  fontFamily: 'Montserrat',
                   fontWeight: FontWeight.w500,
                   fontSize: 20,
-                  color: Colors.pink,
+                  color: kMentorXPAccentDark,
                 ),
               ),
             ),
@@ -120,7 +123,7 @@ class MentorConfirm extends StatelessWidget {
                           Text(
                             'You have been successfully matched with $mentorFname $mentorLname',
                             style: TextStyle(
-                              fontFamily: 'WorkSans',
+                              fontFamily: 'Montserrat',
                               fontWeight: FontWeight.w500,
                               fontSize: 20,
                               color: Colors.black45,
@@ -140,7 +143,7 @@ class MentorConfirm extends StatelessWidget {
                     padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                     child: RoundedButton(
                       title: 'Return to program',
-                      buttonColor: Colors.pink,
+                      buttonColor: kMentorXPPrimary,
                       fontColor: Colors.white,
                       minWidth: 200,
                       fontSize: 15,
@@ -150,6 +153,7 @@ class MentorConfirm extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => ProgramLaunchScreen(
+                              loggedInUser: loggedInUser,
                               programUID: programUID,
                             ),
                           ),

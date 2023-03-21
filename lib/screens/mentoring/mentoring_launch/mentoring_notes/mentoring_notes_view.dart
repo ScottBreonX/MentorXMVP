@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/notes_model.dart';
-import 'package:mentorx_mvp/screens/launch_screen.dart';
-
 import '../../../../components/alert_dialog.dart';
 import '../../../../components/progress.dart';
 import '../../../../models/user.dart';
@@ -126,7 +124,6 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                       fontWeight: FontWeight.w500,
                       onPressed: () async {
                         await _deleteNote(programUID, matchID, noteID);
-                        Navigator.pop(context);
                       },
                     ),
                   ),
@@ -177,8 +174,9 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
           .doc(matchID)
           .collection('Notes')
           .doc(noteID)
-          .delete()
-          .then((value) => Navigator.pop(context));
+          .delete();
+      Navigator.pop(context);
+      Navigator.pop(context);
     } on FirebaseException catch (e) {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
@@ -201,17 +199,17 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
         ),
       ),
       body: SingleChildScrollView(
-        child: StreamBuilder<Object>(
-            stream: programsRef
+        child: FutureBuilder<Object>(
+            future: programsRef
                 .doc(widget.programUID)
                 .collection('matchedPairs')
                 .doc(widget.matchID)
                 .collection('Notes')
                 .doc(widget.noteID)
-                .snapshots(),
+                .get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return Center();
+                return CircularProgressIndicator();
               }
 
               final notes = snapshot.data;
@@ -334,7 +332,7 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
                             await _updateNotes(
                               widget.programUID,
                               widget.matchID,
-                              loggedInUser,
+                              widget.loggedInUser,
                               widget.noteID,
                             ).then((value) => Navigator.pop(context));
                           },

@@ -8,7 +8,6 @@ import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_launch_screen.dart';
 import '../components/profile_image_circle.dart';
 import '../components/progress.dart';
-import '../screens/launch_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -16,25 +15,33 @@ final programsRef = FirebaseFirestore.instance.collection('institutions');
 class MatchList extends StatefulWidget {
   final String mentorUID;
   final String programUID;
+  final myUser loggedInUser;
 
-  MatchList({this.mentorUID, this.programUID});
+  MatchList({this.mentorUID, this.programUID, this.loggedInUser});
 
-  factory MatchList.fromDocument(DocumentSnapshot doc, String programUID) {
-    return MatchList(mentorUID: doc.id, programUID: programUID);
+  factory MatchList.fromDocument(
+      DocumentSnapshot doc, String programUID, myUser loggedInUser) {
+    return MatchList(
+      mentorUID: doc.id,
+      programUID: programUID,
+      loggedInUser: loggedInUser,
+    );
   }
 
   @override
   _MatchListState createState() => _MatchListState(
         mentorUID: this.mentorUID,
         programUID: this.programUID,
+        loggedInUser: this.loggedInUser,
       );
 }
 
 class _MatchListState extends State<MatchList> {
   final String mentorUID;
   final String programUID;
+  final myUser loggedInUser;
 
-  _MatchListState({this.mentorUID, this.programUID});
+  _MatchListState({this.mentorUID, this.programUID, this.loggedInUser});
 
   buildMatchCard() {
     return FutureBuilder<DocumentSnapshot>(

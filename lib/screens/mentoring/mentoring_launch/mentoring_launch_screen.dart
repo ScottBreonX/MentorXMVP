@@ -8,7 +8,6 @@ import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_launch_manage.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_notes/mentoring_notes.dart';
 import '../../../components/progress.dart';
-import '../../launch_screen.dart';
 import '../../profile/profile_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -190,7 +189,7 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => MentoringNotes(
-                                          loggedInUser: loggedInUser,
+                                          loggedInUser: widget.loggedInUser,
                                           matchID: widget.matchID,
                                           mentorUID: widget.mentorUID,
                                           programUID: widget.programUID,
@@ -206,7 +205,7 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             MentoringLaunchManage(
-                                          loggedInUser: loggedInUser,
+                                          loggedInUser: widget.loggedInUser,
                                           programUID: widget.programUID,
                                           mentorUser: mentor,
                                         ),

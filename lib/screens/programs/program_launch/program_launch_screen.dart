@@ -67,7 +67,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
         future: programsRef
             .doc(widget.programUID)
             .collection('userSubscribed')
-            .doc(loggedInUser.id)
+            .doc(widget.loggedInUser.id)
             .collection('matches')
             .get(),
         builder: (context, snapshot) {
@@ -77,7 +77,8 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
             _snapshot = snapshot.data;
             if (_snapshot.size > 0) {
               matches = _snapshot.docs
-                  .map((doc) => MatchList.fromDocument(doc, widget.programUID))
+                  .map((doc) => MatchList.fromDocument(
+                      doc, widget.programUID, widget.loggedInUser))
                   .toList();
               return Container(
                 height: 150,
@@ -91,7 +92,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                   stream: programsRef
                       .doc(widget.programUID)
                       .collection('userSubscribed')
-                      .doc(loggedInUser.id)
+                      .doc(widget.loggedInUser.id)
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
@@ -119,6 +120,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                 MaterialPageRoute(
                                   builder: (context) => MentoringScreen(
                                     programUID: widget.programUID,
+                                    loggedInUser: widget.loggedInUser,
                                   ),
                                 ),
                               );
@@ -167,7 +169,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => AvailableMentorsScreen(
-                                    loggedInUser: loggedInUser,
+                                    loggedInUser: widget.loggedInUser,
                                     programUID: widget.programUID,
                                   ),
                                 ),
@@ -272,7 +274,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
           final GlobalKey<ScaffoldState> _scaffoldKey =
               new GlobalKey<ScaffoldState>();
 
-          bool programToDoComplete = false;
+          bool programToDoComplete = true;
 
           return Scaffold(
             key: _scaffoldKey,
@@ -406,9 +408,9 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 15.0),
-                      child: !programToDoComplete
-                          ? buildProgramToDoList()
-                          : buildMatches(),
+                      child: programToDoComplete
+                          ? buildMatches()
+                          : buildProgramToDoList(),
                     ),
                     const Divider(
                       thickness: 2,

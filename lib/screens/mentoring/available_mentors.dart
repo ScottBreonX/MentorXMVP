@@ -5,7 +5,6 @@ import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/mentor_match_models/mentor_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../../components/profile_image_circle.dart';
@@ -67,7 +66,7 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
                 ),
                 AvailableMentorsStream(
                   // searchString: searchString,
-                  loggedInUser: loggedInUser,
+                  loggedInUser: widget.loggedInUser,
                   programUID: widget.programUID,
                 ),
               ],
@@ -89,7 +88,7 @@ class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
           height: 100,
         ),
       ),
-      body: buildMentorListContent(loggedInUser),
+      body: buildMentorListContent(widget.loggedInUser),
     );
   }
 }
@@ -140,6 +139,7 @@ class AvailableMentorsStream extends StatelessWidget {
                   myUser userModel = myUser.fromDocument(user);
 
                   final mentorBubble = MentorCard(
+                    loggedInUser: loggedInUser,
                     mentorUID: mentor.id,
                     mentorFname: userModel.firstName,
                     mentorLname: userModel.lastName,

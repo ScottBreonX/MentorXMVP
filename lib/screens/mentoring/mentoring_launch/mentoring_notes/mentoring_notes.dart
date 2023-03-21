@@ -5,7 +5,6 @@ import 'package:mentorx_mvp/components/notes_tile.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/notes_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_notes/mentoring_notes_add.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -101,6 +100,7 @@ class _MentoringNotesState extends State<MentoringNotes> {
                     programUID: widget.programUID,
                     matchID: widget.matchID,
                     mentorUID: widget.mentorUID,
+                    loggedInUser: widget.loggedInUser,
                   ),
                 ),
               ),
@@ -116,8 +116,10 @@ class AvailableNotesStream extends StatelessWidget {
   final String programUID;
   final String matchID;
   final String mentorUID;
+  final myUser loggedInUser;
 
-  AvailableNotesStream({this.programUID, this.matchID, this.mentorUID});
+  AvailableNotesStream(
+      {this.programUID, this.matchID, this.mentorUID, this.loggedInUser});
 
   @override
   Widget build(BuildContext context) {
