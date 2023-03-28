@@ -118,51 +118,72 @@ class _MentorCardState extends State<MentorCard> {
                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 35.0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.60,
-                          child: Text(
-                            '${widget.mentorFname} ${widget.mentorLname}',
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontFamily: 'WorkSans',
-                              fontSize: 25,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black54,
-                            ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.60,
+                        child: Text(
+                          '${widget.mentorFname} ${widget.mentorLname}',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            fontSize: 25,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black54,
                           ),
                         ),
                       ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          widget.mentorSlots == null
-                              ? Container()
-                              : Text(
-                                  'Available Slots: ',
-                                  style: TextStyle(
-                                    fontFamily: 'WorkSans',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black54,
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.60,
+                        child: Row(
+                          children: [
+                            widget.mentorSlots == null
+                                ? Container()
+                                : Text(
+                                    'Available Slots: ',
+                                    style: TextStyle(
+                                      fontFamily: 'WorkSans',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black54,
+                                    ),
+                                    textAlign: TextAlign.left,
                                   ),
-                                  textAlign: TextAlign.left,
-                                ),
-                          widget.mentorSlots == null
-                              ? Container()
-                              : Text(
-                                  '${widget.mentorSlots}',
-                                  style: TextStyle(
-                                    fontFamily: 'WorkSans',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: kMentorXPAccentDark,
+                            widget.mentorSlots == null
+                                ? Container()
+                                : Text(
+                                    '${widget.mentorSlots}',
+                                    style: TextStyle(
+                                      fontFamily: 'WorkSans',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: kMentorXPAccentDark,
+                                    ),
                                   ),
-                                ),
-                        ],
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.60,
+                          child: Column(
+                            children: [
+                              widget.xFactor == null
+                                  ? Container()
+                                  : Text(
+                                      '${widget.xFactor}',
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        fontFamily: 'WorkSans',
+                                        overflow: TextOverflow.ellipsis,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                        color: kMentorXPAccentDark,
+                                      ),
+                                    ),
+                            ],
+                          ),
+                        ),
                       ),
                     ]),
               ]),
@@ -204,10 +225,11 @@ class _MentorCardState extends State<MentorCard> {
                                 child: Text(
                                   '${widget.xFactor}',
                                   overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
+                                  maxLines: 4,
                                   style: TextStyle(
                                     fontFamily: 'WorkSans',
-                                    fontSize: 15,
+                                    overflow: TextOverflow.ellipsis,
+                                    fontSize: 14,
                                     color: Colors.black45,
                                   ),
                                 ),
@@ -364,7 +386,7 @@ class _MentorCardState extends State<MentorCard> {
                   : Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 10.0, bottom: 5),
+                          padding: const EdgeInsets.only(top: 5.0, bottom: 5),
                           child: widget.dividerExpand ??
                               Divider(
                                 indent: 10,

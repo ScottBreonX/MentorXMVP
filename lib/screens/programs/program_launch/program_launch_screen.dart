@@ -245,6 +245,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                   articleTitle: 'Guidelines',
                   bodyText: 'Read through and agree to program guidelines',
                   programUID: widget.programUID,
+                  onTap: () {},
                 ),
           enrollmentComplete
               ? Container()
@@ -255,6 +256,17 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                   articleTitle: 'Enrollment',
                   bodyText: 'Enroll in the program as a mentor or mentee',
                   programUID: widget.programUID,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MentoringScreen(
+                          programUID: widget.programUID,
+                          loggedInUser: widget.loggedInUser,
+                        ),
+                      ),
+                    );
+                  },
                 ),
         ],
       ),
