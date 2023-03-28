@@ -8,11 +8,11 @@ import 'package:mentorx_mvp/models/match_list.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_admin_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_overview_screen.dart';
 import '../../../components/icon_circle_single.dart';
 import '../../../components/progress.dart';
-import '../../launch_screen.dart';
 import '../../mentoring/available_mentors.dart';
 import '../../menu_bar/menu_bar.dart';
 import '../../profile/profile_screen.dart';
@@ -39,6 +39,7 @@ class ProgramLaunchScreen extends StatefulWidget {
 class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
   @override
   void initState() {
+    checkIsAdmin();
     super.initState();
   }
 
@@ -51,7 +52,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
     DocumentSnapshot doc = await programsRef
         .doc(widget.programUID)
         .collection('programAdmins')
-        .doc(loggedInUser.id)
+        .doc(widget.loggedInUser.id)
         .get();
     if (doc.exists) {
       setState(() {
@@ -466,89 +467,87 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                               )
                             ],
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              CircleIconWithText(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Profile(
-                                        loggedInUser: widget.loggedInUser,
-                                        profileId: widget.loggedInUser.id,
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                CircleIconWithText(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Profile(
+                                          loggedInUser: widget.loggedInUser,
+                                          profileId: widget.loggedInUser.id,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
-                                cardIcon: Icons.person,
-                                textDescription1: 'My',
-                                textDescription2: 'Profile',
-                              ),
-                              CircleIconWithText(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MentoringScreen(
-                                        loggedInUser: widget.loggedInUser,
-                                        programUID: widget.programUID,
+                                    );
+                                  },
+                                  cardIcon: Icons.person,
+                                  textDescription1: 'My',
+                                  textDescription2: 'Profile',
+                                ),
+                                CircleIconWithText(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MentoringScreen(
+                                          loggedInUser: widget.loggedInUser,
+                                          programUID: widget.programUID,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
-                                cardIcon: Icons.change_circle,
-                                textDescription1: 'Mentoring',
-                                textDescription2: 'Enrollment',
-                              ),
-                              CircleIconWithText(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ProgramOverview(
-                                        programId: widget.programUID,
-                                        loggedInUser: widget.loggedInUser,
+                                    );
+                                  },
+                                  cardIcon: Icons.change_circle,
+                                  textDescription1: 'Mentoring',
+                                  textDescription2: 'Enrollment',
+                                ),
+                                CircleIconWithText(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ProgramOverview(
+                                          programId: widget.programUID,
+                                          loggedInUser: widget.loggedInUser,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
-                                cardIcon: Icons.info,
-                                textDescription1: 'Program',
-                                textDescription2: 'Info',
-                              ),
-                              // isAdmin
-                              //     ? ButtonCard(
-                              //         buttonCardText: 'Program Management',
-                              //         buttonCardIcon: Icons.manage_accounts,
-                              //         buttonCardTextSize: 25,
-                              //         buttonCardTextAlign: TextAlign.start,
-                              //         buttonCardRadius: 20,
-                              //         buttonCardIconSize: 40,
-                              //         buttonCardIconColor: kMentorXPSecondary,
-                              //         onPressed: () {
-                              //           Navigator.push(
-                              //               context,
-                              //               MaterialPageRoute(
-                              //                   builder: (context) =>
-                              //                       ProgramAdminScreen(
-                              //                         loggedInUser: loggedInUser,
-                              //                         programUID: program.id,
-                              //                         enrollmentType:
-                              //                             program.enrollmentType,
-                              //                         aboutProgram:
-                              //                             program.aboutProgram,
-                              //                         institutionName:
-                              //                             program.institutionName,
-                              //                         programName:
-                              //                             program.programName,
-                              //                         programCode:
-                              //                             program.programCode,
-                              //                       )));
-                              //         },
-                              //       )
-                              //     : Container(),
-                            ],
+                                    );
+                                  },
+                                  cardIcon: Icons.info,
+                                  textDescription1: 'Program',
+                                  textDescription2: 'Info',
+                                ),
+                                isAdmin
+                                    ? CircleIconWithText(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ProgramAdminScreen(
+                                                        loggedInUser:
+                                                            widget.loggedInUser,
+                                                        programUID: program.id,
+                                                        aboutProgram: program
+                                                            .aboutProgram,
+                                                        institutionName: program
+                                                            .institutionName,
+                                                        programName:
+                                                            program.programName,
+                                                        programCode:
+                                                            program.programCode,
+                                                      )));
+                                        },
+                                        cardIcon: Icons.manage_accounts,
+                                        textDescription1: 'Program',
+                                        textDescription2: 'Admin',
+                                      )
+                                    : Container(),
+                              ],
+                            ),
                           ),
                         ],
                       ),

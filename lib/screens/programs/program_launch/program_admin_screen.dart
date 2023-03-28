@@ -63,38 +63,6 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
     programCode = widget.programCode;
   }
 
-  List<DropdownMenuItem<String>> get dropdownItems {
-    List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 5.0, left: 5.0),
-              child: Icon(Icons.public),
-            ),
-            Text("Public"),
-          ],
-        ),
-        value: "Public",
-        alignment: Alignment.center,
-      ),
-      DropdownMenuItem(
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 5.0, left: 5.0),
-              child: Icon(Icons.lock),
-            ),
-            Text("Private"),
-          ],
-        ),
-        value: "Private",
-        alignment: Alignment.center,
-      ),
-    ];
-    return menuItems;
-  }
-
   TextFormField _buildTextField(
     BuildContext context,
     Key _key,
@@ -114,8 +82,6 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
         setState(() {});
         if (fieldName == 'institutionName') {
           institutionName = value;
-        } else if (fieldName == 'enrollmentType') {
-          programType = value;
         } else if (fieldName == 'aboutProgram') {
           aboutProgram = value;
         } else if (fieldName == 'programName') {
@@ -125,13 +91,14 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
         }
       },
       style: TextStyle(
-        color: Colors.blue,
+        color: Colors.black45,
         fontSize: 15,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
         prefixIcon: _prefixIcon,
+        prefixIconColor: kMentorXPSecondary,
         labelText: '$labelText',
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -140,7 +107,7 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
         filled: true,
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          borderSide: BorderSide(color: kMentorXPAccentDark, width: 4.0),
           borderRadius: BorderRadius.all(
             Radius.circular(20.0),
           ),
@@ -156,7 +123,6 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
       await programsRef.doc(widget.programUID).update({
         "aboutProgram": aboutProgram,
         "institutionName": institutionName,
-        "enrollmentType": programType,
         "programName": programName,
         "programCode": programCode,
       });
@@ -164,6 +130,7 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
           context,
           MaterialPageRoute(
               builder: (context) => ProgramLaunchScreen(
+                    loggedInUser: widget.loggedInUser,
                     programUID: widget.programUID,
                   )));
     } on FirebaseException catch (e) {
@@ -172,23 +139,23 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
     }
   }
 
-  Future<void> _adminCollection(
-    BuildContext context,
-  ) async {
-    try {
-      QueryDocumentSnapshot<Map<String, dynamic>> queryDocumentSnapshot;
-      await programsRef
-          .doc(widget.programUID)
-          .collection('programAdmins')
-          .get()
-          .then((querySnapshot) =>
-              {queryDocumentSnapshot = querySnapshot.docs[0]});
-      print(queryDocumentSnapshot);
-    } on FirebaseException catch (e) {
-      showAlertDialog(context,
-          title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
-    }
-  }
+  // Future<void> _adminCollection(
+  //   BuildContext context,
+  // ) async {
+  //   try {
+  //     QueryDocumentSnapshot<Map<String, dynamic>> queryDocumentSnapshot;
+  //     await programsRef
+  //         .doc(widget.programUID)
+  //         .collection('programAdmins')
+  //         .get()
+  //         .then((querySnapshot) =>
+  //             {queryDocumentSnapshot = querySnapshot.docs[0]});
+  //     print(queryDocumentSnapshot);
+  //   } on FirebaseException catch (e) {
+  //     showAlertDialog(context,
+  //         title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
+  //   }
+  // }
 
   bool isLoading = false;
 
@@ -207,10 +174,11 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
           return Scaffold(
             key: _scaffoldKey,
             appBar: AppBar(
+              backgroundColor: kMentorXPPrimary,
               elevation: 5,
               title: Image.asset(
-                'assets/images/MentorPinkWhite.png',
-                height: 150,
+                'assets/images/MentorXP.png',
+                height: 100,
               ),
             ),
             body: SingleChildScrollView(
@@ -230,12 +198,13 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                                   ? Container(
                                       decoration: BoxDecoration(
                                         border: Border.all(
-                                            color: Colors.blue, width: 4),
+                                            color: Colors.transparent,
+                                            width: 4),
                                         borderRadius: BorderRadius.circular(20),
                                         color: Colors.white,
                                       ),
                                       child: Image.asset(
-                                        'assets/images/MLogoPink.png',
+                                        'assets/images/MXPDark.png',
                                         height: 120,
                                         width: 120,
                                         fit: BoxFit.cover,
@@ -270,7 +239,7 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                                             circularProgress(),
                                         errorWidget: (context, url, error) =>
                                             Image.asset(
-                                          'assets/images/MLogoBlue.png',
+                                          'assets/images/MentorXP.png',
                                           height: 120,
                                           width: 120,
                                           fit: BoxFit.cover,
@@ -326,62 +295,6 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                             program.aboutProgram,
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 40, bottom: 40, left: 15.0, right: 20.0),
-                              child: Text(
-                                'Enrollment',
-                                style: TextStyle(
-                                  fontFamily: 'Work Sans',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black45,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 20.0),
-                              child: Container(
-                                width: 150,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 2,
-                                      offset: Offset(2, 3),
-                                      color: Colors.grey[700],
-                                    ),
-                                  ],
-                                  color: Colors.white,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: DropdownButton(
-                                    underline: Container(),
-                                    isExpanded: true,
-                                    dropdownColor: Colors.white,
-                                    value: programType,
-                                    style: TextStyle(
-                                      fontFamily: 'Work Sans',
-                                      fontSize: 20,
-                                      color: Colors.blue,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    onChanged: (String newValue) {
-                                      setState(() {
-                                        programType = newValue;
-                                      });
-                                    },
-                                    items: dropdownItems,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: _buildTextField(
@@ -404,7 +317,7 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                                 fontWeight: FontWeight.w500,
                                 fontSize: 20,
                                 buttonColor: Colors.white,
-                                fontColor: Colors.pink,
+                                fontColor: kMentorXPSecondary,
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
@@ -414,11 +327,10 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                                 title: 'Save',
                                 fontWeight: FontWeight.w500,
                                 fontSize: 20,
-                                buttonColor: Colors.pink,
+                                buttonColor: kMentorXPSecondary,
                                 fontColor: Colors.white,
                                 onPressed: () async {
                                   await _updateProgram(context);
-                                  print('updated program');
                                 },
                                 minWidth: 160,
                               ),
@@ -436,7 +348,8 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => ProgramCreationDetail(
-                                programUID: program.id,
+                                loggedInUser: widget.loggedInUser,
+                                programUID: widget.programUID,
                                 programLogo: program.programLogo,
                               ),
                             ),
@@ -448,7 +361,7 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                           iconSize: 30.0,
                           iconType: Icons.camera_alt,
                           circleColor: Colors.white,
-                          iconColor: Colors.blue,
+                          iconColor: kMentorXPAccentDark,
                         ),
                       ),
                     ),

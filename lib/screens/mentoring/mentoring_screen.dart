@@ -173,13 +173,11 @@ class _MentoringScreenState extends State<MentoringScreen> {
                   cardAlignment: MainAxisAlignment.center,
                   cardIconBool: Container(),
                   onPressed: () => (menteeSelected | mentorSelected)
-                      ? {
-                          mentorSelected
-                              ? _createMentor(context, widget.programUID,
-                                  widget.loggedInUser)
-                              : createMentee(context, widget.programUID,
-                                  widget.loggedInUser)
-                        }
+                      ? mentorSelected
+                          ? _createMentor(
+                              context, widget.programUID, widget.loggedInUser)
+                          : createMentee(
+                              context, widget.programUID, widget.loggedInUser)
                       : {},
                 ),
                 ButtonCard(
@@ -224,7 +222,7 @@ Future<void> createMentee(
         .doc(programUID)
         .collection('userSubscribed')
         .doc(loggedInUser.id)
-        .set({
+        .update({
       "enrollmentStatus": 'mentee',
     });
     await programsRef
@@ -232,16 +230,15 @@ Future<void> createMentee(
         .collection('mentees')
         .doc(loggedInUser.id)
         .get()
-        .then((docSnapshot) => {
-              if (!docSnapshot.exists)
-                {
-                  programsRef
-                      .doc(programUID)
-                      .collection('mentees')
-                      .doc(loggedInUser.id)
-                      .set({})
-                }
-            });
+        .then((docSnapshot) => !docSnapshot.exists
+            ? {
+                programsRef
+                    .doc(programUID)
+                    .collection('mentees')
+                    .doc(loggedInUser.id)
+                    .set({})
+              }
+            : {});
 
     await programsRef
         .doc(programUID)
@@ -270,7 +267,7 @@ Future<void> _createMentor(
         .doc(programUID)
         .collection('userSubscribed')
         .doc(loggedInUser.id)
-        .set({
+        .update({
       "enrollmentStatus": 'mentor',
     });
     await programsRef
@@ -278,16 +275,17 @@ Future<void> _createMentor(
         .collection('mentors')
         .doc(loggedInUser.id)
         .get()
-        .then((docSnapshot) => {
-              if (!docSnapshot.exists)
-                {
+        .then(
+          (docSnapshot) => !docSnapshot.exists
+              ? {
                   programsRef
                       .doc(programUID)
                       .collection('mentors')
                       .doc(loggedInUser.id)
                       .set({})
                 }
-            });
+              : {},
+        );
 
     await programsRef
         .doc(programUID)
