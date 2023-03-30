@@ -8,6 +8,7 @@ import 'package:mentorx_mvp/models/match_list.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guidelines.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_overview_screen.dart';
 import '../../../components/icon_circle_single.dart';
@@ -244,7 +245,17 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                   articleTitle: 'Guidelines',
                   bodyText: 'Read through and agree to program guidelines',
                   programUID: widget.programUID,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProgramGuidelines(
+                          programUID: widget.programUID,
+                          loggedInUser: widget.loggedInUser,
+                        ),
+                      ),
+                    );
+                  },
                 ),
           enrollmentComplete
               ? Container()
