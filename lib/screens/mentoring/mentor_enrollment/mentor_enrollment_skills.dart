@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentor_enrollment/mentor_enrollment_hobbies.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentor_enrollment/mentor_enrollment_free_form.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/progress.dart';
 import '../../../models/mentor_match_models/mentor_model.dart';
@@ -45,7 +45,7 @@ class _MentorEnrollmentSkillsScreenState
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => MentorEnrollmentHobbies(
+          builder: (context) => MentorEnrollmentFreeForm(
             loggedInUser: widget.loggedInUser,
             programUID: widget.programUID,
           ),

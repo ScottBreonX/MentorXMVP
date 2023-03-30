@@ -7,7 +7,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.1.0+2
 
 environment:
-  sdk: ">=2.2.0 <3.0.0-85.0.dev"
+  sdk: ">=2.2.2 <3.0.0-85.0.dev"
 
 dependencies:
   flutter:
@@ -34,6 +34,7 @@ dependencies:
   intl: ^0.17.0
   lottie: ^1.4.2
   dropdown_button2: ^1.9.2
+  carousel_slider: ^4.2.1
 
 
 
@@ -63,14 +64,6 @@ flutter:
 
 
   assets:
-    - assets/images/MentorWhite.png
-    - assets/images/MLogoWhite.png
-    - assets/images/MLogoBlue.png
-    - assets/images/MLogoPink.png
-    - assets/images/MentorPinkWhite.png
-    - assets/images/MentorPink.png
-    - assets/images/UMichLogo.png
-    - assets/images/UNILogo.png
     - assets/images/MentorXP.png
     - assets/images/MentorXPDark.png
     - assets/images/MXPDark.png

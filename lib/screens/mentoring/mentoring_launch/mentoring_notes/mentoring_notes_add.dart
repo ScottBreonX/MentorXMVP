@@ -40,6 +40,8 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
   String noteText;
   String noteID;
 
+  String menteeFreeForm;
+
   Future<void> _addNotes(
       String programID, String matchID, myUser loggedInUser) async {
     try {
@@ -127,35 +129,9 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                    left: 20.0, right: 20.0, bottom: 20.0, top: 40),
-                child: TextFormField(
-                  key: _formKey2,
-                  onChanged: (value) => noteText = value,
-                  textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black54,
-                    fontWeight: FontWeight.normal,
-                  ),
-                  textAlign: TextAlign.start,
-                  autocorrect: false,
-                  decoration: InputDecoration(
-                    hintText: 'Notes',
-                    hintStyle: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.normal,
-                      fontFamily: 'Montserrat',
-                    ),
-                    prefixIcon: Icon(
-                      Icons.notes,
-                      size: 40,
-                      color: kMentorXPSecondary,
-                    ),
-                  ),
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                  child: buildFreeFormField(),
                 ),
               ),
               Row(
@@ -201,6 +177,50 @@ class _MentoringNotesAddState extends State<MentoringNotesAdd> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  buildFreeFormField({
+    String currentFreeFormResponse,
+  }) {
+    return TextFormField(
+      key: _formKey2,
+      style: TextStyle(
+        color: Colors.black54,
+        fontFamily: 'Montserrat',
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+      ),
+      autocorrect: true,
+      initialValue: currentFreeFormResponse,
+      onChanged: (value) => noteText = value,
+      textCapitalization: TextCapitalization.sentences,
+      minLines: 10,
+      maxLines: 20,
+      decoration: InputDecoration(
+        hintStyle: TextStyle(
+            color: kMentorXPSecondary.withOpacity(
+              0.3,
+            ),
+            fontSize: 20,
+            fontFamily: 'Montserrat'),
+        filled: true,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.0),
+          borderSide: BorderSide(
+            color: Colors.black54,
+            width: 1.0,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.0),
+          borderSide: BorderSide(
+            color: kMentorXPSecondary,
+            width: 3.0,
+          ),
+        ),
+        fillColor: Colors.white,
       ),
     );
   }

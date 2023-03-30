@@ -8,7 +8,6 @@ import 'package:mentorx_mvp/models/match_list.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_screen.dart';
-import 'package:mentorx_mvp/screens/programs/program_launch/program_admin_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_overview_screen.dart';
 import '../../../components/icon_circle_single.dart';
@@ -484,80 +483,63 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                CircleIconWithText(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Profile(
-                                          loggedInUser: widget.loggedInUser,
-                                          profileId: widget.loggedInUser.id,
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: CircleIconWithText(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Profile(
+                                            loggedInUser: widget.loggedInUser,
+                                            profileId: widget.loggedInUser.id,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                  cardIcon: Icons.person,
-                                  textDescription1: 'My',
-                                  textDescription2: 'Profile',
+                                      );
+                                    },
+                                    cardIcon: Icons.person,
+                                    textDescription1: 'My',
+                                    textDescription2: 'Profile',
+                                  ),
                                 ),
-                                CircleIconWithText(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => MentoringScreen(
-                                          loggedInUser: widget.loggedInUser,
-                                          programUID: widget.programUID,
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: CircleIconWithText(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => MentoringScreen(
+                                            loggedInUser: widget.loggedInUser,
+                                            programUID: widget.programUID,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                  cardIcon: Icons.change_circle,
-                                  textDescription1: 'Mentoring',
-                                  textDescription2: 'Enrollment',
+                                      );
+                                    },
+                                    cardIcon: Icons.change_circle,
+                                    textDescription1: 'Mentoring',
+                                    textDescription2: 'Enrollment',
+                                  ),
                                 ),
-                                CircleIconWithText(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ProgramOverview(
-                                          programId: widget.programUID,
-                                          loggedInUser: widget.loggedInUser,
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: CircleIconWithText(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ProgramOverview(
+                                            programId: widget.programUID,
+                                            loggedInUser: widget.loggedInUser,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                  cardIcon: Icons.info,
-                                  textDescription1: 'Program',
-                                  textDescription2: 'Info',
+                                      );
+                                    },
+                                    cardIcon: Icons.info,
+                                    textDescription1: 'Program',
+                                    textDescription2: 'Info',
+                                  ),
                                 ),
-                                isAdmin
-                                    ? CircleIconWithText(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ProgramAdminScreen(
-                                                        loggedInUser:
-                                                            widget.loggedInUser,
-                                                        programUID: program.id,
-                                                        aboutProgram: program
-                                                            .aboutProgram,
-                                                        institutionName: program
-                                                            .institutionName,
-                                                        programName:
-                                                            program.programName,
-                                                        programCode:
-                                                            program.programCode,
-                                                      )));
-                                        },
-                                        cardIcon: Icons.manage_accounts,
-                                        textDescription1: 'Program',
-                                        textDescription2: 'Admin',
-                                      )
-                                    : Container(),
                               ],
                             ),
                           ),

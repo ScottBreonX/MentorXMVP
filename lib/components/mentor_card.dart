@@ -136,53 +136,82 @@ class _MentorCardState extends State<MentorCard> {
                         width: MediaQuery.of(context).size.width * 0.60,
                         child: Row(
                           children: [
-                            widget.mentorSlots == null
-                                ? Container()
-                                : Text(
-                                    'Available Slots: ',
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 5.0,
+                                right: 15.0,
+                                left: 5.0,
+                              ),
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    skillMap['${widget.mtrAtt1}'],
+                                    color: kMentorXPAccentDark,
+                                    size: 30,
+                                  ),
+                                  Text(
+                                    '${widget.mtrAtt1 ?? ''}',
                                     style: TextStyle(
                                       fontFamily: 'WorkSans',
-                                      fontSize: 15,
+                                      fontSize: 8,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.black54,
+                                      color: kMentorXPPrimary,
                                     ),
-                                    textAlign: TextAlign.left,
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 5.0,
+                                right: 15.0,
+                                left: 15.0,
+                              ),
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    skillMap['${widget.mtrAtt2}'],
+                                    color: kMentorXPAccentDark,
+                                    size: 30,
                                   ),
-                            widget.mentorSlots == null
-                                ? Container()
-                                : Text(
-                                    '${widget.mentorSlots}',
+                                  Text(
+                                    '${widget.mtrAtt2 ?? ''}',
                                     style: TextStyle(
                                       fontFamily: 'WorkSans',
-                                      fontSize: 15,
+                                      fontSize: 8,
                                       fontWeight: FontWeight.w500,
-                                      color: kMentorXPAccentDark,
+                                      color: kMentorXPPrimary,
                                     ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 5.0,
+                                right: 10.0,
+                                left: 15.0,
+                              ),
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    skillMap['${widget.mtrAtt3}'],
+                                    color: kMentorXPAccentDark,
+                                    size: 30,
                                   ),
+                                  Text(
+                                    '${widget.mtrAtt3 ?? ''}',
+                                    style: TextStyle(
+                                      fontFamily: 'WorkSans',
+                                      fontSize: 8,
+                                      fontWeight: FontWeight.w500,
+                                      color: kMentorXPPrimary,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
                           ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.60,
-                          child: Column(
-                            children: [
-                              widget.xFactor == null
-                                  ? Container()
-                                  : Text(
-                                      '${widget.xFactor}',
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                        fontFamily: 'WorkSans',
-                                        overflow: TextOverflow.ellipsis,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        color: kMentorXPAccentDark,
-                                      ),
-                                    ),
-                            ],
-                          ),
                         ),
                       ),
                     ]),
@@ -254,22 +283,6 @@ class _MentorCardState extends State<MentorCard> {
                           widget.mtrAtt1 ?? '',
                           widget.mtrAtt2 ?? '',
                           widget.mtrAtt3 ?? '',
-                        ),
-                        Divider(
-                          indent: 10,
-                          endIndent: 10,
-                          color: Colors.grey.shade300,
-                          thickness: 1,
-                        ),
-                        buildSkillsSection(
-                          'My Hobbies',
-                          kMentorXPSecondary,
-                          skillMap['${widget.mtrHobby1}'],
-                          skillMap['${widget.mtrHobby2}'],
-                          skillMap['${widget.mtrHobby3}'],
-                          widget.mtrHobby1 ?? '',
-                          widget.mtrHobby2 ?? '',
-                          widget.mtrHobby3 ?? '',
                         ),
                         widget.previewStatus
                             ? Container()

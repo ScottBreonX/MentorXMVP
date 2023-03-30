@@ -86,87 +86,88 @@ class _MatchListState extends State<MatchList> {
                         left: 5,
                       ),
                       child: Container(
-                          child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        elevation: 10,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(children: <Widget>[
-                            CircleAvatar(
-                              backgroundColor: Colors.grey,
-                              radius: 35,
-                              child: Container(
-                                child: user.profilePicture == null ||
-                                        user.profilePicture.isEmpty ||
-                                        user.profilePicture == ""
-                                    ? ProfileImageCircle(
-                                        circleColor: kMentorXPPrimary,
-                                        iconSize: 45,
-                                        iconColor: Colors.white,
-                                        circleSize: 40,
-                                      )
-                                    : CircleAvatar(
-                                        radius: 40,
-                                        child: CachedNetworkImage(
-                                          imageUrl: user.profilePicture,
-                                          imageBuilder:
-                                              (context, imageProvider) =>
-                                                  Container(
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                image: imageProvider,
-                                                fit: BoxFit.cover,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          elevation: 10,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(children: <Widget>[
+                              CircleAvatar(
+                                backgroundColor: Colors.grey,
+                                radius: 35,
+                                child: Container(
+                                  child: user.profilePicture == null ||
+                                          user.profilePicture.isEmpty ||
+                                          user.profilePicture == ""
+                                      ? ProfileImageCircle(
+                                          circleColor: kMentorXPPrimary,
+                                          iconSize: 45,
+                                          iconColor: Colors.white,
+                                          circleSize: 40,
+                                        )
+                                      : CircleAvatar(
+                                          radius: 40,
+                                          child: CachedNetworkImage(
+                                            imageUrl: user.profilePicture,
+                                            imageBuilder:
+                                                (context, imageProvider) =>
+                                                    Container(
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                image: DecorationImage(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          placeholder: (context, url) =>
-                                              CircularProgressIndicator(),
-                                          errorWidget: (context, url, error) =>
-                                              Icon(
-                                            Icons.person,
-                                            size: 50,
-                                            color: Colors.white,
+                                            placeholder: (context, url) =>
+                                                CircularProgressIndicator(),
+                                            errorWidget:
+                                                (context, url, error) => Icon(
+                                              Icons.person,
+                                              size: 50,
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                              ),
-                            ),
-                            Container(
-                              width: 150,
-                              child: Text(
-                                '${user.firstName}',
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'WorkSans',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black54,
                                 ),
                               ),
-                            ),
-                            Container(
-                              width: 150,
-                              child: Text(
-                                '${user.lastName}',
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'WorkSans',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black54,
+                              Container(
+                                width: 150,
+                                child: Text(
+                                  '${user.firstName}',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: 'WorkSans',
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black54,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ]),
+                              Container(
+                                width: 150,
+                                child: Text(
+                                  '${user.lastName}',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: 'WorkSans',
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ),
+                            ]),
+                          ),
                         ),
-                      )),
+                      ),
                     ),
                   ),
                 ],

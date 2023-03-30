@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/program.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_admin_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 
 import '../../../components/rounded_button.dart';
@@ -148,9 +149,25 @@ class _ProgramOverviewState extends State<ProgramOverview> {
         ));
   }
 
+  bool isAdmin = false;
+
   @override
   void initState() {
+    checkIsAdmin();
     super.initState();
+  }
+
+  checkIsAdmin() async {
+    DocumentSnapshot doc = await programsRef
+        .doc(widget.programId)
+        .collection('programAdmins')
+        .doc(widget.loggedInUser.id)
+        .get();
+    if (doc.exists) {
+      setState(() {
+        isAdmin = true;
+      });
+    }
   }
 
   Widget build(BuildContext context) {
@@ -296,6 +313,33 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                               onPressed: () => _confirmLeaveScreen(
                                   context, widget.programId),
                             ),
+                            isAdmin
+                                ? ButtonCard(
+                                    buttonCardText: 'Program Admin Tools',
+                                    buttonCardTextSize: 25,
+                                    buttonCardRadius: 20,
+                                    buttonCardIcon: Icons.admin_panel_settings,
+                                    buttonCardIconSize: 40,
+                                    buttonCardIconColor: kMentorXPSecondary,
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProgramAdminScreen(
+                                            loggedInUser: widget.loggedInUser,
+                                            programUID: program.id,
+                                            aboutProgram: program.aboutProgram,
+                                            institutionName:
+                                                program.institutionName,
+                                            programName: program.programName,
+                                            programCode: program.programCode,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : Container(),
                           ],
                         ),
                       ),

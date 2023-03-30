@@ -1,89 +1,141 @@
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_launch_manage.dart';
 
-class ProgramCard extends StatelessWidget {
-  const ProgramCard({
+import '../constants.dart';
+
+class ProgramGuideCard extends StatefulWidget {
+  const ProgramGuideCard({
+    this.titleText,
+    this.trackText,
     Key key,
-    @required this.programName,
-    @required this.programStartDate,
-    @required this.programEndDate,
+    this.bodyText,
+    this.swipeText,
+    this.fileName,
+    this.selectButtons,
+    this.onPressed1,
+    this.onPressed2,
+    this.button1Text,
+    this.button2Text,
+    this.cardColor,
+    this.swipeTextOnTap,
   }) : super(key: key);
 
-  final String programName;
-  final String programStartDate;
-  final String programEndDate;
+  final String titleText;
+  final String trackText;
+  final String bodyText;
+  final String swipeText;
+  final Widget fileName;
+  final bool selectButtons;
+  final Function onPressed1;
+  final Function onPressed2;
+  final Color cardColor;
+  final Function swipeTextOnTap;
+
+  final String button1Text;
+  final String button2Text;
+
+  @override
+  State<ProgramGuideCard> createState() => _ProgramGuideCardState();
+}
+
+class _ProgramGuideCardState extends State<ProgramGuideCard> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: 300,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.white.withOpacity(1.0),
-          ),
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey[700],
-              blurRadius: 5,
-              offset: Offset(5, 5),
-            ),
-          ],
-          color: Colors.white,
+    return Container(
+      width: double.infinity,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
         ),
+        color: widget.cardColor ?? kMentorXPPrimary,
         child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
             children: [
+              Text(
+                widget.titleText ?? 'N/A',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat',
+                ),
+              ),
+              Text(
+                widget.trackText ?? '',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: kMentorXPAccentMed,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat',
+                ),
+              ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.school,
-                      size: 40,
+                padding: const EdgeInsets.only(top: 20.0),
+                child: widget.fileName ?? Text(''),
+              ),
+              widget.selectButtons ?? false
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Column(
+                        children: [
+                          ButtonCard(
+                            buttonCardText: '${widget.button1Text ?? ''}',
+                            onPressed: widget.onPressed1 ?? () {},
+                            cardIconBool: Container(),
+                            cardAlignment: MainAxisAlignment.center,
+                            buttonCardColor: kMentorXPAccentDark,
+                            buttonCardTextColor: Colors.white,
+                            buttonCardTextSize: 20,
+                            buttonCardRadius: 20,
+                            buttonCardHeight: 70,
+                            cardWidthPercent: .50,
+                          ),
+                          ButtonCard(
+                            buttonCardText: '${widget.button2Text ?? ''}',
+                            onPressed: widget.onPressed2 ?? () {},
+                            cardIconBool: Container(),
+                            cardAlignment: MainAxisAlignment.center,
+                            buttonCardColor: kMentorXPSecondary,
+                            buttonCardTextColor: Colors.white,
+                            buttonCardTextSize: 20,
+                            buttonCardRadius: 20,
+                            buttonCardHeight: 70,
+                            cardWidthPercent: .50,
+                          ),
+                        ],
+                      ),
                     )
+                  : Container(),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: widget.swipeTextOnTap ?? () {},
+                      child: Text(
+                        widget.swipeText ?? 'Swipe for next part',
+                        style: TextStyle(
+                          color: kMentorXPAccentMed,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        programName ?? 'TBD',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Montserrat',
-                          color: Colors.black54,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        programStartDate ?? 'TBD',
-                        style: Theme.of(context).textTheme.subtitle2,
-                      ),
-                      Text(
-                        ' to ',
-                        style: Theme.of(context).textTheme.subtitle2,
-                      ),
-                      Text(
-                        programEndDate ?? 'TBD',
-                        style: Theme.of(context).textTheme.subtitle2,
-                      ),
-                    ],
-                  )
-                ],
-              )
             ],
           ),
         ),

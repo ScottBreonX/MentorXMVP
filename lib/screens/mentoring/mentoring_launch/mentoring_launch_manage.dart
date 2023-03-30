@@ -389,6 +389,7 @@ class ButtonCard extends StatelessWidget {
     this.cardAlignment,
     this.cardIconBool,
     this.iconPadding,
+    this.buttonCardHeight,
   }) : super(key: key);
 
   final String buttonCardText;
@@ -404,6 +405,7 @@ class ButtonCard extends StatelessWidget {
   final MainAxisAlignment cardAlignment;
   final Container cardIconBool;
   final EdgeInsets iconPadding;
+  final double buttonCardHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -412,7 +414,7 @@ class ButtonCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onPressed ?? () {},
         child: Container(
-          height: 80,
+          height: buttonCardHeight ?? 80,
           width: MediaQuery.of(context).size.width * (cardWidthPercent ?? .95),
           child: Card(
             elevation: 10,

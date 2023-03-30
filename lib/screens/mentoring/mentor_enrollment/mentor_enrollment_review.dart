@@ -105,9 +105,6 @@ class _MentorEnrollmentReviewState extends State<MentorEnrollmentReview> {
                             mtrAtt1: mentorSkills.mentorSkill1,
                             mtrAtt2: mentorSkills.mentorSkill2,
                             mtrAtt3: mentorSkills.mentorSkill3,
-                            mtrHobby1: mentorSkills.mentorHobby1,
-                            mtrHobby2: mentorSkills.mentorHobby2,
-                            mtrHobby3: mentorSkills.mentorHobby3,
                             xFactor: mentorSkills.mentorFreeForm,
                             previewStatus: true,
                             imageContainer: Container(

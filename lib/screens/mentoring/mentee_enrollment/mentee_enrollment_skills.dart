@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentee_enrollment/mentee_enrollment_hobbies.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentee_enrollment/mentee_enrollment_free_form.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/progress.dart';
 import '../../../models/mentor_match_models/mentee_model.dart';
-import '../../launch_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -44,12 +43,14 @@ class _MenteeEnrollmentSkillsScreenState
         "id": widget.loggedInUser.id,
       });
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => MenteeEnrollmentHobbies(
-                    loggedInUser: widget.loggedInUser,
-                    programUID: widget.programUID,
-                  )));
+        context,
+        MaterialPageRoute(
+          builder: (context) => MenteeEnrollmentFreeForm(
+            loggedInUser: widget.loggedInUser,
+            programUID: widget.programUID,
+          ),
+        ),
+      );
     } on FirebaseException catch (e) {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');

@@ -106,10 +106,7 @@ class _MenteeEnrollmentReviewState extends State<MenteeEnrollmentReview> {
                             mtrAtt1: menteeSkills.menteeSkill1,
                             mtrAtt2: menteeSkills.menteeSkill2,
                             mtrAtt3: menteeSkills.menteeSkill3,
-                            mtrHobby1: menteeSkills.menteeHobby1,
-                            mtrHobby2: menteeSkills.menteeHobby2,
-                            mtrHobby3: menteeSkills.menteeHobby3,
-                            xFactor: menteeSkills.menteeFreeForm,
+                            xFactor: menteeSkills.menteeFreeForm ?? '',
                             previewStatus: true,
                             imageContainer: Container(
                               child: userProfile.profilePicture == null ||
