@@ -205,9 +205,11 @@ class _MentoringScreenState extends State<MentoringScreen> {
       appBar: AppBar(
         elevation: 5,
         backgroundColor: kMentorXPPrimary,
-        title: Image.asset(
-          'assets/images/MentorXP.png',
-          height: 100,
+        title: Center(
+          child: Image.asset(
+            'assets/images/MentorXP.png',
+            height: 100,
+          ),
         ),
       ),
       body: buildRoleSelection(),

@@ -101,17 +101,24 @@ class AvailableMentorsStream extends StatelessWidget {
 
   final String programUID;
   final myUser loggedInUser;
-  Stream get mentorStream => _firestore
-      .collection('institutions')
-      .doc(programUID)
-      .collection('mentors')
-      .where('mentorSlots', isGreaterThan: 0)
-      .snapshots();
+  // Stream get mentorStream => _firestore
+  //     .collection('institutions')
+  //     .doc(programUID)
+  //     .collection('mentors')
+  //     .where(
+  //       'mentorSlots',
+  //       isGreaterThan: 0,
+  //     )
+  //     .snapshots();
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: mentorStream,
+      stream: _firestore
+          .collection('institutions')
+          .doc(programUID)
+          .collection('mentors')
+          .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center();
@@ -177,7 +184,7 @@ class AvailableMentorsStream extends StatelessWidget {
                               ),
                             ),
                     ),
-                    mentorSlots: mentorModel.mentorSlots,
+                    // mentorSlots: mentorModel.mentorSlots,
                     mtrAtt1: mentorModel.mentorSkill1,
                     mtrAtt2: mentorModel.mentorSkill2,
                     mtrAtt3: mentorModel.mentorSkill3,

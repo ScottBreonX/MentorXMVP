@@ -97,9 +97,11 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                   appBar: AppBar(
                     backgroundColor: kMentorXPPrimary,
                     elevation: 5,
-                    title: Image.asset(
-                      'assets/images/MentorXP.png',
-                      height: 100,
+                    title: Center(
+                      child: Image.asset(
+                        'assets/images/MentorXP.png',
+                        height: 100,
+                      ),
                     ),
                   ),
                   body: SingleChildScrollView(

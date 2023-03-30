@@ -7,7 +7,6 @@ import 'package:mentorx_mvp/screens/mentoring/mentor_enrollment/mentor_enrollmen
 import '../../../components/alert_dialog.dart';
 import '../../../components/progress.dart';
 import '../../../models/mentor_match_models/mentor_model.dart';
-import '../../launch_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -37,6 +36,7 @@ class _MentorEnrollmentFreeFormState extends State<MentorEnrollmentFreeForm> {
           .doc(widget.loggedInUser.id)
           .update({
         "Mentor Free Form": mentorFreeForm,
+        "mentorSlots": 4,
       });
       Navigator.push(
         context,

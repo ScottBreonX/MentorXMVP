@@ -13,7 +13,6 @@ final programsRef = FirebaseFirestore.instance.collection('institutions');
 class MentorCard extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
-  final int mentorSlots;
   final String mentorFname;
   final String mentorLname;
   final Container imageContainer;
@@ -34,7 +33,6 @@ class MentorCard extends StatefulWidget {
   MentorCard({
     this.loggedInUser,
     this.mentorUID,
-    this.mentorSlots,
     this.mentorFname,
     this.mentorLname,
     this.imageContainer,
@@ -317,7 +315,6 @@ class _MentorCardState extends State<MentorCard> {
                                           xFactor: widget.xFactor,
                                           mentorPicContainer:
                                               widget.imageContainer,
-                                          mentorSlots: widget.mentorSlots,
                                           programUID: widget.programUID,
                                         ),
                                       ),

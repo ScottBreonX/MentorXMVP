@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/mentor_card.dart';
@@ -25,7 +23,6 @@ class MentorConfirm extends StatelessWidget {
   final String mtrAtt3;
   final String xFactor;
   final Container mentorPicContainer;
-  final int mentorSlots;
   final String programUID;
 
   MentorConfirm({
@@ -34,7 +31,6 @@ class MentorConfirm extends StatelessWidget {
     this.mentorPicContainer,
     this.mentorFname,
     this.mentorLname,
-    this.mentorSlots,
     this.mentorMajor,
     this.mentorYearInSchool,
     this.mtrAtt1,
@@ -78,11 +74,11 @@ class MentorConfirm extends StatelessWidget {
         .doc(loggedInUser.id)
         .set({"matchID": mentorUID + loggedInUser.id});
     //decrement mentor available slots
-    programsRef
-        .doc(programUID)
-        .collection('mentors')
-        .doc(mentorUID)
-        .update({"mentorSlots": max(0, mentorSlots - 1)});
+    // programsRef
+    //     .doc(programUID)
+    //     .collection('mentors')
+    //     .doc(mentorUID)
+    //     .update({"mentorSlots": max(0, mentorSlots - 1)});
     //add mentor ID and mentee ID to matchID section
     programsRef
         .doc(programUID)
@@ -222,7 +218,7 @@ class MentorConfirm extends StatelessWidget {
                         mtrAtt2: mtrAtt2,
                         mtrAtt3: mtrAtt3,
                         xFactor: xFactor,
-                        mentorSlots: mentorSlots,
+                        // mentorSlots: mentorSlots,
                         moreInfoExpand: Container(),
                         dividerExpand: Divider(
                           height: 0,

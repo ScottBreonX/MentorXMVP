@@ -30,7 +30,7 @@ class ProgramGuideMenuTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: 400,
+                  width: MediaQuery.of(context).size.width * .95,
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Colors.white.withOpacity(1.0),

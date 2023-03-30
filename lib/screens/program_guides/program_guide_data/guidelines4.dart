@@ -28,7 +28,7 @@ class Guidelines4 extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 30.0),
+          padding: const EdgeInsets.only(top: 20.0),
           child: RichText(
             text: TextSpan(
               text: 'Feedback: ',

@@ -63,9 +63,11 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
       appBar: AppBar(
         backgroundColor: kMentorXPPrimary,
         elevation: 5,
-        title: Image.asset(
-          'assets/images/MentorXP.png',
-          height: 100,
+        title: Center(
+          child: Image.asset(
+            'assets/images/MentorXP.png',
+            height: 100,
+          ),
         ),
       ),
       body: Container(
