@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/programs/program_profile.dart';
 
 import '../constants.dart';
+import '../models/user.dart';
 
 class ProgramTile extends StatelessWidget {
   final String programId;
+  final myUser loggedInUser;
   final String programName;
   final String institutionName;
   final String programAbout;
@@ -31,6 +33,7 @@ class ProgramTile extends StatelessWidget {
     this.imageAsset,
     this.cachedNetworkImage,
     this.imageContainer,
+    this.loggedInUser,
   });
 
   @override
@@ -40,7 +43,10 @@ class ProgramTile extends StatelessWidget {
           () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProgramProfile(programId: programId),
+                  builder: (context) => ProgramProfile(
+                    programId: programId,
+                    loggedInUser: loggedInUser,
+                  ),
                 ),
               ),
       child: Padding(
@@ -65,8 +71,10 @@ class ProgramTile extends StatelessWidget {
                               () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          ProgramProfile(programId: programId),
+                                      builder: (context) => ProgramProfile(
+                                        programId: programId,
+                                        loggedInUser: loggedInUser,
+                                      ),
                                     ),
                                   ),
                           child: imageContainer ??

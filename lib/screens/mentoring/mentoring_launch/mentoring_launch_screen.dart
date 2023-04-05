@@ -35,13 +35,13 @@ class MentoringLaunchScreen extends StatefulWidget {
 }
 
 class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
+  bool isMentor = false;
+
   @override
   void initState() {
     checkIsMentor();
     super.initState();
   }
-
-  bool isMentor = false;
 
   checkIsMentor() async {
     DocumentSnapshot doc = await programsRef
@@ -54,11 +54,12 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
         isMentor = true;
         print("isMentor");
       });
+    } else {
+      setState(() {
+        isMentor = false;
+        print("isNotMentor");
+      });
     }
-    setState(() {
-      isMentor = false;
-      print("isNotMentor");
-    });
   }
 
   bool userProfilePic = false;

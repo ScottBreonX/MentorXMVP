@@ -79,6 +79,7 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
                 children: [
                   Container(
                     height: 70,
+                    // width: MediaQuery.of(context).size.width * .90,
                     width: 200,
                     child: Card(
                       shape: RoundedRectangleBorder(

@@ -34,13 +34,14 @@ class _ProgramProfileState extends State<ProgramProfile> {
   void initState() {
     super.initState();
     checkHasJoined();
+    print(widget.loggedInUser.id);
   }
 
   checkHasRequested() async {
     DocumentSnapshot doc = await programsRef
         .doc(widget.programId)
         .collection('userRequested')
-        .doc(loggedInUser.id)
+        .doc(widget.loggedInUser.id)
         .get();
     setState(() {
       hasRequested = doc.exists;
@@ -51,7 +52,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
     DocumentSnapshot doc = await programsRef
         .doc(widget.programId)
         .collection('userSubscribed')
-        .doc(loggedInUser.id)
+        .doc(widget.loggedInUser.id)
         .get();
     setState(() {
       hasJoined = doc.exists;
@@ -76,6 +77,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
     }
 
     buildJoinButton(Program program) {
+      checkHasJoined();
       if (!hasJoined) {
         return buildButton(
           text: "Want to Join?",
@@ -161,12 +163,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 2,
                                   style: TextStyle(
-                                    fontSize: 30,
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .headline4
-                                        .color,
-                                  ),
+                                      fontSize: 30, color: Colors.black45),
                                 ),
                               ),
                             ),

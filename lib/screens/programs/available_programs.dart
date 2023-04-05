@@ -11,7 +11,9 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 class AvailableProgramsScreen extends StatefulWidget {
   final myUser loggedInUser;
   static const String id = 'available_programs_screen';
-  const AvailableProgramsScreen({this.loggedInUser});
+  const AvailableProgramsScreen({
+    this.loggedInUser,
+  });
 
   @override
   _AvailableProgramsScreenState createState() =>
@@ -65,7 +67,7 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: AvailableProgramsStream(),
+            child: AvailableProgramsStream(widget.loggedInUser),
           ),
         ],
       ),
@@ -93,7 +95,9 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
 // building class for stream of Available Programs
 
 class AvailableProgramsStream extends StatelessWidget {
-  AvailableProgramsStream();
+  AvailableProgramsStream(this.loggedInUser);
+
+  final myUser loggedInUser;
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +118,7 @@ class AvailableProgramsStream extends StatelessWidget {
 
           final programBubble = ProgramTile(
             programId: program.id.toString(),
+            loggedInUser: loggedInUser,
             programName: prog.programName,
             institutionName: prog.institutionName,
             programAbout: prog.aboutProgram,
