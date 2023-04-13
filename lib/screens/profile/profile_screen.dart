@@ -395,20 +395,20 @@ class _ProfileState extends State<Profile> {
   }
 
   Scaffold buildUploadScreen(pictureType, programID) {
-    bool isCoverPhoto = false;
-
-    if (pictureType == "Cover Photo") {
-      setState(() {
-        isCoverPhoto = true;
-      });
-    }
+    // bool isCoverPhoto = false;
+    //
+    // if (pictureType == "Cover Photo") {
+    //   print('Cover Photo');
+    //   // setState(() {
+    //   //   isCoverPhoto = true;
+    //   // });
+    // }
 
     return Scaffold(
         appBar: AppBar(
           backgroundColor: kMentorXPPrimary,
           title: Center(
-            child: Text(
-                isCoverPhoto ? "Upload Cover Photo" : "Upload Profile Picture"),
+            child: Text("Upload $pictureType"),
           ),
         ),
         body: Stack(
@@ -449,7 +449,7 @@ class _ProfileState extends State<Profile> {
                               textAlign: TextAlign.center,
                             ),
                             Text(
-                              isCoverPhoto ? 'Cover Photo' : 'Profile Photo',
+                              '$pictureType',
                               style: TextStyle(
                                 fontFamily: 'Monsterrat',
                                 fontSize: 30,
@@ -460,7 +460,7 @@ class _ProfileState extends State<Profile> {
                           ],
                         ),
                       ),
-                      isCoverPhoto
+                      (pictureType == 'Cover Photo')
                           ? Container(
                               width: 500,
                               height: 150.0,
