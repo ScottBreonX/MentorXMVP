@@ -41,6 +41,9 @@ class _MenteeEnrollmentSkillsScreenState
         "Mentee Skill 2": skill2,
         "Mentee Skill 3": skill3,
         "id": widget.loggedInUser.id,
+        "First Name": widget.loggedInUser.firstName,
+        "Last Name": widget.loggedInUser.lastName,
+        "Profile Picture": widget.loggedInUser.profilePicture,
       });
       Navigator.push(
         context,

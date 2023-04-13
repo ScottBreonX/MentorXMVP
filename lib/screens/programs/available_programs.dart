@@ -96,7 +96,6 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
 
 class AvailableProgramsStream extends StatelessWidget {
   AvailableProgramsStream(this.loggedInUser);
-
   final myUser loggedInUser;
 
   @override

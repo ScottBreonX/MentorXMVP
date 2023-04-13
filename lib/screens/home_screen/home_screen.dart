@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          AvailableProgramsStream(),
+          AvailableProgramsStream(widget.loggedInUser),
         ],
       ),
     );
@@ -173,8 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       )
                                     : CachedNetworkImage(
-                                        imageUrl:
-                                            widget.loggedInUser.profilePicture,
+                                        imageUrl: loggedInUser.profilePicture,
                                         imageBuilder:
                                             (context, imageProvider) =>
                                                 Container(
@@ -314,7 +313,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class AvailableProgramsStream extends StatelessWidget {
-  AvailableProgramsStream();
+  AvailableProgramsStream(this.loggedInUser);
+  final myUser loggedInUser;
 
   @override
   Widget build(BuildContext context) {
@@ -335,6 +335,7 @@ class AvailableProgramsStream extends StatelessWidget {
 
           final programBubble = ProgramTile(
             programId: program.id.toString(),
+            loggedInUser: loggedInUser,
             programName: prog.programName,
             institutionName: prog.institutionName,
             programAbout: prog.aboutProgram,

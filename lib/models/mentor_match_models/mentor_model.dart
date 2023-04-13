@@ -7,15 +7,20 @@ class Mentor {
   final String mentorSkill2;
   final String mentorSkill3;
   final String mentorFreeForm;
+  final String lName;
+  final String fName;
+  final String profilePicture;
 
-  Mentor({
-    this.mentorSkill1,
-    this.mentorSkill2,
-    this.mentorSkill3,
-    this.mentorFreeForm,
-    this.id,
-    this.mentorSlots,
-  });
+  Mentor(
+      {this.mentorSkill1,
+      this.mentorSkill2,
+      this.mentorSkill3,
+      this.mentorFreeForm,
+      this.id,
+      this.mentorSlots,
+      this.fName,
+      this.lName,
+      this.profilePicture});
 
   factory Mentor.fromDocument(DocumentSnapshot doc) {
     return Mentor(
@@ -35,6 +40,13 @@ class Mentor {
       mentorFreeForm: doc.data().toString().contains('Mentor Free Form')
           ? doc['Mentor Free Form']
           : '',
+      fName:
+          doc.data().toString().contains('First Name') ? doc['First Name'] : '',
+      lName:
+          doc.data().toString().contains('Last Name') ? doc['Last Name'] : '',
+      profilePicture: doc.data().toString().contains('Profile Picture')
+          ? doc['Profile Picture']
+          : '',
     );
   }
   Map<String, dynamic> toMap() {
@@ -45,6 +57,9 @@ class Mentor {
       'Mentor Skill 2': mentorSkill2,
       'Mentor Skill 3': mentorSkill3,
       'Mentor Free Form': mentorFreeForm,
+      'First Name': fName,
+      'Last Name': lName,
+      'Profile Picture': profilePicture,
     };
   }
 }

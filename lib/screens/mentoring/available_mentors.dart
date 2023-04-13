@@ -31,6 +31,9 @@ class AvailableMentorsScreen extends StatefulWidget {
 
 class _AvailableMentorsScreenState extends State<AvailableMentorsScreen> {
   bool showSpinner = false;
+  bool isLoading = true;
+  int availableMentorCount = 0;
+  List<Mentor> mentors = [];
 
   @override
   void initState() {
@@ -101,7 +104,8 @@ class AvailableMentorsStream extends StatelessWidget {
 
   final String programUID;
   final myUser loggedInUser;
-  // Stream get mentorStream => _firestore
+
+  // final Stream mentorStream = _firestore
   //     .collection('institutions')
   //     .doc(programUID)
   //     .collection('mentors')
@@ -114,97 +118,81 @@ class AvailableMentorsStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: _firestore
-          .collection('institutions')
-          .doc(programUID)
-          .collection('mentors')
-          .snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Center();
-        }
-
-        final mentors = snapshot.data.docs;
-        List<MentorCard> mentorBubbles = [];
-
-        for (var mentor in mentors) {
-          if (mentor.id == loggedInUser.id) {
-            continue;
+        stream: _firestore
+            .collection('institutions')
+            .doc(programUID)
+            .collection('mentors')
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center();
           }
 
-          Mentor mentorModel = Mentor.fromDocument(mentor);
+          final mentors = snapshot.data.docs;
+          List<MentorCard> mentorBubbles = [];
 
-          return StreamBuilder<QuerySnapshot>(
-              stream: usersRef.where('id', isEqualTo: mentor.id).snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return CircularProgressIndicator();
-                }
+          for (var mentor in mentors) {
+            if (mentor.id == loggedInUser.id) {
+              continue;
+            }
 
-                final users = snapshot.data.docs;
-                for (var user in users) {
-                  myUser userModel = myUser.fromDocument(user);
+            Mentor mentorModel = Mentor.fromDocument(mentor);
 
-                  final mentorBubble = MentorCard(
-                    loggedInUser: loggedInUser,
-                    mentorUID: mentor.id,
-                    mentorFname: userModel.firstName,
-                    mentorLname: userModel.lastName,
-                    imageContainer: Container(
-                      child: userModel.profilePicture == null ||
-                              userModel.profilePicture.isEmpty ||
-                              userModel.profilePicture == ""
-                          ? ProfileImageCircle(
-                              circleColor: Colors.blue,
-                              iconSize: 45,
-                              iconColor: Colors.white,
-                              circleSize: 40,
-                            )
-                          : CircleAvatar(
-                              radius: 40,
-                              child: CachedNetworkImage(
-                                imageUrl: userModel.profilePicture,
-                                imageBuilder: (context, imageProvider) =>
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      image: imageProvider,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                placeholder: (context, url) =>
-                                    CircularProgressIndicator(),
-                                errorWidget: (context, url, error) => Icon(
-                                  Icons.person,
-                                  size: 50,
-                                  color: Colors.white,
-                                ),
+            final mentorBubble = MentorCard(
+              loggedInUser: loggedInUser,
+              mentorUID: mentorModel.id,
+              mentorFname: '${mentorModel.fName}',
+              mentorLname: '${mentorModel.lName}',
+              imageContainer: Container(
+                child: mentorModel.profilePicture == null ||
+                        mentorModel.profilePicture.isEmpty ||
+                        mentorModel.profilePicture == ""
+                    ? ProfileImageCircle(
+                        circleColor: Colors.blue,
+                        iconSize: 45,
+                        iconColor: Colors.white,
+                        circleSize: 40,
+                      )
+                    : CircleAvatar(
+                        radius: 40,
+                        child: CachedNetworkImage(
+                          imageUrl: mentorModel.profilePicture,
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
                               ),
                             ),
-                    ),
-                    // mentorSlots: mentorModel.mentorSlots,
-                    mtrAtt1: mentorModel.mentorSkill1,
-                    mtrAtt2: mentorModel.mentorSkill2,
-                    mtrAtt3: mentorModel.mentorSkill3,
-                    xFactor: mentorModel.mentorFreeForm,
-                    profileOnly: false,
-                    programUID: programUID,
-                  );
-                  mentorBubbles.add(mentorBubble);
-                }
-                return Container(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: mentorBubbles,
-                    ),
-                  ),
-                );
-              });
-        }
-        return Container();
-      },
-    );
+                          ),
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(
+                            Icons.person,
+                            size: 50,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+              ),
+              // mentorSlots: mentorModel.mentorSlots,
+              mtrAtt1: mentorModel.mentorSkill1,
+              mtrAtt2: mentorModel.mentorSkill2,
+              mtrAtt3: mentorModel.mentorSkill3,
+              xFactor: mentorModel.mentorFreeForm,
+              profileOnly: false,
+              programUID: programUID,
+            );
+            mentorBubbles.add(mentorBubble);
+          }
+          return Container(
+            child: SingleChildScrollView(
+              child: Column(
+                children: mentorBubbles,
+              ),
+            ),
+          );
+        });
   }
 }

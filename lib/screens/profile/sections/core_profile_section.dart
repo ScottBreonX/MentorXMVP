@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/mentor_card.dart';
 import '../../../constants.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/icon_circle.dart';
@@ -35,17 +36,91 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
   final _formKey1 = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
 
-  Future<void> _updateCoreProfile(String userID) async {
+  Future<void> _updateCoreProfile(String userID, String programID) async {
     try {
       if (firstNameText != null) {
         await usersRef.doc(userID).update({
           "First Name": firstNameText,
         });
+        if (programID == "" || programID == null) {
+        } else {
+          await programsRef
+              .doc(programID)
+              .collection('mentors')
+              .doc(userID)
+              .get()
+              .then((doc) => {
+                    if (doc.exists)
+                      {
+                        programsRef
+                            .doc(programID)
+                            .collection('mentors')
+                            .doc(userID)
+                            .update({
+                          "First Name": firstNameText,
+                        })
+                      }
+                  });
+          await programsRef
+              .doc(programID)
+              .collection('mentees')
+              .doc(userID)
+              .get()
+              .then((doc) => {
+                    if (doc.exists)
+                      {
+                        programsRef
+                            .doc(programID)
+                            .collection('mentees')
+                            .doc(userID)
+                            .update({
+                          "First Name": firstNameText,
+                        })
+                      }
+                  });
+        }
       }
       if (lastNameText != null) {
         await usersRef.doc(userID).update({
           "Last Name": lastNameText,
         });
+        if (programID == "" || programID == null) {
+        } else {
+          await programsRef
+              .doc(programID)
+              .collection('mentors')
+              .doc(userID)
+              .get()
+              .then((doc) => {
+                    if (doc.exists)
+                      {
+                        programsRef
+                            .doc(programID)
+                            .collection('mentors')
+                            .doc(userID)
+                            .update({
+                          "Last Name": lastNameText,
+                        })
+                      }
+                  });
+          await programsRef
+              .doc(programID)
+              .collection('mentees')
+              .doc(userID)
+              .get()
+              .then((doc) => {
+                    if (doc.exists)
+                      {
+                        programsRef
+                            .doc(programID)
+                            .collection('mentees')
+                            .doc(userID)
+                            .update({
+                          "Last Name": lastNameText,
+                        })
+                      }
+                  });
+        }
       }
     } on FirebaseException catch (e) {
       showAlertDialog(context,
@@ -82,7 +157,7 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                                 ),
                                 child: GestureDetector(
                                   onTap: () {
-                                    _updateCoreProfile(user.id);
+                                    _updateCoreProfile(user.id, user.program);
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(

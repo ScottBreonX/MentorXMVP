@@ -9,11 +9,13 @@ import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_join_request.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 
+import '../../models/user.dart';
+
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class ProgramProfile extends StatefulWidget {
-  final loggedInUser;
+  final myUser loggedInUser;
   final String programId;
   static String id = 'program_screen';
 
@@ -34,7 +36,6 @@ class _ProgramProfileState extends State<ProgramProfile> {
   void initState() {
     super.initState();
     checkHasJoined();
-    print(widget.loggedInUser.id);
   }
 
   checkHasRequested() async {

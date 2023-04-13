@@ -85,7 +85,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
       controller: _emailController,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.start,
       onChanged: widget.bloc.updateEmail,
       style: TextStyle(
         color: Colors.black54,
@@ -119,7 +119,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
     return TextField(
       controller: _passwordController,
       obscureText: true,
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.start,
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updatePassword,
       style: TextStyle(

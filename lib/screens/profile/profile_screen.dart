@@ -10,6 +10,7 @@ import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/core_profile_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/work_experience.dart';
@@ -18,6 +19,8 @@ import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
+final programsRef = FirebaseFirestore.instance.collection('institutions');
+
 final Reference storageRef = FirebaseStorage.instance.ref();
 
 class Profile extends StatefulWidget {
@@ -195,7 +198,11 @@ class _ProfileState extends State<Profile> {
             title: Center(
               child: Text(
                 "Confirm Photo Removal",
-                style: Theme.of(context).textTheme.headline4,
+                style: TextStyle(
+                  fontFamily: 'Monsterrat',
+                  fontSize: 20,
+                  color: Colors.black45,
+                ),
               ),
             ),
             children: <Widget>[
@@ -262,13 +269,59 @@ class _ProfileState extends State<Profile> {
     return downloadUrl;
   }
 
-  savePhotoInUserCollection({String mediaUrl, String pictureType}) {
-    usersRef.doc(widget.loggedInUser.id).update({pictureType: mediaUrl});
+  savePhotoInUserCollection(
+      {String mediaUrl, String pictureType, String programID}) async {
+    await usersRef.doc(widget.loggedInUser.id).update({pictureType: mediaUrl});
+    if (programID == "" || programID == null) {
+    } else {
+      await programsRef
+          .doc(programID)
+          .collection('mentors')
+          .doc(widget.loggedInUser.id)
+          .get()
+          .then((doc) => {
+                if (doc.exists)
+                  {
+                    programsRef
+                        .doc(programID)
+                        .collection('mentors')
+                        .doc(widget.loggedInUser.id)
+                        .update({
+                      "Profile Picture": mediaUrl,
+                    })
+                  }
+              });
+    }
+    if (programID == "" || programID == null) {
+    } else {
+      await programsRef
+          .doc(programID)
+          .collection('mentees')
+          .doc(widget.loggedInUser.id)
+          .get()
+          .then((doc) => {
+                if (doc.exists)
+                  {
+                    programsRef
+                        .doc(programID)
+                        .collection('mentees')
+                        .doc(widget.loggedInUser.id)
+                        .update({
+                      "Profile Picture": mediaUrl,
+                    })
+                  }
+              });
+    }
     setState(() {
       file = null;
       isUploading = false;
     });
     Navigator.pop(context);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LandingPage(),
+        ));
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -292,16 +345,17 @@ class _ProfileState extends State<Profile> {
         ));
   }
 
-  handleSubmit(pictureType) async {
+  handleSubmit(pictureType, programID) async {
     setState(() {
       isUploading = true;
     });
     await compressImage();
     String mediaUrl = await uploadImage(file);
-    savePhotoInUserCollection(mediaUrl: mediaUrl, pictureType: pictureType);
+    savePhotoInUserCollection(
+        mediaUrl: mediaUrl, pictureType: pictureType, programID: programID);
   }
 
-  Scaffold buildUploadScreen(pictureType) {
+  Scaffold buildUploadScreen(pictureType, programID) {
     bool isCoverPhoto = false;
 
     if (pictureType == "Cover Photo") {
@@ -348,12 +402,20 @@ class _ProfileState extends State<Profile> {
                           children: [
                             Text(
                               'Confirm Upload of',
-                              style: Theme.of(context).textTheme.headline1,
+                              style: TextStyle(
+                                fontFamily: 'Monsterrat',
+                                fontSize: 30,
+                                color: Colors.black54,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                             Text(
                               isCoverPhoto ? 'Cover Photo' : 'Profile Photo',
-                              style: Theme.of(context).textTheme.headline1,
+                              style: TextStyle(
+                                fontFamily: 'Monsterrat',
+                                fontSize: 30,
+                                color: Colors.black54,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -416,7 +478,7 @@ class _ProfileState extends State<Profile> {
                               fontWeight: FontWeight.w500,
                               onPressed: isUploading
                                   ? null
-                                  : () => handleSubmit(pictureType),
+                                  : () => handleSubmit(pictureType, programID),
                             ),
                           ),
                         ],
@@ -444,225 +506,228 @@ class _ProfileState extends State<Profile> {
       });
     }
 
-    return file != null
-        ? buildUploadScreen(pictureType)
-        : FutureBuilder<Object>(
-            future: usersRef.doc(widget.profileId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-              myUser user = myUser.fromDocument(snapshot.data);
+    return FutureBuilder<Object>(
+        future: usersRef.doc(widget.profileId).get(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return circularProgress();
+          }
+          myUser user = myUser.fromDocument(snapshot.data);
 
-              if (user.profilePicture != "") {
-                profilePhotoExist = true;
-              }
+          if (user.profilePicture != "") {
+            profilePhotoExist = true;
+          }
 
-              if (user.coverPhoto != "") {
-                coverPhotoExist = true;
-              }
+          if (user.coverPhoto != "") {
+            coverPhotoExist = true;
+          }
 
-              return Scaffold(
-                appBar: AppBar(
-                  backgroundColor: kMentorXPPrimary,
-                  elevation: 5,
-                  leading: GestureDetector(
-                    child: Icon(Icons.close),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  title: Center(
-                    child: Image.asset(
-                      'assets/images/MentorXP.png',
-                      height: 100,
+          return file != null
+              ? buildUploadScreen(pictureType, widget.loggedInUser.program)
+              : Scaffold(
+                  appBar: AppBar(
+                    backgroundColor: kMentorXPPrimary,
+                    elevation: 5,
+                    leading: GestureDetector(
+                      child: Icon(Icons.close),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    title: Center(
+                      child: Image.asset(
+                        'assets/images/MentorXP.png',
+                        height: 100,
+                      ),
                     ),
                   ),
-                ),
-                body: SingleChildScrollView(
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Stack(
-                          clipBehavior: Clip.none,
-                          alignment: Alignment.center,
-                          children: [
-                            Container(
-                              height: coverPhotoHeight,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Colors.white,
-                                    width: 5,
+                  body: SingleChildScrollView(
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Stack(
+                            clipBehavior: Clip.none,
+                            alignment: Alignment.center,
+                            children: [
+                              Container(
+                                height: coverPhotoHeight,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: Colors.white,
+                                      width: 5,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              child: coverPhotoExist
-                                  ? CachedNetworkImage(
-                                      imageUrl: user.coverPhoto,
-                                      imageBuilder: (context, imageProvider) =>
-                                          Container(
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.rectangle,
-                                          image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.fitWidth,
+                                child: coverPhotoExist
+                                    ? CachedNetworkImage(
+                                        imageUrl: user.coverPhoto,
+                                        imageBuilder:
+                                            (context, imageProvider) =>
+                                                Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.fitWidth,
+                                            ),
                                           ),
                                         ),
+                                        placeholder: (context, url) =>
+                                            Container(),
+                                        errorWidget: (context, url, error) =>
+                                            Container(),
+                                      )
+                                    : Image.asset(
+                                        'assets/images/defaultCover.png',
+                                        fit: BoxFit.fitWidth,
                                       ),
-                                      placeholder: (context, url) =>
-                                          Container(),
-                                      errorWidget: (context, url, error) =>
-                                          Container(),
-                                    )
-                                  : Image.asset(
-                                      'assets/images/defaultCover.png',
-                                      fit: BoxFit.fitWidth,
-                                    ),
-                            ),
-                            Positioned(
-                              top: top,
-                              child: Stack(
-                                clipBehavior: Clip.none,
-                                children: [
-                                  profilePhotoExist
-                                      ? CircleAvatar(
-                                          backgroundColor: Colors.white,
-                                          radius: profilePhotoHeight / 2,
-                                          child: CachedNetworkImage(
-                                            imageUrl: user.profilePicture,
-                                            imageBuilder:
-                                                (context, imageProvider) =>
-                                                    Container(
-                                              // width: 180.0,
-                                              height: 140.0,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                image: DecorationImage(
-                                                  image: imageProvider,
-                                                  fit: BoxFit.cover,
+                              ),
+                              Positioned(
+                                top: top,
+                                child: Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    profilePhotoExist
+                                        ? CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            radius: profilePhotoHeight / 2,
+                                            child: CachedNetworkImage(
+                                              imageUrl: user.profilePicture,
+                                              imageBuilder:
+                                                  (context, imageProvider) =>
+                                                      Container(
+                                                // width: 180.0,
+                                                height: 140.0,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  image: DecorationImage(
+                                                    image: imageProvider,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              placeholder: (context, url) =>
+                                                  Container(),
+                                              errorWidget:
+                                                  (context, url, error) => Icon(
+                                                Icons.person,
+                                                size: 50,
+                                                color: kMentorXPSecondary,
+                                              ),
+                                            ),
+                                          )
+                                        : CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            radius: profilePhotoHeight / 2,
+                                            child: ProfileImageCircle(
+                                              iconSize: profilePhotoHeight / 2,
+                                              circleSize:
+                                                  profilePhotoHeight / 2 * .95,
+                                              circleColor: Colors.grey,
+                                            ),
+                                          ),
+                                    !myProfileView
+                                        ? Container()
+                                        : Positioned(
+                                            right: 5,
+                                            top: 5,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                selectImage(
+                                                  context,
+                                                  "Upload a Profile Photo",
+                                                  "Profile Picture",
+                                                );
+                                              },
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(50),
+                                                  color: Colors.white
+                                                      .withOpacity(0.9),
+                                                ),
+                                                height: 35.0,
+                                                width: 35.0,
+                                                child: GestureDetector(
+                                                  child: Icon(
+                                                    Icons.edit,
+                                                    color: kMentorXPAccentDark,
+                                                    size: 25,
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                            placeholder: (context, url) =>
-                                                Container(),
-                                            errorWidget:
-                                                (context, url, error) => Icon(
-                                              Icons.person,
-                                              size: 50,
-                                              color: kMentorXPSecondary,
-                                            ),
                                           ),
-                                        )
-                                      : CircleAvatar(
-                                          backgroundColor: Colors.white,
-                                          radius: profilePhotoHeight / 2,
-                                          child: ProfileImageCircle(
-                                            iconSize: profilePhotoHeight / 2,
-                                            circleSize:
-                                                profilePhotoHeight / 2 * .95,
-                                            circleColor: Colors.grey,
-                                          ),
-                                        ),
-                                  !myProfileView
-                                      ? Container()
-                                      : Positioned(
-                                          right: 5,
-                                          top: 5,
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              selectImage(
-                                                context,
-                                                "Upload a Profile Photo",
-                                                "Profile Picture",
-                                              );
-                                            },
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                                color: Colors.white
-                                                    .withOpacity(0.9),
-                                              ),
-                                              height: 35.0,
-                                              width: 35.0,
-                                              child: GestureDetector(
-                                                child: Icon(
-                                                  Icons.edit,
-                                                  color: kMentorXPAccentDark,
-                                                  size: 25,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            !myProfileView
-                                ? Container()
-                                : Positioned(
-                                    top: 20,
-                                    right: 10,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        selectImage(
-                                          context,
-                                          "Upload a Cover Photo",
-                                          "Cover Photo",
-                                        );
-                                      },
-                                      child: IconCircle(
-                                        iconSize: 23.0,
-                                        iconType: Icons.edit,
-                                        circleColor: Colors.transparent,
-                                        iconColor: kMentorXPAccentMed,
+                              !myProfileView
+                                  ? Container()
+                                  : Positioned(
+                                      top: 20,
+                                      right: 10,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          selectImage(
+                                            context,
+                                            "Upload a Cover Photo",
+                                            "Cover Photo",
+                                          );
+                                        },
+                                        child: IconCircle(
+                                          iconSize: 23.0,
+                                          iconType: Icons.edit,
+                                          circleColor: Colors.transparent,
+                                          iconColor: kMentorXPAccentMed,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 100.0),
-                          child: CoreProfileSection(
-                            profileId: user.id,
-                            myProfileView: myProfileView,
+                            ],
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                          child: const Divider(
-                            thickness: 4,
-                            color: Colors.grey,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 100.0),
+                            child: CoreProfileSection(
+                              profileId: user.id,
+                              myProfileView: myProfileView,
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10.0),
-                          child: AboutMeSection(
-                            profileId: user.id,
-                            myProfileView: myProfileView,
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 8.0, right: 8.0),
+                            child: const Divider(
+                              thickness: 4,
+                              color: Colors.grey,
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                          child: const Divider(
-                            thickness: 4,
-                            color: Colors.grey,
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10.0),
+                            child: AboutMeSection(
+                              profileId: user.id,
+                              myProfileView: myProfileView,
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 20.0),
-                          child: WorkExperienceSection(
-                            profileId: user.id,
-                            myProfileView: myProfileView,
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 8.0, right: 8.0),
+                            child: const Divider(
+                              thickness: 4,
+                              color: Colors.grey,
+                            ),
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 20.0),
+                            child: WorkExperienceSection(
+                              profileId: user.id,
+                              myProfileView: myProfileView,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            });
+                );
+        });
   }
 }

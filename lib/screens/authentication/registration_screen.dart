@@ -130,7 +130,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       controller: _emailController,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.start,
       onChanged: widget.bloc.updateEmail,
       style: TextStyle(
         color: Colors.black54,
@@ -164,7 +164,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return TextField(
       controller: _passwordController,
       obscureText: true,
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.start,
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updatePassword,
       style: TextStyle(
@@ -199,7 +199,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return TextField(
       controller: _passwordConfirmController,
       obscureText: true,
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.start,
       textInputAction: TextInputAction.done,
       onChanged: widget.bloc.updateConfirmPassword,
       style: TextStyle(

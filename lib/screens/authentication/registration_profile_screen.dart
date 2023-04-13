@@ -78,7 +78,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       key: _formKey,
       controller: _firstNameController,
       textInputAction: TextInputAction.next,
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.start,
       onChanged: (value) {
         firstName = value;
         setState(() {});
@@ -115,7 +115,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       key: _formKey2,
       controller: _lastNameController,
       textInputAction: TextInputAction.next,
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.start,
       onChanged: (value) {
         lastName = value;
         setState(() {});
