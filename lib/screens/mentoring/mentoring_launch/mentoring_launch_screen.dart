@@ -176,8 +176,8 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                                   width: 100,
                                                   child: Text(
                                                     isMentor
-                                                        ? '${user.firstName} ${user.lastName}'
-                                                        : '${mentor.firstName} ${mentor.lastName}',
+                                                        ? '${user.firstName}\n${user.lastName}'
+                                                        : '${mentor.firstName}\n${mentor.lastName}',
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                       fontFamily: 'Montserrat',
@@ -254,8 +254,8 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                                 width: 100,
                                                 child: Text(
                                                   isMentor
-                                                      ? '${mentor.firstName} ${mentor.lastName}'
-                                                      : '${user.firstName} ${user.lastName}',
+                                                      ? '${mentor.firstName}\n${mentor.lastName}'
+                                                      : '${user.firstName}\n${user.lastName}',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                     fontFamily: 'Montserrat',
@@ -424,7 +424,7 @@ class ImageCircle extends StatelessWidget {
         child: !profilePicBool
             ? CircleAvatar(
                 radius: 72,
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.grey,
                 child: Icon(
                   Icons.person,
                   size: 80,

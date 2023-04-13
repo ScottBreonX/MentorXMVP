@@ -12,6 +12,8 @@ class ProgramGuideCard extends StatefulWidget {
     this.swipeText,
     this.fileName,
     this.selectButtons,
+    this.selectButton1,
+    this.selectButton2,
     this.onPressed1,
     this.onPressed2,
     this.button1Text,
@@ -26,6 +28,8 @@ class ProgramGuideCard extends StatefulWidget {
   final String swipeText;
   final Widget fileName;
   final bool selectButtons;
+  final bool selectButton1;
+  final bool selectButton2;
   final Function onPressed1;
   final Function onPressed2;
   final Color cardColor;
@@ -44,6 +48,8 @@ class _ProgramGuideCardState extends State<ProgramGuideCard> {
     super.initState();
   }
 
+  final ScrollController _firstController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -54,89 +60,108 @@ class _ProgramGuideCardState extends State<ProgramGuideCard> {
         ),
         color: widget.cardColor ?? kMentorXPPrimary,
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              Text(
-                widget.titleText ?? 'N/A',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-              Text(
-                widget.trackText ?? '',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: kMentorXPAccentMed,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: widget.fileName ?? Text(''),
-              ),
-              widget.selectButtons ?? false
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: Column(
-                        children: [
-                          ButtonCard(
-                            buttonCardText: '${widget.button1Text ?? ''}',
-                            onPressed: widget.onPressed1 ?? () {},
-                            cardIconBool: Container(),
-                            cardAlignment: MainAxisAlignment.center,
-                            buttonCardColor: kMentorXPAccentDark,
-                            buttonCardTextColor: Colors.white,
-                            buttonCardTextSize: 20,
-                            buttonCardRadius: 20,
-                            buttonCardHeight: 70,
-                            cardWidthPercent: .50,
-                          ),
-                          ButtonCard(
-                            buttonCardText: '${widget.button2Text ?? ''}',
-                            onPressed: widget.onPressed2 ?? () {},
-                            cardIconBool: Container(),
-                            cardAlignment: MainAxisAlignment.center,
-                            buttonCardColor: kMentorXPSecondary,
-                            buttonCardTextColor: Colors.white,
-                            buttonCardTextSize: 20,
-                            buttonCardRadius: 20,
-                            buttonCardHeight: 70,
-                            cardWidthPercent: .50,
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container(),
-              Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+          padding: const EdgeInsets.all(5.0),
+          child: RawScrollbar(
+            controller: _firstController,
+            thumbVisibility: false,
+            thickness: 10,
+            thumbColor: kMentorXPSecondary.withOpacity(0.8),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              controller: _firstController,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
                   children: [
-                    GestureDetector(
-                      onTap: widget.swipeTextOnTap ?? () {},
-                      child: Text(
-                        widget.swipeText ?? 'Swipe for next part',
-                        style: TextStyle(
-                          color: kMentorXPAccentMed,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          fontFamily: 'Montserrat',
-                        ),
+                    Text(
+                      widget.titleText ?? 'N/A',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
+                    Text(
+                      widget.trackText ?? '',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: kMentorXPAccentMed,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: widget.fileName ?? Text(''),
+                    ),
+                    widget.selectButtons ?? false
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: Column(
+                              children: [
+                                widget.selectButton1 ?? false
+                                    ? ButtonCard(
+                                        buttonCardText:
+                                            '${widget.button1Text ?? ''}',
+                                        onPressed: widget.onPressed1 ?? () {},
+                                        cardIconBool: Container(),
+                                        cardAlignment: MainAxisAlignment.center,
+                                        buttonCardColor: kMentorXPAccentDark,
+                                        buttonCardTextColor: Colors.white,
+                                        buttonCardTextSize: 20,
+                                        buttonCardRadius: 20,
+                                        buttonCardHeight: 70,
+                                        cardWidthPercent: .50,
+                                      )
+                                    : Container(),
+                                widget.selectButton2 ?? false
+                                    ? ButtonCard(
+                                        buttonCardText:
+                                            '${widget.button2Text ?? ''}',
+                                        onPressed: widget.onPressed2 ?? () {},
+                                        cardIconBool: Container(),
+                                        cardAlignment: MainAxisAlignment.center,
+                                        buttonCardColor: kMentorXPSecondary,
+                                        buttonCardTextColor: Colors.white,
+                                        buttonCardTextSize: 20,
+                                        buttonCardRadius: 20,
+                                        buttonCardHeight: 70,
+                                        cardWidthPercent: .50,
+                                      )
+                                    : Container()
+                              ],
+                            ),
+                          )
+                        : Container(),
+                    // Spacer(),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(bottom: 10.0),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.end,
+                    //     children: [
+                    //       GestureDetector(
+                    //         onTap: widget.swipeTextOnTap ?? () {},
+                    //         child: Text(
+                    //           widget.swipeText ?? 'Swipe for next part',
+                    //           style: TextStyle(
+                    //             color: kMentorXPAccentMed,
+                    //             fontSize: 20,
+                    //             fontWeight: FontWeight.bold,
+                    //             fontStyle: FontStyle.italic,
+                    //             fontFamily: 'Montserrat',
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),

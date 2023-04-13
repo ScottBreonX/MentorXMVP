@@ -94,6 +94,8 @@ class _ProgramGuidesIntrosScreenState extends State<ProgramGuidesIntrosScreen> {
                       trackText: 'Track 1',
                       fileName: Introductions3(),
                       selectButtons: true,
+                      selectButton1: true,
+                      selectButton2: true,
                       button1Text: 'Mentor',
                       onPressed1: () {
                         Navigator.push(
@@ -137,8 +139,11 @@ class _ProgramGuidesIntrosScreenState extends State<ProgramGuidesIntrosScreen> {
                       titleText: 'Introductions',
                       trackText: 'Track 1',
                       fileName: Introductions6(),
-                      swipeText: 'Complete Session',
-                      swipeTextOnTap: () {
+                      // swipeText: 'Complete Session',
+                      selectButtons: true,
+                      selectButton1: true,
+                      button1Text: 'Complete Session',
+                      onPressed1: () {
                         Navigator.pop(context);
                       },
                     ),

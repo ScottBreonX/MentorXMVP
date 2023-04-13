@@ -167,7 +167,8 @@ class _ProfileState extends State<Profile> {
                 ),
                 onPressed: () {
                   Navigator.pop(context);
-                  removePhotoConfirm(context, pictureType);
+                  removePhotoConfirm(
+                      context, pictureType, widget.loggedInUser.program);
                 },
               ),
               SimpleDialogOption(
@@ -187,7 +188,7 @@ class _ProfileState extends State<Profile> {
         });
   }
 
-  removePhotoConfirm(parentContext, pictureType) {
+  removePhotoConfirm(parentContext, pictureType, programID) {
     return showDialog(
         context: parentContext,
         builder: (context) {
@@ -225,7 +226,8 @@ class _ProfileState extends State<Profile> {
                       title: "Remove Photo",
                       buttonColor: Colors.red,
                       fontColor: Colors.white,
-                      onPressed: () => removeCurrentPhoto(pictureType),
+                      onPressed: () =>
+                          removeCurrentPhoto(pictureType, programID),
                     ),
                   )
                 ],
@@ -332,8 +334,45 @@ class _ProfileState extends State<Profile> {
         ));
   }
 
-  removeCurrentPhoto(pictureType) {
+  removeCurrentPhoto(pictureType, programID) async {
     usersRef.doc(widget.loggedInUser.id).update({pictureType: ""});
+
+    if (programID == "" || programID == null) {
+    } else {
+      if (pictureType == "Profile Picture") {
+        await programsRef
+            .doc(programID)
+            .collection('mentors')
+            .doc(widget.loggedInUser.id)
+            .get()
+            .then((doc) => {
+                  if (doc.exists)
+                    {
+                      programsRef
+                          .doc(programID)
+                          .collection('mentors')
+                          .doc(widget.loggedInUser.id)
+                          .update({'Profile Picture': ""})
+                    }
+                });
+        await programsRef
+            .doc(programID)
+            .collection('mentees')
+            .doc(widget.loggedInUser.id)
+            .get()
+            .then((doc) => {
+                  if (doc.exists)
+                    {
+                      programsRef
+                          .doc(programID)
+                          .collection('mentees')
+                          .doc(widget.loggedInUser.id)
+                          .update({'Profile Picture': ""})
+                    }
+                });
+      }
+    }
+    Navigator.pop(context);
     Navigator.pop(context);
     Navigator.push(
         context,
