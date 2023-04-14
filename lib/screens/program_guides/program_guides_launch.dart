@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/program_guides_menu.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/interview_101/interview_101.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/networking_101/networking_101.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/resume_101/resume_101.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guides_intros.dart';
 
@@ -144,24 +148,76 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
               titlePrefix: '3',
               iconData: Icons.lock,
               iconColor: Colors.black45,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Networking101Screen(
+                      loggedInUser: widget.loggedInUser,
+                      matchID: widget.matchID,
+                      mentorUID: widget.mentorUID,
+                      programUID: widget.programUID,
+                    ),
+                  ),
+                );
+              },
             ),
             ProgramGuideMenuTile(
               titleText: 'Major / Career Exploration',
               titlePrefix: '4',
               iconData: Icons.lock,
               iconColor: Colors.black45,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MajorCareer101Screen(
+                      loggedInUser: widget.loggedInUser,
+                      matchID: widget.matchID,
+                      mentorUID: widget.mentorUID,
+                      programUID: widget.programUID,
+                    ),
+                  ),
+                );
+              },
             ),
             ProgramGuideMenuTile(
               titleText: 'Company Exploration',
               titlePrefix: '5',
               iconData: Icons.lock,
               iconColor: Colors.black45,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Company101Screen(
+                      loggedInUser: widget.loggedInUser,
+                      matchID: widget.matchID,
+                      mentorUID: widget.mentorUID,
+                      programUID: widget.programUID,
+                    ),
+                  ),
+                );
+              },
             ),
             ProgramGuideMenuTile(
               titleText: 'Interview Prep 101',
               titlePrefix: '6',
               iconData: Icons.lock,
               iconColor: Colors.black45,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Interview101Screen(
+                      loggedInUser: widget.loggedInUser,
+                      matchID: widget.matchID,
+                      mentorUID: widget.mentorUID,
+                      programUID: widget.programUID,
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),
