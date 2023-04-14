@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/program_guides_menu.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/resume_101/resume_101.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guides_intros.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -74,13 +75,13 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 5, top: 20.0),
+              padding: const EdgeInsets.only(left: 5, top: 20.0, right: 5),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                     height: 70,
-                    // width: MediaQuery.of(context).size.width * .90,
-                    width: 200,
+                    width: MediaQuery.of(context).size.width * .95,
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
@@ -88,7 +89,7 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
                       color: kMentorXPPrimary,
                       child: Center(
                         child: Text(
-                          'Track 1 / 3',
+                          'Track 1 - Getting Started',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Montserrat',
@@ -124,6 +125,19 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
               titlePrefix: '2',
               iconData: Icons.lock,
               iconColor: Colors.black45,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Resume101Screen(
+                      loggedInUser: widget.loggedInUser,
+                      matchID: widget.matchID,
+                      mentorUID: widget.mentorUID,
+                      programUID: widget.programUID,
+                    ),
+                  ),
+                );
+              },
             ),
             ProgramGuideMenuTile(
               titleText: 'Networking 101',

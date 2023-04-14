@@ -89,8 +89,10 @@ class _MentorResponsibilitiesScreenState
                       titleText: 'Role & Responsibility of a Mentor',
                       cardColor: Colors.grey.shade700,
                       fileName: MentorResponsibilities3(),
-                      swipeText: 'Return to Guides',
-                      swipeTextOnTap: () {
+                      selectButtons: true,
+                      selectButton2: true,
+                      button2Text: 'Return',
+                      onPressed2: () {
                         Navigator.pop(context);
                       },
                     ),

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/constants.dart';
 
-class Introductions1 extends StatelessWidget {
-  const Introductions1({
+class Resume101DataV1 extends StatelessWidget {
+  const Resume101DataV1({
     Key key,
   }) : super(key: key);
 
@@ -11,9 +10,8 @@ class Introductions1 extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'The first meeting between a mentor and mentee is an '
-          'important opportunity to establish rapport, '
-          'set expectations, and get to know each other. ',
+          'A resume is a document that showcases your skills, '
+          'qualifications, education,  and experiences.',
           style: TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -23,10 +21,11 @@ class Introductions1 extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 50.0),
           child: Text(
-            'Swipe to see some tips on how to make the most of this first meeting.',
+            'The purpose is to provide a quick snapshot of '
+            'why you are a good fit for the job in a clear and concise manner. '
+            'Swipe to see the benefits of having an effective resume.',
             style: TextStyle(
-              color: kMentorXPAccentMed,
-              fontWeight: FontWeight.bold,
+              color: Colors.white,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),

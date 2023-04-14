@@ -3,21 +3,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/menteeResponsibilities1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/menteeResponsibilities2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/menteeResponsibilities3.dart';
-import '../../components/program_card.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/resume_101/resume_dont_data_v1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/resume_101/resume_dont_data_v2.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/resume_101/resume_dont_data_v3.dart';
+
+import '../../../../../components/program_card.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class MenteeResponsibilitiesScreen extends StatefulWidget {
+class ResumeDontScreen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const MenteeResponsibilitiesScreen({
+  const ResumeDontScreen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -25,15 +26,13 @@ class MenteeResponsibilitiesScreen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'mentee_responsibilities_screen';
+  static const String id = 'resume_do_screen';
 
   @override
-  _MenteeResponsibilitiesScreenState createState() =>
-      _MenteeResponsibilitiesScreenState();
+  _ResumeDontScreenState createState() => _ResumeDontScreenState();
 }
 
-class _MenteeResponsibilitiesScreenState
-    extends State<MenteeResponsibilitiesScreen> {
+class _ResumeDontScreenState extends State<ResumeDontScreen> {
   @override
   void initState() {
     super.initState();
@@ -75,19 +74,19 @@ class _MenteeResponsibilitiesScreenState
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Role & Responsibility of a Mentee',
-                      cardColor: Colors.blueGrey.shade600,
-                      fileName: MenteeResponsibilities1(),
+                      titleText: 'Resume Don\'ts',
+                      fileName: ResumeDontDataV1(),
+                      cardColor: Colors.grey.shade700,
                     ),
                     ProgramGuideCard(
-                      titleText: 'Role & Responsibility of a Mentee',
-                      cardColor: Colors.blueGrey.shade600,
-                      fileName: MenteeResponsibilities2(),
+                      titleText: 'Resume Don\'ts',
+                      fileName: ResumeDontDataV2(),
+                      cardColor: Colors.grey.shade700,
                     ),
                     ProgramGuideCard(
-                      titleText: 'Role & Responsibility of a Mentee',
-                      cardColor: Colors.blueGrey.shade600,
-                      fileName: MenteeResponsibilities3(),
+                      titleText: 'Resume Don\'ts',
+                      fileName: ResumeDontDataV3(),
+                      cardColor: Colors.grey.shade700,
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Return',
