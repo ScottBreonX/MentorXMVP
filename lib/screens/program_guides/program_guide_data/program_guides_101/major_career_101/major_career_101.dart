@@ -3,6 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101_data_v1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101_data_v2.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101_data_v3.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101_data_v4.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101_data_v5.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101_data_v6.dart';
 
 import '../../../../../components/program_card.dart';
 
@@ -71,34 +77,34 @@ class _MajorCareer101ScreenState extends State<MajorCareer101Screen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Career Exploration 101',
+                      titleText: 'Careers 101',
                       trackText: 'Track 1',
-                      // fileName: MajorCareer101DataV1(),
+                      fileName: MajorCareer101DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Career Exploration 101',
+                      titleText: 'Careers 101',
                       trackText: 'Track 1',
-                      // fileName: MajorCareer101DataV2(),
+                      fileName: MajorCareer101DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Career Exploration 101',
+                      titleText: 'Careers 101',
                       trackText: 'Track 1',
-                      // fileName: MajorCareer101DataV3(),
+                      fileName: MajorCareer101DataV3(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Career Exploration 101',
+                      titleText: 'Careers 101',
                       trackText: 'Track 1',
-                      // fileName: MajorCareer101DataV4(),
+                      fileName: MajorCareer101DataV4(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Career Exploration 101',
+                      titleText: 'Careers 101',
                       trackText: 'Track 1',
-                      // fileName: MajorCareer101DataV5(),
+                      fileName: MajorCareer101DataV5(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Career Exploration 101',
+                      titleText: 'Careers 101',
                       trackText: 'Track 1',
-                      // fileName: MajorCareer101DataV6(),
+                      fileName: MajorCareer101DataV6(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',

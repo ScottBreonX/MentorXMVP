@@ -3,6 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101_data_v1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101_data_v2.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101_data_v3.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101_data_v4.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101_data_v5.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101_data_v6.dart';
 
 import '../../../../../components/program_card.dart';
 
@@ -73,32 +79,32 @@ class _Company101ScreenState extends State<Company101Screen> {
                     ProgramGuideCard(
                       titleText: 'Company Exploration 101',
                       trackText: 'Track 1',
-                      // fileName: Company101DataV1(),
+                      fileName: Company101DataV1(),
                     ),
                     ProgramGuideCard(
                       titleText: 'Company Exploration 101',
                       trackText: 'Track 1',
-                      // fileName: Company101DataV2(),
+                      fileName: Company101DataV2(),
                     ),
                     ProgramGuideCard(
                       titleText: 'Company Exploration 101',
                       trackText: 'Track 1',
-                      // fileName: Company101DataV3(),
+                      fileName: Company101DataV3(),
                     ),
                     ProgramGuideCard(
                       titleText: 'Company Exploration 101',
                       trackText: 'Track 1',
-                      // fileName: Company101DataV4(),
+                      fileName: Company101DataV4(),
                     ),
                     ProgramGuideCard(
                       titleText: 'Company Exploration 101',
                       trackText: 'Track 1',
-                      // fileName: Company101DataV5(),
+                      fileName: Company101DataV5(),
                     ),
                     ProgramGuideCard(
                       titleText: 'Company Exploration 101',
                       trackText: 'Track 1',
-                      // fileName: Company101DataV6(),
+                      fileName: Company101DataV6(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
