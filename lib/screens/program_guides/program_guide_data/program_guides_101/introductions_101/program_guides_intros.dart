@@ -3,15 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/mentor_responsibilities.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/introductions1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/introductions2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/introductions3.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/introductions4.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/introductions5.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/introductions6.dart';
-
-import '../../components/program_card.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/introductions4.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/introductions5.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/introductions6.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/mentor_responsibilities.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/introductions1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/introductions2.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/introductions3.dart';
+import '../../../../../components/program_card.dart';
 import 'mentee_responsibilities.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');

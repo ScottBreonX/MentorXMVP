@@ -9,7 +9,7 @@ import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_gu
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/networking_101/networking_101.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/resume_101/resume_101.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guides_intros.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/program_guides_intros.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');

@@ -3,21 +3,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/menteeResponsibilities1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/menteeResponsibilities2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/menteeResponsibilities3.dart';
-import '../../components/program_card.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/mentorResponsibilities1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/mentorResponsibilities2.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/mentorResponsibilities3.dart';
+import '../../../../../components/program_card.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class MenteeResponsibilitiesScreen extends StatefulWidget {
+class MentorResponsibilitiesScreen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const MenteeResponsibilitiesScreen({
+  const MentorResponsibilitiesScreen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -25,15 +25,15 @@ class MenteeResponsibilitiesScreen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'mentee_responsibilities_screen';
+  static const String id = 'mentor_responsibilities_screen';
 
   @override
-  _MenteeResponsibilitiesScreenState createState() =>
-      _MenteeResponsibilitiesScreenState();
+  _MentorResponsibilitiesScreenState createState() =>
+      _MentorResponsibilitiesScreenState();
 }
 
-class _MenteeResponsibilitiesScreenState
-    extends State<MenteeResponsibilitiesScreen> {
+class _MentorResponsibilitiesScreenState
+    extends State<MentorResponsibilitiesScreen> {
   @override
   void initState() {
     super.initState();
@@ -75,23 +75,23 @@ class _MenteeResponsibilitiesScreenState
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Role & Responsibility of a Mentee',
-                      cardColor: Colors.blueGrey.shade600,
-                      fileName: MenteeResponsibilities1(),
+                      titleText: 'Role & Responsibility of a Mentor',
+                      cardColor: Colors.grey.shade700,
+                      fileName: MentorResponsibilities1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Role & Responsibility of a Mentee',
-                      cardColor: Colors.blueGrey.shade600,
-                      fileName: MenteeResponsibilities2(),
+                      titleText: 'Role & Responsibility of a Mentor',
+                      cardColor: Colors.grey.shade700,
+                      fileName: MentorResponsibilities2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Role & Responsibility of a Mentee',
-                      cardColor: Colors.blueGrey.shade600,
-                      fileName: MenteeResponsibilities3(),
+                      titleText: 'Role & Responsibility of a Mentor',
+                      cardColor: Colors.grey.shade700,
+                      fileName: MentorResponsibilities3(),
                       selectButtons: true,
-                      selectButton1: true,
-                      button1Text: 'Return',
-                      onPressed1: () {
+                      selectButton2: true,
+                      button2Text: 'Return',
+                      onPressed2: () {
                         Navigator.pop(context);
                       },
                     ),
