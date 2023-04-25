@@ -23,9 +23,12 @@ class MentorXMenuList extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(
-              'assets/images/MentorXP.png',
-              width: 200,
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Image.asset(
+                'assets/images/MentorXP.png',
+                width: 150,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 15.0, right: 15, bottom: 20),
@@ -119,7 +122,11 @@ class MentorXMenuList extends StatelessWidget {
                 ),
                 title: Text(
                   'Create a Program',
-                  style: Theme.of(context).textTheme.headline2,
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
                 ),
                 onTap: () {
                   Navigator.push(

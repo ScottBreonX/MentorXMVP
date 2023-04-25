@@ -37,6 +37,19 @@ class ProgramGuidesIntrosScreen extends StatefulWidget {
       _ProgramGuidesIntrosScreenState();
 }
 
+_markSessionComplete(
+    context, String programUID, myUser loggedInUser, String matchID) async {
+  await programsRef
+      .doc(programUID)
+      .collection('matchedPairs')
+      .doc(matchID)
+      .collection('programGuides')
+      .doc(loggedInUser.id)
+      .update({
+    'Introductions': 'Complete',
+  });
+}
+
 class _ProgramGuidesIntrosScreenState extends State<ProgramGuidesIntrosScreen> {
   @override
   void initState() {
@@ -141,7 +154,9 @@ class _ProgramGuidesIntrosScreenState extends State<ProgramGuidesIntrosScreen> {
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
-                      onPressed1: () {
+                      onPressed1: () async {
+                        await _markSessionComplete(context, widget.programUID,
+                            widget.loggedInUser, widget.matchID);
                         Navigator.pop(context);
                       },
                     ),

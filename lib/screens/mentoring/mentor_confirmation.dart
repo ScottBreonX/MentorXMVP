@@ -85,6 +85,22 @@ class MentorConfirm extends StatelessWidget {
         .collection('matchedPairs')
         .doc(mentorUID + loggedInUser.id)
         .set({"mentor": mentorUID, "mentee": loggedInUser.id});
+    //add program guides section for loggedInUser ID
+    programsRef
+        .doc(programUID)
+        .collection('matchedPairs')
+        .doc(mentorUID + loggedInUser.id)
+        .collection('programGuides')
+        .doc(loggedInUser.id)
+        .set({});
+    //add program guides section for loggedInUser ID
+    programsRef
+        .doc(programUID)
+        .collection('matchedPairs')
+        .doc(mentorUID + loggedInUser.id)
+        .collection('programGuides')
+        .doc(mentorUID)
+        .set({});
   }
 
   _successfulMatch(parentContext) {

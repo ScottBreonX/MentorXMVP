@@ -206,9 +206,13 @@ class _MentoringScreenState extends State<MentoringScreen> {
         elevation: 5,
         backgroundColor: kMentorXPPrimary,
         title: Center(
-          child: Image.asset(
-            'assets/images/MentorXP.png',
-            height: 100,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 35.0, bottom: 10),
+            child: Image.asset(
+              'assets/images/MentorXP.png',
+              fit: BoxFit.contain,
+              height: 35,
+            ),
           ),
         ),
       ),

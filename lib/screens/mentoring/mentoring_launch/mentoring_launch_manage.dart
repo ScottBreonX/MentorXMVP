@@ -147,6 +147,35 @@ _removeMatch(
       .doc(loggedInUser.id)
       .delete();
 
+  //remove notes from matches collection
+  await programsRef
+      .doc(programUID)
+      .collection('matchedPairs')
+      .doc(matchID)
+      .set({});
+
+  var notes = await programsRef
+      .doc(programUID)
+      .collection('matchedPairs')
+      .doc(matchID)
+      .collection('Notes')
+      .get();
+
+  for (var doc in notes.docs) {
+    await doc.reference.delete();
+  }
+
+  var programGuides = await programsRef
+      .doc(programUID)
+      .collection('matchedPairs')
+      .doc(matchID)
+      .collection('programGuides')
+      .get();
+
+  for (var doc in programGuides.docs) {
+    await doc.reference.delete();
+  }
+
   //remove match from programs collection
   await programsRef
       .doc(programUID)
@@ -227,9 +256,16 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                               appBar: AppBar(
                                 elevation: 5,
                                 backgroundColor: kMentorXPPrimary,
-                                title: Image.asset(
-                                  'assets/images/MentorXP.png',
-                                  height: 100,
+                                title: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 35.0, bottom: 10),
+                                    child: Image.asset(
+                                      'assets/images/MentorXP.png',
+                                      fit: BoxFit.contain,
+                                      height: 35,
+                                    ),
+                                  ),
                                 ),
                               ),
                               body: SingleChildScrollView(
