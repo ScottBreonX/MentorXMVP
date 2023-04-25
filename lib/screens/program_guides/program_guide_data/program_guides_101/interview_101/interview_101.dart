@@ -41,15 +41,34 @@ class _Interview101ScreenState extends State<Interview101Screen> {
 
   int currentIndex = 0;
 
+  _markSessionComplete(
+      context, String programUID, myUser loggedInUser, String matchID) async {
+    await programsRef
+        .doc(programUID)
+        .collection('matchedPairs')
+        .doc(matchID)
+        .collection('programGuides')
+        .doc(loggedInUser.id)
+        .update({
+      'Interview 101': 'Complete',
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kMentorXPPrimary,
         elevation: 5,
-        title: Image.asset(
-          'assets/images/MentorXP.png',
-          height: 100,
+        title: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(right: 35.0, bottom: 10),
+            child: Image.asset(
+              'assets/images/MentorXP.png',
+              fit: BoxFit.contain,
+              height: 35,
+            ),
+          ),
         ),
       ),
       body: Center(
@@ -106,7 +125,9 @@ class _Interview101ScreenState extends State<Interview101Screen> {
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
-                      onPressed1: () {
+                      onPressed1: () async {
+                        await _markSessionComplete(context, widget.programUID,
+                            widget.loggedInUser, widget.matchID);
                         Navigator.pop(context);
                       },
                     ),
