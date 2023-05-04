@@ -722,15 +722,18 @@ class _ProfileState extends State<Profile> {
                                         child: IconCircle(
                                           iconSize: 23.0,
                                           iconType: Icons.edit,
-                                          circleColor: Colors.transparent,
-                                          iconColor: kMentorXPAccentMed,
+                                          circleColor:
+                                              Colors.white.withOpacity(0.8),
+                                          height: 30,
+                                          width: 30,
+                                          iconColor: kMentorXPAccentDark,
                                         ),
                                       ),
                                     ),
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 100.0),
+                            padding: const EdgeInsets.only(top: 60.0),
                             child: CoreProfileSection(
                               profileId: user.id,
                               myProfileView: myProfileView,

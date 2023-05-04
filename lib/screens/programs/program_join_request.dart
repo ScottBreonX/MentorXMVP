@@ -258,9 +258,15 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
       appBar: AppBar(
         elevation: 5,
         backgroundColor: kMentorXPPrimary,
-        title: Image.asset(
-          'assets/images/MentorXP.png',
-          height: 100,
+        title: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(right: 35.0, bottom: 10),
+            child: Image.asset(
+              'assets/images/MentorXP.png',
+              fit: BoxFit.contain,
+              height: 35,
+            ),
+          ),
         ),
       ),
       body: Container(
@@ -432,7 +438,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,
-                    color: Theme.of(context).textTheme.headline4.color,
+                    color: Colors.black54,
                   ),
                 ),
               ),

@@ -171,7 +171,7 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.introductionStatus == null)
+                      (guideStatus.resume101Status == null)
                           ? ''
                           : Navigator.push(
                               context,
@@ -200,7 +200,7 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.introductionStatus == null)
+                      (guideStatus.networking101Status == null)
                           ? ''
                           : Navigator.push(
                               context,
@@ -229,7 +229,7 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.introductionStatus == null)
+                      (guideStatus.career101Status == null)
                           ? ''
                           : Navigator.push(
                               context,
@@ -258,7 +258,7 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.introductionStatus == null)
+                      (guideStatus.company101Status == null)
                           ? ''
                           : Navigator.push(
                               context,
@@ -287,7 +287,7 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.introductionStatus == null)
+                      (guideStatus.interview101Status == null)
                           ? ''
                           : Navigator.push(
                               context,

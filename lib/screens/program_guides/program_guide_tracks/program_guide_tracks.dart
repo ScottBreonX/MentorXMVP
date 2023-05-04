@@ -3,21 +3,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/menteeResponsibilities1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/menteeResponsibilities2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/menteeResponsibilities3.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_tracks/track1_data.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_tracks/track2_data.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_tracks/track3_data.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_tracks/track4_data.dart';
 import '../../../../../components/program_card.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class MenteeResponsibilitiesScreen extends StatefulWidget {
+class ProgramGuideTracks extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const MenteeResponsibilitiesScreen({
+  const ProgramGuideTracks({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -25,15 +26,15 @@ class MenteeResponsibilitiesScreen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'mentee_responsibilities_screen';
+  static const String id = 'program_guide_tracks';
 
   @override
-  _MenteeResponsibilitiesScreenState createState() =>
-      _MenteeResponsibilitiesScreenState();
+  _ProgramGuideTracksState createState() => _ProgramGuideTracksState();
 }
 
-class _MenteeResponsibilitiesScreenState
-    extends State<MenteeResponsibilitiesScreen> {
+_selectTrack(context) async {}
+
+class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
   @override
   void initState() {
     super.initState();
@@ -81,25 +82,44 @@ class _MenteeResponsibilitiesScreenState
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Role & Responsibility of a Mentee',
-                      cardColor: Colors.blueGrey.shade600,
-                      fileName: MenteeResponsibilities1(),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Role & Responsibility of a Mentee',
-                      cardColor: Colors.blueGrey.shade600,
-                      fileName: MenteeResponsibilities2(),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Role & Responsibility of a Mentee',
-                      cardColor: Colors.blueGrey.shade600,
-                      fileName: MenteeResponsibilities3(),
+                      titleText: 'MentorUP Track 1',
+                      trackText: 'Recommended for: College year 1-2',
+                      fileName: Track1Data(),
                       selectButtons: true,
                       selectButton1: true,
-                      button1Text: 'Return',
-                      onPressed1: () {
-                        Navigator.pop(context);
-                      },
+                      button1Text: 'Select Track',
+                      onPressed1: () {},
+                      // fileName: Introductions1(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'MentorUP Track 2',
+                      trackText: 'Recommended for: College year 1-2',
+                      fileName: Track2Data(),
+                      selectButtons: true,
+                      selectButton1: true,
+                      button1Text: 'Select Track',
+                      onPressed1: () {},
+                      // fileName: Introductions1(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'MentorUP Track 3',
+                      trackText: 'Recommended for: College year 1-2',
+                      fileName: Track3Data(),
+                      selectButtons: true,
+                      selectButton1: true,
+                      button1Text: 'Select Track',
+                      onPressed1: () {},
+                      // fileName: Introductions1(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'MentorUP Track 4',
+                      trackText: 'Recommended for: College year 1-2',
+                      fileName: Track4Data(),
+                      selectButtons: true,
+                      selectButton1: true,
+                      button1Text: 'Select Track',
+                      onPressed1: () {},
+                      // fileName: Introductions1(),
                     ),
                   ],
                 ),
@@ -108,7 +128,7 @@ class _MenteeResponsibilitiesScreenState
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 4; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(
