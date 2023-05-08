@@ -20,6 +20,7 @@ class ProgramGuideCard extends StatefulWidget {
     this.button2Text,
     this.cardColor,
     this.swipeTextOnTap,
+    this.filePadding,
   }) : super(key: key);
 
   final String titleText;
@@ -34,6 +35,7 @@ class ProgramGuideCard extends StatefulWidget {
   final Function onPressed2;
   final Color cardColor;
   final Function swipeTextOnTap;
+  final EdgeInsets filePadding;
 
   final String button1Text;
   final String button2Text;
@@ -94,7 +96,8 @@ class _ProgramGuideCardState extends State<ProgramGuideCard> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
+                      padding:
+                          widget.filePadding ?? const EdgeInsets.only(top: 20),
                       child: widget.fileName ?? Text(''),
                     ),
                     widget.selectButtons ?? false

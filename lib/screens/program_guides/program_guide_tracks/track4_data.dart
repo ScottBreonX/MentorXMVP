@@ -3,18 +3,49 @@ import 'package:flutter/material.dart';
 class Track4Data extends StatelessWidget {
   const Track4Data({
     Key key,
+    this.fontSize,
   }) : super(key: key);
+
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Row(
+          children: [
+            Text(
+              'Recommended for: ',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: fontSize ?? 18,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Montserrat',
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20.0),
+          child: Row(
+            children: [
+              Text(
+                'College Year 2-4',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: fontSize ?? 18,
+                  fontFamily: 'Montserrat',
+                ),
+              ),
+            ],
+          ),
+        ),
         RichText(
           text: TextSpan(
             text: 'What this track focuses on: ',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 20,
+              fontSize: fontSize ?? 18,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
             ),
@@ -35,7 +66,7 @@ class Track4Data extends StatelessWidget {
                 'Session Guides: ',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: fontSize ?? 18,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Montserrat',
                 ),
@@ -49,7 +80,7 @@ class Track4Data extends StatelessWidget {
               '• Introductions',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 20,
+                fontSize: fontSize ?? 18,
                 fontFamily: 'Montserrat',
               ),
             ),
@@ -62,7 +93,7 @@ class Track4Data extends StatelessWidget {
                 '• Emotional Intelligence',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: fontSize ?? 18,
                   fontFamily: 'Montserrat',
                 ),
               ),
@@ -76,7 +107,7 @@ class Track4Data extends StatelessWidget {
                 '• Diversity & Inclusion',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: fontSize ?? 18,
                   fontFamily: 'Montserrat',
                 ),
               ),
@@ -90,7 +121,7 @@ class Track4Data extends StatelessWidget {
                 '• Skill Development',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: fontSize ?? 18,
                   fontFamily: 'Montserrat',
                 ),
               ),
@@ -104,7 +135,7 @@ class Track4Data extends StatelessWidget {
                 '• Negotiation',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: fontSize ?? 18,
                   fontFamily: 'Montserrat',
                 ),
               ),
@@ -118,7 +149,7 @@ class Track4Data extends StatelessWidget {
                 '• Shared Learnings',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: fontSize ?? 18,
                   fontFamily: 'Montserrat',
                 ),
               ),
