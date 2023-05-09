@@ -194,11 +194,16 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Hero(
-                          tag: 'logo',
-                          child: Container(
-                            height: 150.0,
-                            child: Image.asset('assets/images/MentorXP.png'),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 50.0, top: 50),
+                          child: Hero(
+                            tag: 'logo',
+                            child: Container(
+                              child: Image.asset(
+                                'assets/images/MentorXP.png',
+                                height: 70,
+                              ),
+                            ),
                           ),
                         ),
                         SizedBox(

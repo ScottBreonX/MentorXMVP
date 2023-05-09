@@ -128,17 +128,20 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                   child: Column(
                     children: [
-                      Hero(
-                        tag: 'logo',
-                        child: Container(
-                          child: Image.asset(
-                            'assets/images/MentorXP.png',
-                            height: 200,
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 50.0, bottom: 50),
+                      //   child: Hero(
+                      //     tag: 'logo',
+                      //     child: Container(
+                      //       child: Image.asset(
+                      //         'assets/images/MentorXP.png',
+                      //         height: 70,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0),
+                        padding: const EdgeInsets.only(top: 50, bottom: 20.0),
                         child: Column(
                           children: [
                             Text(

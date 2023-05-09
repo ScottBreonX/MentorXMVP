@@ -93,7 +93,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 0,
+                  height: 200,
                 ),
                 Flexible(
                   child: Hero(
@@ -102,6 +102,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       child: Image.asset(
                         'assets/images/MentorXP.png',
                         fit: BoxFit.fitWidth,
+                        width: MediaQuery.of(context).size.width * .7,
                       ),
                     ),
                   ),

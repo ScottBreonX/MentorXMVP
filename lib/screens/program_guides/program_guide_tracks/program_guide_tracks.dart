@@ -36,8 +36,11 @@ class ProgramGuideTracks extends StatefulWidget {
 }
 
 _selectTrack(
-    context, String trackName, String programID, String matchID) async {
-  print(trackName);
+  context,
+  String trackName,
+  String programID,
+  String matchID,
+) async {
   await programsRef
       .doc(programID)
       .collection('matchedPairs')
@@ -68,7 +71,7 @@ class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
           if (!snapshot.hasData) {
             return circularProgress();
           }
-          TrackStatus trackStatus = TrackStatus.fromDocument(snapshot.data);
+          TrackInfo trackStatus = TrackInfo.fromDocument(snapshot.data);
 
           if (trackStatus.trackSelected == true) {
             return ProgramGuidesLaunchScreen(
@@ -76,6 +79,7 @@ class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
               mentorUID: widget.mentorUID,
               programUID: widget.programUID,
               matchID: widget.matchID,
+              trackName: trackStatus.track,
             );
           }
           return Scaffold(
@@ -125,8 +129,12 @@ class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
                             selectButton1: true,
                             button1Text: 'Select Track',
                             onPressed1: () {
-                              _selectTrack(context, 'Track 1',
-                                  widget.programUID, widget.matchID);
+                              _selectTrack(
+                                context,
+                                'Track 1',
+                                widget.programUID,
+                                widget.matchID,
+                              );
                             },
                           ),
                           ProgramGuideCard(
@@ -138,7 +146,14 @@ class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
                             selectButtons: true,
                             selectButton1: true,
                             button1Text: 'Select Track',
-                            onPressed1: () {},
+                            onPressed1: () {
+                              _selectTrack(
+                                context,
+                                'Track 2',
+                                widget.programUID,
+                                widget.matchID,
+                              );
+                            },
                           ),
                           ProgramGuideCard(
                             titleText: 'Track 3',
@@ -149,7 +164,14 @@ class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
                             selectButtons: true,
                             selectButton1: true,
                             button1Text: 'Select Track',
-                            onPressed1: () {},
+                            onPressed1: () {
+                              _selectTrack(
+                                context,
+                                'Track 3',
+                                widget.programUID,
+                                widget.matchID,
+                              );
+                            },
                           ),
                           ProgramGuideCard(
                             titleText: 'Track 4',
@@ -158,7 +180,14 @@ class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
                             selectButtons: true,
                             selectButton1: true,
                             button1Text: 'Select Track',
-                            onPressed1: () {},
+                            onPressed1: () {
+                              _selectTrack(
+                                context,
+                                'Track 4',
+                                widget.programUID,
+                                widget.matchID,
+                              );
+                            },
                           ),
                         ],
                       ),

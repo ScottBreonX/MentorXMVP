@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class TrackStatus {
+class TrackInfo {
   final bool trackSelected;
   final String track;
 
-  TrackStatus({
+  TrackInfo({
     this.trackSelected,
     this.track,
   });
 
-  factory TrackStatus.fromDocument(DocumentSnapshot doc) {
-    return TrackStatus(
+  factory TrackInfo.fromDocument(DocumentSnapshot doc) {
+    return TrackInfo(
       trackSelected: doc.data().toString().contains('Track Selected')
           ? doc['Track Selected']
           : null,

@@ -274,11 +274,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         SizedBox(
                           height: 0,
                         ),
-                        Hero(
-                          tag: 'logo',
-                          child: Container(
-                            height: 150.0,
-                            child: Image.asset('assets/images/MentorXP.png'),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 50.0, bottom: 50),
+                          child: Hero(
+                            tag: 'logo',
+                            child: Container(
+                              height: 70.0,
+                              child: Image.asset('assets/images/MentorXP.png'),
+                            ),
                           ),
                         ),
                         Padding(
