@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Networking101DataV2 extends StatelessWidget {
-  const Networking101DataV2({
+class Networking201DataV3 extends StatelessWidget {
+  const Networking201DataV3({
     Key key,
   }) : super(key: key);
 
@@ -11,7 +11,7 @@ class Networking101DataV2 extends StatelessWidget {
       children: [
         RichText(
           text: TextSpan(
-            text: '2. Knowledge Sharing ',
+            text: 'Develop Networking Skills: ',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -20,8 +20,8 @@ class Networking101DataV2 extends StatelessWidget {
             ),
             children: const <TextSpan>[
               TextSpan(
-                text: 'Networking exposes you to new ideas and best '
-                    'practices in the industry.',
+                text:
+                    'Such as how to introduce yourself, how to start a conversation, how to set up a meet & greet on LinkedIn and how to follow up after an event.',
                 style: TextStyle(fontWeight: FontWeight.normal),
               ),
             ],
@@ -31,7 +31,7 @@ class Networking101DataV2 extends StatelessWidget {
           padding: const EdgeInsets.only(top: 50.0),
           child: RichText(
             text: TextSpan(
-              text: '3. Career Development ',
+              text: 'Personal Branding: ',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -40,9 +40,8 @@ class Networking101DataV2 extends StatelessWidget {
               ),
               children: const <TextSpan>[
                 TextSpan(
-                  text: 'Connecting with mentors and other professionals '
-                      'allows for additional support and guidance that '
-                      'can propel your career forward.',
+                  text:
+                      'Develop a personal brand that aligns with your networking goals. This includes creating a professional image, developing a personal elevator pitch, and identifying their unique selling points.',
                   style: TextStyle(fontWeight: FontWeight.normal),
                 ),
               ],

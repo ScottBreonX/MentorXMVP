@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Networking101DataV3 extends StatelessWidget {
-  const Networking101DataV3({
+class Networking201DataV4 extends StatelessWidget {
+  const Networking201DataV4({
     Key key,
   }) : super(key: key);
 
@@ -11,7 +11,7 @@ class Networking101DataV3 extends StatelessWidget {
       children: [
         RichText(
           text: TextSpan(
-            text: '4. Industry Exposure ',
+            text: 'Practice Networking: ',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -20,9 +20,8 @@ class Networking101DataV3 extends StatelessWidget {
             ),
             children: const <TextSpan>[
               TextSpan(
-                text: 'By attending industry events, participating in '
-                    'online discussions, and sharing knowledge with others, '
-                    'you can increase your visibility and build your personal brand.',
+                text:
+                    'Attending events, joining groups, and reaching out to contacts. Provide feedback on the mentee\'s networking skills and suggest areas for improvement',
                 style: TextStyle(fontWeight: FontWeight.normal),
               ),
             ],
@@ -32,7 +31,7 @@ class Networking101DataV3 extends StatelessWidget {
           padding: const EdgeInsets.only(top: 50.0),
           child: RichText(
             text: TextSpan(
-              text: '5. Advocacy ',
+              text: 'Follow-up and Maintain Relationships: ',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -41,10 +40,8 @@ class Networking101DataV3 extends StatelessWidget {
               ),
               children: const <TextSpan>[
                 TextSpan(
-                  text: 'Developing relationships with a variety of '
-                      'individuals can open doors that you weren\’t even '
-                      'considering. Networking can lead to finding colleagues '
-                      'who will advocate for you.',
+                  text:
+                      'Develop a follow-up strategy after networking events, such as sending a personalized email or connecting on Linkedin. Provide guidance on how to maintain relationships and stay in touch with contacts.',
                   style: TextStyle(fontWeight: FontWeight.normal),
                 ),
               ],

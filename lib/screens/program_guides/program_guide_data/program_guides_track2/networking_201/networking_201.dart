@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v2.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v3.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v4.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v5.dart';
 import '../../../../../components/program_card.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -46,7 +50,7 @@ class _Networking201ScreenState extends State<Networking201Screen> {
         .collection('programGuides')
         .doc(loggedInUser.id)
         .update({
-      'Networking 101': 'Complete',
+      'Networking 201': 'Complete',
       'Career 101': 'Current',
     });
   }
@@ -95,39 +99,34 @@ class _Networking201ScreenState extends State<Networking201Screen> {
                       trackText: 'Track 2',
                       fileName: Networking201DataV1(),
                     ),
-                    // ProgramGuideCard(
-                    //   titleText: 'Networking 201',
-                    //   trackText: 'Track 2',
-                    //   fileName: Networking101DataV2(),
-                    // ),
-                    // ProgramGuideCard(
-                    //   titleText: 'Networking 201',
-                    //   trackText: 'Track 2',
-                    //   fileName: Networking101DataV3(),
-                    // ),
-                    // ProgramGuideCard(
-                    //   titleText: 'Networking 201',
-                    //   trackText: 'Track 2',
-                    //   fileName: Networking101DataV4(),
-                    // ),
-                    // ProgramGuideCard(
-                    //   titleText: 'Networking 201',
-                    //   trackText: 'Track 2',
-                    //   fileName: Networking101DataV5(),
-                    // ),
-                    // ProgramGuideCard(
-                    //   titleText: 'Networking 201',
-                    //   trackText: 'Track 2',
-                    //   fileName: Networking101DataV6(),
-                    //   selectButtons: true,
-                    //   selectButton1: true,
-                    //   button1Text: 'Complete Session',
-                    //   onPressed1: () async {
-                    //     await _markSessionComplete(context, widget.programUID,
-                    //         widget.loggedInUser, widget.matchID);
-                    //     Navigator.pop(context);
-                    //   },
-                    // ),
+                    ProgramGuideCard(
+                      titleText: 'Networking 201',
+                      trackText: 'Track 2',
+                      fileName: Networking201DataV2(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Networking 201',
+                      trackText: 'Track 2',
+                      fileName: Networking201DataV3(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Networking 201',
+                      trackText: 'Track 2',
+                      fileName: Networking201DataV4(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Networking 201',
+                      trackText: 'Track 2',
+                      fileName: Networking201DataV5(),
+                      selectButtons: true,
+                      selectButton1: true,
+                      button1Text: 'Complete Session',
+                      onPressed1: () async {
+                        await _markSessionComplete(context, widget.programUID,
+                            widget.loggedInUser, widget.matchID);
+                        Navigator.pop(context);
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -135,7 +134,7 @@ class _Networking201ScreenState extends State<Networking201Screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 5; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(
