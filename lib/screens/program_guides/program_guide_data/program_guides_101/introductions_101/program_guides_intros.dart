@@ -21,6 +21,7 @@ class ProgramGuidesIntrosScreen extends StatefulWidget {
   final String mentorUID;
   final String programUID;
   final String matchID;
+  final String nextGuide;
 
   const ProgramGuidesIntrosScreen({
     Key key,
@@ -28,6 +29,7 @@ class ProgramGuidesIntrosScreen extends StatefulWidget {
     this.mentorUID,
     this.programUID,
     this.matchID,
+    this.nextGuide,
   }) : super(key: key);
 
   static const String id = 'program_guides_intros_screen';
@@ -38,16 +40,21 @@ class ProgramGuidesIntrosScreen extends StatefulWidget {
 }
 
 _markSessionComplete(
-    context, String programUID, myUser loggedInUser, String matchID) async {
+  context,
+  String programUID,
+  myUser loggedInUser,
+  String matchID,
+  String nextGuide,
+) async {
   await programsRef
       .doc(programUID)
       .collection('matchedPairs')
       .doc(matchID)
       .collection('programGuides')
       .doc(loggedInUser.id)
-      .update({
+      .set({
     'Introductions': 'Complete',
-    'Resume 101': 'Current',
+    nextGuide: 'Current',
   });
 }
 
@@ -162,8 +169,12 @@ class _ProgramGuidesIntrosScreenState extends State<ProgramGuidesIntrosScreen> {
                       selectButton1: true,
                       button1Text: 'Complete Session',
                       onPressed1: () async {
-                        await _markSessionComplete(context, widget.programUID,
-                            widget.loggedInUser, widget.matchID);
+                        await _markSessionComplete(
+                            context,
+                            widget.programUID,
+                            widget.loggedInUser,
+                            widget.matchID,
+                            widget.nextGuide);
                         Navigator.pop(context);
                       },
                     ),

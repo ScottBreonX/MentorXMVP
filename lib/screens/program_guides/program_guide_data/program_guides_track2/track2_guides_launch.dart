@@ -9,21 +9,21 @@ import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_gu
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/interview_101/interview_101.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/networking_101/networking_101.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/resume_101/resume_101.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/program_guides_intros.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201.dart';
 
 import '../../../../components/progress.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class Track1GuidesLaunchScreen extends StatefulWidget {
+class Track2GuidesLaunchScreen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const Track1GuidesLaunchScreen({
+  const Track2GuidesLaunchScreen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -31,14 +31,14 @@ class Track1GuidesLaunchScreen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'track1_guides_launch_screen';
+  static const String id = 'track2_guides_launch_screen';
 
   @override
-  _Track1GuidesLaunchScreenState createState() =>
-      _Track1GuidesLaunchScreenState();
+  _Track2GuidesLaunchScreenState createState() =>
+      _Track2GuidesLaunchScreenState();
 }
 
-class _Track1GuidesLaunchScreenState extends State<Track1GuidesLaunchScreen> {
+class _Track2GuidesLaunchScreenState extends State<Track2GuidesLaunchScreen> {
   @override
   void initState() {
     checkIsMentor();
@@ -77,7 +77,7 @@ class _Track1GuidesLaunchScreenState extends State<Track1GuidesLaunchScreen> {
         .doc(widget.matchID)
         .collection('programGuides')
         .doc(widget.loggedInUser.id)
-        .set({});
+        .delete();
   }
 
   @override
@@ -131,7 +131,7 @@ class _Track1GuidesLaunchScreenState extends State<Track1GuidesLaunchScreen> {
                             color: kMentorXPPrimary,
                             child: Center(
                               child: Text(
-                                'Track 1 - Getting Started',
+                                'Track 2 - Making Progress',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: 'Montserrat',
@@ -167,32 +167,32 @@ class _Track1GuidesLaunchScreenState extends State<Track1GuidesLaunchScreen> {
                             matchID: widget.matchID,
                             mentorUID: widget.mentorUID,
                             programUID: widget.programUID,
-                            nextGuide: 'Resume 101',
+                            nextGuide: 'Networking 201',
                           ),
                         ),
                       );
                     },
                   ),
                   ProgramGuideMenuTile(
-                    titleText: 'Resume 101',
+                    titleText: 'Networking 201',
                     titlePrefix: '2',
-                    iconData: (guideStatus.resume101Status == 'Current')
+                    iconData: (guideStatus.networking201Status == 'Current')
                         ? Icons.play_arrow
-                        : (guideStatus.resume101Status == null)
+                        : (guideStatus.networking201Status == null)
                             ? Icons.lock
                             : Icons.check,
-                    iconColor: (guideStatus.resume101Status == 'Current')
+                    iconColor: (guideStatus.networking201Status == 'Current')
                         ? kMentorXPAccentMed
-                        : (guideStatus.resume101Status == null)
+                        : (guideStatus.networking201Status == null)
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.resume101Status == null)
+                      (guideStatus.networking201Status == null)
                           ? ''
                           : Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Resume101Screen(
+                                builder: (context) => Networking201Screen(
                                   loggedInUser: widget.loggedInUser,
                                   matchID: widget.matchID,
                                   mentorUID: widget.mentorUID,

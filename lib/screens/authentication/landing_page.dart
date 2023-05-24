@@ -34,20 +34,53 @@ class _LandingPageState extends State<LandingPage> {
           if (user == null) {
             return FutureBuilder(
               future: Future.delayed(
-                const Duration(seconds: 3),
+                const Duration(seconds: 5),
               ),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Scaffold(
                     backgroundColor: kMentorXPPrimary,
-                    body: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/MentorXP.png',
-                          fit: BoxFit.fill,
+                    body: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: [
+                            Colors.grey.shade600,
+                            kMentorXPPrimary,
+                          ],
                         ),
-                      ],
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(50.0),
+                            child: Image.asset(
+                              'assets/images/MentorXP.png',
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          Text(
+                            'Connecting the world',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: kMentorXPAccentMed,
+                              fontFamily: 'RockSalt',
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            'in a more meaningful way',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'RockSalt',
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 }
