@@ -7,9 +7,9 @@ import 'package:mentorx_mvp/models/program_guides_models/program_guides.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/interview_101/interview_101.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/networking_101/networking_101.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/program_guides_intros.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/interviewprep_201/interviewprep_201.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201.dart';
 
 import '../../../../components/progress.dart';
@@ -203,25 +203,25 @@ class _Track2GuidesLaunchScreenState extends State<Track2GuidesLaunchScreen> {
                     },
                   ),
                   ProgramGuideMenuTile(
-                    titleText: 'Networking 101',
+                    titleText: 'Interview Prep 201',
                     titlePrefix: '3',
-                    iconData: (guideStatus.networking101Status == 'Current')
+                    iconData: (guideStatus.interviewPrep201status == 'Current')
                         ? Icons.play_arrow
-                        : (guideStatus.networking101Status == null)
+                        : (guideStatus.interviewPrep201status == null)
                             ? Icons.lock
                             : Icons.check,
-                    iconColor: (guideStatus.networking101Status == 'Current')
+                    iconColor: (guideStatus.interviewPrep201status == 'Current')
                         ? kMentorXPAccentMed
-                        : (guideStatus.networking101Status == null)
+                        : (guideStatus.interviewPrep201status == null)
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.networking101Status == null)
+                      (guideStatus.interviewPrep201status == null)
                           ? ''
                           : Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Networking101Screen(
+                                builder: (context) => InterviewPrep201Screen(
                                   loggedInUser: widget.loggedInUser,
                                   matchID: widget.matchID,
                                   mentorUID: widget.mentorUID,
@@ -232,25 +232,25 @@ class _Track2GuidesLaunchScreenState extends State<Track2GuidesLaunchScreen> {
                     },
                   ),
                   ProgramGuideMenuTile(
-                    titleText: 'Major / Career Exploration',
+                    titleText: 'Mock Interview',
                     titlePrefix: '4',
-                    iconData: (guideStatus.career101Status == 'Current')
+                    iconData: (guideStatus.mockInterview201status == 'Current')
                         ? Icons.play_arrow
-                        : (guideStatus.career101Status == null)
+                        : (guideStatus.mockInterview201status == null)
                             ? Icons.lock
                             : Icons.check,
-                    iconColor: (guideStatus.career101Status == 'Current')
+                    iconColor: (guideStatus.mockInterview201status == 'Current')
                         ? kMentorXPAccentMed
-                        : (guideStatus.career101Status == null)
+                        : (guideStatus.mockInterview201status == null)
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.career101Status == null)
+                      (guideStatus.mockInterview201status == null)
                           ? ''
                           : Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => MajorCareer101Screen(
+                                builder: (context) => MockInterview201Screen(
                                   loggedInUser: widget.loggedInUser,
                                   matchID: widget.matchID,
                                   mentorUID: widget.mentorUID,
