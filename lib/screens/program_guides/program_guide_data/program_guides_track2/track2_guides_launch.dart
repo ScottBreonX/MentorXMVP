@@ -5,12 +5,12 @@ import 'package:mentorx_mvp/components/program_guides_menu.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/program_guides_models/program_guides.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/interview_101/interview_101.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/program_guides_intros.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/interviewprep_201/interviewprep_201.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201.dart';
 
 import '../../../../components/progress.dart';
 
@@ -261,25 +261,25 @@ class _Track2GuidesLaunchScreenState extends State<Track2GuidesLaunchScreen> {
                     },
                   ),
                   ProgramGuideMenuTile(
-                    titleText: 'Company Exploration',
+                    titleText: 'Resume Building',
                     titlePrefix: '5',
-                    iconData: (guideStatus.company101Status == 'Current')
+                    iconData: (guideStatus.resume201status == 'Current')
                         ? Icons.play_arrow
-                        : (guideStatus.company101Status == null)
+                        : (guideStatus.resume201status == null)
                             ? Icons.lock
                             : Icons.check,
-                    iconColor: (guideStatus.company101Status == 'Current')
+                    iconColor: (guideStatus.resume201status == 'Current')
                         ? kMentorXPAccentMed
-                        : (guideStatus.company101Status == null)
+                        : (guideStatus.resume201status == null)
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.company101Status == null)
+                      (guideStatus.resume201status == null)
                           ? ''
                           : Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Company101Screen(
+                                builder: (context) => Resume201Screen(
                                   loggedInUser: widget.loggedInUser,
                                   matchID: widget.matchID,
                                   mentorUID: widget.mentorUID,

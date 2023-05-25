@@ -3,23 +3,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v3.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v4.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v5.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v2.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v3.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v4.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v5.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v6.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v7.dart';
 import '../../../../../components/program_card.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class MockInterview201Screen extends StatefulWidget {
+class Resume201Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const MockInterview201Screen({
+  const Resume201Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -27,13 +29,13 @@ class MockInterview201Screen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'mockinterview_201_screen';
+  static const String id = 'resume_201_screen';
 
   @override
-  _MockInterview201ScreenState createState() => _MockInterview201ScreenState();
+  _Resume201ScreenState createState() => _Resume201ScreenState();
 }
 
-class _MockInterview201ScreenState extends State<MockInterview201Screen> {
+class _Resume201ScreenState extends State<Resume201Screen> {
   @override
   void initState() {
     super.initState();
@@ -50,8 +52,8 @@ class _MockInterview201ScreenState extends State<MockInterview201Screen> {
         .collection('programGuides')
         .doc(loggedInUser.id)
         .update({
-      'Mock Interview 201': 'Complete',
-      'Resume 201': 'Current',
+      'Resume 201': 'Complete',
+      'Career 201': 'Current',
     });
   }
 
@@ -95,29 +97,39 @@ class _MockInterview201ScreenState extends State<MockInterview201Screen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Mock Interview 201',
+                      titleText: 'Resume 201',
                       trackText: 'Track 2',
-                      fileName: MockInterview201DataV1(),
+                      fileName: Resume201DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Mock Interview 201',
+                      titleText: 'Resume 201',
                       trackText: 'Track 2',
-                      fileName: MockInterview201DataV2(),
+                      fileName: Resume201DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Mock Interview 201',
+                      titleText: 'Resume 201',
                       trackText: 'Track 2',
-                      fileName: MockInterview201DataV3(),
+                      fileName: Resume201DataV3(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Mock Interview 201',
+                      titleText: 'Resume 201',
                       trackText: 'Track 2',
-                      fileName: MockInterview201DataV4(),
+                      fileName: Resume201DataV4(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Mock Interview 201',
+                      titleText: 'Resume 201',
                       trackText: 'Track 2',
-                      fileName: MockInterview201DataV5(),
+                      fileName: Resume201DataV5(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Resume 201',
+                      trackText: 'Track 2',
+                      fileName: Resume201DataV6(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Resume 201',
+                      trackText: 'Track 2',
+                      fileName: Resume201DataV7(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
@@ -134,7 +146,7 @@ class _MockInterview201ScreenState extends State<MockInterview201Screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 7; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(
