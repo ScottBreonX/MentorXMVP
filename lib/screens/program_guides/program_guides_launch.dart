@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:mentorx_mvp/models/program_guides_models/track_status.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/track1_guides_launch.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/track1_guides_launch.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/track2_guides_launch.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/track3_guides_launch.dart';
 
 import '../../components/progress.dart';
 
@@ -85,6 +86,14 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
           }
           if (trackInfo.track == 'Track 2') {
             return Track2GuidesLaunchScreen(
+              loggedInUser: widget.loggedInUser,
+              mentorUID: widget.mentorUID,
+              programUID: widget.programUID,
+              matchID: widget.matchID,
+            );
+          }
+          if (trackInfo.track == 'Track 3') {
+            return Track3GuidesLaunchScreen(
               loggedInUser: widget.loggedInUser,
               mentorUID: widget.mentorUID,
               programUID: widget.programUID,

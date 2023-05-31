@@ -3,25 +3,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101_data_v1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101_data_v2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101_data_v3.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101_data_v4.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101_data_v5.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101_data_v6.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_do_data_v1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_do_data_v2.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_do_data_v3.dart';
 
 import '../../../../../components/program_card.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class MajorCareer101Screen extends StatefulWidget {
+class ResumeDoScreen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const MajorCareer101Screen({
+  const ResumeDoScreen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -29,33 +26,19 @@ class MajorCareer101Screen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'major_career_101_screen';
+  static const String id = 'resume_do_screen';
 
   @override
-  _MajorCareer101ScreenState createState() => _MajorCareer101ScreenState();
+  _ResumeDoScreenState createState() => _ResumeDoScreenState();
 }
 
-class _MajorCareer101ScreenState extends State<MajorCareer101Screen> {
+class _ResumeDoScreenState extends State<ResumeDoScreen> {
   @override
   void initState() {
     super.initState();
   }
 
   int currentIndex = 0;
-
-  _markSessionComplete(
-      context, String programUID, myUser loggedInUser, String matchID) async {
-    await programsRef
-        .doc(programUID)
-        .collection('matchedPairs')
-        .doc(matchID)
-        .collection('programGuides')
-        .doc(loggedInUser.id)
-        .update({
-      'Career 101': 'Complete',
-      'Company 101': 'Current',
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,40 +80,23 @@ class _MajorCareer101ScreenState extends State<MajorCareer101Screen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Careers 101',
-                      trackText: 'Track 1',
-                      fileName: MajorCareer101DataV1(),
+                      titleText: 'Resume Dos',
+                      fileName: ResumeDoDataV1(),
+                      cardColor: Colors.blueGrey.shade700,
                     ),
                     ProgramGuideCard(
-                      titleText: 'Careers 101',
-                      trackText: 'Track 1',
-                      fileName: MajorCareer101DataV2(),
+                      titleText: 'Resume Dos',
+                      fileName: ResumeDoDataV2(),
+                      cardColor: Colors.blueGrey.shade700,
                     ),
                     ProgramGuideCard(
-                      titleText: 'Careers 101',
-                      trackText: 'Track 1',
-                      fileName: MajorCareer101DataV3(),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Careers 101',
-                      trackText: 'Track 1',
-                      fileName: MajorCareer101DataV4(),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Careers 101',
-                      trackText: 'Track 1',
-                      fileName: MajorCareer101DataV5(),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Careers 101',
-                      trackText: 'Track 1',
-                      fileName: MajorCareer101DataV6(),
+                      titleText: 'Resume Dos',
+                      fileName: ResumeDoDataV3(),
+                      cardColor: Colors.blueGrey.shade700,
                       selectButtons: true,
                       selectButton1: true,
-                      button1Text: 'Complete Session',
-                      onPressed1: () async {
-                        await _markSessionComplete(context, widget.programUID,
-                            widget.loggedInUser, widget.matchID);
+                      button1Text: 'Return',
+                      onPressed1: () {
                         Navigator.pop(context);
                       },
                     ),
@@ -141,7 +107,7 @@ class _MajorCareer101ScreenState extends State<MajorCareer101Screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 3; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(

@@ -5,14 +5,13 @@ import 'package:mentorx_mvp/components/program_guides_menu.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/program_guides_models/program_guides.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/interview_101/interview_101.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/major_career_101/major_career_101.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/networking_101/networking_101.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/resume_101/resume_101.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/program_guides_intros.dart';
-
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_101.dart';
 import '../../../../components/progress.dart';
+import 'company_101/company_101.dart';
+import 'interview_101/interview_101.dart';
+import 'introductions_101/program_guides_intros.dart';
+import 'major_career_101/major_career_101.dart';
+import 'networking_101/networking_101.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');

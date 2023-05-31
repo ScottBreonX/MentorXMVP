@@ -12,6 +12,11 @@ class ProgramGuideStatus {
   final String mockInterview201status;
   final String resume201status;
   final String companyTour201Status;
+  final String interview301Status;
+  final String networking301Status;
+  final String mentor301Status;
+  final String coaching301Status;
+  final String jobShadow301Status;
 
   ProgramGuideStatus({
     this.career101Status,
@@ -25,6 +30,11 @@ class ProgramGuideStatus {
     this.mockInterview201status,
     this.resume201status,
     this.companyTour201Status,
+    this.interview301Status,
+    this.networking301Status,
+    this.mentor301Status,
+    this.coaching301Status,
+    this.jobShadow301Status,
   });
 
   factory ProgramGuideStatus.fromDocument(DocumentSnapshot doc) {
@@ -64,6 +74,21 @@ class ProgramGuideStatus {
       companyTour201Status: doc.data().toString().contains('Company Tour 201')
           ? doc['Company Tour 201']
           : null,
+      interview301Status: doc.data().toString().contains('Interview 301')
+          ? doc['Interview 301']
+          : null,
+      networking301Status: doc.data().toString().contains('Networking 301')
+          ? doc['Networking 301']
+          : null,
+      mentor301Status: doc.data().toString().contains('Mentor 301')
+          ? doc['Mentor 301']
+          : null,
+      coaching301Status: doc.data().toString().contains('Coaching 301')
+          ? doc['Coaching 301']
+          : null,
+      jobShadow301Status: doc.data().toString().contains('Job Shadow 301')
+          ? doc['Job Shadow 301']
+          : null,
     );
   }
   Map<String, dynamic> toMap() {
@@ -79,6 +104,11 @@ class ProgramGuideStatus {
       'Mock Interview 201': mockInterview201status,
       'Resume 201': resume201status,
       'Company Tour 201': companyTour201Status,
+      'Interview 301': interview301Status,
+      'Networking 301': networking301Status,
+      'Mentor 301': mentor301Status,
+      'Coaching 301': coaching301Status,
+      'Job Shadow 301': jobShadow301Status,
     };
   }
 }

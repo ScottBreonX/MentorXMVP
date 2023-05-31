@@ -3,25 +3,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101_data_v1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101_data_v2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101_data_v3.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101_data_v4.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101_data_v5.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/company_101/company_101_data_v6.dart';
-
 import '../../../../../components/program_card.dart';
+import 'networking_101_data_v1.dart';
+import 'networking_101_data_v2.dart';
+import 'networking_101_data_v3.dart';
+import 'networking_101_data_v4.dart';
+import 'networking_101_data_v5.dart';
+import 'networking_101_data_v6.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class Company101Screen extends StatefulWidget {
+class Networking101Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const Company101Screen({
+  const Networking101Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -29,13 +28,13 @@ class Company101Screen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'company_101_screen';
+  static const String id = 'networking_101_screen';
 
   @override
-  _Company101ScreenState createState() => _Company101ScreenState();
+  _Networking101ScreenState createState() => _Networking101ScreenState();
 }
 
-class _Company101ScreenState extends State<Company101Screen> {
+class _Networking101ScreenState extends State<Networking101Screen> {
   @override
   void initState() {
     super.initState();
@@ -52,8 +51,8 @@ class _Company101ScreenState extends State<Company101Screen> {
         .collection('programGuides')
         .doc(loggedInUser.id)
         .update({
-      'Company 101': 'Complete',
-      'Interview 101': 'Current',
+      'Networking 101': 'Complete',
+      'Career 101': 'Current',
     });
   }
 
@@ -97,34 +96,34 @@ class _Company101ScreenState extends State<Company101Screen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Company Exploration 101',
+                      titleText: 'Networking 101',
                       trackText: 'Track 1',
-                      fileName: Company101DataV1(),
+                      fileName: Networking101DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Company Exploration 101',
+                      titleText: 'Networking 101',
                       trackText: 'Track 1',
-                      fileName: Company101DataV2(),
+                      fileName: Networking101DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Company Exploration 101',
+                      titleText: 'Networking 101',
                       trackText: 'Track 1',
-                      fileName: Company101DataV3(),
+                      fileName: Networking101DataV3(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Company Exploration 101',
+                      titleText: 'Networking 101',
                       trackText: 'Track 1',
-                      fileName: Company101DataV4(),
+                      fileName: Networking101DataV4(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Company Exploration 101',
+                      titleText: 'Networking 101',
                       trackText: 'Track 1',
-                      fileName: Company101DataV5(),
+                      fileName: Networking101DataV5(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Company Exploration 101',
+                      titleText: 'Networking 101',
                       trackText: 'Track 1',
-                      fileName: Company101DataV6(),
+                      fileName: Networking101DataV6(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',

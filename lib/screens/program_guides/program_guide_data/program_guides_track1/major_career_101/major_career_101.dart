@@ -3,22 +3,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/resume_101/resume_dont_data_v1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/resume_101/resume_dont_data_v2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/resume_101/resume_dont_data_v3.dart';
 
 import '../../../../../components/program_card.dart';
+import 'major_career_101_data_v1.dart';
+import 'major_career_101_data_v2.dart';
+import 'major_career_101_data_v3.dart';
+import 'major_career_101_data_v4.dart';
+import 'major_career_101_data_v5.dart';
+import 'major_career_101_data_v6.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class ResumeDontScreen extends StatefulWidget {
+class MajorCareer101Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const ResumeDontScreen({
+  const MajorCareer101Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -26,19 +29,33 @@ class ResumeDontScreen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'resume_do_screen';
+  static const String id = 'major_career_101_screen';
 
   @override
-  _ResumeDontScreenState createState() => _ResumeDontScreenState();
+  _MajorCareer101ScreenState createState() => _MajorCareer101ScreenState();
 }
 
-class _ResumeDontScreenState extends State<ResumeDontScreen> {
+class _MajorCareer101ScreenState extends State<MajorCareer101Screen> {
   @override
   void initState() {
     super.initState();
   }
 
   int currentIndex = 0;
+
+  _markSessionComplete(
+      context, String programUID, myUser loggedInUser, String matchID) async {
+    await programsRef
+        .doc(programUID)
+        .collection('matchedPairs')
+        .doc(matchID)
+        .collection('programGuides')
+        .doc(loggedInUser.id)
+        .update({
+      'Career 101': 'Complete',
+      'Company 101': 'Current',
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,23 +97,40 @@ class _ResumeDontScreenState extends State<ResumeDontScreen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Resume Don\'ts',
-                      fileName: ResumeDontDataV1(),
-                      cardColor: Colors.grey.shade700,
+                      titleText: 'Careers 101',
+                      trackText: 'Track 1',
+                      fileName: MajorCareer101DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Resume Don\'ts',
-                      fileName: ResumeDontDataV2(),
-                      cardColor: Colors.grey.shade700,
+                      titleText: 'Careers 101',
+                      trackText: 'Track 1',
+                      fileName: MajorCareer101DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Resume Don\'ts',
-                      fileName: ResumeDontDataV3(),
-                      cardColor: Colors.grey.shade700,
+                      titleText: 'Careers 101',
+                      trackText: 'Track 1',
+                      fileName: MajorCareer101DataV3(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Careers 101',
+                      trackText: 'Track 1',
+                      fileName: MajorCareer101DataV4(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Careers 101',
+                      trackText: 'Track 1',
+                      fileName: MajorCareer101DataV5(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Careers 101',
+                      trackText: 'Track 1',
+                      fileName: MajorCareer101DataV6(),
                       selectButtons: true,
                       selectButton1: true,
-                      button1Text: 'Return',
-                      onPressed1: () {
+                      button1Text: 'Complete Session',
+                      onPressed1: () async {
+                        await _markSessionComplete(context, widget.programUID,
+                            widget.loggedInUser, widget.matchID);
                         Navigator.pop(context);
                       },
                     ),
@@ -107,7 +141,7 @@ class _ResumeDontScreenState extends State<ResumeDontScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 6; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(

@@ -3,22 +3,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/resume_101/resume_do_data_v1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/resume_101/resume_do_data_v2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/resume_101/resume_do_data_v3.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_dont_data_v1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_dont_data_v2.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_dont_data_v3.dart';
 
 import '../../../../../components/program_card.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class ResumeDoScreen extends StatefulWidget {
+class ResumeDontScreen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const ResumeDoScreen({
+  const ResumeDontScreen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -29,10 +29,10 @@ class ResumeDoScreen extends StatefulWidget {
   static const String id = 'resume_do_screen';
 
   @override
-  _ResumeDoScreenState createState() => _ResumeDoScreenState();
+  _ResumeDontScreenState createState() => _ResumeDontScreenState();
 }
 
-class _ResumeDoScreenState extends State<ResumeDoScreen> {
+class _ResumeDontScreenState extends State<ResumeDontScreen> {
   @override
   void initState() {
     super.initState();
@@ -80,19 +80,19 @@ class _ResumeDoScreenState extends State<ResumeDoScreen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Resume Dos',
-                      fileName: ResumeDoDataV1(),
-                      cardColor: Colors.blueGrey.shade700,
+                      titleText: 'Resume Don\'ts',
+                      fileName: ResumeDontDataV1(),
+                      cardColor: Colors.grey.shade700,
                     ),
                     ProgramGuideCard(
-                      titleText: 'Resume Dos',
-                      fileName: ResumeDoDataV2(),
-                      cardColor: Colors.blueGrey.shade700,
+                      titleText: 'Resume Don\'ts',
+                      fileName: ResumeDontDataV2(),
+                      cardColor: Colors.grey.shade700,
                     ),
                     ProgramGuideCard(
-                      titleText: 'Resume Dos',
-                      fileName: ResumeDoDataV3(),
-                      cardColor: Colors.blueGrey.shade700,
+                      titleText: 'Resume Don\'ts',
+                      fileName: ResumeDontDataV3(),
+                      cardColor: Colors.grey.shade700,
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Return',

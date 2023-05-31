@@ -9,21 +9,21 @@ import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_gu
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/companytour_201/companytour_201.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/interviewprep_201/interviewprep_201.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/interviewprep_301/interviewprep_301.dart';
 
 import '../../../../components/progress.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class Track2GuidesLaunchScreen extends StatefulWidget {
+class Track3GuidesLaunchScreen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const Track2GuidesLaunchScreen({
+  const Track3GuidesLaunchScreen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -31,14 +31,14 @@ class Track2GuidesLaunchScreen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'track2_guides_launch_screen';
+  static const String id = 'track3_guides_launch_screen';
 
   @override
-  _Track2GuidesLaunchScreenState createState() =>
-      _Track2GuidesLaunchScreenState();
+  _Track3GuidesLaunchScreenState createState() =>
+      _Track3GuidesLaunchScreenState();
 }
 
-class _Track2GuidesLaunchScreenState extends State<Track2GuidesLaunchScreen> {
+class _Track3GuidesLaunchScreenState extends State<Track3GuidesLaunchScreen> {
   @override
   void initState() {
     checkIsMentor();
@@ -131,7 +131,7 @@ class _Track2GuidesLaunchScreenState extends State<Track2GuidesLaunchScreen> {
                             color: kMentorXPPrimary,
                             child: Center(
                               child: Text(
-                                'Track 2 - Making Progress',
+                                'Track 3 - Refinement',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: 'Montserrat',
@@ -167,32 +167,32 @@ class _Track2GuidesLaunchScreenState extends State<Track2GuidesLaunchScreen> {
                             matchID: widget.matchID,
                             mentorUID: widget.mentorUID,
                             programUID: widget.programUID,
-                            nextGuide: 'Networking 201',
+                            nextGuide: 'Interview 301',
                           ),
                         ),
                       );
                     },
                   ),
                   ProgramGuideMenuTile(
-                    titleText: 'Networking 201',
+                    titleText: 'Interview 301',
                     titlePrefix: '2',
-                    iconData: (guideStatus.networking201Status == 'Current')
+                    iconData: (guideStatus.interview301Status == 'Current')
                         ? Icons.play_arrow
-                        : (guideStatus.networking201Status == null)
+                        : (guideStatus.interview301Status == null)
                             ? Icons.lock
                             : Icons.check,
-                    iconColor: (guideStatus.networking201Status == 'Current')
+                    iconColor: (guideStatus.interview301Status == 'Current')
                         ? kMentorXPAccentMed
-                        : (guideStatus.networking201Status == null)
+                        : (guideStatus.interview301Status == null)
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.networking201Status == null)
+                      (guideStatus.interview301Status == null)
                           ? ''
                           : Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Networking201Screen(
+                                builder: (context) => InterviewPrep301Screen(
                                   loggedInUser: widget.loggedInUser,
                                   matchID: widget.matchID,
                                   mentorUID: widget.mentorUID,
@@ -203,20 +203,20 @@ class _Track2GuidesLaunchScreenState extends State<Track2GuidesLaunchScreen> {
                     },
                   ),
                   ProgramGuideMenuTile(
-                    titleText: 'Interview Prep 201',
+                    titleText: 'Networking 301',
                     titlePrefix: '3',
-                    iconData: (guideStatus.interviewPrep201status == 'Current')
+                    iconData: (guideStatus.networking301Status == 'Current')
                         ? Icons.play_arrow
-                        : (guideStatus.interviewPrep201status == null)
+                        : (guideStatus.networking301Status == null)
                             ? Icons.lock
                             : Icons.check,
-                    iconColor: (guideStatus.interviewPrep201status == 'Current')
+                    iconColor: (guideStatus.networking301Status == 'Current')
                         ? kMentorXPAccentMed
-                        : (guideStatus.interviewPrep201status == null)
+                        : (guideStatus.networking301Status == null)
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.interviewPrep201status == null)
+                      (guideStatus.networking301Status == null)
                           ? ''
                           : Navigator.push(
                               context,
@@ -232,20 +232,20 @@ class _Track2GuidesLaunchScreenState extends State<Track2GuidesLaunchScreen> {
                     },
                   ),
                   ProgramGuideMenuTile(
-                    titleText: 'Mock Interview',
+                    titleText: 'Becoming a Mentor',
                     titlePrefix: '4',
-                    iconData: (guideStatus.mockInterview201status == 'Current')
+                    iconData: (guideStatus.mentor301Status == 'Current')
                         ? Icons.play_arrow
-                        : (guideStatus.mockInterview201status == null)
+                        : (guideStatus.mentor301Status == null)
                             ? Icons.lock
                             : Icons.check,
-                    iconColor: (guideStatus.mockInterview201status == 'Current')
+                    iconColor: (guideStatus.mentor301Status == 'Current')
                         ? kMentorXPAccentMed
-                        : (guideStatus.mockInterview201status == null)
+                        : (guideStatus.mentor301Status == null)
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.mockInterview201status == null)
+                      (guideStatus.mentor301Status == null)
                           ? ''
                           : Navigator.push(
                               context,
@@ -261,20 +261,20 @@ class _Track2GuidesLaunchScreenState extends State<Track2GuidesLaunchScreen> {
                     },
                   ),
                   ProgramGuideMenuTile(
-                    titleText: 'Resume Building',
+                    titleText: 'Coaching',
                     titlePrefix: '5',
-                    iconData: (guideStatus.resume201status == 'Current')
+                    iconData: (guideStatus.coaching301Status == 'Current')
                         ? Icons.play_arrow
-                        : (guideStatus.resume201status == null)
+                        : (guideStatus.coaching301Status == null)
                             ? Icons.lock
                             : Icons.check,
-                    iconColor: (guideStatus.resume201status == 'Current')
+                    iconColor: (guideStatus.coaching301Status == 'Current')
                         ? kMentorXPAccentMed
-                        : (guideStatus.resume201status == null)
+                        : (guideStatus.coaching301Status == null)
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.resume201status == null)
+                      (guideStatus.coaching301Status == null)
                           ? ''
                           : Navigator.push(
                               context,
@@ -290,20 +290,20 @@ class _Track2GuidesLaunchScreenState extends State<Track2GuidesLaunchScreen> {
                     },
                   ),
                   ProgramGuideMenuTile(
-                    titleText: 'Company Tour',
+                    titleText: 'Job Shadow',
                     titlePrefix: '6',
-                    iconData: (guideStatus.companyTour201Status == 'Current')
+                    iconData: (guideStatus.jobShadow301Status == 'Current')
                         ? Icons.play_arrow
-                        : (guideStatus.companyTour201Status == null)
+                        : (guideStatus.jobShadow301Status == null)
                             ? Icons.lock
                             : Icons.check,
-                    iconColor: (guideStatus.companyTour201Status == 'Current')
+                    iconColor: (guideStatus.jobShadow301Status == 'Current')
                         ? kMentorXPAccentMed
-                        : (guideStatus.companyTour201Status == null)
+                        : (guideStatus.jobShadow301Status == null)
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.companyTour201Status == null)
+                      (guideStatus.jobShadow301Status == null)
                           ? ''
                           : Navigator.push(
                               context,

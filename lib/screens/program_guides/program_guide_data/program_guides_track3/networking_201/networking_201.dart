@@ -3,23 +3,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/interview_101/interview_101_data_v1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/interview_101/interview_101_data_v2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/interview_101/interview_101_data_v3.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/interview_101/interview_101_data_v4.dart';
-
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v2.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v3.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v4.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v5.dart';
 import '../../../../../components/program_card.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class Interview101Screen extends StatefulWidget {
+class Networking201Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const Interview101Screen({
+  const Networking201Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -27,13 +27,13 @@ class Interview101Screen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'interview_101_screen';
+  static const String id = 'networking_201_screen';
 
   @override
-  _Interview101ScreenState createState() => _Interview101ScreenState();
+  _Networking201ScreenState createState() => _Networking201ScreenState();
 }
 
-class _Interview101ScreenState extends State<Interview101Screen> {
+class _Networking201ScreenState extends State<Networking201Screen> {
   @override
   void initState() {
     super.initState();
@@ -50,7 +50,8 @@ class _Interview101ScreenState extends State<Interview101Screen> {
         .collection('programGuides')
         .doc(loggedInUser.id)
         .update({
-      'Interview 101': 'Complete',
+      'Networking 201': 'Complete',
+      'Interview Prep 201': 'Current',
     });
   }
 
@@ -94,34 +95,29 @@ class _Interview101ScreenState extends State<Interview101Screen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Interview Prep 101',
-                      trackText: 'Track 1',
-                      fileName: Interview101DataV1(),
+                      titleText: 'Networking 201',
+                      trackText: 'Track 2',
+                      fileName: Networking201DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Interview Prep 101',
-                      trackText: 'Track 1',
-                      fileName: Interview101DataV2(),
+                      titleText: 'Networking 201',
+                      trackText: 'Track 2',
+                      fileName: Networking201DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Interview Prep 101',
-                      trackText: 'Track 1',
-                      fileName: Interview101DataV3(),
+                      titleText: 'Networking 201',
+                      trackText: 'Track 2',
+                      fileName: Networking201DataV3(),
                     ),
-                    // ProgramGuideCard(
-                    //   titleText: 'Interview Prep 101',
-                    //   trackText: 'Track 1',
-                    //   // fileName: Interview101DataV4(),
-                    // ),
-                    // ProgramGuideCard(
-                    //   titleText: 'Interview Prep 101',
-                    //   trackText: 'Track 1',
-                    //   // fileName: Interview101DataV5(),
-                    // ),
                     ProgramGuideCard(
-                      titleText: 'Interview Prep 101',
-                      trackText: 'Track 1',
-                      fileName: Interview101DataV4(),
+                      titleText: 'Networking 201',
+                      trackText: 'Track 2',
+                      fileName: Networking201DataV4(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Networking 201',
+                      trackText: 'Track 2',
+                      fileName: Networking201DataV5(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
@@ -138,7 +134,7 @@ class _Interview101ScreenState extends State<Interview101Screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 5; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(

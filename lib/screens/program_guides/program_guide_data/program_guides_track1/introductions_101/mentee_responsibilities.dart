@@ -3,10 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/menteeResponsibilities1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/menteeResponsibilities2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/menteeResponsibilities3.dart';
 import '../../../../../components/program_card.dart';
+import 'menteeResponsibilities1.dart';
+import 'menteeResponsibilities2.dart';
+import 'menteeResponsibilities3.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');

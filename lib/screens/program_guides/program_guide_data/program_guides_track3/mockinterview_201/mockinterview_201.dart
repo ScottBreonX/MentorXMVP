@@ -3,21 +3,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/mentorResponsibilities1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/mentorResponsibilities2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/mentorResponsibilities3.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v2.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v3.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v4.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v5.dart';
 import '../../../../../components/program_card.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class MentorResponsibilitiesScreen extends StatefulWidget {
+class MockInterview201Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const MentorResponsibilitiesScreen({
+  const MockInterview201Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -25,21 +27,33 @@ class MentorResponsibilitiesScreen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'mentor_responsibilities_screen';
+  static const String id = 'mockinterview_201_screen';
 
   @override
-  _MentorResponsibilitiesScreenState createState() =>
-      _MentorResponsibilitiesScreenState();
+  _MockInterview201ScreenState createState() => _MockInterview201ScreenState();
 }
 
-class _MentorResponsibilitiesScreenState
-    extends State<MentorResponsibilitiesScreen> {
+class _MockInterview201ScreenState extends State<MockInterview201Screen> {
   @override
   void initState() {
     super.initState();
   }
 
   int currentIndex = 0;
+
+  _markSessionComplete(
+      context, String programUID, myUser loggedInUser, String matchID) async {
+    await programsRef
+        .doc(programUID)
+        .collection('matchedPairs')
+        .doc(matchID)
+        .collection('programGuides')
+        .doc(loggedInUser.id)
+        .update({
+      'Mock Interview 201': 'Complete',
+      'Resume 201': 'Current',
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,23 +95,35 @@ class _MentorResponsibilitiesScreenState
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Role & Responsibility of a Mentor',
-                      cardColor: Colors.grey.shade700,
-                      fileName: MentorResponsibilities1(),
+                      titleText: 'Mock Interview 201',
+                      trackText: 'Track 2',
+                      fileName: MockInterview201DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Role & Responsibility of a Mentor',
-                      cardColor: Colors.grey.shade700,
-                      fileName: MentorResponsibilities2(),
+                      titleText: 'Mock Interview 201',
+                      trackText: 'Track 2',
+                      fileName: MockInterview201DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Role & Responsibility of a Mentor',
-                      cardColor: Colors.grey.shade700,
-                      fileName: MentorResponsibilities3(),
+                      titleText: 'Mock Interview 201',
+                      trackText: 'Track 2',
+                      fileName: MockInterview201DataV3(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Mock Interview 201',
+                      trackText: 'Track 2',
+                      fileName: MockInterview201DataV4(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Mock Interview 201',
+                      trackText: 'Track 2',
+                      fileName: MockInterview201DataV5(),
                       selectButtons: true,
-                      selectButton2: true,
-                      button2Text: 'Return',
-                      onPressed2: () {
+                      selectButton1: true,
+                      button1Text: 'Complete Session',
+                      onPressed1: () async {
+                        await _markSessionComplete(context, widget.programUID,
+                            widget.loggedInUser, widget.matchID);
                         Navigator.pop(context);
                       },
                     ),
@@ -108,7 +134,7 @@ class _MentorResponsibilitiesScreenState
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 5; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(

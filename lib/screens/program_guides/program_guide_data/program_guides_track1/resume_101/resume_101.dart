@@ -3,68 +3,61 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/introductions4.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/introductions5.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/introductions6.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/mentor_responsibilities.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/introductions1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/introductions2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/introductions3.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_101_data_v1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_101_data_v2.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_101_data_v3.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_101_data_v4.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_101_data_v5.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_101_data_v6.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_do.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/resume_101/resume_dont.dart';
+
 import '../../../../../components/program_card.dart';
-import 'mentee_responsibilities.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class ProgramGuidesIntrosScreen extends StatefulWidget {
+class Resume101Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
-  final String nextGuide;
 
-  const ProgramGuidesIntrosScreen({
+  const Resume101Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
     this.programUID,
     this.matchID,
-    this.nextGuide,
   }) : super(key: key);
 
-  static const String id = 'program_guides_intros_screen';
+  static const String id = 'resume_101_screen';
 
   @override
-  _ProgramGuidesIntrosScreenState createState() =>
-      _ProgramGuidesIntrosScreenState();
+  _Resume101ScreenState createState() => _Resume101ScreenState();
 }
 
-_markSessionComplete(
-  context,
-  String programUID,
-  myUser loggedInUser,
-  String matchID,
-  String nextGuide,
-) async {
-  await programsRef
-      .doc(programUID)
-      .collection('matchedPairs')
-      .doc(matchID)
-      .collection('programGuides')
-      .doc(loggedInUser.id)
-      .set({
-    'Introductions': 'Complete',
-    nextGuide: 'Current',
-  });
-}
-
-class _ProgramGuidesIntrosScreenState extends State<ProgramGuidesIntrosScreen> {
+class _Resume101ScreenState extends State<Resume101Screen> {
   @override
   void initState() {
     super.initState();
   }
 
   int currentIndex = 0;
+
+  _markSessionComplete(
+      context, String programUID, myUser loggedInUser, String matchID) async {
+    await programsRef
+        .doc(programUID)
+        .collection('matchedPairs')
+        .doc(matchID)
+        .collection('programGuides')
+        .doc(loggedInUser.id)
+        .update({
+      'Resume 101': 'Complete',
+      'Networking 101': 'Current',
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,28 +99,17 @@ class _ProgramGuidesIntrosScreenState extends State<ProgramGuidesIntrosScreen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Introductions',
+                      titleText: 'Resume 101',
                       trackText: 'Track 1',
-                      fileName: Introductions1(),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Introductions',
-                      trackText: 'Track 1',
-                      fileName: Introductions2(),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Introductions',
-                      trackText: 'Track 1',
-                      fileName: Introductions3(),
+                      fileName: Resume101DataV1(),
                       selectButtons: true,
                       selectButton1: true,
-                      selectButton2: true,
-                      button1Text: 'Mentor',
+                      button1Text: "Resume Dos",
                       onPressed1: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MentorResponsibilitiesScreen(
+                            builder: (context) => ResumeDoScreen(
                               loggedInUser: widget.loggedInUser,
                               matchID: widget.matchID,
                               mentorUID: widget.mentorUID,
@@ -136,12 +118,13 @@ class _ProgramGuidesIntrosScreenState extends State<ProgramGuidesIntrosScreen> {
                           ),
                         );
                       },
-                      button2Text: 'Mentee',
+                      selectButton2: true,
+                      button2Text: "Resume Don\'ts",
                       onPressed2: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MenteeResponsibilitiesScreen(
+                            builder: (context) => ResumeDontScreen(
                               loggedInUser: widget.loggedInUser,
                               matchID: widget.matchID,
                               mentorUID: widget.mentorUID,
@@ -152,29 +135,35 @@ class _ProgramGuidesIntrosScreenState extends State<ProgramGuidesIntrosScreen> {
                       },
                     ),
                     ProgramGuideCard(
-                      titleText: 'Introductions',
+                      titleText: 'Resume 101',
                       trackText: 'Track 1',
-                      fileName: Introductions4(),
+                      fileName: Resume101DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Introductions',
+                      titleText: 'Resume 101',
                       trackText: 'Track 1',
-                      fileName: Introductions5(),
+                      fileName: Resume101DataV3(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Introductions',
+                      titleText: 'Resume 101',
                       trackText: 'Track 1',
-                      fileName: Introductions6(),
+                      fileName: Resume101DataV4(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Resume 101',
+                      trackText: 'Track 1',
+                      fileName: Resume101DataV5(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Resume 101',
+                      trackText: 'Track 1',
+                      fileName: Resume101DataV6(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
                       onPressed1: () async {
-                        await _markSessionComplete(
-                            context,
-                            widget.programUID,
-                            widget.loggedInUser,
-                            widget.matchID,
-                            widget.nextGuide);
+                        await _markSessionComplete(context, widget.programUID,
+                            widget.loggedInUser, widget.matchID);
                         Navigator.pop(context);
                       },
                     ),
