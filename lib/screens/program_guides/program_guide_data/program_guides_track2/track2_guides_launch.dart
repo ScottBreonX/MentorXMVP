@@ -5,8 +5,8 @@ import 'package:mentorx_mvp/components/program_guides_menu.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/program_guides_models/program_guides.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/interview_101/interview_101.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_101/introductions_101/program_guides_intros.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/companytour_201/companytour_201.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/interviewprep_201/interviewprep_201.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201.dart';
@@ -290,25 +290,25 @@ class _Track2GuidesLaunchScreenState extends State<Track2GuidesLaunchScreen> {
                     },
                   ),
                   ProgramGuideMenuTile(
-                    titleText: 'Interview Prep 101',
+                    titleText: 'Company Tour',
                     titlePrefix: '6',
-                    iconData: (guideStatus.interview101Status == 'Current')
+                    iconData: (guideStatus.companyTour201Status == 'Current')
                         ? Icons.play_arrow
-                        : (guideStatus.interview101Status == null)
+                        : (guideStatus.companyTour201Status == null)
                             ? Icons.lock
                             : Icons.check,
-                    iconColor: (guideStatus.interview101Status == 'Current')
+                    iconColor: (guideStatus.companyTour201Status == 'Current')
                         ? kMentorXPAccentMed
-                        : (guideStatus.interview101Status == null)
+                        : (guideStatus.companyTour201Status == null)
                             ? Colors.grey
                             : kMentorXPSecondary,
                     onTap: () {
-                      (guideStatus.interview101Status == null)
+                      (guideStatus.companyTour201Status == null)
                           ? ''
                           : Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Interview101Screen(
+                                builder: (context) => CompanyTour201Screen(
                                   loggedInUser: widget.loggedInUser,
                                   matchID: widget.matchID,
                                   mentorUID: widget.mentorUID,

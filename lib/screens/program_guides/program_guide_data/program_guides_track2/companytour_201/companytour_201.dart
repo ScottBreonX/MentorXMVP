@@ -3,25 +3,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v3.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v4.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v5.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v6.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v7.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/companytour_201/companytour_201_data_v1.dart';
 import '../../../../../components/program_card.dart';
+import 'companytour_201_data_v2.dart';
+import 'companytour_201_data_v3.dart';
+import 'companytour_201_data_v4.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class Resume201Screen extends StatefulWidget {
+class CompanyTour201Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const Resume201Screen({
+  const CompanyTour201Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -29,13 +26,13 @@ class Resume201Screen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'resume_201_screen';
+  static const String id = 'companytour_201_screen';
 
   @override
-  _Resume201ScreenState createState() => _Resume201ScreenState();
+  _CompanyTour201ScreenState createState() => _CompanyTour201ScreenState();
 }
 
-class _Resume201ScreenState extends State<Resume201Screen> {
+class _CompanyTour201ScreenState extends State<CompanyTour201Screen> {
   @override
   void initState() {
     super.initState();
@@ -52,8 +49,7 @@ class _Resume201ScreenState extends State<Resume201Screen> {
         .collection('programGuides')
         .doc(loggedInUser.id)
         .update({
-      'Resume 201': 'Complete',
-      'Company Tour 201': 'Current',
+      'Company Tour 201': 'Complete',
     });
   }
 
@@ -97,39 +93,24 @@ class _Resume201ScreenState extends State<Resume201Screen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Resume 201',
+                      titleText: 'Company Tour',
                       trackText: 'Track 2',
-                      fileName: Resume201DataV1(),
+                      fileName: CompanyTour201DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Resume 201',
+                      titleText: 'Company Tour',
                       trackText: 'Track 2',
-                      fileName: Resume201DataV2(),
+                      fileName: CompanyTour201DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Resume 201',
+                      titleText: 'Company Tour',
                       trackText: 'Track 2',
-                      fileName: Resume201DataV3(),
+                      fileName: CompanyTour201DataV3(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Resume 201',
+                      titleText: 'Company Tour',
                       trackText: 'Track 2',
-                      fileName: Resume201DataV4(),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Resume 201',
-                      trackText: 'Track 2',
-                      fileName: Resume201DataV5(),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Resume 201',
-                      trackText: 'Track 2',
-                      fileName: Resume201DataV6(),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Resume 201',
-                      trackText: 'Track 2',
-                      fileName: Resume201DataV7(),
+                      fileName: CompanyTour201DataV4(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
@@ -146,7 +127,7 @@ class _Resume201ScreenState extends State<Resume201Screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 7; i++)
+                for (int i = 0; i < 4; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(

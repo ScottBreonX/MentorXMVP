@@ -11,6 +11,7 @@ class ProgramGuideStatus {
   final String interviewPrep201status;
   final String mockInterview201status;
   final String resume201status;
+  final String companyTour201Status;
 
   ProgramGuideStatus({
     this.career101Status,
@@ -23,6 +24,7 @@ class ProgramGuideStatus {
     this.interviewPrep201status,
     this.mockInterview201status,
     this.resume201status,
+    this.companyTour201Status,
   });
 
   factory ProgramGuideStatus.fromDocument(DocumentSnapshot doc) {
@@ -59,6 +61,9 @@ class ProgramGuideStatus {
       resume201status: doc.data().toString().contains('Resume 201')
           ? doc['Resume 201']
           : null,
+      companyTour201Status: doc.data().toString().contains('Company Tour 201')
+          ? doc['Company Tour 201']
+          : null,
     );
   }
   Map<String, dynamic> toMap() {
@@ -73,6 +78,7 @@ class ProgramGuideStatus {
       'Interview Prep 201': interviewPrep201status,
       'Mock Interview 201': mockInterview201status,
       'Resume 201': resume201status,
+      'Company Tour 201': companyTour201Status,
     };
   }
 }
