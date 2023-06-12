@@ -3,23 +3,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v3.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v4.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/networking_201/networking_201_data_v5.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/networking_301/networking_301_data_v2.dart';
 import '../../../../../components/program_card.dart';
+import 'networking_301_data_v1.dart';
+import 'networking_301_data_v3.dart';
+import 'networking_301_data_v4.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class Networking201Screen extends StatefulWidget {
+class Networking301Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const Networking201Screen({
+  const Networking301Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -27,13 +26,13 @@ class Networking201Screen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'networking_201_screen';
+  static const String id = 'networking_301_screen';
 
   @override
-  _Networking201ScreenState createState() => _Networking201ScreenState();
+  _Networking301ScreenState createState() => _Networking301ScreenState();
 }
 
-class _Networking201ScreenState extends State<Networking201Screen> {
+class _Networking301ScreenState extends State<Networking301Screen> {
   @override
   void initState() {
     super.initState();
@@ -50,8 +49,8 @@ class _Networking201ScreenState extends State<Networking201Screen> {
         .collection('programGuides')
         .doc(loggedInUser.id)
         .update({
-      'Networking 201': 'Complete',
-      'Interview Prep 201': 'Current',
+      'Networking 301': 'Complete',
+      'Mentor 301': 'Current',
     });
   }
 
@@ -95,29 +94,24 @@ class _Networking201ScreenState extends State<Networking201Screen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Networking 201',
-                      trackText: 'Track 2',
-                      fileName: Networking201DataV1(),
+                      titleText: 'Networking 301',
+                      trackText: 'Track 3',
+                      fileName: Networking301DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Networking 201',
-                      trackText: 'Track 2',
-                      fileName: Networking201DataV2(),
+                      titleText: 'Networking 301',
+                      trackText: 'Track 3',
+                      fileName: Networking301DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Networking 201',
-                      trackText: 'Track 2',
-                      fileName: Networking201DataV3(),
+                      titleText: 'Networking 301',
+                      trackText: 'Track 3',
+                      fileName: Networking301DataV3(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Networking 201',
-                      trackText: 'Track 2',
-                      fileName: Networking201DataV4(),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Networking 201',
-                      trackText: 'Track 2',
-                      fileName: Networking201DataV5(),
+                      titleText: 'Networking 301',
+                      trackText: 'Track 3',
+                      fileName: Networking301DataV4(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
@@ -134,7 +128,7 @@ class _Networking201ScreenState extends State<Networking201Screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 4; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(

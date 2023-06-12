@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Networking201DataV3 extends StatelessWidget {
-  const Networking201DataV3({
+class InterviewPrep301DataV5 extends StatelessWidget {
+  const InterviewPrep301DataV5({
     Key key,
   }) : super(key: key);
 
@@ -11,7 +11,7 @@ class Networking201DataV3 extends StatelessWidget {
       children: [
         RichText(
           text: TextSpan(
-            text: 'Develop Networking Skills: ',
+            text: 'A series of interviews:  ',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -21,7 +21,7 @@ class Networking201DataV3 extends StatelessWidget {
             children: const <TextSpan>[
               TextSpan(
                 text:
-                    'Such as how to introduce yourself, how to start a conversation, how to set up a meet & greet on LinkedIn and how to follow up after an event.',
+                    'You will likely meet with a number of people during your onsite interview. This could include the hiring manager, other members of the team, and even the CEO.',
                 style: TextStyle(fontWeight: FontWeight.normal),
               ),
             ],
@@ -31,7 +31,7 @@ class Networking201DataV3 extends StatelessWidget {
           padding: const EdgeInsets.only(top: 50.0),
           child: RichText(
             text: TextSpan(
-              text: 'Personal Branding: ',
+              text: 'Lunch break:  ',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -41,7 +41,7 @@ class Networking201DataV3 extends StatelessWidget {
               children: const <TextSpan>[
                 TextSpan(
                   text:
-                      'Develop a personal brand that aligns with your networking goals. This includes creating a professional image, developing a personal elevator pitch, and identifying their unique selling points.',
+                      'You may be offered a lunch break during your onsite interview. This is a good opportunity to relax and get to know your interviewers better. You may be taken to lunch by a potential peer. Take time to understand if this would be a good fit for you.',
                   style: TextStyle(fontWeight: FontWeight.normal),
                 ),
               ],

@@ -8,6 +8,8 @@ import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_gu
 import '../../../../../components/program_card.dart';
 import 'interviewprep_301_data_v2.dart';
 import 'interviewprep_301_data_v4.dart';
+import 'interviewprep_301_data_v5.dart';
+import 'interviewprep_301_data_v6.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -49,7 +51,8 @@ class _InterviewPrep301ScreenState extends State<InterviewPrep301Screen> {
         .collection('programGuides')
         .doc(loggedInUser.id)
         .update({
-      'Company Tour 201': 'Complete',
+      'Interview 301': 'Complete',
+      'Networking 301': 'Current',
     });
   }
 
@@ -109,22 +112,27 @@ class _InterviewPrep301ScreenState extends State<InterviewPrep301Screen> {
                     ),
                     ProgramGuideCard(
                       titleText: 'Interview Prep',
-                      trackText: 'Track 4',
+                      trackText: 'Track 3',
                       fileName: InterviewPrep301DataV4(),
                     ),
-                    // ProgramGuideCard(
-                    //   titleText: 'Company Tour',
-                    //   trackText: 'Track 2',
-                    //   fileName: CompanyTour201DataV4(),
-                    //   selectButtons: true,
-                    //   selectButton1: true,
-                    //   button1Text: 'Complete Session',
-                    //   onPressed1: () async {
-                    //     await _markSessionComplete(context, widget.programUID,
-                    //         widget.loggedInUser, widget.matchID);
-                    //     Navigator.pop(context);
-                    //   },
-                    // ),
+                    ProgramGuideCard(
+                      titleText: 'Interview Prep',
+                      trackText: 'Track 3',
+                      fileName: InterviewPrep301DataV5(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Interview Prep',
+                      trackText: 'Track 3',
+                      fileName: InterviewPrep301DataV6(),
+                      selectButtons: true,
+                      selectButton1: true,
+                      button1Text: 'Complete Session',
+                      onPressed1: () async {
+                        await _markSessionComplete(context, widget.programUID,
+                            widget.loggedInUser, widget.matchID);
+                        Navigator.pop(context);
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -132,7 +140,7 @@ class _InterviewPrep301ScreenState extends State<InterviewPrep301Screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 6; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(
