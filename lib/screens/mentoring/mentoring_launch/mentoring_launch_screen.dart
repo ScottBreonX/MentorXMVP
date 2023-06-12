@@ -52,12 +52,10 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
     if (doc.exists) {
       setState(() {
         isMentor = true;
-        print("isMentor");
       });
     } else {
       setState(() {
         isMentor = false;
-        print("isNotMentor");
       });
     }
   }

@@ -3,22 +3,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/interviewprep_201/interviewprep_201_data_v2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/interviewprep_201/interviewprep_201_data_v3.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/interviewprep_201/interviewprep_201_data_v4.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/interviewprep_201/inteviewprep_201_data_v1.dart';
 import '../../../../../components/program_card.dart';
+import 'coaching_301_data_v1.dart';
+import 'coaching_301_data_v2.dart';
+import 'coaching_301_data_v3.dart';
+import 'coaching_301_data_v4.dart';
+import 'coaching_301_data_v5.dart';
+import 'coaching_301_data_v6.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class InterviewPrep201Screen extends StatefulWidget {
+class Coaching301Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const InterviewPrep201Screen({
+  const Coaching301Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -26,13 +28,13 @@ class InterviewPrep201Screen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'interviewprep_201_screen';
+  static const String id = 'coaching_301_screen';
 
   @override
-  _InterviewPrep201ScreenState createState() => _InterviewPrep201ScreenState();
+  _Coaching301ScreenState createState() => _Coaching301ScreenState();
 }
 
-class _InterviewPrep201ScreenState extends State<InterviewPrep201Screen> {
+class _Coaching301ScreenState extends State<Coaching301Screen> {
   @override
   void initState() {
     super.initState();
@@ -49,8 +51,8 @@ class _InterviewPrep201ScreenState extends State<InterviewPrep201Screen> {
         .collection('programGuides')
         .doc(loggedInUser.id)
         .update({
-      'Interview Prep 201': 'Complete',
-      'Mock Interview 201': 'Current',
+      'Coaching 301': 'Complete',
+      'Job Shadow 301': 'Current',
     });
   }
 
@@ -94,24 +96,34 @@ class _InterviewPrep201ScreenState extends State<InterviewPrep201Screen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Interview Prep 201',
-                      trackText: 'Track 2',
-                      fileName: InterviewPrep201DataV1(),
+                      titleText: 'Coaching',
+                      trackText: 'Track 3',
+                      fileName: Coaching301DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Interview Prep 201',
-                      trackText: 'Track 2',
-                      fileName: InterviewPrep201DataV2(),
+                      titleText: 'Coaching',
+                      trackText: 'Track 3',
+                      fileName: Coaching301DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Interview Prep 201',
-                      trackText: 'Track 2',
-                      fileName: InterviewPrep201DataV3(),
+                      titleText: 'Coaching',
+                      trackText: 'Track 3',
+                      fileName: Coaching301DataV3(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Interview Prep 201',
-                      trackText: 'Track 2',
-                      fileName: InterviewPrep201DataV4(),
+                      titleText: 'Coaching',
+                      trackText: 'Track 3',
+                      fileName: Coaching301DataV4(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Coaching',
+                      trackText: 'Track 3',
+                      fileName: Coaching301DataV5(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Coaching',
+                      trackText: 'Track 3',
+                      fileName: Coaching301DataV6(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
@@ -128,7 +140,7 @@ class _InterviewPrep201ScreenState extends State<InterviewPrep201Screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 6; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(

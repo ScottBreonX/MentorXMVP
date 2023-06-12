@@ -56,12 +56,10 @@ class _Track2GuidesLaunchScreenState extends State<Track2GuidesLaunchScreen> {
     if (doc.exists) {
       setState(() {
         isMentor = true;
-        print("isMentor");
       });
     }
     setState(() {
       isMentor = false;
-      print("isNotMentor");
     });
   }
 

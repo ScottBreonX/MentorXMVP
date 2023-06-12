@@ -53,12 +53,10 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
     if (doc.exists) {
       setState(() {
         isMentor = true;
-        print("isMentor");
       });
     }
     setState(() {
       isMentor = false;
-      print("isNotMentor");
     });
   }
 
