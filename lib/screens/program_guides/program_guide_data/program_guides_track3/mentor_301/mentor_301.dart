@@ -3,25 +3,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v3.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v4.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v5.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v6.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201_data_v7.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/mentor_301/mentor_301_data_v1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/mentor_301/mentor_301_data_v5.dart';
 import '../../../../../components/program_card.dart';
+import 'mentor_301_data_v2.dart';
+import 'mentor_301_data_v3.dart';
+import 'mentor_301_data_v4.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class Resume201Screen extends StatefulWidget {
+class Mentor301Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const Resume201Screen({
+  const Mentor301Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -29,13 +27,13 @@ class Resume201Screen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'resume_201_screen';
+  static const String id = 'mentor_301_screen';
 
   @override
-  _Resume201ScreenState createState() => _Resume201ScreenState();
+  _Mentor301ScreenState createState() => _Mentor301ScreenState();
 }
 
-class _Resume201ScreenState extends State<Resume201Screen> {
+class _Mentor301ScreenState extends State<Mentor301Screen> {
   @override
   void initState() {
     super.initState();
@@ -52,8 +50,8 @@ class _Resume201ScreenState extends State<Resume201Screen> {
         .collection('programGuides')
         .doc(loggedInUser.id)
         .update({
-      'Resume 201': 'Complete',
-      'Company Tour 201': 'Current',
+      'Mentor 301': 'Complete',
+      'Coaching 301': 'Current',
     });
   }
 
@@ -97,39 +95,29 @@ class _Resume201ScreenState extends State<Resume201Screen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Resume 201',
-                      trackText: 'Track 2',
-                      fileName: Resume201DataV1(),
+                      titleText: 'Becoming a Mentor',
+                      trackText: 'Track 3',
+                      fileName: Mentor301DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Resume 201',
-                      trackText: 'Track 2',
-                      fileName: Resume201DataV2(),
+                      titleText: 'Becoming a Mentor',
+                      trackText: 'Track 3',
+                      fileName: Mentor301DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Resume 201',
-                      trackText: 'Track 2',
-                      fileName: Resume201DataV3(),
+                      titleText: 'Becoming a Mentor',
+                      trackText: 'Track 3',
+                      fileName: Mentor301DataV3(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Resume 201',
-                      trackText: 'Track 2',
-                      fileName: Resume201DataV4(),
+                      titleText: 'Becoming a Mentor',
+                      trackText: 'Track 3',
+                      fileName: Mentor301DataV4(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Resume 201',
-                      trackText: 'Track 2',
-                      fileName: Resume201DataV5(),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Resume 201',
-                      trackText: 'Track 2',
-                      fileName: Resume201DataV6(),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Resume 201',
-                      trackText: 'Track 2',
-                      fileName: Resume201DataV7(),
+                      titleText: 'Becoming a Mentor',
+                      trackText: 'Track 3',
+                      fileName: Mentor301DataV5(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
@@ -146,7 +134,7 @@ class _Resume201ScreenState extends State<Resume201Screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 7; i++)
+                for (int i = 0; i < 5; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(

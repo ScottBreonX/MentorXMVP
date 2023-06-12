@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Resume201DataV4 extends StatelessWidget {
-  const Resume201DataV4({
+class Mentor301DataV3 extends StatelessWidget {
+  const Mentor301DataV3({
     Key key,
   }) : super(key: key);
 
@@ -11,7 +11,7 @@ class Resume201DataV4 extends StatelessWidget {
       children: [
         RichText(
           text: TextSpan(
-            text: 'Highlight your skills: ',
+            text: 'Be patient and understanding: ',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -21,17 +21,17 @@ class Resume201DataV4 extends StatelessWidget {
             children: const <TextSpan>[
               TextSpan(
                 text:
-                    'Create a section that highlights your skills, such as your technical skills, communication skills, or leadership skills. Make sure to include only those skills that are relevant to the job you are applying for.',
+                    'Everyone learns at their own pace. Be patient with your mentee as they learn and grow. Be understanding of their mistakes and setbacks.',
                 style: TextStyle(fontWeight: FontWeight.normal),
               ),
             ],
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 50.0),
+          padding: const EdgeInsets.only(top: 40.0),
           child: RichText(
             text: TextSpan(
-              text: 'Education and certifications: ',
+              text: 'Be honest and open: ',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -41,7 +41,7 @@ class Resume201DataV4 extends StatelessWidget {
               children: const <TextSpan>[
                 TextSpan(
                   text:
-                      'List your educational qualifications and certifications in this section. Include the name of the institution, the degree or certification you received, and the dates you attended.',
+                      'Build trust with your mentee by being honest and open with them. Be truthful about your own experiences and mistakes. This will help your mentee feel comfortable sharing their own thoughts and feelings with you.',
                   style: TextStyle(fontWeight: FontWeight.normal),
                 ),
               ],

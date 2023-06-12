@@ -7,9 +7,9 @@ import 'package:mentorx_mvp/models/program_guides_models/program_guides.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/introductions_101/program_guides_intros.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/companytour_201/companytour_201.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/resume_201/resume_201.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/interviewprep_301/interviewprep_301.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/mentor_301/mentor_301.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/networking_301/networking_301.dart';
 
 import '../../../../components/progress.dart';
@@ -250,7 +250,7 @@ class _Track3GuidesLaunchScreenState extends State<Track3GuidesLaunchScreen> {
                           : Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => MockInterview201Screen(
+                                builder: (context) => Mentor301Screen(
                                   loggedInUser: widget.loggedInUser,
                                   matchID: widget.matchID,
                                   mentorUID: widget.mentorUID,

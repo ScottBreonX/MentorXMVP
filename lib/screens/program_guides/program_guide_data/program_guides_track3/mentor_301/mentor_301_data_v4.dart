@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Resume201DataV5 extends StatelessWidget {
-  const Resume201DataV5({
+class Mentor301DataV4 extends StatelessWidget {
+  const Mentor301DataV4({
     Key key,
   }) : super(key: key);
 
@@ -11,7 +11,7 @@ class Resume201DataV5 extends StatelessWidget {
       children: [
         RichText(
           text: TextSpan(
-            text: 'Use keywords: ',
+            text: 'Be supportive and encouraging: ',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -21,7 +21,7 @@ class Resume201DataV5 extends StatelessWidget {
             children: const <TextSpan>[
               TextSpan(
                 text:
-                    'Many companies use applicant tracking systems (ATS) to scan resumes for specific keywords. Make sure to include relevant keywords throughout your resume to increase your chances of getting through the ATS.',
+                    'Let your mentee know that you believe in them and their ability to succeed. Offer encouragement and support, especially when they are facing challenges.',
                 style: TextStyle(fontWeight: FontWeight.normal),
               ),
             ],
@@ -31,7 +31,7 @@ class Resume201DataV5 extends StatelessWidget {
           padding: const EdgeInsets.only(top: 50.0),
           child: RichText(
             text: TextSpan(
-              text: 'Keep it concise: ',
+              text: 'Be a good listener: ',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -41,7 +41,7 @@ class Resume201DataV5 extends StatelessWidget {
               children: const <TextSpan>[
                 TextSpan(
                   text:
-                      'Your resume should be no more than two pages long. Use bullet points and concise sentences to keep your resume easy to read and to the point.',
+                      'One of the most important things you can do as a mentor is to listen to your mentee. This means really hearing what they have to say, without judgment or interruption. It also means being open to their ideas and perspectives.',
                   style: TextStyle(fontWeight: FontWeight.normal),
                 ),
               ],
