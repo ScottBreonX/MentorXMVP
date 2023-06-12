@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MockInterview201DataV5 extends StatelessWidget {
-  const MockInterview201DataV5({
+class JobShadow301DataV2 extends StatelessWidget {
+  const JobShadow301DataV2({
     Key key,
   }) : super(key: key);
 
@@ -12,7 +12,7 @@ class MockInterview201DataV5 extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: Text(
-            'By following these steps, you can effectively perform a mock interview and prepare for an actual job interview. Mock interviews can help you identify areas where you need to improve, build your confidence, and increase your chances of landing the job.',
+            'To get the most out of your job shadowing experience, be prepared. Do your research on the career you\'re interested in and come up with a list of questions to ask. Be respectful of the person you\'re shadowing and their time. And most importantly, be open to learning and asking questions.',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,

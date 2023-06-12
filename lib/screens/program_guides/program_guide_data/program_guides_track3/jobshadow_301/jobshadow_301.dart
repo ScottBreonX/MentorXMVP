@@ -3,23 +3,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v3.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v4.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/mockinterview_201/mockinterview_201_data_v5.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/jobshadow_301/jobshadow_301_data_v1.dart';
 import '../../../../../components/program_card.dart';
+import 'jobshadow_301_data_v2.dart';
+import 'jobshadow_301_data_v3.dart';
+import 'jobshadow_301_data_v4.dart';
+import 'jobshadow_301_data_v5.dart';
+import 'jobshadow_301_data_v6.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class MockInterview201Screen extends StatefulWidget {
+class JobShadow301Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const MockInterview201Screen({
+  const JobShadow301Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -27,13 +28,13 @@ class MockInterview201Screen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'mockinterview_201_screen';
+  static const String id = 'jobshadow_301_screen';
 
   @override
-  _MockInterview201ScreenState createState() => _MockInterview201ScreenState();
+  _JobShadow301ScreenState createState() => _JobShadow301ScreenState();
 }
 
-class _MockInterview201ScreenState extends State<MockInterview201Screen> {
+class _JobShadow301ScreenState extends State<JobShadow301Screen> {
   @override
   void initState() {
     super.initState();
@@ -50,8 +51,7 @@ class _MockInterview201ScreenState extends State<MockInterview201Screen> {
         .collection('programGuides')
         .doc(loggedInUser.id)
         .update({
-      'Mock Interview 201': 'Complete',
-      'Resume 201': 'Current',
+      'Job Shadow 301': 'Complete',
     });
   }
 
@@ -95,29 +95,34 @@ class _MockInterview201ScreenState extends State<MockInterview201Screen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Mock Interview 201',
-                      trackText: 'Track 2',
-                      fileName: MockInterview201DataV1(),
+                      titleText: 'Job Shadow',
+                      trackText: 'Track 3',
+                      fileName: JobShadow301DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Mock Interview 201',
-                      trackText: 'Track 2',
-                      fileName: MockInterview201DataV2(),
+                      titleText: 'Job Shadow',
+                      trackText: 'Track 3',
+                      fileName: JobShadow301DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Mock Interview 201',
-                      trackText: 'Track 2',
-                      fileName: MockInterview201DataV3(),
+                      titleText: 'Job Shadow',
+                      trackText: 'Track 3',
+                      fileName: JobShadow301DataV3(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Mock Interview 201',
-                      trackText: 'Track 2',
-                      fileName: MockInterview201DataV4(),
+                      titleText: 'Job Shadow',
+                      trackText: 'Track 3',
+                      fileName: JobShadow301DataV4(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Mock Interview 201',
-                      trackText: 'Track 2',
-                      fileName: MockInterview201DataV5(),
+                      titleText: 'Job Shadow',
+                      trackText: 'Track 3',
+                      fileName: JobShadow301DataV5(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Job Shadow',
+                      trackText: 'Track 3',
+                      fileName: JobShadow301DataV6(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
@@ -134,7 +139,7 @@ class _MockInterview201ScreenState extends State<MockInterview201Screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 6; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(
