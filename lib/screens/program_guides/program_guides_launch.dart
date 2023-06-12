@@ -6,6 +6,8 @@ import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track1/track1_guides_launch.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/track2_guides_launch.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/track3_guides_launch.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track4/track4_guides_launch.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_tracks/program_guide_tracks.dart';
 
 import '../../components/progress.dart';
 
@@ -98,7 +100,20 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
               matchID: widget.matchID,
             );
           }
-          return Text('WIP');
+          if (trackInfo.track == 'Track 4') {
+            return Track4GuidesLaunchScreen(
+              loggedInUser: widget.loggedInUser,
+              mentorUID: widget.mentorUID,
+              programUID: widget.programUID,
+              matchID: widget.matchID,
+            );
+          }
+          return ProgramGuideTracks(
+            loggedInUser: widget.loggedInUser,
+            mentorUID: widget.mentorUID,
+            programUID: widget.programUID,
+            matchID: widget.matchID,
+          );
         });
   }
 }

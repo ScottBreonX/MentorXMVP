@@ -132,7 +132,7 @@ class Track4Data extends StatelessWidget {
           children: [
             Flexible(
               child: Text(
-                '• Negotiation',
+                '• Graduate Degrees',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: fontSize ?? 18,
@@ -146,7 +146,7 @@ class Track4Data extends StatelessWidget {
           children: [
             Flexible(
               child: Text(
-                '• Shared Learnings',
+                '• Paying it Forward',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: fontSize ?? 18,

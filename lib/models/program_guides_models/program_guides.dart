@@ -17,6 +17,11 @@ class ProgramGuideStatus {
   final String mentor301Status;
   final String coaching301Status;
   final String jobShadow301Status;
+  final String emotionalIntelligenceStatus;
+  final String diversityInclusion;
+  final String skillDevelopment;
+  final String graduateDegrees;
+  final String payingItForward;
 
   ProgramGuideStatus({
     this.career101Status,
@@ -35,6 +40,11 @@ class ProgramGuideStatus {
     this.mentor301Status,
     this.coaching301Status,
     this.jobShadow301Status,
+    this.emotionalIntelligenceStatus,
+    this.diversityInclusion,
+    this.skillDevelopment,
+    this.graduateDegrees,
+    this.payingItForward,
   });
 
   factory ProgramGuideStatus.fromDocument(DocumentSnapshot doc) {
@@ -89,6 +99,23 @@ class ProgramGuideStatus {
       jobShadow301Status: doc.data().toString().contains('Job Shadow 301')
           ? doc['Job Shadow 301']
           : null,
+      emotionalIntelligenceStatus:
+          doc.data().toString().contains('Emotional Intelligence')
+              ? doc['Emotional Intelligence']
+              : null,
+      diversityInclusion:
+          doc.data().toString().contains('Diversity & Inclusion')
+              ? doc['Diversity & Inclusion']
+              : null,
+      skillDevelopment: doc.data().toString().contains('Skill Development')
+          ? doc['Skill Development']
+          : null,
+      graduateDegrees: doc.data().toString().contains('Graduate Degrees')
+          ? doc['Graduate Degrees']
+          : null,
+      payingItForward: doc.data().toString().contains('Paying It Forward')
+          ? doc['Paying It Forward']
+          : null,
     );
   }
   Map<String, dynamic> toMap() {
@@ -109,6 +136,11 @@ class ProgramGuideStatus {
       'Mentor 301': mentor301Status,
       'Coaching 301': coaching301Status,
       'Job Shadow 301': jobShadow301Status,
+      'Emotional Intelligence': emotionalIntelligenceStatus,
+      'Diversity & Inclusion': diversityInclusion,
+      'Skill Development': skillDevelopment,
+      'Graduate Degrees': graduateDegrees,
+      'Paying It Forward': payingItForward,
     };
   }
 }
