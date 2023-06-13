@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Mentor301DataV5 extends StatelessWidget {
-  const Mentor301DataV5({
+class PayingItForward01DataV6 extends StatelessWidget {
+  const PayingItForward01DataV6({
     Key key,
   }) : super(key: key);
 
@@ -11,7 +11,7 @@ class Mentor301DataV5 extends StatelessWidget {
       children: [
         RichText(
           text: TextSpan(
-            text: 'Be willing to share your knowledge and experience: ',
+            text: 'Preserving knowledge: ',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -21,7 +21,7 @@ class Mentor301DataV5 extends StatelessWidget {
             children: const <TextSpan>[
               TextSpan(
                 text:
-                    'One of the best ways to help your mentee is to share your knowledge and experience with them. This can be done through formal mentoring sessions, as well as through informal conversations and interactions.',
+                    'Teaching helps preserve knowledge and pass it on to future generations. By imparting knowledge to others, you ensure that valuable information and skills are not lost over time, but continue to benefit individuals and society in the long run.',
                 style: TextStyle(fontWeight: FontWeight.normal),
               ),
             ],
@@ -30,7 +30,7 @@ class Mentor301DataV5 extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: Text(
-            'Mentoring can be a rewarding experience for both the mentor and the mentee. By following these tips, you can be a great mentor and help your mentee reach their full potential.',
+            'In summary, teaching others is important because it enables knowledge sharing, reinforces learning, builds relationships, empowers individuals, promotes critical thinking, creates a positive impact, and preserves knowledge for future generations.',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,

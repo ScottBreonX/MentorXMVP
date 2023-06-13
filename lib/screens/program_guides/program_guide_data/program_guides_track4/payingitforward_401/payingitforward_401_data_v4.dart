@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Mentor301DataV4 extends StatelessWidget {
-  const Mentor301DataV4({
+class PayingItForward01DataV4 extends StatelessWidget {
+  const PayingItForward01DataV4({
     Key key,
   }) : super(key: key);
 
@@ -11,7 +11,7 @@ class Mentor301DataV4 extends StatelessWidget {
       children: [
         RichText(
           text: TextSpan(
-            text: 'Be supportive and encouraging: ',
+            text: 'Empowering others: ',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -21,17 +21,17 @@ class Mentor301DataV4 extends StatelessWidget {
             children: const <TextSpan>[
               TextSpan(
                 text:
-                    'Let your mentee know that you believe in them and their ability to succeed. Offer encouragement and support, especially when they are facing challenges.',
+                    'Teaching empowers individuals by providing them with the tools and knowledge they need to succeed. By sharing your expertise, you can inspire and motivate others to pursue their goals, acquire new skills, and broaden their horizons.',
                 style: TextStyle(fontWeight: FontWeight.normal),
               ),
             ],
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 50.0),
+          padding: const EdgeInsets.only(top: 20.0),
           child: RichText(
             text: TextSpan(
-              text: 'Be a good listener: ',
+              text: 'Promoting critical thinking: ',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -41,7 +41,7 @@ class Mentor301DataV4 extends StatelessWidget {
               children: const <TextSpan>[
                 TextSpan(
                   text:
-                      'One of the most important things you can do as a mentor is to listen to your mentee. This means really hearing what they have to say, without judgment or interruption. It also means being open to their ideas and perspectives.',
+                      'Teaching encourages critical thinking and problem-solving skills. When you teach, you often face questions and challenges that require you to think deeply, analyze information, and find creative solutions.',
                   style: TextStyle(fontWeight: FontWeight.normal),
                 ),
               ],
