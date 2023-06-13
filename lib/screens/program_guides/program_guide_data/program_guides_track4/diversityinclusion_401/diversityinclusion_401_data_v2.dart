@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Coaching301DataV6 extends StatelessWidget {
-  const Coaching301DataV6({
+class DiversityInclusion401DataV2 extends StatelessWidget {
+  const DiversityInclusion401DataV2({
     Key key,
   }) : super(key: key);
 
@@ -12,7 +12,7 @@ class Coaching301DataV6 extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: Text(
-            'Take turns switching roles of coach and coachee to improve the skill of coach and find personal solutions. Be sure to take notes and provide feedback between coaching sessions.',
+            'These differences can include but are not limited to race, ethnicity, gender, age, sexual orientation, religion, socioeconomic status, disabilities, and cultural backgrounds.',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -23,7 +23,7 @@ class Coaching301DataV6 extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: Text(
-            'Additionally you can pair up with another mentorship group and practice coaching to get new perspectives.',
+            'Embracing diversity recognizes and values the unique perspectives, experiences, and identities that individuals bring to the table.',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,

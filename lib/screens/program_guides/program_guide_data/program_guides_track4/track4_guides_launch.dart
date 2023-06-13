@@ -9,7 +9,7 @@ import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_gu
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/coaching_301/coaching_301.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/jobshadow_301/jobshadow_301.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/mentor_301/mentor_301.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/networking_301/networking_301.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track4/diversityinclusion_401/diversityinclusion_401.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track4/emotionalintelligence_401/emotionalintelligence_401.dart';
 
 import '../../../../components/progress.dart';
@@ -222,7 +222,8 @@ class _Track4GuidesLaunchScreenState extends State<Track4GuidesLaunchScreen> {
                           : Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Networking301Screen(
+                                builder: (context) =>
+                                    DiversityInclusion401Screen(
                                   loggedInUser: widget.loggedInUser,
                                   matchID: widget.matchID,
                                   mentorUID: widget.mentorUID,

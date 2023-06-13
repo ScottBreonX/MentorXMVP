@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Coaching301DataV1 extends StatelessWidget {
-  const Coaching301DataV1({
+class DiversityInclusion401DataV6 extends StatelessWidget {
+  const DiversityInclusion401DataV6({
     Key key,
   }) : super(key: key);
 
@@ -12,7 +12,7 @@ class Coaching301DataV1 extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: Text(
-            'This session will teach you how to listen while coaching someone and helping them to solve issues. The goal is not to give answers, but to help the person you are coaching finding their own answers. Find the root cause of the issues and come up with an action item to solve the problem. Both mentee and mentor will take turns taking the role of coach.',
+            'Inclusion requires removing barriers, addressing biases, and promoting a culture of respect and collaboration.',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -23,11 +23,10 @@ class Coaching301DataV1 extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: Text(
-            'Understand the value of coaching & learn a coaching / problem-solving model',
+            'The interconnected nature of DEI recognizes that diversity alone is not enough. Equity and inclusion are crucial for leveraging the benefits of diversity and creating a more just and inclusive society or organization. By striving for diversity, equity, and inclusion, we aim to create environments where all individuals have equal opportunities, feel respected and valued, and can fully contribute their talents and perspectives.',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
-              fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
             ),
           ),

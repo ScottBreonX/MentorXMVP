@@ -4,23 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import '../../../../../components/program_card.dart';
-import 'coaching_301_data_v1.dart';
-import 'coaching_301_data_v2.dart';
-import 'coaching_301_data_v3.dart';
-import 'coaching_301_data_v4.dart';
-import 'coaching_301_data_v5.dart';
-import 'coaching_301_data_v6.dart';
+import 'diversityinclusion_401_data_v1.dart';
+import 'diversityinclusion_401_data_v2.dart';
+import 'diversityinclusion_401_data_v3.dart';
+import 'diversityinclusion_401_data_v4.dart';
+import 'diversityinclusion_401_data_v5.dart';
+import 'diversityinclusion_401_data_v6.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class Coaching301Screen extends StatefulWidget {
+class DiversityInclusion401Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const Coaching301Screen({
+  const DiversityInclusion401Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -28,13 +28,15 @@ class Coaching301Screen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'coaching_301_screen';
+  static const String id = 'diversity_inclusion_401_screen';
 
   @override
-  _Coaching301ScreenState createState() => _Coaching301ScreenState();
+  _DiversityInclusion401ScreenState createState() =>
+      _DiversityInclusion401ScreenState();
 }
 
-class _Coaching301ScreenState extends State<Coaching301Screen> {
+class _DiversityInclusion401ScreenState
+    extends State<DiversityInclusion401Screen> {
   @override
   void initState() {
     super.initState();
@@ -51,8 +53,8 @@ class _Coaching301ScreenState extends State<Coaching301Screen> {
         .collection('programGuides')
         .doc(loggedInUser.id)
         .update({
-      'Coaching 301': 'Complete',
-      'Job Shadow 301': 'Current',
+      'Diversity & Inclusion': 'Complete',
+      'Skill Development': 'Current',
     });
   }
 
@@ -96,34 +98,34 @@ class _Coaching301ScreenState extends State<Coaching301Screen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Coaching',
-                      trackText: 'Track 3',
-                      fileName: Coaching301DataV1(),
+                      titleText: 'Diversity & Inclusion',
+                      trackText: 'Track 4',
+                      fileName: DiversityInclusion401DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Coaching',
-                      trackText: 'Track 3',
-                      fileName: Coaching301DataV2(),
+                      titleText: 'Diversity & Inclusion',
+                      trackText: 'Track 4',
+                      fileName: DiversityInclusion401DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Coaching',
-                      trackText: 'Track 3',
-                      fileName: Coaching301DataV3(),
+                      titleText: 'Diversity & Inclusion',
+                      trackText: 'Track 4',
+                      fileName: DiversityInclusion401DataV3(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Coaching',
-                      trackText: 'Track 3',
-                      fileName: Coaching301DataV4(),
+                      titleText: 'Diversity & Inclusion',
+                      trackText: 'Track 4',
+                      fileName: DiversityInclusion401DataV4(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Coaching',
-                      trackText: 'Track 3',
-                      fileName: Coaching301DataV5(),
+                      titleText: 'Diversity & Inclusion',
+                      trackText: 'Track 4',
+                      fileName: DiversityInclusion401DataV5(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Coaching',
-                      trackText: 'Track 3',
-                      fileName: Coaching301DataV6(),
+                      titleText: 'Diversity & Inclusion',
+                      trackText: 'Track 4',
+                      fileName: DiversityInclusion401DataV6(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
