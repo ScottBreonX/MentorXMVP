@@ -3,18 +3,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Mentor {
   final String id;
   final int mentorSlots;
-  final String mentorSkill1;
-  final String mentorSkill2;
-  final String mentorSkill3;
+  final String mentorBackground;
+  final String mentorExperience;
+  final String mentorOtherInfo;
+  final String mentorYearInSchool;
   final String mentorFreeForm;
   final String lName;
   final String fName;
   final String profilePicture;
 
   Mentor(
-      {this.mentorSkill1,
-      this.mentorSkill2,
-      this.mentorSkill3,
+      {this.mentorBackground,
+      this.mentorExperience,
+      this.mentorOtherInfo,
+      this.mentorYearInSchool,
       this.mentorFreeForm,
       this.id,
       this.mentorSlots,
@@ -28,18 +30,22 @@ class Mentor {
       mentorSlots: doc.data().toString().contains('mentorSlots')
           ? doc['mentorSlots']
           : 2,
-      mentorSkill1: doc.data().toString().contains('Mentor Skill 1')
-          ? doc['Mentor Skill 1']
-          : null,
-      mentorSkill2: doc.data().toString().contains('Mentor Skill 2')
-          ? doc['Mentor Skill 2']
-          : null,
-      mentorSkill3: doc.data().toString().contains('Mentor Skill 3')
-          ? doc['Mentor Skill 3']
-          : null,
       mentorFreeForm: doc.data().toString().contains('Mentor Free Form')
           ? doc['Mentor Free Form']
           : '',
+      mentorBackground: doc.data().toString().contains('Mentor Background')
+          ? doc['Mentor Background']
+          : '',
+      mentorExperience: doc.data().toString().contains('Mentor Experience')
+          ? doc['Mentor Experience']
+          : '',
+      mentorOtherInfo: doc.data().toString().contains('Mentor Other Info')
+          ? doc['Mentor Other Info']
+          : '',
+      mentorYearInSchool:
+          doc.data().toString().contains('Mentor Year in School')
+              ? doc['Mentor Year in School']
+              : '',
       fName:
           doc.data().toString().contains('First Name') ? doc['First Name'] : '',
       lName:
@@ -53,9 +59,10 @@ class Mentor {
     return {
       'id': id,
       'Mentor Slots': mentorSlots,
-      'Mentor Skill 1': mentorSkill1,
-      'Mentor Skill 2': mentorSkill2,
-      'Mentor Skill 3': mentorSkill3,
+      'Mentor Background': mentorBackground,
+      'Mentor Experience': mentorExperience,
+      'Mentor Other Info': mentorOtherInfo,
+      'Mentor Year in School': mentorYearInSchool,
       'Mentor Free Form': mentorFreeForm,
       'First Name': fName,
       'Last Name': lName,

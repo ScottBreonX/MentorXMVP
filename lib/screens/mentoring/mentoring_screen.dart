@@ -5,7 +5,7 @@ import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/enrollment_model.dart';
 import 'package:mentorx_mvp/screens/launch_screen.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentee_enrollment/mentee_enrollment_skills.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentor_enrollment/mentor_enrollment_skills.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentor_enrollment/mentor_enrollment_background.dart';
 import '../../components/alert_dialog.dart';
 import '../../components/progress.dart';
 import '../../models/mentoring_model.dart';
