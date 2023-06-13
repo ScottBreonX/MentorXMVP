@@ -3,22 +3,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/networking_301/networking_301_data_v2.dart';
 import '../../../../../components/program_card.dart';
-import 'networking_301_data_v1.dart';
-import 'networking_301_data_v3.dart';
-import 'networking_301_data_v4.dart';
+import 'emotionalintelligence_401_data_v1.dart';
+import 'emotionalintelligence_401_data_v2.dart';
+import 'emotionalintelligence_401_data_v3.dart';
+import 'emotionalintelligence_401_data_v4.dart';
+import 'emotionalintelligence_401_data_v5.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class Networking301Screen extends StatefulWidget {
+class EmotionalIntelligence401Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const Networking301Screen({
+  const EmotionalIntelligence401Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -26,13 +27,15 @@ class Networking301Screen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'networking_301_screen';
+  static const String id = 'emotional_intelligence_401_screen';
 
   @override
-  _Networking301ScreenState createState() => _Networking301ScreenState();
+  _EmotionalIntelligence401ScreenState createState() =>
+      _EmotionalIntelligence401ScreenState();
 }
 
-class _Networking301ScreenState extends State<Networking301Screen> {
+class _EmotionalIntelligence401ScreenState
+    extends State<EmotionalIntelligence401Screen> {
   @override
   void initState() {
     super.initState();
@@ -49,8 +52,8 @@ class _Networking301ScreenState extends State<Networking301Screen> {
         .collection('programGuides')
         .doc(loggedInUser.id)
         .update({
-      'Networking 301': 'Complete',
-      'Mentor 301': 'Current',
+      'Emotional Intelligence': 'Complete',
+      'Diversity & Inclusion': 'Current',
     });
   }
 
@@ -94,24 +97,29 @@ class _Networking301ScreenState extends State<Networking301Screen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Networking 301',
-                      trackText: 'Track 3',
-                      fileName: Networking301DataV1(),
+                      titleText: 'Emotional Intelligence',
+                      trackText: 'Track 4',
+                      fileName: EmotionalIntelligence401DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Networking 301',
-                      trackText: 'Track 3',
-                      fileName: Networking301DataV2(),
+                      titleText: 'Emotional Intelligence',
+                      trackText: 'Track 4',
+                      fileName: EmotionalIntelligence401DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Networking 301',
-                      trackText: 'Track 3',
-                      fileName: Networking301DataV3(),
+                      titleText: 'Emotional Intelligence',
+                      trackText: 'Track 4',
+                      fileName: EmotionalIntelligence401DataV3(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Networking 301',
-                      trackText: 'Track 3',
-                      fileName: Networking301DataV4(),
+                      titleText: 'Emotional Intelligence',
+                      trackText: 'Track 4',
+                      fileName: EmotionalIntelligence401DataV4(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Emotional Intelligence',
+                      trackText: 'Track 4',
+                      fileName: EmotionalIntelligence401DataV5(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
@@ -128,7 +136,7 @@ class _Networking301ScreenState extends State<Networking301Screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 5; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(

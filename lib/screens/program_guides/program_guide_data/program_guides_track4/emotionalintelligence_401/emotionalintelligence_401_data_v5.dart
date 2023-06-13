@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Networking301DataV4 extends StatelessWidget {
-  const Networking301DataV4({
+class EmotionalIntelligence401DataV5 extends StatelessWidget {
+  const EmotionalIntelligence401DataV5({
     Key key,
   }) : super(key: key);
 
@@ -9,20 +9,11 @@ class Networking301DataV4 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          'Here are some additional tips that may help you build your network:',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Montserrat',
-          ),
-        ),
         Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: RichText(
             text: TextSpan(
-              text: 'Be a good listener: ',
+              text: '5. Stress Management: ',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -32,7 +23,7 @@ class Networking301DataV4 extends StatelessWidget {
               children: const <TextSpan>[
                 TextSpan(
                   text:
-                      'People are more likely to want to help you if they feel like you\'re interested in them and what they have to say.',
+                      'Emotionally intelligent people are better at managing stress and dealing with difficult situations. Identifying and regulating their emotions allows them to handle high pressure situations and avoid reacting impulsively.',
                   style: TextStyle(fontWeight: FontWeight.normal),
                 ),
               ],
@@ -43,7 +34,7 @@ class Networking301DataV4 extends StatelessWidget {
           padding: const EdgeInsets.only(top: 20.0),
           child: RichText(
             text: TextSpan(
-              text: 'Be positive: ',
+              text: '6. Increased Empathy: ',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -53,7 +44,7 @@ class Networking301DataV4 extends StatelessWidget {
               children: const <TextSpan>[
                 TextSpan(
                   text:
-                      'People are more likely to want to be around you if you\'re positive and upbeat.',
+                      'EI allows individuals to understand and empathize with others. Acknowledging the perspectives and emotions of others can go a long way in building stronger relationships.',
                   style: TextStyle(fontWeight: FontWeight.normal),
                 ),
               ],
@@ -61,23 +52,13 @@ class Networking301DataV4 extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 20.0),
-          child: RichText(
-            text: TextSpan(
-              text: 'Be persistent: ',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Montserrat',
-              ),
-              children: const <TextSpan>[
-                TextSpan(
-                  text:
-                      'Don\'t give up on networking. It takes time to build a strong network, but it\'s worth it in the end.',
-                  style: TextStyle(fontWeight: FontWeight.normal),
-                ),
-              ],
+          padding: const EdgeInsets.only(top: 20.0, bottom: 20),
+          child: Text(
+            'EI is crucial in networking because it enables individuals to effectively communicate and create meaningful connections.',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontFamily: 'Montserrat',
             ),
           ),
         ),
