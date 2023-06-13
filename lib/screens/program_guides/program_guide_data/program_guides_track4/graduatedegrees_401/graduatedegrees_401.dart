@@ -3,24 +3,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/jobshadow_301/jobshadow_301_data_v1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track4/graduatedegrees_401/graduatedegrees_401_data_v1.dart';
 import '../../../../../components/program_card.dart';
-import 'jobshadow_301_data_v2.dart';
-import 'jobshadow_301_data_v3.dart';
-import 'jobshadow_301_data_v4.dart';
-import 'jobshadow_301_data_v5.dart';
-import 'jobshadow_301_data_v6.dart';
+import 'graduatedegrees_401_data_v2.dart';
+import 'graduatedegrees_401_data_v3.dart';
+import 'graduatedegrees_401_data_v4.dart';
+import 'graduatedegrees_401_data_v5.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class JobShadow301Screen extends StatefulWidget {
+class GraduateDegrees401Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const JobShadow301Screen({
+  const GraduateDegrees401Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -28,13 +27,14 @@ class JobShadow301Screen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'jobshadow_301_screen';
+  static const String id = 'graduatedegrees_401_screen';
 
   @override
-  _JobShadow301ScreenState createState() => _JobShadow301ScreenState();
+  _GraduateDegrees401ScreenState createState() =>
+      _GraduateDegrees401ScreenState();
 }
 
-class _JobShadow301ScreenState extends State<JobShadow301Screen> {
+class _GraduateDegrees401ScreenState extends State<GraduateDegrees401Screen> {
   @override
   void initState() {
     super.initState();
@@ -51,7 +51,8 @@ class _JobShadow301ScreenState extends State<JobShadow301Screen> {
         .collection('programGuides')
         .doc(loggedInUser.id)
         .update({
-      'Job Shadow 301': 'Complete',
+      'Graduate Degrees': 'Complete',
+      'Paying It Forward': 'Current',
     });
   }
 
@@ -95,34 +96,29 @@ class _JobShadow301ScreenState extends State<JobShadow301Screen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Job Shadow',
-                      trackText: 'Track 3',
-                      fileName: JobShadow301DataV1(),
+                      titleText: 'Graduate Degrees',
+                      trackText: 'Track 4',
+                      fileName: GraduateDegrees401DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Job Shadow',
-                      trackText: 'Track 3',
-                      fileName: JobShadow301DataV2(),
+                      titleText: 'Graduate Degrees',
+                      trackText: 'Track 4',
+                      fileName: GraduateDegrees401DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Job Shadow',
-                      trackText: 'Track 3',
-                      fileName: JobShadow301DataV3(),
+                      titleText: 'Graduate Degrees',
+                      trackText: 'Track 4',
+                      fileName: GraduateDegrees401DataV3(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Job Shadow',
-                      trackText: 'Track 3',
-                      fileName: JobShadow301DataV4(),
+                      titleText: 'Graduate Degrees',
+                      trackText: 'Track 4',
+                      fileName: GraduateDegrees401DataV4(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Job Shadow',
-                      trackText: 'Track 3',
-                      fileName: JobShadow301DataV5(),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Job Shadow',
-                      trackText: 'Track 3',
-                      fileName: JobShadow301DataV6(),
+                      titleText: 'Graduate Degrees',
+                      trackText: 'Track 4',
+                      fileName: GraduateDegrees401DataV5(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
@@ -139,7 +135,7 @@ class _JobShadow301ScreenState extends State<JobShadow301Screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 5; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(
