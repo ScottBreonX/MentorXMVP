@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class InterviewPrep301DataV1 extends StatelessWidget {
-  const InterviewPrep301DataV1({
+class SkillDevelopment401DataV1 extends StatelessWidget {
+  const SkillDevelopment401DataV1({
     Key key,
   }) : super(key: key);
 
@@ -9,11 +9,19 @@ class InterviewPrep301DataV1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Text(
+          'Transferable skills are necessary to build the foundation of your resume, and will always be relevant in your career. However, there are a variety of specialized skills that can contribute to landing your dream job.',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontFamily: 'Montserrat',
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: RichText(
             text: TextSpan(
-              text: 'Generally there are a few phases of interviews: ',
+              text: 'Adaptability and Flexibility: ',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -23,21 +31,10 @@ class InterviewPrep301DataV1 extends StatelessWidget {
               children: const <TextSpan>[
                 TextSpan(
                   text:
-                      'Initial screening, first interview with hiring leader, second interview with team, on-site interview with team and cross functional partners.',
+                      'In today\'s rapidly changing world, being adaptable and open to new ideas is important.',
                   style: TextStyle(fontWeight: FontWeight.normal),
                 ),
               ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 50.0),
-          child: Text(
-            'This can vary company by company, This session will focus on preparing for on-site interviews.',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontFamily: 'Montserrat',
             ),
           ),
         ),

@@ -3,24 +3,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/interviewprep_301/interviewprep_301_data_v1.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/interviewprep_301/interviewprep_301_data_v3.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track4/skilldevelopment_401/skilldevelopment_401_data_v1.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track4/skilldevelopment_401/skilldevelopment_401_data_v2.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track4/skilldevelopment_401/skilldevelopment_401_data_v3.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track4/skilldevelopment_401/skilldevelopment_401_data_v4.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track4/skilldevelopment_401/skilldevelopment_401_data_v5.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track4/skilldevelopment_401/skilldevelopment_401_data_v6.dart';
 import '../../../../../components/program_card.dart';
-import 'interviewprep_301_data_v2.dart';
-import 'interviewprep_301_data_v4.dart';
-import 'interviewprep_301_data_v5.dart';
-import 'interviewprep_301_data_v6.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class InterviewPrep301Screen extends StatefulWidget {
+class SkillDevelopment401Screen extends StatefulWidget {
   final myUser loggedInUser;
   final String mentorUID;
   final String programUID;
   final String matchID;
 
-  const InterviewPrep301Screen({
+  const SkillDevelopment401Screen({
     Key key,
     this.loggedInUser,
     this.mentorUID,
@@ -28,13 +28,14 @@ class InterviewPrep301Screen extends StatefulWidget {
     this.matchID,
   }) : super(key: key);
 
-  static const String id = 'interviewprep_301_screen';
+  static const String id = 'skilldevelopment_401_screen';
 
   @override
-  _InterviewPrep301ScreenState createState() => _InterviewPrep301ScreenState();
+  _SkillDevelopment401ScreenState createState() =>
+      _SkillDevelopment401ScreenState();
 }
 
-class _InterviewPrep301ScreenState extends State<InterviewPrep301Screen> {
+class _SkillDevelopment401ScreenState extends State<SkillDevelopment401Screen> {
   @override
   void initState() {
     super.initState();
@@ -51,8 +52,8 @@ class _InterviewPrep301ScreenState extends State<InterviewPrep301Screen> {
         .collection('programGuides')
         .doc(loggedInUser.id)
         .update({
-      'Interview 301': 'Complete',
-      'Networking 301': 'Current',
+      'Skill Development': 'Complete',
+      'Graduate Degrees': 'Current',
     });
   }
 
@@ -96,34 +97,34 @@ class _InterviewPrep301ScreenState extends State<InterviewPrep301Screen> {
                       }),
                   items: [
                     ProgramGuideCard(
-                      titleText: 'Interview Prep',
-                      trackText: 'Track 3',
-                      fileName: InterviewPrep301DataV1(),
+                      titleText: 'Skill Development',
+                      trackText: 'Track 4',
+                      fileName: SkillDevelopment401DataV1(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Interview Prep',
-                      trackText: 'Track 3',
-                      fileName: InterviewPrep301DataV2(),
+                      titleText: 'Skill Development',
+                      trackText: 'Track 4',
+                      fileName: SkillDevelopment401DataV2(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Interview Prep',
-                      trackText: 'Track 3',
-                      fileName: InterviewPrep301DataV3(),
+                      titleText: 'Skill Development',
+                      trackText: 'Track 4',
+                      fileName: SkillDevelopment401DataV3(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Interview Prep',
-                      trackText: 'Track 3',
-                      fileName: InterviewPrep301DataV4(),
+                      titleText: 'Skill Development',
+                      trackText: 'Track 4',
+                      fileName: SkillDevelopment401DataV4(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Interview Prep',
-                      trackText: 'Track 3',
-                      fileName: InterviewPrep301DataV5(),
+                      titleText: 'Skill Development',
+                      trackText: 'Track 4',
+                      fileName: SkillDevelopment401DataV5(),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Interview Prep',
-                      trackText: 'Track 3',
-                      fileName: InterviewPrep301DataV6(),
+                      titleText: 'Skill Development',
+                      trackText: 'Track 4',
+                      fileName: SkillDevelopment401DataV6(),
                       selectButtons: true,
                       selectButton1: true,
                       button1Text: 'Complete Session',
