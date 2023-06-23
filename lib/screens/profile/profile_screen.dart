@@ -732,13 +732,21 @@ class _ProfileState extends State<Profile> {
                                     ),
                             ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 60.0),
-                            child: CoreProfileSection(
-                              profileId: user.id,
-                              myProfileView: myProfileView,
-                            ),
-                          ),
+                          !myProfileView
+                              ? Padding(
+                                  padding: const EdgeInsets.only(top: 90.0),
+                                  child: CoreProfileSection(
+                                    profileId: user.id,
+                                    myProfileView: myProfileView,
+                                  ),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.only(top: 60.0),
+                                  child: CoreProfileSection(
+                                    profileId: user.id,
+                                    myProfileView: myProfileView,
+                                  ),
+                                ),
                           Padding(
                             padding:
                                 const EdgeInsets.only(left: 8.0, right: 8.0),

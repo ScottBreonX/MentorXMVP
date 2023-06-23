@@ -301,7 +301,7 @@ Future<void> _createMentor(
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => MentorEnrollmentSkillsScreen(
+        builder: (context) => MentorEnrollmentBackgroundScreen(
           loggedInUser: loggedInUser,
           programUID: programUID,
         ),

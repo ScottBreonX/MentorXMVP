@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentor_enrollment/mentor_enrollment_backgroundV2.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentor_enrollment/mentor_enrollment_skills.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/progress.dart';
 import '../../../models/mentor_match_models/mentor_model.dart';
@@ -11,42 +12,42 @@ import '../../../models/mentor_match_models/mentor_model.dart';
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class MentorEnrollmentSkillsScreen extends StatefulWidget {
+class MentorEnrollmentBackgroundScreen extends StatefulWidget {
   final myUser loggedInUser;
   final String programUID;
   static const String id = 'mentor_enrollment_background_screen';
 
-  const MentorEnrollmentSkillsScreen({
+  const MentorEnrollmentBackgroundScreen({
     this.loggedInUser,
     this.programUID,
   });
 
   @override
-  State<MentorEnrollmentSkillsScreen> createState() =>
-      _MentorEnrollmentSkillsScreenState();
+  State<MentorEnrollmentBackgroundScreen> createState() =>
+      _MentorEnrollmentBackgroundScreenState();
 }
 
-class _MentorEnrollmentSkillsScreenState
-    extends State<MentorEnrollmentSkillsScreen> {
+class _MentorEnrollmentBackgroundScreenState
+    extends State<MentorEnrollmentBackgroundScreen> {
   Future<void> _updateMentorAttributes(BuildContext context, String programUID,
-      String mentorBackgroundText, String mentorExperienceText) async {
+      String mentorExperienceText, String yearInSchoolText) async {
     try {
       await programsRef
           .doc(widget.programUID)
           .collection('mentors')
           .doc(widget.loggedInUser.id)
           .update({
-        "Mentor Background": mentorBackgroundText,
         "Mentor Experience": mentorExperienceText,
         "id": widget.loggedInUser.id,
         "First Name": widget.loggedInUser.firstName,
         "Last Name": widget.loggedInUser.lastName,
         "Profile Picture": widget.loggedInUser.profilePicture,
+        "Mentor Year in School": yearInSchoolText,
       });
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => MentorEnrollmentBackgroundV2Screen(
+          builder: (context) => MentorEnrollmentSkillsScreen(
             loggedInUser: widget.loggedInUser,
             programUID: widget.programUID,
           ),
@@ -58,58 +59,8 @@ class _MentorEnrollmentSkillsScreenState
     }
   }
 
-  String mentorBackground;
   String mentorExperience;
-  final _formKey1 = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
-
-  buildFreeFormField({
-    @required String hintString,
-    @required IconData icon,
-    @required int minLines,
-    String currentFreeFormResponse,
-  }) {
-    return TextFormField(
-      key: _formKey1,
-      style: TextStyle(
-        color: Colors.black54,
-        fontFamily: 'Montserrat',
-        fontSize: 20,
-        fontWeight: FontWeight.w500,
-      ),
-      autocorrect: true,
-      initialValue: currentFreeFormResponse,
-      onChanged: (value) => mentorBackground = value,
-      textCapitalization: TextCapitalization.sentences,
-      minLines: minLines,
-      maxLines: minLines == null ? 1 : minLines + 1,
-      decoration: InputDecoration(
-        hintText: hintString,
-        hintStyle: TextStyle(
-            color: kMentorXPSecondary.withOpacity(
-              0.3,
-            ),
-            fontSize: 20,
-            fontFamily: 'Montserrat'),
-        filled: true,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          borderSide: BorderSide(
-            color: Colors.black54,
-            width: 1.0,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          borderSide: BorderSide(
-            color: kMentorXPSecondary,
-            width: 3.0,
-          ),
-        ),
-        fillColor: Colors.white,
-      ),
-    );
-  }
 
   buildFreeFormField2({
     @required String hintString,
@@ -158,6 +109,16 @@ class _MentorEnrollmentSkillsScreenState
       ),
     );
   }
+
+  List<String> items = [
+    'Freshman',
+    'Sophomore',
+    'Junior',
+    'Senior',
+  ];
+
+  String yearInSchool;
+  bool yearInSchoolChanged = false;
 
   @override
   Widget build(BuildContext context) {
@@ -219,29 +180,6 @@ class _MentorEnrollmentSkillsScreenState
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 20.0, bottom: 10),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Share some of your background:',
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: kMentorXPSecondary,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      buildFreeFormField(
-                        hintString:
-                            'hometown, college degree, job field interests, hobbies, unique facts...',
-                        icon: Icons.key,
-                        minLines: 8,
-                        currentFreeFormResponse: mentorSkills.mentorBackground,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0, bottom: 10),
                         child: Text(
                           'What experiences and skills could you share with prospective mentees?',
                           style: TextStyle(
@@ -256,11 +194,40 @@ class _MentorEnrollmentSkillsScreenState
                         hintString:
                             'Work experience, classes taken, internships...',
                         icon: Icons.key,
-                        minLines: 8,
+                        minLines: 5,
                         currentFreeFormResponse: mentorSkills.mentorExperience,
                       ),
                       SizedBox(
-                        height: 50,
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 10),
+                        child: Column(
+                          children: [
+                            Text(
+                              'What year in school are you in this semester?',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: kMentorXPSecondary,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 10.0, bottom: 10),
+                              child: dropDownSection(
+                                yearInSchoolOption: yearInSchool,
+                                inputFunction: (value) => setState(() {
+                                  yearInSchool = value;
+                                  yearInSchoolChanged = true;
+                                }),
+                                selectionChanged: yearInSchoolChanged,
+                                currentValue: mentorSkills.mentorYearInSchool,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -290,8 +257,9 @@ class _MentorEnrollmentSkillsScreenState
                               _updateMentorAttributes(
                                 context,
                                 widget.programUID,
-                                mentorBackground,
-                                mentorExperience,
+                                mentorExperience ??
+                                    mentorSkills.mentorExperience,
+                                yearInSchool ?? mentorSkills.mentorYearInSchool,
                               );
                             },
                           ),
@@ -304,5 +272,92 @@ class _MentorEnrollmentSkillsScreenState
             ),
           );
         });
+  }
+
+  DropdownButtonHideUnderline dropDownSection({
+    String yearInSchoolOption,
+    bool selectionChanged,
+    String currentValue,
+    final void Function(String) inputFunction,
+  }) {
+    return DropdownButtonHideUnderline(
+      child: Column(
+        children: [
+          DropdownButton2(
+            isExpanded: true,
+            hint: Row(
+              children: const [
+                Expanded(
+                  child: Text(
+                    '<None Selected>',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+            items: items
+                .map((name) => DropdownMenuItem<String>(
+                      value: name,
+                      child: Row(
+                        children: [
+                          Text(
+                            name,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontFamily: 'Montserrat',
+                              color: Colors.white,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ))
+                .toList(),
+            value: selectionChanged ? yearInSchoolOption : currentValue,
+            onChanged: inputFunction,
+            icon: const Icon(
+              Icons.arrow_drop_down_circle_rounded,
+            ),
+            iconSize: 30,
+            iconEnabledColor: Colors.white,
+            buttonHeight: 60,
+            buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+            buttonDecoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: Colors.white,
+              ),
+              color: (currentValue == null && yearInSchoolOption == null)
+                  ? Colors.grey
+                  : kMentorXPSecondary,
+            ),
+            buttonElevation: 4,
+            itemHeight: 40,
+            itemPadding: const EdgeInsets.only(left: 14, right: 14),
+            dropdownMaxHeight: 200,
+            dropdownOverButton: false,
+            dropdownDecoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
+              border: Border.all(color: Colors.white),
+              color: Colors.grey,
+            ),
+            dropdownElevation: 8,
+            scrollbarRadius: const Radius.circular(50),
+            scrollbarThickness: 15,
+            scrollbarAlwaysShow: true,
+            offset: const Offset(0, 13),
+          ),
+        ],
+      ),
+    );
   }
 }

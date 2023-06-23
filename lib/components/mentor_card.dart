@@ -20,9 +20,7 @@ class MentorCard extends StatefulWidget {
   final String mtrAtt2;
   final String mtrAtt3;
   final String xFactor;
-  final String mtrHobby1;
-  final String mtrHobby2;
-  final String mtrHobby3;
+  final String mtrClass;
   final bool profileOnly;
   final String programUID;
   final Container moreInfoExpand;
@@ -39,6 +37,7 @@ class MentorCard extends StatefulWidget {
     this.mtrAtt1,
     this.mtrAtt2,
     this.mtrAtt3,
+    this.mtrClass,
     this.xFactor,
     this.profileOnly,
     this.programUID,
@@ -46,9 +45,6 @@ class MentorCard extends StatefulWidget {
     this.dividerExpand,
     this.previewStatus = false,
     this.menteePreview = false,
-    this.mtrHobby1,
-    this.mtrHobby2,
-    this.mtrHobby3,
   });
 
   @override
@@ -59,21 +55,13 @@ class _MentorCardState extends State<MentorCard> {
   bool expandStatus = false;
 
   Map<String, IconData> skillMap = {
-    'Coding': Icons.code,
-    'Analytics': Icons.numbers,
-    'Presenting': Icons.co_present,
-    'Communication': Icons.podcasts_rounded,
-    'Finance': Icons.monetization_on,
-    'Networking': Icons.people,
-    'Managing up': Icons.swipe_up_alt_rounded,
-    'Crafts': Icons.format_paint,
-    'Drawing': Icons.draw,
-    'Painting': Icons.picture_as_pdf,
-    'Robotics': Icons.military_tech,
-    'Sports': Icons.sports,
-    'Travel': Icons.travel_explore,
-    'Video Games': Icons.gamepad,
-    'Volunteering': Icons.help,
+    'Career Exploration': Icons.business,
+    'Communication': Icons.emoji_people,
+    'Internships': Icons.work,
+    'Interview Prep': Icons.people_alt_outlined,
+    'Major Exploration': Icons.school,
+    'Resumes': Icons.note,
+    'Skill Development': Icons.leaderboard,
   };
 
   @override
@@ -93,7 +81,7 @@ class _MentorCardState extends State<MentorCard> {
                 Padding(
                   padding: const EdgeInsets.only(
                     left: 10.0,
-                    top: 10,
+                    top: 0,
                     right: 10,
                   ),
                   child: GestureDetector(
@@ -117,98 +105,131 @@ class _MentorCardState extends State<MentorCard> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.60,
-                        child: Text(
-                          '${widget.mentorFname} ${widget.mentorLname}',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontFamily: 'WorkSans',
-                            fontSize: 25,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black54,
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: Text(
+                            '${widget.mentorFname} ${widget.mentorLname}',
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontFamily: 'WorkSans',
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0, left: 2),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: Row(
+                            children: [
+                              Text(
+                                'Class: ',
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black45,
+                                ),
+                              ),
+                              Text(
+                                '${widget.mtrClass}',
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 13,
+                                  color: kMentorXPAccentDark,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.60,
-                        child: Row(
+                        child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 5.0,
-                                right: 15.0,
-                                left: 5.0,
-                              ),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    skillMap['${widget.mtrAtt1}'],
-                                    color: kMentorXPAccentDark,
-                                    size: 30,
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 5.0,
+                                    right: 15.0,
+                                    left: 5.0,
                                   ),
-                                  Text(
-                                    '${widget.mtrAtt1 ?? ''}',
-                                    style: TextStyle(
-                                      fontFamily: 'WorkSans',
-                                      fontSize: 8,
-                                      fontWeight: FontWeight.w500,
-                                      color: kMentorXPPrimary,
-                                    ),
-                                  )
-                                ],
-                              ),
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        skillMap['${widget.mtrAtt1}'],
+                                        color: kMentorXPAccentDark,
+                                        size: 30,
+                                      ),
+                                      Text(
+                                        '${widget.mtrAtt1 ?? ''}',
+                                        style: TextStyle(
+                                          fontFamily: 'WorkSans',
+                                          fontSize: 8,
+                                          fontWeight: FontWeight.w500,
+                                          color: kMentorXPPrimary,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 5.0,
+                                    right: 15.0,
+                                    left: 15.0,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        skillMap['${widget.mtrAtt2}'],
+                                        color: kMentorXPAccentDark,
+                                        size: 30,
+                                      ),
+                                      Text(
+                                        '${widget.mtrAtt2 ?? ''}',
+                                        style: TextStyle(
+                                          fontFamily: 'WorkSans',
+                                          fontSize: 8,
+                                          fontWeight: FontWeight.w500,
+                                          color: kMentorXPPrimary,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 5.0,
+                                    right: 10.0,
+                                    left: 15.0,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        skillMap['${widget.mtrAtt3}'],
+                                        color: kMentorXPAccentDark,
+                                        size: 30,
+                                      ),
+                                      Text(
+                                        '${widget.mtrAtt3 ?? ''}',
+                                        style: TextStyle(
+                                          fontFamily: 'WorkSans',
+                                          fontSize: 8,
+                                          fontWeight: FontWeight.w500,
+                                          color: kMentorXPPrimary,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 5.0,
-                                right: 15.0,
-                                left: 15.0,
-                              ),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    skillMap['${widget.mtrAtt2}'],
-                                    color: kMentorXPAccentDark,
-                                    size: 30,
-                                  ),
-                                  Text(
-                                    '${widget.mtrAtt2 ?? ''}',
-                                    style: TextStyle(
-                                      fontFamily: 'WorkSans',
-                                      fontSize: 8,
-                                      fontWeight: FontWeight.w500,
-                                      color: kMentorXPPrimary,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 5.0,
-                                right: 10.0,
-                                left: 15.0,
-                              ),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    skillMap['${widget.mtrAtt3}'],
-                                    color: kMentorXPAccentDark,
-                                    size: 30,
-                                  ),
-                                  Text(
-                                    '${widget.mtrAtt3 ?? ''}',
-                                    style: TextStyle(
-                                      fontFamily: 'WorkSans',
-                                      fontSize: 8,
-                                      fontWeight: FontWeight.w500,
-                                      color: kMentorXPPrimary,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
                           ],
                         ),
                       ),
@@ -231,7 +252,7 @@ class _MentorCardState extends State<MentorCard> {
                               child: Text(
                                 widget.menteePreview
                                     ? "What I'm looking for in a mentor:"
-                                    : "Why I'd be a great mentor:",
+                                    : "Experience I offer as a mentor:",
                                 style: TextStyle(
                                   fontFamily: 'WorkSans',
                                   fontSize: 15,
@@ -313,6 +334,7 @@ class _MentorCardState extends State<MentorCard> {
                                           mtrAtt2: widget.mtrAtt2,
                                           mtrAtt3: widget.mtrAtt3,
                                           xFactor: widget.xFactor,
+                                          mtrClass: widget.mtrClass,
                                           mentorPicContainer:
                                               widget.imageContainer,
                                           programUID: widget.programUID,

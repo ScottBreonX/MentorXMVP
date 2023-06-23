@@ -109,9 +109,9 @@ class _MenteeEnrollmentReviewState extends State<MenteeEnrollmentReview> {
                             mentorUID: widget.loggedInUser.id,
                             mentorFname: userProfile.firstName,
                             mentorLname: userProfile.lastName,
-                            mtrAtt1: menteeSkills.menteeSkill1,
-                            mtrAtt2: menteeSkills.menteeSkill2,
-                            mtrAtt3: menteeSkills.menteeSkill3,
+                            mtrAtt1: menteeSkills.mentorSkill1,
+                            mtrAtt2: menteeSkills.mentorSkill2,
+                            mtrAtt3: menteeSkills.mentorSkill3,
                             xFactor: menteeSkills.menteeFreeForm ?? '',
                             previewStatus: true,
                             imageContainer: Container(

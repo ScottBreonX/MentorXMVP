@@ -24,6 +24,7 @@ class MentorConfirm extends StatelessWidget {
   final String xFactor;
   final Container mentorPicContainer;
   final String programUID;
+  final String mtrClass;
 
   MentorConfirm({
     this.loggedInUser,
@@ -38,6 +39,7 @@ class MentorConfirm extends StatelessWidget {
     this.mtrAtt3,
     this.xFactor,
     this.programUID,
+    this.mtrClass,
   });
 
   handleConfirmSelection() {
@@ -227,6 +229,7 @@ class MentorConfirm extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
                       child: MentorCard(
                         mentorUID: mentorUID,
+                        loggedInUser: loggedInUser,
                         mentorFname: mentorFname,
                         mentorLname: mentorLname,
                         imageContainer: mentorPicContainer,
@@ -234,6 +237,7 @@ class MentorConfirm extends StatelessWidget {
                         mtrAtt2: mtrAtt2,
                         mtrAtt3: mtrAtt3,
                         xFactor: xFactor,
+                        mtrClass: mtrClass,
                         // mentorSlots: mentorSlots,
                         moreInfoExpand: Container(),
                         dividerExpand: Divider(

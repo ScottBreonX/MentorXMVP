@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../../components/profile_image_circle.dart';
+import '../../components/progress.dart';
 
 final _firestore = FirebaseFirestore.instance;
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -147,14 +148,21 @@ class AvailableMentorsStream extends StatelessWidget {
             final mentorBubble = MentorCard(
               loggedInUser: loggedInUser,
               mentorUID: mentorModel.id,
-              mentorFname: '${mentorModel.fName}',
-              mentorLname: '${mentorModel.lName}',
+              programUID: programUID,
+              mentorFname: mentorModel.fName,
+              mentorLname: mentorModel.lName,
+              mtrAtt1: mentorModel.mentorSkill1,
+              mtrAtt2: mentorModel.mentorSkill2,
+              mtrAtt3: mentorModel.mentorSkill3,
+              mtrClass: mentorModel.mentorYearInSchool,
+              xFactor: mentorModel.mentorExperience,
+              previewStatus: false,
               imageContainer: Container(
                 child: mentorModel.profilePicture == null ||
                         mentorModel.profilePicture.isEmpty ||
                         mentorModel.profilePicture == ""
                     ? ProfileImageCircle(
-                        circleColor: Colors.blue,
+                        circleColor: Colors.grey,
                         iconSize: 45,
                         iconColor: Colors.white,
                         circleSize: 40,
@@ -182,10 +190,6 @@ class AvailableMentorsStream extends StatelessWidget {
                         ),
                       ),
               ),
-              // mentorSlots: mentorModel.mentorSlots,
-              xFactor: mentorModel.mentorFreeForm,
-              profileOnly: false,
-              programUID: programUID,
             );
             mentorBubbles.add(mentorBubble);
           }
