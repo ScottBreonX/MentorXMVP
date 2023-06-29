@@ -8,7 +8,7 @@ import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_launch_manage.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_notes/mentoring_notes.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_profile/mentoring_profile_cards.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_tracks/program_guide_tracks.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guides_launch.dart';
 import '../../../components/progress.dart';
 import '../../profile/profile_screen.dart';
 
@@ -332,7 +332,7 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                ProgramGuideTracks(
+                                                ProgramGuidesLaunchScreen(
                                               loggedInUser: widget.loggedInUser,
                                               matchID: widget.matchID,
                                               mentorUID: widget.mentorUID,

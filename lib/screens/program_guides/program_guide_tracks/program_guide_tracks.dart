@@ -40,6 +40,8 @@ _selectTrack(
   String trackName,
   String programID,
   String matchID,
+  String nextTrack,
+  String loggedInUserID,
 ) async {
   await programsRef
       .doc(programID)
@@ -48,6 +50,16 @@ _selectTrack(
       .update({
     'Track': trackName,
     'Track Selected': true,
+  });
+  await programsRef
+      .doc(programID)
+      .collection('matchedPairs')
+      .doc(matchID)
+      .collection('programGuides')
+      .doc(loggedInUserID)
+      .update({
+    'Introductions': 'Complete',
+    nextTrack: 'Current',
   });
 }
 
@@ -134,6 +146,8 @@ class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
                                 'Track 1',
                                 widget.programUID,
                                 widget.matchID,
+                                'Resume 101',
+                                widget.loggedInUser.id,
                               );
                             },
                           ),
@@ -152,6 +166,8 @@ class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
                                 'Track 2',
                                 widget.programUID,
                                 widget.matchID,
+                                'Networking 201',
+                                widget.loggedInUser.id,
                               );
                             },
                           ),
@@ -170,6 +186,8 @@ class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
                                 'Track 3',
                                 widget.programUID,
                                 widget.matchID,
+                                'Interview 301',
+                                widget.loggedInUser.id,
                               );
                             },
                           ),
@@ -186,6 +204,8 @@ class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
                                 'Track 4',
                                 widget.programUID,
                                 widget.matchID,
+                                'Emotional Intelligence',
+                                widget.loggedInUser.id,
                               );
                             },
                           ),

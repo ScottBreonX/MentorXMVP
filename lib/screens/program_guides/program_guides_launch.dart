@@ -7,7 +7,7 @@ import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_gu
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track2/track2_guides_launch.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track3/track3_guides_launch.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/program_guides_track4/track4_guides_launch.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_tracks/program_guide_tracks.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_intros/program_guide_info.dart';
 
 import '../../components/progress.dart';
 
@@ -108,12 +108,18 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
               matchID: widget.matchID,
             );
           }
-          return ProgramGuideTracks(
+          return ProgramGuideInfo(
             loggedInUser: widget.loggedInUser,
             mentorUID: widget.mentorUID,
             programUID: widget.programUID,
             matchID: widget.matchID,
           );
+          // return ProgramGuideTracks(
+          //   loggedInUser: widget.loggedInUser,
+          //   mentorUID: widget.mentorUID,
+          //   programUID: widget.programUID,
+          //   matchID: widget.matchID,
+          // );
         });
   }
 }
