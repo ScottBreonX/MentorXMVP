@@ -56,9 +56,11 @@ class _LandingPageState extends State<LandingPage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(50.0),
-                            child: Image.asset(
-                              'assets/images/MentorXP.png',
-                              fit: BoxFit.fill,
+                            child: Container(
+                              child: Image.asset(
+                                'assets/images/MentorXP.png',
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
                           Text(
