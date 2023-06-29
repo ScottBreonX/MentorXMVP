@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/services/database.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../../components/profile_image_circle.dart';
-import '../../components/progress.dart';
 
 final _firestore = FirebaseFirestore.instance;
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -193,10 +192,13 @@ class AvailableMentorsStream extends StatelessWidget {
             );
             mentorBubbles.add(mentorBubble);
           }
-          return Container(
-            child: SingleChildScrollView(
-              child: Column(
-                children: mentorBubbles,
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 50.0),
+            child: Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: mentorBubbles,
+                ),
               ),
             ),
           );

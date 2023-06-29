@@ -7,6 +7,7 @@ import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_launch_manage.dart';
 import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_notes/mentoring_notes.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentoring_launch/mentoring_profile/mentoring_profile_cards.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_tracks/program_guide_tracks.dart';
 import '../../../components/progress.dart';
 import '../../profile/profile_screen.dart';
@@ -367,10 +368,24 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                         boxWidth: 140,
                                         iconSize: 60,
                                         cardColor: Colors.white,
-                                        cardIcon: Icons.calendar_month,
+                                        cardIcon: Icons.people,
                                         cardIconColor: kMentorXPSecondary,
-                                        cardText: 'Calendar',
-                                        onTap: () {},
+                                        cardText: 'Mentoring Cards',
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MentoringProfileScreen(
+                                                loggedInUser:
+                                                    widget.loggedInUser,
+                                                programUID: widget.programUID,
+                                                mentorUID: widget.mentorUID,
+                                                mentorStatus: isMentor,
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
                                       IconCard(
                                         onTap: () {

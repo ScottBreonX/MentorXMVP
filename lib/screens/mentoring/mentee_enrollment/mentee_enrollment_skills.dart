@@ -3,11 +3,11 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
+import 'package:mentorx_mvp/models/mentor_match_models/mentee_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/mentoring/mentee_enrollment/mentee_enrollment_free_form.dart';
+import 'package:mentorx_mvp/screens/mentoring/mentee_enrollment/mentee_enrollment_review.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/progress.dart';
-import '../../../models/mentor_match_models/mentee_model.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -48,7 +48,7 @@ class _MenteeEnrollmentSkillsScreenState
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => MenteeEnrollmentFreeForm(
+          builder: (context) => MenteeEnrollmentReview(
             loggedInUser: widget.loggedInUser,
             programUID: widget.programUID,
           ),
@@ -61,23 +61,23 @@ class _MenteeEnrollmentSkillsScreenState
   }
 
   List<String> items = [
-    'Analytics',
-    'Coding',
+    'Career Exploration',
     'Communication',
-    'Finance',
-    'Networking',
-    'Managing up',
-    'Presenting',
+    'Internships',
+    'Interview Prep',
+    'Major Exploration',
+    'Resumes',
+    'Skill Development',
   ];
 
   Map<String, IconData> map = {
-    'Coding': Icons.code,
-    'Analytics': Icons.numbers,
-    'Presenting': Icons.co_present,
-    'Communication': Icons.podcasts_rounded,
-    'Finance': Icons.monetization_on,
-    'Networking': Icons.people,
-    'Managing up': Icons.swipe_up_alt_rounded,
+    'Career Exploration': Icons.business,
+    'Communication': Icons.emoji_people,
+    'Internships': Icons.work,
+    'Interview Prep': Icons.people_alt_outlined,
+    'Major Exploration': Icons.school,
+    'Resumes': Icons.note,
+    'Skill Development': Icons.leaderboard,
   };
 
   String skill1;
@@ -123,7 +123,7 @@ class _MenteeEnrollmentSkillsScreenState
               child: Column(
                 children: [
                   Text(
-                    'What top 3 skills you are looking to develop?',
+                    'What top 3 skills are you looking to enhance?',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Montserrat',
@@ -132,17 +132,17 @@ class _MenteeEnrollmentSkillsScreenState
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   dropDownSection(
                     titleText: 'Skill #1',
                     skillValue: skill1,
                     inputFunction: (value) => setState(() {
-                      skill1 = value ?? menteeSkills.mentorSkill1;
+                      skill1 = value ?? menteeSkills.menteeSkill1;
                       skill1Changed = true;
                     }),
                     skillChanged: skill1Changed,
-                    currentValue: menteeSkills.mentorSkill1,
+                    currentValue: menteeSkills.menteeSkill1,
                   ),
                   dropDownSection(
                     titleText: 'Skill #2',
@@ -152,7 +152,7 @@ class _MenteeEnrollmentSkillsScreenState
                       skill2Changed = true;
                     }),
                     skillChanged: skill2Changed,
-                    currentValue: menteeSkills.mentorSkill2,
+                    currentValue: menteeSkills.menteeSkill2,
                   ),
                   dropDownSection(
                     titleText: 'Skill #3',
@@ -162,7 +162,7 @@ class _MenteeEnrollmentSkillsScreenState
                       skill3Changed = true;
                     }),
                     skillChanged: skill3Changed,
-                    currentValue: menteeSkills.mentorSkill3,
+                    currentValue: menteeSkills.menteeSkill3,
                   ),
                   SizedBox(
                     height: 50,
@@ -193,13 +193,13 @@ class _MenteeEnrollmentSkillsScreenState
                         minWidth: 150,
                         onPressed: () {
                           if (skill1 == null) {
-                            skill1 = menteeSkills.mentorSkill1;
+                            skill1 = menteeSkills.menteeSkill1;
                           }
                           if (skill2 == null) {
-                            skill2 = menteeSkills.mentorSkill2;
+                            skill2 = menteeSkills.menteeSkill2;
                           }
                           if (skill3 == null) {
-                            skill3 = menteeSkills.mentorSkill3;
+                            skill3 = menteeSkills.menteeSkill3;
                           }
                           _updateMenteeAttributes(context, widget.programUID);
                         },

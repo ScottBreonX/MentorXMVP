@@ -3,13 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
-import 'package:mentorx_mvp/models/mentor_match_models/mentee_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/mentor_card.dart';
 import '../../../components/profile_image_circle.dart';
 import '../../../components/progress.dart';
+import '../../../models/mentor_match_models/mentee_model.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -105,14 +105,15 @@ class _MenteeEnrollmentReviewState extends State<MenteeEnrollmentReview> {
                             ),
                           ),
                           MentorCard(
-                            menteePreview: true,
                             mentorUID: widget.loggedInUser.id,
                             mentorFname: userProfile.firstName,
                             mentorLname: userProfile.lastName,
-                            mtrAtt1: menteeSkills.mentorSkill1,
-                            mtrAtt2: menteeSkills.mentorSkill2,
-                            mtrAtt3: menteeSkills.mentorSkill3,
-                            xFactor: menteeSkills.menteeFreeForm ?? '',
+                            mtrAtt1: menteeSkills.menteeSkill1,
+                            mtrAtt2: menteeSkills.menteeSkill2,
+                            mtrAtt3: menteeSkills.menteeSkill3,
+                            mtrClass: menteeSkills.menteeYearInSchool,
+                            xFactor: menteeSkills.menteeExperience,
+                            menteePreview: true,
                             previewStatus: true,
                             imageContainer: Container(
                               child: userProfile.profilePicture == null ||
@@ -180,7 +181,9 @@ class _MenteeEnrollmentReviewState extends State<MenteeEnrollmentReview> {
                                 minWidth: 150,
                                 onPressed: () {
                                   _updateMenteeFreeForm(
-                                      context, widget.programUID);
+                                    context,
+                                    widget.programUID,
+                                  );
                                 },
                               ),
                             ],
