@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/program.dart';
-import 'package:mentorx_mvp/screens/programs/program_launch/program_admin_screen.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_admin_launch_screen.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_screen.dart';
 
 import '../../../components/rounded_button.dart';
@@ -332,17 +332,27 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              ProgramAdminScreen(
+                                              ProgramAdminLaunchScreen(
                                             loggedInUser: widget.loggedInUser,
                                             programUID: program.id,
-                                            aboutProgram: program.aboutProgram,
-                                            institutionName:
-                                                program.institutionName,
-                                            programName: program.programName,
-                                            programCode: program.programCode,
                                           ),
                                         ),
                                       );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) =>
+                                      //         ProgramAdminScreen(
+                                      //       loggedInUser: widget.loggedInUser,
+                                      //       programUID: program.id,
+                                      //       aboutProgram: program.aboutProgram,
+                                      //       institutionName:
+                                      //           program.institutionName,
+                                      //       programName: program.programName,
+                                      //       programCode: program.programCode,
+                                      //     ),
+                                      //   ),
+                                      // );
                                     },
                                   )
                                 : Container(),

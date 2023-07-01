@@ -92,13 +92,13 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
       },
       style: TextStyle(
         color: Colors.black45,
-        fontSize: 15,
+        fontSize: 20,
         fontWeight: FontWeight.w400,
       ),
       autocorrect: false,
       decoration: kTextFieldDecorationLight.copyWith(
         prefixIcon: _prefixIcon,
-        prefixIconColor: kMentorXPSecondary,
+        prefixIconColor: kMentorXPAccentDark,
         labelText: '$labelText',
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -106,10 +106,16 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
         hintStyle: TextStyle(color: Colors.grey.shade400),
         filled: true,
         fillColor: Colors.white,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey, width: 4.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(15.0),
+          ),
+        ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: kMentorXPAccentDark, width: 4.0),
           borderRadius: BorderRadius.all(
-            Radius.circular(20.0),
+            Radius.circular(15.0),
           ),
         ),
       ),
@@ -139,24 +145,6 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
     }
   }
 
-  // Future<void> _adminCollection(
-  //   BuildContext context,
-  // ) async {
-  //   try {
-  //     QueryDocumentSnapshot<Map<String, dynamic>> queryDocumentSnapshot;
-  //     await programsRef
-  //         .doc(widget.programUID)
-  //         .collection('programAdmins')
-  //         .get()
-  //         .then((querySnapshot) =>
-  //             {queryDocumentSnapshot = querySnapshot.docs[0]});
-  //     print(queryDocumentSnapshot);
-  //   } on FirebaseException catch (e) {
-  //     showAlertDialog(context,
-  //         title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
-  //   }
-  // }
-
   bool isLoading = false;
 
   @override
@@ -178,18 +166,18 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
               elevation: 5,
               title: Image.asset(
                 'assets/images/MentorXP.png',
-                height: 100,
+                height: 35,
               ),
             ),
             body: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(top: 40.0, bottom: 40),
                 child: Stack(
                   children: [
                     Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
+                          padding: const EdgeInsets.only(left: 15.0),
                           child: Column(
                             children: [
                               program.programLogo == null ||
@@ -251,15 +239,42 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                         ),
                         Padding(
                           padding:
-                              const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                              const EdgeInsets.only(top: 30.0, bottom: 20.0),
                           child: Text(
                             'Edit Program Info',
                             style: TextStyle(
-                              fontFamily: 'Work Sans',
+                              fontFamily: 'Montserrat',
                               fontSize: 25,
                               color: Colors.black54,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.bold,
                             ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10.0, right: 10, top: 10),
+                          child: Divider(
+                            color: Colors.grey,
+                            thickness: 2,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 10,
+                            top: 10.0,
+                          ),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Program Name',
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 20,
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         Padding(
@@ -274,6 +289,25 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                           ),
                         ),
                         Padding(
+                          padding: const EdgeInsets.only(
+                            left: 10,
+                            top: 10.0,
+                          ),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Linked University or Institution',
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 20,
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: _buildTextField(
                             context,
@@ -285,14 +319,19 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: _buildTextField(
-                            context,
-                            _formKey4,
-                            'aboutProgram',
-                            'Description of Program',
-                            Icon(Icons.edit),
-                            program.aboutProgram,
+                          padding: const EdgeInsets.only(left: 10, top: 10.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Program Join Password',
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 20,
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         Padding(
@@ -304,6 +343,44 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                             'Program Password',
                             Icon(Icons.key),
                             program.programCode,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10.0, right: 10, top: 10),
+                          child: Divider(
+                            color: Colors.grey,
+                            thickness: 2,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 10,
+                            top: 20.0,
+                          ),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Description of the program:',
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 20,
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: _buildTextField(
+                            context,
+                            _formKey4,
+                            'aboutProgram',
+                            'Description of Program',
+                            Icon(Icons.edit),
+                            program.aboutProgram,
                           ),
                         ),
                         Padding(
@@ -341,7 +418,7 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                     ),
                     Positioned(
                       top: 100,
-                      right: 100,
+                      right: 125,
                       child: GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -358,10 +435,10 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                         child: IconCircle(
                           height: 40.0,
                           width: 40.0,
-                          iconSize: 30.0,
-                          iconType: Icons.camera_alt,
-                          circleColor: Colors.white,
-                          iconColor: kMentorXPAccentDark,
+                          iconSize: 25.0,
+                          iconType: Icons.edit,
+                          circleColor: kMentorXPPrimary,
+                          iconColor: Colors.white,
                         ),
                       ),
                     ),
