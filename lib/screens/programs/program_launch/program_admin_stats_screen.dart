@@ -2,34 +2,36 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import '../../../constants.dart';
+import '../../../models/mentor_match_models/mentor_model.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class ProgramAdminLaunchScreen extends StatefulWidget {
+class ProgramAdminStatsScreen extends StatefulWidget {
   final myUser loggedInUser;
   final String programUID;
 
-  const ProgramAdminLaunchScreen({
+  const ProgramAdminStatsScreen({
     Key key,
     this.loggedInUser,
     this.programUID,
   }) : super(key: key);
 
-  static const String id = 'program_admin_launch_screen';
+  static const String id = 'program_admin_stats_screen';
 
   @override
-  _ProgramAdminLaunchScreenState createState() =>
-      _ProgramAdminLaunchScreenState();
+  _ProgramAdminStatsScreenState createState() =>
+      _ProgramAdminStatsScreenState();
 }
 
-class _ProgramAdminLaunchScreenState extends State<ProgramAdminLaunchScreen> {
+class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
   @override
   void initState() {
     super.initState();
     _mentorQuery();
     _menteeQuery();
     _programUserQuery();
+    _mentorSlotsQuery();
   }
 
   _mentorQuery() async {
@@ -56,11 +58,32 @@ class _ProgramAdminLaunchScreenState extends State<ProgramAdminLaunchScreen> {
     });
   }
 
+  _mentorSlotsQuery() async {
+    List<int> mentorSlots = [];
+
+    await programsRef
+        .doc(widget.programUID)
+        .collection('mentors')
+        .get()
+        .then((QuerySnapshot snapshot) {
+      snapshot.docs.forEach((mentor) {
+        Mentor mentorModel = Mentor.fromDocument(mentor);
+        mentorSlots.add(mentorModel.mentorSlots);
+      });
+    });
+
+    setState(() {
+      _mentorSlots = mentorSlots.fold(0, (p, c) => p + c);
+    });
+  }
+
   int _mentorCount;
   int _menteeCount;
   int _programUsers;
   int _unenrolledUsers;
-  int _mentorMenteeRatio;
+  int _mentorSlots;
+  double _mentorMenteeRatio;
+  double _mentorSlotRatio;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +95,9 @@ class _ProgramAdminLaunchScreenState extends State<ProgramAdminLaunchScreen> {
       );
     }
     _unenrolledUsers = _programUsers - _mentorCount - _menteeCount;
-    _mentorMenteeRatio = _mentorCount ~/ _menteeCount;
+    _mentorMenteeRatio = _menteeCount / _mentorCount;
+    _mentorSlotRatio = _mentorSlots / _menteeCount;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kMentorXPPrimary,
@@ -138,6 +163,7 @@ class _ProgramAdminLaunchScreenState extends State<ProgramAdminLaunchScreen> {
                           _programUserQuery();
                           _menteeQuery();
                           _mentorQuery();
+                          _mentorSlotsQuery();
                         });
                       },
                       child: Icon(
@@ -204,18 +230,6 @@ class _ProgramAdminLaunchScreenState extends State<ProgramAdminLaunchScreen> {
                           fontSize: 20,
                           color: kMentorXPSecondary),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _mentorQuery();
-                        });
-                      },
-                      child: Icon(
-                        Icons.refresh,
-                        color: kMentorXPSecondary,
-                        size: 30,
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -235,17 +249,22 @@ class _ProgramAdminLaunchScreenState extends State<ProgramAdminLaunchScreen> {
                         thickness: 2,
                       ),
                       statWidget(
-                        '$_mentorMenteeRatio',
+                        '${_mentorMenteeRatio.toStringAsFixed(1)}',
                         '# of mentees per mentor',
                         kMentorXPSecondary,
                       ),
-                      statWidget(
-                        '4',
-                        'total mentor slots',
-                        kMentorXPSecondary,
+                      GestureDetector(
+                        onTap: () {
+                          _mentorSlotsQuery();
+                        },
+                        child: statWidget(
+                          '$_mentorSlots',
+                          'total mentor slots',
+                          kMentorXPSecondary,
+                        ),
                       ),
                       statWidget(
-                        '2.4',
+                        '$_mentorSlotRatio',
                         'total mentor slots per mentor',
                         kMentorXPSecondary,
                       ),
