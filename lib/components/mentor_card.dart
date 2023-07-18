@@ -27,6 +27,7 @@ class MentorCard extends StatefulWidget {
   final Divider dividerExpand;
   final bool previewStatus;
   final bool menteePreview;
+  final int mentorSlots;
 
   MentorCard({
     this.loggedInUser,
@@ -45,6 +46,7 @@ class MentorCard extends StatefulWidget {
     this.dividerExpand,
     this.previewStatus = false,
     this.menteePreview = false,
+    this.mentorSlots,
   });
 
   @override
@@ -335,6 +337,7 @@ class _MentorCardState extends State<MentorCard> {
                                           mtrAtt3: widget.mtrAtt3,
                                           xFactor: widget.xFactor,
                                           mtrClass: widget.mtrClass,
+                                          mentorSlots: widget.mentorSlots,
                                           mentorPicContainer:
                                               widget.imageContainer,
                                           programUID: widget.programUID,

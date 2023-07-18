@@ -96,7 +96,7 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
     }
     _unenrolledUsers = _programUsers - _mentorCount - _menteeCount;
     _mentorMenteeRatio = _menteeCount / _mentorCount;
-    _mentorSlotRatio = _mentorSlots / _menteeCount;
+    _mentorSlotRatio = _mentorSlots / _mentorCount;
 
     return Scaffold(
       appBar: AppBar(
@@ -240,8 +240,8 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       statWidget(
-                        '$_mentorCount',
-                        'total # of mentors',
+                        '$_mentorSlots',
+                        'available mentor slots',
                         kMentorXPSecondary,
                       ),
                       VerticalDivider(
@@ -249,23 +249,18 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                         thickness: 2,
                       ),
                       statWidget(
-                        '${_mentorMenteeRatio.toStringAsFixed(1)}',
-                        '# of mentees per mentor',
+                        '$_mentorSlotRatio',
+                        'mentor slots per mentor',
                         kMentorXPSecondary,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          _mentorSlotsQuery();
-                        },
-                        child: statWidget(
-                          '$_mentorSlots',
-                          'total mentor slots',
-                          kMentorXPSecondary,
-                        ),
+                      statWidget(
+                        'XX',
+                        'unmatched mentees',
+                        kMentorXPSecondary,
                       ),
                       statWidget(
-                        '$_mentorSlotRatio',
-                        'total mentor slots per mentor',
+                        '${_mentorMenteeRatio.toStringAsFixed(1)}',
+                        '# of mentees per mentor',
                         kMentorXPSecondary,
                       ),
                     ],
@@ -294,18 +289,6 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                         color: kMentorXPAccentDark,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _mentorQuery();
-                        });
-                      },
-                      child: Icon(
-                        Icons.refresh,
-                        color: kMentorXPAccentDark,
-                        size: 30,
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -316,7 +299,7 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       statWidget(
-                        '10',
+                        'XX',
                         'total available slots',
                         kMentorXPAccentDark,
                       ),
@@ -325,17 +308,17 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                         thickness: 2,
                       ),
                       statWidget(
-                        '22.4',
+                        'XX',
                         'unmatched mentees',
                         kMentorXPAccentDark,
                       ),
                       statWidget(
-                        '4',
+                        'XX',
                         'available slots per mentee',
                         kMentorXPAccentDark,
                       ),
                       statWidget(
-                        '2',
+                        'XX',
                         'available slots per unmatched',
                         kMentorXPAccentDark,
                       ),

@@ -34,7 +34,7 @@ class _LandingPageState extends State<LandingPage> {
           if (user == null) {
             return FutureBuilder(
               future: Future.delayed(
-                const Duration(seconds: 5),
+                const Duration(seconds: 2),
               ),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {

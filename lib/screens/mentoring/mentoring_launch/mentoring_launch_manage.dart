@@ -8,6 +8,7 @@ import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 import '../../../components/progress.dart';
 import '../../../components/rounded_button.dart';
+import '../../../models/mentor_match_models/mentor_model.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -183,12 +184,24 @@ _removeMatch(
       .doc(matchID)
       .delete();
 
+  //change Mentor Match in Mentees collection back to false
+  await programsRef.doc(programUID).collection('mentees').doc(mentorUID).set({
+    'Mentor Match': false,
+  });
+  await programsRef
+      .doc(programUID)
+      .collection('mentees')
+      .doc(loggedInUser.id)
+      .set({
+    'Mentor Match': false,
+  });
+
   //add back mentor slot to mentor
   await programsRef
       .doc(programUID)
       .collection('mentors')
       .doc(mentorUID)
-      .update({"mentorSlots": mentorSlots + 1});
+      .update({"Mentor Slots": mentorSlots + 1});
 
   Navigator.pop(context);
   Navigator.pushReplacement(
@@ -244,13 +257,14 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                           future: programsRef
                               .doc(program.id)
                               .collection('mentors')
-                              //need to dynamically generate who is mentor and who is mentee
                               .doc(widget.mentorUser.id)
                               .get(),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) {
                               return circularProgress();
                             }
+                            final mentor = snapshot.data;
+                            Mentor mentorModel = Mentor.fromDocument(mentor);
 
                             return Scaffold(
                               appBar: AppBar(
@@ -392,7 +406,7 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                                             widget.programUID,
                                             widget.mentorUser.id,
                                             matchInfo.matchID,
-                                            2,
+                                            mentorModel.mentorSlots,
                                             widget.loggedInUser,
                                           );
                                         },

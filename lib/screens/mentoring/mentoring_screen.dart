@@ -248,6 +248,14 @@ Future<void> createMentee(
 
     await programsRef
         .doc(programUID)
+        .collection('mentees')
+        .doc(loggedInUser.id)
+        .update({
+      "Mentor Match": false,
+    });
+
+    await programsRef
+        .doc(programUID)
         .collection('mentors')
         .doc(loggedInUser.id)
         .delete();

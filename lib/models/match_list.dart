@@ -181,7 +181,7 @@ class _MatchListState extends State<MatchList> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
+      children: [
         buildMatchCard(),
       ],
     );

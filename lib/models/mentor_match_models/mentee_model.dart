@@ -11,6 +11,7 @@ class Mentee {
   final String fName;
   final String lName;
   final String profilePicture;
+  final bool mentorMatch;
 
   Mentee({
     this.fName,
@@ -23,6 +24,7 @@ class Mentee {
     this.menteeSkill1,
     this.menteeSkill2,
     this.menteeSkill3,
+    this.mentorMatch,
   });
 
   factory Mentee.fromDocument(DocumentSnapshot doc) {
@@ -53,6 +55,9 @@ class Mentee {
       profilePicture: doc.data().toString().contains('Profile Picture')
           ? doc['Profile Picture']
           : '',
+      mentorMatch: doc.data().toString().contains('Mentor Match')
+          ? doc['Mentor Match']
+          : false,
     );
   }
   Map<String, dynamic> toMap() {
@@ -67,6 +72,7 @@ class Mentee {
       'First Name': fName,
       'Last Name': lName,
       'Profile Picture': profilePicture,
+      'Mentor Match': mentorMatch,
     };
   }
 }

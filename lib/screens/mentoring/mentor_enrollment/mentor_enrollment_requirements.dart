@@ -61,7 +61,7 @@ class _MentorEnrollmentRequirementsScreenState
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<MaterialState> states) {
-      return isChecked ? kMentorXPSecondary : kMentorXPAccentDark;
+      return isChecked ? kMentorXPPrimary : Colors.black45;
     }
 
     return FutureBuilder<Object>(
@@ -117,9 +117,8 @@ class _MentorEnrollmentRequirementsScreenState
                               'How many mentees can you support this semester?',
                               style: TextStyle(
                                 fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
                                 fontSize: 20,
-                                color: kMentorXPSecondary,
+                                color: kMentorXPPrimary,
                               ),
                             ),
                             Row(
@@ -148,9 +147,8 @@ class _MentorEnrollmentRequirementsScreenState
                           'Are you willing to commit 1-2 hours a week to participate in this mentorship program?',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
                             fontSize: 20,
-                            color: kMentorXPSecondary,
+                            color: kMentorXPPrimary,
                           ),
                         ),
                       ),
@@ -179,8 +177,8 @@ class _MentorEnrollmentRequirementsScreenState
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25,
                                 color: isChecked
-                                    ? kMentorXPSecondary
-                                    : kMentorXPAccentDark,
+                                    ? kMentorXPPrimary
+                                    : Colors.black45,
                               ),
                             )
                           ],
@@ -197,7 +195,7 @@ class _MentorEnrollmentRequirementsScreenState
                             buttonColor: Colors.white,
                             borderWidth: 2,
                             borderRadius: 20,
-                            fontColor: kMentorXPSecondary,
+                            fontColor: kMentorXPPrimary,
                             fontWeight: FontWeight.w500,
                             minWidth: 150,
                             fontSize: 20,
@@ -207,19 +205,61 @@ class _MentorEnrollmentRequirementsScreenState
                           ),
                           RoundedButton(
                             title: 'Next -->',
-                            buttonColor: kMentorXPSecondary,
+                            buttonColor: kMentorXPPrimary,
                             fontColor: Colors.white,
                             fontWeight: FontWeight.w500,
                             fontSize: 20,
                             borderRadius: 20,
                             minWidth: 150,
                             onPressed: () {
-                              _updateMentorAttributes(
-                                context,
-                                widget.programUID,
-                                mentorSlots,
-                                isChecked,
-                              );
+                              isChecked
+                                  ? _updateMentorAttributes(
+                                      context,
+                                      widget.programUID,
+                                      mentorSlots,
+                                      isChecked,
+                                    )
+                                  : showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return SimpleDialog(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          title: Text(
+                                            "Please confirm mentorship time commitment by selecting the checkbox",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.black45,
+                                              fontFamily: 'Montserrat',
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                left: 50.0,
+                                                right: 50,
+                                              ),
+                                              child: SimpleDialogOption(
+                                                child: RoundedButton(
+                                                  title: 'Ok',
+                                                  textAlignment:
+                                                      MainAxisAlignment.center,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w500,
+                                                  buttonColor: kMentorXPPrimary,
+                                                  fontColor: Colors.white,
+                                                  onPressed: () =>
+                                                      Navigator.pop(context),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        );
+                                      });
                             },
                           ),
                         ],
@@ -280,7 +320,7 @@ class _MentorEnrollmentRequirementsScreenState
                     size: 30,
                   ),
                   backgroundColor: Colors.white,
-                  foregroundColor: kMentorXPSecondary,
+                  foregroundColor: kMentorXPPrimary,
                   tooltip: 'Decrement',
                 ),
               ),
@@ -290,7 +330,7 @@ class _MentorEnrollmentRequirementsScreenState
                 style: TextStyle(
                   fontSize: 60.0,
                   fontFamily: 'Montserrat',
-                  color: kMentorXPSecondary,
+                  color: kMentorXPPrimary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -306,7 +346,7 @@ class _MentorEnrollmentRequirementsScreenState
                     size: 30,
                   ),
                   backgroundColor: Colors.white,
-                  foregroundColor: kMentorXPSecondary,
+                  foregroundColor: kMentorXPPrimary,
                   tooltip: 'Increment',
                 ),
               ),

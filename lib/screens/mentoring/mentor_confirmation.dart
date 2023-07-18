@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/mentor_card.dart';
@@ -25,6 +27,7 @@ class MentorConfirm extends StatelessWidget {
   final Container mentorPicContainer;
   final String programUID;
   final String mtrClass;
+  final int mentorSlots;
 
   MentorConfirm({
     this.loggedInUser,
@@ -40,9 +43,17 @@ class MentorConfirm extends StatelessWidget {
     this.xFactor,
     this.programUID,
     this.mtrClass,
+    this.mentorSlots,
   });
 
   handleConfirmSelection() {
+    //change Mentor Match in Mentees collection to True
+    programsRef
+        .doc(programUID)
+        .collection('mentees')
+        .doc(loggedInUser.id)
+        .update({'Mentor Match': true});
+
     //add mentor to mentee match collection
     programsRef
         .doc(programUID)
@@ -75,12 +86,12 @@ class MentorConfirm extends StatelessWidget {
         .collection('matches')
         .doc(loggedInUser.id)
         .set({"matchID": mentorUID + loggedInUser.id});
-    //decrement mentor available slots
-    // programsRef
-    //     .doc(programUID)
-    //     .collection('mentors')
-    //     .doc(mentorUID)
-    //     .update({"mentorSlots": max(0, mentorSlots - 1)});
+    // decrement mentor available slots
+    programsRef
+        .doc(programUID)
+        .collection('mentors')
+        .doc(mentorUID)
+        .update({"Mentor Slots": max(0, mentorSlots - 1)});
     //add mentor ID and mentee ID to matchID section
     programsRef
         .doc(programUID)
