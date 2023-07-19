@@ -32,6 +32,9 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
     _menteeQuery();
     _programUserQuery();
     _mentorSlotsQuery();
+    _unmatchedMenteesQuery();
+    _availableMentorQuery();
+    _matchQuery();
   }
 
   _mentorQuery() async {
@@ -39,6 +42,17 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
     var snapshot = await query.get();
     setState(() {
       _mentorCount = snapshot.size;
+    });
+  }
+
+  _availableMentorQuery() async {
+    var query = programsRef
+        .doc(widget.programUID)
+        .collection("mentors")
+        .where("Mentor Slots", isGreaterThan: 0);
+    var snapshot = await query.get();
+    setState(() {
+      _availableMentorCount = snapshot.size;
     });
   }
 
@@ -55,6 +69,25 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
     var snapshot = await query.get();
     setState(() {
       _programUsers = snapshot.size;
+    });
+  }
+
+  _matchQuery() async {
+    var query = programsRef.doc(widget.programUID).collection("matchedPairs");
+    var snapshot = await query.get();
+    setState(() {
+      _matches = snapshot.size;
+    });
+  }
+
+  _unmatchedMenteesQuery() async {
+    var query = programsRef
+        .doc(widget.programUID)
+        .collection('mentees')
+        .where('Mentor Match', isEqualTo: false);
+    var snapshot = await query.get();
+    setState(() {
+      _unMatchedMentees = snapshot.size;
     });
   }
 
@@ -78,11 +111,13 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
   }
 
   int _mentorCount;
+  int _availableMentorCount;
   int _menteeCount;
   int _programUsers;
+  int _unMatchedMentees;
   int _unenrolledUsers;
   int _mentorSlots;
-  double _mentorMenteeRatio;
+  int _matches;
   double _mentorSlotRatio;
 
   @override
@@ -95,8 +130,8 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
       );
     }
     _unenrolledUsers = _programUsers - _mentorCount - _menteeCount;
-    _mentorMenteeRatio = _menteeCount / _mentorCount;
-    _mentorSlotRatio = _mentorSlots / _mentorCount;
+    _mentorSlotRatio =
+        double.parse((_mentorSlots / _mentorCount).toStringAsFixed(1));
 
     return Scaffold(
       appBar: AppBar(
@@ -164,6 +199,9 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                           _menteeQuery();
                           _mentorQuery();
                           _mentorSlotsQuery();
+                          _unmatchedMenteesQuery();
+                          _availableMentorQuery();
+                          _matchQuery();
                         });
                       },
                       child: Icon(
@@ -224,7 +262,7 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Mentor Stats',
+                      'Mentoring Availability Stats',
                       style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontSize: 20,
@@ -240,8 +278,8 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       statWidget(
-                        '$_mentorSlots',
-                        'available mentor slots',
+                        '$_availableMentorCount',
+                        '# of mentors available',
                         kMentorXPSecondary,
                       ),
                       VerticalDivider(
@@ -249,18 +287,18 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                         thickness: 2,
                       ),
                       statWidget(
-                        '$_mentorSlotRatio',
-                        'mentor slots per mentor',
+                        '$_mentorSlots',
+                        '# of available mentor slots',
                         kMentorXPSecondary,
                       ),
                       statWidget(
-                        'XX',
+                        '$_unMatchedMentees',
                         'unmatched mentees',
                         kMentorXPSecondary,
                       ),
                       statWidget(
-                        '${_mentorMenteeRatio.toStringAsFixed(1)}',
-                        '# of mentees per mentor',
+                        '$_mentorSlotRatio',
+                        'available slots per unmatched',
                         kMentorXPSecondary,
                       ),
                     ],
@@ -282,7 +320,7 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Mentoring Availability Stats',
+                      'Match Stats',
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 20,
@@ -299,27 +337,8 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       statWidget(
-                        'XX',
-                        'total available slots',
-                        kMentorXPAccentDark,
-                      ),
-                      VerticalDivider(
-                        color: kMentorXPAccentDark,
-                        thickness: 2,
-                      ),
-                      statWidget(
-                        'XX',
-                        'unmatched mentees',
-                        kMentorXPAccentDark,
-                      ),
-                      statWidget(
-                        'XX',
-                        'available slots per mentee',
-                        kMentorXPAccentDark,
-                      ),
-                      statWidget(
-                        'XX',
-                        'available slots per unmatched',
+                        '$_matches',
+                        '# of mentoring matches',
                         kMentorXPAccentDark,
                       ),
                     ],
