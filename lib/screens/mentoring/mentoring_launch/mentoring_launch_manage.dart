@@ -17,12 +17,14 @@ class MentoringLaunchManage extends StatefulWidget {
   final myUser loggedInUser;
   final String programUID;
   final myUser mentorUser;
+  final bool mentorStatus;
 
   const MentoringLaunchManage({
     Key key,
     this.loggedInUser,
     this.programUID,
     this.mentorUser,
+    this.mentorStatus,
   }) : super(key: key);
 
   static const String id = 'mentoring_launch_manage_screen';
@@ -32,7 +34,7 @@ class MentoringLaunchManage extends StatefulWidget {
 }
 
 _confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
-    mentorUID, matchID, mentorSlots, loggedInUser) {
+    mentorUID, matchID, mentorSlots, loggedInUser, mentorStatus) {
   return showDialog(
       context: parentContext,
       builder: (context) {
@@ -91,7 +93,7 @@ _confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
                     fontWeight: FontWeight.w500,
                     onPressed: () {
                       _removeMatch(context, programUID, mentorUID, matchID,
-                          mentorSlots, loggedInUser);
+                          mentorSlots, loggedInUser, mentorStatus);
                     },
                   ),
                 ),
@@ -129,8 +131,8 @@ _confirmRemoveMatch(parentContext, mentorFname, mentorLname, programUID,
       });
 }
 
-_removeMatch(
-    context, programUID, mentorUID, matchID, mentorSlots, loggedInUser) async {
+_removeMatch(context, programUID, mentorUID, matchID, mentorSlots, loggedInUser,
+    mentorStatus) async {
   //remove match from loggedInUser collection
   await programsRef
       .doc(programUID)
@@ -185,13 +187,10 @@ _removeMatch(
       .delete();
 
   //change Mentor Match in Mentees collection back to false
-  await programsRef.doc(programUID).collection('mentees').doc(mentorUID).set({
-    'Mentor Match': false,
-  });
   await programsRef
       .doc(programUID)
       .collection('mentees')
-      .doc(loggedInUser.id)
+      .doc(mentorStatus ? mentorUID : loggedInUser.id)
       .set({
     'Mentor Match': false,
   });
@@ -408,6 +407,7 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                                             matchInfo.matchID,
                                             mentorModel.mentorSlots,
                                             widget.loggedInUser,
+                                            widget.mentorStatus,
                                           );
                                         },
                                       ),

@@ -131,7 +131,7 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
     }
     _unenrolledUsers = _programUsers - _mentorCount - _menteeCount;
     _mentorSlotRatio =
-        double.parse((_mentorSlots / _mentorCount).toStringAsFixed(1));
+        double.parse((_mentorSlots / _unMatchedMentees).toStringAsFixed(1));
 
     return Scaffold(
       appBar: AppBar(

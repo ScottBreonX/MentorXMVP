@@ -398,6 +398,7 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                                     widget.loggedInUser,
                                                 programUID: widget.programUID,
                                                 mentorUser: mentor,
+                                                mentorStatus: isMentor,
                                               ),
                                             ),
                                           );
