@@ -115,7 +115,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   onPressed: canResendEmail ? sendVerificationEmail : null,
                 ),
                 Text(
-                  'If you don\'nt see an email in your inbox please check your Spam folder. The email will be sent from The MentorUP Team.',
+                  'If you don\'t see an email in your inbox please check your Spam folder. The email will be sent from The MentorUP Team.',
                   style: TextStyle(
                     fontSize: 15,
                     fontFamily: 'Montserrat',
