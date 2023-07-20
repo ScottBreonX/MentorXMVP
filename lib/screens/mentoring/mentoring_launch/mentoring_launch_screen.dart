@@ -136,63 +136,63 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                       ),
                                     ),
                                     Container(
-                                      child: Card(
-                                        color: Colors.white,
-                                        elevation: 10,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
+                                      child: GestureDetector(
+                                        onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Profile(
+                                              profileId: isMentor
+                                                  ? widget.loggedInUser.id
+                                                  : widget.mentorUID,
+                                              loggedInUser: widget.loggedInUser,
+                                            ),
+                                          ),
                                         ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15.0),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              GestureDetector(
-                                                child: ImageCircle(
+                                        child: Card(
+                                          color: Colors.white,
+                                          elevation: 10,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                ImageCircle(
                                                   profilePicBool: isMentor
                                                       ? userProfilePic
                                                       : mentorProfilePic,
                                                   myUserRef:
                                                       isMentor ? user : mentor,
                                                 ),
-                                                onTap: () => Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Profile(
-                                                      profileId: isMentor
-                                                          ? widget
-                                                              .loggedInUser.id
-                                                          : widget.mentorUID,
-                                                      loggedInUser:
-                                                          widget.loggedInUser,
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 10.0),
+                                                  child: Container(
+                                                    width: 100,
+                                                    child: Text(
+                                                      isMentor
+                                                          ? '${user.firstName}\n${user.lastName}'
+                                                          : '${mentor.firstName}\n${mentor.lastName}',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.black45,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 10.0),
-                                                child: Container(
-                                                  width: 100,
-                                                  child: Text(
-                                                    isMentor
-                                                        ? '${user.firstName}\n${user.lastName}'
-                                                        : '${mentor.firstName}\n${mentor.lastName}',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      fontFamily: 'Montserrat',
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.black45,
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
-                                            ],
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -215,61 +215,60 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                         ),
                                       ),
                                     ),
-                                    Card(
-                                      color: Colors.white,
-                                      elevation: 10,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
+                                    GestureDetector(
+                                      onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Profile(
+                                            profileId: isMentor
+                                                ? widget.mentorUID
+                                                : widget.loggedInUser.id,
+                                            loggedInUser: widget.loggedInUser,
+                                          ),
+                                        ),
                                       ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            GestureDetector(
-                                              child: ImageCircle(
+                                      child: Card(
+                                        color: Colors.white,
+                                        elevation: 10,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(15.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              ImageCircle(
                                                 profilePicBool: isMentor
                                                     ? mentorProfilePic
                                                     : userProfilePic,
                                                 myUserRef:
                                                     isMentor ? mentor : user,
                                               ),
-                                              onTap: () => Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) => Profile(
-                                                    profileId: isMentor
-                                                        ? widget.mentorUID
-                                                        : widget
-                                                            .loggedInUser.id,
-                                                    loggedInUser:
-                                                        widget.loggedInUser,
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 10.0),
+                                                child: Container(
+                                                  width: 100,
+                                                  child: Text(
+                                                    isMentor
+                                                        ? '${mentor.firstName}\n${mentor.lastName}'
+                                                        : '${user.firstName}\n${user.lastName}',
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      fontFamily: 'Montserrat',
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black45,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 10.0),
-                                              child: Container(
-                                                width: 100,
-                                                child: Text(
-                                                  isMentor
-                                                      ? '${mentor.firstName}\n${mentor.lastName}'
-                                                      : '${user.firstName}\n${user.lastName}',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    fontFamily: 'Montserrat',
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black45,
-                                                  ),
-                                                ),
-                                              ),
-                                            )
-                                          ],
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),

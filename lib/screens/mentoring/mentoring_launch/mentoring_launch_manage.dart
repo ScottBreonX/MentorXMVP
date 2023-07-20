@@ -191,7 +191,7 @@ _removeMatch(context, programUID, mentorUID, matchID, mentorSlots, loggedInUser,
       .doc(programUID)
       .collection('mentees')
       .doc(mentorStatus ? mentorUID : loggedInUser.id)
-      .set({
+      .update({
     'Mentor Match': false,
   });
 
