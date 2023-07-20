@@ -67,8 +67,9 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
           appBar: AppBar(
             leading: GestureDetector(
               child: Icon(Icons.close),
-              onTap: () {
-                Navigator.popAndPushNamed(context, LandingPage.id);
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.pop(context);
               },
             ),
             backgroundColor: kMentorXPPrimary,
