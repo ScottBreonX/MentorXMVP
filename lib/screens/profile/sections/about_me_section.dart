@@ -37,7 +37,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
       key: _formKey1,
       textCapitalization: TextCapitalization.sentences,
       initialValue: userAboutMeText,
-      textInputAction: TextInputAction.next,
+      textInputAction: TextInputAction.newline,
       keyboardType: TextInputType.multiline,
       maxLines: null,
       textAlign: TextAlign.start,

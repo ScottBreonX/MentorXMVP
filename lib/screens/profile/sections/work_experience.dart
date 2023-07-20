@@ -36,7 +36,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
     return TextFormField(
       key: _formKey1,
       initialValue: userWorkExperienceText,
-      textInputAction: TextInputAction.next,
+      textInputAction: TextInputAction.newline,
       textCapitalization: TextCapitalization.sentences,
       keyboardType: TextInputType.multiline,
       maxLines: null,
