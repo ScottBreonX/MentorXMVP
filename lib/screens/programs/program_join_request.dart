@@ -85,7 +85,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
           'enrollmentStatus': '',
           'Profile Complete': false,
           'Enrollment Complete': false,
-          'Guideline Complete': false,
+          'Guidelines Complete': false,
         });
         await usersRef.doc(loggedInUser.id).update({
           'Program': widget.program.id,

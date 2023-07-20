@@ -102,8 +102,18 @@ class _ProgramGuidelinesState extends State<ProgramGuidelines> {
                       cardColor: Colors.grey.shade700,
                       fileName: Guidelines5(),
                       swipeText: 'Return to Program',
-                      swipeTextOnTap: () {
-                        Navigator.pop(context);
+                      selectButtons: true,
+                      selectButton1: true,
+                      button1Text: 'Complete Session',
+                      onPressed1: () async {
+                        await programsRef
+                            .doc(widget.programUID)
+                            .collection('userSubscribed')
+                            .doc(widget.loggedInUser.id)
+                            .update({"Guidelines Complete": true});
+                        setState(() {
+                          Navigator.pop(context);
+                        });
                       },
                     ),
                   ],
