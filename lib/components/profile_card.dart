@@ -1,79 +1,128 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import '../constants.dart';
 
-class ProfileCard extends StatelessWidget {
+class ProfileCard extends StatefulWidget {
   myUser user;
-  final Color cardColor;
-  final Color borderColor;
-  final Color cardTextColor;
-  final Function onTap;
-  final double primaryTextSize;
-  final double secondaryTextSize;
-  final double boxHeight;
-  final double boxWidth;
+  String profilePicture;
 
   ProfileCard({
     Key key,
     @required this.user,
-    this.cardTextColor,
-    this.borderColor,
-    this.onTap,
-    this.cardColor,
-    this.primaryTextSize,
-    this.secondaryTextSize,
-    this.boxHeight,
-    this.boxWidth,
+    @required this.profilePicture,
   }) : super(key: key);
 
   @override
+  State<ProfileCard> createState() => _ProfileCardState();
+}
+
+class _ProfileCardState extends State<ProfileCard> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 10),
       child: GestureDetector(
-        onTap: onTap,
+        onTap: () {},
         child: Container(
           decoration: BoxDecoration(
-            border:
-                Border.all(color: borderColor ?? kMentorXPPrimary, width: 8),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
                 blurRadius: 2,
-                offset: Offset(2, 3),
-                color: Colors.grey[700],
+                offset: Offset(2, 5),
+                color: Colors.grey[500],
               ),
             ],
-            color: cardColor ?? Colors.white,
+            color: Colors.white,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // image placeholder
-              ProfileImageCircle(
-                iconSize: 125,
-                iconColor: Colors.blue,
-                circleSize: 75,
-                circleColor: Colors.grey[300],
-              ),
-              SizedBox(height: 5.0),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                '${user.firstName} ${user.lastName}',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: cardTextColor ?? Colors.black,
-                  fontSize: primaryTextSize ?? 15,
-                  fontWeight: FontWeight.w500,
-                ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: CircleAvatar(
+                      backgroundColor: kMentorXPSecondary,
+                      radius: 38,
+                      child: Container(
+                        child: widget.profilePicture == null ||
+                                widget.profilePicture.isEmpty ||
+                                widget.profilePicture == ""
+                            ? ProfileImageCircle(
+                                circleColor: Colors.grey,
+                                iconSize: 30,
+                                iconColor: Colors.white,
+                                circleSize: 50,
+                              )
+                            : CircleAvatar(
+                                radius: 35,
+                                child: CachedNetworkImage(
+                                  imageUrl: widget.profilePicture,
+                                  imageBuilder: (context, imageProvider) =>
+                                      Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) => Icon(
+                                    Icons.person,
+                                    size: 50,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 250,
+                          child: Text(
+                            '${widget.user.firstName} ${widget.user.lastName}',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              color: Colors.black54,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 250,
+                          child: Text(
+                            '${widget.user.email}',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              color: Colors.black54,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-          height: boxHeight ?? 150,
-          width: boxWidth ?? 450,
+          height: 100,
+          width: MediaQuery.of(context).size.width,
         ),
       ),
     );

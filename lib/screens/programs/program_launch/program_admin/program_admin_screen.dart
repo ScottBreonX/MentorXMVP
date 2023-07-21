@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/program_creation/program_creation_detail.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
-import '../../../components/alert_dialog.dart';
-import '../../../components/icon_circle.dart';
-import '../../../components/progress.dart';
-import '../../../components/rounded_button.dart';
-import '../../../constants.dart';
-import '../../../models/program.dart';
+import '../../../../components/alert_dialog.dart';
+import '../../../../components/icon_circle.dart';
+import '../../../../components/progress.dart';
+import '../../../../components/rounded_button.dart';
+import '../../../../constants.dart';
+import '../../../../models/program.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');

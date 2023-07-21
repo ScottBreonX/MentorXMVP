@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import '../../../constants.dart';
-import '../../../models/mentor_match_models/mentor_model.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_admin/program_admin_stats_detail.dart';
+import '../../../../constants.dart';
+import '../../../../models/mentor_match_models/mentor_model.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -219,10 +220,24 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      statWidget(
-                        '$_programUsers',
-                        'total # of users',
-                        kMentorXPPrimary,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ProgramAdminStatsDetailScreen(
+                                loggedInUser: widget.loggedInUser,
+                                programUID: widget.programUID,
+                              ),
+                            ),
+                          );
+                        },
+                        child: statWidget(
+                          '$_programUsers',
+                          'total # of users',
+                          kMentorXPPrimary,
+                        ),
                       ),
                       VerticalDivider(
                         color: kMentorXPPrimary,
