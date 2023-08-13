@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/apptheme.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
+import 'package:mentorx_mvp/main.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/program_creation/program_creation.dart';
 import 'package:mentorx_mvp/screens/programs/available_programs.dart';
+import '../../components/rounded_button.dart';
+import '../../constants.dart';
 import '../profile/profile_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -107,6 +111,86 @@ class MentorXMenuList extends StatelessWidget {
           ),
           title: Text(
             'Join New Program',
+            style: TextStyle(
+              fontFamily: 'Montserrat',
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.sunny,
+            size: 30,
+            color: Colors.white,
+          ),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return SimpleDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  title: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Choose your app color theme",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headlineLarge,
+                      ),
+                    ),
+                  ),
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RoundedButton(
+                            minWidth: 120,
+                            title: "Dark Mode",
+                            prefixIcon: Icon(
+                              Icons.dark_mode,
+                              color: Colors.white,
+                            ),
+                            buttonColor: kMentorXPPrimary,
+                            fontColor: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                            onPressed: () => MentorX.of(context).changeTheme(
+                              AppTheme.darkTheme,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RoundedButton(
+                            minWidth: 120,
+                            title: "Light Mode",
+                            prefixIcon: Icon(
+                              Icons.sunny,
+                              color: kMentorXPPrimary,
+                            ),
+                            buttonColor: Colors.white,
+                            fontColor: kMentorXPPrimary,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                            onPressed: () => MentorX.of(context)
+                                .changeTheme(AppTheme.lightTheme),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                );
+              },
+            );
+            // MentorX.of(context).changeTheme(AppTheme.darkTheme);
+          },
+          title: Text(
+            'Change Theme',
             style: TextStyle(
               fontFamily: 'Montserrat',
               color: Colors.white,

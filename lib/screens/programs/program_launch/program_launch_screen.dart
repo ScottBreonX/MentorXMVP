@@ -325,13 +325,11 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                   key: _scaffoldKey,
                   drawer: Drawer(
                     child: Container(
-                      color: kMentorXPPrimary,
                       child: drawerItems,
                     ),
                   ),
                   appBar: AppBar(
                     elevation: 5,
-                    backgroundColor: kMentorXPPrimary,
                     title: Center(
                       child: Padding(
                         padding: const EdgeInsets.only(right: 35.0, bottom: 10),
@@ -407,16 +405,12 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                                     top: 10.0,
                                                   ),
                                                   child: Text(
-                                                    '${program.programName}',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      fontFamily: 'Montserrat',
-                                                      fontSize: 25,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Colors.black54,
-                                                    ),
-                                                  ),
+                                                      '${program.programName}',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .headlineLarge),
                                                 ),
                                               ),
                                             ),
@@ -431,7 +425,6 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                           ),
                           const Divider(
                             thickness: 2,
-                            color: Colors.grey,
                             indent: 20,
                             endIndent: 20,
                           ),
@@ -449,12 +442,9 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                     programToDoComplete
                                         ? 'Connections'
                                         : 'Program To-Do List:',
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'Montserrat',
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineLarge,
                                   ),
                                 ),
                               ],
@@ -472,7 +462,6 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                           ),
                           const Divider(
                             thickness: 2,
-                            color: Colors.grey,
                             indent: 20,
                             endIndent: 20,
                           ),
@@ -483,12 +472,8 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                     const EdgeInsets.only(left: 10.0, top: 20),
                                 child: Text(
                                   'Resources',
-                                  style: TextStyle(
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 25,
-                                    fontFamily: 'Montserrat',
-                                  ),
+                                  style:
+                                      Theme.of(context).textTheme.headlineLarge,
                                 ),
                               )
                             ],
@@ -601,20 +586,12 @@ class CircleIconWithText extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10.0),
             child: Text(
               textDescription1 ?? '',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.black45,
-                fontFamily: 'Montserrat',
-              ),
+              style: Theme.of(context).textTheme.labelLarge,
             ),
           ),
           Text(
             textDescription2 ?? '',
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.black45,
-              fontFamily: 'Montserrat',
-            ),
+            style: Theme.of(context).textTheme.labelLarge,
           ),
         ],
       ),

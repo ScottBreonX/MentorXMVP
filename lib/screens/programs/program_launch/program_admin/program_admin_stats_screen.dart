@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_admin/program_admin_stats_detail.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_admin/program_admin_stats_mentees.dart';
 import '../../../../constants.dart';
 import '../../../../models/mentor_match_models/mentor_model.dart';
 
@@ -243,10 +244,24 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                         color: kMentorXPPrimary,
                         thickness: 2,
                       ),
-                      statWidget(
-                        '$_menteeCount',
-                        '# of mentees',
-                        kMentorXPPrimary,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ProgramAdminStatsMenteesScreen(
+                                loggedInUser: widget.loggedInUser,
+                                programUID: widget.programUID,
+                              ),
+                            ),
+                          );
+                        },
+                        child: statWidget(
+                          '$_menteeCount',
+                          '# of mentees',
+                          kMentorXPPrimary,
+                        ),
                       ),
                       statWidget(
                         '$_mentorCount',

@@ -6,26 +6,28 @@ import 'package:mentorx_mvp/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
+import '../../../../models/mentor_match_models/mentee_model.dart';
+
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class ProgramAdminStatsDetailScreen extends StatefulWidget {
+class ProgramAdminStatsMenteesScreen extends StatefulWidget {
   final myUser loggedInUser;
   final String programUID;
-  static const String id = 'program_admin_stats_detail';
+  static const String id = 'program_admin_stats_mentees';
 
-  ProgramAdminStatsDetailScreen({
+  ProgramAdminStatsMenteesScreen({
     this.loggedInUser,
     this.programUID,
   });
 
   @override
-  _ProgramAdminStatsDetailScreenState createState() =>
-      _ProgramAdminStatsDetailScreenState();
+  _ProgramAdminStatsMenteesScreenState createState() =>
+      _ProgramAdminStatsMenteesScreenState();
 }
 
-class _ProgramAdminStatsDetailScreenState
-    extends State<ProgramAdminStatsDetailScreen> {
+class _ProgramAdminStatsMenteesScreenState
+    extends State<ProgramAdminStatsMenteesScreen> {
   bool showSpinner = false;
   bool isLoading = true;
   List<Mentor> mentors = [];
@@ -35,7 +37,7 @@ class _ProgramAdminStatsDetailScreenState
     super.initState();
   }
 
-  buildUserListContent(myUser loggedInUser) {
+  buildMenteeListContent(myUser loggedInUser) {
     return Scaffold(
       body: SingleChildScrollView(
         child: ModalProgressHUD(
@@ -47,7 +49,7 @@ class _ProgramAdminStatsDetailScreenState
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Users Enrolled',
+                  'Mentees Enrolled',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Montserrat',
@@ -62,7 +64,7 @@ class _ProgramAdminStatsDetailScreenState
                   color: Colors.black54,
                   thickness: 2,
                 ),
-                UserDetailStream(
+                MenteeDetailStream(
                   loggedInUser: widget.loggedInUser,
                   programUID: widget.programUID,
                 ),
@@ -90,13 +92,13 @@ class _ProgramAdminStatsDetailScreenState
           ),
         ),
       ),
-      body: buildUserListContent(widget.loggedInUser),
+      body: buildMenteeListContent(widget.loggedInUser),
     );
   }
 }
 
-class UserDetailStream extends StatelessWidget {
-  UserDetailStream({
+class MenteeDetailStream extends StatelessWidget {
+  MenteeDetailStream({
     this.loggedInUser,
     this.programUID,
   });
@@ -107,9 +109,10 @@ class UserDetailStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: usersRef
-            .orderBy("First Name")
-            .where("Program", isEqualTo: programUID)
+        stream: programsRef
+            .doc(programUID)
+            .collection('mentees')
+            // .orderBy("First Name")
             .snapshots(),
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasError) {
@@ -119,24 +122,24 @@ class UserDetailStream extends StatelessWidget {
             return Center();
           }
 
-          final users = snapshot.data.docs;
-          List<ProfileCard> userBubbles = [];
+          final mentees = snapshot.data.docs;
+          List<ProfileCard> menteeBubbles = [];
 
-          for (var user in users) {
-            myUser userModel = myUser.fromDocument(user);
+          for (var mentee in mentees) {
+            Mentee menteeModel = Mentee.fromDocument(mentee);
 
-            final userBubble = ProfileCard(
-              profilePicture: userModel.profilePicture,
-              user: userModel,
+            final menteeBubble = ProfileCard(
+              profilePicture: menteeModel.profilePicture,
+              user: mentee,
             );
-            userBubbles.add(userBubble);
+            menteeBubbles.add(menteeBubble);
           }
           return Padding(
             padding: const EdgeInsets.only(bottom: 50.0),
             child: Container(
               child: SingleChildScrollView(
                 child: Column(
-                  children: userBubbles,
+                  children: menteeBubbles,
                 ),
               ),
             ),

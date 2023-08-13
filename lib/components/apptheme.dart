@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/constants.dart';
 
 class AppTheme {
   //
   AppTheme._();
 
   static final ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: Colors.grey.shade300,
-    backgroundColor: Colors.grey.shade300,
+    scaffoldBackgroundColor: Colors.white,
+    primaryColor: kMentorXPPrimary,
     appBarTheme: AppBarTheme(
-      color: Colors.blue,
+      color: kMentorXPPrimary,
       iconTheme: IconThemeData(
         color: Colors.white,
       ),
     ),
-    canvasColor: Colors.blue,
+    canvasColor: kMentorXPPrimary,
     colorScheme: ColorScheme.light(
-      primary: Colors.blue,
+      primary: Colors.black54,
       onPrimary: Colors.white,
       secondary: Colors.pink,
     ),
@@ -23,76 +24,106 @@ class AppTheme {
       color: Colors.white,
     ),
     cardColor: Colors.white,
+    dividerColor: Colors.grey.shade400,
     iconTheme: IconThemeData(
       color: Colors.blue,
     ),
     textTheme: TextTheme(
-      headline1: TextStyle(
-        color: Colors.black54,
-        fontSize: 30.0,
+      titleLarge: TextStyle(
+        color: kMentorXPAccentDark,
+        fontSize: 25,
         fontFamily: 'Montserrat',
       ),
-      headline2: TextStyle(
-        color: Colors.white,
-        fontSize: 20,
-        fontFamily: 'Montserrat',
-      ),
-      headline3: TextStyle(
-        color: Colors.blue,
-        fontSize: 20,
-        fontFamily: 'Montserrat',
-      ),
-      headline4: TextStyle(
-        color: Colors.black54,
-        fontSize: 20,
-        fontFamily: 'Montserrat',
-      ),
-      headline5: TextStyle(
-        color: Colors.black54,
-        fontSize: 15.0,
-        fontFamily: 'Montserrat',
-      ),
-      subtitle1: TextStyle(
-        color: Colors.white,
-        fontSize: 20.0,
-      ),
-      subtitle2: TextStyle(
+      headlineLarge: TextStyle(
         color: Colors.black45,
-        fontSize: 18.0,
+        fontSize: 25,
+        fontFamily: 'Montserrat',
       ),
-      button: TextStyle(
-        color: const Color(0xFFFFFFFF),
+      headlineMedium: TextStyle(
+        color: Colors.black45,
+        fontSize: 20,
+        fontFamily: 'Montserrat',
+      ),
+      headlineSmall: TextStyle(
+        color: Colors.black45,
+        fontSize: 15,
+        fontFamily: 'Montserrat',
+      ),
+      labelLarge: TextStyle(
+        color: Colors.black45,
+        fontSize: 20,
+        fontFamily: 'Montserrat',
+      ),
+      labelSmall: TextStyle(
+        color: Colors.black45,
+        fontSize: 15,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Montserrat',
+      ),
+      bodyLarge: TextStyle(
+        color: Colors.black45,
+        fontSize: 15,
+        fontFamily: 'Montserrat',
       ),
     ),
   );
 
   static final ThemeData darkTheme = ThemeData(
-    scaffoldBackgroundColor: Colors.black,
+    scaffoldBackgroundColor: Colors.grey.shade900,
+    primaryColor: Colors.white,
     appBarTheme: AppBarTheme(
-      color: Colors.black,
+      color: Colors.black12,
       iconTheme: IconThemeData(
         color: Colors.white,
       ),
     ),
-    colorScheme: ColorScheme.light(
-      primary: Colors.black,
-      onPrimary: Colors.black,
-      secondary: Colors.red,
+    canvasColor: Colors.grey.shade900.withOpacity(1),
+    colorScheme: ColorScheme.dark(
+      primary: Colors.white,
+      onPrimary: Colors.black54,
+      secondary: Colors.white,
     ),
-    cardTheme: CardTheme(
-      color: Colors.black,
-    ),
+    cardColor: Colors.grey.shade700,
+    dividerColor: Colors.grey.shade700,
     iconTheme: IconThemeData(
-      color: Colors.white54,
+      color: Colors.white,
     ),
     textTheme: TextTheme(
-      subtitle1: TextStyle(
-        color: Colors.white,
-        fontSize: 20.0,
+      titleLarge: TextStyle(
+        color: kMentorXPAccentDark,
+        fontSize: 25,
+        fontFamily: 'Montserrat',
       ),
-      subtitle2: TextStyle(
-        color: Colors.white70,
-        fontSize: 18.0,
+      headlineLarge: TextStyle(
+        color: Colors.white,
+        fontSize: 25,
+        fontFamily: 'Montserrat',
+      ),
+      headlineMedium: TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+        fontFamily: 'Montserrat',
+      ),
+      headlineSmall: TextStyle(
+        color: Colors.white,
+        fontSize: 15,
+        fontFamily: 'Montserrat',
+      ),
+      labelLarge: TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+        fontFamily: 'Montserrat',
+      ),
+      labelSmall: TextStyle(
+        color: Colors.white,
+        fontSize: 15,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Montserrat',
+      ),
+      bodyLarge: TextStyle(
+        color: Colors.white,
+        fontSize: 15,
+        fontFamily: 'Montserrat',
       ),
     ),
   );

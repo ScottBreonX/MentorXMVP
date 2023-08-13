@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
@@ -119,7 +118,6 @@ class _HomeScreenState extends State<HomeScreen> {
             key: _scaffoldKey,
             drawer: Drawer(
               child: Container(
-                color: kMentorXPPrimary,
                 child: drawerItems,
               ),
             ),
@@ -221,12 +219,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: Text(
                                           '${loggedInUser.firstName} ${loggedInUser.lastName}',
                                           overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontFamily: 'Montserrat',
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.black54,
-                                          ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineLarge,
                                         ),
                                       ),
                                     ),
@@ -241,11 +236,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       child: Text(
                                         '${loggedInUser.email}',
-                                        style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 15,
-                                          color: Colors.black54,
-                                        ),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall,
                                       ),
                                     ),
                                   ],
@@ -258,7 +251,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const Divider(
                       thickness: 2,
-                      color: Colors.grey,
                       indent: 20,
                       endIndent: 20,
                     ),
@@ -274,12 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Text(
                               'Join a Program',
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 25,
-                                fontWeight: FontWeight.w500,
-                                color: kMentorXPSecondary,
-                              ),
+                              style: Theme.of(context).textTheme.headlineLarge,
                             ),
                           ),
                           Wrap(
@@ -289,18 +276,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Text(
                                   'You are not currently enrolled in any programs. Join a program below:',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontFamily: 'WorkSans',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black45,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                               ),
                             ],
                           ),
                           Divider(
-                            color: kMentorXPSecondary,
                             indent: 20,
                             endIndent: 20,
                             thickness: 2,

@@ -69,7 +69,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
           onPressed: function,
           cardIconBool: Container(),
           cardAlignment: MainAxisAlignment.center,
-          buttonCardColor: hasJoined ? Colors.grey : kMentorXPAccentDark,
+          buttonCardColor: hasJoined ? Colors.grey : kMentorXPPrimary,
           buttonCardTextColor: hasJoined ? Colors.grey.shade600 : Colors.white,
           buttonCardTextSize: 25,
           buttonCardRadius: 20,
@@ -169,8 +169,8 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                   textAlign: TextAlign.center,
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 2,
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.black45),
+                                  style:
+                                      Theme.of(context).textTheme.headlineLarge,
                                 ),
                               ),
                             ),
@@ -181,7 +181,6 @@ class _ProgramProfileState extends State<ProgramProfile> {
                         thickness: 2,
                         indent: 20,
                         endIndent: 20,
-                        color: Colors.grey.shade400,
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
@@ -191,21 +190,17 @@ class _ProgramProfileState extends State<ProgramProfile> {
                             Padding(
                               padding: const EdgeInsets.only(
                                   left: 10.0, bottom: 10.0),
-                              child: Text(
-                                'About this program',
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black45,
-                                ),
-                              ),
+                              child: Text('About this program',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium),
                             ),
                             SizedBox(height: 5),
                             Container(
                               height: 150,
                               alignment: Alignment.topLeft,
                               decoration: BoxDecoration(
-                                color: Colors.grey[200],
+                                color: Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               child: Padding(
@@ -217,11 +212,9 @@ class _ProgramProfileState extends State<ProgramProfile> {
                                   child: Text(
                                     '${program.aboutProgram}',
                                     textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontFamily: 'Montserrat',
-                                      color: Colors.black54,
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 ),
                               ),

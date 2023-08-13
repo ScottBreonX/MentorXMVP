@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/screens/programs/program_profile.dart';
-
-import '../constants.dart';
 import '../models/user.dart';
 
 class ProgramTile extends StatelessWidget {
@@ -61,94 +59,61 @@ class ProgramTile extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: GestureDetector(
-                          onTap: onPressed ??
-                              () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ProgramProfile(
-                                        programId: programId,
-                                        loggedInUser: loggedInUser,
-                                      ),
-                                    ),
+                Row(crossAxisAlignment: CrossAxisAlignment.start, children: <
+                    Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: GestureDetector(
+                      onTap: onPressed ??
+                          () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProgramProfile(
+                                    programId: programId,
+                                    loggedInUser: loggedInUser,
                                   ),
-                          child: imageContainer ??
-                              imageAsset ??
-                              cachedNetworkImage ??
-                              null,
+                                ),
+                              ),
+                      child: imageContainer ??
+                          imageAsset ??
+                          cachedNetworkImage ??
+                          null,
+                    ),
+                  ),
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          width: MediaQuery.of(context).size.width * .7,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: Container(
+                              child: Text(
+                                '$programName',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
+                        Row(
+                          children: [
+                            Text('Institution: ',
+                                style: Theme.of(context).textTheme.labelSmall),
                             Container(
-                              width: MediaQuery.of(context).size.width * .7,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
-                                child: Container(
-                                  child: Text(
-                                    '$programName',
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black54,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Institution: ',
-                                  style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 15,
-                                    color: kMentorXPSecondary,
-                                  ),
-                                ),
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * .50,
-                                  child: Text(
-                                    '$institutionName',
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      fontSize: 15,
-                                      color: Colors.black54,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 5.0, bottom: 10),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.70,
-                                child: Text(
-                                  '$programAbout',
+                              width: MediaQuery.of(context).size.width * .50,
+                              child: Text('$institutionName',
                                   overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 15,
-                                    color: Colors.black45,
-                                  ),
-                                ),
-                              ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall),
                             ),
-                          ]),
-                    ]),
+                          ],
+                        ),
+                      ]),
+                ]),
               ],
             ),
           ),
