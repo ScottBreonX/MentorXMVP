@@ -81,7 +81,7 @@ class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
           TrackInfo trackStatus = TrackInfo.fromDocument(snapshot.data);
 

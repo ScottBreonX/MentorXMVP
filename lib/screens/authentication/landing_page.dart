@@ -95,7 +95,7 @@ class _LandingPageState extends State<LandingPage> {
               future: usersRef.doc(user.uid).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return circularProgress();
+                  return circularProgress(Theme.of(context).primaryColor);
                 }
                 myUser _user = myUser.fromDocument(snapshot.data);
 

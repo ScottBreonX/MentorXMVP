@@ -70,14 +70,14 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
         stream: usersRef.doc(widget.loggedInUser.id).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
           myUser user = myUser.fromDocument(snapshot.data);
           return StreamBuilder<Object>(
               stream: usersRef.doc(widget.mentorUID).snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return circularProgress();
+                  return circularProgress(Theme.of(context).primaryColor);
                 }
                 myUser mentor = myUser.fromDocument(snapshot.data);
 

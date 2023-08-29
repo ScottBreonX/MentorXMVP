@@ -53,7 +53,7 @@ class _MatchListState extends State<MatchList> {
             .get(),
         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
           MatchModel matchModel = MatchModel.fromDocument(snapshot.data);
 
@@ -61,7 +61,7 @@ class _MatchListState extends State<MatchList> {
             future: usersRef.doc(mentorUID).get(),
             builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
               if (!snapshot.hasData) {
-                return circularProgress();
+                return circularProgress(Theme.of(context).primaryColor);
               }
               myUser user = myUser.fromDocument(snapshot.data);
 
@@ -141,12 +141,9 @@ class _MatchListState extends State<MatchList> {
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontFamily: 'WorkSans',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black54,
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                 ),
                               ),
                               Container(
@@ -156,12 +153,9 @@ class _MatchListState extends State<MatchList> {
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontFamily: 'WorkSans',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black54,
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                 ),
                               ),
                             ]),

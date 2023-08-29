@@ -84,7 +84,7 @@ class _MentoringScreenState extends State<MentoringScreen> {
             .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
 
           EnrollmentModel enrollmentModel =

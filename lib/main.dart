@@ -88,7 +88,6 @@ class _MentorXState extends State<MentorX> {
         debugShowCheckedModeBanner: false,
         // theme: loggedInUser.darkMode ? AppTheme.darkTheme : AppTheme.lightTheme,
         theme: _themeMode,
-        // themeMode: _themeMode,
 // Navigator routes
         initialRoute: LandingPage.id,
         routes: {

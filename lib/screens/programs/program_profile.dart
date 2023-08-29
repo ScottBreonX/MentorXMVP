@@ -96,7 +96,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
         future: programsRef.doc(widget.programId).get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
           Program program = Program.fromDocument(snapshot.data);
           return Scaffold(

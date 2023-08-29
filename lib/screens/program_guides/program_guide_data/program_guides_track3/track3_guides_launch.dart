@@ -90,7 +90,7 @@ class _Track3GuidesLaunchScreenState extends State<Track3GuidesLaunchScreen> {
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
           ProgramGuideStatus guideStatus =
               ProgramGuideStatus.fromDocument(snapshot.data);

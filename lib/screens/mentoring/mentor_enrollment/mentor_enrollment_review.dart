@@ -53,7 +53,7 @@ class _MentorEnrollmentReviewState extends State<MentorEnrollmentReview> {
         future: usersRef.doc(widget.loggedInUser.id).get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
           final user = snapshot.data;
           myUser userProfile = myUser.fromDocument(user);
@@ -65,7 +65,7 @@ class _MentorEnrollmentReviewState extends State<MentorEnrollmentReview> {
                   .get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return circularProgress();
+                  return circularProgress(Theme.of(context).primaryColor);
                 }
 
                 final mentor = snapshot.data;

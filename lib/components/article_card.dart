@@ -43,17 +43,17 @@ class _ArticleCardState extends State<ArticleCard> {
           width: 200,
           decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.white.withOpacity(1.0),
+              color: Theme.of(context).cardColor,
             ),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey[700],
-                blurRadius: 5,
-                offset: Offset(5, 5),
+                color: Colors.grey[500],
+                blurRadius: 1,
+                offset: Offset(3, 3),
               ),
             ],
-            color: Colors.white,
+            color: Theme.of(context).cardColor,
           ),
           child: Padding(
             padding: const EdgeInsets.only(left: 5.0, top: 5),
@@ -77,15 +77,7 @@ class _ArticleCardState extends State<ArticleCard> {
                           child: Text(
                             widget.articleTitle ?? 'Upcoming',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              decoration: isChecked
-                                  ? TextDecoration.lineThrough
-                                  : TextDecoration.none,
-                              fontFamily: 'Montserrat',
-                              fontSize: 20,
-                              color: Colors.black45,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context).textTheme.headlineMedium,
                           ),
                         ),
                       ],
@@ -107,11 +99,7 @@ class _ArticleCardState extends State<ArticleCard> {
                         child: Text(
                           widget.bodyText ?? '',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 15,
-                            color: Colors.black54,
-                          ),
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       ),
                     ],
@@ -138,10 +126,7 @@ class _ArticleCardState extends State<ArticleCard> {
                     ),
                     Text(
                       'Mark Complete',
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black45,
-                          fontFamily: 'Montserrat'),
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ],
                 )

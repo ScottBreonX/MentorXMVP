@@ -320,12 +320,11 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: TextFormField(
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium,
+                                  style:
+                                      Theme.of(context).textTheme.headlineLarge,
                                   key: formKey,
                                   controller: codeController,
-                                  cursorColor: Theme.of(context).primaryColor,
+                                  cursorColor: Theme.of(context).indicatorColor,
                                   decoration: InputDecoration(
                                     filled: true,
                                     enabledBorder: OutlineInputBorder(
@@ -378,8 +377,9 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
                         ? ButtonCard(
                             buttonCardText: 'Cancel',
                             onPressed: () => Navigator.pop(context),
-                            buttonCardColor: Colors.white,
-                            buttonCardTextColor: kMentorXPPrimary,
+                            buttonCardColor: Theme.of(context).cardColor,
+                            buttonCardTextColor:
+                                Theme.of(context).colorScheme.primary,
                             buttonCardTextSize: 25,
                             buttonCardRadius: 20,
                             cardIconBool: Container(),

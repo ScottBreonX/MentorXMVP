@@ -73,7 +73,9 @@ class _LaunchScreenState extends State<LaunchScreen> {
   @override
   Widget build(BuildContext context) {
     if (loggedIn == false || loggedInUser == null) {
-      return circularProgressBlue();
+      return circularProgress(
+        Theme.of(context).primaryColor,
+      );
     }
 
     return Scaffold(

@@ -231,7 +231,7 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
             .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
 
           MatchModel matchInfo = MatchModel.fromDocument(snapshot.data);
@@ -240,7 +240,7 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
               future: programsRef.doc(widget.programUID).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return circularProgress();
+                  return circularProgress(Theme.of(context).primaryColor);
                 }
 
                 Program program = Program.fromDocument(snapshot.data);
@@ -249,7 +249,7 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                     future: usersRef.doc(widget.loggedInUser.id).get(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
-                        return circularProgress();
+                        return circularProgress(Theme.of(context).primaryColor);
                       }
 
                       return FutureBuilder<Object>(
@@ -260,7 +260,8 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                               .get(),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) {
-                              return circularProgress();
+                              return circularProgress(
+                                  Theme.of(context).primaryColor);
                             }
                             final mentor = snapshot.data;
                             Mentor mentorModel = Mentor.fromDocument(mentor);
@@ -334,7 +335,10 @@ class _MentoringLaunchManageState extends State<MentoringLaunchManage> {
                                                           ),
                                                           placeholder: (context,
                                                                   url) =>
-                                                              circularProgress(),
+                                                              circularProgress(
+                                                                  Theme.of(
+                                                                          context)
+                                                                      .primaryColor),
                                                           errorWidget: (context,
                                                                   url, error) =>
                                                               Image.asset(

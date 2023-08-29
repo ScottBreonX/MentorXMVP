@@ -42,7 +42,7 @@ class _MentoringProfileScreenState extends State<MentoringProfileScreen> {
             .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
           final mentor = snapshot.data;
           Mentor mentorSkills = Mentor.fromDocument(mentor);
@@ -56,7 +56,7 @@ class _MentoringProfileScreenState extends State<MentoringProfileScreen> {
                   .get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return circularProgress();
+                  return circularProgress(Theme.of(context).primaryColor);
                 }
 
                 final mentee = snapshot.data;

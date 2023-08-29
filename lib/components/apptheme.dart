@@ -19,11 +19,13 @@ class AppTheme {
       primary: Colors.black54,
       onPrimary: Colors.white,
       secondary: Colors.pink,
+      tertiary: kMentorXPSecondary,
     ),
     cardTheme: CardTheme(
-      color: Colors.white,
+      color: Colors.grey.shade200,
     ),
-    cardColor: Colors.white,
+    cardColor: Colors.grey.shade200,
+    indicatorColor: kMentorXPAccentDark,
     dividerColor: Colors.grey.shade400,
     iconTheme: IconThemeData(
       color: Colors.blue,
@@ -70,7 +72,7 @@ class AppTheme {
 
   static final ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: Colors.grey.shade900,
-    primaryColor: Colors.white,
+    primaryColor: Colors.black26,
     appBarTheme: AppBarTheme(
       color: Colors.black12,
       iconTheme: IconThemeData(
@@ -81,9 +83,11 @@ class AppTheme {
     colorScheme: ColorScheme.dark(
       primary: Colors.white,
       onPrimary: Colors.black54,
-      secondary: Colors.white,
+      secondary: kMentorXPPrimary,
+      tertiary: kMentorXPAccentDark,
     ),
     cardColor: Colors.grey.shade700,
+    indicatorColor: kMentorXPAccentDark,
     dividerColor: Colors.grey.shade700,
     iconTheme: IconThemeData(
       color: Colors.white,

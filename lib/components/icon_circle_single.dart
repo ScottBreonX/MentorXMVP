@@ -30,18 +30,18 @@ class IconCircleSingle extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.white.withOpacity(1.0),
+              color: Theme.of(context).cardColor,
               width: 0,
             ),
             borderRadius: BorderRadius.circular(circleRadius ?? 100),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey[600],
+                color: Theme.of(context).primaryColor.withOpacity(0.5),
                 blurRadius: 5,
-                offset: Offset(0, 7),
+                offset: Offset(5, 5),
               ),
             ],
-            color: Colors.white,
+            color: Theme.of(context).cardColor,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     if (loggedIn == false || widget.loggedInUser == null) {
-      return circularProgress();
+      return circularProgress(Theme.of(context).primaryColor);
     }
 
     final drawerItems = MentorXMenuList(loggedInUser: loggedInUser);
@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
         stream: usersRef.doc(widget.loggedInUser.id).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
 
           if (widget.loggedInUser.profilePicture != "") {

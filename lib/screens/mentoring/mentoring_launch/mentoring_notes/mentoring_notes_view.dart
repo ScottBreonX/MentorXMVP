@@ -186,7 +186,7 @@ class _MentoringNotesViewState extends State<MentoringNotesView> {
   @override
   Widget build(BuildContext context) {
     if (widget.noteID == null) {
-      return circularProgress();
+      return circularProgress(Theme.of(context).primaryColor);
     }
 
     return Scaffold(

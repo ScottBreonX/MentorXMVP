@@ -137,7 +137,7 @@ class _ChatScreenState extends State<ChatScreen> {
         future: usersRef.doc(widget.mentorUID).get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
 
           myUser mentor = myUser.fromDocument(snapshot.data);
@@ -252,7 +252,7 @@ class MessagesStream extends StatelessWidget {
         future: usersRef.doc(loggedInUser.id).get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
           myUser user = myUser.fromDocument(snapshot.data);
 
@@ -266,7 +266,7 @@ class MessagesStream extends StatelessWidget {
                 .snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return circularProgress();
+                return circularProgress(Theme.of(context).primaryColor);
               }
 
               final messages = snapshot.data.docs.reversed;

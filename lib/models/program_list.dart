@@ -36,7 +36,7 @@ class _ProgramListState extends State<ProgramList> {
       future: programsRef.doc(programUID).get(),
       builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (!snapshot.hasData) {
-          return circularProgress();
+          return circularProgress(Theme.of(context).primaryColor);
         }
         Program program = Program.fromDocument(snapshot.data);
 

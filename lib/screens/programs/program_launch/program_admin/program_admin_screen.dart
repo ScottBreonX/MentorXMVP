@@ -155,7 +155,7 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
         future: programsRef.doc(widget.programUID).get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
           Program program = Program.fromDocument(snapshot.data);
 
@@ -224,7 +224,8 @@ class _ProgramAdminScreenState extends State<ProgramAdminScreen> {
                                           ),
                                         ),
                                         placeholder: (context, url) =>
-                                            circularProgress(),
+                                            circularProgress(
+                                                Theme.of(context).primaryColor),
                                         errorWidget: (context, url, error) =>
                                             Image.asset(
                                           'assets/images/MentorXP.png',

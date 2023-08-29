@@ -1,18 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorx_mvp/components/mentor_card.dart';
 import '../../../constants.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/icon_circle.dart';
 import 'package:mentorx_mvp/models/user.dart';
 
+import '../profile_screen.dart';
+
 final usersRef = FirebaseFirestore.instance.collection('users');
+final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class CoreProfileSection extends StatefulWidget {
+  final myUser loggedInUser;
+  final String programImport;
+  final String fNameImport;
+  final String lNameImport;
   final String profileId;
   final bool myProfileView;
 
   const CoreProfileSection({
+    @required this.fNameImport,
+    @required this.lNameImport,
+    @required this.programImport,
+    @required this.loggedInUser,
     @required this.profileId,
     @required this.myProfileView,
   });
@@ -133,141 +143,69 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Object>(
-      future: usersRef.doc(widget.profileId).get(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Container();
-        }
-        myUser user = myUser.fromDocument(snapshot.data);
-        return Column(
-          children: [
-            coreProfileEditStatus
-                ? Column(
+    return Column(
+      children: [
+        coreProfileEditStatus
+            ? Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  right: 8.0,
-                                  bottom: 10.0,
-                                ),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    _updateCoreProfile(user.id, user.program);
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: kMentorXPSecondary,
-                                    ),
-                                    height: 40.0,
-                                    width: 40.0,
-                                    child: Icon(
-                                      Icons.check,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 8.0, bottom: 10.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      coreProfileEditStatus = false;
-                                    });
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.white,
-                                    ),
-                                    height: 40.0,
-                                    width: 40.0,
-                                    child: Icon(
-                                      Icons.close,
-                                      color: kMentorXPSecondary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            coreProfileTextField(
-                              user,
-                              _formKey1,
-                              user.firstName,
-                              "First Name",
-                              (value) => firstNameText = value,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              right: 8.0,
+                              bottom: 10.0,
                             ),
-                            coreProfileTextField(
-                              user,
-                              _formKey2,
-                              user.lastName,
-                              'Last Name',
-                              (value) => lastNameText = value,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  )
-                : Column(
-                    children: [
-                      widget.myProfileView
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    right: 10.0,
-                                  ),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        coreProfileEditStatus = true;
-                                      });
-                                    },
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 15.0),
-                                      child: IconCircle(
-                                        width: 30.0,
-                                        height: 30.0,
-                                        iconType: Icons.edit,
-                                        iconColor: kMentorXPAccentDark,
-                                      ),
+                            child: GestureDetector(
+                              onTap: () {
+                                _updateCoreProfile(
+                                    widget.profileId, widget.programImport);
+                                Navigator.pop(context);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Profile(
+                                      loggedInUser: widget.loggedInUser,
+                                      profileId: widget.profileId,
                                     ),
                                   ),
-                                )
-                              ],
-                            )
-                          : Container(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 20.0),
-                              child: Text(
-                                "${user.firstName} ${user.lastName}",
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black54,
-                                  fontSize: 30,
+                                );
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: kMentorXPSecondary,
+                                ),
+                                height: 40.0,
+                                width: 40.0,
+                                child: Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(right: 8.0, bottom: 10.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  coreProfileEditStatus = false;
+                                });
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.white,
+                                ),
+                                height: 40.0,
+                                width: 40.0,
+                                child: Icon(
+                                  Icons.close,
+                                  color: kMentorXPSecondary,
                                 ),
                               ),
                             ),
@@ -276,9 +214,77 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                       ),
                     ],
                   ),
-          ],
-        );
-      },
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        coreProfileTextField(
+                          widget.loggedInUser,
+                          _formKey1,
+                          widget.fNameImport,
+                          "First Name",
+                          (value) => firstNameText = value,
+                        ),
+                        coreProfileTextField(
+                          widget.loggedInUser,
+                          _formKey2,
+                          widget.lNameImport,
+                          'Last Name',
+                          (value) => lastNameText = value,
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            : Column(
+                children: [
+                  widget.myProfileView
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                right: 10.0,
+                              ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    coreProfileEditStatus = true;
+                                  });
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: IconCircle(
+                                    width: 30.0,
+                                    height: 30.0,
+                                    iconType: Icons.edit,
+                                    iconColor: kMentorXPAccentDark,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      : Container(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 20.0),
+                          child: Text(
+                            "${widget.fNameImport} ${widget.lNameImport}",
+                            style: Theme.of(context).textTheme.headlineLarge,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+      ],
     );
   }
 
@@ -295,10 +301,7 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
               child: Text(
                 hintText,
                 textAlign: TextAlign.start,
-                style: TextStyle(
-                  color: Colors.black45,
-                  fontWeight: FontWeight.w400,
-                ),
+                style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             Material(
@@ -314,18 +317,15 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
+                    cursorColor: Theme.of(context).indicatorColor,
                     textAlign: TextAlign.start,
                     onChanged: onChanged,
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Montserrat',
-                      fontSize: 20,
-                    ),
+                    style: Theme.of(context).textTheme.headlineLarge,
                     autocorrect: false,
                     decoration: kTextFieldDecoration.copyWith(
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2.0),
+                        borderSide: BorderSide(
+                            color: Theme.of(context).cardColor, width: 2.0),
                         borderRadius: BorderRadius.all(
                           Radius.circular(10.0),
                         ),
@@ -336,7 +336,7 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                       labelStyle: TextStyle(color: Colors.grey.shade400),
                       hintStyle: TextStyle(color: Colors.grey.shade400),
                       filled: true,
-                      fillColor: Colors.white,
+                      fillColor: Theme.of(context).cardColor,
                       focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: kMentorXPSecondary, width: 4.0),

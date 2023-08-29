@@ -97,7 +97,7 @@ class _MenteeEnrollmentSkillsScreenState
             .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
 
           final mentee = snapshot.data;

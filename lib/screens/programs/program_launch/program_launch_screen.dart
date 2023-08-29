@@ -73,7 +73,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
             .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           } else {
             _snapshot = snapshot.data;
             if (_snapshot.size > 0) {
@@ -97,7 +97,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
-                      return circularProgress();
+                      return circularProgress(Theme.of(context).primaryColor);
                     }
                     EnrollmentModel enrollmentModel =
                         EnrollmentModel.fromDocument(snapshot.data);
@@ -289,7 +289,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
         stream: programsRef.doc(widget.programUID).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
           Program program = Program.fromDocument(snapshot.data);
 
@@ -306,7 +306,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return circularProgress();
+                  return circularProgress(Theme.of(context).primaryColor);
                 }
                 EnrollmentModel enrollmentModel =
                     EnrollmentModel.fromDocument(snapshot.data);
@@ -382,7 +382,9 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                                 ),
                                               ),
                                               placeholder: (context, url) =>
-                                                  circularProgress(),
+                                                  circularProgress(
+                                                      Theme.of(context)
+                                                          .primaryColor),
                                               errorWidget:
                                                   (context, url, error) =>
                                                       Image.asset(
@@ -405,12 +407,12 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                                     top: 10.0,
                                                   ),
                                                   child: Text(
-                                                      '${program.programName}',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headlineLarge),
+                                                    '${program.programName}',
+                                                    textAlign: TextAlign.center,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .headlineLarge,
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -580,6 +582,7 @@ class CircleIconWithText extends StatelessWidget {
               cardWidth: MediaQuery.of(context).size.width * .80 / 3,
               cardIcon: cardIcon,
               cardIconSize: 70,
+              cardIconColor: Theme.of(context).colorScheme.tertiary,
             ),
           ),
           Padding(

@@ -151,7 +151,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
   @override
   Widget build(BuildContext context) {
     if (user.uid == null) {
-      return circularProgress();
+      return circularProgress(Theme.of(context).primaryColor);
     }
     return Scaffold(
       extendBodyBehindAppBar: true,

@@ -72,7 +72,7 @@ class _ProgramGuidesLaunchScreenState extends State<ProgramGuidesLaunchScreen> {
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
           TrackInfo trackInfo = TrackInfo.fromDocument(snapshot.data);
 

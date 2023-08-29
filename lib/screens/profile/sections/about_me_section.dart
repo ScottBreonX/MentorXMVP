@@ -1,20 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../../../components/progress.dart';
 import '../../../constants.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/icon_circle.dart';
-import 'package:mentorx_mvp/models/user.dart';
+import '../../../models/user.dart';
+import '../profile_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 
 class AboutMeSection extends StatefulWidget {
+  final myUser loggedInUser;
   final String profileId;
   final bool myProfileView;
+  final String aboutMeTextImport;
 
   const AboutMeSection({
+    @required this.loggedInUser,
     @required this.profileId,
     @required this.myProfileView,
+    @required this.aboutMeTextImport,
   });
 
   @override
@@ -82,129 +86,130 @@ class _AboutMeSectionState extends State<AboutMeSection> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Object>(
-      future: usersRef.doc(widget.profileId).get(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return circularProgress();
-        }
-        myUser user = myUser.fromDocument(snapshot.data);
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: aboutMeEditStatus
-                      ? CrossAxisAlignment.center
-                      : CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      'About Me',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Montserrat',
-                        fontSize: 20,
-                        color: kMentorXPSecondary,
-                      ),
-                    ),
-                    aboutMeEditStatus
-                        ? Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  right: 8.0,
-                                  bottom: 10.0,
-                                ),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    _updateAboutMe(user.id);
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: kMentorXPSecondary,
-                                    ),
-                                    height: 40.0,
-                                    width: 40.0,
-                                    child: Icon(
-                                      Icons.check,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 8.0, bottom: 10.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      aboutMeEditStatus = false;
-                                    });
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.white,
-                                    ),
-                                    height: 40.0,
-                                    width: 40.0,
-                                    child: Icon(
-                                      Icons.close,
-                                      color: kMentorXPSecondary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        : !widget.myProfileView
-                            ? SizedBox()
-                            : Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      aboutMeEditStatus = true;
-                                    });
-                                  },
-                                  child: IconCircle(
-                                    width: 30.0,
-                                    height: 30.0,
-                                    iconType: Icons.edit,
-                                    iconColor: kMentorXPAccentDark,
-                                  ),
-                                ),
-                              ),
-                  ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: aboutMeEditStatus
+                  ? CrossAxisAlignment.center
+                  : CrossAxisAlignment.end,
+              children: [
+                Text(
+                  'About Me',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Montserrat',
+                    fontSize: 20,
+                    color: kMentorXPSecondary,
+                  ),
                 ),
-              ),
-              aboutMeEditStatus
-                  ? _buildAboutMeTextField(user.aboutMe)
-                  : Padding(
-                      padding: const EdgeInsets.only(top: 8.0, right: 10.0),
-                      child: Row(
+                aboutMeEditStatus
+                    ? Row(
                         children: [
-                          Flexible(
-                            child: Text(
-                              "${user.aboutMe}",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontFamily: 'Montserrat',
-                                color: Colors.black54,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              right: 8.0,
+                              bottom: 10.0,
+                            ),
+                            child: GestureDetector(
+                              onTap: () {
+                                _updateAboutMe(widget.profileId);
+                                Navigator.pop(context);
+
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Profile(
+                                        profileId: widget.profileId,
+                                        loggedInUser: widget.loggedInUser,
+                                      ),
+                                    ));
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: kMentorXPSecondary,
+                                ),
+                                height: 40.0,
+                                width: 40.0,
+                                child: Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(right: 8.0, bottom: 10.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  aboutMeEditStatus = false;
+                                });
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.white,
+                                ),
+                                height: 40.0,
+                                width: 40.0,
+                                child: Icon(
+                                  Icons.close,
+                                  color: kMentorXPSecondary,
+                                ),
                               ),
                             ),
                           ),
                         ],
-                      ),
-                    ),
-            ],
+                      )
+                    : !widget.myProfileView
+                        ? SizedBox()
+                        : Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  aboutMeEditStatus = true;
+                                });
+                              },
+                              child: IconCircle(
+                                width: 30.0,
+                                height: 30.0,
+                                iconType: Icons.edit,
+                                iconColor: kMentorXPAccentDark,
+                              ),
+                            ),
+                          ),
+              ],
+            ),
           ),
-        );
-      },
+          aboutMeEditStatus
+              ? _buildAboutMeTextField(widget.aboutMeTextImport)
+              : Padding(
+                  padding: const EdgeInsets.only(top: 8.0, right: 10.0),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          "${widget.aboutMeTextImport}",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'Montserrat',
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+        ],
+      ),
     );
   }
 }

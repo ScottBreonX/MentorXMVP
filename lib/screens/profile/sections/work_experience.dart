@@ -1,18 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../../../components/progress.dart';
 import '../../../constants.dart';
 import '../../../components/alert_dialog.dart';
 import '../../../components/icon_circle.dart';
 import 'package:mentorx_mvp/models/user.dart';
 
+import '../profile_screen.dart';
+
 final usersRef = FirebaseFirestore.instance.collection('users');
 
 class WorkExperienceSection extends StatefulWidget {
+  final myUser loggedInUser;
   final String profileId;
+  final String workExperienceImport;
   final bool myProfileView;
 
   const WorkExperienceSection({
+    @required this.workExperienceImport,
+    @required this.loggedInUser,
     @required this.profileId,
     @required this.myProfileView,
   });
@@ -81,129 +86,129 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Object>(
-      future: usersRef.doc(widget.profileId).get(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return circularProgress();
-        }
-        myUser user = myUser.fromDocument(snapshot.data);
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: workExperienceEditStatus
-                      ? CrossAxisAlignment.center
-                      : CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Work Experience',
-                      style: TextStyle(
-                        color: kMentorXPSecondary,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Montserrat',
-                      ),
-                    ),
-                    workExperienceEditStatus
-                        ? Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  right: 8.0,
-                                  bottom: 10.0,
-                                ),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    _updateWorkExperience(user.id);
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: kMentorXPSecondary,
-                                    ),
-                                    height: 40.0,
-                                    width: 40.0,
-                                    child: Icon(
-                                      Icons.check,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 8.0, bottom: 10.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      workExperienceEditStatus = false;
-                                    });
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.white,
-                                    ),
-                                    height: 40.0,
-                                    width: 40.0,
-                                    child: Icon(
-                                      Icons.close,
-                                      color: kMentorXPSecondary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        : !widget.myProfileView
-                            ? SizedBox()
-                            : Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      workExperienceEditStatus = true;
-                                    });
-                                  },
-                                  child: IconCircle(
-                                    width: 30.0,
-                                    height: 30.0,
-                                    iconType: Icons.edit,
-                                    iconColor: kMentorXPAccentDark,
-                                  ),
-                                ),
-                              ),
-                  ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: workExperienceEditStatus
+                  ? CrossAxisAlignment.center
+                  : CrossAxisAlignment.end,
+              children: [
+                Text(
+                  'Work Experience',
+                  style: TextStyle(
+                    color: kMentorXPSecondary,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Montserrat',
+                  ),
                 ),
-              ),
-              workExperienceEditStatus
-                  ? _buildWorkExperienceTextField(user.workExperience)
-                  : Padding(
-                      padding: const EdgeInsets.only(top: 8.0, right: 10.0),
-                      child: Row(
+                workExperienceEditStatus
+                    ? Row(
                         children: [
-                          Flexible(
-                            child: Text(
-                              "${user.workExperience}",
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 18,
-                                fontFamily: 'Montserrat',
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              right: 8.0,
+                              bottom: 10.0,
+                            ),
+                            child: GestureDetector(
+                              onTap: () {
+                                _updateWorkExperience(widget.profileId);
+                                Navigator.pop(context);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Profile(
+                                        profileId: widget.profileId,
+                                        loggedInUser: widget.loggedInUser,
+                                      ),
+                                    ));
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: kMentorXPSecondary,
+                                ),
+                                height: 40.0,
+                                width: 40.0,
+                                child: Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(right: 8.0, bottom: 10.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  workExperienceEditStatus = false;
+                                });
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.white,
+                                ),
+                                height: 40.0,
+                                width: 40.0,
+                                child: Icon(
+                                  Icons.close,
+                                  color: kMentorXPSecondary,
+                                ),
                               ),
                             ),
                           ),
                         ],
-                      ),
-                    ),
-            ],
+                      )
+                    : !widget.myProfileView
+                        ? SizedBox()
+                        : Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  workExperienceEditStatus = true;
+                                });
+                              },
+                              child: IconCircle(
+                                width: 30.0,
+                                height: 30.0,
+                                iconType: Icons.edit,
+                                iconColor: kMentorXPAccentDark,
+                              ),
+                            ),
+                          ),
+              ],
+            ),
           ),
-        );
-      },
+          workExperienceEditStatus
+              ? _buildWorkExperienceTextField(widget.workExperienceImport)
+              : Padding(
+                  padding: const EdgeInsets.only(top: 8.0, right: 10.0),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          "${widget.workExperienceImport}",
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 18,
+                            fontFamily: 'Montserrat',
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+        ],
+      ),
     );
   }
 }

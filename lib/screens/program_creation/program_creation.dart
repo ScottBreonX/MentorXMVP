@@ -181,10 +181,10 @@ class _ProgramCreationState extends State<ProgramCreation> {
         future: usersRef.doc(widget.loggedInUser.id).get(),
         builder: (context, snapshot) {
           if (isLoading == true) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
           if (!snapshot.hasData) {
-            return circularProgress();
+            return circularProgress(Theme.of(context).primaryColor);
           }
 
           return Scaffold(

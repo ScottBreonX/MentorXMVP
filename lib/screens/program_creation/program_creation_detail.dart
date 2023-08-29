@@ -415,7 +415,7 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
             future: programsRef.doc(widget.programUID).get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return circularProgress();
+                return circularProgress(Theme.of(context).primaryColor);
               }
               // Program program = Program.fromDocument(snapshot.data);
 
@@ -423,10 +423,10 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                   future: usersRef.doc(widget.loggedInUser.id).get(),
                   builder: (context, snapshot) {
                     if (isLoading == true) {
-                      return circularProgress();
+                      return circularProgress(Theme.of(context).primaryColor);
                     }
                     if (!snapshot.hasData) {
-                      return circularProgress();
+                      return circularProgress(Theme.of(context).primaryColor);
                     }
                     return Scaffold(
                       key: _scaffoldKey,
@@ -493,7 +493,9 @@ class _ProgramCreationDetailState extends State<ProgramCreationDetail> {
                                               ),
                                             ),
                                             placeholder: (context, url) =>
-                                                circularProgress(),
+                                                circularProgress(
+                                                    Theme.of(context)
+                                                        .primaryColor),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
