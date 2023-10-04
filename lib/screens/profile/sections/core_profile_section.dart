@@ -136,9 +136,11 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
     }
-    setState(() {
-      coreProfileEditStatus = false;
-    });
+    if (this.mounted) {
+      setState(() {
+        coreProfileEditStatus = false;
+      });
+    }
   }
 
   @override
@@ -162,27 +164,34 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                               onTap: () {
                                 _updateCoreProfile(
                                     widget.profileId, widget.programImport);
-                                Navigator.pop(context);
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Profile(
-                                      loggedInUser: widget.loggedInUser,
+                                  PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            Profile(
                                       profileId: widget.profileId,
+                                      loggedInUser: widget.loggedInUser,
                                     ),
+                                    transitionDuration: Duration.zero,
+                                    reverseTransitionDuration: Duration.zero,
                                   ),
                                 );
                               },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: kMentorXPSecondary,
-                                ),
-                                height: 40.0,
-                                width: 40.0,
-                                child: Icon(
-                                  Icons.check,
-                                  color: Colors.white,
+                              child: Material(
+                                elevation: 5,
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: kMentorXPSecondary,
+                                  ),
+                                  height: 40.0,
+                                  width: 40.0,
+                                  child: Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
@@ -192,20 +201,26 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                                 const EdgeInsets.only(right: 8.0, bottom: 10.0),
                             child: GestureDetector(
                               onTap: () {
-                                setState(() {
-                                  coreProfileEditStatus = false;
-                                });
+                                if (this.mounted) {
+                                  setState(() {
+                                    coreProfileEditStatus = false;
+                                  });
+                                }
                               },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                ),
-                                height: 40.0,
-                                width: 40.0,
-                                child: Icon(
-                                  Icons.close,
-                                  color: kMentorXPSecondary,
+                              child: Material(
+                                elevation: 5,
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.white,
+                                  ),
+                                  height: 40.0,
+                                  width: 40.0,
+                                  child: Icon(
+                                    Icons.close,
+                                    color: kMentorXPSecondary,
+                                  ),
                                 ),
                               ),
                             ),
@@ -250,9 +265,11 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
                               ),
                               child: GestureDetector(
                                 onTap: () {
-                                  setState(() {
-                                    coreProfileEditStatus = true;
-                                  });
+                                  if (this.mounted) {
+                                    setState(() {
+                                      coreProfileEditStatus = true;
+                                    });
+                                  }
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 15.0),
@@ -305,48 +322,44 @@ class _CoreProfileSectionState extends State<CoreProfileSection> {
               ),
             ),
             Material(
-              elevation: 10,
-              shadowColor: Colors.black54,
-              borderRadius: BorderRadius.circular(20.0),
-              child: Column(
-                children: [
-                  TextFormField(
-                    key: formKey,
-                    initialValue: initialValue,
-                    textCapitalization: TextCapitalization.sentences,
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    cursorColor: Theme.of(context).indicatorColor,
-                    textAlign: TextAlign.start,
-                    onChanged: onChanged,
-                    style: Theme.of(context).textTheme.headlineLarge,
-                    autocorrect: false,
-                    decoration: kTextFieldDecoration.copyWith(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Theme.of(context).cardColor, width: 2.0),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10.0),
-                        ),
-                      ),
-                      alignLabelWithHint: true,
-                      hintText: hintText,
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      labelStyle: TextStyle(color: Colors.grey.shade400),
-                      hintStyle: TextStyle(color: Colors.grey.shade400),
-                      filled: true,
-                      fillColor: Theme.of(context).cardColor,
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: kMentorXPSecondary, width: 4.0),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10.0),
-                        ),
-                      ),
+              elevation: 5,
+              borderRadius: BorderRadius.circular(10.0),
+              child: TextFormField(
+                key: formKey,
+                initialValue: initialValue,
+                textCapitalization: TextCapitalization.sentences,
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                cursorColor: Theme.of(context).indicatorColor,
+                textAlign: TextAlign.start,
+                onChanged: onChanged,
+                style: Theme.of(context).textTheme.headlineLarge,
+                autocorrect: false,
+                decoration: kTextFieldDecoration.copyWith(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Theme.of(context).cardColor, width: 1.0),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10.0),
                     ),
                   ),
-                ],
+                  alignLabelWithHint: true,
+                  hintText: hintText,
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  labelStyle: TextStyle(color: Colors.grey.shade400),
+                  hintStyle:
+                      TextStyle(color: Colors.grey.shade400, fontSize: 20),
+                  filled: true,
+                  fillColor: Theme.of(context).cardColor,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: kMentorXPSecondary, width: 2.0),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10.0),
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

@@ -39,7 +39,7 @@ class ProgramLaunchScreen extends StatefulWidget {
 class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
   @override
   void initState() {
-    checkIsAdmin();
+    // checkIsAdmin();
     super.initState();
   }
 
@@ -48,18 +48,18 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
   bool isAdmin = false;
   List<MatchList> matches = [];
 
-  checkIsAdmin() async {
-    DocumentSnapshot doc = await programsRef
-        .doc(widget.programUID)
-        .collection('programAdmins')
-        .doc(widget.loggedInUser.id)
-        .get();
-    if (doc.exists) {
-      setState(() {
-        isAdmin = true;
-      });
-    }
-  }
+  // checkIsAdmin() async {
+  //   DocumentSnapshot doc = await programsRef
+  //       .doc(widget.programUID)
+  //       .collection('programAdmins')
+  //       .doc(widget.loggedInUser.id)
+  //       .get();
+  //   if (doc.exists) {
+  //     setState(() {
+  //       isAdmin = true;
+  //     });
+  //   }
+  // }
 
   buildMatches() {
     isLoading = true;

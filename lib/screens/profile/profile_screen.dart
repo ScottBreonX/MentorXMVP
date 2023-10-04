@@ -10,7 +10,6 @@ import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/profile/sections/about_me_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/core_profile_section.dart';
 import 'package:mentorx_mvp/screens/profile/sections/work_experience.dart';
@@ -310,27 +309,23 @@ class _ProfileState extends State<Profile> {
       file = null;
       isUploading = false;
     });
-    Navigator.pop(context);
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LandingPage(),
-        ));
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Profile(
-            profileId: widget.loggedInUser.id,
-            loggedInUser: widget.loggedInUser,
-          ),
-        ));
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => Profile(
+          profileId: widget.profileId,
+          loggedInUser: widget.loggedInUser,
+        ),
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+      ),
+    );
   }
 
   removeCurrentPhoto(pictureType, programID) async {
     if (programID == "" || programID == null) {
     } else {
       if (pictureType == "Profile Picture") {
-        Navigator.pop(context);
         await usersRef
             .doc(widget.loggedInUser.id)
             .update({'Profile Picture': ""});
@@ -366,20 +361,27 @@ class _ProfileState extends State<Profile> {
                 });
         setState(() {
           isUploading = false;
+          profilePhotoExist = false;
+        });
+      } else {
+        await usersRef.doc(widget.loggedInUser.id).update({'Cover Photo': ""});
+        setState(() {
+          coverPhotoExist = false;
+          isUploading = false;
         });
       }
     }
-
-    Navigator.pop(context);
-
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Profile(
-            loggedInUser: widget.loggedInUser,
-            profileId: widget.loggedInUser.id,
-          ),
-        ));
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => Profile(
+          profileId: widget.profileId,
+          loggedInUser: widget.loggedInUser,
+        ),
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+      ),
+    );
   }
 
   handleSubmit(pictureType, programID) async {
@@ -397,7 +399,10 @@ class _ProfileState extends State<Profile> {
         appBar: AppBar(
           backgroundColor: kMentorXPPrimary,
           title: Center(
-            child: Text("Upload $pictureType"),
+            child: Text(
+              "Upload $pictureType",
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
           ),
         ),
         body: Stack(
@@ -420,7 +425,7 @@ class _ProfileState extends State<Profile> {
                   )
                 : Text(""),
             Opacity(
-              opacity: isUploading ? 0.2 : 1.0,
+              opacity: isUploading ? 0 : 1.0,
               child: Container(
                 child: Center(
                   child: Column(
@@ -432,20 +437,12 @@ class _ProfileState extends State<Profile> {
                           children: [
                             Text(
                               'Confirm Upload of',
-                              style: TextStyle(
-                                fontFamily: 'Monsterrat',
-                                fontSize: 30,
-                                color: Colors.black54,
-                              ),
+                              style: Theme.of(context).textTheme.headlineLarge,
                               textAlign: TextAlign.center,
                             ),
                             Text(
                               '$pictureType',
-                              style: TextStyle(
-                                fontFamily: 'Monsterrat',
-                                fontSize: 30,
-                                color: Colors.black54,
-                              ),
+                              style: Theme.of(context).textTheme.headlineLarge,
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -484,14 +481,18 @@ class _ProfileState extends State<Profile> {
                               onPressed: isUploading
                                   ? null
                                   : () {
-                                      Navigator.pop(context);
-                                      Navigator.push(
+                                      Navigator.pushReplacement(
                                         context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Profile(
+                                        PageRouteBuilder(
+                                          pageBuilder: (context, animation1,
+                                                  animation2) =>
+                                              Profile(
+                                            profileId: widget.profileId,
                                             loggedInUser: widget.loggedInUser,
-                                            profileId: widget.loggedInUser.id,
                                           ),
+                                          transitionDuration: Duration.zero,
+                                          reverseTransitionDuration:
+                                              Duration.zero,
                                         ),
                                       );
                                     },
@@ -501,7 +502,8 @@ class _ProfileState extends State<Profile> {
                             padding: const EdgeInsets.all(8.0),
                             child: RoundedButton(
                               title: 'Upload',
-                              buttonColor: kMentorXPAccentDark,
+                              buttonColor:
+                                  Theme.of(context).colorScheme.tertiary,
                               fontColor: Colors.white,
                               minWidth: 150,
                               fontSize: 20,
@@ -531,9 +533,11 @@ class _ProfileState extends State<Profile> {
     }
 
     if (widget.profileId == widget.loggedInUser.id) {
-      setState(() {
-        myProfileView = true;
-      });
+      if (this.mounted) {
+        setState(() {
+          myProfileView = true;
+        });
+      }
     }
 
     return FutureBuilder<Object>(
@@ -591,7 +595,8 @@ class _ProfileState extends State<Profile> {
                                     decoration: BoxDecoration(
                                       border: Border(
                                         bottom: BorderSide(
-                                          color: Colors.white,
+                                          color: Theme.of(context)
+                                              .scaffoldBackgroundColor,
                                           width: 5,
                                         ),
                                       ),
@@ -628,7 +633,9 @@ class _ProfileState extends State<Profile> {
                                       children: [
                                         profilePhotoExist
                                             ? CircleAvatar(
-                                                backgroundColor: Colors.white,
+                                                backgroundColor: Theme.of(
+                                                        context)
+                                                    .scaffoldBackgroundColor,
                                                 radius: profilePhotoHeight / 2,
                                                 child: CachedNetworkImage(
                                                   imageUrl: user.profilePicture,
@@ -657,7 +664,9 @@ class _ProfileState extends State<Profile> {
                                                 ),
                                               )
                                             : CircleAvatar(
-                                                backgroundColor: Colors.white,
+                                                backgroundColor: Theme.of(
+                                                        context)
+                                                    .scaffoldBackgroundColor,
                                                 radius: profilePhotoHeight / 2,
                                                 child: ProfileImageCircle(
                                                   iconSize:
@@ -687,8 +696,9 @@ class _ProfileState extends State<Profile> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               50),
-                                                      color: Colors.white
-                                                          .withOpacity(0.9),
+                                                      color: Theme.of(context)
+                                                          .scaffoldBackgroundColor
+                                                          .withOpacity(0.8),
                                                     ),
                                                     height: 35.0,
                                                     width: 35.0,
@@ -722,10 +732,11 @@ class _ProfileState extends State<Profile> {
                                             child: IconCircle(
                                               iconSize: 23.0,
                                               iconType: Icons.edit,
-                                              circleColor:
-                                                  Colors.white.withOpacity(0.8),
-                                              height: 30,
-                                              width: 30,
+                                              circleColor: Theme.of(context)
+                                                  .scaffoldBackgroundColor
+                                                  .withOpacity(0.8),
+                                              height: 35,
+                                              width: 35,
                                               iconColor: kMentorXPAccentDark,
                                             ),
                                           ),
@@ -758,9 +769,9 @@ class _ProfileState extends State<Profile> {
                               Padding(
                                 padding: const EdgeInsets.only(
                                     left: 8.0, right: 8.0),
-                                child: const Divider(
-                                  thickness: 4,
-                                  color: Colors.grey,
+                                child: Divider(
+                                  thickness: 2,
+                                  color: Colors.grey.shade300,
                                 ),
                               ),
                               Padding(
@@ -775,9 +786,9 @@ class _ProfileState extends State<Profile> {
                               Padding(
                                 padding: const EdgeInsets.only(
                                     left: 8.0, right: 8.0),
-                                child: const Divider(
-                                  thickness: 4,
-                                  color: Colors.grey,
+                                child: Divider(
+                                  thickness: 2,
+                                  color: Colors.grey.shade300,
                                 ),
                               ),
                               Padding(
@@ -798,7 +809,7 @@ class _ProfileState extends State<Profile> {
                               height: double.infinity,
                               width: double.infinity,
                               child: circularProgress(
-                                Theme.of(context).primaryColor,
+                                Theme.of(context).canvasColor,
                               ),
                             )
                           : Text(''),

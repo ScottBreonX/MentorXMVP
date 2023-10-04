@@ -36,34 +36,36 @@ class _AboutMeSectionState extends State<AboutMeSection> {
   String aboutMeText;
   final _formKey1 = GlobalKey<FormState>();
 
-  TextFormField _buildAboutMeTextField(String userAboutMeText) {
-    return TextFormField(
-      key: _formKey1,
-      textCapitalization: TextCapitalization.sentences,
-      initialValue: userAboutMeText,
-      textInputAction: TextInputAction.newline,
-      keyboardType: TextInputType.multiline,
-      maxLines: null,
-      textAlign: TextAlign.start,
-      onChanged: (value) => aboutMeText = value,
-      style: TextStyle(
-        fontFamily: 'Montserrat',
-        color: Colors.black54,
-        fontSize: 18,
-      ),
-      autocorrect: true,
-      decoration: kTextFieldDecoration.copyWith(
-        fillColor: Colors.white,
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: kMentorXPSecondary, width: 4.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(10.0),
+  Material _buildAboutMeTextField(String userAboutMeText) {
+    return Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(10),
+      child: TextFormField(
+        key: _formKey1,
+        textCapitalization: TextCapitalization.sentences,
+        initialValue: userAboutMeText,
+        textInputAction: TextInputAction.newline,
+        keyboardType: TextInputType.multiline,
+        maxLines: null,
+        textAlign: TextAlign.start,
+        cursorColor: Theme.of(context).indicatorColor,
+        onChanged: (value) => aboutMeText = value,
+        style: Theme.of(context).textTheme.labelLarge,
+        autocorrect: true,
+        decoration: kTextFieldDecoration.copyWith(
+          fillColor: Theme.of(context).cardColor,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: kMentorXPSecondary, width: 2.0),
+            borderRadius: BorderRadius.all(
+              Radius.circular(10.0),
+            ),
           ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: kMentorXPSecondary, width: 2.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(10.0),
+          enabledBorder: OutlineInputBorder(
+            borderSide:
+                BorderSide(color: Theme.of(context).cardColor, width: 2.0),
+            borderRadius: BorderRadius.all(
+              Radius.circular(10.0),
+            ),
           ),
         ),
       ),
@@ -79,9 +81,11 @@ class _AboutMeSectionState extends State<AboutMeSection> {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
     }
-    setState(() {
-      aboutMeEditStatus = false;
-    });
+    if (this.mounted) {
+      setState(() {
+        aboutMeEditStatus = false;
+      });
+    }
   }
 
   @override
@@ -118,27 +122,35 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                             child: GestureDetector(
                               onTap: () {
                                 _updateAboutMe(widget.profileId);
-                                Navigator.pop(context);
-
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Profile(
-                                        profileId: widget.profileId,
-                                        loggedInUser: widget.loggedInUser,
-                                      ),
-                                    ));
+                                setState(() {});
+                                Navigator.pushReplacement(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            Profile(
+                                      profileId: widget.profileId,
+                                      loggedInUser: widget.loggedInUser,
+                                    ),
+                                    transitionDuration: Duration.zero,
+                                    reverseTransitionDuration: Duration.zero,
+                                  ),
+                                );
                               },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: kMentorXPSecondary,
-                                ),
-                                height: 40.0,
-                                width: 40.0,
-                                child: Icon(
-                                  Icons.check,
-                                  color: Colors.white,
+                              child: Material(
+                                elevation: 5,
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: kMentorXPSecondary,
+                                  ),
+                                  height: 40.0,
+                                  width: 40.0,
+                                  child: Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
@@ -148,20 +160,26 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                                 const EdgeInsets.only(right: 8.0, bottom: 10.0),
                             child: GestureDetector(
                               onTap: () {
-                                setState(() {
-                                  aboutMeEditStatus = false;
-                                });
+                                if (this.mounted) {
+                                  setState(() {
+                                    aboutMeEditStatus = false;
+                                  });
+                                }
                               },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                ),
-                                height: 40.0,
-                                width: 40.0,
-                                child: Icon(
-                                  Icons.close,
-                                  color: kMentorXPSecondary,
+                              child: Material(
+                                elevation: 5,
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.white,
+                                  ),
+                                  height: 40.0,
+                                  width: 40.0,
+                                  child: Icon(
+                                    Icons.close,
+                                    color: kMentorXPSecondary,
+                                  ),
                                 ),
                               ),
                             ),
@@ -174,9 +192,11 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                             padding: const EdgeInsets.only(right: 8.0),
                             child: GestureDetector(
                               onTap: () {
-                                setState(() {
-                                  aboutMeEditStatus = true;
-                                });
+                                if (this.mounted) {
+                                  setState(() {
+                                    aboutMeEditStatus = true;
+                                  });
+                                }
                               },
                               child: IconCircle(
                                 width: 30.0,
@@ -198,11 +218,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
                       Flexible(
                         child: Text(
                           "${widget.aboutMeTextImport}",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'Montserrat',
-                            color: Colors.black54,
-                          ),
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       ),
                     ],

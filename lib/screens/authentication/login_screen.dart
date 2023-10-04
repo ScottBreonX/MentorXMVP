@@ -152,7 +152,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 2.0;
+    timeDilation = 3.0;
 
     return StreamBuilder<LoginModel>(
         stream: widget.bloc.modelStream,

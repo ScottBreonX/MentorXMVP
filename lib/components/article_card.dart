@@ -39,98 +39,92 @@ class _ArticleCardState extends State<ArticleCard> {
       padding: const EdgeInsets.all(10.0),
       child: GestureDetector(
         onTap: widget.onTap,
-        child: Container(
-          width: 200,
-          decoration: BoxDecoration(
-            border: Border.all(
+        child: Material(
+          borderRadius: BorderRadius.circular(20),
+          elevation: 5,
+          child: Container(
+            width: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
               color: Theme.of(context).cardColor,
             ),
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey[500],
-                blurRadius: 1,
-                offset: Offset(3, 3),
-              ),
-            ],
-            color: Theme.of(context).cardColor,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 5.0, top: 5),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(
-                      widget.articleIcon ?? Icons.assignment_rounded,
-                      size: 40,
-                      color: kMentorXPAccentDark,
-                    ),
-                    Column(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 5.0, top: 5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(
+                        widget.articleIcon ?? Icons.assignment_rounded,
+                        size: 40,
+                        color: kMentorXPAccentDark,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5.0),
+                            child: Text(
+                              widget.articleTitle ?? 'Upcoming',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headlineMedium,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0, right: 5),
+                    child: Divider(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
+                        Container(
+                          width: 190,
+                          height: 40,
                           child: Text(
-                            widget.articleTitle ?? 'Upcoming',
+                            widget.bodyText ?? '',
                             textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.headlineMedium,
+                            style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ),
                       ],
                     ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 5.0, right: 5),
-                  child: Divider(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5.0),
-                  child: Row(
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0, right: 5),
+                    child: Divider(),
+                  ),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        width: 190,
-                        height: 40,
-                        child: Text(
-                          widget.bodyText ?? '',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyLarge,
+                      Padding(
+                        padding: const EdgeInsets.only(right: 5.0),
+                        child: Container(
+                          height: 25,
+                          width: 25,
+                          child: CheckBox(
+                            loggedInUser: widget.loggedInUser,
+                            cardRequirement: widget.cardRequirement,
+                            programUID: widget.programUID,
+                          ),
                         ),
+                      ),
+                      Text(
+                        'Mark Complete',
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 5.0, right: 5),
-                  child: Divider(),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 5.0),
-                      child: Container(
-                        height: 25,
-                        width: 25,
-                        child: CheckBox(
-                          loggedInUser: widget.loggedInUser,
-                          cardRequirement: widget.cardRequirement,
-                          programUID: widget.programUID,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      'Mark Complete',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ],
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

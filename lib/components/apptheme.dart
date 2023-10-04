@@ -24,13 +24,18 @@ class AppTheme {
     cardTheme: CardTheme(
       color: Colors.grey.shade200,
     ),
-    cardColor: Colors.grey.shade200,
+    cardColor: Colors.white,
     indicatorColor: kMentorXPAccentDark,
     dividerColor: Colors.grey.shade400,
     iconTheme: IconThemeData(
-      color: Colors.blue,
+      color: Colors.white,
     ),
     textTheme: TextTheme(
+      displayMedium: TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+        fontFamily: 'Montserrat',
+      ),
       titleLarge: TextStyle(
         color: kMentorXPAccentDark,
         fontSize: 25,
@@ -90,9 +95,14 @@ class AppTheme {
     indicatorColor: kMentorXPAccentDark,
     dividerColor: Colors.grey.shade700,
     iconTheme: IconThemeData(
-      color: Colors.white,
+      color: kMentorXPAccentDark,
     ),
     textTheme: TextTheme(
+      displayMedium: TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+        fontFamily: 'Montserrat',
+      ),
       titleLarge: TextStyle(
         color: kMentorXPAccentDark,
         fontSize: 25,

@@ -30,7 +30,7 @@ Container miniProgressIndicator() {
 
 Container circularProgress(Color backgroundColor) {
   return Container(
-    color: backgroundColor.withOpacity(0.5),
+    // color: backgroundColor.withOpacity(0.5),
     child: Stack(
       alignment: Alignment.center,
       children: [
@@ -44,8 +44,8 @@ Container circularProgress(Color backgroundColor) {
           height: 200,
           width: 200,
           child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation(Colors.white),
-            backgroundColor: kMentorXPSecondary,
+            valueColor: AlwaysStoppedAnimation(kMentorXPPrimary),
+            backgroundColor: kMentorXPAccentMed,
             strokeWidth: 10,
           ),
         ),

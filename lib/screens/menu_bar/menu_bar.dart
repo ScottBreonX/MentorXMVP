@@ -40,7 +40,7 @@ class MentorXMenuList extends StatelessWidget {
                 child: Icon(
                   Icons.close_outlined,
                   size: 20,
-                  color: Colors.white,
+                  color: Theme.of(context).iconTheme.color,
                 ),
                 onTap: () {
                   Navigator.pop(context);
@@ -55,15 +55,11 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.home,
-            color: Colors.white,
+            color: Theme.of(context).iconTheme.color,
           ),
           title: Text(
             'Program Home',
-            style: TextStyle(
-              fontFamily: 'Montserrat',
-              color: Colors.white,
-              fontSize: 20,
-            ),
+            style: Theme.of(context).textTheme.displayMedium,
           ),
           onTap: () => Navigator.push(
             context,
@@ -75,15 +71,11 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.person,
-            color: Colors.white,
+            color: Theme.of(context).iconTheme.color,
           ),
           title: Text(
             'My Profile',
-            style: TextStyle(
-              fontFamily: 'Montserrat',
-              color: Colors.white,
-              fontSize: 20,
-            ),
+            style: Theme.of(context).textTheme.displayMedium,
           ),
           onTap: () => Navigator.push(
             context,
@@ -99,7 +91,7 @@ class MentorXMenuList extends StatelessWidget {
           leading: Icon(
             Icons.add_circle_rounded,
             size: 30,
-            color: Colors.white,
+            color: Theme.of(context).iconTheme.color,
           ),
           onTap: () => Navigator.push(
             context,
@@ -111,18 +103,14 @@ class MentorXMenuList extends StatelessWidget {
           ),
           title: Text(
             'Join New Program',
-            style: TextStyle(
-              fontFamily: 'Montserrat',
-              color: Colors.white,
-              fontSize: 20,
-            ),
+            style: Theme.of(context).textTheme.displayMedium,
           ),
         ),
         ListTile(
           leading: Icon(
             Icons.sunny,
             size: 30,
-            color: Colors.white,
+            color: Theme.of(context).iconTheme.color,
           ),
           onTap: () {
             showDialog(
@@ -138,7 +126,7 @@ class MentorXMenuList extends StatelessWidget {
                       child: Text(
                         "Choose your app color theme",
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headlineLarge,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ),
                   ),
@@ -191,26 +179,18 @@ class MentorXMenuList extends StatelessWidget {
           },
           title: Text(
             'Change Theme',
-            style: TextStyle(
-              fontFamily: 'Montserrat',
-              color: Colors.white,
-              fontSize: 20,
-            ),
+            style: Theme.of(context).textTheme.displayMedium,
           ),
         ),
         loggedInUser.canCreateProgram
             ? ListTile(
                 leading: Icon(
                   Icons.create_new_folder_rounded,
-                  color: Colors.white,
+                  color: Theme.of(context).iconTheme.color,
                 ),
                 title: Text(
                   'Create a Program',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
                 onTap: () {
                   Navigator.push(
@@ -227,15 +207,11 @@ class MentorXMenuList extends StatelessWidget {
         ListTile(
           leading: Icon(
             Icons.exit_to_app_rounded,
-            color: Colors.white,
+            color: Theme.of(context).iconTheme.color,
           ),
           title: Text(
             'Log Out',
-            style: TextStyle(
-              fontFamily: 'Montserrat',
-              color: Colors.white,
-              fontSize: 20,
-            ),
+            style: Theme.of(context).textTheme.displayMedium,
           ),
           onTap: () {
             confirmSignOut(context);

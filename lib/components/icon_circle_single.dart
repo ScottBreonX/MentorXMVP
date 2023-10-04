@@ -27,34 +27,27 @@ class IconCircleSingle extends StatelessWidget {
       padding: const EdgeInsets.all(5.0),
       child: GestureDetector(
         onTap: onPressedFunction,
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
+        child: Material(
+          elevation: 5,
+          borderRadius: BorderRadius.circular(circleRadius ?? 100),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(circleRadius ?? 100),
               color: Theme.of(context).cardColor,
-              width: 0,
             ),
-            borderRadius: BorderRadius.circular(circleRadius ?? 100),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).primaryColor.withOpacity(0.5),
-                blurRadius: 5,
-                offset: Offset(5, 5),
-              ),
-            ],
-            color: Theme.of(context).cardColor,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  cardIcon ?? Icons.add,
+                  color: cardIconColor ?? kMentorXPSecondary,
+                  size: cardIconSize ?? 40,
+                ),
+              ],
+            ),
+            height: cardHeight ?? 110,
+            width: cardWidth ?? 110,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                cardIcon ?? Icons.add,
-                color: cardIconColor ?? kMentorXPSecondary,
-                size: cardIconSize ?? 40,
-              ),
-            ],
-          ),
-          height: cardHeight ?? 110,
-          width: cardWidth ?? 110,
         ),
       ),
     );

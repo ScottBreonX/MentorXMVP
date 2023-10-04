@@ -37,31 +37,35 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
   String workExperienceText;
   final _formKey1 = GlobalKey<FormState>();
 
-  TextFormField _buildWorkExperienceTextField(String userWorkExperienceText) {
-    return TextFormField(
-      key: _formKey1,
-      initialValue: userWorkExperienceText,
-      textInputAction: TextInputAction.newline,
-      textCapitalization: TextCapitalization.sentences,
-      keyboardType: TextInputType.multiline,
-      maxLines: null,
-      textAlign: TextAlign.start,
-      onChanged: (value) => workExperienceText = value,
-      style: TextStyle(
-          fontFamily: 'Montserrat', color: Colors.black54, fontSize: 18),
-      autocorrect: true,
-      decoration: kTextFieldDecoration.copyWith(
-        fillColor: Colors.white,
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: kMentorXPSecondary, width: 4.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(10.0),
+  Material _buildWorkExperienceTextField(String userWorkExperienceText) {
+    return Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(10),
+      child: TextFormField(
+        key: _formKey1,
+        initialValue: userWorkExperienceText,
+        textInputAction: TextInputAction.newline,
+        textCapitalization: TextCapitalization.sentences,
+        keyboardType: TextInputType.multiline,
+        maxLines: null,
+        textAlign: TextAlign.start,
+        onChanged: (value) => workExperienceText = value,
+        style: Theme.of(context).textTheme.labelLarge,
+        autocorrect: true,
+        decoration: kTextFieldDecoration.copyWith(
+          fillColor: Theme.of(context).cardColor,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: kMentorXPSecondary, width: 2.0),
+            borderRadius: BorderRadius.all(
+              Radius.circular(10.0),
+            ),
           ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: kMentorXPSecondary, width: 2.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(10.0),
+          enabledBorder: OutlineInputBorder(
+            borderSide:
+                BorderSide(color: Theme.of(context).cardColor, width: 1.0),
+            borderRadius: BorderRadius.all(
+              Radius.circular(10.0),
+            ),
           ),
         ),
       ),
@@ -79,9 +83,11 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
       showAlertDialog(context,
           title: 'Operation Failed', content: '$e', defaultActionText: 'Ok');
     }
-    setState(() {
-      workExperienceEditStatus = false;
-    });
+    if (this.mounted) {
+      setState(() {
+        workExperienceEditStatus = false;
+      });
+    }
   }
 
   @override
@@ -118,15 +124,19 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                             child: GestureDetector(
                               onTap: () {
                                 _updateWorkExperience(widget.profileId);
-                                Navigator.pop(context);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Profile(
-                                        profileId: widget.profileId,
-                                        loggedInUser: widget.loggedInUser,
-                                      ),
-                                    ));
+                                Navigator.pushReplacement(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            Profile(
+                                      profileId: widget.profileId,
+                                      loggedInUser: widget.loggedInUser,
+                                    ),
+                                    transitionDuration: Duration.zero,
+                                    reverseTransitionDuration: Duration.zero,
+                                  ),
+                                );
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -147,9 +157,11 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                                 const EdgeInsets.only(right: 8.0, bottom: 10.0),
                             child: GestureDetector(
                               onTap: () {
-                                setState(() {
-                                  workExperienceEditStatus = false;
-                                });
+                                if (this.mounted) {
+                                  setState(() {
+                                    workExperienceEditStatus = false;
+                                  });
+                                }
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -173,9 +185,11 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                             padding: const EdgeInsets.only(right: 8.0),
                             child: GestureDetector(
                               onTap: () {
-                                setState(() {
-                                  workExperienceEditStatus = true;
-                                });
+                                if (this.mounted) {
+                                  setState(() {
+                                    workExperienceEditStatus = true;
+                                  });
+                                }
                               },
                               child: IconCircle(
                                 width: 30.0,
@@ -197,11 +211,7 @@ class _WorkExperienceSectionState extends State<WorkExperienceSection> {
                       Flexible(
                         child: Text(
                           "${widget.workExperienceImport}",
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontSize: 18,
-                            fontFamily: 'Montserrat',
-                          ),
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       ),
                     ],
