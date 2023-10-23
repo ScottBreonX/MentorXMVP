@@ -242,7 +242,7 @@ class _MenteeEnrollmentSkillsScreenState
           DropdownButton2(
             isExpanded: true,
             hint: Row(
-              children: const [
+              children: [
                 Expanded(
                   child: Text(
                     '<None Selected>',

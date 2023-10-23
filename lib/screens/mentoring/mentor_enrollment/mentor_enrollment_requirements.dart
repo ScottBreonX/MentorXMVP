@@ -61,7 +61,7 @@ class _MentorEnrollmentRequirementsScreenState
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<MaterialState> states) {
-      return isChecked ? kMentorXPPrimary : Colors.black45;
+      return isChecked ? kMentorXPSecondary : Colors.black45;
     }
 
     return FutureBuilder<Object>(
@@ -177,7 +177,7 @@ class _MentorEnrollmentRequirementsScreenState
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25,
                                 color: isChecked
-                                    ? kMentorXPPrimary
+                                    ? kMentorXPSecondary
                                     : Colors.black45,
                               ),
                             )
@@ -195,7 +195,7 @@ class _MentorEnrollmentRequirementsScreenState
                             buttonColor: Colors.white,
                             borderWidth: 2,
                             borderRadius: 20,
-                            fontColor: kMentorXPPrimary,
+                            fontColor: kMentorXPSecondary,
                             fontWeight: FontWeight.w500,
                             minWidth: 150,
                             fontSize: 20,
@@ -205,7 +205,7 @@ class _MentorEnrollmentRequirementsScreenState
                           ),
                           RoundedButton(
                             title: 'Next -->',
-                            buttonColor: kMentorXPPrimary,
+                            buttonColor: kMentorXPSecondary,
                             fontColor: Colors.white,
                             fontWeight: FontWeight.w500,
                             fontSize: 20,
@@ -250,7 +250,8 @@ class _MentorEnrollmentRequirementsScreenState
                                                       MainAxisAlignment.center,
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w500,
-                                                  buttonColor: kMentorXPPrimary,
+                                                  buttonColor:
+                                                      kMentorXPSecondary,
                                                   fontColor: Colors.white,
                                                   onPressed: () =>
                                                       Navigator.pop(context),
@@ -320,7 +321,7 @@ class _MentorEnrollmentRequirementsScreenState
                     size: 30,
                   ),
                   backgroundColor: Colors.white,
-                  foregroundColor: kMentorXPPrimary,
+                  foregroundColor: kMentorXPAccentMed,
                   tooltip: 'Decrement',
                 ),
               ),
@@ -330,7 +331,7 @@ class _MentorEnrollmentRequirementsScreenState
                 style: TextStyle(
                   fontSize: 60.0,
                   fontFamily: 'Montserrat',
-                  color: kMentorXPPrimary,
+                  color: kMentorXPSecondary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -346,7 +347,7 @@ class _MentorEnrollmentRequirementsScreenState
                     size: 30,
                   ),
                   backgroundColor: Colors.white,
-                  foregroundColor: kMentorXPPrimary,
+                  foregroundColor: kMentorXPAccentMed,
                   tooltip: 'Increment',
                 ),
               ),

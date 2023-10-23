@@ -36,17 +36,17 @@ class _ProgramValuesCardState extends State<ProgramValuesCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(
+                  padding: EdgeInsets.only(
                     left: 10.0,
                     top: 20,
-                    bottom: 15,
+                    bottom: expandStatus ? 5 : 15,
                   ),
                   child: Text(
                     '${widget.titleText}',
                     style: TextStyle(
                       fontSize: 18,
                       fontFamily: 'Montserrat',
-                      color: kMentorXPAccentDark,
+                      color: kMentorXPPrimary,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -65,7 +65,7 @@ class _ProgramValuesCardState extends State<ProgramValuesCard> {
                       expandStatus
                           ? Icons.remove_circle_rounded
                           : Icons.add_circle_rounded,
-                      color: kMentorXPAccentDark,
+                      color: kMentorXPSecondary,
                       size: 25,
                     ),
                   ),
@@ -78,11 +78,16 @@ class _ProgramValuesCardState extends State<ProgramValuesCard> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0, right: 10),
                         child: Divider(
-                          thickness: 2,
+                          thickness: 1,
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.only(
+                          top: 5,
+                          left: 10,
+                          right: 10,
+                          bottom: 15,
+                        ),
                         child: Text(
                           '${widget.bodyText}',
                           style: TextStyle(

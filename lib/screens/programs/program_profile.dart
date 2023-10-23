@@ -200,13 +200,13 @@ class _ProgramProfileState extends State<ProgramProfile> {
                               height: 150,
                               alignment: Alignment.topLeft,
                               decoration: BoxDecoration(
-                                color: Theme.of(context).cardColor,
+                                color: Colors.grey.shade200,
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 5,
+                                  horizontal: 15,
+                                  vertical: 10,
                                 ),
                                 child: SingleChildScrollView(
                                   child: Text(

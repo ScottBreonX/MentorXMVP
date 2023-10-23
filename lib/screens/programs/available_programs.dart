@@ -66,7 +66,7 @@ class _AvailableProgramsScreenState extends State<AvailableProgramsScreen> {
             color: Colors.grey,
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(1.0),
             child: AvailableProgramsStream(widget.loggedInUser),
           ),
         ],
@@ -135,13 +135,13 @@ class AvailableProgramsStream extends StatelessWidget {
                         fit: BoxFit.fill,
                       )
                     : Padding(
-                        padding:
-                            const EdgeInsets.only(left: 8.0, right: 8, top: 3),
+                        padding: const EdgeInsets.only(
+                            left: 12, right: 12, top: 5, bottom: 5),
                         child: CachedNetworkImage(
                           imageUrl: prog.programLogo,
                           imageBuilder: (context, imageProvider) => Container(
-                            height: 55,
-                            width: 55,
+                            height: 60,
+                            width: 60,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               image: DecorationImage(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/constants.dart';
 
 Future<bool> showAlertDialog(
   BuildContext context, {
@@ -35,22 +36,49 @@ Future<bool> showAlertDialog(
   return showCupertinoDialog(
     context: context,
     builder: (context) => CupertinoAlertDialog(
-      title: Text(title),
-      content: Text(content),
-      actions: [
-        CupertinoDialogAction(
-          onPressed: () => Navigator.pop(context, true),
-          child: Text(
-            defaultActionText,
-          ),
+      title: Text(
+        title,
+        style: TextStyle(
+          color: kMentorXPSecondary,
+          fontSize: 20,
+          fontFamily: 'Montserrat',
         ),
+      ),
+      content: Text(
+        content,
+        style: TextStyle(
+          color: Colors.black54,
+          fontSize: 15,
+          fontFamily: 'Montserrat',
+        ),
+      ),
+      actions: [
         if (cancelActionText != null)
           CupertinoDialogAction(
-            child: Text(cancelActionText),
+            child: Text(
+              cancelActionText,
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 15,
+                fontFamily: 'Montserrat',
+              ),
+            ),
             onPressed: () {
               Navigator.of(context, rootNavigator: true).pop();
             },
           ),
+        CupertinoDialogAction(
+          onPressed: () => Navigator.pop(context, true),
+          child: Text(
+            defaultActionText,
+            style: TextStyle(
+              color: kMentorXPSecondary,
+              fontSize: 15,
+              fontFamily: 'Montserrat',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ],
     ),
   );

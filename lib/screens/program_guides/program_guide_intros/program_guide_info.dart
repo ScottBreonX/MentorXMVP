@@ -89,7 +89,7 @@ class _ProgramGuideInfoState extends State<ProgramGuideInfo> {
                     style: TextStyle(
                       fontSize: 15,
                       fontFamily: 'Montserrat',
-                      color: kMentorXPPrimary,
+                      color: Colors.black54,
                     ),
                   ),
                   SizedBox(
@@ -100,7 +100,7 @@ class _ProgramGuideInfoState extends State<ProgramGuideInfo> {
                     style: TextStyle(
                       fontSize: 15,
                       fontFamily: 'Montserrat',
-                      color: kMentorXPPrimary,
+                      color: Colors.black54,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -153,8 +153,8 @@ class _ProgramGuideInfoState extends State<ProgramGuideInfo> {
                           title: 'Ready for 1st Meeting -->',
                           textAlignment: MainAxisAlignment.center,
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          buttonColor: kMentorXPAccentDark,
+                          fontSize: 15,
+                          buttonColor: kMentorXPSecondary,
                           fontColor: Colors.white,
                           onPressed: () {
                             Navigator.push(

@@ -70,12 +70,7 @@ class _MenteeEnrollmentBackgroundScreenState
   }) {
     return TextFormField(
       key: _formKey2,
-      style: TextStyle(
-        color: Colors.black54,
-        fontFamily: 'Montserrat',
-        fontSize: 20,
-        fontWeight: FontWeight.w500,
-      ),
+      style: Theme.of(context).textTheme.labelLarge,
       autocorrect: true,
       initialValue: currentFreeFormResponse,
       onChanged: (value) => menteeExperience = value,
@@ -85,9 +80,9 @@ class _MenteeEnrollmentBackgroundScreenState
       decoration: InputDecoration(
         hintText: hintString,
         hintStyle: TextStyle(
-            color: kMentorXPSecondary.withOpacity(
-              0.3,
-            ),
+            color: Theme.of(context).textTheme.headlineMedium.color.withOpacity(
+                  0.2,
+                ),
             fontSize: 20,
             fontFamily: 'Montserrat'),
         filled: true,
@@ -105,7 +100,7 @@ class _MenteeEnrollmentBackgroundScreenState
             width: 3.0,
           ),
         ),
-        fillColor: Colors.white,
+        fillColor: Theme.of(context).cardColor,
       ),
     );
   }
@@ -161,11 +156,7 @@ class _MenteeEnrollmentBackgroundScreenState
                       Text(
                         'Mentee Enrollment',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 30,
-                          color: Colors.black54,
-                        ),
+                        style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       SizedBox(
                         height: 30,
@@ -179,7 +170,15 @@ class _MenteeEnrollmentBackgroundScreenState
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 20.0, bottom: 10),
+                        padding: const EdgeInsets.only(
+                            top: 20.0, bottom: 20, left: 5, right: 5),
+                        child: Divider(
+                          color: Theme.of(context).dividerColor,
+                          thickness: 2,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
                         child: Text(
                           'What experiences and skills are you looking to further develop?',
                           style: TextStyle(

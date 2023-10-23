@@ -73,6 +73,7 @@ class _MentorCardState extends State<MentorCard> {
       child: Container(
         width: MediaQuery.of(context).size.width * 0.94,
         child: Card(
+          color: expandStatus ? kMentorXPPrimary : Colors.grey.shade300,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
@@ -97,7 +98,7 @@ class _MentorCardState extends State<MentorCard> {
                       ),
                     ),
                     child: CircleAvatar(
-                      backgroundColor: Colors.grey,
+                      backgroundColor: Theme.of(context).cardColor,
                       radius: 42,
                       child: widget.imageContainer ?? Container(),
                     ),
@@ -114,12 +115,14 @@ class _MentorCardState extends State<MentorCard> {
                             '${widget.mentorFname} ${widget.mentorLname}',
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: TextStyle(
-                              fontFamily: 'WorkSans',
-                              fontSize: 25,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black54,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                .copyWith(
+                                  color: expandStatus
+                                      ? Colors.white
+                                      : Colors.black54,
+                                ),
                           ),
                         ),
                       ),
@@ -131,20 +134,21 @@ class _MentorCardState extends State<MentorCard> {
                             children: [
                               Text(
                                 'Class: ',
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black45,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall
+                                    .copyWith(
+                                      color: expandStatus
+                                          ? Colors.white
+                                          : Colors.black54,
+                                    ),
                               ),
                               Text(
                                 '${widget.mtrClass}',
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 13,
-                                  color: kMentorXPAccentDark,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall
+                                    .copyWith(color: kMentorXPSecondary),
                               ),
                             ],
                           ),
@@ -165,17 +169,22 @@ class _MentorCardState extends State<MentorCard> {
                                     children: [
                                       Icon(
                                         skillMap['${widget.mtrAtt1}'],
-                                        color: kMentorXPAccentDark,
+                                        color: expandStatus
+                                            ? Colors.white
+                                            : kMentorXPSecondary,
                                         size: 30,
                                       ),
                                       Text(
                                         '${widget.mtrAtt1 ?? ''}',
-                                        style: TextStyle(
-                                          fontFamily: 'WorkSans',
-                                          fontSize: 8,
-                                          fontWeight: FontWeight.w500,
-                                          color: kMentorXPPrimary,
-                                        ),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            .copyWith(
+                                              fontSize: 8,
+                                              color: expandStatus
+                                                  ? Colors.white
+                                                  : Colors.black54,
+                                            ),
                                       )
                                     ],
                                   ),
@@ -190,17 +199,22 @@ class _MentorCardState extends State<MentorCard> {
                                     children: [
                                       Icon(
                                         skillMap['${widget.mtrAtt2}'],
-                                        color: kMentorXPAccentDark,
+                                        color: expandStatus
+                                            ? Colors.white
+                                            : kMentorXPSecondary,
                                         size: 30,
                                       ),
                                       Text(
                                         '${widget.mtrAtt2 ?? ''}',
-                                        style: TextStyle(
-                                          fontFamily: 'WorkSans',
-                                          fontSize: 8,
-                                          fontWeight: FontWeight.w500,
-                                          color: kMentorXPPrimary,
-                                        ),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            .copyWith(
+                                              fontSize: 8,
+                                              color: expandStatus
+                                                  ? Colors.white
+                                                  : Colors.black54,
+                                            ),
                                       )
                                     ],
                                   ),
@@ -215,17 +229,22 @@ class _MentorCardState extends State<MentorCard> {
                                     children: [
                                       Icon(
                                         skillMap['${widget.mtrAtt3}'],
-                                        color: kMentorXPAccentDark,
+                                        color: expandStatus
+                                            ? Colors.white
+                                            : kMentorXPSecondary,
                                         size: 30,
                                       ),
                                       Text(
                                         '${widget.mtrAtt3 ?? ''}',
-                                        style: TextStyle(
-                                          fontFamily: 'WorkSans',
-                                          fontSize: 8,
-                                          fontWeight: FontWeight.w500,
-                                          color: kMentorXPPrimary,
-                                        ),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            .copyWith(
+                                              fontSize: 8,
+                                              color: expandStatus
+                                                  ? Colors.white
+                                                  : Colors.black54,
+                                            ),
                                       )
                                     ],
                                   ),
@@ -243,7 +262,7 @@ class _MentorCardState extends State<MentorCard> {
                         Divider(
                           indent: 10,
                           endIndent: 10,
-                          color: Colors.grey.shade300,
+                          color: Colors.grey.shade400,
                           thickness: 1,
                         ),
                         Row(
@@ -255,12 +274,12 @@ class _MentorCardState extends State<MentorCard> {
                                 widget.menteePreview
                                     ? "What I'm looking for in a mentor:"
                                     : "Experience I offer as a mentor:",
-                                style: TextStyle(
-                                  fontFamily: 'WorkSans',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: kMentorXPPrimary,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall
+                                    .copyWith(
+                                      color: Colors.white,
+                                    ),
                               ),
                             ),
                           ],
@@ -276,12 +295,12 @@ class _MentorCardState extends State<MentorCard> {
                                   '${widget.xFactor}',
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
-                                  style: TextStyle(
-                                    fontFamily: 'WorkSans',
-                                    overflow: TextOverflow.ellipsis,
-                                    fontSize: 14,
-                                    color: Colors.black45,
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      .copyWith(
+                                        color: Colors.white,
+                                      ),
                                 ),
                               ),
                             ),
@@ -290,14 +309,14 @@ class _MentorCardState extends State<MentorCard> {
                         Divider(
                           indent: 10,
                           endIndent: 10,
-                          color: Colors.grey.shade300,
+                          color: Colors.grey.shade400,
                           thickness: 1,
                         ),
                         buildSkillsSection(
                           widget.menteePreview
                               ? 'Skills I am looking to develop'
                               : 'My Mentoring Focus',
-                          kMentorXPAccentDark,
+                          Colors.white,
                           skillMap['${widget.mtrAtt1}'],
                           skillMap['${widget.mtrAtt2}'],
                           skillMap['${widget.mtrAtt3}'],
@@ -310,7 +329,7 @@ class _MentorCardState extends State<MentorCard> {
                             : Divider(
                                 indent: 10,
                                 endIndent: 10,
-                                color: Colors.grey.shade300,
+                                color: Colors.grey.shade400,
                                 thickness: 1,
                               ),
                         Row(
@@ -319,9 +338,29 @@ class _MentorCardState extends State<MentorCard> {
                             widget.previewStatus
                                 ? Container()
                                 : RoundedButton(
+                                    title: 'View Profile',
+                                    borderRadius: 20,
+                                    minWidth: 150,
+                                    fontSize: 15,
+                                    buttonColor: kMentorXPSecondary,
+                                    fontColor: Colors.white,
+                                    onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Profile(
+                                          profileId: widget.mentorUID,
+                                          loggedInUser: widget.loggedInUser,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                            widget.previewStatus
+                                ? Container()
+                                : RoundedButton(
                                     title: 'Select Mentor',
                                     buttonColor: kMentorXPAccentDark,
-                                    borderRadius: 15,
+                                    borderRadius: 20,
+                                    fontSize: 15,
                                     minWidth: 150,
                                     fontColor: Colors.white,
                                     onPressed: () => Navigator.push(
@@ -345,24 +384,6 @@ class _MentorCardState extends State<MentorCard> {
                                       ),
                                     ),
                                   ),
-                            widget.previewStatus
-                                ? Container()
-                                : RoundedButton(
-                                    title: 'View Profile',
-                                    borderRadius: 15,
-                                    minWidth: 150,
-                                    buttonColor: Colors.grey,
-                                    fontColor: Colors.white,
-                                    onPressed: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Profile(
-                                          profileId: widget.mentorUID,
-                                          loggedInUser: widget.loggedInUser,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
                           ],
                         ),
                         Column(
@@ -370,12 +391,6 @@ class _MentorCardState extends State<MentorCard> {
                             Padding(
                               padding:
                                   const EdgeInsets.only(top: 10.0, bottom: 5),
-                              child: Divider(
-                                indent: 10,
-                                endIndent: 10,
-                                color: Colors.grey.shade300,
-                                thickness: 1,
-                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 10.0),
@@ -391,17 +406,17 @@ class _MentorCardState extends State<MentorCard> {
                                               const EdgeInsets.only(right: 5.0),
                                           child: Icon(
                                             Icons.remove_circle,
-                                            color: Colors.black45,
+                                            color: Colors.white,
                                           ),
                                         ),
                                         Text(
                                           'Minimize Info',
-                                          style: TextStyle(
-                                            fontFamily: 'WorkSans',
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.black45,
-                                          ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineSmall
+                                              .copyWith(
+                                                color: Colors.white,
+                                              ),
                                         ),
                                       ],
                                     ),
@@ -445,17 +460,17 @@ class _MentorCardState extends State<MentorCard> {
                                               const EdgeInsets.only(right: 5.0),
                                           child: Icon(
                                             Icons.add_circle,
-                                            color: Colors.grey,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .headlineSmall
+                                                .color,
                                           ),
                                         ),
                                         Text(
                                           'More Info',
-                                          style: TextStyle(
-                                            fontFamily: 'WorkSans',
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.grey,
-                                          ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineSmall,
                                         ),
                                       ],
                                     ),
@@ -495,12 +510,9 @@ class _MentorCardState extends State<MentorCard> {
               padding: const EdgeInsets.only(left: 10.0, top: 5),
               child: Text(
                 titleText,
-                style: TextStyle(
-                  fontFamily: 'WorkSans',
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  color: kMentorXPPrimary,
-                ),
+                style: Theme.of(context).textTheme.headlineSmall.copyWith(
+                      color: Colors.white,
+                    ),
               ),
             ),
           ],
@@ -524,12 +536,10 @@ class _MentorCardState extends State<MentorCard> {
                       child: Text(
                         skillOneText,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'WorkSans',
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black54,
-                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            .copyWith(fontSize: 10, color: Colors.white),
                       ),
                     ),
                   ],
@@ -552,12 +562,10 @@ class _MentorCardState extends State<MentorCard> {
                       child: Text(
                         skillTwoText,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'WorkSans',
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black54,
-                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            .copyWith(fontSize: 10, color: Colors.white),
                       ),
                     ),
                   ],
@@ -580,12 +588,10 @@ class _MentorCardState extends State<MentorCard> {
                       child: Text(
                         skillThreeText,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'WorkSans',
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black54,
-                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            .copyWith(fontSize: 10, color: Colors.white),
                       ),
                     ),
                   ],

@@ -8,6 +8,7 @@ import 'package:mentorx_mvp/screens/program_guides/program_guide_data/guidelines
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/guidelines3.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/guidelines4.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/guidelines5.dart';
+import 'package:mentorx_mvp/screens/program_guides/program_guide_data/guidelinesComplete.dart';
 
 import '../../components/program_card.dart';
 
@@ -101,6 +102,11 @@ class _ProgramGuidelinesState extends State<ProgramGuidelines> {
                       titleText: 'Program Guidelines',
                       cardColor: Colors.grey.shade700,
                       fileName: Guidelines5(),
+                    ),
+                    ProgramGuideCard(
+                      titleText: 'Complete Session',
+                      cardColor: Colors.grey.shade700,
+                      fileName: GuidelinesComplete(),
                       swipeText: 'Return to Program',
                       selectButtons: true,
                       selectButton1: true,
@@ -123,7 +129,7 @@ class _ProgramGuidelinesState extends State<ProgramGuidelines> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 6; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(

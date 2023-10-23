@@ -73,7 +73,10 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
             .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress(Theme.of(context).primaryColor);
+            return Container(
+                width: 100,
+                height: 100,
+                child: circularProgress(Theme.of(context).primaryColor));
           } else {
             _snapshot = snapshot.data;
             if (_snapshot.size > 0) {
@@ -97,7 +100,11 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
-                      return circularProgress(Theme.of(context).primaryColor);
+                      return Container(
+                          width: 100,
+                          height: 100,
+                          child:
+                              circularProgress(Theme.of(context).primaryColor));
                     }
                     EnrollmentModel enrollmentModel =
                         EnrollmentModel.fromDocument(snapshot.data);
@@ -289,7 +296,10 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
         stream: programsRef.doc(widget.programUID).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress(Theme.of(context).primaryColor);
+            return Container(
+                width: 100,
+                height: 100,
+                child: circularProgress(Theme.of(context).primaryColor));
           }
           Program program = Program.fromDocument(snapshot.data);
 
@@ -306,7 +316,10 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return circularProgress(Theme.of(context).primaryColor);
+                  return Container(
+                      width: 100,
+                      height: 100,
+                      child: circularProgress(Theme.of(context).primaryColor));
                 }
                 EnrollmentModel enrollmentModel =
                     EnrollmentModel.fromDocument(snapshot.data);

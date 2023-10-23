@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
 import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
@@ -11,6 +12,8 @@ import '../../components/progress.dart';
 import '../../models/program.dart';
 import '../../services/auth.dart';
 import '../launch_screen.dart';
+import '../programs/available_programs.dart';
+import '../programs/program_launch/program_enrollment_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -271,22 +274,47 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           Wrap(
                             children: [
+                              Text(
+                                'You are not currently enrolled in any programs.',
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                            ],
+                          ),
+                          Wrap(
+                            children: [
                               Padding(
-                                padding: const EdgeInsets.only(bottom: 40.0),
+                                padding: const EdgeInsets.only(bottom: 20.0),
                                 child: Text(
-                                  'You are not currently enrolled in any programs. Join a program below:',
+                                  'Click below to view available programs.',
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                               ),
                             ],
                           ),
-                          Divider(
-                            indent: 20,
-                            endIndent: 20,
-                            thickness: 2,
+                          Container(
+                            padding: EdgeInsets.only(top: 2.0),
+                            child: ButtonCard(
+                              buttonCardText: "View Available Programs",
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AvailableProgramsScreen(
+                                    loggedInUser: loggedInUser,
+                                  ),
+                                ),
+                              ),
+                              cardIconBool: Container(),
+                              cardWidthPercent: .80,
+                              cardAlignment: MainAxisAlignment.center,
+                              buttonCardColor: kMentorXPPrimary,
+                              buttonCardTextColor: Colors.white,
+                              buttonCardTextSize: 20,
+                              buttonCardRadius: 20,
+                            ),
                           ),
-                          buildProgramListContent(),
+                          // buildProgramListContent(),
                         ],
                       ),
                     )

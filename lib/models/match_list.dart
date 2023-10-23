@@ -53,7 +53,10 @@ class _MatchListState extends State<MatchList> {
             .get(),
         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (!snapshot.hasData) {
-            return circularProgress(Theme.of(context).primaryColor);
+            return Container(
+                width: 100,
+                height: 100,
+                child: circularProgress(Theme.of(context).primaryColor));
           }
           MatchModel matchModel = MatchModel.fromDocument(snapshot.data);
 
@@ -61,7 +64,10 @@ class _MatchListState extends State<MatchList> {
             future: usersRef.doc(mentorUID).get(),
             builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
               if (!snapshot.hasData) {
-                return circularProgress(Theme.of(context).primaryColor);
+                return Container(
+                    width: 100,
+                    height: 100,
+                    child: circularProgress(Theme.of(context).primaryColor));
               }
               myUser user = myUser.fromDocument(snapshot.data);
 
