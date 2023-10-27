@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
@@ -77,6 +78,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           defaultActionText: "Ok",
         );
       }
+      if (e.code == 'weak-password') {
+        showAlertDialog(
+          context,
+          title: "Invalid Password",
+          content: "Password should be at least 6 characters in length",
+          defaultActionText: "Ok",
+        );
+      }
       if (e.code == 'email-already-in-use') {
         showAlertDialog(
           context,
@@ -85,14 +94,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               "Email is already in use. Try new email or proceed to log in.",
           defaultActionText: "Ok",
         );
-      } else {
-        showAlertDialog(
-          context,
-          title: "Password",
-          content: "Password should be at least 6 characters in length",
-          defaultActionText: "Ok",
-        );
       }
+      // else {
+      //   showAlertDialog(
+      //     context,
+      //     title: "Password",
+      //     content: "Password should be at least 6 characters in length",
+      //     defaultActionText: "Ok",
+      //   );
+      // }
     } catch (e) {
       showAlertDialog(
         context,
@@ -177,7 +187,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           color: kMentorXPAccentMed,
         ),
         labelText: 'Password',
-        errorText: model.passwordErrorText,
+        // errorText: model.passwordErrorText,
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
         labelStyle: TextStyle(color: Colors.grey.shade400),
@@ -212,7 +222,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           color: kMentorXPAccentMed,
         ),
         labelText: 'Re-Enter Password',
-        errorText: model.passwordErrorText,
+        // errorText: model.passwordErrorText,
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
         labelStyle: TextStyle(color: Colors.grey.shade400),
@@ -262,6 +272,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               child: ModalProgressHUD(
                 inAsyncCall: model.showSpinner,
+                progressIndicator: circularProgress(Colors.white),
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -326,7 +337,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   },
                             title: 'Next',
                             buttonColor: model.canSubmit
-                                ? kMentorXPAccentMed
+                                ? kMentorXPSecondary
                                 : Colors.grey,
                             fontColor: model.canSubmit
                                 ? Colors.white

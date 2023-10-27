@@ -157,8 +157,15 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
+        leading: Container(),
         backgroundColor: Colors.transparent,
-        title: Text('Create Profile'),
+        // title: Text(
+        //   'Create Profile',
+        //   style: Theme.of(context)
+        //       .textTheme
+        //       .headlineLarge
+        //       .copyWith(color: Colors.white),
+        // ),
         centerTitle: true,
       ),
       body: Container(
@@ -190,12 +197,13 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                 Hero(
                   tag: 'logo',
                   child: Container(
-                    height: 150.0,
+                    height: 80.0,
                     child: Image.asset('assets/images/MentorXP.png'),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.only(
+                      top: 50.0, bottom: 20, left: 20, right: 20),
                   child: Text(
                     'Enter your first and last name',
                     textAlign: TextAlign.center,

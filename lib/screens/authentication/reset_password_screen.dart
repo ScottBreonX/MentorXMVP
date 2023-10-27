@@ -63,22 +63,23 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   child: Container(
                     child: Image.asset(
                       'assets/images/MentorXP.png',
-                      height: 200,
+                      height: 80,
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10),
+                  padding:
+                      const EdgeInsets.only(top: 50, left: 10.0, right: 10),
                   child: Column(
                     children: [
                       Text(
                         'Check your email for a password reset link',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: kMentorXPAccentMed,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w500,
-                        ),
+                            color: kMentorXPAccentMed,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Montserrat'),
                       ),
                     ],
                   ),

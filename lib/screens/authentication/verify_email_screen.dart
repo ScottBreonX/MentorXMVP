@@ -6,6 +6,8 @@ import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 
+import '../../components/alert_dialog.dart';
+
 class VerifyEmailScreen extends StatefulWidget {
   static const String id = 'verify_email_screen';
   @override
@@ -56,8 +58,10 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
     await user.sendEmailVerification();
 
     setState(() => canResendEmail = false);
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(seconds: 1));
     setState(() => canResendEmail = true);
+
+    print('email sent');
   }
 
   @override
@@ -107,14 +111,22 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 ),
                 SizedBox(height: 40),
                 RoundedButton(
-                  title: 'Resend Email',
-                  buttonColor: kMentorXPSecondary,
-                  fontColor: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                  textAlignment: MainAxisAlignment.center,
-                  onPressed: canResendEmail ? sendVerificationEmail : null,
-                ),
+                    title: 'Resend Email',
+                    buttonColor: kMentorXPSecondary,
+                    fontColor: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20,
+                    textAlignment: MainAxisAlignment.center,
+                    onPressed: () {
+                      showAlertDialog(
+                        context,
+                        title: "Check Email",
+                        content:
+                            "Verification email sent to your email address.",
+                        defaultActionText: "Ok",
+                      );
+                      sendVerificationEmail();
+                    }),
                 Text(
                   'If you don\'t see an email in your inbox please check your Spam folder. The email will be sent from The MentorUP Team.',
                   style: TextStyle(
