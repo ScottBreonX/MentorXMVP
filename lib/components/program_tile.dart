@@ -61,24 +61,21 @@ class ProgramTile extends StatelessWidget {
               children: [
                 Row(crossAxisAlignment: CrossAxisAlignment.start, children: <
                     Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: GestureDetector(
-                      onTap: onPressed ??
-                          () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProgramProfile(
-                                    programId: programId,
-                                    loggedInUser: loggedInUser,
-                                  ),
+                  GestureDetector(
+                    onTap: onPressed ??
+                        () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProgramProfile(
+                                  programId: programId,
+                                  loggedInUser: loggedInUser,
                                 ),
                               ),
-                      child: imageContainer ??
-                          imageAsset ??
-                          cachedNetworkImage ??
-                          null,
-                    ),
+                            ),
+                    child: imageContainer ??
+                        imageAsset ??
+                        cachedNetworkImage ??
+                        null,
                   ),
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +100,7 @@ class ProgramTile extends StatelessWidget {
                             Text('Institution: ',
                                 style: Theme.of(context).textTheme.labelSmall),
                             Container(
-                              width: MediaQuery.of(context).size.width * .50,
+                              width: MediaQuery.of(context).size.width * .40,
                               child: Text('$institutionName',
                                   overflow: TextOverflow.ellipsis,
                                   style: Theme.of(context)

@@ -168,6 +168,7 @@ _removeMatch(context, programUID, mentorUID, matchID, mentorSlots, loggedInUser,
     await doc.reference.delete();
   }
 
+  //remove program guides reference
   var programGuides = await programsRef
       .doc(programUID)
       .collection('matchedPairs')

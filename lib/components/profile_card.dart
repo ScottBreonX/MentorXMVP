@@ -31,11 +31,11 @@ class _ProfileCardState extends State<ProfileCard> {
             boxShadow: [
               BoxShadow(
                 blurRadius: 2,
-                offset: Offset(2, 5),
+                offset: Offset(0, 1),
                 color: Colors.grey[500],
               ),
             ],
-            color: Colors.white,
+            color: Colors.grey.shade200,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

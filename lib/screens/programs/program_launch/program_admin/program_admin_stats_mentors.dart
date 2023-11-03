@@ -1,34 +1,33 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mentorx_mvp/constants.dart';
+import 'package:mentorx_mvp/models/mentor_match_models/mentor_model.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-
 import '../../../../components/mentor_card.dart';
 import '../../../../components/profile_image_circle.dart';
-import '../../../../models/mentor_match_models/mentee_model.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
 
-class ProgramAdminStatsMenteesScreen extends StatefulWidget {
+class ProgramAdminStatsMentorsScreen extends StatefulWidget {
   final myUser loggedInUser;
   final String programUID;
-  static const String id = 'program_admin_stats_mentees';
+  static const String id = 'program_admin_stats_mentors';
 
-  ProgramAdminStatsMenteesScreen({
+  ProgramAdminStatsMentorsScreen({
     this.loggedInUser,
     this.programUID,
   });
 
   @override
-  _ProgramAdminStatsMenteesScreenState createState() =>
-      _ProgramAdminStatsMenteesScreenState();
+  _ProgramAdminStatsMentorsScreenState createState() =>
+      _ProgramAdminStatsMentorsScreenState();
 }
 
-class _ProgramAdminStatsMenteesScreenState
-    extends State<ProgramAdminStatsMenteesScreen> {
+class _ProgramAdminStatsMentorsScreenState
+    extends State<ProgramAdminStatsMentorsScreen> {
   bool showSpinner = false;
   bool isLoading = true;
 
@@ -37,7 +36,7 @@ class _ProgramAdminStatsMenteesScreenState
     super.initState();
   }
 
-  buildMenteeListContent(myUser loggedInUser) {
+  buildMentorListContent(myUser loggedInUser) {
     return Scaffold(
       body: SingleChildScrollView(
         child: ModalProgressHUD(
@@ -49,7 +48,7 @@ class _ProgramAdminStatsMenteesScreenState
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Mentees Enrolled',
+                  'Mentors Enrolled',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Montserrat',
@@ -64,7 +63,7 @@ class _ProgramAdminStatsMenteesScreenState
                   color: Colors.black54,
                   thickness: 2,
                 ),
-                MenteeDetailStream(
+                MentorDetailStream(
                   loggedInUser: widget.loggedInUser,
                   programUID: widget.programUID,
                 ),
@@ -92,13 +91,13 @@ class _ProgramAdminStatsMenteesScreenState
           ),
         ),
       ),
-      body: buildMenteeListContent(widget.loggedInUser),
+      body: buildMentorListContent(widget.loggedInUser),
     );
   }
 }
 
-class MenteeDetailStream extends StatelessWidget {
-  MenteeDetailStream({
+class MentorDetailStream extends StatelessWidget {
+  MentorDetailStream({
     this.loggedInUser,
     this.programUID,
   });
@@ -111,7 +110,7 @@ class MenteeDetailStream extends StatelessWidget {
     return StreamBuilder<QuerySnapshot>(
         stream: programsRef
             .doc(programUID)
-            .collection('mentees')
+            .collection('mentors')
             .orderBy("First Name")
             .snapshots(),
         builder: (context, AsyncSnapshot snapshot) {
@@ -122,28 +121,28 @@ class MenteeDetailStream extends StatelessWidget {
             return Center();
           }
 
-          final mentees = snapshot.data.docs;
-          List<MentorCard> menteeBubbles = [];
+          final mentors = snapshot.data.docs;
+          List<MentorCard> mentorBubbles = [];
 
-          for (var mentee in mentees) {
-            Mentee menteeModel = Mentee.fromDocument(mentee);
+          for (var mentor in mentors) {
+            Mentor mentorModel = Mentor.fromDocument(mentor);
 
-            final menteeBubble = MentorCard(
+            final mentorBubble = MentorCard(
               loggedInUser: loggedInUser,
-              mentorUID: menteeModel.id,
+              mentorUID: mentorModel.id,
               programUID: programUID,
-              mentorFname: menteeModel.fName,
-              mentorLname: menteeModel.lName,
-              mtrAtt1: menteeModel.menteeSkill1,
-              mtrAtt2: menteeModel.menteeSkill2,
-              mtrAtt3: menteeModel.menteeSkill3,
-              mtrClass: menteeModel.menteeYearInSchool,
-              xFactor: menteeModel.menteeExperience,
+              mentorFname: mentorModel.fName,
+              mentorLname: mentorModel.lName,
+              mtrAtt1: mentorModel.mentorSkill1,
+              mtrAtt2: mentorModel.mentorSkill2,
+              mtrAtt3: mentorModel.mentorSkill3,
+              mtrClass: mentorModel.mentorYearInSchool,
+              xFactor: mentorModel.mentorExperience,
               previewStatus: false,
               imageContainer: Container(
-                child: menteeModel.profilePicture == null ||
-                        menteeModel.profilePicture.isEmpty ||
-                        menteeModel.profilePicture == ""
+                child: mentorModel.profilePicture == null ||
+                        mentorModel.profilePicture.isEmpty ||
+                        mentorModel.profilePicture == ""
                     ? ProfileImageCircle(
                         circleColor: Colors.grey,
                         iconSize: 45,
@@ -153,7 +152,7 @@ class MenteeDetailStream extends StatelessWidget {
                     : CircleAvatar(
                         radius: 40,
                         child: CachedNetworkImage(
-                          imageUrl: menteeModel.profilePicture,
+                          imageUrl: mentorModel.profilePicture,
                           imageBuilder: (context, imageProvider) => Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
@@ -174,14 +173,14 @@ class MenteeDetailStream extends StatelessWidget {
                       ),
               ),
             );
-            menteeBubbles.add(menteeBubble);
+            mentorBubbles.add(mentorBubble);
           }
           return Padding(
             padding: const EdgeInsets.only(bottom: 50.0),
             child: Container(
               child: SingleChildScrollView(
                 child: Column(
-                  children: menteeBubbles,
+                  children: mentorBubbles,
                 ),
               ),
             ),

@@ -10,7 +10,6 @@ class myUser {
   final String program;
   final String profilePicture;
   final String coverPhoto;
-  final bool darkMode;
   final bool canCreateProgram;
 
   myUser({
@@ -24,7 +23,6 @@ class myUser {
     this.profilePicture,
     this.coverPhoto,
     this.canCreateProgram,
-    this.darkMode,
   });
 
   factory myUser.fromDocument(DocumentSnapshot doc) {
@@ -39,7 +37,6 @@ class myUser {
       profilePicture: doc['Profile Picture'],
       coverPhoto: doc['Cover Photo'],
       canCreateProgram: doc['Can Create Program'],
-      darkMode: doc['Dark Mode'],
     );
   }
   Map<String, dynamic> toMap() {
@@ -54,7 +51,6 @@ class myUser {
       'Profile Picture': profilePicture,
       'Cover Photo': coverPhoto,
       'Can Create Program': canCreateProgram,
-      'Dark Mode': darkMode,
     };
   }
 }

@@ -49,7 +49,7 @@ class _MatchListState extends State<MatchList> {
             .collection('userSubscribed')
             .doc(widget.loggedInUser.id)
             .collection('matches')
-            .doc(mentorUID)
+            .doc(widget.mentorUID)
             .get(),
         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (!snapshot.hasData) {
@@ -61,7 +61,7 @@ class _MatchListState extends State<MatchList> {
           MatchModel matchModel = MatchModel.fromDocument(snapshot.data);
 
           return FutureBuilder<DocumentSnapshot>(
-            future: usersRef.doc(mentorUID).get(),
+            future: usersRef.doc(widget.mentorUID).get(),
             builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
               if (!snapshot.hasData) {
                 return Container(

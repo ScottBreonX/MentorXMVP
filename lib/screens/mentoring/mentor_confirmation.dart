@@ -53,15 +53,14 @@ class MentorConfirm extends StatelessWidget {
         .collection('mentees')
         .doc(loggedInUser.id)
         .update({'Mentor Match': true});
-
     //add mentor to mentee match collection
-    programsRef
-        .doc(programUID)
-        .collection('userSubscribed')
-        .doc(loggedInUser.id)
-        .collection('matches')
-        .doc(mentorUID)
-        .set({});
+    // programsRef
+    //     .doc(programUID)
+    //     .collection('userSubscribed')
+    //     .doc(loggedInUser.id)
+    //     .collection('matches')
+    //     .doc(mentorUID)
+    //     .set({});
     //add matchID to mentee
     programsRef
         .doc(programUID)

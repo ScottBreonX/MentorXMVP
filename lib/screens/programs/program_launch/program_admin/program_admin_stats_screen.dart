@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_admin/program_admin_stats_detail.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_admin/program_admin_stats_mentees.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_admin/program_admin_stats_mentors.dart';
 import '../../../../constants.dart';
 import '../../../../models/mentor_match_models/mentor_model.dart';
 
@@ -126,9 +128,7 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
   Widget build(BuildContext context) {
     if (_programUsers == null || _mentorCount == null || _menteeCount == null) {
       return Center(
-        child: CircularProgressIndicator(
-          color: kMentorXPAccentDark,
-        ),
+        child: circularProgress(Colors.white),
       );
     }
     _unenrolledUsers = _programUsers - _mentorCount - _menteeCount;
@@ -263,10 +263,24 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                           kMentorXPPrimary,
                         ),
                       ),
-                      statWidget(
-                        '$_mentorCount',
-                        '# of mentors',
-                        kMentorXPPrimary,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ProgramAdminStatsMentorsScreen(
+                                loggedInUser: widget.loggedInUser,
+                                programUID: widget.programUID,
+                              ),
+                            ),
+                          );
+                        },
+                        child: statWidget(
+                          '$_mentorCount',
+                          '# of mentors',
+                          kMentorXPPrimary,
+                        ),
                       ),
                       statWidget(
                         '$_unenrolledUsers',
