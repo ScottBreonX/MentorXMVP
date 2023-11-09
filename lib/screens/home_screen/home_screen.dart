@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
@@ -52,6 +53,76 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       }
     }));
+  }
+
+  Future _welcomeBoolUpdate() async {
+    await usersRef.doc(widget.loggedInUser.id).update({
+      'Welcome Message': false,
+    });
+  }
+
+  welcomeMessage(parentContext) {
+    return showDialog(
+        context: parentContext,
+        builder: (context) {
+          return SimpleDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            title: Text(
+              'Welcome to MentorUP!',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: kMentorXPAccentDark,
+                fontFamily: 'Montserrat',
+                fontSize: 25,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Divider(
+                  height: 4,
+                  color: Colors.grey,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 20, left: 20.0, right: 20.0, bottom: 10),
+                child: Column(
+                  children: [
+                    Text(
+                      'Through involvement in this program, you will gain access to resources designed to facilitate your mentoring relationship and unlock your full career potential.',
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'Explore curated content tailored to your experience as you further your development alongside your mentor / mentee.',
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'Congratulations on investing in yourself and beginning your mentorship journey!',
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    SizedBox(height: 20),
+                    RoundedButton(
+                      title: 'Let\'s Go',
+                      textAlignment: MainAxisAlignment.center,
+                      buttonColor: kMentorXPSecondary,
+                      fontColor: Colors.white,
+                      onPressed: () {
+                        _welcomeBoolUpdate();
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        });
   }
 
   buildProgramListContent() {
@@ -116,6 +187,10 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             );
           }
+
+          loggedInUser.welcomeMessage
+              ? Future.delayed(Duration.zero, () => welcomeMessage(context))
+              : null;
 
           return Scaffold(
             key: _scaffoldKey,

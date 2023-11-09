@@ -50,6 +50,8 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
     }
   }
 
+  bool showSpinner = false;
+
   Future<void> _createProfile(BuildContext context) async {
     try {
       final database = FirestoreDatabase();
@@ -65,6 +67,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
           profilePicture: '',
           coverPhoto: '',
           canCreateProgram: false,
+          welcomeMessage: true,
         ),
       );
     } on FirebaseException catch (e) {
@@ -181,72 +184,80 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
             ],
           ),
         ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 24.0,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(
-                  height: 50,
-                ),
-                Hero(
-                  tag: 'logo',
-                  child: Container(
-                    height: 80.0,
-                    child: Image.asset('assets/images/MentorXP.png'),
+        child: showSpinner
+            ? circularProgress(Colors.white.withOpacity(1))
+            : SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 24.0,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Hero(
+                        tag: 'logo',
+                        child: Container(
+                          height: 80.0,
+                          child: Image.asset('assets/images/MentorXP.png'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 50.0, bottom: 20, left: 20, right: 20),
+                        child: Text(
+                          'Enter your first and last name',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      _buildFirstNameTextField(context),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      _buildLastNameTextField(context),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      RoundedButton(
+                        textAlignment: MainAxisAlignment.center,
+                        onPressed: (_firstNameController.value.text.isEmpty ||
+                                _lastNameController.value.text.isEmpty)
+                            ? () {}
+                            : () async {
+                                setState(() {
+                                  showSpinner = true;
+                                });
+                                await _createProfile(context).then((_) {
+                                  Navigator.popAndPushNamed(
+                                      context, VerifyEmailScreen.id);
+                                });
+                                setState(() {
+                                  showSpinner = false;
+                                });
+                              },
+                        title: 'Submit',
+                        buttonColor: (_firstNameController.value.text.isEmpty ||
+                                _lastNameController.value.text.isEmpty)
+                            ? Colors.grey
+                            : kMentorXPAccentDark,
+                        fontColor: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        minWidth: 500.0,
+                      ),
+                    ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 50.0, bottom: 20, left: 20, right: 20),
-                  child: Text(
-                    'Enter your first and last name',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                _buildFirstNameTextField(context),
-                SizedBox(
-                  height: 20,
-                ),
-                _buildLastNameTextField(context),
-                SizedBox(
-                  height: 20.0,
-                ),
-                RoundedButton(
-                  textAlignment: MainAxisAlignment.center,
-                  onPressed: (_firstNameController.value.text.isEmpty ||
-                          _lastNameController.value.text.isEmpty)
-                      ? () {}
-                      : () async {
-                          await _createProfile(context).then((_) {
-                            Navigator.popAndPushNamed(
-                                context, VerifyEmailScreen.id);
-                          });
-                        },
-                  title: 'Submit',
-                  buttonColor: (_firstNameController.value.text.isEmpty ||
-                          _lastNameController.value.text.isEmpty)
-                      ? Colors.grey
-                      : kMentorXPAccentDark,
-                  fontColor: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  minWidth: 500.0,
-                ),
-              ],
-            ),
-          ),
-        ),
+              ),
       ),
     );
   }
