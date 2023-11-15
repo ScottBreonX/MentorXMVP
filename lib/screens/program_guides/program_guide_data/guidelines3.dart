@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class Guidelines3 extends StatelessWidget {
   const Guidelines3({
+    this.bodyTextColor,
     Key key,
   }) : super(key: key);
+
+  final Color bodyTextColor;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class Guidelines3 extends StatelessWidget {
           text: TextSpan(
             text: 'Commitment: ',
             style: TextStyle(
-              color: Colors.white,
+              color: bodyTextColor ?? Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -33,7 +36,7 @@ class Guidelines3 extends StatelessWidget {
             text: TextSpan(
               text: 'Goals: ',
               style: TextStyle(
-                color: Colors.white,
+                color: bodyTextColor ?? Colors.white,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

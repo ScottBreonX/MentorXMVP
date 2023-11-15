@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class GuidelinesComplete extends StatelessWidget {
   const GuidelinesComplete({
+    this.bodyTextColor,
     Key key,
   }) : super(key: key);
+
+  final Color bodyTextColor;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,7 @@ class GuidelinesComplete extends StatelessWidget {
             'Tap the below button to complete and acknowledge Program Guidelines',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.white,
+              color: bodyTextColor ?? Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.normal,
               fontFamily: 'Montserrat',

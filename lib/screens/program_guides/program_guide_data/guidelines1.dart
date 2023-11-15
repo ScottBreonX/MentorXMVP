@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class Guidelines1 extends StatelessWidget {
   const Guidelines1({
+    this.bodyTextColor,
     Key key,
   }) : super(key: key);
+
+  final Color bodyTextColor;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class Guidelines1 extends StatelessWidget {
           text: TextSpan(
             text: '',
             style: TextStyle(
-              color: Colors.white,
+              color: bodyTextColor ?? Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -33,7 +36,7 @@ class Guidelines1 extends StatelessWidget {
             text: TextSpan(
               text: '',
               style: TextStyle(
-                color: Colors.white,
+                color: bodyTextColor ?? Colors.white,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

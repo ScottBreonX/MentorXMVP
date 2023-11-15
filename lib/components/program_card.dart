@@ -21,6 +21,7 @@ class ProgramGuideCard extends StatefulWidget {
     this.cardColor,
     this.swipeTextOnTap,
     this.filePadding,
+    this.textColor,
   }) : super(key: key);
 
   final String titleText;
@@ -36,6 +37,7 @@ class ProgramGuideCard extends StatefulWidget {
   final Color cardColor;
   final Function swipeTextOnTap;
   final EdgeInsets filePadding;
+  final Color textColor;
 
   final String button1Text;
   final String button2Text;
@@ -57,8 +59,12 @@ class _ProgramGuideCardState extends State<ProgramGuideCard> {
     return Container(
       width: double.infinity,
       child: Card(
+        shadowColor: Colors.black,
+        elevation: 5,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(
+            15.0,
+          ),
         ),
         color: widget.cardColor ?? kMentorXPPrimary,
         child: Padding(
@@ -79,7 +85,7 @@ class _ProgramGuideCardState extends State<ProgramGuideCard> {
                       widget.titleText ?? 'N/A',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: widget.textColor ?? Colors.white,
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Montserrat',

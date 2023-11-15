@@ -42,6 +42,7 @@ class _ProgramGuidelinesState extends State<ProgramGuidelines> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         backgroundColor: kMentorXPPrimary,
         elevation: 5,
@@ -80,33 +81,51 @@ class _ProgramGuidelinesState extends State<ProgramGuidelines> {
                   items: [
                     ProgramGuideCard(
                       titleText: 'Program Guidelines',
-                      cardColor: Colors.grey.shade700,
-                      fileName: Guidelines1(),
+                      cardColor: Colors.white,
+                      textColor: kMentorXPPrimary,
+                      fileName: Guidelines1(
+                        bodyTextColor: Colors.black54,
+                      ),
                     ),
                     ProgramGuideCard(
                       titleText: 'Program Guidelines',
-                      cardColor: Colors.grey.shade700,
-                      fileName: Guidelines2(),
+                      cardColor: Colors.white,
+                      textColor: kMentorXPPrimary,
+                      fileName: Guidelines2(
+                        bodyTextColor: Colors.black54,
+                      ),
                     ),
                     ProgramGuideCard(
                       titleText: 'Program Guidelines',
-                      cardColor: Colors.grey.shade700,
-                      fileName: Guidelines3(),
+                      cardColor: Colors.white,
+                      textColor: kMentorXPPrimary,
+                      fileName: Guidelines3(
+                        bodyTextColor: Colors.black54,
+                      ),
                     ),
                     ProgramGuideCard(
                       titleText: 'Program Guidelines',
-                      cardColor: Colors.grey.shade700,
-                      fileName: Guidelines4(),
+                      cardColor: Colors.white,
+                      textColor: kMentorXPPrimary,
+                      fileName: Guidelines4(
+                        bodyTextColor: Colors.black54,
+                      ),
                     ),
                     ProgramGuideCard(
                       titleText: 'Program Guidelines',
-                      cardColor: Colors.grey.shade700,
-                      fileName: Guidelines5(),
+                      cardColor: Colors.white,
+                      textColor: kMentorXPPrimary,
+                      fileName: Guidelines5(
+                        bodyTextColor: Colors.black54,
+                      ),
                     ),
                     ProgramGuideCard(
                       titleText: 'Complete Session',
-                      cardColor: Colors.grey.shade700,
-                      fileName: GuidelinesComplete(),
+                      cardColor: Colors.white,
+                      textColor: kMentorXPPrimary,
+                      fileName: GuidelinesComplete(
+                        bodyTextColor: Colors.black54,
+                      ),
                       swipeText: 'Return to Program',
                       selectButtons: true,
                       selectButton1: true,
