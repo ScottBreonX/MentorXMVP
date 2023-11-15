@@ -264,201 +264,207 @@ class _ProgramOverviewState extends State<ProgramOverview> {
             return circularProgress(Theme.of(context).primaryColor);
           }
           Program program = Program.fromDocument(snapshot.data);
-          return isLoading
-              ? circularProgress(Colors.white)
-              : Scaffold(
-                  appBar: AppBar(
-                    elevation: 5,
-                    backgroundColor: kMentorXPPrimary,
-                    title: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 35.0, bottom: 10),
-                        child: Image.asset(
-                          'assets/images/MentorXP.png',
-                          fit: BoxFit.contain,
-                          height: 35,
-                        ),
-                      ),
-                    ),
+          return Scaffold(
+            appBar: AppBar(
+              elevation: 5,
+              backgroundColor: kMentorXPPrimary,
+              title: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 35.0, bottom: 10),
+                  child: Image.asset(
+                    'assets/images/MentorXP.png',
+                    fit: BoxFit.contain,
+                    height: 35,
                   ),
-                  body: SingleChildScrollView(
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: program.programLogo.isEmpty ||
-                                      program.programLogo == null ||
-                                      program.programLogo == ""
-                                  ? Image.asset(
+                ),
+              ),
+            ),
+            body: Stack(
+              children: [
+                SingleChildScrollView(
+                  child: Container(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: program.programLogo.isEmpty ||
+                                    program.programLogo == null ||
+                                    program.programLogo == ""
+                                ? Image.asset(
+                                    'assets/images/MXPDark.png',
+                                    height: 150,
+                                  )
+                                : CachedNetworkImage(
+                                    imageUrl: program.programLogo,
+                                    imageBuilder: (context, imageProvider) =>
+                                        Container(
+                                      height: 150,
+                                      width: 150,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        image: DecorationImage(
+                                          image: imageProvider,
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                    ),
+                                    placeholder: (context, url) =>
+                                        CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        Image.asset(
                                       'assets/images/MXPDark.png',
                                       height: 150,
-                                    )
-                                  : CachedNetworkImage(
-                                      imageUrl: program.programLogo,
-                                      imageBuilder: (context, imageProvider) =>
-                                          Container(
-                                        height: 150,
-                                        width: 150,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                          image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.fitWidth,
-                                          ),
-                                        ),
-                                      ),
-                                      placeholder: (context, url) =>
-                                          CircularProgressIndicator(),
-                                      errorWidget: (context, url, error) =>
-                                          Image.asset(
-                                        'assets/images/MXPDark.png',
-                                        height: 150,
-                                        fit: BoxFit.fill,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 10.0),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      '${program.programName}',
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        color: Colors.black54,
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.w500,
                                       ),
                                     ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 10.0),
-                                    child: Container(
-                                      alignment: Alignment.center,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                            child: Divider(
+                              thickness: 2,
+                              color: Colors.black45,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10.0, bottom: 10),
+                                  child: Text(
+                                    'About this program',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      color: Colors.black45,
+                                      fontFamily: 'Montserrat',
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Container(
+                                  height: 150,
+                                  alignment: Alignment.topLeft,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[200],
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 5,
+                                    ),
+                                    child: SingleChildScrollView(
                                       child: Text(
-                                        '${program.programName}',
-                                        textAlign: TextAlign.center,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 2,
+                                        '${program.aboutProgram}',
+                                        textAlign: TextAlign.left,
                                         style: TextStyle(
-                                          fontSize: 30,
+                                          fontSize: 20,
                                           color: Colors.black54,
                                           fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(20, 10, 20, 20),
-                              child: Divider(
-                                thickness: 2,
-                                color: Colors.black45,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 15),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10.0, bottom: 10),
-                                    child: Text(
-                                      'About this program',
-                                      style: TextStyle(
-                                        fontSize: 25,
-                                        color: Colors.black45,
-                                        fontFamily: 'Montserrat',
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Container(
-                                    height: 150,
-                                    alignment: Alignment.topLeft,
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey[200],
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                        vertical: 5,
-                                      ),
-                                      child: SingleChildScrollView(
-                                        child: Text(
-                                          '${program.aboutProgram}',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.black54,
-                                            fontFamily: 'Montserrat',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  ButtonCard(
-                                    buttonCardText: 'Leave Program',
-                                    buttonCardTextSize: 25,
-                                    buttonCardRadius: 20,
-                                    buttonCardIcon: Icons.exit_to_app,
-                                    buttonCardIconSize: 40,
-                                    buttonCardIconColor: kMentorXPSecondary,
-                                    onPressed: () => _confirmLeaveScreen(
-                                        context, widget.programId),
-                                  ),
-                                  isAdmin
-                                      ? ButtonCard(
-                                          buttonCardText: 'Program Admin Tools',
-                                          buttonCardTextSize: 25,
-                                          buttonCardRadius: 20,
-                                          buttonCardIcon:
-                                              Icons.admin_panel_settings,
-                                          buttonCardIconSize: 40,
-                                          buttonCardIconColor:
-                                              kMentorXPSecondary,
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ProgramAdminStatsScreen(
-                                                  loggedInUser:
-                                                      widget.loggedInUser,
-                                                  programUID: program.id,
-                                                ),
+                                ),
+                                ButtonCard(
+                                  buttonCardText: 'Leave Program',
+                                  buttonCardTextSize: 25,
+                                  buttonCardRadius: 20,
+                                  buttonCardIcon: Icons.exit_to_app,
+                                  buttonCardIconSize: 40,
+                                  buttonCardIconColor: kMentorXPSecondary,
+                                  onPressed: () => _confirmLeaveScreen(
+                                      context, widget.programId),
+                                ),
+                                isAdmin
+                                    ? ButtonCard(
+                                        buttonCardText: 'Program Admin Tools',
+                                        buttonCardTextSize: 25,
+                                        buttonCardRadius: 20,
+                                        buttonCardIcon:
+                                            Icons.admin_panel_settings,
+                                        buttonCardIconSize: 40,
+                                        buttonCardIconColor: kMentorXPSecondary,
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProgramAdminStatsScreen(
+                                                loggedInUser:
+                                                    widget.loggedInUser,
+                                                programUID: program.id,
                                               ),
-                                            );
-                                            // Navigator.push(
-                                            //   context,
-                                            //   MaterialPageRoute(
-                                            //     builder: (context) =>
-                                            //         ProgramAdminScreen(
-                                            //       loggedInUser: widget.loggedInUser,
-                                            //       programUID: program.id,
-                                            //       aboutProgram: program.aboutProgram,
-                                            //       institutionName:
-                                            //           program.institutionName,
-                                            //       programName: program.programName,
-                                            //       programCode: program.programCode,
-                                            //     ),
-                                            //   ),
-                                            // );
-                                          },
-                                        )
-                                      : Container(),
-                                ],
-                              ),
+                                            ),
+                                          );
+                                          // Navigator.push(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) =>
+                                          //         ProgramAdminScreen(
+                                          //       loggedInUser: widget.loggedInUser,
+                                          //       programUID: program.id,
+                                          //       aboutProgram: program.aboutProgram,
+                                          //       institutionName:
+                                          //           program.institutionName,
+                                          //       programName: program.programName,
+                                          //       programCode: program.programCode,
+                                          //     ),
+                                          //   ),
+                                          // );
+                                        },
+                                      )
+                                    : Container(),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                );
+                ),
+                isLoading
+                    ? Container(
+                        height: double.infinity,
+                        width: double.infinity,
+                        color: Colors.white.withOpacity(0.5),
+                        child: circularProgress(Colors.white),
+                      )
+                    : Container(),
+              ],
+            ),
+          );
         });
   }
 }

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/program.dart';
@@ -31,6 +32,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
   String programCode;
   bool hasRequested = false;
   bool hasJoined = false;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -71,6 +73,7 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
       if (programCode == _program.programCode) {
         setState(() {
           hasJoined = true;
+          isLoading = true;
         });
         await programsRef
             .doc(widget.program.id)
@@ -89,6 +92,9 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
         });
         await usersRef.doc(loggedInUser.id).update({
           'Program': widget.program.id,
+        });
+        setState(() {
+          isLoading = false;
         });
         showDialog(
           context: context,
@@ -247,162 +253,183 @@ class _ProgramJoinRequestState extends State<ProgramJoinRequest> {
         ),
       ),
       body: Container(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: _program.programLogo == null ||
-                        _program.programLogo.isEmpty ||
-                        _program.programLogo == ""
-                    ? Image.asset(
-                        'assets/images/MXPDark.png',
-                        height: 150,
-                        fit: BoxFit.fill,
-                      )
-                    : CachedNetworkImage(
-                        imageUrl: _program.programLogo,
-                        imageBuilder: (context, imageProvider) => Container(
-                          height: 150,
-                          width: 150,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        placeholder: (context, url) =>
-                            CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => Image.asset(
-                          'assets/images/MXPDark.png',
-                          height: 150,
-                          width: 150,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    '${_program.programName}',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20.0, bottom: 20),
-                    child: Divider(
-                      indent: 10,
-                      endIndent: 10,
-                      thickness: 2,
-                      color: Theme.of(context).dividerColor,
-                    ),
-                  ),
-
-                  // !hasRequested
-                  !hasJoined
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              'Enter the program code:',
-                              style: Theme.of(context).textTheme.headlineMedium,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).cardColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: TextFormField(
-                                  style:
-                                      Theme.of(context).textTheme.headlineLarge,
-                                  key: formKey,
-                                  controller: codeController,
-                                  cursorColor: Theme.of(context).indicatorColor,
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 4,
-                                      ),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide(
-                                        color: Theme.of(context).primaryColor,
-                                        width: 4,
-                                      ),
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        Icons.clear,
-                                        color: kMentorXPPrimary,
-                                      ),
-                                      onPressed: clearCode,
-                                    ),
-                                  ),
+                    padding: const EdgeInsets.all(20.0),
+                    child: _program.programLogo == null ||
+                            _program.programLogo.isEmpty ||
+                            _program.programLogo == ""
+                        ? Image.asset(
+                            'assets/images/MXPDark.png',
+                            height: 150,
+                            fit: BoxFit.fill,
+                          )
+                        : CachedNetworkImage(
+                            imageUrl: _program.programLogo,
+                            imageBuilder: (context, imageProvider) => Container(
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                image: DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
-                          ],
-                        )
-                      : Text(
-                          'You have joined the program',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontFamily: 'Work Sans',
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black54,
+                            placeholder: (context, url) =>
+                                CircularProgressIndicator(),
+                            errorWidget: (context, url, error) => Image.asset(
+                              'assets/images/MXPDark.png',
+                              height: 150,
+                              width: 150,
+                              fit: BoxFit.fill,
+                            ),
                           ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        '${_program.programName}',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headlineLarge,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 20),
+                        child: Divider(
+                          indent: 10,
+                          endIndent: 10,
+                          thickness: 2,
+                          color: Theme.of(context).dividerColor,
                         ),
+                      ),
+
+                      // !hasRequested
+                      !hasJoined
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Text(
+                                  'Enter the program code:',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).cardColor,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: TextFormField(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineLarge,
+                                      key: formKey,
+                                      controller: codeController,
+                                      cursorColor:
+                                          Theme.of(context).indicatorColor,
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 4,
+                                          ),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: BorderSide(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            width: 4,
+                                          ),
+                                        ),
+                                        suffixIcon: IconButton(
+                                          icon: Icon(
+                                            Icons.clear,
+                                            color: kMentorXPPrimary,
+                                          ),
+                                          onPressed: clearCode,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Text(
+                              'You have joined the program',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontFamily: 'Work Sans',
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black54,
+                              ),
+                            ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        // buildRequestButton(),
+                        buildJoinButton(),
+                        // !hasRequested
+                        !hasJoined
+                            ? ButtonCard(
+                                buttonCardText: 'Cancel',
+                                onPressed: () => Navigator.pop(context),
+                                buttonCardColor: Theme.of(context).cardColor,
+                                buttonCardTextColor:
+                                    Theme.of(context).colorScheme.primary,
+                                buttonCardTextSize: 25,
+                                buttonCardRadius: 20,
+                                cardIconBool: Container(),
+                                cardAlignment: MainAxisAlignment.center,
+                              )
+                            : SizedBox(height: 0),
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    thickness: 2,
+                    color: Theme.of(context).dividerColor,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, bottom: 45.0),
+                    child: Text(
+                      'Don\'t have a code? Contact the program administrator.',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ),
                 ],
               ),
-              SizedBox(height: 10),
-              Expanded(
-                child: Column(
-                  children: [
-                    // buildRequestButton(),
-                    buildJoinButton(),
-                    // !hasRequested
-                    !hasJoined
-                        ? ButtonCard(
-                            buttonCardText: 'Cancel',
-                            onPressed: () => Navigator.pop(context),
-                            buttonCardColor: Theme.of(context).cardColor,
-                            buttonCardTextColor:
-                                Theme.of(context).colorScheme.primary,
-                            buttonCardTextSize: 25,
-                            buttonCardRadius: 20,
-                            cardIconBool: Container(),
-                            cardAlignment: MainAxisAlignment.center,
-                          )
-                        : SizedBox(height: 0),
-                  ],
-                ),
-              ),
-              Divider(
-                thickness: 2,
-                color: Theme.of(context).dividerColor,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10, bottom: 45.0),
-                child: Text(
-                  'Don\'t have a code? Contact the program administrator.',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-              ),
-            ],
-          ),
+            ),
+            isLoading
+                ? Container(
+                    color: Colors.white.withOpacity(0.5),
+                    height: double.infinity,
+                    width: double.infinity,
+                    child: circularProgress(
+                      Colors.white,
+                    ),
+                  )
+                : Container(),
+          ],
         ),
       ),
     );
