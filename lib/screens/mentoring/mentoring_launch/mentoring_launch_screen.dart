@@ -310,6 +310,7 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                       cardIcon: Icons.note_rounded,
                                       cardIconColor: kMentorXPSecondary,
                                       cardText: 'Notes',
+                                      cardTextColor: Colors.black54,
                                       onTap: () {
                                         Navigator.push(
                                           context,
@@ -353,6 +354,7 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                       cardIcon: Icons.map,
                                       cardIconColor: kMentorXPSecondary,
                                       cardText: 'Program Guides',
+                                      cardTextColor: Colors.black54,
                                     ),
                                   ],
                                 ),
@@ -370,6 +372,7 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                         cardIcon: Icons.people,
                                         cardIconColor: kMentorXPSecondary,
                                         cardText: 'Mentoring Cards',
+                                        cardTextColor: Colors.black54,
                                         onTap: () {
                                           Navigator.push(
                                             context,
@@ -409,6 +412,7 @@ class _MentoringLaunchScreenState extends State<MentoringLaunchScreen> {
                                         cardIcon: Icons.settings,
                                         cardIconColor: kMentorXPSecondary,
                                         cardText: 'Manage',
+                                        cardTextColor: Colors.black54,
                                       ),
                                     ],
                                   ),

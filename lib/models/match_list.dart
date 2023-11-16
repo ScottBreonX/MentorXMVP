@@ -108,8 +108,8 @@ class _MatchListState extends State<MatchList> {
                                           user.profilePicture.isEmpty ||
                                           user.profilePicture == ""
                                       ? ProfileImageCircle(
-                                          circleColor: kMentorXPPrimary,
-                                          iconSize: 45,
+                                          circleColor: kMentorXPSecondary,
+                                          iconSize: 40,
                                           iconColor: Colors.white,
                                           circleSize: 40,
                                         )
@@ -133,23 +133,26 @@ class _MatchListState extends State<MatchList> {
                                             errorWidget:
                                                 (context, url, error) => Icon(
                                               Icons.person,
-                                              size: 50,
+                                              size: 40,
                                               color: Colors.white,
                                             ),
                                           ),
                                         ),
                                 ),
                               ),
-                              Container(
-                                width: 150,
-                                child: Text(
-                                  '${user.firstName}',
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium,
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: Container(
+                                  width: 150,
+                                  child: Text(
+                                    '${user.firstName}',
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
+                                  ),
                                 ),
                               ),
                               Container(

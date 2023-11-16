@@ -85,7 +85,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                       doc, widget.programUID, widget.loggedInUser))
                   .toList();
               return Container(
-                height: 150,
+                height: 160,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: matches,
