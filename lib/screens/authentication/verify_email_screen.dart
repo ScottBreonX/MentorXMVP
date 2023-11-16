@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
@@ -7,6 +8,8 @@ import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 
 import '../../components/alert_dialog.dart';
+
+final usersRef = FirebaseFirestore.instance.collection('users');
 
 class VerifyEmailScreen extends StatefulWidget {
   static const String id = 'verify_email_screen';

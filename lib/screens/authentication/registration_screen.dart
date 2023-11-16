@@ -127,6 +127,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           profilePicture: '',
           coverPhoto: '',
           canCreateProgram: false,
+          welcomeMessage: false,
         ),
       );
     } on FirebaseException catch (e) {

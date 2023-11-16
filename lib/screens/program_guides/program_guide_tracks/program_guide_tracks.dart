@@ -10,6 +10,7 @@ import 'package:mentorx_mvp/screens/program_guides/program_guide_tracks/track4_d
 import 'package:mentorx_mvp/screens/program_guides/program_guides_launch.dart';
 import '../../../../../components/program_card.dart';
 import '../../../components/progress.dart';
+import '../../../components/rounded_button.dart';
 import '../../../models/program_guides_models/track_status.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -63,6 +64,64 @@ _selectTrack(
   });
 }
 
+welcomeMessage(parentContext) {
+  return showDialog(
+      context: parentContext,
+      builder: (context) {
+        return SimpleDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          title: Text(
+            'Select your track',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: kMentorXPAccentDark,
+              fontFamily: 'Montserrat',
+              fontSize: 25,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+              child: Divider(
+                height: 4,
+                color: Colors.grey,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 20, left: 20.0, right: 20.0, bottom: 10),
+              child: Column(
+                children: [
+                  Text(
+                    'As a first step, select the track that best suits your goals to accomplish this mentoring cycle.',
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'The track you select will populate guides for you and your mentor to accompany your discussions during the program.',
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
+                  SizedBox(height: 20),
+                  RoundedButton(
+                    title: 'View Tracks',
+                    textAlignment: MainAxisAlignment.center,
+                    buttonColor: kMentorXPSecondary,
+                    fontColor: Colors.white,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      });
+}
+
 class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
   @override
   void initState() {
@@ -73,6 +132,8 @@ class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration.zero, () => welcomeMessage(context));
+
     return StreamBuilder<Object>(
         stream: programsRef
             .doc(widget.programUID)

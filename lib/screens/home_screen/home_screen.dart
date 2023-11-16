@@ -112,9 +112,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       textAlignment: MainAxisAlignment.center,
                       buttonColor: kMentorXPSecondary,
                       fontColor: Colors.white,
-                      onPressed: () {
-                        _welcomeBoolUpdate();
-                        Navigator.pop(context);
+                      onPressed: () async {
+                        await _welcomeBoolUpdate();
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomeScreen(
+                              loggedInUser: loggedInUser,
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ],
