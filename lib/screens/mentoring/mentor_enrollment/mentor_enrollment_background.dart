@@ -31,6 +31,9 @@ class _MentorEnrollmentBackgroundScreenState
     extends State<MentorEnrollmentBackgroundScreen> {
   Future<void> _updateMentorAttributes(BuildContext context, String programUID,
       String mentorExperienceText, String yearInSchoolText) async {
+    setState(() {
+      isLoading = true;
+    });
     try {
       await programsRef
           .doc(widget.programUID)
@@ -43,6 +46,9 @@ class _MentorEnrollmentBackgroundScreenState
         "Last Name": widget.loggedInUser.lastName,
         "Profile Picture": widget.loggedInUser.profilePicture,
         "Mentor Year in School": yearInSchoolText,
+      });
+      setState(() {
+        isLoading = false;
       });
       Navigator.push(
         context,
@@ -119,6 +125,7 @@ class _MentorEnrollmentBackgroundScreenState
 
   String yearInSchool;
   bool yearInSchoolChanged = false;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -151,61 +158,40 @@ class _MentorEnrollmentBackgroundScreenState
                 ),
               ),
             ),
-            body: Scrollbar(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 20.0, right: 20, top: 40),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Mentor Enrollment',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 30,
-                          color: Colors.black54,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Text(
-                        'The following questions will help mentees select a mentor who best fits their needs.',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 20,
-                          color: Colors.black54,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0, bottom: 10),
-                        child: Text(
-                          'What experiences and skills could you share with prospective mentees?',
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: kMentorXPSecondary,
+            body: Stack(
+              children: [
+                Scrollbar(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20.0, right: 20, top: 40),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Mentor Enrollment',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 30,
+                              color: Colors.black54,
+                            ),
                           ),
-                        ),
-                      ),
-                      buildFreeFormField2(
-                        hintString:
-                            'Work experience, classes taken, internships...',
-                        icon: Icons.key,
-                        minLines: 5,
-                        currentFreeFormResponse: mentorSkills.mentorExperience,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0, bottom: 10),
-                        child: Column(
-                          children: [
-                            Text(
-                              'What year in school are you in this semester?',
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Text(
+                            'The following questions will help mentees select a mentor who best fits their needs.',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 20,
+                              color: Colors.black54,
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(top: 20.0, bottom: 10),
+                            child: Text(
+                              'What experiences and skills could you share with prospective mentees?',
                               style: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -213,62 +199,107 @@ class _MentorEnrollmentBackgroundScreenState
                                 color: kMentorXPSecondary,
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10.0, bottom: 10),
-                              child: dropDownSection(
-                                yearInSchoolOption: yearInSchool,
-                                inputFunction: (value) => setState(() {
-                                  yearInSchool = value;
-                                  yearInSchoolChanged = true;
-                                }),
-                                selectionChanged: yearInSchoolChanged,
-                                currentValue: mentorSkills.mentorYearInSchool,
-                              ),
+                          ),
+                          buildFreeFormField2(
+                            hintString:
+                                'Work experience, classes taken, internships...',
+                            icon: Icons.key,
+                            minLines: 5,
+                            currentFreeFormResponse:
+                                mentorSkills.mentorExperience,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(top: 20.0, bottom: 10),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'What year in school are you in this semester?',
+                                  style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: kMentorXPSecondary,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10.0, bottom: 10),
+                                  child: dropDownSection(
+                                    yearInSchoolOption: yearInSchool,
+                                    inputFunction: (value) => setState(() {
+                                      yearInSchool = value;
+                                      yearInSchoolChanged = true;
+                                    }),
+                                    selectionChanged: yearInSchoolChanged,
+                                    currentValue:
+                                        mentorSkills.mentorYearInSchool,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          RoundedButton(
-                            title: '<-- Back',
-                            buttonColor: Colors.white,
-                            borderWidth: 2,
-                            borderRadius: 20,
-                            fontColor: kMentorXPSecondary,
-                            fontWeight: FontWeight.w500,
-                            minWidth: 150,
-                            fontSize: 20,
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
                           ),
-                          RoundedButton(
-                            title: 'Next -->',
-                            buttonColor: kMentorXPSecondary,
-                            fontColor: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20,
-                            borderRadius: 20,
-                            minWidth: 150,
-                            onPressed: () {
-                              _updateMentorAttributes(
-                                context,
-                                widget.programUID,
-                                mentorExperience ??
-                                    mentorSkills.mentorExperience,
-                                yearInSchool ?? mentorSkills.mentorYearInSchool,
-                              );
-                            },
-                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              RoundedButton(
+                                title: '<-- Back',
+                                buttonColor: Colors.white,
+                                borderWidth: 2,
+                                borderRadius: 20,
+                                fontColor: kMentorXPSecondary,
+                                fontWeight: FontWeight.w500,
+                                minWidth: 150,
+                                fontSize: 20,
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              RoundedButton(
+                                title: 'Next -->',
+                                buttonColor: kMentorXPSecondary,
+                                fontColor: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                                borderRadius: 20,
+                                minWidth: 150,
+                                onPressed: () {
+                                  _updateMentorAttributes(
+                                    context,
+                                    widget.programUID,
+                                    mentorExperience ??
+                                        mentorSkills.mentorExperience,
+                                    yearInSchool ??
+                                        mentorSkills.mentorYearInSchool,
+                                  );
+                                },
+                              ),
+                            ],
+                          )
                         ],
-                      )
-                    ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                isLoading
+                    ? Container(
+                        color: Colors.white.withOpacity(0.8),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              circularProgress(
+                                Theme.of(context).primaryColor,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : Text(""),
+              ],
             ),
           );
         });

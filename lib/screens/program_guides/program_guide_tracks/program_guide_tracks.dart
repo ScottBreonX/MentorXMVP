@@ -126,14 +126,13 @@ class _ProgramGuideTracksState extends State<ProgramGuideTracks> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration.zero, () => welcomeMessage(context));
   }
 
   int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration.zero, () => welcomeMessage(context));
-
     return StreamBuilder<Object>(
         stream: programsRef
             .doc(widget.programUID)

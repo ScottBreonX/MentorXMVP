@@ -31,6 +31,9 @@ class _MenteeEnrollmentSkillsScreenState
     extends State<MenteeEnrollmentSkillsScreen> {
   Future<void> _updateMenteeAttributes(
       BuildContext context, String programUID) async {
+    setState(() {
+      isLoading = true;
+    });
     try {
       await programsRef
           .doc(widget.programUID)
@@ -44,6 +47,9 @@ class _MenteeEnrollmentSkillsScreenState
         "First Name": widget.loggedInUser.firstName,
         "Last Name": widget.loggedInUser.lastName,
         "Profile Picture": widget.loggedInUser.profilePicture,
+      });
+      setState(() {
+        isLoading = false;
       });
       Navigator.push(
         context,
@@ -86,6 +92,7 @@ class _MenteeEnrollmentSkillsScreenState
   bool skill3Changed = false;
   bool skill2Changed = false;
   bool skill1Changed = false;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -118,96 +125,117 @@ class _MenteeEnrollmentSkillsScreenState
                 ),
               ),
             ),
-            body: Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 40),
-              child: Column(
-                children: [
-                  Text(
-                    'What top 3 skills are you looking to enhance?',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 30,
-                      color: Colors.black54,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  dropDownSection(
-                    titleText: 'Skill #1',
-                    skillValue: skill1,
-                    inputFunction: (value) => setState(() {
-                      skill1 = value ?? menteeSkills.menteeSkill1;
-                      skill1Changed = true;
-                    }),
-                    skillChanged: skill1Changed,
-                    currentValue: menteeSkills.menteeSkill1,
-                  ),
-                  dropDownSection(
-                    titleText: 'Skill #2',
-                    skillValue: skill2,
-                    inputFunction: (value) => setState(() {
-                      skill2 = value;
-                      skill2Changed = true;
-                    }),
-                    skillChanged: skill2Changed,
-                    currentValue: menteeSkills.menteeSkill2,
-                  ),
-                  dropDownSection(
-                    titleText: 'Skill #3',
-                    skillValue: skill3,
-                    inputFunction: (value) => setState(() {
-                      skill3 = value;
-                      skill3Changed = true;
-                    }),
-                    skillChanged: skill3Changed,
-                    currentValue: menteeSkills.menteeSkill3,
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            body: Stack(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20.0, right: 20, top: 40),
+                  child: Column(
                     children: [
-                      RoundedButton(
-                        title: '<-- Back',
-                        buttonColor: Colors.white,
-                        borderWidth: 2,
-                        borderRadius: 20,
-                        fontColor: kMentorXPSecondary,
-                        fontWeight: FontWeight.w500,
-                        minWidth: 150,
-                        fontSize: 20,
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
+                      Text(
+                        'What top 3 skills are you looking to enhance?',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 30,
+                          color: Colors.black54,
+                        ),
                       ),
-                      RoundedButton(
-                        title: 'Next -->',
-                        buttonColor: kMentorXPSecondary,
-                        fontColor: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
-                        borderRadius: 20,
-                        minWidth: 150,
-                        onPressed: () {
-                          if (skill1 == null) {
-                            skill1 = menteeSkills.menteeSkill1;
-                          }
-                          if (skill2 == null) {
-                            skill2 = menteeSkills.menteeSkill2;
-                          }
-                          if (skill3 == null) {
-                            skill3 = menteeSkills.menteeSkill3;
-                          }
-                          _updateMenteeAttributes(context, widget.programUID);
-                        },
+                      SizedBox(
+                        height: 20,
                       ),
+                      dropDownSection(
+                        titleText: 'Skill #1',
+                        skillValue: skill1,
+                        inputFunction: (value) => setState(() {
+                          skill1 = value ?? menteeSkills.menteeSkill1;
+                          skill1Changed = true;
+                        }),
+                        skillChanged: skill1Changed,
+                        currentValue: menteeSkills.menteeSkill1,
+                      ),
+                      dropDownSection(
+                        titleText: 'Skill #2',
+                        skillValue: skill2,
+                        inputFunction: (value) => setState(() {
+                          skill2 = value;
+                          skill2Changed = true;
+                        }),
+                        skillChanged: skill2Changed,
+                        currentValue: menteeSkills.menteeSkill2,
+                      ),
+                      dropDownSection(
+                        titleText: 'Skill #3',
+                        skillValue: skill3,
+                        inputFunction: (value) => setState(() {
+                          skill3 = value;
+                          skill3Changed = true;
+                        }),
+                        skillChanged: skill3Changed,
+                        currentValue: menteeSkills.menteeSkill3,
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          RoundedButton(
+                            title: '<-- Back',
+                            buttonColor: Colors.white,
+                            borderWidth: 2,
+                            borderRadius: 20,
+                            fontColor: kMentorXPSecondary,
+                            fontWeight: FontWeight.w500,
+                            minWidth: 150,
+                            fontSize: 20,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          RoundedButton(
+                            title: 'Next -->',
+                            buttonColor: kMentorXPSecondary,
+                            fontColor: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            borderRadius: 20,
+                            minWidth: 150,
+                            onPressed: () {
+                              if (skill1 == null) {
+                                skill1 = menteeSkills.menteeSkill1;
+                              }
+                              if (skill2 == null) {
+                                skill2 = menteeSkills.menteeSkill2;
+                              }
+                              if (skill3 == null) {
+                                skill3 = menteeSkills.menteeSkill3;
+                              }
+                              _updateMenteeAttributes(
+                                  context, widget.programUID);
+                            },
+                          ),
+                        ],
+                      )
                     ],
-                  )
-                ],
-              ),
+                  ),
+                ),
+                isLoading
+                    ? Container(
+                        color: Colors.white.withOpacity(0.8),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              circularProgress(
+                                Theme.of(context).primaryColor,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : Text(""),
+              ],
             ),
           );
         });

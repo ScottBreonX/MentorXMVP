@@ -309,15 +309,14 @@ class _ProfileState extends State<Profile> {
       file = null;
       isUploading = false;
     });
+
     Navigator.pushReplacement(
       context,
-      PageRouteBuilder(
-        pageBuilder: (context, animation1, animation2) => Profile(
+      MaterialPageRoute(
+        builder: (context) => Profile(
           profileId: widget.profileId,
           loggedInUser: widget.loggedInUser,
         ),
-        transitionDuration: Duration.zero,
-        reverseTransitionDuration: Duration.zero,
       ),
     );
   }
@@ -407,119 +406,113 @@ class _ProfileState extends State<Profile> {
         ),
         body: Stack(
           children: [
+            Container(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Confirm Upload of',
+                            style: Theme.of(context).textTheme.headlineLarge,
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            '$pictureType',
+                            style: Theme.of(context).textTheme.headlineLarge,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                    (pictureType == 'Cover Photo')
+                        ? Container(
+                            width: 500,
+                            height: 200.0,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: FileImage(file),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          )
+                        : CircleAvatar(
+                            radius: 120,
+                            backgroundImage: FileImage(file),
+                          ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RoundedButton(
+                            title: 'Cancel',
+                            buttonColor: Colors.white,
+                            fontColor: Colors.black45,
+                            minWidth: 150,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            onPressed: isUploading
+                                ? null
+                                : () {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder:
+                                            (context, animation1, animation2) =>
+                                                Profile(
+                                          profileId: widget.profileId,
+                                          loggedInUser: widget.loggedInUser,
+                                        ),
+                                        transitionDuration: Duration.zero,
+                                        reverseTransitionDuration:
+                                            Duration.zero,
+                                      ),
+                                    );
+                                  },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RoundedButton(
+                            title: 'Upload',
+                            buttonColor: Theme.of(context).colorScheme.tertiary,
+                            fontColor: Colors.white,
+                            minWidth: 150,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            onPressed: isUploading
+                                ? null
+                                : () => handleSubmit(pictureType, programID),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
             isUploading
                 ? Container(
+                    color: Colors.white.withOpacity(0.8),
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Opacity(
-                            opacity: 1.0,
-                            child: circularProgress(
-                              Theme.of(context).primaryColor,
-                            ),
+                          circularProgress(
+                            Theme.of(context).primaryColor,
                           ),
                         ],
                       ),
                     ),
                   )
                 : Text(""),
-            Opacity(
-              opacity: isUploading ? 0 : 1.0,
-              child: Container(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              'Confirm Upload of',
-                              style: Theme.of(context).textTheme.headlineLarge,
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              '$pictureType',
-                              style: Theme.of(context).textTheme.headlineLarge,
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ),
-                      (pictureType == 'Cover Photo')
-                          ? Container(
-                              width: 500,
-                              height: 150.0,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: FileImage(file),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            )
-                          : CircleAvatar(
-                              radius: 120,
-                              backgroundImage: FileImage(file),
-                            ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 10.0),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: RoundedButton(
-                              title: 'Cancel',
-                              buttonColor: Colors.white,
-                              fontColor: Colors.black45,
-                              minWidth: 150,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              onPressed: isUploading
-                                  ? null
-                                  : () {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        PageRouteBuilder(
-                                          pageBuilder: (context, animation1,
-                                                  animation2) =>
-                                              Profile(
-                                            profileId: widget.profileId,
-                                            loggedInUser: widget.loggedInUser,
-                                          ),
-                                          transitionDuration: Duration.zero,
-                                          reverseTransitionDuration:
-                                              Duration.zero,
-                                        ),
-                                      );
-                                    },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: RoundedButton(
-                              title: 'Upload',
-                              buttonColor:
-                                  Theme.of(context).colorScheme.tertiary,
-                              fontColor: Colors.white,
-                              minWidth: 150,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              onPressed: isUploading
-                                  ? null
-                                  : () => handleSubmit(pictureType, programID),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
           ],
         ));
   }
@@ -590,42 +583,41 @@ class _ProfileState extends State<Profile> {
                                 alignment: Alignment.center,
                                 children: [
                                   Container(
-                                    height: coverPhotoHeight,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        bottom: BorderSide(
-                                          color: Theme.of(context)
-                                              .scaffoldBackgroundColor,
-                                          width: 5,
+                                      height: coverPhotoHeight,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            color: Theme.of(context)
+                                                .scaffoldBackgroundColor,
+                                            width: 5,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    child: coverPhotoExist
-                                        ? CachedNetworkImage(
-                                            imageUrl: user.coverPhoto,
-                                            imageBuilder:
-                                                (context, imageProvider) =>
-                                                    Container(
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.rectangle,
-                                                image: DecorationImage(
-                                                  image: imageProvider,
-                                                  fit: BoxFit.fitWidth,
+                                      child: coverPhotoExist
+                                          ? CachedNetworkImage(
+                                              imageUrl: user.coverPhoto,
+                                              imageBuilder:
+                                                  (context, imageProvider) =>
+                                                      Container(
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.rectangle,
+                                                  image: DecorationImage(
+                                                    image: imageProvider,
+                                                    fit: BoxFit.fitWidth,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            placeholder: (context, url) =>
-                                                Container(),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    Container(),
-                                          )
-                                        : Image.asset(
-                                            'assets/images/defaultCover.png',
-                                            fit: BoxFit.fitWidth,
-                                          ),
-                                  ),
+                                              placeholder: (context, url) =>
+                                                  Container(),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      Container(),
+                                            )
+                                          : Container(
+                                              color: kMentorXPPrimary
+                                                  .withOpacity(0.4),
+                                            )),
                                   Positioned(
                                     top: top,
                                     child: Stack(

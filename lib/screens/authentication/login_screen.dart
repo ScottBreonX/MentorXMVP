@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mentorx_mvp/components/alert_dialog.dart';
+import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/models/login_bloc.dart';
 import 'package:mentorx_mvp/models/login_model.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
@@ -185,6 +186,7 @@ class _LoginScreenBlocBasedState extends State<LoginScreenBlocBased> {
               ),
               child: ModalProgressHUD(
                 inAsyncCall: model.showSpinner,
+                progressIndicator: circularProgress(Colors.white),
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsets.symmetric(

@@ -194,7 +194,7 @@ class _ProgramCreationState extends State<ProgramCreation> {
               elevation: 5,
               title: Image.asset(
                 'assets/images/MentorXP.png',
-                height: 100,
+                height: 30,
               ),
             ),
             body: SingleChildScrollView(
