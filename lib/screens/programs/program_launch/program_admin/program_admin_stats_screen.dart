@@ -123,6 +123,7 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
   int _mentorSlots;
   int _matches;
   double _mentorSlotRatio;
+  bool mentorRatioCalc = false;
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +135,12 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
     _unenrolledUsers = _programUsers - _mentorCount - _menteeCount;
     _mentorSlotRatio =
         double.parse((_mentorSlots / _unMatchedMentees).toStringAsFixed(1));
+
+    if (_mentorSlotRatio.toString() == "Infinity") {
+      setState(() {
+        mentorRatioCalc = false;
+      });
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -341,7 +348,7 @@ class _ProgramAdminStatsScreenState extends State<ProgramAdminStatsScreen> {
                         kMentorXPSecondary,
                       ),
                       statWidget(
-                        '$_mentorSlotRatio',
+                        mentorRatioCalc ? '$_mentorSlotRatio' : "-",
                         'available slots per unmatched',
                         kMentorXPSecondary,
                       ),
