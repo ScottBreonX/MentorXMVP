@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
+import 'package:mentorx_mvp/screens/chat/chat_gpt.dart';
 import 'package:mentorx_mvp/screens/program_creation/program_creation.dart';
 import 'package:mentorx_mvp/screens/programs/available_programs.dart';
 import '../profile/profile_screen.dart';
@@ -193,6 +194,28 @@ class MentorXMenuList extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ProgramCreation(
+                        loggedInUser: loggedInUser,
+                      ),
+                    ),
+                  );
+                },
+              )
+            : Container(),
+        loggedInUser.canCreateProgram
+            ? ListTile(
+                leading: Icon(
+                  Icons.blur_circular_sharp,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                title: Text(
+                  'ChatGPT Test',
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChatGPTScreen(
                         loggedInUser: loggedInUser,
                       ),
                     ),

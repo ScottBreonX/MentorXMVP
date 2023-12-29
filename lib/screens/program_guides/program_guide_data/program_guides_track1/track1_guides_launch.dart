@@ -109,37 +109,57 @@ class _Track1GuidesLaunchScreenState extends State<Track1GuidesLaunchScreen> {
                 ),
               ),
             ),
-            body: Container(
+            body: SingleChildScrollView(
               child: Column(
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsets.only(left: 5, top: 20.0, right: 5),
+                    padding: const EdgeInsets.only(
+                        left: 5, top: 20.0, right: 5, bottom: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          height: 70,
-                          width: MediaQuery.of(context).size.width * .95,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            color: kMentorXPPrimary,
-                            child: Center(
-                              child: Text(
-                                'Track 1 - Getting Started',
+                        Center(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 20.0),
+                                child: Text(
+                                  'Track 1',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: 'Montserrat',
+                                    color: kMentorXPPrimary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                'Program Guides',
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Montserrat',
                                   fontSize: 25,
+                                  fontFamily: 'Montserrat',
+                                  color: kMentorXPPrimary,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 15.0, right: 15, bottom: 15),
+                    child: Text(
+                      'Track 1 is geared toward anyone looking to start their journey of finding their career path. Build your first Resume, create a LinkedIn profile and explore different majors and companies.',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'Montserrat',
+                        color: Colors.black54,
+                      ),
                     ),
                   ),
                   ProgramGuideMenuTile(

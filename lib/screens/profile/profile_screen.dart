@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mentorx_mvp/components/icon_circle.dart';
 import 'package:mentorx_mvp/components/profile_image_circle.dart';
 import 'package:mentorx_mvp/components/progress.dart';
 import 'package:mentorx_mvp/components/rounded_button.dart';
@@ -37,7 +36,6 @@ class _ProfileState extends State<Profile> {
   @override
   File file;
   final imagePicker = ImagePicker();
-  final double coverPhotoHeight = 200;
   final double profilePhotoHeight = 150;
 
   handleTakePhoto() async {
@@ -62,11 +60,7 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-  selectImage(parentContext, titleText, pictureType) {
-    setState(() {
-      this.pictureType = pictureType;
-    });
-
+  selectImage(parentContext, titleText) {
     return showDialog(
         context: parentContext,
         builder: (context) {
@@ -155,8 +149,7 @@ class _ProfileState extends State<Profile> {
                 ),
                 onPressed: () {
                   Navigator.pop(context);
-                  removePhotoConfirm(
-                      context, pictureType, widget.loggedInUser.program);
+                  removePhotoConfirm(context, widget.loggedInUser.program);
                 },
               ),
               SimpleDialogOption(
@@ -176,7 +169,7 @@ class _ProfileState extends State<Profile> {
         });
   }
 
-  removePhotoConfirm(parentContext, pictureType, programID) {
+  removePhotoConfirm(parentContext, programID) {
     return showDialog(
         context: parentContext,
         builder: (context) {
@@ -211,13 +204,13 @@ class _ProfileState extends State<Profile> {
                       buttonColor: Colors.red,
                       fontColor: Colors.white,
                       onPressed: () {
+                        Navigator.pop(context);
+                        removeCurrentPhoto(
+                          programID,
+                        );
                         setState(() {
                           isUploading = true;
                         });
-                        removeCurrentPhoto(
-                          pictureType,
-                          programID,
-                        );
                       },
                     ),
                   )
@@ -234,8 +227,6 @@ class _ProfileState extends State<Profile> {
   bool isUploading = false;
   String postId = Uuid().v4();
   bool profilePhotoExist = false;
-  bool coverPhotoExist = false;
-  String pictureType;
 
   clearImage() {
     setState(() {
@@ -262,9 +253,10 @@ class _ProfileState extends State<Profile> {
     return downloadUrl;
   }
 
-  savePhotoInUserCollection(
-      {String mediaUrl, String pictureType, String programID}) async {
-    await usersRef.doc(widget.loggedInUser.id).update({pictureType: mediaUrl});
+  savePhotoInUserCollection({String mediaUrl, String programID}) async {
+    await usersRef
+        .doc(widget.loggedInUser.id)
+        .update({"Profile Picture": mediaUrl});
     if (programID == "" || programID == null) {
     } else {
       await programsRef
@@ -321,54 +313,54 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  removeCurrentPhoto(pictureType, programID) async {
+  removeCurrentPhoto(programID) async {
+    await usersRef.doc(widget.loggedInUser.id).update({'Profile Picture': ""});
     if (programID == "" || programID == null) {
+      setState(() {
+        isUploading = false;
+        profilePhotoExist = false;
+      });
+      setState(() {
+        isUploading = false;
+      });
     } else {
-      if (pictureType == "Profile Picture") {
-        await usersRef
-            .doc(widget.loggedInUser.id)
-            .update({'Profile Picture': ""});
-        await programsRef
-            .doc(programID)
-            .collection('mentors')
-            .doc(widget.loggedInUser.id)
-            .get()
-            .then((doc) => {
-                  if (doc.exists)
-                    {
-                      programsRef
-                          .doc(programID)
-                          .collection('mentors')
-                          .doc(widget.loggedInUser.id)
-                          .update({'Profile Picture': ""})
-                    }
-                });
-        await programsRef
-            .doc(programID)
-            .collection('mentees')
-            .doc(widget.loggedInUser.id)
-            .get()
-            .then((doc) => {
-                  if (doc.exists)
-                    {
-                      programsRef
-                          .doc(programID)
-                          .collection('mentees')
-                          .doc(widget.loggedInUser.id)
-                          .update({'Profile Picture': ""})
-                    }
-                });
-        setState(() {
-          isUploading = false;
-          profilePhotoExist = false;
-        });
-      } else {
-        await usersRef.doc(widget.loggedInUser.id).update({'Cover Photo': ""});
-        setState(() {
-          coverPhotoExist = false;
-          isUploading = false;
-        });
-      }
+      await programsRef
+          .doc(programID)
+          .collection('mentors')
+          .doc(widget.loggedInUser.id)
+          .get()
+          .then((doc) => {
+                if (doc.exists)
+                  {
+                    programsRef
+                        .doc(programID)
+                        .collection('mentors')
+                        .doc(widget.loggedInUser.id)
+                        .update({'Profile Picture': ""})
+                  }
+              });
+      await programsRef
+          .doc(programID)
+          .collection('mentees')
+          .doc(widget.loggedInUser.id)
+          .get()
+          .then((doc) => {
+                if (doc.exists)
+                  {
+                    programsRef
+                        .doc(programID)
+                        .collection('mentees')
+                        .doc(widget.loggedInUser.id)
+                        .update({'Profile Picture': ""})
+                  }
+              });
+      setState(() {
+        isUploading = false;
+        profilePhotoExist = false;
+      });
+      setState(() {
+        isUploading = false;
+      });
     }
     Navigator.pushReplacement(
       context,
@@ -383,23 +375,22 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  handleSubmit(pictureType, programID) async {
+  handleSubmit(programID) async {
     setState(() {
       isUploading = true;
     });
     await compressImage();
     String mediaUrl = await uploadImage(file);
-    savePhotoInUserCollection(
-        mediaUrl: mediaUrl, pictureType: pictureType, programID: programID);
+    savePhotoInUserCollection(mediaUrl: mediaUrl, programID: programID);
   }
 
-  Scaffold buildUploadScreen(pictureType, programID) {
+  Scaffold buildUploadScreen(programID) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: kMentorXPPrimary,
           title: Center(
             child: Text(
-              "Upload $pictureType",
+              "Upload Profile Picture",
               style: Theme.of(context).textTheme.displayMedium,
             ),
           ),
@@ -421,28 +412,17 @@ class _ProfileState extends State<Profile> {
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            '$pictureType',
+                            'Profile Picture',
                             style: Theme.of(context).textTheme.headlineLarge,
                             textAlign: TextAlign.center,
                           ),
                         ],
                       ),
                     ),
-                    (pictureType == 'Cover Photo')
-                        ? Container(
-                            width: 500,
-                            height: 200.0,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: FileImage(file),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          )
-                        : CircleAvatar(
-                            radius: 120,
-                            backgroundImage: FileImage(file),
-                          ),
+                    CircleAvatar(
+                      radius: 120,
+                      backgroundImage: FileImage(file),
+                    ),
                     Padding(
                       padding: EdgeInsets.only(top: 10.0),
                     ),
@@ -489,7 +469,7 @@ class _ProfileState extends State<Profile> {
                             fontWeight: FontWeight.w500,
                             onPressed: isUploading
                                 ? null
-                                : () => handleSubmit(pictureType, programID),
+                                : () => handleSubmit(programID),
                           ),
                         ),
                       ],
@@ -519,7 +499,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    final top = coverPhotoHeight - profilePhotoHeight / 2;
+    // final top = 200 - profilePhotoHeight / 2;
 
     if (widget.profileId == null) {
       return circularProgress(Theme.of(context).primaryColor);
@@ -545,12 +525,8 @@ class _ProfileState extends State<Profile> {
             profilePhotoExist = true;
           }
 
-          if (user.coverPhoto != "") {
-            coverPhotoExist = true;
-          }
-
           return file != null
-              ? buildUploadScreen(pictureType, widget.loggedInUser.program)
+              ? buildUploadScreen(widget.loggedInUser.program)
               : Scaffold(
                   appBar: AppBar(
                     backgroundColor: kMentorXPPrimary,
@@ -583,43 +559,23 @@ class _ProfileState extends State<Profile> {
                                 alignment: Alignment.center,
                                 children: [
                                   Container(
-                                      height: coverPhotoHeight,
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        border: Border(
-                                          bottom: BorderSide(
-                                            color: Theme.of(context)
-                                                .scaffoldBackgroundColor,
-                                            width: 5,
-                                          ),
-                                        ),
+                                    height: 200,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.vertical(
+                                          bottom: Radius.circular(0)),
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: <Color>[
+                                          kMentorXPPrimary,
+                                          Colors.white,
+                                        ],
                                       ),
-                                      child: coverPhotoExist
-                                          ? CachedNetworkImage(
-                                              imageUrl: user.coverPhoto,
-                                              imageBuilder:
-                                                  (context, imageProvider) =>
-                                                      Container(
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                  image: DecorationImage(
-                                                    image: imageProvider,
-                                                    fit: BoxFit.fitWidth,
-                                                  ),
-                                                ),
-                                              ),
-                                              placeholder: (context, url) =>
-                                                  Container(),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      Container(),
-                                            )
-                                          : Container(
-                                              color: kMentorXPPrimary
-                                                  .withOpacity(0.4),
-                                            )),
+                                    ),
+                                  ),
                                   Positioned(
-                                    top: top,
+                                    top: 120,
                                     child: Stack(
                                       clipBehavior: Clip.none,
                                       children: [
@@ -680,7 +636,6 @@ class _ProfileState extends State<Profile> {
                                                     selectImage(
                                                       context,
                                                       "Upload a Profile Photo",
-                                                      "Profile Picture",
                                                     );
                                                   },
                                                   child: Container(
@@ -708,31 +663,6 @@ class _ProfileState extends State<Profile> {
                                       ],
                                     ),
                                   ),
-                                  !myProfileView
-                                      ? Container()
-                                      : Positioned(
-                                          top: 20,
-                                          right: 10,
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              selectImage(
-                                                context,
-                                                "Upload a Cover Photo",
-                                                "Cover Photo",
-                                              );
-                                            },
-                                            child: IconCircle(
-                                              iconSize: 23.0,
-                                              iconType: Icons.edit,
-                                              circleColor: Theme.of(context)
-                                                  .scaffoldBackgroundColor
-                                                  .withOpacity(0.8),
-                                              height: 35,
-                                              width: 35,
-                                              iconColor: kMentorXPAccentDark,
-                                            ),
-                                          ),
-                                        ),
                                 ],
                               ),
                               !myProfileView
@@ -798,10 +728,16 @@ class _ProfileState extends State<Profile> {
                       ),
                       isUploading
                           ? Container(
-                              height: double.infinity,
-                              width: double.infinity,
-                              child: circularProgress(
-                                Theme.of(context).canvasColor,
+                              color: Colors.white.withOpacity(0.8),
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    circularProgress(
+                                      Theme.of(context).primaryColor,
+                                    ),
+                                  ],
+                                ),
                               ),
                             )
                           : Text(''),
