@@ -17,7 +17,7 @@ class Company101DataV1 extends StatelessWidget {
             'pitfalls and ensure that your goals are strategically aligned with '
             'those of your employer.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -30,7 +30,7 @@ class Company101DataV1 extends StatelessWidget {
             'careers to look up the top employers in this industry. '
             'Make a list of five companies that you want to learn more about.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),

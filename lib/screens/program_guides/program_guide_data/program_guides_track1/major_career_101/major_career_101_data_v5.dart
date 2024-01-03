@@ -18,7 +18,7 @@ class MajorCareer101DataV5 extends StatelessWidget {
             'it could be something to focus on for a minor or '
             'concentration of study.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -31,7 +31,7 @@ class MajorCareer101DataV5 extends StatelessWidget {
             'determine your career path. Advisors, career counselors, '
             'mentors, and other students can all weigh in with valuable insight.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),

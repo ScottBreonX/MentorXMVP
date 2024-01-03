@@ -13,7 +13,7 @@ class Resume101DataV2 extends StatelessWidget {
           text: TextSpan(
             text: 'First Impressions: ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -34,7 +34,7 @@ class Resume101DataV2 extends StatelessWidget {
             text: TextSpan(
               text: 'Showcasing Qualifications: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

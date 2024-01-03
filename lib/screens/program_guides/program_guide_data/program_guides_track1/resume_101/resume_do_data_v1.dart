@@ -13,7 +13,7 @@ class ResumeDoDataV1 extends StatelessWidget {
           text: TextSpan(
             text: 'Be Concise: ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -35,7 +35,7 @@ class ResumeDoDataV1 extends StatelessWidget {
             text: TextSpan(
               text: 'Tailor as Necessary: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

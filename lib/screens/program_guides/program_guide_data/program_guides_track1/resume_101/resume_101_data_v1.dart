@@ -13,7 +13,7 @@ class Resume101DataV1 extends StatelessWidget {
           'A resume is a document that showcases your skills, '
           'qualifications, education,  and experiences.',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black54,
             fontSize: 20,
             fontFamily: 'Montserrat',
           ),
@@ -25,7 +25,7 @@ class Resume101DataV1 extends StatelessWidget {
             'why you are a good fit for the job in a clear and concise manner. '
             'Swipe to see the benefits of having an effective resume.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),

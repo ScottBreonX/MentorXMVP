@@ -13,7 +13,7 @@ class ResumeDoDataV2 extends StatelessWidget {
           text: TextSpan(
             text: 'Utilize Strong Word Choice: ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -35,7 +35,7 @@ class ResumeDoDataV2 extends StatelessWidget {
             text: TextSpan(
               text: 'Quantify if Possible: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

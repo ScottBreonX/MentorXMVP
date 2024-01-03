@@ -13,7 +13,7 @@ class Resume101DataV4 extends StatelessWidget {
           text: TextSpan(
             text: 'Take a few minutes to swap resumes and discuss feedback.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -27,7 +27,7 @@ class Resume101DataV4 extends StatelessWidget {
             'strengths of each resume.',
             style: TextStyle(
               fontWeight: FontWeight.normal,
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -39,7 +39,7 @@ class Resume101DataV4 extends StatelessWidget {
             'Offer constructive criticism on what could be improved, and include specific examples. ',
             style: TextStyle(
               fontWeight: FontWeight.normal,
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -51,7 +51,7 @@ class Resume101DataV4 extends StatelessWidget {
             'Consider the industry and job requirements throughout the session.',
             style: TextStyle(
               fontWeight: FontWeight.normal,
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),

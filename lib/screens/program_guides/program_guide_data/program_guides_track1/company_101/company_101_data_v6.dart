@@ -15,7 +15,7 @@ class Company101DataV6 extends StatelessWidget {
             text: TextSpan(
               text: 'Networking: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -36,7 +36,7 @@ class Company101DataV6 extends StatelessWidget {
             text: TextSpan(
               text: 'Recruitment Process: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -57,7 +57,7 @@ class Company101DataV6 extends StatelessWidget {
             text: TextSpan(
               text: 'Post Job: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

@@ -13,7 +13,7 @@ class ResumeDoDataV3 extends StatelessWidget {
           text: TextSpan(
             text: 'Include Contact Information: ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -34,7 +34,7 @@ class ResumeDoDataV3 extends StatelessWidget {
             text: TextSpan(
               text: 'Use Professional Format: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

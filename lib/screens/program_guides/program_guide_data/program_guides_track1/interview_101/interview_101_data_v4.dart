@@ -14,7 +14,7 @@ class Interview101DataV4 extends StatelessWidget {
           child: Text(
             'To increase your chances at landing your dream job, it is best to familiarize yourself and prepare for each.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),

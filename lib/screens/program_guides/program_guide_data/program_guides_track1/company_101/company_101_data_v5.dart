@@ -15,7 +15,7 @@ class Company101DataV5 extends StatelessWidget {
             text: TextSpan(
               text: 'Type of work: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -35,7 +35,7 @@ class Company101DataV5 extends StatelessWidget {
             text: TextSpan(
               text: 'Company values: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -56,7 +56,7 @@ class Company101DataV5 extends StatelessWidget {
             text: TextSpan(
               text: 'Stability: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -77,7 +77,7 @@ class Company101DataV5 extends StatelessWidget {
             text: TextSpan(
               text: 'Movement: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

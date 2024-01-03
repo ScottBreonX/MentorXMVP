@@ -13,7 +13,7 @@ class ResumeDontDataV1 extends StatelessWidget {
           text: TextSpan(
             text: 'Don\’t Include Irrelevant Information: ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -35,7 +35,7 @@ class ResumeDontDataV1 extends StatelessWidget {
             text: TextSpan(
               text: 'Don\’t List References: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

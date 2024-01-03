@@ -14,7 +14,7 @@ class Company101DataV4 extends StatelessWidget {
           child: Text(
             'Discuss the following topics and take notes on what is important to you. It could be helpful to rank your priorities.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -26,7 +26,7 @@ class Company101DataV4 extends StatelessWidget {
             text: TextSpan(
               text: 'Size: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -46,7 +46,7 @@ class Company101DataV4 extends StatelessWidget {
             text: TextSpan(
               text: 'Location: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -66,7 +66,7 @@ class Company101DataV4 extends StatelessWidget {
             text: TextSpan(
               text: 'Culture: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

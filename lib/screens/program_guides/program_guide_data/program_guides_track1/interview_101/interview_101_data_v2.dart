@@ -14,7 +14,7 @@ class Interview101DataV2 extends StatelessWidget {
           child: Text(
             'There are a variety of interview types, and preparing for any interview will make you the ideal candidate.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -26,7 +26,7 @@ class Interview101DataV2 extends StatelessWidget {
             text: TextSpan(
               text: 'Behavioral: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -47,7 +47,7 @@ class Interview101DataV2 extends StatelessWidget {
             text: TextSpan(
               text: 'Technical: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

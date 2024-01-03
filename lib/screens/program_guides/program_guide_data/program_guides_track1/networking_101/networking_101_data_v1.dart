@@ -13,7 +13,7 @@ class Networking101DataV1 extends StatelessWidget {
           text: TextSpan(
             text: 'Networking ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -32,7 +32,7 @@ class Networking101DataV1 extends StatelessWidget {
           child: Text(
             'Benefits of networking include:',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -45,7 +45,7 @@ class Networking101DataV1 extends StatelessWidget {
             text: TextSpan(
               text: '1.  Increased Opportunities: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

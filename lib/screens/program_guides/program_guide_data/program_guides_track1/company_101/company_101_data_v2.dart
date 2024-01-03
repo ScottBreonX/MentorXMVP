@@ -14,7 +14,7 @@ class Company101DataV2 extends StatelessWidget {
           child: Text(
             'There are many ways you could learn more about an employer, including:',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -26,7 +26,7 @@ class Company101DataV2 extends StatelessWidget {
             text: TextSpan(
               text: '1. Online Research: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -47,7 +47,7 @@ class Company101DataV2 extends StatelessWidget {
             text: TextSpan(
               text: '2. Networking: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

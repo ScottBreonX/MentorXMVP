@@ -13,7 +13,7 @@ class MentorResponsibilities3 extends StatelessWidget {
           text: TextSpan(
             text: 'Act as a role model: ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -33,7 +33,7 @@ class MentorResponsibilities3 extends StatelessWidget {
             text: TextSpan(
               text: '',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

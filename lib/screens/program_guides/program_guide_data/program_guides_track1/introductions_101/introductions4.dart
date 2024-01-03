@@ -13,7 +13,7 @@ class Introductions4 extends StatelessWidget {
           text: TextSpan(
             text: 'Set Goals: ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -33,7 +33,7 @@ class Introductions4 extends StatelessWidget {
             text: TextSpan(
               text: 'Discuss Challenges: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

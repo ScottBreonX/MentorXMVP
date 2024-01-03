@@ -15,7 +15,7 @@ class Networking101DataV6 extends StatelessWidget {
             text: TextSpan(
               text: 'Experience: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -36,7 +36,7 @@ class Networking101DataV6 extends StatelessWidget {
             text: TextSpan(
               text: 'Education: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -57,7 +57,7 @@ class Networking101DataV6 extends StatelessWidget {
             text: TextSpan(
               text: 'Skills/Endorsements: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

@@ -17,7 +17,7 @@ class Track1Data extends StatelessWidget {
             Text(
               'Recommended for: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: fontSize ?? 17,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -32,7 +32,7 @@ class Track1Data extends StatelessWidget {
               Text(
                 'College Year 1-2',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black54,
                   fontSize: fontSize ?? 17,
                   fontFamily: 'Montserrat',
                 ),
@@ -44,7 +44,7 @@ class Track1Data extends StatelessWidget {
           text: TextSpan(
             text: 'What this track focuses on: ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: fontSize ?? 17,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -65,7 +65,7 @@ class Track1Data extends StatelessWidget {
               child: Text(
                 'Session Guides: ',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black54,
                   fontSize: fontSize ?? 17,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Montserrat',
@@ -79,7 +79,7 @@ class Track1Data extends StatelessWidget {
             Text(
               '• Introductions',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: fontSize ?? 17,
                 fontFamily: 'Montserrat',
               ),
@@ -92,7 +92,7 @@ class Track1Data extends StatelessWidget {
               child: Text(
                 '• Resume 101',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black54,
                   fontSize: fontSize ?? 17,
                   fontFamily: 'Montserrat',
                 ),
@@ -106,7 +106,7 @@ class Track1Data extends StatelessWidget {
               child: Text(
                 '• Networking 101',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black54,
                   fontSize: fontSize ?? 17,
                   fontFamily: 'Montserrat',
                 ),
@@ -120,7 +120,7 @@ class Track1Data extends StatelessWidget {
               child: Text(
                 '• Career Exploration',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black54,
                   fontSize: fontSize ?? 17,
                   fontFamily: 'Montserrat',
                 ),
@@ -134,7 +134,7 @@ class Track1Data extends StatelessWidget {
               child: Text(
                 '• Company targeting',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black54,
                   fontSize: fontSize ?? 17,
                   fontFamily: 'Montserrat',
                 ),
@@ -148,7 +148,7 @@ class Track1Data extends StatelessWidget {
               child: Text(
                 '• Interview Prep 101',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black54,
                   fontSize: fontSize ?? 17,
                   fontFamily: 'Montserrat',
                 ),

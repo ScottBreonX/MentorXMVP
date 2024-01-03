@@ -14,7 +14,7 @@ class MajorCareer101DataV1 extends StatelessWidget {
           child: Text(
             'Determining a career path can feel intimidating,, but there are steps you can take to make the process easier.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -26,7 +26,7 @@ class MajorCareer101DataV1 extends StatelessWidget {
             text: TextSpan(
               text: '1. Make a list of your interests and values. ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -47,7 +47,7 @@ class MajorCareer101DataV1 extends StatelessWidget {
             text: TextSpan(
               text: '2. Think about the skills you have developed thus far. ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

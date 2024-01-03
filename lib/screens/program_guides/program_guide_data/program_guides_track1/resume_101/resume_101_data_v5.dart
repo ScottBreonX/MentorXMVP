@@ -17,7 +17,7 @@ class Resume101DataV5 extends StatelessWidget {
             'evolve over time, so it\’s important to maintain a current resume.',
             style: TextStyle(
               fontWeight: FontWeight.normal,
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -30,7 +30,7 @@ class Resume101DataV5 extends StatelessWidget {
             'be a need or transferable skills.',
             style: TextStyle(
               fontWeight: FontWeight.normal,
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -44,7 +44,7 @@ class Resume101DataV5 extends StatelessWidget {
             'easily transferred from one job to another.',
             style: TextStyle(
               fontWeight: FontWeight.normal,
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),

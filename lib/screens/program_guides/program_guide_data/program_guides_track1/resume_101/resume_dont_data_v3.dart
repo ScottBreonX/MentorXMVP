@@ -13,7 +13,7 @@ class ResumeDontDataV3 extends StatelessWidget {
           text: TextSpan(
             text: 'Don\’t overdo formatting: ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',

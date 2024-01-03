@@ -15,7 +15,7 @@ class Company101DataV3 extends StatelessWidget {
             text: TextSpan(
               text: '3. Attending job fairs or company events: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -36,7 +36,7 @@ class Company101DataV3 extends StatelessWidget {
             text: TextSpan(
               text: '4. Analyzing financial reports: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

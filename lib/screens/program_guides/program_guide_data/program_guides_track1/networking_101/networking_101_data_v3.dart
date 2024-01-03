@@ -13,7 +13,7 @@ class Networking101DataV3 extends StatelessWidget {
           text: TextSpan(
             text: '4. Industry Exposure ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -34,7 +34,7 @@ class Networking101DataV3 extends StatelessWidget {
             text: TextSpan(
               text: '5. Advocacy ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

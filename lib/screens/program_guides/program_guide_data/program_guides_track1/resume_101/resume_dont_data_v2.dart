@@ -13,7 +13,7 @@ class ResumeDontDataV2 extends StatelessWidget {
           text: TextSpan(
             text: 'Don\’t Exaggerate Qualifications: ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -32,7 +32,7 @@ class ResumeDontDataV2 extends StatelessWidget {
             text: TextSpan(
               text: 'Don’t Include Personal Information: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

@@ -109,22 +109,44 @@ class _Track1GuidesLaunchScreenState extends State<Track1GuidesLaunchScreen> {
                 ),
               ),
             ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 5, top: 20.0, right: 5, bottom: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20.0),
-                                child: Text(
-                                  'Track 1',
+            body: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    kMentorXPPrimary.withOpacity(0.1),
+                    Colors.white,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 5, top: 20.0, right: 5, bottom: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20.0),
+                                  child: Text(
+                                    'Track 1',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontFamily: 'Montserrat',
+                                      color: kMentorXPPrimary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  'Program Guides',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 25,
@@ -133,229 +155,219 @@ class _Track1GuidesLaunchScreenState extends State<Track1GuidesLaunchScreen> {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              ),
-                              Text(
-                                'Program Guides',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  fontFamily: 'Montserrat',
-                                  color: kMentorXPPrimary,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 15.0, right: 15, bottom: 15),
-                    child: Text(
-                      'Track 1 is geared toward anyone looking to start their journey of finding their career path. Build your first Resume, create a LinkedIn profile and explore different majors and companies.',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: 'Montserrat',
-                        color: Colors.black54,
-                      ),
-                    ),
-                  ),
-                  ProgramGuideMenuTile(
-                    titleText: 'Introductions',
-                    titlePrefix: '1',
-                    iconData: (guideStatus.introductionStatus == 'Current')
-                        ? Icons.play_arrow
-                        : (guideStatus.introductionStatus == null)
-                            ? Icons.play_arrow
-                            : Icons.check,
-                    iconColor: (guideStatus.introductionStatus == 'Current')
-                        ? kMentorXPAccentMed
-                        : (guideStatus.introductionStatus == null)
-                            ? kMentorXPAccentMed
-                            : kMentorXPSecondary,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProgramGuidesIntrosScreen(
-                            loggedInUser: widget.loggedInUser,
-                            matchID: widget.matchID,
-                            mentorUID: widget.mentorUID,
-                            programUID: widget.programUID,
-                            nextGuide: 'Resume 101',
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  ProgramGuideMenuTile(
-                    titleText: 'Resume 101',
-                    titlePrefix: '2',
-                    iconData: (guideStatus.resume101Status == 'Current')
-                        ? Icons.play_arrow
-                        : (guideStatus.resume101Status == null)
-                            ? Icons.lock
-                            : Icons.check,
-                    iconColor: (guideStatus.resume101Status == 'Current')
-                        ? kMentorXPAccentMed
-                        : (guideStatus.resume101Status == null)
-                            ? Colors.grey
-                            : kMentorXPSecondary,
-                    onTap: () {
-                      (guideStatus.resume101Status == null)
-                          ? ''
-                          : Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Resume101Screen(
-                                  loggedInUser: widget.loggedInUser,
-                                  matchID: widget.matchID,
-                                  mentorUID: widget.mentorUID,
-                                  programUID: widget.programUID,
-                                ),
-                              ),
-                            );
-                    },
-                  ),
-                  ProgramGuideMenuTile(
-                    titleText: 'Networking 101',
-                    titlePrefix: '3',
-                    iconData: (guideStatus.networking101Status == 'Current')
-                        ? Icons.play_arrow
-                        : (guideStatus.networking101Status == null)
-                            ? Icons.lock
-                            : Icons.check,
-                    iconColor: (guideStatus.networking101Status == 'Current')
-                        ? kMentorXPAccentMed
-                        : (guideStatus.networking101Status == null)
-                            ? Colors.grey
-                            : kMentorXPSecondary,
-                    onTap: () {
-                      (guideStatus.networking101Status == null)
-                          ? ''
-                          : Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Networking101Screen(
-                                  loggedInUser: widget.loggedInUser,
-                                  matchID: widget.matchID,
-                                  mentorUID: widget.mentorUID,
-                                  programUID: widget.programUID,
-                                ),
-                              ),
-                            );
-                    },
-                  ),
-                  ProgramGuideMenuTile(
-                    titleText: 'Major / Career Exploration',
-                    titlePrefix: '4',
-                    iconData: (guideStatus.career101Status == 'Current')
-                        ? Icons.play_arrow
-                        : (guideStatus.career101Status == null)
-                            ? Icons.lock
-                            : Icons.check,
-                    iconColor: (guideStatus.career101Status == 'Current')
-                        ? kMentorXPAccentMed
-                        : (guideStatus.career101Status == null)
-                            ? Colors.grey
-                            : kMentorXPSecondary,
-                    onTap: () {
-                      (guideStatus.career101Status == null)
-                          ? ''
-                          : Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MajorCareer101Screen(
-                                  loggedInUser: widget.loggedInUser,
-                                  matchID: widget.matchID,
-                                  mentorUID: widget.mentorUID,
-                                  programUID: widget.programUID,
-                                ),
-                              ),
-                            );
-                    },
-                  ),
-                  ProgramGuideMenuTile(
-                    titleText: 'Company Exploration',
-                    titlePrefix: '5',
-                    iconData: (guideStatus.company101Status == 'Current')
-                        ? Icons.play_arrow
-                        : (guideStatus.company101Status == null)
-                            ? Icons.lock
-                            : Icons.check,
-                    iconColor: (guideStatus.company101Status == 'Current')
-                        ? kMentorXPAccentMed
-                        : (guideStatus.company101Status == null)
-                            ? Colors.grey
-                            : kMentorXPSecondary,
-                    onTap: () {
-                      (guideStatus.company101Status == null)
-                          ? ''
-                          : Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Company101Screen(
-                                  loggedInUser: widget.loggedInUser,
-                                  matchID: widget.matchID,
-                                  mentorUID: widget.mentorUID,
-                                  programUID: widget.programUID,
-                                ),
-                              ),
-                            );
-                    },
-                  ),
-                  ProgramGuideMenuTile(
-                    titleText: 'Interview Prep 101',
-                    titlePrefix: '6',
-                    iconData: (guideStatus.interview101Status == 'Current')
-                        ? Icons.play_arrow
-                        : (guideStatus.interview101Status == null)
-                            ? Icons.lock
-                            : Icons.check,
-                    iconColor: (guideStatus.interview101Status == 'Current')
-                        ? kMentorXPAccentMed
-                        : (guideStatus.interview101Status == null)
-                            ? Colors.grey
-                            : kMentorXPSecondary,
-                    onTap: () {
-                      (guideStatus.interview101Status == null)
-                          ? ''
-                          : Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Interview101Screen(
-                                  loggedInUser: widget.loggedInUser,
-                                  matchID: widget.matchID,
-                                  mentorUID: widget.mentorUID,
-                                  programUID: widget.programUID,
-                                ),
-                              ),
-                            );
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            _trackWithdraw();
-                          },
-                          child: Text(
-                            'Withdraw from Track',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey,
+                              ],
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 15.0, right: 15, bottom: 15),
+                      child: Text(
+                        'Track 1 is geared toward anyone looking to start their journey of finding their career path. Build your first Resume, create a LinkedIn profile and explore different majors and companies.',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: 'Montserrat',
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                    ProgramGuideMenuTile(
+                      titleText: 'Introductions',
+                      titlePrefix: '1',
+                      iconData: (guideStatus.introductionStatus == 'Current')
+                          ? Icons.play_arrow
+                          : (guideStatus.introductionStatus == null)
+                              ? Icons.play_arrow
+                              : Icons.check,
+                      iconColor: (guideStatus.introductionStatus == 'Current')
+                          ? kMentorXPAccentMed
+                          : (guideStatus.introductionStatus == null)
+                              ? kMentorXPAccentMed
+                              : kMentorXPSecondary,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProgramGuidesIntrosScreen(
+                              loggedInUser: widget.loggedInUser,
+                              matchID: widget.matchID,
+                              mentorUID: widget.mentorUID,
+                              programUID: widget.programUID,
+                              nextGuide: 'Resume 101',
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    ProgramGuideMenuTile(
+                      titleText: 'Resume 101',
+                      titlePrefix: '2',
+                      iconData: (guideStatus.resume101Status == 'Current')
+                          ? Icons.play_arrow
+                          : (guideStatus.resume101Status == null)
+                              ? Icons.lock
+                              : Icons.check,
+                      iconColor: (guideStatus.resume101Status == 'Current')
+                          ? kMentorXPAccentMed
+                          : (guideStatus.resume101Status == null)
+                              ? Colors.grey
+                              : kMentorXPSecondary,
+                      onTap: () {
+                        (guideStatus.resume101Status == null)
+                            ? ''
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Resume101Screen(
+                                    loggedInUser: widget.loggedInUser,
+                                    matchID: widget.matchID,
+                                    mentorUID: widget.mentorUID,
+                                    programUID: widget.programUID,
+                                  ),
+                                ),
+                              );
+                      },
+                    ),
+                    ProgramGuideMenuTile(
+                      titleText: 'Networking 101',
+                      titlePrefix: '3',
+                      iconData: (guideStatus.networking101Status == 'Current')
+                          ? Icons.play_arrow
+                          : (guideStatus.networking101Status == null)
+                              ? Icons.lock
+                              : Icons.check,
+                      iconColor: (guideStatus.networking101Status == 'Current')
+                          ? kMentorXPAccentMed
+                          : (guideStatus.networking101Status == null)
+                              ? Colors.grey
+                              : kMentorXPSecondary,
+                      onTap: () {
+                        (guideStatus.networking101Status == null)
+                            ? ''
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Networking101Screen(
+                                    loggedInUser: widget.loggedInUser,
+                                    matchID: widget.matchID,
+                                    mentorUID: widget.mentorUID,
+                                    programUID: widget.programUID,
+                                  ),
+                                ),
+                              );
+                      },
+                    ),
+                    ProgramGuideMenuTile(
+                      titleText: 'Major / Career Exploration',
+                      titlePrefix: '4',
+                      iconData: (guideStatus.career101Status == 'Current')
+                          ? Icons.play_arrow
+                          : (guideStatus.career101Status == null)
+                              ? Icons.lock
+                              : Icons.check,
+                      iconColor: (guideStatus.career101Status == 'Current')
+                          ? kMentorXPAccentMed
+                          : (guideStatus.career101Status == null)
+                              ? Colors.grey
+                              : kMentorXPSecondary,
+                      onTap: () {
+                        (guideStatus.career101Status == null)
+                            ? ''
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MajorCareer101Screen(
+                                    loggedInUser: widget.loggedInUser,
+                                    matchID: widget.matchID,
+                                    mentorUID: widget.mentorUID,
+                                    programUID: widget.programUID,
+                                  ),
+                                ),
+                              );
+                      },
+                    ),
+                    ProgramGuideMenuTile(
+                      titleText: 'Company Exploration',
+                      titlePrefix: '5',
+                      iconData: (guideStatus.company101Status == 'Current')
+                          ? Icons.play_arrow
+                          : (guideStatus.company101Status == null)
+                              ? Icons.lock
+                              : Icons.check,
+                      iconColor: (guideStatus.company101Status == 'Current')
+                          ? kMentorXPAccentMed
+                          : (guideStatus.company101Status == null)
+                              ? Colors.grey
+                              : kMentorXPSecondary,
+                      onTap: () {
+                        (guideStatus.company101Status == null)
+                            ? ''
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Company101Screen(
+                                    loggedInUser: widget.loggedInUser,
+                                    matchID: widget.matchID,
+                                    mentorUID: widget.mentorUID,
+                                    programUID: widget.programUID,
+                                  ),
+                                ),
+                              );
+                      },
+                    ),
+                    ProgramGuideMenuTile(
+                      titleText: 'Interview Prep 101',
+                      titlePrefix: '6',
+                      iconData: (guideStatus.interview101Status == 'Current')
+                          ? Icons.play_arrow
+                          : (guideStatus.interview101Status == null)
+                              ? Icons.lock
+                              : Icons.check,
+                      iconColor: (guideStatus.interview101Status == 'Current')
+                          ? kMentorXPAccentMed
+                          : (guideStatus.interview101Status == null)
+                              ? Colors.grey
+                              : kMentorXPSecondary,
+                      onTap: () {
+                        (guideStatus.interview101Status == null)
+                            ? ''
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Interview101Screen(
+                                    loggedInUser: widget.loggedInUser,
+                                    matchID: widget.matchID,
+                                    mentorUID: widget.mentorUID,
+                                    programUID: widget.programUID,
+                                  ),
+                                ),
+                              );
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              _trackWithdraw();
+                            },
+                            child: Text(
+                              'Withdraw from Track',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

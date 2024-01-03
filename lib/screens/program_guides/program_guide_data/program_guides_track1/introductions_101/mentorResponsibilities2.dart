@@ -13,7 +13,7 @@ class MentorResponsibilities2 extends StatelessWidget {
           text: TextSpan(
             text: 'Share their expertise: ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -32,7 +32,7 @@ class MentorResponsibilities2 extends StatelessWidget {
             text: TextSpan(
               text: 'Offer constructive feedback: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -53,7 +53,7 @@ class MentorResponsibilities2 extends StatelessWidget {
             text: TextSpan(
               text: 'Support the mentee: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

@@ -16,7 +16,7 @@ class Resume101DataV6 extends StatelessWidget {
             'and adaptability skills.',
             style: TextStyle(
               fontWeight: FontWeight.normal,
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -29,7 +29,7 @@ class Resume101DataV6 extends StatelessWidget {
             'not be currently represented on your resume.',
             style: TextStyle(
               fontWeight: FontWeight.normal,
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -41,7 +41,7 @@ class Resume101DataV6 extends StatelessWidget {
             'Make a list of three skills that you want to further develop.',
             style: TextStyle(
               fontWeight: FontWeight.normal,
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),

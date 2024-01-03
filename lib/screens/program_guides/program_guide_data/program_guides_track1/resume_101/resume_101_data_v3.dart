@@ -13,7 +13,7 @@ class Resume101DataV3 extends StatelessWidget {
           text: TextSpan(
             text: 'Obtaining the Interview: ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -33,7 +33,7 @@ class Resume101DataV3 extends StatelessWidget {
             text: TextSpan(
               text: 'Demonstrating Growth: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -54,7 +54,7 @@ class Resume101DataV3 extends StatelessWidget {
             text: TextSpan(
               text: 'Serving as a Reference: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

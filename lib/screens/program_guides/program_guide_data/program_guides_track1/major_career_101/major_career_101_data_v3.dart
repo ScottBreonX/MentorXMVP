@@ -17,7 +17,7 @@ class MajorCareer101DataV3 extends StatelessWidget {
             'Based on the prior steps, talk about potential '
             'degrees that might be worth pursuing.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -30,7 +30,7 @@ class MajorCareer101DataV3 extends StatelessWidget {
             'options, you can make an informed decision and '
             'increase the chances of job satisfaction.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),

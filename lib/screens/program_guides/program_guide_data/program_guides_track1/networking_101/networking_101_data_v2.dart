@@ -13,7 +13,7 @@ class Networking101DataV2 extends StatelessWidget {
           text: TextSpan(
             text: '2. Knowledge Sharing ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -33,7 +33,7 @@ class Networking101DataV2 extends StatelessWidget {
             text: TextSpan(
               text: '3. Career Development ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

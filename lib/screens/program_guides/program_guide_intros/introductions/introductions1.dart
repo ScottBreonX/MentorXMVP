@@ -15,7 +15,7 @@ class Introductions1 extends StatelessWidget {
           'important opportunity to establish rapport, '
           'set expectations, and get to know each other. ',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black54,
             fontSize: 20,
             fontFamily: 'Montserrat',
           ),
@@ -25,7 +25,7 @@ class Introductions1 extends StatelessWidget {
           child: Text(
             'Swipe to see some tips on how to make the most of this first meeting.',
             style: TextStyle(
-              color: kMentorXPAccentMed,
+              color: kMentorXPSecondary,
               fontWeight: FontWeight.bold,
               fontSize: 20,
               fontFamily: 'Montserrat',

@@ -16,7 +16,7 @@ class MajorCareer101DataV2 extends StatelessWidget {
               text:
                   '3. Research careers in the fields that might be a good fit for your interests and skills. ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -39,7 +39,7 @@ class MajorCareer101DataV2 extends StatelessWidget {
             'as what you might dislike. Identifying the fields you don’t '
             'like can help narrow down your path.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),

@@ -15,7 +15,7 @@ class MajorCareer101DataV6 extends StatelessWidget {
             'Choosing a career is a process that takes time and effort. '
             'Finding a path that is a good fit requires patience and an open mind.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -28,7 +28,7 @@ class MajorCareer101DataV6 extends StatelessWidget {
               child: Text(
                 'A couple ways to get started: ',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black54,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Montserrat',
@@ -42,7 +42,7 @@ class MajorCareer101DataV6 extends StatelessWidget {
             Text(
               '• Meet with professors',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontFamily: 'Montserrat',
               ),
@@ -55,7 +55,7 @@ class MajorCareer101DataV6 extends StatelessWidget {
               child: Text(
                 '• Find colleagues in the field',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black54,
                   fontSize: 20,
                   fontFamily: 'Montserrat',
                 ),
@@ -69,7 +69,7 @@ class MajorCareer101DataV6 extends StatelessWidget {
               child: Text(
                 '• Attend campus info session',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black54,
                   fontSize: 20,
                   fontFamily: 'Montserrat',
                 ),
@@ -83,7 +83,7 @@ class MajorCareer101DataV6 extends StatelessWidget {
               child: Text(
                 '• Find a career aligned club',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black54,
                   fontSize: 20,
                   fontFamily: 'Montserrat',
                 ),

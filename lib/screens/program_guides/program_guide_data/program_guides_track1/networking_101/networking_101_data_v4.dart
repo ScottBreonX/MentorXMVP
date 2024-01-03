@@ -17,7 +17,7 @@ class Networking101DataV4 extends StatelessWidget {
             'A great way to begin building your network is by '
             'creating a Linkedin account.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -30,7 +30,7 @@ class Networking101DataV4 extends StatelessWidget {
             'and education as well as connect with other industry '
             'professionals.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -42,7 +42,7 @@ class Networking101DataV4 extends StatelessWidget {
             'If you don\’t have a headshot for your profile, '
             'coordinate with your mentor to have one taken.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
               fontWeight: FontWeight.bold,
@@ -54,7 +54,7 @@ class Networking101DataV4 extends StatelessWidget {
           child: Text(
             'Take a few moments to review each other’s Linkedin profiles.',
             style: TextStyle(
-              color: kMentorXPAccentMed,
+              color: kMentorXPPrimary,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',

@@ -13,7 +13,7 @@ class MenteeResponsibilities3 extends StatelessWidget {
           text: TextSpan(
             text: 'Be committed: ',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -33,7 +33,7 @@ class MenteeResponsibilities3 extends StatelessWidget {
             text: TextSpan(
               text: 'Learn and grow: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

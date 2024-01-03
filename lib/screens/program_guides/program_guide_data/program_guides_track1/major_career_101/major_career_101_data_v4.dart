@@ -17,7 +17,7 @@ class MajorCareer101DataV4 extends StatelessWidget {
             'not have to be a permanent decision. Many students '
             'change majors multiple times while obtaining their degree.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),
@@ -31,7 +31,7 @@ class MajorCareer101DataV4 extends StatelessWidget {
             'If the courses sound appealing and aligned with '
             'your expertise, you might be on the right path.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontFamily: 'Montserrat',
             ),

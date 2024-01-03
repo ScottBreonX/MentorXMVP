@@ -14,7 +14,7 @@ class Networking101DataV5 extends StatelessWidget {
           child: Text(
             'Discuss your first impressions and review key elements of LinkedIn.',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
@@ -27,7 +27,7 @@ class Networking101DataV5 extends StatelessWidget {
             text: TextSpan(
               text: 'Photo: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -48,7 +48,7 @@ class Networking101DataV5 extends StatelessWidget {
             text: TextSpan(
               text: 'Headline: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
@@ -69,7 +69,7 @@ class Networking101DataV5 extends StatelessWidget {
             text: TextSpan(
               text: 'About: ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',

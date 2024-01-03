@@ -56,17 +56,27 @@ class _ProgramGuideCardState extends State<ProgramGuideCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      child: Card(
-        shadowColor: Colors.black,
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            15.0,
+    return Card(
+      shadowColor: Colors.black,
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          15.0,
+        ),
+      ),
+      color: Colors.white,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: <Color>[
+              kMentorXPPrimary.withOpacity(0.1),
+              kMentorXPPrimary.withOpacity(0.3),
+            ],
           ),
         ),
-        color: widget.cardColor ?? kMentorXPPrimary,
         child: Padding(
           padding: const EdgeInsets.all(5.0),
           child: RawScrollbar(
@@ -85,7 +95,7 @@ class _ProgramGuideCardState extends State<ProgramGuideCard> {
                       widget.titleText ?? 'N/A',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: widget.textColor ?? Colors.white,
+                        color: kMentorXPPrimary,
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Montserrat',
