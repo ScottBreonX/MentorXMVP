@@ -7,6 +7,7 @@ import '../../../models/user.dart';
 import '../profile_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
+final programsRef = FirebaseFirestore.instance.collection('institutions');
 
 class AboutMeSection extends StatefulWidget {
   final myUser loggedInUser;
@@ -75,6 +76,7 @@ class _AboutMeSectionState extends State<AboutMeSection> {
   Future<void> _updateAboutMe(String userID) async {
     try {
       if (aboutMeText != null) {
+        await programsRef.doc(userID).update({"About Me": aboutMeText});
         await usersRef.doc(userID).update({"About Me": aboutMeText});
       }
     } on FirebaseException catch (e) {

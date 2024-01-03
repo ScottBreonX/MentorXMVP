@@ -5,7 +5,6 @@ import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/menu_bar/menu_bar.dart';
-import 'package:mentorx_mvp/screens/profile/profile_screen.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 import '../../components/program_tile.dart';
@@ -221,118 +220,53 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            body: SingleChildScrollView(
-              child: Container(
+            body: Container(
+              height: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    kMentorXPPrimary.withOpacity(0.1),
+                    Colors.white,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 30.0, right: 10, bottom: 10, top: 30),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                pageTransition(
-                                  Profile(
-                                    loggedInUser: widget.loggedInUser,
-                                    profileId: widget.loggedInUser.id,
-                                  ),
-                                  1.5,
-                                  1.0,
-                                ),
-                              );
-                            },
-                            child: CircleAvatar(
-                              radius: 50,
-                              backgroundColor: Colors.white,
-                              child: CircleAvatar(
-                                radius: 45,
-                                backgroundColor: Colors.white,
-                                child: !profilePictureStatus
-                                    ? CircleAvatar(
-                                        radius: 50,
-                                        backgroundColor: Colors.grey,
-                                        child: Icon(
-                                          Icons.person,
-                                          size: 40,
-                                          color: Colors.white,
-                                        ),
-                                      )
-                                    : CachedNetworkImage(
-                                        imageUrl: loggedInUser.profilePicture,
-                                        imageBuilder:
-                                            (context, imageProvider) =>
-                                                Container(
-                                          width: 190,
-                                          height: 190,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            image: DecorationImage(
-                                              image: imageProvider,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                        placeholder: (context, url) =>
-                                            Container(),
-                                        errorWidget: (context, url, error) =>
-                                            Icon(
-                                          Icons.person,
-                                          size: 60,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(right: 8.0, top: 20.0),
-                            child: Column(
+                    Padding(
+                      padding: const EdgeInsets.only(top: 50.0),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            top: 20,
+                            right: 40,
+                            left: 40,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 5.0),
-                                      child: Container(
-                                        width: 200,
-                                        child: Text(
-                                          '${loggedInUser.firstName} ${loggedInUser.lastName}',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headlineLarge,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                Text(
+                                  'Welcome to',
+                                  style:
+                                      Theme.of(context).textTheme.headlineLarge,
                                 ),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 7.0,
-                                        top: 2,
-                                      ),
-                                      child: Text(
-                                        '${loggedInUser.email}',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineSmall,
-                                      ),
-                                    ),
-                                  ],
-                                )
                               ],
                             ),
                           ),
-                        ),
-                      ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/images/MentorXPDark.png',
+                                fit: BoxFit.contain,
+                                height: 150,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                     const Divider(
                       thickness: 2,

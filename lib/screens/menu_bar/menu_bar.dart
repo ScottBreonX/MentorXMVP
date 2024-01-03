@@ -4,9 +4,9 @@ import 'package:mentorx_mvp/components/sign_out.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/authentication/landing_page.dart';
 import 'package:mentorx_mvp/screens/chat/chat_gpt.dart';
+import 'package:mentorx_mvp/screens/founders_portal/founders_portal.dart';
 import 'package:mentorx_mvp/screens/program_creation/program_creation.dart';
 import 'package:mentorx_mvp/screens/programs/available_programs.dart';
-import '../profile/profile_screen.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 
@@ -65,25 +65,25 @@ class MentorXMenuList extends StatelessWidget {
             ),
           ),
         ),
-        ListTile(
-          leading: Icon(
-            Icons.person,
-            color: Theme.of(context).iconTheme.color,
-          ),
-          title: Text(
-            'My Profile',
-            style: Theme.of(context).textTheme.displayMedium,
-          ),
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Profile(
-                loggedInUser: loggedInUser,
-                profileId: loggedInUser.id,
-              ),
-            ),
-          ),
-        ),
+        // ListTile(
+        //   leading: Icon(
+        //     Icons.person,
+        //     color: Theme.of(context).iconTheme.color,
+        //   ),
+        //   title: Text(
+        //     'My Profile',
+        //     style: Theme.of(context).textTheme.displayMedium,
+        //   ),
+        //   onTap: () => Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => Profile(
+        //         loggedInUser: loggedInUser,
+        //         profileId: loggedInUser.id,
+        //       ),
+        //     ),
+        //   ),
+        // ),
         ListTile(
           leading: Icon(
             Icons.add_circle_rounded,
@@ -216,6 +216,28 @@ class MentorXMenuList extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ChatGPTScreen(
+                        loggedInUser: loggedInUser,
+                      ),
+                    ),
+                  );
+                },
+              )
+            : Container(),
+        loggedInUser.canCreateProgram
+            ? ListTile(
+                leading: Icon(
+                  Icons.admin_panel_settings,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                title: Text(
+                  'Founders Portal',
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FoundersPortalScreen(
                         loggedInUser: loggedInUser,
                       ),
                     ),
