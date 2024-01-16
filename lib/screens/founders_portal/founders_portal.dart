@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/models/user.dart';
+import 'package:mentorx_mvp/screens/founders_portal/founders_portal_enrolled.dart';
+import 'package:mentorx_mvp/screens/founders_portal/founders_portal_not_enrolled.dart';
+import 'package:mentorx_mvp/screens/founders_portal/founders_portal_programs.dart';
 import 'package:mentorx_mvp/screens/founders_portal/founders_portal_users.dart';
 import '../../../../constants.dart';
 import '../../components/progress.dart';
@@ -36,12 +39,15 @@ class _FoundersPortalScreenState extends State<FoundersPortalScreen> {
     var snapshot2 = await usersRef.where("Program", isNotEqualTo: "").get();
     var snapshot3 =
         await usersRef.where("Profile Picture", isNotEqualTo: "").get();
+    var snapshot4 = await programsRef.get();
+
     updatingData = false;
 
     setState(() {
       _userCount = snapshot1.size;
       _numberEnrolled = snapshot2.size;
       _profilePicCount = snapshot3.size;
+      _programsCreated = snapshot4.size;
       _percentEnrolled =
           int.parse(((_numberEnrolled / _userCount) * 100).toStringAsFixed(0));
       _profilePicPercent =
@@ -51,6 +57,7 @@ class _FoundersPortalScreenState extends State<FoundersPortalScreen> {
 
   int _userCount;
   int _numberEnrolled;
+  int _programsCreated;
   int _percentEnrolled;
   int _profilePicCount;
   int _profilePicPercent;
@@ -165,26 +172,46 @@ class _FoundersPortalScreenState extends State<FoundersPortalScreen> {
                               thickness: 2,
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        FoundersPortalEnrolledScreen(
+                                      loggedInUser: widget.loggedInUser,
+                                    ),
+                                  ),
+                                );
+                              },
                               child: statWidget(
-                                '$_percentEnrolled%',
-                                '% enrolled',
+                                '$_numberEnrolled',
+                                'enrolled in a program',
                                 kMentorXPPrimary,
                                 _statFontSize,
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        FoundersPortalNotEnrolledScreen(
+                                      loggedInUser: widget.loggedInUser,
+                                    ),
+                                  ),
+                                );
+                              },
                               child: statWidget(
-                                '$_profilePicPercent%',
-                                '% with profile picture',
+                                '${_userCount - _numberEnrolled}',
+                                'not enrolled in a program',
                                 kMentorXPPrimary,
                                 _statFontSize,
                               ),
                             ),
                             statWidget(
-                              '',
-                              '% with profile info',
+                              '$_percentEnrolled%',
+                              '% enrolled in a program',
                               kMentorXPPrimary,
                               _statFontSize,
                             ),
@@ -224,33 +251,24 @@ class _FoundersPortalScreenState extends State<FoundersPortalScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            statWidget(
-                              '',
-                              '# of programs created',
-                              kMentorXPSecondary,
-                              _statFontSize,
-                            ),
-                            VerticalDivider(
-                              color: kMentorXPSecondary,
-                              thickness: 2,
-                            ),
-                            statWidget(
-                              '',
-                              'total enrolled',
-                              kMentorXPSecondary,
-                              _statFontSize,
-                            ),
-                            statWidget(
-                              '',
-                              '# of matches',
-                              kMentorXPSecondary,
-                              _statFontSize,
-                            ),
-                            statWidget(
-                              "-",
-                              'TBD',
-                              kMentorXPSecondary,
-                              _statFontSize,
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        FoundersPortalProgramsScreen(
+                                      loggedInUser: widget.loggedInUser,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: statWidget(
+                                '$_programsCreated',
+                                '# of programs created',
+                                kMentorXPSecondary,
+                                _statFontSize,
+                              ),
                             ),
                           ],
                         ),
@@ -258,12 +276,6 @@ class _FoundersPortalScreenState extends State<FoundersPortalScreen> {
                     ),
                     SizedBox(
                       height: 20,
-                    ),
-                    Divider(
-                      thickness: 1,
-                      color: Colors.grey.shade400,
-                      endIndent: 10,
-                      indent: 10,
                     ),
                   ],
                 ),

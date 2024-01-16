@@ -6,7 +6,7 @@ import 'package:mentorx_mvp/components/rounded_button.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 
-final apiKey = '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';
+final apiKey = '';
 final apiUrl = 'https://api.openai.com/v1/engines/davinci-codex/completions';
 
 // Future<String> getChatResponse(String input) async {
