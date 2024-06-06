@@ -192,8 +192,8 @@ class _MentorCardState extends State<MentorCard> {
                                 Padding(
                                   padding: const EdgeInsets.only(
                                     top: 5.0,
-                                    right: 15.0,
-                                    left: 15.0,
+                                    right: 5.0,
+                                    left: 5.0,
                                   ),
                                   child: Column(
                                     children: [
