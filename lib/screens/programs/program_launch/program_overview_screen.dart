@@ -88,12 +88,12 @@ class _ProgramOverviewState extends State<ProgramOverview> {
                       minWidth: 120,
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
-                      onPressed: () {
+                      onPressed: () async {
                         Navigator.pop(context);
                         setState(() {
                           isLoading = true;
                         });
-                        _leaveProgram();
+                        await _leaveProgram();
                       },
                     ),
                   ),
@@ -173,7 +173,7 @@ class _ProgramOverviewState extends State<ProgramOverview> {
 
       for (var doc in userMatchReverse.docs) {
         if (doc.id == widget.loggedInUser.id) {
-          doc.reference.delete();
+          await doc.reference.delete();
         }
       }
     }
@@ -228,7 +228,7 @@ class _ProgramOverviewState extends State<ProgramOverview> {
       isLoading = false;
     });
 
-    Navigator.push(
+    Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => LandingPage(),

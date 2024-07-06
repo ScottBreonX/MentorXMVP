@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  welcomeMessage(parentContext) {
+    welcomeMessage(parentContext) {
     return showDialog(
         context: parentContext,
         builder: (context) {

@@ -78,7 +78,7 @@ class _ProgramGuideCardState extends State<ProgramGuideCard> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(10.0),
           child: RawScrollbar(
             controller: _firstController,
             thumbVisibility: false,
@@ -88,7 +88,7 @@ class _ProgramGuideCardState extends State<ProgramGuideCard> {
               scrollDirection: Axis.vertical,
               controller: _firstController,
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.only(top: 10.0),
                 child: Column(
                   children: [
                     Text(
@@ -96,7 +96,7 @@ class _ProgramGuideCardState extends State<ProgramGuideCard> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: kMentorXPPrimary,
-                        fontSize: 30,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Montserrat',
                       ),
@@ -106,14 +106,14 @@ class _ProgramGuideCardState extends State<ProgramGuideCard> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: kMentorXPAccentMed,
-                        fontSize: 20,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Montserrat',
                       ),
                     ),
                     Padding(
                       padding:
-                          widget.filePadding ?? const EdgeInsets.only(top: 20),
+                          widget.filePadding ?? const EdgeInsets.only(top: 5),
                       child: widget.fileName ?? Text(''),
                     ),
                     widget.selectButtons ?? false
@@ -130,7 +130,7 @@ class _ProgramGuideCardState extends State<ProgramGuideCard> {
                                         cardAlignment: MainAxisAlignment.center,
                                         buttonCardColor: kMentorXPAccentDark,
                                         buttonCardTextColor: Colors.white,
-                                        buttonCardTextSize: 20,
+                                        buttonCardTextSize: 15,
                                         buttonCardRadius: 20,
                                         buttonCardHeight: 70,
                                         cardWidthPercent: .50,
@@ -145,7 +145,7 @@ class _ProgramGuideCardState extends State<ProgramGuideCard> {
                                         cardAlignment: MainAxisAlignment.center,
                                         buttonCardColor: kMentorXPSecondary,
                                         buttonCardTextColor: Colors.white,
-                                        buttonCardTextSize: 20,
+                                        buttonCardTextSize: 15,
                                         buttonCardRadius: 20,
                                         buttonCardHeight: 70,
                                         cardWidthPercent: .50,

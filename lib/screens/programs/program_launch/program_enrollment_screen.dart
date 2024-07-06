@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/home_screen/home_screen.dart';
+import 'package:mentorx_mvp/screens/programs/available_programs.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_overview_screen.dart';
 import '../../../components/progress.dart';
 import '../../../components/rounded_button.dart';
@@ -131,32 +131,31 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
         });
   }
 
-  _leaveProgram(programUID) {
-    usersRef
+  _leaveProgram(programUID) async {
+    await usersRef
         .doc(loggedInUser.id)
         .collection('enrolledPrograms')
         .doc(programUID)
         .delete();
-    programsRef
+    await programsRef
         .doc(programUID)
         .collection('userSubscribed')
         .doc(loggedInUser.id)
         .delete();
-    programsRef
+    await programsRef
         .doc(programUID)
         .collection('mentors')
         .doc(loggedInUser.id)
         .delete();
-    programsRef
+    await programsRef
         .doc(programUID)
         .collection('mentees')
         .doc(loggedInUser.id)
         .delete();
-    Navigator.pop(context);
-    Navigator.push(
+    Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => HomeScreen(
+          builder: (context) => AvailableProgramsScreen(
             loggedInUser: loggedInUser,
           ),
         ));

@@ -13,6 +13,7 @@ import 'package:mentorx_mvp/screens/programs/program_launch/program_enrollment_s
 import 'package:mentorx_mvp/screens/programs/program_launch/program_overview_screen.dart';
 import '../../../components/icon_circle_single.dart';
 import '../../../components/progress.dart';
+import '../../../components/rounded_button.dart';
 import '../../mentoring/available_mentors.dart';
 import '../../menu_bar/menu_bar.dart';
 import '../../profile/profile_screen.dart';
@@ -46,6 +47,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
   bool isLoading = false;
   bool hasMatches = false;
   bool isAdmin = false;
+  bool programGuidelinesComplete = false;
   List<MatchList> matches = [];
 
   // checkIsAdmin() async {
@@ -60,6 +62,68 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
   //     });
   //   }
   // }
+
+  welcomeProgram(parentContext, String programName) {
+    return showDialog(
+        context: parentContext,
+        barrierDismissible: false,
+        builder: (context) {
+          return SimpleDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            title: Text(
+              'Welcome to $programName',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: kMentorXPAccentDark,
+                fontFamily: 'Montserrat',
+                fontSize: 25,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Divider(
+                  height: 4,
+                  color: Colors.grey,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 20, left: 20.0, right: 20.0, bottom: 10),
+                child: Column(
+                  children: [
+                    Text(
+                      'Please read through and acknowledge the program guidelines before proceeding.',
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    RoundedButton(
+                      title: 'Review Guidelines',
+                      textAlignment: MainAxisAlignment.center,
+                      buttonColor: kMentorXPSecondary,
+                      fontColor: Colors.white,
+                      onPressed: ()  {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProgramGuidelines(
+                              programUID: widget.programUID,
+                              loggedInUser: widget.loggedInUser,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        });
+  }
 
   buildMatches() {
     isLoading = true;
@@ -334,6 +398,10 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                   programToDoComplete = false;
                 }
 
+                enrollmentModel.guidelinesComplete
+                    ? null
+                    : Future.delayed(Duration.zero, () => welcomeProgram(context, program.programName));
+
                 return Scaffold(
                   key: _scaffoldKey,
                   drawer: Drawer(
@@ -355,7 +423,9 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                     ),
                   ),
                   body: SingleChildScrollView(
-                    child: Container(
+                    child:
+
+                    Container(
                       child: Column(
                         children: [
                           Padding(
@@ -375,7 +445,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                               program.programLogo == ""
                                           ? Image.asset(
                                               'assets/images/MXPDark.png',
-                                              height: 150,
+                                              height: 100,
                                               fit: BoxFit.cover,
                                             )
                                           : CachedNetworkImage(
@@ -383,8 +453,8 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                               imageBuilder:
                                                   (context, imageProvider) =>
                                                       Container(
-                                                height: 150.0,
-                                                width: 150.0,
+                                                height: 100.0,
+                                                width: 100.0,
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(12),
@@ -459,7 +529,7 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                         : 'Program To-Do List:',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .headlineLarge,
+                                        .headlineMedium,
                                   ),
                                 ),
                               ],
@@ -488,75 +558,63 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                                 child: Text(
                                   'Resources',
                                   style:
-                                      Theme.of(context).textTheme.headlineLarge,
+                                      Theme.of(context).textTheme.headlineMedium,
                                 ),
                               )
                             ],
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: CircleIconWithText(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Profile(
-                                            loggedInUser: widget.loggedInUser,
-                                            profileId: widget.loggedInUser.id,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    cardIcon: Icons.person,
-                                    textDescription1: 'My',
-                                    textDescription2: 'Profile',
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: CircleIconWithText(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => MentoringScreen(
-                                            loggedInUser: widget.loggedInUser,
-                                            programUID: widget.programUID,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    cardIcon: Icons.change_circle,
-                                    textDescription1: 'Mentoring',
-                                    textDescription2: 'Enrollment',
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: CircleIconWithText(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => ProgramOverview(
-                                            programId: widget.programUID,
-                                            loggedInUser: widget.loggedInUser,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    cardIcon: Icons.info,
-                                    textDescription1: 'Program',
-                                    textDescription2: 'Info',
-                                  ),
-                                ),
-                              ],
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              CircleIconWithText(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Profile(
+                                        loggedInUser: widget.loggedInUser,
+                                        profileId: widget.loggedInUser.id,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                cardIcon: Icons.person,
+                                textDescription1: 'My',
+                                textDescription2: 'Profile',
+                              ),
+                              CircleIconWithText(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MentoringScreen(
+                                        loggedInUser: widget.loggedInUser,
+                                        programUID: widget.programUID,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                cardIcon: Icons.change_circle,
+                                textDescription1: 'Mentoring',
+                                textDescription2: 'Enrollment',
+                              ),
+                              CircleIconWithText(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ProgramOverview(
+                                        programId: widget.programUID,
+                                        loggedInUser: widget.loggedInUser,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                cardIcon: Icons.info,
+                                textDescription1: 'Program',
+                                textDescription2: 'Info',
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -591,10 +649,10 @@ class CircleIconWithText extends StatelessWidget {
           GestureDetector(
             onTap: onTap,
             child: IconCircleSingle(
-              cardHeight: MediaQuery.of(context).size.width * .80 / 3,
-              cardWidth: MediaQuery.of(context).size.width * .80 / 3,
+              cardHeight: MediaQuery.of(context).size.width * .70 / 3,
+              cardWidth: MediaQuery.of(context).size.width * .70 / 3,
               cardIcon: cardIcon,
-              cardIconSize: 70,
+              cardIconSize: 60,
               cardIconColor: Theme.of(context).colorScheme.tertiary,
             ),
           ),
@@ -602,12 +660,12 @@ class CircleIconWithText extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10.0),
             child: Text(
               textDescription1 ?? '',
-              style: Theme.of(context).textTheme.labelLarge,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
           Text(
             textDescription2 ?? '',
-            style: Theme.of(context).textTheme.labelLarge,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ],
       ),

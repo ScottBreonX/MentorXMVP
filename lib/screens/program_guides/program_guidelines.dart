@@ -5,12 +5,11 @@ import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/user.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/guidelines1.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/guidelines2.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/guidelines3.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/guidelines4.dart';
-import 'package:mentorx_mvp/screens/program_guides/program_guide_data/guidelines5.dart';
 import 'package:mentorx_mvp/screens/program_guides/program_guide_data/guidelinesComplete.dart';
+import 'package:mentorx_mvp/screens/programs/program_launch/program_launch_screen.dart';
 
 import '../../components/program_card.dart';
+import '../../components/progress.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 final programsRef = FirebaseFirestore.instance.collection('institutions');
@@ -39,8 +38,11 @@ class _ProgramGuidelinesState extends State<ProgramGuidelines> {
 
   int currentIndex = 0;
 
+
   @override
   Widget build(BuildContext context) {
+    bool isLoading = false;
+
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
@@ -61,9 +63,12 @@ class _ProgramGuidelinesState extends State<ProgramGuidelines> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 50.0, bottom: 50.0),
-              child: Container(
-                height: 600,
+              padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+              child:
+              isLoading ?
+              circularProgress(Theme.of(context).primaryColor) :
+              Container(
+                height: MediaQuery.of(context).size.height*.70,
                 width: double.infinity,
                 child: CarouselSlider(
                   options: CarouselOptions(
@@ -96,31 +101,7 @@ class _ProgramGuidelinesState extends State<ProgramGuidelines> {
                       ),
                     ),
                     ProgramGuideCard(
-                      titleText: 'Program Guidelines',
-                      cardColor: Colors.white,
-                      textColor: kMentorXPPrimary,
-                      fileName: Guidelines3(
-                        bodyTextColor: Colors.black54,
-                      ),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Program Guidelines',
-                      cardColor: Colors.white,
-                      textColor: kMentorXPPrimary,
-                      fileName: Guidelines4(
-                        bodyTextColor: Colors.black54,
-                      ),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Program Guidelines',
-                      cardColor: Colors.white,
-                      textColor: kMentorXPPrimary,
-                      fileName: Guidelines5(
-                        bodyTextColor: Colors.black54,
-                      ),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Complete Session',
+                      titleText: 'Acknowledge Agreement',
                       cardColor: Colors.white,
                       textColor: kMentorXPPrimary,
                       fileName: GuidelinesComplete(
@@ -129,15 +110,28 @@ class _ProgramGuidelinesState extends State<ProgramGuidelines> {
                       swipeText: 'Return to Program',
                       selectButtons: true,
                       selectButton1: true,
-                      button1Text: 'Complete Session',
+                      button1Text: 'Agree to Guidelines',
                       onPressed1: () async {
+                        setState(() {
+                          isLoading = true;
+                        });
                         await programsRef
                             .doc(widget.programUID)
                             .collection('userSubscribed')
                             .doc(widget.loggedInUser.id)
                             .update({"Guidelines Complete": true});
+                        // isLoading = false;
                         setState(() {
                           Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProgramLaunchScreen(
+                                programUID: widget.programUID,
+                                loggedInUser: widget.loggedInUser,
+                              ),
+                            ),
+                          );
                         });
                       },
                     ),
@@ -148,7 +142,7 @@ class _ProgramGuidelinesState extends State<ProgramGuidelines> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 3; i++)
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Container(
