@@ -37,11 +37,10 @@ class _ProgramGuidelinesState extends State<ProgramGuidelines> {
   }
 
   int currentIndex = 0;
-
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    bool isLoading = false;
 
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
@@ -60,114 +59,125 @@ class _ProgramGuidelinesState extends State<ProgramGuidelines> {
         ),
       ),
       body: Center(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
-              child:
-              isLoading ?
-              circularProgress(Theme.of(context).primaryColor) :
-              Container(
-                height: MediaQuery.of(context).size.height*.70,
-                width: double.infinity,
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                      height: double.infinity,
-                      viewportFraction: 0.88,
-                      enlargeCenterPage: true,
-                      enlargeFactor: 0.2,
-                      autoPlay: false,
-                      enableInfiniteScroll: false,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          currentIndex = index;
-                        });
-                      }),
-                  items: [
-                    ProgramGuideCard(
-                      titleText: 'Program Guidelines',
-                      cardColor: Colors.white,
-                      textColor: kMentorXPPrimary,
-                      fileName: Guidelines1(
-                        bodyTextColor: Colors.black54,
+        child: Stack(
+          children: [ Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+                child:
+                Container(
+                  height: MediaQuery.of(context).size.height*.70,
+                  width: double.infinity,
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                        height: double.infinity,
+                        viewportFraction: 0.88,
+                        enlargeCenterPage: true,
+                        enlargeFactor: 0.2,
+                        autoPlay: false,
+                        enableInfiniteScroll: false,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            currentIndex = index;
+                          });
+                        }),
+                    items: [
+                      ProgramGuideCard(
+                        titleText: 'Program Guidelines',
+                        cardColor: Colors.white,
+                        textColor: kMentorXPPrimary,
+                        fileName: Guidelines1(
+                          bodyTextColor: Colors.black54,
+                        ),
                       ),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Program Guidelines',
-                      cardColor: Colors.white,
-                      textColor: kMentorXPPrimary,
-                      fileName: Guidelines2(
-                        bodyTextColor: Colors.black54,
+                      ProgramGuideCard(
+                        titleText: 'Program Guidelines',
+                        cardColor: Colors.white,
+                        textColor: kMentorXPPrimary,
+                        fileName: Guidelines2(
+                          bodyTextColor: Colors.black54,
+                        ),
                       ),
-                    ),
-                    ProgramGuideCard(
-                      titleText: 'Acknowledge Agreement',
-                      cardColor: Colors.white,
-                      textColor: kMentorXPPrimary,
-                      fileName: GuidelinesComplete(
-                        bodyTextColor: Colors.black54,
-                      ),
-                      swipeText: 'Return to Program',
-                      selectButtons: true,
-                      selectButton1: true,
-                      button1Text: 'Agree to Guidelines',
-                      onPressed1: () async {
-                        setState(() {
-                          isLoading = true;
-                        });
-                        await programsRef
-                            .doc(widget.programUID)
-                            .collection('userSubscribed')
-                            .doc(widget.loggedInUser.id)
-                            .update({"Guidelines Complete": true});
-                        // isLoading = false;
-                        setState(() {
-                          Navigator.pop(context);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ProgramLaunchScreen(
-                                programUID: widget.programUID,
-                                loggedInUser: widget.loggedInUser,
+
+
+                      ProgramGuideCard(
+                        titleText: 'Acknowledge Agreement',
+                        cardColor: Colors.white,
+                        textColor: kMentorXPPrimary,
+                        fileName: GuidelinesComplete(
+                          bodyTextColor: Colors.black54,
+                        ),
+                        swipeText: 'Return to Program',
+                        selectButtons: true,
+                        selectButton1: true,
+                        button1Text: 'Agree to Guidelines',
+                        onPressed1: () async {
+                          setState(() {
+                            print('loading');
+                            isLoading = true;
+                          });
+                          await programsRef
+                              .doc(widget.programUID)
+                              .collection('userSubscribed')
+                              .doc(widget.loggedInUser.id)
+                              .update({"Guidelines Complete": true});
+                          setState(() {
+                            Navigator.pop(context);
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProgramLaunchScreen(
+                                  programUID: widget.programUID,
+                                  loggedInUser: widget.loggedInUser,
+                                ),
                               ),
-                            ),
-                          );
-                        });
-                      },
-                    ),
-                  ],
+                              ModalRoute.withName('/'),
+                            );
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                for (int i = 0; i < 3; i++)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child: Container(
-                      height: 25,
-                      width: 25,
-                      decoration: BoxDecoration(
-                        color: currentIndex == i
-                            ? kMentorXPAccentMed
-                            : Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            spreadRadius: 1,
-                            blurRadius: 3,
-                            offset: Offset(2, 2),
-                          ),
-                        ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  for (int i = 0; i < 3; i++)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: Container(
+                        height: 25,
+                        width: 25,
+                        decoration: BoxDecoration(
+                          color: currentIndex == i
+                              ? kMentorXPAccentMed
+                              : Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              spreadRadius: 1,
+                              blurRadius: 3,
+                              offset: Offset(2, 2),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-              ],
+                ],
+              ),
+            ],
+          ),
+            isLoading
+                ? Container(
+              height: double.infinity,
+              width: double.infinity,
+              color: Colors.white.withOpacity(0.5),
+              child: circularProgress(Colors.white),
             )
-          ],
-        ),
+                : Container(),
+       ] ),
       ),
     );
   }

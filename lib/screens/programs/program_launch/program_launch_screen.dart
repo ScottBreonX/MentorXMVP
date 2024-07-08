@@ -398,9 +398,10 @@ class _ProgramLaunchScreenState extends State<ProgramLaunchScreen> {
                   programToDoComplete = false;
                 }
 
-                enrollmentModel.guidelinesComplete
-                    ? null
-                    : Future.delayed(Duration.zero, () => welcomeProgram(context, program.programName));
+      // print('triggered');
+                  !enrollmentModel.guidelinesComplete
+                      ? Future.delayed(Duration.zero, () => welcomeProgram(context, program.programName))
+                      : null;
 
                 return Scaffold(
                   key: _scaffoldKey,

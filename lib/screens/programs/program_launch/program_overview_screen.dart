@@ -199,13 +199,6 @@ class _ProgramOverviewState extends State<ProgramOverview> {
       await doc.reference.delete();
     }
 
-    //remove user from program subscribers
-    await programsRef
-        .doc(widget.programId)
-        .collection('userSubscribed')
-        .doc(widget.loggedInUser.id)
-        .delete();
-
     //remove user from program mentor collection
     await programsRef
         .doc(widget.programId)
@@ -220,19 +213,22 @@ class _ProgramOverviewState extends State<ProgramOverview> {
         .doc(widget.loggedInUser.id)
         .delete();
 
+    //Navigate back to home screen
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => LandingPage()),
+      ModalRoute.withName('/'),
+    );
+
     //remove user reference to program
     await usersRef.doc(widget.loggedInUser.id).update({'Program': ""});
 
-    //Navigate back to home screen
-    setState(() {
-      isLoading = false;
-    });
-
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LandingPage(),
-        ));
+    //remove user from program subscribers
+    await programsRef
+        .doc(widget.programId)
+        .collection('userSubscribed')
+        .doc(widget.loggedInUser.id)
+        .delete();
   }
 
   bool isAdmin = false;

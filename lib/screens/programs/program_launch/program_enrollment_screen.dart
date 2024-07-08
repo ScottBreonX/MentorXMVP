@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mentorx_mvp/constants.dart';
 import 'package:mentorx_mvp/models/program.dart';
 import 'package:mentorx_mvp/models/user.dart';
-import 'package:mentorx_mvp/screens/programs/available_programs.dart';
 import 'package:mentorx_mvp/screens/programs/program_launch/program_overview_screen.dart';
 import '../../../components/progress.dart';
 import '../../../components/rounded_button.dart';
@@ -93,7 +92,9 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
                       minWidth: 150,
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
-                      onPressed: () => _leaveProgram(programUID),
+                      onPressed: (){
+                      },
+                      // onPressed: () => _leaveProgram(programUID),
                     ),
                   ),
                   SimpleDialogOption(
@@ -152,13 +153,13 @@ class _ProgramEnrollmentScreenState extends State<ProgramEnrollmentScreen> {
         .collection('mentees')
         .doc(loggedInUser.id)
         .delete();
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AvailableProgramsScreen(
-            loggedInUser: loggedInUser,
-          ),
-        ));
+    // Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => AvailableProgramsScreen(
+    //         loggedInUser: loggedInUser,
+    //       ),
+    //     ));
   }
 
   @override
